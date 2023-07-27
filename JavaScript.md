@@ -3,15 +3,13 @@
 
 
 ★★ javascript DLC ★★
-Object.is
-
 프로퍼티의 속성
 
 class
 
-const / let
+화살표 함수
 
-=> 표기법
+const / let
 
 콜백 함수
 
@@ -19,8 +17,10 @@ const / let
 
 JSON.stringify
 
-=== 완료 ===
-문자열 이스케이프 표기법
+=== 신송 추가 ===
+레퍼런스, 가변성/불변셩
+
+함수의 유효범위 삭제 (변수 스코프와 중복, 혼란 유발)
 
 
 ## 도입 (Intro)
@@ -127,11 +127,14 @@ console.log(res);
 	- 원시 타입과 객체 타입으로 구분됩니다.
 
 #### 원시 타입
-- `숫자(number)`
-- `문자열(string)`
-- `불리언(boolean)`
-- `심볼(symbol)`
-- `undefined`
+- 원시 타입은 값 그 자체가 변수에 저장됩니다.
+- 원시 타입의 값 자체는 변하지 않는 `불변성`을 가집니다. 만약 변수에 저장된 값을 바꾸고 싶다면 새로운 값을 대입해야 합니다.
+
+1. `숫자(number)`
+2. `문자열(string)`
+3. `불리언(boolean)`
+4. `심볼(symbol)`
+5. `undefined`
 
 ##### 숫자 (number)
 - 자바스크립트에선 정수, 실수를 하나의 타입으로 취급합니다.
@@ -191,9 +194,12 @@ null === unfefined  // false
 
 #### 객체 타입
 - `객체(object)`: 여러 프로퍼티(property), 메소드(method)를 묶은 일종의 집합체 타입
+- 객체는 레퍼런스 형태로 변수에 담깁니다.
+- 객체 그 자체는 바뀔 수 있는 `가변성` 특성을 가집니다. 그렇기에 const 변수라도 객체 자체는 변경될 수 있습니다.
 
 ```
-{ name: "object", id: 1 }
+const obj = { name: "object", id: 1 };
+obj.id = 2; // 가능!
 ```
 
 ### 타입 변환
@@ -239,12 +245,13 @@ var res = str + 15;
 ### 변수 (Variable)
 - `변수(Variable)`: 데이터를 저장할 수 있는 메모리 공간
 - 예약어 `var`를 사용해서 변수를 선언할 수 있습니다.
+- ES2015에 추가된 `let`, `const`으로도 변수를 선언할 수 있습니다.
 - 변수의 이름은 `식별자(identifier)`입니다.
 - 선언, 초기화는 동시에 할 수 있습니다.
 - 쉼표`,` 연산자를 사용해서 동시 선언 및 초기화가 가능합니다.
 - 같은 변수에 다른 타입의 값을 대입할 수 있습니다.
-- 재선언은 불가능합니다.
-- 초기화되지 않은 변수는  undefined 값을 갖습니다.
+- 일반적으로 재선언은 불가능합니다.
+- 초기화되지 않은 변수는 undefined 값을 갖습니다.
 
 ```
 var data;
@@ -383,6 +390,89 @@ Fantastic
 Super String
 !!
 ```
+
+### 변수 스코프 (Variable Scope)
+- 변수는 유효 범위를 기준으로 2가지로 구분할 수 있습니다.
+
+1. 지역 변수
+2. 전역 변수
+
+#### 지역 변수 (Local Variable)
+- `지역 변수`: 함수/블록 내에서 선언된 변수
+- 지역 변수는 선언된 함수/블록 내에서만 유효하며, 함수/블록 종료시 메모리에서 사라집니다.
+- 함수의 매개변수도 해당 함수의 지역 변수에 속합니다.
+
+```
+function genNum() {
+	var num = 5;
+	console.log(typeof num);
+}
+genNum();
+console.log(typeof num);
+```
+
+- 출력 결과
+```
+number
+undefined
+```
+
+#### 전역 변수 (Global Variable)
+- `전역 변수`: 함수/블록의 외부에서 선언된 변수
+- 전역 변수는 어느 영역에서든 접근 가능하며, 프로그램이 종료되어야 메모리에서 사라집니다.
+- 전역 변수는 wndow 객체의 프로퍼티입니다.
+- 변수 선언 키워드(var, let, const)를 사용하지 않고 선언한 변수는 전역 변수입니다.
+- 전역 변수와 지역 변수의 이름이 동일한 경우는, 지역 변수가 우선시됩니다.
+	- 전역 변수를 사용하려면, window 객체의 프로퍼티임을 명시하면 됩니다.
+
+- 예제 1
+```
+var num = 5;
+function addNum() {
+	num++;
+}
+for(var i = 0; i < 5; i++)
+	addNum();
+console.log(num + ", " + i);
+```
+
+- 출력 결과 1
+```
+10, 5
+```
+
+- 예제 2
+```
+var str = "global";
+function func() {
+	var str = "local";
+	console.log(str);
+	console.log(window.str);
+}
+func();
+```
+
+- 출력 결과 2
+```
+local
+global
+```
+
+### 변수 키워드 종류
+- ES2015에는 새로운 변수 선언 키워드인 `let`, `const`이 추가되었습니다. 이들은 기존 `var`와는 몇몇 점이 다릅니다.
+
+#### var
+- `var`는 ES2015 이전에 변수를 선언하는 유일한 키워드입니다.
+- `var` 변수의 유효 범위는 **함수**를 기준으로 합니다.
+	- 함수 내부에서 선언된 변수는 `지역 변수`,  함수 외부에서 선언된 변수는 `전역 변수`입니다.
+- `var` 변수는 재선언이 가능합니다.
+- `var` 변수는 `함수 호이스팅` 메커니즘이 적용됩니다.
+
+#### let
+- `블록(block)`은 `{}`로 묶인 부분을 의미합니다. 함수뿐만 아니라 if, for 제어문도 블록입니다.
+
+#### const
+
 
 ## 연산자 (Operator)
 
@@ -982,6 +1072,7 @@ for(var i = 1; i <= 5; i++) {
 - 인덱스는 불연속적일 수 있습니다.
 	- 일부 배열 요소가 undefiend일 수 있습니다.
 - 자바스크립트에서 모든 배열은 `Array` 객체로 다뤄집니다.
+	- 배열은 `Array` 생성자의 인스턴스입니다.
 - 배열의 길이는 `length` 프로퍼티에 저장되어 있습니다.
 	- 배열의 길이가 변동되면 length도 자동으로 갱신됩니다.
 
@@ -1128,6 +1219,8 @@ console.log(str instanceof Array);  // false
 	- 함수를 변수에 대입하는 것이 가능합니다.
 - 하나의 함수가 다른 함수 내에 중첩되어 정의될 수 있습니다.
 - 자바스크립트에서 모든 함수는 `Function` 객체로 다뤄집니다.
+	- 즉, 자바스크립트에서 함수는 객체입니다!
+	- 함수는 `Function` 생성자의 인스턴스입니다.
 
 ### 사용법
 #### 정의
@@ -1165,169 +1258,6 @@ console.log(addNum(1, 2));  // 3
 ```
 var func = addNum;
 console.log(func(2, 4));  // 6
-```
-
-### 변수의 유효 범위 (Variable Scope)
-- `변수의 유효 범위`: 해당 변수를 접근할 수 있는 변수, 객체, 함수의 집합
-
-1. 지역 변수(local variable)
-2. 전역 변수(global variable)
-
-#### 지역 변수 (Local Variable)
-- `지역 변수`: 함수 내에서 선언된 변수
-- 지역 변수는 선언된 함수 내에서만 유효하며, 함수 종료시 메모리에서 사라집니다.
-- 함수의 매개변수도 해당 함수의 지역 변수에 속합니다.
-
-```
-function genNum() {
-	var num = 5;
-	console.log(typeof num);
-}
-genNum();
-console.log(typeof num);
-```
-
-- 출력 결과
-```
-number
-undefined
-```
-
-#### 전역 변수 (Global Variable)
-- `전역 변수`: 함수의 외부에서 선언된 변수
-- 전역 변수는 어느 영역에서든 접근 가능하며, 프로그램이 종료되어야 메모리에서 사라집니다.
-- 전역 변수는 wndow 객체의 프로퍼티입니다.
-- 자바스크립트에선 if, for 등 제어문 내부에서 선언된 변수는 전역 변수입니다.
-	- 자바스크립트에선 유효 범위의 기준을 함수로 하기 때문입니다.
-- var 키워드를 사용하지 않고 선언한 변수는 전역 변수입니다.
-- 전역 변수와 지역 변수의 이름이 동일한 경우는, 지역 변수가 우선시됩니다.
-	- 전역 변수를 사용하려면, window 객체의 프로퍼티임을 명시하면 됩니다.
-
-- 예제 1
-```
-var num = 5;
-function addNum() {
-	num++;
-}
-for(var i = 0; i < 5; i++)
-	addNum();
-console.log(num + ", " + i);
-```
-
-- 출력 결과 1
-```
-10, 5
-```
-
-- 예제 2
-```
-var str = "global";
-function func() {
-	var str = "local";
-	console.log(str);
-	console.log(window.str);
-}
-func();
-```
-
-- 출력 결과 2
-```
-local
-global
-```
-
-### 함수의 유효 범위 (Function Scope)
-- `블록(block)`: `{}`로 묶인 부분
-- 자바스크립트에선 유효 범위의 기준을 함수로 합니다.
-- 어떤 함수의 유효 범위 = 해당 함수의 블록 + 부모 함수의 유효 범위
-	- 함수들의 체계는 트리 구조로 생각할 수 있습니다.
-	- 전역은 루트 노드로 볼 수 있습니다.
-	- 자식 함수의 블록은 유효 범위에 포함되지 않습니다.
-- 유효 범위 내에 선언된 변수와 함수만이 접근 가능합니다.
-- 유효 범위 밖은 접근 불가능합니다.
-
-```
-// func의 유효 범위
- |  ...
- |  function otherFunc() {
-       ...
-    }	    
- |  ...
- |  function parentFunc() {
- |     ...
- |     function func() {
- |         ...
- |		   function childFunc() {
- 		      ...
-  		   }
- |		   ...
- |     }
- |     ...
- |  }
- |  ...
-```
-
-```
-// 트리 구조 (함수 체계)
-             global
-	    /               \
-    parentFunc      otherFunc
-      /
-    func
-    /
-childFunc
-```
-
-```
-function func1() {
-	var a = 1, b = 2;
-	console.log(a + b);
-}
-
-function func2() {
-	var a = 3, b = 4;
-	function func2_2() {
-		console.log(a + b);
-	}
-	func2_2();
-}
-
-func1();   // 3
-func2();   // 7
-console.log(a + b); // 오류 발생
-```
-
-#### 함수 호이스팅 (Hoisting)
-- `함수 호이스팅`: 함수의 유효 범위의 적용이 변수 선언 이전에도 적용되는 자바스크립트의 특성
-- 함수 내부의 모든 변수 선언이 해당 함수의 블록 맨 처음으로 이동한 것으로 생각할 수 있습니다.
-- 함수 호이스팅으로 인해, 함수 블록 첫 부분에 변수를 선언하는 것이 좋습니다.
-
-```
-function main() {
-	var n = 10;
-	function sub() {
-		console.log(n);   // 10?
-		var n = 20;
-		console.log(n);   // 20?
-	}
-	sub();
-}
-main();
-```
-
-- 위 예제는 자바스크립트 내부에서 함수 호이스팅에 의해 다음 예제처럼 변경되어 처리됩니다.
-```
-function main() {
-	var n = 10;
-	function sub() {
-		var n;
-		console.log(n);   // undefined
-		n = 20;
-		console.log(n);   // 20
-	}
-	sub();
-}
-main();
 ```
 
 ### 매개변수 (Parameter)
@@ -1600,9 +1530,60 @@ Number(false);      // "false"
 Number(null);       // "null"
 ```
 
+### 함수 호이스팅 (Hoisting)
+- `함수 호이스팅`: 함수 내부의 모든 변수 선언이 해당 함수의 블록 맨 처음으로 이동하는 메커니즘
+- 함수 호이스팅으로 인해, 함수 블록 첫 부분에 변수를 선언하는 것이 좋습니다.
+- 함수 호이스팅은 `var`로 선언된 변수만 해당됩니다.
+
+```
+function main() {
+	var n = 10;
+	function sub() {
+		console.log(n);   // 10?
+		var n = 20;
+		console.log(n);   // 20?
+	}
+	sub();
+}
+main();
+```
+
+- 위 예제는 자바스크립트 내부에서 함수 호이스팅에 의해 다음 예제처럼 변경되어 처리됩니다.
+```
+function main() {
+	var n = 10;
+	function sub() {
+		var n;
+		console.log(n);   // undefined
+		n = 20;
+		console.log(n);   // 20
+	}
+	sub();
+}
+main();
+```
+
+### 익명 함수 (Anonymous Function)
+- 자바스크립트에서 함수를 선언할 때 이름을 붙이지 않을 수 있습니다. 이러한 함수를 `익명 함수` 또는 `함수 리터럴`이라고 합니다.
+- 이름이 없으므로 익명 함수만으로는 호출이 불가능합니다.
+- 익명 함수는 주로 함수를 인자로 넘겨줄 때 사용됩니다.
+
+```
+function(x, y) {
+	return x + y;
+};
+```
+
+### 화살표 함수 (Arrow Function)
+- `화살표 함수`는 ES2015부터 도입된 새로운 함수 표기법입니다.
+- 표기법이 간단하기에 주로 익명 함수를 작성할 때 사용됩니다.
+
+> (`param1`, `param2`, ...) \=\> { ... }
+
 ## 객체 (Object)
 - `객체(object)`: 프로퍼티의 정렬되지 않은 집합
 - `프로퍼티(property)`: 이름(name)과 값(value)으로 구성된 이름-값 쌍
+	- 프로퍼티는 객체를 구성하는 원소입니다.
 - `메소드(method)`: 함수가 값인 프로퍼티
 - 자바스크립트에선 number, string, boolean 등 원시 타입도 `래퍼 객체`로 인해 값이 정해진 객체로 취급될 수 있습니다.
 - `객체 레퍼런스(object reference)`: 객체가 위치한 주소를 저장하는 변수
@@ -1734,6 +1715,7 @@ exp
 - `this` 키워드는 해당 키워드가 위치한 코드 영역을 포함하는 객체를 가리킵니다.
 	- 간단히 말해, 자기 자신을 가리킵니다.
 - this를 사용해서 객체 내부에서 사용되는 프로퍼티임을 명시할 수 있습니다.
+- 메소드 내에서 사용되는 this는 해당 메소드를 호출한 객체를 가리킵니다.
 
 ```
 var item = {
@@ -1763,12 +1745,27 @@ console.log(item.hp + ", " + item.mp); // 200, 100
 	- 모든 객체는 최소한 1개 이상의 다른 객체를 상속합니다.
 - 자바스크립트에서 상속은 현재 존재한 객체를 복제하여 재사용하는 것을 의미합니다.
 
-#### 프로토타입 프로퍼티 (prototype Property)
+#### prototype
 - 모든 함수는 `prototype` 프로퍼티를 가지고 있습니다.
 - prototype 프로퍼티는 생성자 함수가 인스턴스 생성시 사용하는 프로토타입 객체를 가리킵니다.
 	- 이 프로토타입 객체는 Object.prototype의 복사본입니다.
 - prototype 프로퍼티는 해당 함수의 프로토타입과 관련이 없습니다.
 	- 함수의 프로토타입은 `Function.prototype`입니다.
+
+#### constructor
+- 함수의 prototype 객체는 `constructor` 프로퍼티를 가지고 있습니다.
+- constructor 프로퍼티는 생성자 함수를 저장합니다.
+- 생성자 함수로 생성된 인스턴스는 prototype 객체를 상속하므로, 인스턴스도 contructor 프로퍼티를 갖습니다. (값도 prototype 것과 동일합니다.)
+
+```
+function Item() {
+    this.a = 1;
+}
+var item = new Item();
+
+console.log(Item.prototype.constructor === Item); // true
+console.log(item.constructor === Item); // true
+```
 
 #### 프로토타입 체인 (Phototype Chain)
 - 어떤 객체의 프로토타입을 계속 추적할 경우, 이러한 추적의 종점은 항상 `Object.prototype`입니다.
@@ -1924,6 +1921,7 @@ console.log(item.getHPBarGuage); // 30000
 - `래퍼 객체`: 원시 타입(number, string 등)의 프로퍼티를 접근하려 할 때, 자동으로 생성되는 임시 객체
 - 원시 타입은 객체가 아니니 프로퍼티가 없습니다. 그렇기에 원시 타입에서 프로퍼티를 참조하면 오류가 발생할 것으로 예측할 수 있습니다. 그러나 자바스크립트에선 내부적으로 래퍼 객체를 생성함으로써 이러한 동작을 가능하게 합니다!
 - 프로퍼티의 참조가 끝나면 래퍼 객체는 자동으로 삭제됩니다.
+- 생성자 String, Number, Boolean, Symbol가 래퍼 객체 생성에 사용됩니다.
 
 ```
 var str = "JavaScript";
@@ -1934,6 +1932,35 @@ console.log(str.length); // 10
 ```
 var str = "JavaScript";
 console.log((new String(str)).length);
+```
+
+### 속성 가리기 (Property Shadowing)
+- 프로토타입 체인에서 같은 이름의 속성이 여러 번 등장할 수 있습니다. 이때는 현재 객체와 가장 가까운 프로토타입(또는 자신)의 것이 선택됩니다.
+- 이처럼 상위 프로퍼티보다 하위 프로퍼티가 우선시되는 현상을 `속성 가리기`라고 합니다.
+
+```
+var potion = { hp: 100 };
+var superPotion = { hp: 200 };
+Object.setPrototypeOf(superPotion, potion);
+
+// 같은 이름의 프로퍼티가 있다면 하위 것을 우선시합니다.
+console.log(superPotion.hp); // 200
+```
+
+### 정적 메소드 (Static Method)
+- `정적 메소드`는 생성자 함수의 프로퍼티에 직접 지정된 메소드입니다.
+- 생성자 함수의 prototype 객체에 정의하는 것이 아니므로 인스턴스는 정적 메소드를 사용할 수 없습니다.
+- 정적 메소드의 예시로는 Object.create(), Array.isArray() 등이 있습니다.
+
+```
+function Item() { 
+	this.hp = 100;
+}
+
+// 생성자 함수의 프로퍼티로 정적 메소드를 추가할 수 있습니다.
+Item.powerUp = function(item) {
+	item.hp += 100;
+}
 ```
 
 ## 표준 객체 (Standard Object)
@@ -1960,6 +1987,8 @@ console.log((new String(str)).length);
 |getOwnPropertyNames(`object`)|Array|주어진 객체의 모든 고유 프로퍼티의 이름을 담은 배열 반환|
 |isExtensible(`object`)|boolean|주어진 객체에 새로운 프로퍼티를 추가할 수 있다면 true 반환|
 |getPrototypeOf(`object`)|object|주어진 객체의 프로토타입 반환|
+|setPrototypeOf(`child`, `parent`)||객체 `child`의 프로토타입을 객체 `parent`로 설정|
+|is(`x`, `y`)|boolean|두 값이 동일한지 비교|
 
 ##### keys()
 - 주어진 객체의 열거 가능한 고유 프로퍼티의 이름을 담은 배열을 반환합니다.
@@ -2014,6 +2043,29 @@ function Item() {
 }
 var item = new Item();
 console.log(Object.getPrototypeOf(item) === Item.prototype); // true
+```
+
+
+##### setPrototypeOf()
+- 주어진 객체의 프로토타입을 변경합니다.
+
+```
+var potion = { hp: 100 };
+var superPotion = { hp: 200 };
+Object.setPrototypeOf(superPotion, potion);
+console.log(superPotion.hp); // 200
+```
+
+##### is()
+- 두 값이 동일한지 비교합니다.
+- \=\=\= 연산자와 거의 동일하나, 이하 2가지만 다릅니다.
+
+```
+-0 === 0  // true
+Object.is(-0, 0) // false
+
+NaN === NaN // false
+Object.is(NaN, NaN); // true
 ```
 
 #### Object.prototype
@@ -2572,7 +2624,7 @@ Array.of(1, "234", true); // [1, "234", true]
 |pop()|제거된 요소|배열의 가장 마지막 요소 제거|
 |shift()|제거된 요소|배열의 가장 앞의 요소 제거|
 |reverse()|변경된 배열|배열의 순서를 뒤집음|
-|sort()|변경된 배열|배열의 요소를 정렬 (string 사전순)|
+|sort(`compare`)|변경된 배열|정렬 함수 `compare`를 기준으로 배열의 요소를 정렬|
 |splice(`pos`, `cnt`, _`x1`_, _`x2`_, ...)|제거된 요소들로 구성된 배열|배열의 `pos` 인덱스부터 `cnt`개 요소들을 제거한 뒤, `x` 요소들을 그 인덱스에 추가|
 
 - 현재 배열이 변경되지 않는 메소드
@@ -2657,14 +2709,29 @@ console.log(arr); // [3, 2, 1]
 ```
 
 ##### sort()
-- 배열의 요소를 string 사전순으로 정렬합니다.
-- stirng 타입이 아닌 값(number 등)은 string으로 변환된 것을 정렬 기준으로 합니다.
+- 배열의 요소를 주어진 비교 함수에 따라 정렬합니다.
+- 비교 함수를 전달하지 않으면, 유니코드 코드포인트 방식으로 비교합니다. (이때는 모든 요소를 string 타입으로 간주한 상태로 비교를 수행합니다.)
 
 ```
 var arr = ["html", "css", "javascript", 123, true];
 arr.sort();
 console.log(arr); // [123, "css", "html", "javascript", true]
 ```
+
+- 비교 함수의 구조는 다음과 같습니다.
+
+> (`a`, `b`)
+> 음수 반환시, `a`가 앞에 옵니다.
+> 양수 반환시, `b`가 앞에 옵니다.
+> 0 반환시, `a`와 `b`는 같은 순서로 간주됩니다.
+
+```
+var arr = ["html", "css", "javascript"];
+arr.sort((x, y) => x.length - y.length); // 길이 오름차순으로 정렬
+console.log(arr); // ["css", "html", "javascript"]
+```
+
+- 브라우저마다 다르지만, 일반적으로 sort()는 불안정 정렬을 수행합니다. (같은 순서의 요소들이 정렬 후에는 순서가 서로 바뀌어 있을 수 있습니다.)
 
 ##### splice()
 - 특정 위치부터 배열의 요소들을 제거하고 주어진 인자들을 해당 자리에 추가합니다.
@@ -3619,3 +3686,4 @@ console.log(reg.test("bcacbc"));
 ## 출처 (Reference)
 http://www.tcpschool.com/javascript/intro
 https://helloworldjavascript.net/pages/020-tutorial.html
+https://www.freecodecamp.org/korean/news/var-let-constyi-caijeomeun/
