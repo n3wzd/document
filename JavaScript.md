@@ -3,13 +3,11 @@
 
 
 ★★ javascript DLC ★★
+this는 프로퍼티인가 키워드인가
+
 프로퍼티의 속성
 
 class
-
-화살표 함수
-
-const / let
 
 콜백 함수
 
@@ -18,9 +16,7 @@ const / let
 JSON.stringify
 
 === 신송 추가 ===
-레퍼런스, 가변성/불변셩
 
-함수의 유효범위 삭제 (변수 스코프와 중복, 혼란 유발)
 
 
 ## 도입 (Intro)
@@ -460,19 +456,39 @@ global
 
 ### 변수 키워드 종류
 - ES2015에는 새로운 변수 선언 키워드인 `let`, `const`이 추가되었습니다. 이들은 기존 `var`와는 몇몇 점이 다릅니다.
+- 코드의 안정성 측면에서 `const`가 가장 안전합니다. 그 다음은 `let`이며, `var`는 가급적 사용하지 않는 것이 좋습니다.
+
+| |var|let|const|
+|---|---|---|---|
+|스코프 기준|함수|블록|블록|
+|재선언 가능|O|X|X|
+|값 재할당 가능|O|O|X|
+|호이스팅 이후 값|undefined|-|-|
+|우선도 순위|3|2|1|
 
 #### var
 - `var`는 ES2015 이전에 변수를 선언하는 유일한 키워드입니다.
 - `var` 변수의 유효 범위는 **함수**를 기준으로 합니다.
 	- 함수 내부에서 선언된 변수는 `지역 변수`,  함수 외부에서 선언된 변수는 `전역 변수`입니다.
 - `var` 변수는 재선언이 가능합니다.
-- `var` 변수는 `함수 호이스팅` 메커니즘이 적용됩니다.
+- 함수 호이스팅 적용 이후, 선언 이전의 `var` 변수를 사용하면 undefined 값으로 참조됩니다.
+- 함수 스코프와 재선언이 가능하다는 점에서, `var`는 불안정하고 의도치 않은 동작이 발생할 수 있다는 문제점이 있습니다.
 
 #### let
-- `블록(block)`은 `{}`로 묶인 부분을 의미합니다. 함수뿐만 아니라 if, for 제어문도 블록입니다.
+- `let` 변수의 유효 범위는 **블록**을 기준으로 합니다.
+	- `블록(block)`은 `{}`로 묶인 부분을 의미합니다. 함수뿐만 아니라 if, for 제어문도 블록입니다.
+	- 블록 내부에서 선언된 변수는 `지역 변수`,  블록 외부에서 선언된 변수는 `전역 변수`입니다.
+- `let` 변수는 재선언이 불가능합니다.
+- 함수 호이스팅 적용 이후, 선언 이전의 `let` 변수를 사용하면 참조 오류가 발생할 것입니다.
 
 #### const
-
+- `const` 변수의 유효 범위는 **블록**을 기준으로 합니다.
+- `const` 변수는 재선언이 불가능합니다.
+- `const` 변수는 값 재할당이 불가능합니다.
+	- 단, 가리키는 값 자체가 바뀔 수는 있습니다.
+	- 객체의 프로퍼티는 변경이 가능합니다.
+- `const` 변수는 반드시 선언 동시에 초기화되어야 합니다.
+- 함수 호이스팅 적용 이후, 선언 이전의 `const` 변수를 사용하면 참조 오류가 발생할 것입니다.
 
 ## 연산자 (Operator)
 
@@ -1284,33 +1300,6 @@ printTriple("Java", "Script");
 Java, Script, undefined
 ```
 
-#### arguments
-- `arguments`: 함수에 전달된 인자를 배열 구조로 저장하는 객체
-- n번째 인수 = arguments\[n - 1\]
-- 인수의 개수 = arguments.length
-- arguments 객체는 배열과 유사하지만 Array 객체가 아닙니다.
-- arguments 객체를 사용하면 인자의 개수가 매개변수 개수보다 많은 상황을 유연하게 대처할 수 있습니다.
-
-```
-// 인자들의 총합을 구하는 함수 (인자 개수 제약 없음)
-function addNum() {
-	var sum = 0;
-	for(n of arguments)
-		sum += n;
-	return sum;
-}
-console.log(addNum(1, 2));
-console.log(addNum(1, 2, 3, 4, 5));
-console.log(addNum());
-```
-
-- 출력 결과
-```
-3
-15
-0
-```
-
 #### 디폴트 매개변수 (Default Parameter)
 - `디폴트 매개변수`: 함수 호출시, 명시된 매개변수에 인자가 제공되지 않은 경우에 사용할 기본값
 
@@ -1533,7 +1522,6 @@ Number(null);       // "null"
 ### 함수 호이스팅 (Hoisting)
 - `함수 호이스팅`: 함수 내부의 모든 변수 선언이 해당 함수의 블록 맨 처음으로 이동하는 메커니즘
 - 함수 호이스팅으로 인해, 함수 블록 첫 부분에 변수를 선언하는 것이 좋습니다.
-- 함수 호이스팅은 `var`로 선언된 변수만 해당됩니다.
 
 ```
 function main() {
@@ -1576,15 +1564,61 @@ function(x, y) {
 
 ### 화살표 함수 (Arrow Function)
 - `화살표 함수`는 ES2015부터 도입된 새로운 함수 표기법입니다.
-- 표기법이 간단하기에 주로 익명 함수를 작성할 때 사용됩니다.
+- 표기법이 간단하기에 주로 함수를 인자로 전달할 때 사용됩니다.
+- 화살표 함수만의 특징으로 인해 객체의 메소드를 정의할 때는 사용하지 않는 것이 좋습니다.
 
 > (`param1`, `param2`, ...) \=\> { ... }
+
+```
+const mix = (hp, mp) => { return hp + mp; };
+```
+
+조건에 따라 더 간결하게 표현할 수 있습니다.
+- 화살표 함수의 매개변수가 1개면, 괄호를 생략할 수 있습니다.
+- 화살표 함수 내부의 구문이 1개면, 중괄호를 생략할 수 있습니다. 또한 구문의 결과값이 해당 함수의 반환값이 됩니다.
+
+> `param` \=\> `statement`
+
+```
+const buff = hp => hp * 2;
+```
+
+화살표 함수는 function 구문으로 정의되는 일반적인 함수와 다른 점이 있습니다.
+- 화살표 함수는 생성자로 사용될 수 없습니다.
+	- `prototype` 프로퍼티가 존재하지 않습니다.
+	- `new.target`를 사용할 수 없습니다.
+- 화살표 함수는 자신만의 `this`, `arguments`, `super`를 가지지 않습니다.
+	- 화살표 함수 내에서 이 프로퍼티들은 각각 해당 함수가 정의된 스코프의 것을 가리킵니다.
+	- 예를 들어, 화살표 함수의 this는 이 함수가 정의된 스코프의 this와 동일합니다. 또한 화살표 함수의 this는 strict 모드의 영향을 받지 않으며, bind() 등을 통한 강제 변경도 불가능합니다.
+- 화살표 함수 내에서 `yield`를 사용할 수 없습니다.
+
+```
+// 생성자 함수
+function Item(name) {
+	this.name = name;
+	this.show = () => this.name;
+}
+const item1 = new Item("Sword");
+
+// 리터럴
+const item2 = {
+	name: "Spear",
+	show: () => this.name
+}
+
+// 생성자 함수 내 this는 인스턴스(item1)입니다.
+console.log(item1.show()); // "Sword"
+
+// 리터럴 내 this는 Object.prototype의 복사본입니다.
+console.log(item2.show()); // undefined
+```
 
 ## 객체 (Object)
 - `객체(object)`: 프로퍼티의 정렬되지 않은 집합
 - `프로퍼티(property)`: 이름(name)과 값(value)으로 구성된 이름-값 쌍
 	- 프로퍼티는 객체를 구성하는 원소입니다.
 - `메소드(method)`: 함수가 값인 프로퍼티
+	- 메소드는 객체에 포함되어있다는 점에서 일반적인 함수와 다릅니다.
 - 자바스크립트에선 number, string, boolean 등 원시 타입도 `래퍼 객체`로 인해 값이 정해진 객체로 취급될 수 있습니다.
 - `객체 레퍼런스(object reference)`: 객체가 위치한 주소를 저장하는 변수
 	- 자바스크립트에서 객체는 레퍼런스 형태로 변수에 담깁니다.
@@ -1711,28 +1745,6 @@ mp
 exp
 ```
 
-#### this
-- `this` 키워드는 해당 키워드가 위치한 코드 영역을 포함하는 객체를 가리킵니다.
-	- 간단히 말해, 자기 자신을 가리킵니다.
-- this를 사용해서 객체 내부에서 사용되는 프로퍼티임을 명시할 수 있습니다.
-- 메소드 내에서 사용되는 this는 해당 메소드를 호출한 객체를 가리킵니다.
-
-```
-var item = {
-	hp: 100,
-	mp: 50,
-	effect: function() {
-		// this를 사용해서 프로퍼티임을 명시합니다.
-		// this를 사용하지 않으면 함수 내 지역변수로 취급됩니다.
-		this.hp += 100;
-		this.mp += 50;
-	}
-};
-
-item.effect();
-console.log(item.hp + ", " + item.mp); // 200, 100
-```
-
 ### 프로토타입 (Prototype)
 - `상속(inheritance)`: 새로운 클래스에서 기존 클래스의 모든 프로퍼티와 메소드를 이어받는 것
 	- 객체지향 프로그래밍에선 상속을 통해 클래스 간 종속 관계를 형성해서 객체의 관계를 조직화할 수 있다는 이점이 있습니다.
@@ -1744,28 +1756,6 @@ console.log(item.hp + ", " + item.mp); // 200, 100
 	- 모든 객체는 해당 프로토타입으로부터 프로퍼티와 메소드를 상속합니다.
 	- 모든 객체는 최소한 1개 이상의 다른 객체를 상속합니다.
 - 자바스크립트에서 상속은 현재 존재한 객체를 복제하여 재사용하는 것을 의미합니다.
-
-#### prototype
-- 모든 함수는 `prototype` 프로퍼티를 가지고 있습니다.
-- prototype 프로퍼티는 생성자 함수가 인스턴스 생성시 사용하는 프로토타입 객체를 가리킵니다.
-	- 이 프로토타입 객체는 Object.prototype의 복사본입니다.
-- prototype 프로퍼티는 해당 함수의 프로토타입과 관련이 없습니다.
-	- 함수의 프로토타입은 `Function.prototype`입니다.
-
-#### constructor
-- 함수의 prototype 객체는 `constructor` 프로퍼티를 가지고 있습니다.
-- constructor 프로퍼티는 생성자 함수를 저장합니다.
-- 생성자 함수로 생성된 인스턴스는 prototype 객체를 상속하므로, 인스턴스도 contructor 프로퍼티를 갖습니다. (값도 prototype 것과 동일합니다.)
-
-```
-function Item() {
-    this.a = 1;
-}
-var item = new Item();
-
-console.log(Item.prototype.constructor === Item); // true
-console.log(item.constructor === Item); // true
-```
 
 #### 프로토타입 체인 (Phototype Chain)
 - 어떤 객체의 프로토타입을 계속 추적할 경우, 이러한 추적의 종점은 항상 `Object.prototype`입니다.
@@ -2070,6 +2060,10 @@ Object.is(NaN, NaN); // true
 
 #### Object.prototype
 
+|프로퍼티|의미|
+|---|---|
+|constructor|생성자 함수|
+
 |메소드|반환|기능|
 |---|---|---|
 |hasOwnProperty(`prop-name`)|boolean|현재 객체가 직접 선언된 특정 프로퍼티를 가지고 있다면 true 반환|
@@ -2077,6 +2071,20 @@ Object.is(NaN, NaN); // true
 |isPrototypeOf(`object`)|boolean|현재 객체가 `object`의 프로토타입 체인에 속하면 true 반환|
 |toString()|string|현재 객체를 string으로 변환|
 |valueOf()||현재 객체의 원시 타입(number, string...)의 값 반환|
+
+##### constructor
+- 함수의 prototype 객체에 존재하는 프로퍼티로, 생성자 함수를 가리킵니다.
+- 생성자 함수로 생성된 인스턴스는 생성자 함수의 prototype 객체를 상속하므로, 인스턴스도 동일한 contructor를 갖습니다.
+
+```
+function Item() {
+    this.a = 1;
+}
+var item = new Item();
+
+console.log(Item.prototype.constructor === Item); // true
+console.log(item.constructor === Item); // true
+```
 
 ##### hasOwnProperty()
 - 해당 객체가 직접 선언된 특정 프로퍼티를 가지고 있다면 true를 반환합니다.
@@ -2908,6 +2916,103 @@ for(var entry of arrEntries)
 ```
 
 
+### Function
+- `Function`: 자바스크립트에서 함수를 담당하는 객체
+- Function.prototype에서 여러 가지 프로퍼티를 제공합니다.
+
+|프로퍼티|의미|
+|---|---|
+|length|함수의 매개변수 개수|
+|name|함수의 이름|
+|this|자신을 호출한 객체|
+|arguments|함수에 전달된 인자 리스트 (유사 배열 객체)|
+|prototype|생성자 함수가 인스턴스 생성시 사용하는 프로토타입 객체|
+
+|메소드|반환|기능|
+|---|---|---|
+|bind(`object`)|function|this의 값이 `object`으로 고정된 함수 반환|
+
+#### this
+- `this`는 현재 함수를 호출한 객체를 가리킵니다.
+- 일반적으로 this는 메소드 내에서 사용됩니다. 메소드 내에서 사용되는 this는 해당 메소드를 포함한 객체를 가리킵니다.
+	- this를 사용해서 객체 내부에서 사용되는 프로퍼티임을 명시할 수 있습니다.
+- 현재 함수를 호출한 객체가 지정되지 않았다면 undefined가 반환됩니다.
+	- 단, 함수를 전역에서 호출한다면 전역 객체를 가리킵니다.
+	- `strict 모드`에선 다시 undefined가 반환되도록 수정됩니다.
+- bind() 등 메소드를 통해 this가 특정 객체를 가리리게 할 수 있습니다.
+
+```
+var item = {
+	hp: 100,
+	mp: 50,
+	effect: function() {
+		// this를 사용해서 프로퍼티임을 명시합니다.
+		// this를 사용하지 않으면 함수 내 지역변수로 취급됩니다.
+		this.hp += 100;
+		this.mp += 50;
+	}
+};
+
+item.effect();
+console.log(item.hp + ", " + item.mp); // 200, 100
+```
+
+```
+function printHp() {
+	// 이때 this는 자신을 호출한 객체입니다.
+	console.log(this.hp);
+}
+function Item(hp) {
+	this.hp = hp;
+    this.show = printHp;
+}
+const item1 = new Item(100);
+const item2 = new Item(200);
+item1.show(); // 100
+item2.show(); // 200
+```
+
+#### arguments
+- 함수에 전달된 인자들을 순차적으로 담은 유사 배열 객체입니다.
+- arguments 객체를 사용하면 인자의 개수가 매개변수 개수보다 많은 상황을 대처할 수 있습니다.
+	- 단, 이러한 용도로 사용하는 것은 ES2015에 도입된 `나머지 매개변수`로 대체 가능합니다.
+
+```
+// 인자들의 총합을 구하는 함수 (인자 개수 제약 없음)
+function addNum() {
+	var sum = 0;
+	for(n of arguments)
+		sum += n;
+	return sum;
+}
+console.log(addNum(1, 2)); // 3
+console.log(addNum(1, 2, 3, 4, 5)); // 15
+console.log(addNum()); // 0
+```
+
+#### prototype
+- 생성자 함수가 인스턴스 생성시 사용하는 프로토타입 객체를 가리킵니다.
+	- 이 프로토타입 객체는 Object.prototype의 복사본입니다.
+- 함수의 프로토타입과 관련이 없습니다. (함수의 프로토타입은 `Function.prototype`입니다.)
+
+#### bind()
+- this의 값이 `object`으로 고정된 새 함수를 반환합니다.
+
+```
+function powerUp() {
+	this.hp += 100;
+}
+const item = { hp: 100 };
+const itemPowerUp = powerUp.bind(item);
+
+itemPowerUp();
+console.log(item.hp); // 200
+```
+
+## 함수형 프로그래밍 (Function Programming)
+### 고차 함수
+
+
 ## DOM (Document Object Model)
 - `문서 객체 모델(DOM ,Document Object Model)`: XML이나 HTML 문서에 접근하기 위한 일종의 인터페이스
 - DOM을 통해 HTML 요소에 대해 접근/변경/추가/삭제 등을 할 수 있습니다.
@@ -3522,6 +3627,7 @@ while(loop) {
 ### strict 모드
 - `strict 모드`는 자바스크립트 코드에 보다 엄격한 오류 검사와 향상된 보안 기능을 제공합니다.
 - 스크립트나 함수의 맨 처음에 다음 지시어를 추가하면, 해당 블록에 strict 모드가 적용됩니다.
+	- ES2015 모듈로 작성된 코드는 항상 strict 모드로 동작합니다.
 
 > "use strict"
 
@@ -3533,6 +3639,7 @@ strict 모드에서 대표적인 변경사항은 다음과 같습니다.
 - 함수를 구문이나 블록 내에서 선언 불가
 - 중복된 매개변수 불가
 - arguments 객체의 요소 값 변경 불가
+- 전역에서 함수 호출시, this가 undefined 반환
 - 문자열 "eval", "arguments" 사용 불가
 - delete 키워드 사용 불가
 - with 문 사용 불가
