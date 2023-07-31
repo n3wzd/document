@@ -3,20 +3,17 @@
 
 
 ★★ javascript DLC ★★
-this는 프로퍼티인가 키워드인가
-
 프로퍼티의 속성
 
 class
-
-콜백 함수
 
 비동기 / promise
 
 JSON.stringify
 
 === 신송 추가 ===
-
+고차 함수, 콜백 함수
+클로저
 
 
 ## 도입 (Intro)
@@ -491,6 +488,7 @@ global
 - 함수 호이스팅 적용 이후, 선언 이전의 `const` 변수를 사용하면 참조 오류가 발생할 것입니다.
 
 ## 연산자 (Operator)
+### 연산자 우선순위
 
 |우선순위|연산자|기능|결합 방향|
 |---|---|---|---|
@@ -748,6 +746,49 @@ str instanceof Number;  // false
 ```
 void(0)  // undefiend
 ```
+
+### Short-circuit Evaluation
+- `평가(Evaluation)`: 표현식이 값으로 변환되는 절차
+- 피연산자가 2개인 연산에서, 앞의 1개의 표현식만으로 연산 결과가 결정나는 경우가 있습니다. 이때 다른쪽 표현식은 평가가 되지 않으며, 이러한 방식을 `Short-circuit Evaluation`라고 합니다.
+- 이하 식에선 `expression`은 평가되지 않습니다.
+
+> `false` && `expression`
+> `true` || `expression`
+
+```
+let k = 5;
+if(false && (k = 10));
+console.log(k); // 5
+```
+
+### Optional Chaining
+- ES2020에 새로 추가된 방법으로, `Optional Chaining` 연산자 `?.`를 사용할 수 있습니다.
+- 참조 대상이 undefined인 에러 상황을 대비할 수 있습니다.
+
+> `obj?.prop` =
+> 만약 `obj`이 `null` or `undefined`이면, `obj` 반환
+> 그렇지 않으면, `obj.prop` 반환
+
+```
+let obj;
+console.log(obj?.prop); // undefined
+console.log(obj.prop); // 오류 발생!
+```
+
+### Spread Syntax
+- `Spread Syntax`는 배열에 다른 배열 추가를 쉽게 해주는 방법을 제공합니다.
+- 복사할 배열 앞에 `...`을 붙이면 해당 배열의 원소들이 그대로 추가됩니다.
+- 객체도 Spread Syntax를 사용할 수 있습니다. 이때는 열거 가능한 프로퍼티만 복사됩니다.
+- 값의 복사는 얕은 복사로 진행됩니다.
+
+```
+const arr1 = [3, 4];
+const arr2 = [1, 2, ...arr1, 5]; // [ 1, 2, 3, 4, 5 ]
+const obj1 = { b: 2 };
+const obj2 = { a: 1, ...obj1, c: 3 }; // { a: 1, b: 2, c: 3 }
+```
+
+### 분해대입 (Destructuring Assignment)
 
 ## 제어문 (Control Flow Statements)
 - `제어문`: 프로그램의 순차적인 흐름을 제어할 때 사용되는 실행문입니다.
@@ -1276,6 +1317,46 @@ var func = addNum;
 console.log(func(2, 4));  // 6
 ```
 
+### this
+- `this` 키워드는 현재 함수를 호출한 객체를 가리킵니다.
+- 일반적으로 this는 메소드 내에서 사용됩니다. 메소드 내에서 사용되는 this는 해당 메소드를 포함한 객체를 가리킵니다.
+	- this를 사용해서 객체 내부에서 사용되는 프로퍼티임을 명시할 수 있습니다.
+- 현재 함수를 호출한 객체가 지정되지 않았다면 undefined가 반환됩니다.
+	- 단, 함수를 전역에서 호출한다면 전역 객체를 가리킵니다.
+	- `strict 모드`에선 다시 undefined가 반환되도록 수정됩니다.
+- bind() 등 메소드를 통해 this가 특정 객체를 가리리게 할 수 있습니다.
+
+```
+var item = {
+	hp: 100,
+	mp: 50,
+	effect: function() {
+		// this를 사용해서 프로퍼티임을 명시합니다.
+		// this를 사용하지 않으면 함수 내 지역변수로 취급됩니다.
+		this.hp += 100;
+		this.mp += 50;
+	}
+};
+
+item.effect();
+console.log(item.hp + ", " + item.mp); // 200, 100
+```
+
+```
+function printHp() {
+	// 이때 this는 자신을 호출한 객체입니다.
+	console.log(this.hp);
+}
+function Item(hp) {
+	this.hp = hp;
+    this.show = printHp;
+}
+const item1 = new Item(100);
+const item2 = new Item(200);
+item1.show(); // 100
+item2.show(); // 200
+```
+
 ### 매개변수 (Parameter)
 - `매개변수(parameter)`: 함수 정의에서 전달받은 인수를 함수 내부로 전달하기 위해 사용하는 변수
 - `인수(argument)`: 함수 호출에서 함수로 전달되는 값
@@ -1611,6 +1692,66 @@ console.log(item1.show()); // "Sword"
 
 // 리터럴 내 this는 Object.prototype의 복사본입니다.
 console.log(item2.show()); // undefined
+```
+
+### 고차 함수 (Higher-order Function)
+- `고차 함수`는 함수를 인수로 받거나, 함수를 반환하는 함수를 의미합니다.
+- `콜백(callback)`은 인수로 넘겨지는 함수입니다.
+- 화살표 함수로도 고차 함수를 만들 수 있습니다.
+
+```
+function repeater(func, n) {
+	for(let i = 0; i < n; i++)
+		func();
+}
+```
+
+### 클로저 (Closure)
+- 내부 스코프의 함수가 외부 스코프의 변수를 사용한다면, 이 변수는 `클로저`라는 저장소에 저장됩니다.
+	- 이때 변수의 상태는 함수가 생성된 시점을 기준으로 합니다.
+- 외부 스코프의 코드가 종료되더라도 함수는 클로저를 통해 계속 변수를 사용할 수 있습니다.
+- 클로저 변수를 함수의 private 프로퍼티처럼 활용할 수 있습니다.
+	- 함수의 호출이 종료되더라도 클로저 변수는 호출 이전 상태로 돌아가지 않습니다.
+	- 클로저 변수는 외부에서 접근할 수 없으며, 오로지 함수 내부에서만 조작이 가능합니다.
+
+```
+function poo(x) {
+	// 내부 스코프의 함수가 외부 스코프의 변수를 사용하고 있습니다.
+	return function() {
+		return x;
+	}
+}
+const func1 = poo(5);
+const func2 = poo(10);
+
+// 클로저에 저장된 변수를 사용합니다.
+console.log(func1()); // 5
+// 클로저 변수의 초기 상태는 함수가 생성된 시점을 기준으로 합니다.
+console.log(func2()); // 10
+```
+
+```
+function generateCounter(n = 1) {
+	return function () {
+		return n++;
+	}
+}
+
+// 클로저 변수는 함수 내부에서만 조작 가능합니다.
+const counter = generateCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2
+console.log(counter()); // 3
+```
+
+### 재귀 함수 (Recursive Function)
+- `재귀 함수`는 자기 자신을 호출하는 함수입니다.
+- 자바스크립트에서도 재귀 함수를 사용할 수 있습니다.
+
+```
+function poo() {
+	poo();
+}
 ```
 
 ## 객체 (Object)
@@ -2924,53 +3065,12 @@ for(var entry of arrEntries)
 |---|---|
 |length|함수의 매개변수 개수|
 |name|함수의 이름|
-|this|자신을 호출한 객체|
 |arguments|함수에 전달된 인자 리스트 (유사 배열 객체)|
 |prototype|생성자 함수가 인스턴스 생성시 사용하는 프로토타입 객체|
 
 |메소드|반환|기능|
 |---|---|---|
 |bind(`object`)|function|this의 값이 `object`으로 고정된 함수 반환|
-
-#### this
-- `this`는 현재 함수를 호출한 객체를 가리킵니다.
-- 일반적으로 this는 메소드 내에서 사용됩니다. 메소드 내에서 사용되는 this는 해당 메소드를 포함한 객체를 가리킵니다.
-	- this를 사용해서 객체 내부에서 사용되는 프로퍼티임을 명시할 수 있습니다.
-- 현재 함수를 호출한 객체가 지정되지 않았다면 undefined가 반환됩니다.
-	- 단, 함수를 전역에서 호출한다면 전역 객체를 가리킵니다.
-	- `strict 모드`에선 다시 undefined가 반환되도록 수정됩니다.
-- bind() 등 메소드를 통해 this가 특정 객체를 가리리게 할 수 있습니다.
-
-```
-var item = {
-	hp: 100,
-	mp: 50,
-	effect: function() {
-		// this를 사용해서 프로퍼티임을 명시합니다.
-		// this를 사용하지 않으면 함수 내 지역변수로 취급됩니다.
-		this.hp += 100;
-		this.mp += 50;
-	}
-};
-
-item.effect();
-console.log(item.hp + ", " + item.mp); // 200, 100
-```
-
-```
-function printHp() {
-	// 이때 this는 자신을 호출한 객체입니다.
-	console.log(this.hp);
-}
-function Item(hp) {
-	this.hp = hp;
-    this.show = printHp;
-}
-const item1 = new Item(100);
-const item2 = new Item(200);
-item1.show(); // 100
-item2.show(); // 200
-```
 
 #### arguments
 - 함수에 전달된 인자들을 순차적으로 담은 유사 배열 객체입니다.
@@ -3008,10 +3108,6 @@ const itemPowerUp = powerUp.bind(item);
 itemPowerUp();
 console.log(item.hp); // 200
 ```
-
-## 함수형 프로그래밍 (Function Programming)
-### 고차 함수
-
 
 ## DOM (Document Object Model)
 - `문서 객체 모델(DOM ,Document Object Model)`: XML이나 HTML 문서에 접근하기 위한 일종의 인터페이스
