@@ -12,8 +12,6 @@ class
 JSON.stringify
 
 === 신송 추가 ===
-고차 함수, 콜백 함수
-클로저
 
 
 ## 도입 (Intro)
@@ -789,6 +787,46 @@ const obj2 = { a: 1, ...obj1, c: 3 }; // { a: 1, b: 2, c: 3 }
 ```
 
 ### 분해대입 (Destructuring Assignment)
+- `분해대입`은 배열이나 객체를 분해해서 다수의 변수를 간편하게 설정하는 방법입니다.
+- 분해대입은 ES2015에 도입되었습니다.
+- 배열을 활용한 분해대입 사용법은 다음과 같습니다. (배열의 인덱스를 매칭 기준으로 하며, 요소가 변수명/대입할 값입니다.)
+
+```
+const [a, b, c] = [1, 2, 3];
+console.log(a, b, c); // 1 2 3
+```
+
+- 객체를 활용한 분해대입 사용법은 다음과 같습니다. (객체의 프로퍼티를 매칭 기준으로 하며, 프로퍼티의 값이 변수명/대입할 값입니다.)
+- 좌측 객체의 프로퍼티의 값을 생략하면 프로퍼티명이 변수명이 됩니다.
+
+```
+const { p1: a, p2: b } = { p1: 1, p2: 2 };
+console.log(a, b); // 1 2
+
+const { p1, p2 } = { p1: 1, p2: 2 };
+console.log(p1, p2); // 1 2
+```
+
+- 배열/객체에서 서로 매칭되지 않는 부분이 있다면, 해당 부분은 무시됩니다.
+- 좌측 배열/객체에 기본값을 설정할 수 있습니다. 만약 해당 요소에 매칭된 값이 없다면 기본값이 대입됩니다.
+- 배열/객체를 중첩해서 사용할 수 있습니다.
+- 좌측 배열/객체의 맨 마지막 요소에 `...`을 붙이면 해당 요소는 우측 배열/객체의 나머지 값들을 저장하는 배열이 됩니다.
+- 함수의 매개변수에서도 분해대입을 사용할 수 있습니다.
+
+```
+let a, b, c, d;
+[a, , b] = [1, 2, 3, 4];
+console.log(a, b); // 1 3
+
+[a, b, c = 3] = [1, 2];
+console.log(a, b, c); // 1 2 3
+
+[a, b, [c, d]] = [1, 2, [3, 4]];
+console.log(a, b, c, d); // 1 2 3 4
+
+[a, ...b] = [1, 2, 3, 4];
+console.log(b); // [2, 3, 4]
+```
 
 ## 제어문 (Control Flow Statements)
 - `제어문`: 프로그램의 순차적인 흐름을 제어할 때 사용되는 실행문입니다.
@@ -957,63 +995,39 @@ for(var i = 0; i < 3; i++)
 ```
 
 #### for / in
-- `for / in`: 주어진 객체의 프로퍼티 인덱스를 열거하는 반복문입니다.
-	- enumerable 플래그가 true인 프로퍼티만 순회합니다.
+- `for / in`: 주어진 객체의 열거 가능한 프로퍼티 인덱스를 열거하는 반복문입니다.
+	- 부수속성 `enumerable`이 true인 프로퍼티만 순회합니다.
+- 사용 방법은 다음과 같습니다. `index`는 루프마다 열거되는 `object`의 프로퍼티 인덱스 문자열입니다.
 
 > for(`index` in `object`) {
 > 	(`object`의 열거 가능한 프로퍼티 개수만큼 반복)
 > }
 
-- `index`: 루프마다 열거되는 `object`의 프로퍼티 인덱스 (string 값)
-
-- 예제 1
 ```
 var arr = [1, 2, 3];
 for(i in arr)
-	console.log(i);
+	console.log(i); // 0 1 2
 ```
 
-- 출력 결과 1
-```
-0
-1
-2
-```
-
-- 예제 2
 ```
 var obj = { name: "klee", id: 2 };
 for(p in obj)
-	console.log(p);
-```
-
-- 출력 결과 2
-```
-name
-id
+	console.log(p); // name id
 ```
 
 #### for / of
 - `for / of`: 주어진 객체의 프로퍼티 값을 열거하는 반복문입니다.
 	- 순회 가능한 객체(iterable objects)만 적용 가능합니다. (ex. Array, Map, Set ...)
+- 사용 방법은 다음과 같습니다. `target`은 루프마다 열거되는 `object`의 프로퍼티 값입니다.
 
 > for(`target` of `object`) {
 > 	(`object`의 프로퍼티 개수만큼 반복)
 > }
 
-- `target`: 루프마다 열거되는 `object`의 프로퍼티 값
-
 ```
 var arr = [1, 2, 3];
 for(n of arr)
-	console.log(n);
-```
-
-- 출력 결과
-```
-1
-2
-3
+	console.log(n); // 1 2 3
 ```
 
 ### 기타 제어문
@@ -1755,18 +1769,18 @@ function poo() {
 ```
 
 ## 객체 (Object)
-- `객체(object)`: 프로퍼티의 정렬되지 않은 집합
-- `프로퍼티(property)`: 이름(name)과 값(value)으로 구성된 이름-값 쌍
+- **객체(object)**: 프로퍼티의 정렬되지 않은 집합
+- **프로퍼티(property)**: 이름(name)과 값(value)으로 구성된 이름-값 쌍
 	- 프로퍼티는 객체를 구성하는 원소입니다.
-- `메소드(method)`: 함수가 값인 프로퍼티
+- **메소드(method)**: 함수가 값인 프로퍼티
 	- 메소드는 객체에 포함되어있다는 점에서 일반적인 함수와 다릅니다.
-- 자바스크립트에선 number, string, boolean 등 원시 타입도 `래퍼 객체`로 인해 값이 정해진 객체로 취급될 수 있습니다.
-- `객체 레퍼런스(object reference)`: 객체가 위치한 주소를 저장하는 변수
+- 자바스크립트에선 number, string, boolean 등 원시 타입도 **래퍼 객체**로 인해 값이 정해진 객체로 취급될 수 있습니다.
+- **객체 레퍼런스(object reference)**: 객체가 위치한 주소를 저장하는 변수
 	- 자바스크립트에서 객체는 레퍼런스 형태로 변수에 담깁니다.
 	- 객체 레퍼런스의 값은 객체 그 자체가 아니라 객체가 메모리에 위치한 주소입니다.
 
 ### 생성 (Create)
-- `인스턴스(instance)`: 생성된 객체
+- **인스턴스(instance)**: 생성된 객체
 - 객체를 생성하는 방법은 다음이 있습니다.
 
 1. 리터럴 표기(literal notation)
@@ -1775,7 +1789,7 @@ function poo() {
 
 #### 리터럴 표기 (Literal Notation)
 - 직접 객체의 프로퍼티를 작성해서 생성하는 방법입니다.
-- 이 방법으로 생성된 객체의 프로토타입은 Object.prototype입니다.
+- 이 방법으로 생성된 객체의 프로토타입은 `Object.prototype`입니다.
 
 > var `object` = {
 > 	`property1`: `value1`,
@@ -1794,10 +1808,10 @@ var item = {
 ```
 
 #### 생성자 함수 (Constructor Function)
-- `생성자 함수`: 객체를 생성할 때 사용되는 함수
+- **생성자 함수**는 객체를 생성할 때 사용되는 함수입니다.
 - 모든 함수는 생성자 함수가 될 수 있습니다.
-- `new` 연산자: 생성자 함수를 통해 객체를 생성
-- 자바스크립트에서 미리 정의된 생성자 함수(Object, Number, String 등)도 있고, 직접 생성자 함수를 작성할 수도 있습니다.
+- `new` 연산자로 생성자 함수를 통해 객체를 생성할 수 있습니다.
+- 자바스크립트에서 미리 정의된 생성자 함수(`Object`, `Number`, `String` 등)도 있고, 직접 생성자 함수를 작성할 수도 있습니다.
 
 > new `Constructor`
 
@@ -1806,11 +1820,11 @@ var str = new String();
 ```
 
 #### Object.create()
-- Object의 create() 메소드로 객체를 생성할 수 있습니다.
-- 생성할 객체의 프로토타입을 직접 설정할 수 있습니다.
-- 2번째 인자로부터 프로퍼티를 추가할 수도 있으며, 추가할 프로퍼티의 속성도 같이 설정할 수 있습니다.
+- 생성할 객체의 **프로토타입**을 1번째 인자를 통해 직접 설정할 수 있습니다.
+- 2번째 인자는 **속성 기술자**입니다. 프로퍼티를 추가할 수도 있으며, 추가할 프로퍼티의 부수속성도 같이 설정할 수 있습니다.
+	- 속성 기술자의 속성에서 `writable`, `enumerable`, `configurable`을 따로 설정하지 않았다면, 해당 부수속성은 `false`로 취급됩니다.
 
-> Object.create(`prototype`, { `property1`: { value: `value1`, ... }, ... });
+> Object.create(`prototype`, `prop_des`);
 
 ```
 var item = Object.create(null, { 
@@ -2094,6 +2108,30 @@ Item.powerUp = function(item) {
 }
 ```
 
+### 부수속성 (Property Attribute)
+- 속성의 `부수속성`은 해당 속성의 특성 정보를 저장합니다.
+- `속성 기술자(property descripot)` 객체는 속성의 부수속성들을 담고 있습니다. 속성 기술자는 `Object.getOwnPropertyDescriptor()` 메소드로 얻을 수 있습니다.
+- 속성 기술자는 주로 속성을 정의할 때 부수속성 정보를 넘겨주는 인자로 활용됩니다.
+- `데이터 속성`에 대한 속성 기술자는 다음 프로퍼티를 갖습니다. 
+
+|프로퍼티|의미|
+|---|---|
+|value|속성에 저장된 값|
+|writable|변경 가능성|
+|enumerable|열거 가능성|
+|configurable|부수속성 변경 및 프로퍼티 삭제 가능성|
+
+```
+const item = { hp: 100, mp: 50 };
+Object.defineProperty(item, 'exp', {value: 75, writable: false, enumerable : false} );
+
+for(p in item)
+	console.log(p); // exp는 출력되지 않습니다!
+
+item.exp = 150; // 해당 대입은 반영되지 않습니다!
+console.log(item.exp); // 75
+```
+
 ## 표준 객체 (Standard Object)
 - `표준 객체`: 다른 객체의 기초가 되는 핵심 객체
 - 자주 사용되는 표준 객체는 다음과 같습니다.
@@ -2120,6 +2158,9 @@ Item.powerUp = function(item) {
 |getPrototypeOf(`object`)|object|주어진 객체의 프로토타입 반환|
 |setPrototypeOf(`child`, `parent`)||객체 `child`의 프로토타입을 객체 `parent`로 설정|
 |is(`x`, `y`)|boolean|두 값이 동일한지 비교|
+|create(`prototype`, `prop_des`)|object|프로토타입과 속성 기술자를 통해 객체 생성|
+|getOwnPropertyDescriptor(`object`, `prop`)|object|주어진 객체 속성의 속성 기술자 반환|
+|defineProperty(`object`, `prop`, `prop_des`)||주어진 객체에 새로운 속성 정의|
 
 ##### keys()
 - 주어진 객체의 열거 가능한 고유 프로퍼티의 이름을 담은 배열을 반환합니다.
