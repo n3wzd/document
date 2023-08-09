@@ -1,19 +1,6 @@
 # JavaScript
 자바스크립트(JavaScript)는 객체(object) 기반의 스크립트 언어입니다.
 
-
-★★ javascript DLC ★★
-프로퍼티의 속성
-
-class
-
-비동기 / promise
-
-JSON.stringify
-
-=== 신송 추가 ===
-
-
 ## 도입 (Intro)
 - 자바스크립트는 동적이며, 타입을 명시하지 않아도 되는 인터프리터 언어입니다.
 	- 객체 지향 프로그래밍, 함수형 프로그래밍을 모두 표현할 수 있습니다.
@@ -160,7 +147,7 @@ false
 ```
 
 ##### 심볼 (symbol)
-- ECMAScript6에 새로 추가된 타입입니다.
+- ES2015에 새로 추가된 타입입니다.
 - 유일하고 변경할 수 없습니다.
 - 식별자로 사용할 수 있습니다.
 
@@ -2132,17 +2119,21 @@ item.exp = 150; // 해당 대입은 반영되지 않습니다!
 console.log(item.exp); // 75
 ```
 
-## 표준 객체 (Standard Object)
-- `표준 객체`: 다른 객체의 기초가 되는 핵심 객체
-- 자주 사용되는 표준 객체는 다음과 같습니다.
+### 얕은 복사(Shallow Copy) vs 깊은 복사(Deep Copy)
+- 중첩된 자료구조를 포함한 자료구조를 복사하는 것은 크게 2가지 방법이 있습니다.
+- `얕은 복사(Shallow Copy)`는 중첩된 자료구조의 참조만 복사합니다.
+- `깊은 복사(Deep Copy)`는 중첩된 자료구조까지 완전히 복사합니다.
+- 자바스크립트에서 중첩된 객체 복사시, 기본적으로 얕은 복사를 따릅니다. 따라서 깊은 복사를 사용하려면 직접 구현해야 합니다.
 
-1. Object
-2. Number
-3. Math
-4. Date
-5. String
-6. Array
-7. Function
+```
+const healBuff = { time: 30, hp: 30 };
+const hpPotion = { hp: 500, buff: healBuff };
+const mpPotion = Object.assign({}, hpPotion); // 얕은 복사가 진행됩니다.
+console.log(hpPotion.buff === mpPotion.buff); // true
+```
+
+## 표준 객체 (Standard Object)
+`표준 객체`는 자바스크립트에서 기본적으로 제공하는 객체로, 다른 객체의 기초가 되는 핵심 객체입니다.
 
 ### Object
 - 자바스크립트의 모든 객체는 Object.prototype을 상속합니다.
@@ -3097,7 +3088,6 @@ for(var entry of arrEntries)
 [ 2, 'C' ]
 ```
 
-
 ### Function
 - `Function`: 자바스크립트에서 함수를 담당하는 객체
 - Function.prototype에서 여러 가지 프로퍼티를 제공합니다.
@@ -3148,6 +3138,46 @@ const itemPowerUp = powerUp.bind(item);
 
 itemPowerUp();
 console.log(item.hp); // 200
+```
+
+### JSON
+- `직렬화(Serialization)`는 프로그래밍 언어에서 사용하는 자료구조를 저장/전송 가능한 형태로 가공하는 절차입니다. `역직렬화(Deserialization)`는 직렬화된 데이터를 다시 원래 형태로 변환하는 절차입니다.
+- `JSON(JavaScript Object Notation)`은 웹 분야에서 가장 자주 사용되는 직렬화 형식 중 하나로, 자료구조를 자바스크립트 객체와 비슷한 표기법을 사용하는 텍스트로 직렬화합니다.
+- 자바스크립트에서는 표준 객체 `JSON`로 JSON을 사용할 수 있습니다.
+- JSON 메소드를 사용할 때는 JSON 문법을 적용해야 합니다. (자바스크립트 문법이 JSON으로 자동 변환되지 않습니다.)
+	- 예를 들어, JSON에선 속성명을 따옴표로 감쌉니다.
+
+|메소드|기능|
+|---|---|
+|stringify(`obj`)|JSON 직렬화|
+|parse(`json`)|JSON 역직렬화|
+
+```
+const potion = { hp: 500, mp: 150, name: "hpPotion" };
+const data = JSON.stringify(potion);
+console.log(data);
+console.log(JSON.parse(data));
+```
+
+출력 결과는 다음과 같습니다.
+```
+{"hp":500,"mp":150,"name":"hpPotion"}
+{ hp: 500, mp: 150, name: 'hpPotion' }
+```
+
+### Symbol
+- `심볼(Symbol)`은 ES2015에 새로 도입된 원시 타입입니다.
+- 표준 객체 `Symbol`로 심볼을 생성할 수 있습니다.
+- 심볼 생성시, 심볼의 설명을 인자로 줄 수 있습니다. 심볼의 설명은 단순 문자열이며 심볼의 식별에 영향을 주지 않습니다. 즉, 새로 생성된 심볼의 설명이 기존 심볼의 설명과 같다고 해도 두 심볼은 다릅니다.
+- 심볼은 객체의 프로퍼티 `식별자(identifier)` 역할을 할 수 있습니다.
+	- 대괄호 표기법으로 심볼을 객체의 프로퍼티 식별자로 사용할 수 있습니다.
+
+> Symbol(_`desc`_)
+
+```
+const sym = Symbol('hp');
+const potion = { [sym]: 500 };
+console.log(potion); // { [Symbol(hp)]: 500 }
 ```
 
 ## DOM (Document Object Model)
