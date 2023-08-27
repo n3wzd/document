@@ -360,8 +360,8 @@ console.log(s2);
 console.log(s3);
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 String
 Super String
 Fantastic
@@ -389,8 +389,8 @@ genNum();
 console.log(typeof num);
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 number
 undefined
 ```
@@ -414,8 +414,8 @@ for(var i = 0; i < 5; i++)
 console.log(num + ", " + i);
 ```
 
-- 출력 결과 1
 ```
+// 실행 결과
 10, 5
 ```
 
@@ -430,8 +430,8 @@ function func() {
 func();
 ```
 
-- 출력 결과 2
 ```
+// 실행 결과
 local
 global
 ```
@@ -663,8 +663,8 @@ for(var i = 0, j = 19; i <= j; i++, j--)
 console.log(num1 + ", " + num2);
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 10, 20
 ```
 
@@ -684,8 +684,8 @@ if(delete list[1]);
 	console.log(list);
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 undefined
 [1, undefiend, 3]
 ```
@@ -763,7 +763,7 @@ console.log(obj.prop); // 오류 발생!
 ### Spread Syntax
 - `Spread Syntax`는 배열에 다른 배열 추가를 쉽게 해주는 방법을 제공합니다.
 - 복사할 배열 앞에 `...`을 붙이면 해당 배열의 원소들이 그대로 추가됩니다.
-- 객체도 Spread Syntax를 사용할 수 있습니다. 이때는 열거 가능한 프로퍼티만 복사됩니다.
+- 객체도 Spread Syntax를 사용할 수 있습니다. 이때는 열거 가능한(enumerable) 프로퍼티만 복사됩니다.
 - 값의 복사는 얕은 복사로 진행됩니다.
 
 ```
@@ -845,8 +845,8 @@ else
 	console.log("n1은 n2하고 같습니다.");
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 n1은 n2보다 작습니다.
 ```
 
@@ -882,8 +882,8 @@ switch(n) {
 }
 ```
 
-- 출력 결과 1
 ```
+// 실행 결과
 n은 3입니다.
 ```
 
@@ -900,8 +900,8 @@ switch(n) {
 }
 ```
 
-- 출력 결과 2
 ```
+// 실행 결과
 n은 3보다 같거나 큽니다.
 n은 4보다 같거나 큽니다.
 n은 5보다 같거나 큽니다.
@@ -925,8 +925,8 @@ while(i > 0)
 	console.log(i--);
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 3
 2
 1
@@ -946,8 +946,8 @@ do {
 } while(i > 0);
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 0
 ```
 
@@ -974,8 +974,8 @@ for(var i = 0; i < 3; i++)
 	console.log(i);
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 0
 1
 2
@@ -1046,8 +1046,8 @@ for(var i = 1; i <= 5; i++) {
 }
 ```
 
-- 출력 결과 1
 ```
+// 실행 결과
 1
 3
 5
@@ -1065,8 +1065,8 @@ for(var i = 1; i <= 3; i++) {
 }
 ```
 
-- 출력 결과 2
 ```
+// 실행 결과
 0
 1
 0
@@ -1091,8 +1091,8 @@ for(var i = 1; i <= 5; i++) {
 }
 ```
 
-- 출력 결과 1
 ```
+// 실행 결과
 1
 2
 3
@@ -1110,8 +1110,8 @@ for(var i = 1; i <= 5; i++) {
 }
 ```
 
-- 출력 결과 2
 ```
+// 실행 결과
 1
 2
 3
@@ -1158,16 +1158,10 @@ var arr = [false, 1, "2", { n: 3 }, [4]];
 
 ```
 var arr = [1, 2, 3];
-console.log(arr[1]);
+console.log(arr[1]); // 2
 
 arr[4] = 5;
-console.log(arr);
-```
-
-- 출력 결과
-```
-2
-[1, 2, 3, undefiend, 5]
+console.log(arr); // [1, 2, 3, undefiend, 5]
 ```
 
 #### 추가
@@ -1185,16 +1179,7 @@ console.log(arr);
 ```
 var arr = [1, 2, 3, 4, 5];
 for(n of arr)
-	console.log(n);
-```
-
-- 출력 결과
-```
-1
-2
-3
-4
-5
+	console.log(n); // 1 2 3 4 5
 ```
 
 ### 활용
@@ -1205,12 +1190,7 @@ for(n of arr)
 ```
 var arr = [];
 arr[2] = 0;
-console.log(arr.length);
-```
-
-- 출력 결과
-```
-3
+console.log(arr.length); // 3
 ```
 
 #### 다차원 배열
@@ -1226,8 +1206,8 @@ for(var y = 0, n = 0; y < arr.length; y++) {
 }
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 [1, 2, 3, 4]
 [5, 6, 7, 8]
 [9, 10, 11, 12]
@@ -1247,8 +1227,8 @@ str[4] = 'A'; // 반영되지 않습니다.
 console.log(str);
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 S
 10
 JavaScript
@@ -1377,8 +1357,8 @@ function printTriple(a, b, c) {
 printTriple("Java", "Script");
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 Java, Script, undefined
 ```
 
@@ -1416,8 +1396,8 @@ console.log(subNum(10, 1, 2, 3));
 console.log(subNum(10));
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 9
 4
 10
@@ -1529,8 +1509,8 @@ var uri = "http://google.com/search.php?name=abc&word=검색";
 console.log(encodeURI(uri));
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 http://google.com/search.php?name=abc&word=%EA%B2%80%EC%83%89
 ```
 
@@ -1542,8 +1522,8 @@ var uri = "http://google.com/search.php?name=abc&word=검색";
 console.log(encodeURIComponent(uri));
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 http%3A%2F%2Fgoogle.com%2Fsearch.php%3Fname%3Dabc%26word%3D%EA%B2%80%EC%83%89
 ```
 
@@ -1556,8 +1536,8 @@ var enc = encodeURI(uri);
 console.log(decodeURI(enc));
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 http://google.com/search.php?name=abc&word=검색
 ```
 
@@ -1570,8 +1550,8 @@ var enc = encodeURIComponent(uri);
 console.log(decodeURIComponent(enc));
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 http://google.com/search.php?name=abc&word=검색
 ```
 
@@ -1880,8 +1860,8 @@ for(i in item)
 	console.log(i);
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 hp
 mp
 exp
@@ -1980,8 +1960,8 @@ for(p of potionList)
 	console.log(p.hp + ", " + p.mp + ", " + p.exp);
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 100, 50, undefined
 50, 100, 50
 ```
@@ -2016,32 +1996,10 @@ for(p of potionList)
 	console.log(p.hp + ", " + p.mp + ", " + p.atk + ", " + p.def);
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 100, 50, 20, 5
 50, 100, 10, 5
-```
-
-### getter / setter
-- `getter`: 특정 프로퍼티의 값을 받아오는 메소드
-- `setter`: 특정 프로퍼티의 값을 설정하는 메소드
-- 접근자 프로퍼티: getter, setter 메소드로 정의된 프로퍼티
-- 일반 메소드와 달리, 호출 방법이 프로퍼티 조작과 비슷합니다.
-
-> `object`.`getter`
-> `object`.`setter` = `argument`
-
-```
-var item = {
-	hp: 100,
-	mp: 50
-};
-
-Object.defineProperty(item, "getHPBarGuage", { get: function() { return this.hp * 100; }});
-Object.defineProperty(item, "upgradeHP", { set: function(n) { this.hp *= n; }});
-
-item.upgradeHP = 3;
-console.log(item.getHPBarGuage); // 30000
 ```
 
 ### 전역 객체 (Global Object)
@@ -2101,7 +2059,7 @@ Item.powerUp = function(item) {
 - 속성 기술자는 주로 속성을 정의할 때 부수속성 정보를 넘겨주는 인자로 활용됩니다.
 - `데이터 속성`에 대한 속성 기술자는 다음 프로퍼티를 갖습니다. 
 
-|프로퍼티|의미|
+|프로퍼티|값|
 |---|---|
 |value|속성에 저장된 값|
 |writable|변경 가능성|
@@ -2118,6 +2076,37 @@ for(p in item)
 item.exp = 150; // 해당 대입은 반영되지 않습니다!
 console.log(item.exp); // 75
 ```
+
+### 접근자 속성 (Accessor Property)
+- `접근자 속성`은 `getter`와 `setter`가 정의된 속성입니다.
+- `getter`: 특정 프로퍼티의 값을 받아오는 메소드
+- `setter`: 특정 프로퍼티의 값을 설정하는 메소드
+- getter와 setter는 호출 방법이 프로퍼티 조작과 비슷합니다.
+
+> `object`.`getter`
+> `object`.`setter` = `argument`
+
+```
+var item = {
+	hp: 100,
+	mp: 50
+};
+
+Object.defineProperty(item, "getHPBarGuage", { get: function() { return this.hp * 100; }});
+Object.defineProperty(item, "upgradeHP", { set: function(n) { this.hp *= n; }});
+
+item.upgradeHP = 3;
+console.log(item.getHPBarGuage); // 30000
+```
+
+- 접근자 속성의 부수속성은 다음과 같습니다. (데이터 속성에서 get, set만 다릅니다.)
+
+|부수속성|값|
+|---|---|
+|get|getter 메소드|
+|set|setter 메소드|
+|enumerable|열거 가능성|
+|configurable|부수속성 변경 및 속성 삭제 가능성|
 
 ### 얕은 복사(Shallow Copy) vs 깊은 복사(Deep Copy)
 - 중첩된 자료구조를 포함한 자료구조를 복사하는 것은 크게 2가지 방법이 있습니다.
@@ -2143,7 +2132,7 @@ console.log(hpPotion.buff === mpPotion.buff); // true
 
 |메소드|반환|기능|
 |---|---|---|
-|keys(`object`)|Array|주어진 객체의 열거 가능한 고유 프로퍼티의 이름을 담은 배열 반환|
+|keys(`object`)|Array|주어진 객체의 열거 가능한(enumerable) 고유 프로퍼티의 이름을 담은 배열 반환|
 |getOwnPropertyNames(`object`)|Array|주어진 객체의 모든 고유 프로퍼티의 이름을 담은 배열 반환|
 |isExtensible(`object`)|boolean|주어진 객체에 새로운 프로퍼티를 추가할 수 있다면 true 반환|
 |getPrototypeOf(`object`)|object|주어진 객체의 프로토타입 반환|
@@ -2154,7 +2143,7 @@ console.log(hpPotion.buff === mpPotion.buff); // true
 |defineProperty(`object`, `prop`, `prop_des`)||주어진 객체에 새로운 속성 정의|
 
 ##### keys()
-- 주어진 객체의 열거 가능한 고유 프로퍼티의 이름을 담은 배열을 반환합니다.
+- 주어진 객체의 열거 가능한(enumerable) 고유 프로퍼티의 이름을 담은 배열을 반환합니다.
 
 ```
 var item = {
@@ -2240,7 +2229,7 @@ Object.is(NaN, NaN); // true
 |메소드|반환|기능|
 |---|---|---|
 |hasOwnProperty(`prop-name`)|boolean|현재 객체가 직접 선언된 특정 프로퍼티를 가지고 있다면 true 반환|
-|propertyIsEnumerable(`prop-name`)|boolean|현재 객체의 프로퍼티가 열거 가능하다면 true 반환|
+|propertyIsEnumerable(`prop-name`)|boolean|현재 객체의 프로퍼티가 열거 가능(enumerable)하다면 true 반환|
 |isPrototypeOf(`object`)|boolean|현재 객체가 `object`의 프로토타입 체인에 속하면 true 반환|
 |toString()|string|현재 객체를 string으로 변환|
 |valueOf()||현재 객체의 원시 타입(number, string...)의 값 반환|
@@ -2275,7 +2264,7 @@ console.log(item.hasOwnProperty("prototype")); // false
 ```
 
 ##### propertyIsEnumerable()
-- 해당 객체의 프로퍼티가 열거 가능하다면 true를 반환합니다.
+- 해당 객체의 프로퍼티가 열거 가능(enumerable)하다면 true를 반환합니다.
 - 해당 프로퍼티가 객체 내 존재하지 않는다면(=hasOwnProperty()의 결과) false를 반환합니다.
 
 ```
@@ -2572,8 +2561,8 @@ new Date(90000000);
 new Date(2023, 6, 19, 16, 20, 30);
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 2023-07-19T07:34:22.796Z
 2023-07-19T07:20:30.000Z
 2022-04-15T05:20:00.000Z
@@ -2989,8 +2978,9 @@ function printAll(value, index, array) {
 arr.forEach(printAll);
 ```
 
-- 출력 결과
+
 ```
+// 실행 결과
 0: A
 1: B
 2: C
@@ -3081,8 +3071,8 @@ for(var entry of arrEntries)
 	console.log(entry);
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 [ 0, 'A' ]
 [ 1, 'B' ]
 [ 2, 'C' ]
@@ -3159,8 +3149,8 @@ console.log(data);
 console.log(JSON.parse(data));
 ```
 
-출력 결과는 다음과 같습니다.
 ```
+// 실행 결과
 {"hp":500,"mp":150,"name":"hpPotion"}
 { hp: 500, mp: 150, name: 'hpPotion' }
 ```
@@ -3179,6 +3169,532 @@ const sym = Symbol('hp');
 const potion = { [sym]: 500 };
 console.log(potion); // { [Symbol(hp)]: 500 }
 ```
+
+### Map
+- `Map` 객체는 키-값 쌍(key-value pair)을 저장하는 자료구조를 제공합니다.
+- Map 객체의 키는 어떤 값이든 올 수 있으며, 키를 통해서 원하는 값을 빠르게 검색할 수 있습니다.
+- Map 객체는 데이터 추가/삭제가 일반적인 객체보다 빠릅니다.
+- Map 객체는 JSON 등으로 직렬화가 어렵습니다.
+
+|메소드|기능|
+|---|---|
+|set(`key`, `value`)|데이터 추가|
+|get(`key`)|`key`에 대응하는 값 반환|
+|get(`key`)|`key`를 가진 데이터가 존재하면 true 반환|
+|delete(`key`)|`key`를 통해 데이터 삭제|
+
+```
+const map = new Map();
+
+map.set(1, 'sword');
+console.log(map.get(1)); // 'sword'
+console.log(map.has(1)); // true
+
+map.delete(1);
+console.log(map.get(1)); // undefined
+console.log(map.has(1)); // false
+```
+
+### Set
+- `Set` 객체는 집합 자료구조를 제공합니다.
+- Set 객체는 중복 데이터를 허용하지 않습니다. (중복 데이터가 추가될시 무시됩니다)
+- Set 객체 내 데이터는 순서가 없습니다.
+
+```
+const set = new Set();
+
+set.add(1);
+set.add(2);
+set.add(2);
+console.log(set); // Set { 1, 2 }
+```
+
+## Iterable
+- 반복 가능한 객체는`iterable`이며, `iterable protocol`을 만족합니다.
+- iterable은 ES2015에 새로 도입되었습니다.
+- iterable의 예시는 `String`, `Array`, `Map`, `Set` 등이 있습니다.
+- 다음 조건을 만족하면 해당 객체는 iterable입니다.
+
+> iterable 객체의 `Symbol.iterator` 속성은 특별한 형태의 함수를 저장합니다.
+
+```
+const arr = [1, 2, 3];
+arr[Symbol.iterator]; // 특별한 형태의 함수
+```
+
+iterable 객체는 다음을 사용할 수 있습니다.
+- 반복문 for / of
+- spread 연산자 (...)
+- 분해대입
+- iterable을 인수로 받는 함수
+
+### Generator
+- `generator` 함수는 호출시 iterable 객체를 생성하는 함수입니다.
+- generator 함수는 다음 방법으로 정의할 수 있습니다.
+
+```
+// gen은 generator 함수입니다.
+function* gen() {
+	// ...
+}
+const it = gen(); // it은 iterable 객체입니다.
+```
+
+- generator 함수는 일반 함수와 비슷하지만, `yield` 키워드를 사용할 수 있다는 차이가 있습니다.
+- iterable 객체가 반복되면, yield의 값들이 순차적으로 반환됩니다.
+	- 각 반복 과정마다, 현재 yield를 만날 때까지 generator 내 코드가 실행됩니다.
+	- 반복이 끝나면 마지막 yield의 뒤쪽 코드가 실행됩니다.
+
+```
+function* gen() {
+	yield 1;
+	yield 2;
+	yield 3;
+}
+for(n of gen())
+	console.log(n); // 1 2 3
+```
+
+```
+function* gen() {
+	console.log(1);
+	yield 'A';
+	console.log(2);
+	yield 'B';
+	console.log(3);
+}
+for(n of gen()) {
+	console.log(n); // 1 A | 2 B | 3
+	console.log('|');
+}
+```
+
+- `yield*`를 사용하면 다른 generator 함수의 yield 값을 받을 수 있습니다.
+
+```
+function* gen1() {
+	yield 1;
+	yield 2;
+}
+function* gen2() {
+	yield* gen1();
+	yield* gen1();
+}
+for(n of gen2())
+	console.log(n); // 1 2 1 2
+```
+
+- generator 함수가 생성한 iterable 객체는 한 번만 반복 가능합니다.
+		- 반면, `String`, `Array` 등은 여러 번 반복 가능합니다.
+
+```
+function* gen() {
+	yield 1;
+	yield 2;
+}
+const it = gen();
+
+for(n of it)
+	console.log(n); // 1 2
+for(n of it)
+	console.log(n); // 실행되지 않습니다!
+```
+
+- 그외 활용처로, generator와 yield 키워드의 특성을 활용해서 `비동기 프로그래밍`을 구현할 수도 있습니다.
+
+### Iterator
+- 객체가 iterable을 만족하려면, `Symbol.iterator` 속성에 저장되는 함수가 `iterator` 객체를 반환해야 합니다.
+- iterator 객체는 `iterator protocol` 조건을 만족하는 객체입니다. (iterable과 다릅니다!)
+- iterator protocol 조건은 다음과 같습니다.
+
+> 1. iterator는 `next`라는 메소드를 갖습니다.
+> 2. `next` 메소드는 다음 두 속성을 갖는 객체를 반환해야 합니다.
+> 	- `value`: 현재 순서의 값
+> 	- `done`: 반복이 모두 끝났는지 표시
+
+```
+function* gen() {
+	yield 1;
+	yield 2;
+}
+const itr = gen()[Symbol.iterator](); // iterator 객체
+console.log(itr.next()); // { value: 1, done: false }
+console.log(itr.next()); // { value: 2, done: false }
+console.log(itr.next()); // { value: undefined, done: true }
+```
+
+### Generator & Iterator
+generator 함수로부터 만들어진 객체는 다음 특징을 갖습니다.
+1. `iterable protocol`과 `iterator protocol`을 모두 만족합니다.
+	- generator 함수가 반환한 객체도 next 메소드를 사용해서 반복을 수행할 수 있습니다.
+2. generator 함수 안에서 `return` 키워드를 사용하면 반복이 즉시 종료됩니다.
+		- return 값은 반복 과정에서 반환되지 않습니다.
+		- 단, next 메소드에서 반환되는 객체의 value에는 return 값이 저장됩니다.
+3. next 메소드에 인자를 제공할 수 있으며, 이 인자는 이전 순서의 next에 대응하는 yield 표현식 반환값으로 사용됩니다.
+
+```
+function* gen() {
+	yield 1;
+	return 2;
+	yield 3;
+}
+const it1 = gen();
+const it2 = gen();
+
+// 반복 과정에선 return 값이 사용되지 않습니다.
+for(n of it1)
+	console.log(n); // 1
+
+// next의 value에선 return 값이 사용됩니다.
+console.log(it2.next()); // { value: 1, done: false }
+console.log(it2.next()); // { value: 2, done: true }
+console.log(it2.next()); // { value: undefined, done: false }
+```
+
+```
+function* gen() {
+	// yield의 반환값은 이전 next의 인자입니다.
+	for(let i = 1; i <= 3; i++)
+		console.log(yield i);
+}
+const it = gen();
+it.next('Straw'); // 출력 없음
+it.next('Berry'); // Berry
+it.next('Apple'); // Apple
+it.next('Grape'); // Grape
+it.next('Peach'); // 출력 없음
+```
+
+## 클래스 (Class)
+- `클래스(class)`는 ES2015에 새로 도입된 객체를 생성하는 방법입니다. 클래스를 사용해서 생성자 함수를 보다 깔끔하게 정의할 수 있습니다.
+- 클래스는 `함수(function)` 타입입니다. 그러나 일반적인 함수처럼 활용할 수 없습니다.
+- 클래스 선언은 블록 스코프를 따르며, 함수 호이스팅이 발생하지 않습니다.
+- 클래스 내 `constructor`는 생성자 함수와 같습니다.
+- 클래스 내에서 정의한 메소드는 해당 클래스의 prototype에 저장됩니다.
+- 메소드 앞에 `get`, `set`을 붙이면 각각 `getter`, `setter`가 됩니다.
+- 메소드 앞에 `static`을 붙이면 정적 메소드가 됩니다.
+
+```
+class Item {
+	// 인스턴스 속성
+	name = 'item';
+	effect = 'power';
+
+	// 생성자 함수
+	constructor(hp, mp) {
+		this.hp = hp;
+		this.mp = mp;
+	}
+
+	// 인스턴스 메소드
+	print() {
+		console.log(hp + ', ' + mp);
+	}
+
+	// 정적 속성 & 메소드
+	static type = 0;
+	static equip() { ... }
+}
+
+const potion = new Item(100, 50);
+potion.print(); // 100, 50
+```
+
+### 클래스 상속 (Class Inheritance)
+- `클래스 상속`은 객체지향의 상속과 유사합니다. 클래스 A가 클래스 B를 상속한다면, A는 B의 속성과 메소드를 사용할 수 있습니다.
+	- 위의 A-B를 `부모 클래스`-`자식 클래스` 또는 `슈퍼 클래스`-`서브 클래스`라고 칭합니다.
+- `extends` 키워드를 사용해서 클래스 상속을 할 수 있습니다.
+
+```
+class B {
+	...
+}
+
+class A extends B {
+	...
+}
+```
+
+### 메소드 오버라이딩 (Method Overriding)
+- 부모 클래스의 메소드 이름과 자식 클래스의 메소드 이름이 같은 경우, 자식 클래스의 메소드를 우선합니다. 이러한 특성을 `메소드 오버라이딩`이라 합니다.
+
+```
+class slime {
+	getName() {
+		return 'slime';
+	}
+}
+
+class greenSlime extends slime {
+	getName() {
+		return 'greenSlime';
+	}
+}
+
+const gs = new greenSlime();
+console.log(gs.getName()); // greenSlime
+```
+
+### super
+- `super` 키워드는 클래스 내에서 사용할 수 있으며, 부모 클래스를 가리킵니다.
+- `super`를 함수처럼 호출할 수 있으며, 이때는 부모 클래스의 생성자가 호출됩니다.
+
+```
+class slime {
+	getName() {
+		return 'slime';
+	}
+}
+
+class greenSlime extends slime {
+	getName() {
+		return super.getName();
+	}
+}
+
+const gs = new greenSlime();
+console.log(gs.getName()); // slime
+```
+
+## 비동기 (Asyncronous)
+- `동기식 프로그래밍(synchronous programming)`은 현재 코드가 완료될 때까지 다음 코드의 실행을 멈추고 기다리는 프로그래밍 방식입니다.
+- `비동기 프로그래밍(asynchronous programming)`은 현재 코드가 완료되지 않더라도 바로 다음 코드를 실행하는 프로그래밍 방식입니다.
+- 비동기 프로그래밍을 도입하면, 오래 걸리는 작업을 미룰 수 있어 프로그램의 성능과 응답성을 높일 수 있다는 이점이 있습니다. 그러나 코드의 실제 실행 순서를 예측하기 어렵기에 가독성이 떨어지고 디버깅이 어려워진다는 단점이 있습니다.
+
+### 호출 스택 (Call Stack)
+- 자바스크립트에서 `호출 스택(call stack)`은 함수 호출과 관련된 정보를 `스택` 형태로 관리하는 저장소입니다.
+- 호출 스택에 저장되는 항목은 `실행 맥락(execution context)`이라 하며, 실행 맥락에는 다음 정보들이 저장됩니다.
+	- 함수 내부에서 사용되는 변수
+	- 스코프 체인
+	- this가 가리키는 객체
+- 코드가 실행될 때, 호출 스택의 동작은 다음과 같습니다.
+```
+1. 처음 코드 실행시, 전역 실행 맥락(global execution context)이 호출 스택에 추가됩니다.
+2. 함수가 호출되면, 해당 호출에 대한 실행 맥락이 생성되고 호출 스택에 추가됩니다.
+3. 함수의 종료되면, 결과값 반환과 함께 호출 스택 가장 위에 있는 실행 맥락을 삭제합니다.
+4. 코드의 실행이 모두 끝나면, 전역 실행 맥락을 호출 스택에서 삭제합니다.
+```
+- 호출 스택(더 정확히는 microtask queue)이 비어있지 않다면(=실행 중인 함수가 존재한다면), 브라우저의 렌더링이 멈춥니다. 따라서 사용자와 실시간으로 상호작용하는 스크립트라면 실행 시간을 주의해야 합니다.
+
+### 작업 큐 (Task Queue)
+- 하지만 오래 걸리는 동작은 상황에 따라 불가피합니다. (통신 작업 등) 만약 해당 작업을 호출 스택에 등록하면, 그만큼 브라우저 렌더링 시간이 오래 걸리는 문제점이 발생합니다.
+- 만약 브라우저 렌더링을 먼저 수행하고, 나중에 해당 작업을 처리하는 `비동기 프로그래밍`으로 접근하면 위의 문제가 해결될 것입니다.
+- 비동기 작업을 구현하기 위해 브라우저에선 `작업 큐(task queue)`를 사용합니다. 작업 큐는 `큐` 형태로 작업을 관리하는 저장소입니다.
+- 어떠한 작업을 비동기로 처리한다고 가정해봅시다. 브라우저는 다음 절차를 통해 비동기 작업을 처리합니다.
+
+1. 작업을 호출 스택에 바로 등록하지 않고 API를 통해 브라우저에 위임합니다. 동시에, 해당 작업 종료시 실행할 `콜백`도 같이 등록합니다.
+2. 위임된 작업이 끝나면, 처리한 작업의 결과와 등록했던 콜백을 `작업 큐`에 추가합니다.
+3. 브라우저는 호출 스택이 비워질 때마다 작업 큐에 가장 앞에 있는(=가장 오래된) 작업을 가져오고, 해당 작업에 대한 콜백을 실행합니다. (호출 스택에 해당 콜백을 추가합니다.)
+	- 브라우저는 이 과정을 항상 반복하며, 이를 `이벤트 루프(event loop)`라고 합니다.
+	- 호출 스택이 비워질 때마다 브라우저는 화면을 렌더링 할 수 있습니다.
+
+```
+setTimeout(() => {
+	console.log('BOOM!!!');
+}, 0);
+console.log('ready... ');
+
+// ready... BOOM!!! 순서대로 출력됩니다.
+// setTimeout에 등록한 콜백은 작업 큐에 추가됩니다.
+// 따라서 ready... 출력 이후에 해당 콜백이 실행됩니다.
+```
+
+### 콜백 (Callback)
+- `콜백(callback)`은 인수로 넘겨지는 함수입니다.
+- 일반적으로 콜백을 인자로 하는 함수는 비동기식으로 동작합니다. 단, `map`, `forEach`같은 일부 함수는 콜백을 사용해도 동기식으로 동작합니다.
+
+```
+console.log('Ready?');
+
+// setTimeout은 비동기식 함수입니다. 콜백이 작업 큐에 등록됩니다.
+setTimeout(() => {
+	console.log('BOOM!!!');
+}, 0);
+
+// forEach는 동기식 함수입니다. 콜백이 바로 실행됩니다.
+const arr = [3, 2, 1];
+arr.forEach(item => console.log(item));
+
+console.log('Start!');
+```
+
+```
+// 실행 결과
+Ready?
+3
+2
+1
+Start!
+BOOM!!!
+```
+
+- 상황에 따라, 비동기식 콜백을 동기식으로 실행해야 할 필요가 있습니다. (콜백이 끝난 이후에 실행되어야 할 작업이 있다고 가정해봅시다.)
+
+```
+let target;
+function print() {
+	console.log(target);
+}
+
+// print()가 콜백이 설정한 값을 출력되게 해봅시다.
+setTimeout(() => {
+	target = 'Clear!';
+}, 0);
+print(); // undefined가 출력됩니다.
+```
+
+- 작업 큐에 있는 콜백은 호출 스택이 모두 비워져야만 실행될 수 있으므로, `print()`는 해당 콜백 내부에 배치되어야 합니다.
+
+```
+setTimeout(() => {
+	target = 'Clear!';
+	print(); // Clear!가 정상적으로 출력됩니다.
+}, 0);
+```
+
+- 문제는 해결이 됐으나, 코드가 중첩된 구조를 가집니다. 만약 이 방법으로 여러 개의 콜백을 동기식으로 구현한다면, 그만큼 중첩의 깊이가 깊어지고 가독성도 크게 떨어집니다.
+
+```
+setTimeout(() => {
+	target = 'This is ';
+	setTimeout(() => {
+		target += 'Callback ';
+		setTimeout(() => {
+			target += 'Hell!!';
+			print(); // This is Callback Hell!!
+		}, 0);
+	}, 0);
+}, 0);
+```
+
+- 비동기 프로그래밍을 구현할 때, 콜백은 사용이 간편하다는 이점이 있습니다. 그러나 구조가 조금만 복잡해지면, 구현도 같이 복잡해집니다. 이러한 현상을 `콜백 지옥(callback hell)`이라 부르기도 합니다.
+
+### Promise
+- ES2015에 도입된 `Promise`는 콜백 지옥 문제를 해결할 수 있습니다.
+- Promise는 비동기 작업을 제어하는 표준 객체입니다.
+- Promise 객체는 3가지 상태를 가질 수 있습니다.
+	- `pending`: Promise 객체의 '결과값'이 설정되지 않은 상태
+	- `fulfilled`: Promise 객체의 '결과값'이 설정된 상태
+	- `rejected`: 비동기 작업을 수행하다가 오류가 발생한 상태
+- Promise의 정적 메소드인 `resolve`로 간단한 Promise를 생성할 수 있습니다. 이 Promise의 '결과값'은 resolve에서 제공한 인자입니다.
+
+```
+const p = Promise.resolve('Clear!');
+```
+
+- Promise의 생성자 함수는 콜백을 인자로 하며, 비동기 작업과 관련된 코드가 들어갑니다. 해당 콜백은 2개의 인자를 가집니다.
+	- `resolve`: 작업 결과를 설정하는 함수입니다. 콜백 내에서 호출 가능하며, resolve의 인자는 해당 Promise의 '결과값'이 됩니다.
+	- `reject`: 비동기 작업에서 오류 발생시 호출되는 함수입니다.
+- Promise.protoype 메소드인 `then`을 통해서 Promise의 '결과값'을 사용할 수 있습니다.  `then` 메소드는 2개의 콜백을 인자로 할 수 있습니다.
+	- 1번째 콜백은 1개의 인자를 가지며, 이 인자는 Promise의 '결과값'을 갖습니다.
+	- 1번째 콜백은 Promise의 '결과값'이 설정된 이후에 호출됩니다. (오류 등으로 인해 Promise의 '결과값'이 설정되지 않으면 호출되지 않습니다.)
+	- 2번째 콜백은 Promise가 rejected일 때 호출됩니다.
+
+```
+let target;
+function print() {
+	console.log(target);
+}
+
+const p = new Promise((resolve, reject) => {
+	setTimeout(() => {
+		// 비동기 작업을 수행하는 콜백입니다.
+		resolve('Clear!'); // p의 결과값은 'Clear!'입니다.
+	}, 0);
+});
+
+p.then(result => {
+	// p의 결과값이 설정되면 실행됩니다.
+	target = result;
+	print(target); // Clear!가 정상적으로 출력됩니다.
+});
+```
+
+- `then` 메소드는 새로운 Promise 객체를 반환합니다. 이 Promise의 '결과값'은 `then` 메소드에 넘겨준 콜백에서 반환한 값입니다. (만약 이전 Promise가 rejected 상태면, 해당 오류 정보를 그대로 이어받습니다.)
+- 이러한 특성을 활용해서 여러 비동기 작업을 간편하게 동기식으로 작성할 수 있습니다.
+
+```
+const p = new Promise((resolve, reject) => {
+	setTimeout(() => {
+		resolve('This is ');
+	}, 0);
+});
+
+p.then(result => {
+	return result + 'Promise ';
+}).then(result => {
+	return result + 'Chain!!';
+}).then(result => {
+	console.log(result); // This is Promise Chain!!
+});
+```
+
+- `then` 메소드에 넘겨준 콜백의 반환값을 Promise 객체로도 할 수 있습니다. 이때 `then` 메소드가 반환한 Promise 객체의 '결과값'은 콜백이 반환한 Promise 객체의 '결과값'입니다.
+
+```
+const p = new Promise((resolve, reject) => {
+	setTimeout(() => {
+		resolve('Reset! ');
+	}, 0);
+});
+
+p.then(result => {
+	return result + 'Ready... ';
+}).then(result => {
+	return result + 'Start!';
+}).then(result => {
+	return p;
+}).then(result => {
+	console.log(result); // Reset! 
+});
+```
+
+- Promise를 사용하면 비동기 작업을 Promise 객체 단위로 다룰 수 있습니다. 또한 복잡한 비동기 작업을 콜백만 사용했을 때보다 깔끔하게 작성할 수 있습니다.
+
+### 비동기 함수 (Async Function)
+- ES2017에서 도입된 `비동기 함수(async function)`를 사용하면, 비동기식 코드를 Promise만 사용했을 때보다 편하게 작성할 수 있습니다.
+- 함수 앞에 `async` 키워드를 붙이면 해당 함수는 비동기 함수가 됩니다. (화살표 함수, 클래스 메소드도 가능합니다.)
+
+> async function() { ... }
+
+- 비동기 함수는 항상 Promise 객체를 반환합니다. return 대상으로 직접 Promise를 설정할 수도 있고, Promise가 아닌 값도 설정할 수 있습니다. (이 경우는 반환되는 Promise의 '결과값'으로 저장됩니다.)
+
+```
+async function setting() {
+	return 'Clear!';
+}
+setting().then(result => console.log(result)); // Clear!
+```
+
+- `await` 연산자는 피연산자 Promise가 '결과값'을 가질 때까지 현재 비동기 함수의 실행을 중단합니다. (이 중단은 비동기식으로, 브라우저의 동작은 중단의 영향을 받지 않습니다.)
+- await 연산자는 비동기 함수 내에서만 사용 가능합니다.
+- await 연산의 결과값은 피연산자 Promise 객체의 '결과값'입니다.
+
+```
+async function timer(s) {
+	return new Promise(resolve => setTimeout(() => resolve(), s));
+}
+async function main() {
+	for(let i = 1; i <= 3; i++) {
+		// timer가 반환하는 Promise의 결과값이 설정되기까지 대기합니다.
+		await timer(i * 1000);
+		console.log(i + "초가 지났습니다...");
+	}
+	// await의 반환값은 Promise의 결과값입니다.
+	console.log(await Promise.resolve('타이머 종료!'));
+}
+main();
+```
+
+```
+// 실행 결과
+1초가 지났습니다...
+2초가 지났습니다...
+3초가 지났습니다...
+타이머 종료!
+```
+
+- 비동기 함수와 await를 사용하면 비동기식 코드를 동기식처럼 작성할 수 있습니다.
 
 ## DOM (Document Object Model)
 - `문서 객체 모델(DOM ,Document Object Model)`: XML이나 HTML 문서에 접근하기 위한 일종의 인터페이스
@@ -3545,8 +4061,8 @@ cntTimerID = setInterval(counter, 1000);
 setTimeout(BOOM, 5999);
 ```
 
-- 출력 결과
 ```
+// 실행 결과
 5...4...3...2...1...BOOM!!
 ```
 
@@ -3746,24 +4262,25 @@ p.addEventListener("mouseout", outP);
 - 자바스크립트에선 예외 처리를 담당하는 `try / catch / finally`문을 제공합니다.
 - `try`: 처음으로 실행되는 영역입니다. 이 구간에서 예외가 발생하면 즉시 catch로 이동합니다.
 - `catch`: 예외 발생시 실행되는 영역입니다. 인자로 throw가 던져준 값을 갖습니다.
+	- catch의 인자는 생략할 수 있습니다.
 - `finally`: 예외 상관없이 항상 마지막에 실행되는 영역입니다.
 - catch, finally는 반드시 사용하지 않아도 되는 선택적인 옵션입니다.
 - `throw`: 예외를 발생시키는 키워드
 	- number, Error 객체 등 대부분 타입이 올 수 있으며, 이 값은 catch의 인자로 전달됩니다.
-- `Error`: 에러 정보를 저장하는 객체
+- `Error`: 에러 정보를 저장하는 표준 객체
 - 자바스크립트에서 런타임 오류가 발생하면, 해당 오류 정보를 저장하는 Error 객체의 인스턴스가 생성됩니다.
 
-> try {
-> 	// 예외가 발생할 수 있는 작업 영역
-> }
-> catch (`error`) {
-> 	// 예외 발생시 실행되는 영역
-> }
-> finally {
-> 	// try나 catch 구간이 끝나고 실행되는 영역
-> }
-
-> throw `error`
+```
+try {
+	// 예외가 발생할 수 있는 작업 영역
+}
+catch (`error`) {
+	// 예외 발생시 실행되는 영역
+}
+finally {
+	// try나 catch 구간이 끝나고 실행되는 영역
+}
+```
 
 ```
 var loop = true;
@@ -3789,6 +4306,66 @@ while(loop) {
 		loop = confirm("계속 진행할까요?");
 	}
 }
+```
+
+### 비동기 (Asyncronous)
+- 자바스크립트는 오류가 발생하면 호출 스택을 되감는 과정을 거칩니다. 이 과정 중에 try 블록을 만나야 예외 처리를 할 수 있습니다.
+- 그렇기에 비동기의 예외 처리는 동기와는 다른 점이 있습니다.
+
+#### 콜백 (Callback)
+- 비동기 콜백 내부에서 발생한 오류는 콜백 내부의 try 블록으로 잡아야 합니다. (비동기 콜백의 실행 과정 특성상, 콜백 외부의 try 블록으로는 콜백 내부의 오류를 잡을 수 없습니다.)
+
+```
+setTimeout(() => {
+	try {
+		throw new Error('Error!');
+	} catch (e) {
+		console.error(e);
+	}
+}, 0);
+```
+
+#### Promise
+- Promise.prototype의 `then` 메소드는 2개의 콜백 인자를 가질 수 있습니다. 이중 2번째 콜백은 현재 Promise가 `rejected` 상태일 때 호출됩니다.
+- 2번째 콜백의 인자는 Error 객체입니다.
+
+```
+const p = new Promise((resolve, reject) => {
+	setTimeout(() => { throw new Error('Error!'); }, 0);
+});
+
+p.then(res => console.log('여기는 실행되지 않습니다.'), 
+	err => console.log(err)); // 이 콜백이 실행됩니다.
+```
+
+- Promise.prototype의 `catch` 메소드를 사용할 수도 있습니다. `catch` 메소드는 1개의 콜백을 인자로 하며, 이 콜백은 현재 Promise가 `rejected` 상태일 때 호출됩니다.
+- 이 콜백의 인자도 Error 객체입니다.
+
+```
+Promise.resolve()
+	.then(res => { throw new Error('Error!'); })
+	.then(res => console.log('여기는 실행되지 않습니다.'))
+	.catch(err => console.log(err))
+	.then(res => console.log('여기는 실행됩니다.'));
+```
+
+#### 비동기 함수 (Async Function)
+- `비동기 함수`의 예외 처리는 동기식 예외 처리처럼 작성할 수 있습니다.
+- `await`에 걸린 Promise 객체의 오류는 비동기 함수 내부의 try 블록으로 잡을 수 있습니다. 이때 catch의 1번째 인자는 해당 Promise의 오류 정보를 저장합니다.
+	- await를 사용하지 않았다면 try 블록으로 잡히지 않습니다.
+
+```
+async function timer(s) {
+	return new Promise(resolve => { throw new Error('Error!'); }, s);
+}
+async function main() {
+	try {
+		await timer(1000);
+	} catch(e) {
+		console.log(e);
+	}
+}
+main();
 ```
 
 ### strict 모드
@@ -3955,6 +4532,95 @@ console.log(reg.exec("bcabcbc"));
 
 // false
 console.log(reg.test("bcacbc"));
+```
+
+## 모듈 (Module)
+- ES2015에 도입된 `모듈`은 자바스크립트 코드를 담은 파일로, 다음과 같은 특성을 갖습니다.
+	1. `import`, `export` 구문을 사용할 수 있습니다.
+	2. 기본적으로 `strict mode`로 동작합니다.
+	3. 각 모듈은 별도의 스코프, `모듈 스코프`를 갖습니다.
+		- 일반적으로 어떤 모듈은 타 모듈에 접근할 수 없습니다.
+		- 서로 다른 모듈에 같은 이름의 변수가 있더라도 충돌이 발생하지 않습니다.
+- 모듈을 사용하면 자바스크립트 코드를 여러 파일로 분할할 수 있습니다.
+
+### export & import
+- `export` 키워드는 주어진 변수/함수/클래스를 다른 모듈에서도 사용될 수 있게 합니다.
+- `import` 키워드는 다른 모듈의 export된 변수/함수/클래스를 가져옵니다.
+- export/import는 코드를 실행하는 키워드가 아닌, 모듈 간 의존 관계를 명시하는 키워드입니다. 즉, 모듈 A를 모듈 B, C 등에서 import해도, 모듈 A의 코드는 한 번만 실행됩니다.
+- export/import 키워드는 전역 스코프(모듈 내부에서 가장 바깥쪽 스코프)에서만 사용 가능합니다.
+
+> export { `element1`, `element2`, ... }
+> import { `element1`, `element2`, ... } from `path`
+
+```
+// module.js
+const num = 15;
+function print() { console.log(num); }
+export { num, print };
+```
+
+```
+// main.js
+import { num, print } from './module.js';
+print(); // 15
+```
+
+- export 대상이 1개면 중괄호를 생략할 수 있습니다.
+- 한 파일에서 export/import를 여러번 사용할 수 있습니다.
+- 선언 동시에 export를 할 수 있습니다.
+
+```
+// module.js
+export num1 = 10;
+export num2 = 15;
+export num3 = 20;
+```
+
+```
+// main.js
+import { num1 } from './module.js';
+import { num2 } from './module.js';
+console.log(num1 + num2); // 25
+```
+
+### default export
+- export 앞에 `default`를 붙이고 대상으로 값을 지정하면, `default export`가 됩니다.
+- import에서 중괄호를 생략하면 default export 값을 가져옵니다.
+- default export의 값은 모듈당 1개만 올 수 있습니다.
+- default export의 값은 모든 타입이 가능합니다. (객체, 함수, 클래스 등)
+
+```
+// module.js
+export default 10;
+```
+
+```
+// main.js
+import num from './module.js';
+console.log(num); // 10
+```
+
+- 하나의 import로 export, default export를 한꺼번에 불러올 수 있습니다.
+
+```
+// main.js
+import num, { str1, str2 } from './module.js';
+// default export 값은 num에,
+// 일반 export 대상은 str1, str2에 저장됩니다.
+```
+
+### as
+- export/import 대상 뒤에 `as`붙여 다른 이름을 사용할 수 있습니다.
+
+```
+// module.js
+export num = 10 as NUM;
+```
+
+```
+// main.js
+import { NUM as numberValue } from './module.js';
+console.log(numberValue); // 10
 ```
 
 ## 출처 (Reference)
