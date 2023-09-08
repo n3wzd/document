@@ -2,7 +2,7 @@
 Google에서 개발된 `Dart`는 다양한 플랫폼(Android, iOS, 웹 등)에서 빠르게 앱을 개발할 수 있는 클라이언트 최적화, 객체 지향 프로그래밍 언어입니다.
 
 - 무료이며 오픈소스입니다.
-- 네이티브 코드 및 `Javascript` 컴파일이 가능합니다. 실제로 Dart는 자바스크립트와 비슷한 점이 많으며, 자바스크립트를 알고 있다면 Dart도 빠르게 익힐 수 있습니다. (단, 클래스는 자바스크립트보단 C++하고 유사합니다.)
+- 네이티브 코드 및 `Javascript` 컴파일이 가능합니다. 실제로 Dart는 자바스크립트와 비슷한 점이 많으며, 자바스크립트를 알고 있다면 Dart도 빠르게 익힐 수 있습니다. (단, 함수와 클래스는 자바스크립트보단 C++하고 유사합니다.)
 - Dart를 사용하는 대표적인 프레임워크로 `Flutter`가 있습니다.
 - 백엔드 분야에서도 사용할 수 있습니다.
 
@@ -29,7 +29,7 @@ void main() {
 
 ### 변수 (Variable)
 - `변수`는 값을 저장하는 컨테이너이며, 초기화 이후에도 값을 바꿀 수 있습니다.
-- Dart에서 변수는 선언 동시 초기화가 가능합니다.
+- 변수는 선언 동시 초기화가 가능합니다.
 - Dart에서 변수의 생성 및 이름 규칙은 자바스크립트와 거의 동일합니다.
 
 ```
@@ -39,10 +39,34 @@ num level = 1;
 bool flag = true;
 ```
 
-- Dart에서 키워드 `const`를 사용해 `상수(constant)`를 선언할 수 있습니다. 상수는 초기화 이후에 값을 변경할 수 없습니다.
+#### const
+- 키워드 `const`를 사용해 상수를 선언할 수 있습니다.
+- const 변수는 선언 동시에 초기화되어야 하며, 초기화 이후에 값을 변경할 수 없습니다.
+- const 변수의 값은 컴파일 과정에 결정됩니다.
 
 ```
 const MAX_LENGTH = 10;
+```
+
+#### final
+- 키워드 `final`를 사용해 상수를 선언할 수 있습니다.
+- final 변수는 선언 동시에 초기화되어야 하며, 초기화 이후에 값을 변경할 수 없습니다.
+- final 변수의 값은 런타임 과정에 결정됩니다.
+- 상수가 필요할 때, 컴파일 과정에 값이 결정된다면 const, 런타임 과정(클래스 프로퍼티, 파일, 네트워크, 데이터베이스 등)에 값이 결정된다면 final을 사용하면 됩니다.
+
+```
+class Item {
+	final String name = 'item';
+	
+	void display() {
+		print(name);
+	}
+}
+
+void main(){
+    Item item = Item();
+    item.display(); // item
+}
 ```
 
 ### 데이터 타입 (Data Types)
@@ -431,7 +455,7 @@ void main() {
 ### dart:math
 - `dart:math`를 import하면 수학 관련 메소드를 사용할 수 있습니다. (`min`, `max`, `pow` 등)
 
-## 자료구조 (Data Structure)
+## 표준 객체 (Standard Object)
 ### List
 - Dart에서 `List`는 일반적인 프로그래밍에서 배열입니다.
 	- 사용되는 List의 사용법, 프로퍼티, 메소드는 자바스크립트의 `Array`와 거의 같습니다.
@@ -544,6 +568,70 @@ void main() {
   List<int> arr = [1, 2, 3, 4, 5];
   List<int> oddNumbers = arr.where((n) => n.isOdd).toList();
   print(oddNumbers); // [1, 3, 5]
+}
+```
+
+### DateTime
+- Dart에선 날짜, 시간을 관리하는 객체인 `DateTime`을 제공합니다.
+- 다음 메소드로 DateTime 인스턴스를 생성할 수 있습니다.
+
+|메소드|기준|
+|---|---|
+|DateTime.now()|현재 시간|
+|DateTime.parse(`str`)|특정 시간(ex. 2023-09-04)|
+
+- 생성된 인스턴스는 다음 프로퍼티와 메소드를 갖습니다.
+
+|프로퍼티|의미|
+|---|---|
+|year|연도|
+|month|월|
+|day|일|
+|hour|시|
+|minute|분|
+|second|초|
+
+|메소드|기능|
+|---|---|
+|add(`Duration`)|시간 더하기|
+|subtract(`Duration`)|시간 빼기|
+|difference(`DateTime`)|두 Datetime의 차이 반환(Duration)|
+|IsAfter(`DateTime`)|현재 DateTime이 뒤에 있으면 true 반환|
+|IsBefore(`DateTime`)|현재 DateTime이 앞에 있으면 true 반환|
+|IsAtTheSameMoment(`DateTime`)|두 DateTime이 같으면 true 반환|
+
+- DateTime 객체를 연산할 때, 시차를 관리하는 `Duration` 객체가 사용됩니다. 이 객체는 다음 프로퍼티를 갖습니다.
+
+|프로퍼티|의미|
+|---|---|
+|inDays|현재 시차를 일 단위로 반환|
+|inHours|현재 시차를 시 단위로 반환|
+|inMinutes|현재 시차를 분 단위로 반환|
+|inSeconds|현재 시차를 초 단위로 반환|
+|inMilliseconds|현재 시차를 밀리초 단위로 반환|
+|inMicroseconds|현재 시차를 마이크로초 단위로 반환|
+
+```
+void main() {
+	DateTime datetime = DateTime.now();
+	print("Year: " + datetime.year.toString());
+	print("Month: " + datetime.month.toString());
+	print("Day:" + datetime.day.toString());
+	print("Hour: " + datetime.hour.toString());
+	print("Minute: " + datetime.minute.toString());
+	print("Second: " + datetime.second.toString());
+}
+```
+
+### Random
+- `Random` 객체는 무작위 수를 반환할 때 사용됩니다. (`dart:math`에 포함되어 있습니다.)
+- `nextInt(n)` 메소드는 \[0, n) 범위 내 무작위 정수를 반환합니다.
+
+```
+import 'dart:math';
+void main() {
+	Random random = Random();
+	print(random.nextInt(10)); // [0, 9] 랜덤 정수 반환
 }
 ```
 
@@ -701,10 +789,10 @@ Saber
 ```
 
 ## 클래스 (Class)
-- Dart에선 `Class`를 제공하며, 이는 일반적인 객체지향 언어의 클래스와 같은 기능을 합니다.
+- Dart에선 `class`를 제공하며, 이는 일반적인 객체지향 언어의 클래스와 같은 기능을 합니다.
 - 클래스는 프로퍼티와 메소드를 갖습니다.
 	- 메소드도 선택적 매개변수, 이름이 있는 매개변수, 디폴트 매개변수를 사용할 수 있습니다.
-- 클래스를 사용해서 `Instance`를 생성할 수 있습니다. (`new` 키워드를 사용할 수 있으나 생략 가능합니다.)
+- 클래스를 사용해서 `instance`를 생성할 수 있습니다. (`new` 키워드를 사용할 수 있으나 생략 가능합니다.)
 
 ```
 class Item {
@@ -860,25 +948,6 @@ void main(){
     sword.display(); // sword: 10, 20
 }
 ```
-### final
-- `final` 프로퍼티는 읽기 전용입니다. (초기화 이후에는 값을 변경할 수 없습니다.)
-- final 프로퍼티는 선언 동시에 초기화되어야 합니다.
-
-```
-class Item {
-	final String name = 'item';
-	
-	void display() {
-		print(name);
-	}
-}
-
-void main(){
-    Item item = Item();
-    item.display(); // item
-}
-```
-
 ### getter / setter
 - getter / setter는 private 프로퍼티를 접근할 때 주로 사용됩니다. (코드 안전성 확보)
 - getter / setter의 이름은 프로퍼티 이름과 중복될 수 없습니다.
@@ -1223,5 +1292,238 @@ void main() {
 ```
 
 ### factory constructor
+- 일반적인 생성자는 항상 현재 클래스의 인스턴스를 반환하지만, `factory 생성자`는 해당 클래스 또는 하위 클래스의 인스턴스를 반환할 수 있으며, 반환할 인스턴스를 직접 지정할 수 있습니다.
+- 생성자 앞에 `factory` 키워드를 붙이면 factory 생성자가 됩니다.
+- factory 생성자는 반드시 `return`을 사용해서 특정 인스턴스를 반환해야 합니다.
+- factory 생성자 내부에선 `this` 키워드를 사용할 수 없으며, 생성할 인스턴스의 프로퍼티에 접근할 수 없습니다.
+- 일반 생성자와 factory 생성자의 이름은 서로 중복될 수 없습니다.
+- factory 생성자는 주로 다음 용도로 활용됩니다.
+	- `final` 프로퍼티의 초기화 전처리 과정을 넣을 수 있습니다.
+	- 디자인 패턴 - `팩토리` 패턴을 구현할 수 있습니다. (파라미터를 통한 특정 하위 클래스 인스턴스 반환)
+	- 디자인 패턴 - `싱글톤` 패턴을 구현할 수 있습니다. (객체가 단일 인스턴스만을 가짐)
+
+```
+enum EnemyType { slime, rogue }
+
+abstract class Enemy {
+	factory Enemy(EnemyType type) {
+		switch (type) {
+			case EnemyType.slime: return Slime();
+			case EnemyType.rogue: return Rogue();
+		}
+	}
+	void attack();
+}
+
+class Slime implements Enemy {
+	@override
+	void attack() {
+		print('Slime uses Gel Punch!');
+	}
+}
+
+class Rogue implements Enemy {
+	@override
+	void attack() {
+		print('Rogue uses Punch!');
+	}
+}
+
+void main() {
+	// 팩토리 패턴
+	Enemy enemy1 = Enemy(EnemyType.slime);
+	Enemy enemy2 = Enemy(EnemyType.rogue);
+	enemy1.attack(); // Slime uses Gel Punch!
+	enemy2.attack(); // Rogue uses Punch!
+}
+```
+
+```
+class Singleton {
+	static final Singleton _inst = Singleton._private();
+ 
+	factory Singleton() {
+		return _inst;
+	}
+	Singleton._private();
+}
+
+void main() {
+	// 싱글톤 패턴
+	Singleton inst1 = Singleton();
+	Singleton inst2 = Singleton();
+	print(inst1.hashCode);
+	print(inst2.hashCode); // 같은 값이 출력됩니다. (단일 인스턴스)
+}
+```
+
+### Generics
+- `generics`은 타입별로 클래스/함수를 생성하는 방법입니다. (C++의 `템플릿`과 유사합니다.)
+- generics은 각 클래스별 동작은 모두 동일하나, 데이터 타입만은 차별화해야 할 때 유용합니다. (주로 컨테이너 자료구조가 이에 해당합니다.)
+- `List`, `Map`, `Set`도 generics을 사용합니다.
+- 클래스/함수 이름 옆에 `<>`을 사용해서 generics을 넣을 수 있으며, `<>` 내부에 사용할 타입의 약칭을 추가할 수 있습니다.
+- generics에 여러 개의 타입을 넣을 수 있습니다.
+
+```
+class Data<T> {
+	T data;
+	Data(this.data);
+	void display() {
+		print(data);
+	}
+}
+
+void main() {
+	Data<int> data1 = Data<int>(15);
+	Data<String> data2 = Data<String>('item');
+	data1.display();
+	data2.display();
+}
+```
+
+- `extends`를 사용하면 generics에 올 수 있는 타입을 제한할 수 있습니다. (설정한 타입과 그 타입의 하위 타입만이 올 수 있습니다.)
+
+```
+// num과 num의 하위 타입만 허용됩니다.
+num adder<T extends num>(T a, T b) {
+	return a + b;
+}
+
+void main() {
+	print(adder<int>(10, 20)); // 30
+	print(adder<double>(2.5, 6.5)); // 9.0
+}
+```
+
+### Extension
+- Dart 2.7.0에 새로 도입된 `Extension`은 기존에 존재하는 객체의 기능을 확장할 때 사용됩니다.
+
+```
+void main(){
+	String name = "steve";
+	print(name.doubleStr()); // stevesteve
+}
+
+extension StringExt on String{
+	// 기존 String 객체에 새로운 메소드를 추가합니다.
+	String doubleStr() {
+		return this + this;
+	}
+}
+```
+
+## 비동기 (Asyncronous)
+### Future
+- `Future` 객체는 Dart에서 비동기 프로그래밍을 할 때 사용하며, 자바스크립트의 `Promise`와 유사합니다.
+- Future마다 잠재적인 값을 가지고 있으며, 이 값은 비동기 연산의 결과로 설정됩니다. 이 값의 타입은 Future의 `generics`에 지정된 타입입니다.
+- Future는 다음 메소드로 생성될 수 있습니다.
+
+|메소드|기능|
+|---|---|
+|Future.delayed(`Duration`, `callback`)|`Duration`시간 이후에 주어진 콜백을 실행하고 값이 설정된 Future 반환|
+|Future.value(`value`)|값이 설정된 Future 즉시 반환|
+
+- Future는 2가지 상태를 갖습니다.
+	- `Uncompleted`: 비동기 작업이 완료되지 않았거나 오류가 발생한 상태
+	- `Completed`: 오류 없이 비동기 작업이 완료된 상태
+- Future 인스턴스는 `then` 메소드를 사용할 수 있습니다. `then` 메소드는 콜백을 인자로 하며, Future 상태가 `Completed`이 되면 해당 콜백을 실행합니다.
+	- 이 콜백은 Future의 잠재적 값을 인자로 가집니다.
+
+```
+Future<String> timer1() async {
+	return Future.delayed(Duration(seconds: 2), () => 'Surprise!!');
+}
+
+Future<String> timer2() {
+	return Future.value('BOOM!!');
+}
+
+void main() {
+	print("Start");
+	timer1().then((value) => print(value));
+	timer2().then((value) => print(value));
+	print("End");
+}
+```
+
+```
+// 실행 결과
+Start
+End
+BOOM!!
+Surprise!!
+```
+
+### async / await
+- Dart에서 `async`, `await`는 자바스크립트의 `async`, `await`와 유사합니다.
+- `async` 키워드는 `비동기 함수`를 정의할 때 사용됩니다.
+- `비동기 함수`는 비동기로 실행되는 함수입니다.
+- `await` 키워드는 특정 Future의 작업이 완료될 때까지 런타임 실행을 미루며, 작업이 끝나면 해당 Future의 잠재적 값을 반환합니다. `await`는 비동기 함수 내부에서만 효과가 있습니다.
+
+```
+Future<String> getFuture() {
+	return Future.delayed(Duration(seconds: 2), () => 'Surprise!!');
+}
+
+void timer() async {
+	print("Start");
+	String res = await getFuture();
+	print(res);
+	print("End");
+}
+
+void main() {
+	timer();
+}
+```
+
+```
+// 실행 결과
+Start
+Surprise!!
+End
+```
+
+### Stream
+- Dart에서 `Stream` 객체는 여러 개의 `Future`를 다룰 때 사용됩니다.
+- Stream 역시 잠재적 값을 가지며, 이 값은 비동기 작업 중간에 달라질 수 있습니다.
+- Stream은 `Iterable`을 사용해서 생성합니다.
+	- `async*` 함수를 사용해서 Stream을 생성할 수 있습니다. `async*` 함수에서 사용 가능한 `yield` 키워드는 Stream의 값을 변경합니다. (`yield`는 Iterable에서 값을 생성할 때도 사용됩니다.)
+	- `yield*`은 Iterable이나 Stream을 반환하는 함수를 호출할 때 사용됩니다.
+	- `Stream.fromIterable` 메소드로 즉시 Stream을 생성할 수 있습니다.
+- Stream은 반복문으로 통해 사용 가능합니다.
+
+```
+Stream<int> timer1() async* {
+	await Future.delayed(Duration(seconds: 1));
+	yield 3;
+	await Future.delayed(Duration(seconds: 1));
+	yield 2;
+	await Future.delayed(Duration(seconds: 1));
+	yield 1;
+}
+
+Stream<int> timer2() {
+	return Stream.fromIterable([3, 2, 1]);
+}
+
+void main() async {
+	print('Start');
+	await for (int n in timer1()) {
+		print(n);
+	}
+	print('End');
+}
+```
+
+```
+// 실행 결과
+Start
+3
+2
+1
+End
+```
+
 ## 출처 (Reference)
 https://dart-tutorial.com/
