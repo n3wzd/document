@@ -28,10 +28,10 @@ Fluttet 프레임워크는 복잡성에 따라 간단하게 3가지 `레이어`�
 `상태`는 위젯의 속성이 가지고 있는 개체의 데이터를 저장합니다. Flutter 애플리케이션의 상태가 변경될 때마다 해당 상태와 관련된 위젯이 다시 렌더링됩니다.
 
 ## 위젯 (Widget)
-### 상태 비저장 위젯 (Stateless Widgets)
-- `상태 비저장 위젯(Stateless Widgets)`은 런타임 중간에 상태를 변경할 수 없는 위젯입니다. 즉, 빌드 이후에는 상태가 변경되지 않습니다.
-- 상태 비저장 위젯은 `build()` 메소드를 오버라이드해야 합니다. 이 메소드는 `BuildContext`을 인자로 하며, 위젯을 반환합니다. 여기서 `BuildContext`은 위젯 트리 내에서 위젯을 찾는데 사용됩니다.
-- 아이콘, 텍스트 등이 상태 비저장 위젯에 해당됩니다.
+### Stateless Widget
+- `Stateless Widget`은 런타임 중간에 상태를 변경할 수 없는 위젯입니다. 즉, 빌드 이후에는 상태가 변경되지 않습니다.
+- Stateless Widget은 `build()` 메소드를 오버라이드해야 합니다. 이 메소드는 `BuildContext`을 인자로 하며, 위젯을 반환합니다. 여기서 `BuildContext`은 위젯 트리 내에서 위젯을 찾는데 사용됩니다.
+- 아이콘, 텍스트 등이 Stateless Widget에 해당됩니다.
 
 ```
 import 'package:flutter/material.dart';
@@ -84,11 +84,11 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-### 상태 저장 위젯 (Stateful Widgets)
-- `상태 저장 위젯(Stateful Widgets)`은 빌드 이후에도 상태가 변경될 수 있는 위젯입니다.
-- 상태 저장 위젯은 `createState()` 메소드를 오버라이드해야 합니다. 이 메소드는 상태를 반환합니다.
+### Stateful Widget
+- `Stateful Widget`은 빌드 이후에도 상태가 변경될 수 있는 위젯입니다.
+- Stateful Widget은 `createState()` 메소드를 오버라이드해야 합니다. 이 메소드는 상태를 반환합니다.
 - `상태(State)`는 위젯의 속성이 가지고 있는 개체의 데이터를 저장합니다.
-- 상태는 `build()` 메소드를 오버라이드해야 합니다. (상태 비저장 위젯의 `build()`와 같습니다.)
+- 상태는 `build()` 메소드를 오버라이드해야 합니다. (Stateless Widget의 `build()`와 같습니다.)
 
 ```
 import 'package:flutter/material.dart';
@@ -100,11 +100,11 @@ class MyApp extends StatefulWidget {
 	const MyApp({Key? key}) : super(key: key);
  
 	@override
- 	MyAppState createState() => MyAppState();
+ 	_MyAppState createState() => _MyAppState();
 }
  
 // MyApp 위젯의 State을 생성합니다.
-class MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> {
 	@override
  	Widget build(BuildContext context) {
 		return Container();
@@ -122,10 +122,10 @@ class MyApp extends StatefulWidget {
 	const MyApp({Key? key}) : super(key: key);
 
 	@override
-	MyAppState createState() => MyAppState();
+	_MyAppState createState() => _MyAppState();
 }
 
-class MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> {
 	@override
 	Widget build(BuildContext context) {
 		return MaterialApp(
@@ -152,9 +152,9 @@ class MyAppState extends State<MyApp> {
 }
 ```
 
-### 컨테이너 (Container)
-- Flutter의 `컨테이너(Container)`는 위젯의 UI, 위치, 크기를 제어하는 위젯입니다.
-- 컨테이너는의 구조는 `HTML`의 `박스 모델(Box Model)`와 거의 유사합니다.
+### Container
+- Flutter의 `Container`는 위젯의 UI, 위치, 크기를 제어하는 위젯입니다.
+- Container의 구조는 `HTML`의 `박스 모델(Box Model)`와 거의 유사합니다.
 
 ```
 |-Container----------------------------|
@@ -167,8 +167,6 @@ class MyAppState extends State<MyApp> {
 |                                      |
 |--------------------------------------|
 ```
-
-- 대표적인 컨테이너의 프로퍼티는 다음과 같습니다.
 
 |프로퍼티|타입|의미|
 |---|---|---|
@@ -196,6 +194,151 @@ Container({Key key,
 });
 ```
 
+### Scaffold
+- `Scaffold`는 애플리케이션의 기본 디자인 레이아웃을 구현하는 프레임워크를 제공하는 상태 저장 위젯입니다.
+
+```
+|-----------------|
+|    appbar       |
+|-----------------|
+|                 |
+|    content      |
+|                 |
+|                 |
+|           float |
+|-----------------|
+| bottomBar       |
+|-----------------|
+```
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|appbar|PreferredSizeWidget|상단 바|
+|body|Widget|주 내용|
+|floatingActionButton|Widget|우측 하단 코너의 버튼|
+|drawer|Widget|슬라이드 메뉴/패널|
+|bottomNavigationBar|Widget|하단 메뉴|
+|backgroundColor|Color|스캐폴드 배경색|
+
+```
+Scaffold({Key key,
+	AppBar appBar, 
+	Center body,
+	FloatingActionButton floatingActionButton, 
+	Drawer drawer,
+	BottomNavigationBar bottomNavigationBar, 
+});
+```
+
+### MaterialApp
+- `MaterialApp`은 `매터리얼 위젯(Material widget)`들을 감싸는(wrap) 위젯입니다.  MaterialApp을 통해서 MaterialApp에 감싸진 위젯에 접근할 수 있습니다.
+- 일부 위젯은 MaterialApp으로 감싸져야 동작합니다. (ex. `Scaffold`)
+
+```
+import 'package:flutter/material.dart';
+
+void main() { runApp(const MyApp()); }
+
+class MyApp extends StatelessWidget {
+	const MyApp({Key? key}) : super(key: key);
+
+	// 이 MaterialApp은 Scaffold를 감쌉니다.
+	@override
+	Widget build(BuildContext context) {
+		return MaterialApp(
+			title: 'MyApp',
+			home: Scaffold(
+				appBar: AppBar(title: const Text('MyApp')),
+			),
+		);
+	}
+}
+```
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|backButtonDispatcher|BackButtonDispatcher|이전 버튼을 누를 때 일어나는 동작|
+|color|Color|애플리케이션 색|
+|darkTheme|ThemeData|다크 모드 사용시 적용되는 테마|
+|debugShowCheckedModeBanner|bool|디버그시 앱 상단 DEBUG 배너 표시 유무|
+|debugShowMaterialGrid|bool|그리드 오버레이 표시 유무|
+|home|Widget|앱의 기본 루트(default route)일 때 표시되는 위젯|
+|locale|Locale|앱의 초기 로케일|
+|title|String|디바이스에 표시되는 앱의 1줄 설명문|
+
+### BottomNavigationBar
+- `BottomNavigationBar`는 앱 하단 메뉴를 표시하는 위젯입니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|backgrounColor|Color|메뉴바 색상|
+|currentIndex|현재 아이템 인덱스|
+|elevation|double|메뉴바의 z좌표|
+|iconSize|double|아이콘 크기|
+|selectedFontSize|double|선택된 아이템 폰트 크기|
+|selectedIcontheme|IconThemeData|선택된 아이템 테마|
+|selectedIconColor|Color|선택된 아이템 색상|
+|showSelectedLabels|bool|선택된 아이템 라벨 표시 유무|
+|items|List\<BottomNavigationBarItem\>|메뉴 아이템 목록|
+|onTap|ValueChanged\<int\>|아이템을 탭할 때 호출되는 메소드|
+
+다음 예제는 3가지 아이템(Home, Business, School)을 가지는 메뉴 바를 포함합니다. 메뉴 바의 아이템을 선택하면 메인 화면에 표시되는 텍스트가 달라집니다.
+```
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatefulWidget {
+	const MyApp({super.key});
+
+	@override
+	State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+	int _selectedIndex = 0;
+	static const List<Widget> contents = <Widget>[
+		Text('0. Home'),
+		Text('1. Business'),
+		Text('2. School'),
+	];
+
+	void _onItemTapped(int index) {
+		setState(() {
+			_selectedIndex = index;
+		});
+	}
+
+	@override
+	Widget build(BuildContext context) {
+		return MaterialApp(
+			home: Scaffold(
+				body: Center(child: contents[_selectedIndex]),
+				bottomNavigationBar: BottomNavigationBar(
+				items: const <BottomNavigationBarItem>[
+					BottomNavigationBarItem(
+						icon: Icon(Icons.home),
+						label: 'Home',
+					),
+					BottomNavigationBarItem(
+						icon: Icon(Icons.business),
+						label: 'Business',
+					),
+					BottomNavigationBarItem(
+						icon: Icon(Icons.school),
+						label: 'School',
+					),
+				],
+				currentIndex: _selectedIndex,
+				selectedItemColor: Color.fromARGB(255, 79, 205, 255),
+				onTap: _onItemTapped,
+				),
+			),
+		);
+	}
+}
+```
+
 ## 출처 (Reference)
 https://www.geeksforgeeks.org/flutter-tutorial/
-
+https://api.flutter.dev/index.html
