@@ -83,6 +83,8 @@ class MyApp extends StatelessWidget {
 }
 ```
 
+![](images/Flutter-Widget-StatelessWidget.png)
+
 ### Stateful Widget
 - `Stateful Widget`은 빌드 이후에도 상태가 변경될 수 있는 위젯입니다.
 - Stateful Widget은 `createState()` 메소드를 오버라이드해야 합니다. 이 메소드는 상태를 반환합니다.
@@ -148,6 +150,8 @@ class _MyAppState extends State<MyApp> {
 	}
 }
 ```
+
+![](images/Flutter-Widget-StatefulWidget.png)
 
 ### Container
 - `Container`는 위젯의 UI, 위치, 크기를 제어하는 위젯입니다.
@@ -299,6 +303,8 @@ class MyApp extends StatelessWidget {
 }
 ```
 
+![](images/Flutter-Widget-AppBar.png)
+
 ### BottomNavigationBar
 - `BottomNavigationBar`는 앱 하단 메뉴를 표시하는 위젯입니다.
 - Scaffold의 `bottomNavigationBar` 프로퍼티에 적용할 수 있습니다.
@@ -370,6 +376,8 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
+![](images/Flutter-Widget-BottomNavigationBar.png)
+
 ### Drawer
 - `Drawer`는 Scaffold 모서리에서 수평으로 슬라이드하면 나타나는 매터리얼 디자인 패널 위젯입니다.
 - Scaffold의 `drawer` 프로퍼티에 적용할 수 있습니다.
@@ -426,6 +434,8 @@ class MyApp extends StatelessWidget {
 }
 ```
 
+![](images/Flutter-Widget-Drawer.png)
+
 ### ClipRect
 - `ClipRect`는 사각형 클립을 제공하는 위젯입니다.
 
@@ -457,6 +467,8 @@ class MyApp extends StatelessWidget {
 	}
 }
 ```
+
+![](images/Flutter-Widget-ClipRect.png)
 
 ### ClipRRect
 - `ClipRRect`는 모서리가 둥근 사각형 클립을 제공하는 위젯입니다.
@@ -492,6 +504,8 @@ class MyApp extends StatelessWidget {
 }
 ```
 
+![](images/Flutter-Widget-ClipRRect.png)
+
 ### Opacity
 - `Opacity`는 투명도를 제공하는 위젯입니다.
 - 투명도 값 범위는 \[0.0, 1.0\]입니다.
@@ -522,6 +536,8 @@ class MyApp extends StatelessWidget {
 	}
 }
 ```
+
+![](images/Flutter-Widget-Opacity.png)
 
 ## 출처 (Reference)
 https://www.geeksforgeeks.org/flutter-tutorial/
