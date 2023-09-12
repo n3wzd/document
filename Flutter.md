@@ -539,6 +539,143 @@ class MyApp extends StatelessWidget {
 
 ![](images/Flutter-Widget-Opacity.png)
 
+## UI Components
+### Dialog
+- `Dialog`는 메시지 창을 표시합니다.
+
+아래 예제는 버튼을 누르면 `AlertDialog`을 표시합니다.
+```
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+ 
+class MyApp extends StatelessWidget {
+	const MyApp({Key? key}) : super(key: key);
+ 
+	@override
+	Widget build(BuildContext context) {
+		return const MaterialApp(
+			home: HomePage(),
+		);
+	}
+}
+ 
+class HomePage extends StatefulWidget {
+	const HomePage({Key? key}) : super(key: key);
+ 
+	@override
+	_HomePageState createState() => _HomePageState();
+}
+ 
+class _HomePageState extends State<HomePage> {
+	@override
+	Widget build(BuildContext context) {
+		return Scaffold(
+			body: Container(
+				child: Center(
+					child: ElevatedButton(
+						onPressed: () {
+							showDialog(
+								context: context,
+								builder: (ctx) => AlertDialog(
+									title: const Text("Alert Dialog Box"),
+									content: const Text("This is Alert Dialog Box"),
+							        actions: <Widget>[
+						                TextButton(
+							                onPressed: () {
+						                        Navigator.of(ctx).pop();
+						                    },
+						                    child: Container(
+						                        color: Color.fromARGB(255, 204, 253, 255),
+						                        padding: const EdgeInsets.all(14),
+						                        child: const Text("ok"),
+											),
+										),
+									],
+								),
+							);
+						},
+						child: const Text("Show Dialog"),
+					),
+				),
+			),
+		);
+	}
+}
+```
+
+#### AlertDialog
+- `AlertDialog`는 경고 메시지 창을 표시하는 위젯입니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|actions|List\<Widget\>|창 하단에 표시되는 액션 목록|
+|title|Widget|창 상단에 표시되는 제목|
+|content|Widget|창 메시지 내용|
+
+```
+AlertDialog(
+	title: const Text("Alert Dialog Box"),
+	content: const Text("This is Alert Dialog Box"),
+	actions: <Widget>[
+		TextButton(
+			onPressed: () {
+				Navigator.of(ctx).pop();
+			},
+            child: Container(
+                color: Color.fromARGB(255, 204, 253, 255),
+                padding: const EdgeInsets.all(14),
+                child: const Text("ok"),
+			),
+		),
+	],
+),
+```
+
+#### SimpleDialog
+- `SimpleDialog`는 여러 선택지를 포함한 메시지 창을 표시하는 위젯입니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|actions|List\<Widget\>|선택지 목록|
+|title|Widget|창 상단에 표시되는 제목|
+
+```
+SimpleDialog(
+	title:const Text('Simple Dialog Box'),
+	children: <Widget>[
+		SimpleDialogOption(
+			onPressed: () { },
+			child:const Text('Option 1'),
+		),
+		SimpleDialogOption(
+			onPressed: () { },
+			child: const Text('Option 2'),
+		),
+	],
+),
+```
+
+#### showDialog
+- `showDialog`는 Dialog를 표시해주는 함수입니다. `AlertDialog`, `SimpleDialog`를 사용하려면 `showDialog`을 호출하면 됩니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|Builder|WidgetBuilder|빌드 메소드|
+
+```
+showDialog(
+	context: context,
+	builder: (BuildContext context) {
+		return Expanded(
+	        child: AlertDialog(
+	            ...
+			),
+		);
+	},
+);
+```
+
 ## 출처 (Reference)
 https://www.geeksforgeeks.org/flutter-tutorial/
 
