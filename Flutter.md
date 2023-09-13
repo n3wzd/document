@@ -540,71 +540,7 @@ class MyApp extends StatelessWidget {
 ![](images/Flutter-Widget-Opacity.png)
 
 ## UI Components
-### Dialog
-- `Dialog`는 메시지 창을 표시합니다.
-
-아래 예제는 버튼을 누르면 `AlertDialog`을 표시합니다.
-```
-import 'package:flutter/material.dart';
-
-void main() => runApp(const MyApp());
- 
-class MyApp extends StatelessWidget {
-	const MyApp({Key? key}) : super(key: key);
- 
-	@override
-	Widget build(BuildContext context) {
-		return const MaterialApp(
-			home: HomePage(),
-		);
-	}
-}
- 
-class HomePage extends StatefulWidget {
-	const HomePage({Key? key}) : super(key: key);
- 
-	@override
-	_HomePageState createState() => _HomePageState();
-}
- 
-class _HomePageState extends State<HomePage> {
-	@override
-	Widget build(BuildContext context) {
-		return Scaffold(
-			body: Container(
-				child: Center(
-					child: ElevatedButton(
-						onPressed: () {
-							showDialog(
-								context: context,
-								builder: (ctx) => AlertDialog(
-									title: const Text("Alert Dialog Box"),
-									content: const Text("This is Alert Dialog Box"),
-							        actions: <Widget>[
-						                TextButton(
-							                onPressed: () {
-						                        Navigator.of(ctx).pop();
-						                    },
-						                    child: Container(
-						                        color: Color.fromARGB(255, 204, 253, 255),
-						                        padding: const EdgeInsets.all(14),
-						                        child: const Text("ok"),
-											),
-										),
-									],
-								),
-							);
-						},
-						child: const Text("Show Dialog"),
-					),
-				),
-			),
-		);
-	}
-}
-```
-
-#### AlertDialog
+### AlertDialog
 - `AlertDialog`는 경고 메시지 창을 표시하는 위젯입니다.
 
 |프로퍼티|타입|의미|
@@ -632,7 +568,7 @@ AlertDialog(
 ),
 ```
 
-#### SimpleDialog
+### SimpleDialog
 - `SimpleDialog`는 여러 선택지를 포함한 메시지 창을 표시하는 위젯입니다.
 
 |프로퍼티|타입|의미|
@@ -656,11 +592,12 @@ SimpleDialog(
 ),
 ```
 
-#### showDialog
+### showDialog
 - `showDialog`는 Dialog를 표시해주는 함수입니다. `AlertDialog`, `SimpleDialog`를 사용하려면 `showDialog`을 호출하면 됩니다.
 
-|파라미터|타입|의미|
+|프로퍼티|타입|의미|
 |---|---|---|
+|context|BuildContext|`showDialog`를 호출한 위젯의 BuildContext|
 |Builder|WidgetBuilder|빌드 메소드|
 
 ```
@@ -675,6 +612,119 @@ showDialog(
 	},
 );
 ```
+
+### Icon
+- `Icon`은 아이콘을 관리하는 위젯입니다.
+- `Icons`에서 여러 가지 아이콘 종류를 제공합니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|size|double|아이콘 크기|
+|color|Color|아이콘 색|
+
+```
+Icon(
+	Icons.favorite,
+	color: Colors.yellow,
+	size: 20.0,
+),
+```
+
+### Expanded
+- `Expanded`는 flex 레이아웃을 제공하는 위젯입니다.
+- flex 레이아웃은 해당 위젯이 스크린 너머로 초과하는 것을 자동으로 방지해줍니다.
+- 여러 아이템들이 행 또는 열을 이룰 때, flex 값은 각 아이템들이 상대적으로 차지하는 공간을 결정합니다. 만약 아이템 A의 flex가 2, 아이템 B의 flex가 1이면, A와 B는 2:1 크기 비율로 공간을 차지합니다.
+
+```
+A.flex = 2, B.flex = 1
+|----A----|--B--|
+```
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|flex|int|flex 값|
+|child|Widget|하위 위젯|
+
+```
+Expanded(
+	flex: 2,
+	child: Container(
+		color: Colors.amber,
+		height: 100,
+	),
+ ),
+```
+
+### CircularProgressIndicator
+- `CircularProgressIndicator`는 원형 모양의 진행도를 표시하는 위젯입니다.
+- 진행도 위젯은 2가지 타입을 가지고 있습니다.
+	- `indeterminate`: 진행도가 특정 값을 가지지 않습니다. (진행 상태만 파악할 수 있습니다.)
+	- `determinate`: 진행도가 특정 값을 가집니다. 진행도 값 범위는 \[0.0, 1.0\]입니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|backgroundColor|Color|도형 색|
+|strokeWidth|double|도형 두께|
+|value|dobule|값이 `null`이면 `indeterminate`, 그렇지 않으면 `determinate`|
+
+```
+CircularProgressIndicator(
+	backgroundColor: Colors.blue,
+	strokeWidth: 10,
+	value: null,
+),
+```
+
+### LinearProgressIndicator
+- `LinearProgressIndicator`는 선형 모양의 진행도를 표시하는 위젯입니다.
+- 이 외는 `CircularProgressIndicator`와 동일합니다.
+
+```
+LinearProgressIndicator(
+	backgroundColor: Colors.green,
+	strokeWidth: 10,
+	value: null,
+),
+```
+
+### DefaultTabController
+- `DefaultTabController`는 탭 목록을 관리하는 위젯입니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|length|int|탭 개수|
+
+```
+DefaultTabController(
+	length: 5,
+	child: Scaffold(
+		appBar: AppBar(
+			bottom: const TabBar(
+				tabs: [
+					Tab(icon: Icon(Icons.music_note)),
+					Tab(icon: Icon(Icons.music_video)),
+					Tab(icon: Icon(Icons.camera_alt)),
+					Tab(icon: Icon(Icons.grade)),
+					Tab(icon: Icon(Icons.email)),
+				],
+			),
+		),
+	),
+);
+```
+
+### TabBar
+- `TabBar`는 탭 목록을 표시하는 위젯입니다.
+- `DefaultTabController`의 `child`에 `TabBar`를 추가해서 탭 목록을 앱에 넣을 수 있습니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|tabs|List\<Widget\>|탭 위젯|
+
+### ListView
+- `ListView`는 스크롤 가능한 리스트를 표시하는 위젯입니다.
+- 일반적으로 `ListView`의 `child` 위젯은 스크린에 표시될 때만 오브젝트가 존재합니다. 즉, `ListView` 아이템이 스크롤되어 스크린에 표시되면 해당 아이템의 오브젝트가 생성되고, 스크린에서 사라지면 해당 오브젝트가 소멸됩니다.
 
 ## 출처 (Reference)
 https://www.geeksforgeeks.org/flutter-tutorial/
