@@ -231,12 +231,12 @@ void main() {
 
 ```
 List list1 = [];
-list.add(1);
-list.add(2);
-list.add(3);
+list1.add(1);
+list1.add(2);
+list1.add(3);
 
 List list2 = [];
-list
+list2
   ..add(1)
   ..add(2)
   ..add(3)
