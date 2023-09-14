@@ -169,7 +169,7 @@ class _MyAppState extends State<MyApp> {
 |--------------------------------------|
 ```
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |child|Widget|하위 위젯|
 |color|Color|컨테이너 배경색|
@@ -212,7 +212,7 @@ Container({Key key,
 |-----------------|
 ```
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |appbar|PreferredSizeWidget|상단 바|
 |body|Widget|주 내용|
@@ -235,16 +235,12 @@ Scaffold({Key key,
 - `MaterialApp`은 `매터리얼 위젯(Material widget)`들을 감싸는(wrap) 위젯입니다.  MaterialApp을 통해서 MaterialApp에 감싸진 위젯에 접근할 수 있습니다.
 - 일부 위젯은 MaterialApp으로 감싸져야 동작합니다. (ex. `Scaffold`)
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
-|backButtonDispatcher|BackButtonDispatcher|이전 버튼을 누를 때 일어나는 동작|
-|color|Color|애플리케이션 색|
-|darkTheme|ThemeData|다크 모드 사용시 적용되는 테마|
-|debugShowCheckedModeBanner|bool|디버그시 앱 상단 DEBUG 배너 표시 유무|
-|debugShowMaterialGrid|bool|그리드 오버레이 표시 유무|
 |home|Widget|앱의 기본 루트(default route)일 때 표시되는 위젯|
-|locale|Locale|앱의 초기 로케일|
 |title|String|디바이스에 표시되는 앱의 1줄 설명문|
+|color|Color|애플리케이션 색|
+|debugShowCheckedModeBanner|bool|디버그시 앱 상단 DEBUG 배너 표시 유무|
 
 ```
 import 'package:flutter/material.dart';
@@ -269,9 +265,9 @@ class MyApp extends StatelessWidget {
 
 ### AppBar
 - `AppBar`는 앱 상단 메뉴를 표시하는 위젯입니다.
-- Scaffold의 `appBar` 프로퍼티에 적용할 수 있습니다.
+- Scaffold의 `appBar` 파라미터에 적용할 수 있습니다.
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |backgrounColor|Color|메뉴바 색상|
 |leading|Widget|title 이전에 표시되는 위젯|
@@ -307,9 +303,9 @@ class MyApp extends StatelessWidget {
 
 ### BottomNavigationBar
 - `BottomNavigationBar`는 앱 하단 메뉴를 표시하는 위젯입니다.
-- Scaffold의 `bottomNavigationBar` 프로퍼티에 적용할 수 있습니다.
+- Scaffold의 `bottomNavigationBar` 파라미터에 적용할 수 있습니다.
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |backgrounColor|Color|메뉴바 색상|
 |currentIndex|int|현재 아이템 인덱스|
@@ -380,9 +376,9 @@ class _MyAppState extends State<MyApp> {
 
 ### Drawer
 - `Drawer`는 Scaffold 모서리에서 수평으로 슬라이드하면 나타나는 매터리얼 디자인 패널 위젯입니다.
-- Scaffold의 `drawer` 프로퍼티에 적용할 수 있습니다.
+- Scaffold의 `drawer` 파라미터에 적용할 수 있습니다.
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |child|Widget|하위 위젯|
 
@@ -439,33 +435,18 @@ class MyApp extends StatelessWidget {
 ### ClipRect
 - `ClipRect`는 사각형 클립을 제공하는 위젯입니다.
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |child|Widget|하위 위젯|
 
 ```
-import 'package:flutter/material.dart';
-
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-	const MyApp({Key? key}) : super(key: key);
-	
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-			home: Scaffold(
-				body: ClipRect(
-					child: Container(
-						height: 200,
-						width: 200,
-						color: Colors.yellow,
-					),
-				),
-			),
-		);
-	}
-}
+ClipRect(
+	child: Container(
+		height: 200,
+		width: 200,
+		color: Colors.yellow,
+	),
+),
 ```
 
 ![](images/Flutter-Widget-ClipRect.png)
@@ -473,35 +454,20 @@ class MyApp extends StatelessWidget {
 ### ClipRRect
 - `ClipRRect`는 모서리가 둥근 사각형 클립을 제공하는 위젯입니다.
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |child|Widget|하위 위젯|
 |borderRadius|BorderRadiusGeometry|모서리 반지름|
 
 ```
-import 'package:flutter/material.dart';
-
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-	const MyApp({Key? key}) : super(key: key);
-	
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-			home: Scaffold(
-				body: ClipRRect(
-					child: Container(
-						height: 200,
-						width: 200,
-						color: Colors.yellow,
-					),
-					borderRadius: BorderRadius.circular(30.0),
-				),
-			),
-		);
-	}
-}
+ClipRRect(
+	child: Container(
+		height: 200,
+		width: 200,
+		color: Colors.yellow,
+	),
+	borderRadius: BorderRadius.circular(30.0),
+);
 ```
 
 ![](images/Flutter-Widget-ClipRRect.png)
@@ -510,40 +476,44 @@ class MyApp extends StatelessWidget {
 - `Opacity`는 투명도를 제공하는 위젯입니다.
 - 투명도 값 범위는 \[0.0, 1.0\]입니다.
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |child|Widget|하위 위젯|
 |opacity|double|투명도|
 
 ```
-import 'package:flutter/material.dart';
-
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-	const MyApp({Key? key}) : super(key: key);
-	
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-			home: Scaffold(
-				body: Opacity(
-					child: Image.network('https://storage.googleapis.com/cms-storage-bucket/a40ceb6e5d342207de7b.png'),
-					opacity: 0.5,
-				),
-			),
-		);
-	}
-}
+Opacity(
+	child: Image.network(...),
+	opacity: 0.5,
+),
 ```
 
 ![](images/Flutter-Widget-Opacity.png)
+
+### RichText
+- `RichText`는 텍스트를 꾸미는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|text|InlineSpan|텍스트 위젯|
+|textAlign|TextAlign|텍스트 정렬 방식|
+|textDirection|TextDirection|텍스트 방향|
+|selectionColor|Color|텍스트 선택시 색상|
+|maxLines|int|텍스트 최대 라인 개수|
+
+```
+RichText(
+  text: const TextSpan(text: 'Hello'),
+  selectionRegistrar: SelectionContainer.maybeOf(context),
+  selectionColor: const Color(0xAF6694e8),
+)
+```
 
 ## UI Components
 ### AlertDialog
 - `AlertDialog`는 경고 메시지 창을 표시하는 위젯입니다.
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |actions|List\<Widget\>|창 하단에 표시되는 액션 목록|
 |title|Widget|창 상단에 표시되는 제목|
@@ -571,7 +541,7 @@ AlertDialog(
 ### SimpleDialog
 - `SimpleDialog`는 여러 선택지를 포함한 메시지 창을 표시하는 위젯입니다.
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |actions|List\<Widget\>|선택지 목록|
 |title|Widget|창 상단에 표시되는 제목|
@@ -595,7 +565,7 @@ SimpleDialog(
 ### showDialog
 - `showDialog`는 Dialog를 표시해주는 함수입니다. `AlertDialog`, `SimpleDialog`를 사용하려면 `showDialog`을 호출하면 됩니다.
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |context|BuildContext|`showDialog`를 호출한 위젯의 BuildContext|
 |Builder|WidgetBuilder|빌드 메소드|
@@ -615,9 +585,9 @@ showDialog(
 
 ### Icon
 - `Icon`은 아이콘을 관리하는 위젯입니다.
-- `Icons`에서 여러 가지 아이콘 종류를 제공합니다.
+- `Icon` 생성자의 1번째 파라미터는 아이콘 종류를 인자로 합니다.  아이콘 종류는 `Icons`에서 가져올 수 있습니다.
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |size|double|아이콘 크기|
 |color|Color|아이콘 색|
@@ -640,7 +610,7 @@ A.flex = 2, B.flex = 1
 |----A----|--B--|
 ```
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |flex|int|flex 값|
 |child|Widget|하위 위젯|
@@ -661,7 +631,7 @@ Expanded(
 	- `indeterminate`: 진행도가 특정 값을 가지지 않습니다. (진행 상태만 파악할 수 있습니다.)
 	- `determinate`: 진행도가 특정 값을 가집니다. 진행도 값 범위는 \[0.0, 1.0\]입니다.
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |backgroundColor|Color|도형 색|
 |strokeWidth|double|도형 두께|
@@ -690,7 +660,7 @@ LinearProgressIndicator(
 ### DefaultTabController
 - `DefaultTabController`는 탭 목록을 관리하는 위젯입니다.
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |child|Widget|하위 위젯|
 |length|int|탭 개수|
@@ -718,13 +688,59 @@ DefaultTabController(
 - `TabBar`는 탭 목록을 표시하는 위젯입니다.
 - `DefaultTabController`의 `child`에 `TabBar`를 추가해서 탭 목록을 앱에 넣을 수 있습니다.
 
-|프로퍼티|타입|의미|
+|파라미터|타입|의미|
 |---|---|---|
 |tabs|List\<Widget\>|탭 위젯|
 
 ### ListView
 - `ListView`는 스크롤 가능한 리스트를 표시하는 위젯입니다.
 - 일반적으로 `ListView`의 `child` 위젯은 스크린에 표시될 때만 오브젝트가 존재합니다. 즉, `ListView` 아이템이 스크롤되어 스크린에 표시되면 해당 아이템의 오브젝트가 생성되고, 스크린에서 사라지면 해당 오브젝트가 소멸됩니다.
+- `ListView`의 기본 생성자는 사용 가능한 모든 아이템을 한꺼번에 빌드를 수행합니다. 리스트의 아이템 개수가 적다면 기본 생성자가 적합합니다.
+	- `children` 파라미터를 통해 모든 아이템을 나열합니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|children|List\<Widget\>|리스트 아이템 목록|
+|scrollDirection|Axis|스크롤 방향|
+|padding|EdgeInsetsGeometry|아이템간 간격|
+
+```
+ListView(
+	scrollDirection: Axis.horizontal,
+	padding: const EdgeInsets.all(4),
+	children: <Widget>[
+		Container(
+			...
+		),
+		Container(
+			...
+		),
+	],
+)
+```
+
+- `ListView.builder` 생성자는 실제로 스크린에 표시되는 아이템만 빌드합니다. 리스트 아이템 개수가 많다면 `builder` 생성자가 적합합니다.
+	- `itemBuilder` 파라미터를 통해 아이템 틀을 작성합니다. `itemBuilder`는 함수를 값으로 하며, 이 함수는 `BuildContext`와 현재 아이템의 인덱스를 의미하는 `int` 파라미터를 갖습니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|itemCount|int|아이템 개수|
+|scrollDirection|Axis|스크롤 방향|
+|padding|EdgeInsetsGeometry|아이템간 간격|
+
+```
+ListView.builder(
+	padding: const EdgeInsets.all(8),
+	itemCount: 10,
+	itemBuilder: (BuildContext context, int index) {
+		return Container(
+			...
+		);
+	}
+);
+```
+
+## Design & Animations
 
 ## 출처 (Reference)
 https://www.geeksforgeeks.org/flutter-tutorial/
