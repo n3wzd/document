@@ -226,6 +226,22 @@ void main() {
 |`is`|특정 타입이 맞으면 true 반환|
 |`is!`|특정 타입이 맞으면 false 반환|
 
+#### Cascade Notation
+- `..` 연산자를 사용하면 하나의 오브젝트로 메소드를 여러 번 사용할 수 있습니다.
+
+```
+List list1 = [];
+list.add(1);
+list.add(2);
+list.add(3);
+
+List list2 = [];
+list
+  ..add(1)
+  ..add(2)
+  ..add(3)
+```
+
 ### 입력 (Input)
 - `stdin.readLineSync()` 메소드는 사용자로부터 입력받은 문자열(String 타입)을 반환합니다. (`stdin`은 `dart:io`에 포함되어 있습니다.)
 - 만약 수를 입력받고자 한다면, 형변환을 거쳐야 합니다.
