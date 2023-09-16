@@ -147,7 +147,7 @@ Scaffold(
 
 ### MaterialApp
 - `MaterialApp`은 `매터리얼 위젯(Material widget)`들을 감싸는(wrap) 위젯입니다. `MaterialApp`을 통해서 `MaterialApp`의 하위 위젯에 접근할 수 있습니다.
-- 일부 위젯은 `MaterialApp`을 상위 위젯으로 요구합니다. (ex. `Scaffold`)
+- 일부 위젯은 `MaterialApp`을 조상 위젯으로 요구합니다. (ex. `Scaffold`)
 
 |파라미터|타입|의미|
 |---|---|---|
