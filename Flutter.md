@@ -146,8 +146,8 @@ Scaffold(
 ```
 
 ### MaterialApp
-- `MaterialApp`은 `매터리얼 위젯(Material widget)`들을 감싸는(wrap) 위젯입니다.  MaterialApp을 통해서 MaterialApp에 감싸진 위젯에 접근할 수 있습니다.
-- 일부 위젯은 MaterialApp으로 감싸져야 동작합니다. (ex. `Scaffold`)
+- `MaterialApp`은 `매터리얼 위젯(Material widget)`들을 감싸는(wrap) 위젯입니다. `MaterialApp`을 통해서 `MaterialApp`의 하위 위젯에 접근할 수 있습니다.
+- 일부 위젯은 `MaterialApp`을 상위 위젯으로 요구합니다. (ex. `Scaffold`)
 
 |파라미터|타입|의미|
 |---|---|---|
@@ -168,7 +168,7 @@ MaterialApp(
 
 ### AppBar
 - `AppBar`는 앱 상단 메뉴를 표시하는 위젯입니다.
-- Scaffold의 `appBar` 파라미터에 적용할 수 있습니다.
+- `Scaffold`의 `appBar` 파라미터에 적용할 수 있습니다.
 
 |파라미터|타입|의미|
 |---|---|---|
@@ -189,7 +189,7 @@ AppBar(
 
 ### BottomNavigationBar
 - `BottomNavigationBar`는 앱 하단 메뉴를 표시하는 위젯입니다.
-- Scaffold의 `bottomNavigationBar` 파라미터에 적용할 수 있습니다.
+- `Scaffold`의 `bottomNavigationBar` 파라미터에 적용할 수 있습니다.
 
 |파라미터|타입|의미|
 |---|---|---|
@@ -224,7 +224,7 @@ bottomNavigationBar: BottomNavigationBar(
 ```
 
 ### Drawer
-- `Drawer`는 Scaffold 모서리에서 수평으로 슬라이드하면 나타나는 매터리얼 디자인 패널 위젯입니다.
+- `Drawer`는 `Scaffold` 모서리에서 수평으로 슬라이드하면 나타나는 매터리얼 디자인 패널 위젯입니다.
 - Scaffold의 `drawer` 파라미터에 적용할 수 있습니다.
 
 |파라미터|타입|의미|
