@@ -309,6 +309,29 @@ RichText(
 )
 ```
 
+### Builder
+- `Builder` 위젯은 `StatelessWidget`을 정의하는 또 다른 방법입니다.
+
+-  `Center` 위젯 내부에서 `StatelessWidget`을 사용한다고 합시다.
+```
+class Foo extends StatelessWidget {
+	const Foo({super.key});
+	@override
+	Widget build(BuildContext context) => const Text('foo');
+}
+...
+const Center(child: Foo())
+```
+
+- 이는 `Builder`를 사용해서 다음과 같이 대체할 수 있습니다. (`StatelessWidget`을 별도로 정의하지 않고 바로 사용할 수 있습니다.)
+```
+Center(
+	child: Builder(
+		builder: (BuildContext context) => const Text('foo'),
+	),
+)
+```
+
 ## UI Components
 ### AlertDialog
 - `AlertDialog`는 경고 메시지 창을 표시하는 위젯입니다.
@@ -660,6 +683,74 @@ InkWell(
 		});
 	},
 ),
+```
+
+### GridView
+- `GridView`는 스크롤이 가능한 2D 그리드 레이아웃 위젯입니다.
+- `GridView`에서 가장 자주 사용되는 생성자는 타일 개수가 고정된 그리드를 생성하는 `GridView.count`입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|primary|bool|상위 스크롤 뷰 사용 유무|
+|padding|EdgeInsetsGeometry|그리드 바깥 여백 간격|
+|crossAxisSpacing|double|아이템간 간격(세로)|
+|mainAxisSpacing|double|아이템간 간격(가로)|
+|crossAxisCount|double|세로 줄 개수|
+|children|List\<Widget\>|아이템 목록|
+
+```
+GridView.count(
+	primary: false,
+	padding: const EdgeInsets.all(20),
+	crossAxisSpacing: 10,
+	mainAxisSpacing: 10,
+	crossAxisCount: 2,
+	children: <Widget>[
+		Container(
+			...
+		),
+		Container(
+ 			...
+		),
+	],
+)
+```
+
+### ThemeData
+- `ThemeData`는 테마를 정의하는 위젯입니다.
+- `MaterialApp`의 `theme`, `Theme`의 `data` 등에서 값으로 사용됩니다.
+- `ThemeData.copyWith` 메소드는 테마 오브젝트를 복사합니다. (인자를 제공해서 원하는 파라미터를 수정할 수 있습니다.)
+
+|파라미터|타입|의미|
+|---|---|---|
+|brightness|Brightness|밝기 테마|
+|primaryColor|Color|앱의 주요 부분의 배경 색|
+
+```
+ThemeData(
+	brightness: Brightness.light,
+	primaryColor: Colors.green,
+)
+```
+
+### Theme
+- `Theme`는 후손 위젯에게 테마를 적용하는 위젯입니다.
+- `of` 정적 메소드는 주어진 `BuildContext`와 가장 가까운 테마 오브젝트를 반환합니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|data|ThemeData|테마 값|
+|child|Widget|하위 위젯|
+
+```
+Theme(
+	data: Theme.of(context).copyWith(
+		colorScheme: Theme.of(context).colorScheme,
+	),
+	child: Container(
+		...
+	),
+)
 ```
 
 ## Class
