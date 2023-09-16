@@ -601,16 +601,43 @@ CurvedAnimation(
 ```
 
 ### SlideTransition
-- `SlideTransition`은 아이템의 상대 위치에 대한 애니메이션을 수행하는 위젯입니다.
+- `SlideTransition`은 아이템의 위치 애니메이션을 수행하는 위젯입니다.
 
 |파라미터|타입|의미|
 |---|---|---|
 |child|Widget|하위 위젯|
-|position|Animation\<Offset\>|애니메이션에서 `child`의 위치|
+|position|Animation\<Offset\>|`child`의 위치를 제어하는 애니메이션|
 
 ```
 SlideTransition(
-	position: _offsetAnimation,
+	position: Tween<Offset>(
+		begin: Offset.zero,
+		end: const Offset(1.5, 0.0),
+	).animate(CurvedAnimation(
+		...
+	)),
+	child: const Padding(
+		...
+	),
+)
+```
+
+### RotationTransition
+- `RotationTransition`은 아이템의 회전 애니메이션을 수행하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|turns|Animation\<double\>|`child`의 회전을 제어하는 애니메이션|
+
+```
+RotationTransition(
+	turns: Tween(
+		begin: 0.0,
+		end: 0.15,
+	).animate(CurvedAnimation(
+		...
+	)),
 	child: const Padding(
 		...
 	),
