@@ -607,6 +607,61 @@ FlutterLogo(
 ),
 ```
 
+### Material
+- `Material` 위젯은 Clipping, Elevation, Ink 등을 사용할 때 이들의 조상 위젯 역할을 합니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|color|Color|배경 색|
+|animationDuration|Duration|애니메이션 지속 시간|
+
+```
+Material(
+	color: Colors.yellow,
+	child: InkWell(
+		...
+	),
+),
+```
+
+### AnimatedContainer
+- `AnimatedContainer`는 `Container`에서 애니메이션을 포함한 위젯입니다.
+- `AnimatedContainer`의 내부에는 자체`AnimationController`가 포함되어 있습니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|width|double|너비|
+|height|double|높이|
+|duration|Duration|애니메이션 지속 시간|
+|curve|Curve|커브 오브젝트|
+```
+AnimatedContainer(
+	height: 50,
+	width: 50,
+	duration: const Duration(seconds: 2),
+	curve: Curves.easeIn,
+	child: Material(
+		...
+	),
+);
+```
+
+### InkWell
+- `InkWell`은 터치 제스처에 반응하는 직사각형 영역의 매터리얼 위젯입니다.
+- `InkWell`을 사용하려면 `Material` 위젯을 조상 위젯으로 해야 합니다.
+
+```
+InkWell(
+	onTap: () {
+		setState(() {
+			sideLength == 50 ? sideLength = 100 : sideLength = 50;
+		});
+	},
+),
+```
+
 ## Class
 ### Tween<T>
 - `Tween<T>`은 `T` 타입에 대해 시작에서 종료까지 선형 차이를 의미하는 클래스입니다.
@@ -668,7 +723,7 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-![](images/Flutter-Widget-StatelessWidget.png)
+![](images/Flutter-Example-StatelessWidget.png)
 
 ### Stateful Widget
 - 'Stateful Widget'를 출력합니다.
@@ -710,7 +765,7 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
-![](images/Flutter-Widget-StatefulWidget.png)
+![](images/Flutter-Example-StatefulWidget.png)
 
 ### AppBar
 - 상단에 `AppBar`가 표시됩니다.
@@ -740,7 +795,7 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-![](images/Flutter-Widget-AppBar.png)
+![](images/Flutter-Example-AppBar.png)
 
 ### BottomNavigationBar
 - 3가지 아이템(Home, Business, School)을 가지는 메뉴 바입니다.
@@ -801,7 +856,7 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
-![](images/Flutter-Widget-BottomNavigationBar.png)
+![](images/Flutter-Example-BottomNavigationBar.png)
 
 ### Drawer
 - 상단 버튼을 클릭하면 `Drawer`가 표시됩니다.
@@ -852,7 +907,7 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-![](images/Flutter-Widget-Drawer.png)
+![](images/Flutter-Example-Drawer.png)
 
 ### AlertDialog
 - 버튼을 누르면 `AlertDialog`을 표시합니다.
@@ -916,6 +971,8 @@ class _HomePageState extends State<HomePage> {
 }
 ```
 
+![](images/Flutter-Example-AlertDialog.png)
+
 ### AnimationController
 - `CurvedAnimation`와 `SlideTransition`이 적용된 애니메이션입니다.
 
@@ -961,6 +1018,65 @@ class _MyApp extends State<MyApp> with SingleTickerProviderStateMixin {
 	}
 }
 ```
+
+![](images/Flutter-Example-AnimationController.png)
+
+### InkWell
+- 직사각형을 터치하면 확대 / 축소됩니다.
+
+```
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+	const MyApp({super.key});
+
+	@override
+	Widget build(BuildContext context) {
+		return MaterialApp(
+			home: Scaffold(
+				body: const Center(
+					child: InkWellExample(),
+				),
+			),
+		);
+	}
+}
+
+class InkWellExample extends StatefulWidget {
+	const InkWellExample({super.key});
+
+	@override
+	State<InkWellExample> createState() => _InkWellExampleState();
+}
+
+class _InkWellExampleState extends State<InkWellExample> {
+	double length = 50;
+
+	@override
+	Widget build(BuildContext context) {
+		return AnimatedContainer(
+			height: length,
+			width: length,
+			duration: const Duration(seconds: 2),
+			curve: Curves.easeIn,
+			child: Material(
+				color: Colors.yellow,
+				child: InkWell(
+					onTap: () {
+						setState(() {
+							length == 50 ? length = 100 : length = 50;
+						});
+					},
+				),
+			),
+		);
+	}
+}
+```
+
+![](images/Flutter-Example-InkWell.png)
 
 ## 출처 (Reference)
 https://www.geeksforgeeks.org/flutter-tutorial/
