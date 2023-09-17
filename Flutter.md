@@ -104,7 +104,7 @@ Container(
 	height: 200,
 	width: 200,
 	color: Colors.yellow,
-),
+)
 ```
 
 ### Scaffold
@@ -163,7 +163,7 @@ MaterialApp(
 	home: Scaffold(
 		...
 	),
-);
+)
 ```
 
 ### AppBar
@@ -184,7 +184,7 @@ AppBar(
 	    "MyApp",
 		textAlign: TextAlign.start,
 	),
-),
+)
 ```
 
 ### BottomNavigationBar
@@ -220,7 +220,7 @@ bottomNavigationBar: BottomNavigationBar(
 	currentIndex: _selectedIndex,
 	selectedItemColor: Color.fromARGB(255, 79, 205, 255),
 	onTap: _onItemTapped,
-),
+)
 ```
 
 ### Drawer
@@ -654,7 +654,7 @@ RotationTransition(
 ```
 FlutterLogo(
 	size: 150.0
-),
+)
 ```
 
 ### Material
@@ -672,7 +672,7 @@ Material(
 	child: InkWell(
 		...
 	),
-),
+)
 ```
 
 ### AnimatedContainer
@@ -695,7 +695,7 @@ AnimatedContainer(
 	child: Material(
 		...
 	),
-);
+)
 ```
 
 ### InkWell
@@ -709,7 +709,7 @@ InkWell(
 			sideLength == 50 ? sideLength = 100 : sideLength = 50;
 		});
 	},
-),
+)
 ```
 
 ### GridView
@@ -795,7 +795,7 @@ Theme(
 Tween<Offset>(
 	begin: const Offset(0.0, 0.0),
 	end: const Offset(50.0, 100.0),
-),
+)
 ```
 
 ### Offset
