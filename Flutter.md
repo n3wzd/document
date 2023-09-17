@@ -52,7 +52,8 @@ class MyApp extends StatelessWidget {
 - `Stateful Widget`은 빌드 이후에도 상태가 변경될 수 있는 위젯입니다.
 - `Stateful Widget`은 `createState()` 메소드를 오버라이드해야 합니다. 이 메소드는 상태를 반환합니다.
 - `State`은 위젯의 속성이 가지고 있는 개체의 데이터를 저장합니다.
-- 상태는 `build()` 메소드를 오버라이드해야 합니다. (`Stateless Widget`의 `build()`와 같습니다.)
+- `State`은 `build()` 메소드를 오버라이드해야 합니다. (`Stateless Widget`의 `build()`와 같습니다.)
+- `State.setState` 메소드는 호출될 때 해당 `State`의 내부 상태가 변경되었음을 프레임워크에 통지합니다.
 
 ```
 import 'package:flutter/material.dart';
