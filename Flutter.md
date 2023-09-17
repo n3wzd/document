@@ -780,6 +780,72 @@ Theme(
 )
 ```
 
+## Form
+### Form
+- `Form` 위젯은 폼과 관련된 위젯들의 조상 위젯 역할을 합니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+
+```
+Form(
+	key: _formKey,
+	child: Column(
+		...
+	),
+)
+```
+
+### FormField
+- `FormField`는 폼 필드를 제공하는 위젯입니다.
+- `Form` 위젯 내부에 있으면 `FormState`의 메소드를 사용할 수 있습니다. (상태 정보 저장, 리셋, 유효성 검사 등)
+- `GlobalKey`를 사용하면 `FormField`에 저장된 상태 정보를 다른 필드에서도 가져올 수 있습니다.
+
+### TextField
+- `TextField`는 텍스트를 입력할 수 있는 박스를 제공하는 위젯입니다.
+- `onSubmitted` 콜백의 인자의 값은 입력된 텍스트입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|controller|TextEditingController|텍스트 수정을 제어하는 컨트롤러|
+|onSubmitted|ValueChanged\<T\>|텍스트 제출시 호출되는 콜백|
+
+```
+TextField(
+	controller: _controller,
+	onSubmitted: (String value) async {
+		// value = 입력된 텍스트 값
+		...
+	},
+)
+```
+
+### TextFormField
+- `TextFormField`는 `TextField`를 포함한 `FormField` 위젯입니다.
+- `validator` 콜백은 유효성 검사할 때 호출되는 함수입니다.
+	- 이 콜백의 인자는 입력된 텍스트를 값으로 합니다.
+	- 오류가 발생하면, 오류 메시지를 반환합니다. 오류가 없다면 null을 반환합니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|decoration|InputDecoration|텍스트 데코레이션|
+|validator|FormFieldValidator\<String\>|유효성 검사 콜백|
+
+```
+TextFormField(
+	decoration: const InputDecoration(
+		hintText: 'Enter your ID',
+	),
+	validator: (String? value) {
+		if (value == null || value.isEmpty) {
+			return 'empty text';
+		}
+		return null;
+	},
+)
+```
+
 ## Key
 - Key는 위젯을 식별하는 용도로 사용됩니다.
 - 일반적인 `StatefulWidget`은 Key를 저장하는 `key` 프로퍼티를 가지고 있습니다.
@@ -1291,6 +1357,78 @@ class _InkWellExampleState extends State<InkWellExample> {
 ```
 
 ![](images/Flutter-Example-InkWell.png)
+
+### Form
+- `TextFormField`를 포함한 `Form`입니다.
+- ID를 입력하고 제출할 수 있습니다.
+- 빈 텍스트는 제출할 수 없습니다.
+
+```
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+	const MyApp({super.key});
+
+	@override
+	Widget build(BuildContext context) {
+		return MaterialApp(
+			home: Scaffold(
+				appBar: AppBar(title: const Text('Form App')),
+				body: const FormExample(),
+			),
+		);
+	}
+}
+
+class FormExample extends StatefulWidget {
+	const FormExample({super.key});
+
+	@override
+	State<FormExample> createState() => _FormExampleState();
+}
+
+class _FormExampleState extends State<FormExample> {
+	final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+	@override
+	Widget build(BuildContext context) {
+		return Form(
+ 			key: _formKey,
+			child: Column(
+				crossAxisAlignment: CrossAxisAlignment.start,
+ 				children: <Widget>[
+					TextFormField(
+ 						decoration: const InputDecoration(
+ 							hintText: 'Enter your ID',
+						),
+						validator: (String? value) {
+							if (value == null || value.isEmpty) {
+								return 'Please enter some text';
+							}
+ 							return null;
+						},
+					),
+					Padding(
+            					padding: const EdgeInsets.symmetric(vertical: 16.0),
+            					child: ElevatedButton(
+              						onPressed: () {
+                						if (_formKey.currentState!.validate()) {
+	 								// submit 완료
+								}
+	 						},
+							child: const Text('Submit'),
+						),
+					),
+				],
+			),
+		);
+	}
+}
+```
+
+![](images/Flutter-Example-Form.png)
 
 ## 출처 (Reference)
 https://www.geeksforgeeks.org/flutter-tutorial/
