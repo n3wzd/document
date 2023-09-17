@@ -780,6 +780,102 @@ Theme(
 )
 ```
 
+## Key
+- Key는 위젯을 식별하는 용도로 사용됩니다.
+- 일반적인 `StatefulWidget`은 Key를 저장하는 `key` 프로퍼티를 가지고 있습니다.
+- 보통 Key는 자주 쓰이지는 않습니다. 그러나 `StatefulWidget`의 순서나 개수를 변경할 때 Key가 사용됩니다.
+
+### Widget-Element Matching
+- Fluter에서 위젯들은 트리 구조로 구성되어 있으며, Element 역시 트리 구조를 이룹니다. 만약 위젯 트리에서 업데이트가 발생하면, Element 트리에서도 업데이트가 발생합니다.
+- Flutter가 Element 트리를 참조할 때, 각 Element가 알맞은 위젯과 대응되었는지 확인합니다. `StatelessWidget`일 경우 Type만 확인하며, `StatefulWidget`일 경우 Type과 Key 모두를 확인합니다.
+```
+Widget Tree            Element Tree
+
+Row                    Row
+|                      |
+|-- Tile(Key:1)        |-- Tile(Key:1) -- State A
+|                      |
+|-- Tile(Key:2)        |-- Tile(Key:2) -- State B
+```
+
+- 위젯 트리에서 `Row`의 두 하위 위젯 순서를 바꿔봅시다. Flutter가 Element 트리를 탐색하면서 각 Element가 알맞은 위젯에 대응되었는지 확인합니다. 아래 예시에선 Type은 일치하나, Key는 일치하지 않습니다.
+```
+Widget Tree            Element Tree
+
+Row                    Row
+|                      |
+|-- Tile(Key:2)        |-- Tile(Key:1) -- State A
+|                      |
+|-- Tile(Key:1)        |-- Tile(Key:2) -- State B
+```
+
+- 불일치한 Element는 비활성되고 Element 트리에서 삭제됩니다. 이후, Flutter는 위젯 트리의 알맞은 레벨로 이동하여 적합한 위젯이 있는지를  탐색합니다.
+	- 알맞은 위젯을 찾으면, 해당 위젯과 Element를 대응하고 Element 트리를 업데이트합니다.
+	- 알맞은 위젯을 찾지 못하면, 해당 위젯에 대응하는 새로운 Element를 생성합니다.
+- 아래 예시에는 적합한 위젯이 존재하므로, 각 Element가 알맞은 위젯과 매칭됩니다. (만약 key가 없다면 타입만 비교될 것이며, Element의 순서가 바뀌지 않을 것입니다.)
+```
+Widget Tree            Element Tree
+
+Row                    Row
+|                      |
+|-- Tile(Key:2)        |-- Tile(Key:2) -- State B
+|                      |
+|-- Tile(Key:1)        |-- Tile(Key:1) -- State A
+```
+
+- Flutter의 위젯-Element 매칭 알고리즘은 트리의 레벨 단위로 진행됩니다.
+- 탐색은 트리의 최상단부터 시작하며, 레벨 단위로 탐색합니다. (정확히는 동일한 부모 노드를 가지는 노드 집합을 탐색 단위로 합니다.) 불일치한 Element를 발견할 때 알맞은 위젯을 찾는 과정도 마찬가지입니다.
+- 위 예제에서 각 타일이 `Container` 위젯으로 감싸진 상태에서 `Tile`의 순서를 바꿔봅시다. (Key는 `LocalKey`로 가정합니다.)
+```
+Widget Tree             Element Tree
+
+Row                     Row
+|                       |
+| -- Container          | -- Container
+|    |-- Tile(Key:2)    |    |-- Tile(Key:1) -- State A
+|                       |
+| -- Container          | -- Container
+     |-- Tile(Key:1)         |-- Tile(Key:2) -- State B
+```
+
+- 이번에는 각 Element에 대해 알맞은 위젯을 찾지 못합니다. 따라서 새로운 Element가 생성됩니다. (기존 `State` 정보가 초기화됩니다.)
+```
+Widget Tree             Element Tree
+
+Row                     Row
+|                       |
+| -- Container          | -- Container
+|    |-- Tile(Key:2)    |    |-- Tile(Key:2) -- State C
+|                       |
+| -- Container          | -- Container
+     |-- Tile(Key:1)         |-- Tile(Key:1) -- State D
+```
+
+- 문제를 해결하려면 Key는 유지해야 하는 상태 정보가 있는 최상단 위젯에 추가되어야 합니다.
+- 아래 예제에서 `Container`에 Key를 등록하면 문제가 해결됩니다.
+```
+Widget Tree             Element Tree
+
+Row                     Row
+|                       |
+| -- Container(Key:2)   | -- Container(Key:2)
+|    |-- Tile           |    |-- Tile -- State B
+|                       |
+| -- Container(Key:1)   | -- Container(Key:1)
+     |-- Tile                |-- Tile -- State A
+```
+
+### GlobalKey
+- `GlobalKey`는 앱 전체에서 고유한 Key를 가지는 Key 클래스입니다.
+- `GlobalKey`은 주로 다음 용도로 사용됩니다.
+	- 정보를 유지하며 위젯의 부모를 변경할 수 있습니다.
+	- 어떤 위젯의 정보를 다른 위젯 트리에서 접근할 수 있습니다.
+- 일반적으로 `GlobalKey`를 갖는 Element를 매칭할 때는 `LocalKey`에 비해 비용이 비쌉니다.
+
+### LocalKey
+- `LocalKey`는 `GlobalKey`가 아닌 Key 클래스입니다.
+- `LocalKey`의 Key는 같은 부모 노드를 가지는 위젯 집합 내에서만 유일성을 갖습니다.
+
 ## Class
 ### Tween<T>
 - `Tween<T>`은 `T` 타입에 대해 시작에서 종료까지 선형 차이를 의미하는 클래스입니다.
@@ -1200,3 +1296,7 @@ class _InkWellExampleState extends State<InkWellExample> {
 https://www.geeksforgeeks.org/flutter-tutorial/
 
 https://api.flutter.dev/index.html
+
+Key - https://nsinc.tistory.com/214
+
+
