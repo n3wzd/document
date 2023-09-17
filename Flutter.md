@@ -870,6 +870,51 @@ TextFormField(
 )
 ```
 
+## Gesture
+### GestureDetector
+- `GestureDetector`는 제스처를 감지하는 위젯입니다.
+- `child` 내에서 특정 제스처를 감지하면 알맞은 콜백을 호출합니다. (각 제스처에 대한 콜백은 파라미터를 통해 설정할 수 있습니다.)
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+
+```
+GestureDetector(
+	onTap: () {
+		setState(() {
+			_lightIsOn = !_lightIsOn;
+		});
+	},
+	child: Container(
+		child: Text(_lightIsOn ? 'TURN LIGHT OFF' : 'TURN LIGHT ON'),
+	),
+)
+```
+- `GestureDetector`에서 제스처 콜백 종류는 다음이 있습니다.
+
+#### Tap
+- onTapDown
+- onTapUp
+- onTap
+- onTapCancel
+
+#### Double tap
+- onDoubleTap
+
+#### Long press
+- onLongPress
+
+#### Vertical Drag
+- onVerticalDragStart
+- onVerticalDragUpdate
+- onVerticalDragEnd
+
+#### Horizontal Drag
+- onHorizontalDragStart
+- onHorizontalDragUpdate
+- onHorizontalDragEnd
+
 ## Key
 - Key는 위젯을 식별하는 용도로 사용됩니다.
 - 일반적인 `StatefulWidget`은 Key를 저장하는 `key` 프로퍼티를 가지고 있습니다.
@@ -1453,6 +1498,73 @@ class _FormExampleState extends State<FormExample> {
 ```
 
 ![](images/Flutter-Example-Form.png)
+
+### GestureDetector
+- 버튼을 누르면(`GestureDetector.onTap`) 전구 아이콘의 색이 변합니다.
+
+```
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+	const MyApp({super.key});
+
+	@override
+	Widget build(BuildContext context) {
+		return const MaterialApp(
+			home: GestureDetectorExample(),
+		);
+	}
+}
+
+class GestureDetectorExample extends StatefulWidget {
+	const GestureDetectorExample({super.key});
+
+	@override
+	State<GestureDetectorExample> createState() => _GestureDetectorExampleState();
+}
+
+class _GestureDetectorExampleState extends State<GestureDetectorExample> {
+	bool _lightIsOn = false;
+
+	@override
+	Widget build(BuildContext context) {
+		return Scaffold(
+			body: Container(
+				alignment: FractionalOffset.center,
+				child: Column(
+					mainAxisAlignment: MainAxisAlignment.center,
+					children: <Widget>[
+						Padding(
+							padding: const EdgeInsets.all(8.0),
+							child: Icon(
+								Icons.lightbulb_outline,
+								color: _lightIsOn ? Colors.yellow.shade600 : Colors.black,
+								size: 60,
+							),
+						),
+						GestureDetector(
+							onTap: () {
+								setState(() {
+									_lightIsOn = !_lightIsOn;
+								});
+							},
+							child: Container(
+								color: Colors.yellow.shade600,
+								padding: const EdgeInsets.all(8),
+								child: Text(_lightIsOn ? 'TURN LIGHT OFF' : 'TURN LIGHT ON'),
+							),
+						),
+					],
+				),
+			),
+		);
+	}
+}
+```
+
+![](images/Flutter-Example-GestureDetector.png)
 
 ## 출처 (Reference)
 https://www.geeksforgeeks.org/flutter-tutorial/
