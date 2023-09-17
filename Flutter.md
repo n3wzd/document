@@ -27,6 +27,12 @@ Fluttet 프레임워크는 복잡성에 따라 간단하게 3가지 `레이어(L
 ### 상태 (State)
 `상태(State)`는 위젯의 속성이 가지고 있는 개체의 데이터를 저장하는 클래스입니다. Flutter 애플리케이션의 상태가 변경될 때마다 해당 상태와 관련된 위젯이 다시 렌더링됩니다.
 
+### 라우트 (Route)
+`라우트(Route)`는 Flutter 애플리케이션에서 페이지(page)입니다.
+
+### 네비게이터 (Navigator)
+`네비게이터(Navigator)`는 Route간 이동을 처리하는 위젯입니다. Navigator는 Route들을 스택(stack) 구조로 관리합니다.
+
 ## Widget
 ### Stateless Widget
 - `Stateless Widget`은 런타임 중간에 상태를 변경할 수 없는 위젯입니다. 즉, 빌드 이후에는 상태가 변경되지 않습니다.
