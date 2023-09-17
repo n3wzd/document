@@ -107,6 +107,29 @@ Container(
 )
 ```
 
+### Padding
+- `Padding`은 padding을 제공하는 위젯입니다.
+- `Padding`은 `Container.padding`과 동일한 동작을 합니다. 실제로 `Container`에서 `padding` 프로퍼티를 설정하면 `Container`는 `Padding` 위젯을 빌드합니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|padding|EdgeInsetsGeometry|border와 child간 여백|
+
+```
+Padding(
+	padding: EdgeInsets.all(16.0),
+	child: Text('Hello World!'),
+)
+```
+
+### Text
+- `Text`는 텍스트를 제공하는 위젯입니다.
+
+```
+Text('Hello World!')
+```
+
 ### Scaffold
 - `Scaffold`는 앱의 기본 디자인 레이아웃을 제공하는 위젯입니다.
 
