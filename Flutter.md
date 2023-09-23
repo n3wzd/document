@@ -1017,6 +1017,52 @@ Row                     Row
 - `LocalKey`는 `GlobalKey`가 아닌 Key 클래스입니다.
 - `LocalKey`의 Key는 같은 부모 노드를 가지는 위젯 집합 내에서만 유일성을 갖습니다.
 
+## Navigator
+### Route
+- `Route`는 `Navigator`에서 아이템인 추상 클래스입니다.
+
+### MaterialPageRoute
+- `MaterialPageRoute`은 모달(Modal) Route 클래스입니다.
+- 기본적으로 플랫폼 친화적인 트랜지션(transition)이 적용되어 있습니다.
+
+### Navigator
+- `Navigator`는 `Route` 위젯들을 스택 구조로 관리하는 위젯입니다.
+- 대부분의 앱에서 네비게이터는 위젯 트리의 최상단에 위치합니다.
+
+#### 페이지 추가
+- `Navigator.push` 메소드를 사용합니다.
+- `context`와 밀접한 `Navigator`에서 `route`를 가장 위쪽에 추가합니다.
+
+> Navigator.push(BuildContext context, Route<T> route)
+
+```
+Navigator.push(context, MaterialPageRoute<void>(
+    builder: (BuildContext context) {
+        return Scaffold(
+            appBar: AppBar(title: const Text('My Page')),
+            body: Center(
+                child: TextButton(
+                    child: const Text('POP'),
+                    onPressed: () {
+                        Navigator.pop(context);
+                    },
+                ),
+		    ),
+        );
+    },
+));
+```
+
+#### 페이지 삭제
+- `Navigator.pop` 메소드를 사용합니다.
+- `context`와 밀접한 `Navigator`에서 가장 위쪽에 있는 Route를 삭제합니다.
+
+> Navigator.pop(BuildContext context)
+
+```
+Navigator.pop(context);
+```
+
 ## Class
 ### Tween<T>
 - `Tween<T>`은 `T` 타입에 대해 시작에서 종료까지 선형 차이를 의미하는 클래스입니다.
