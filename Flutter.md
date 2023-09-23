@@ -1053,6 +1053,10 @@ Navigator.push(context, MaterialPageRoute<void>(
 ));
 ```
 
+- 만약 이름이 있는 Route를 추가한다면 다음 메소드를 사용하면 됩니다. (동작은 `Navigator.push`와 같습니다.)
+
+> Navigator.pushNamed(`context`, `routeName`);
+
 #### 페이지 삭제
 - `Navigator.pop` 메소드를 사용합니다.
 - `context`와 밀접한 `Navigator`에서 가장 위쪽에 있는 Route를 삭제합니다.
@@ -1062,6 +1066,27 @@ Navigator.push(context, MaterialPageRoute<void>(
 ```
 Navigator.pop(context);
 ```
+
+### 페이지 이름
+- Route를 관리하는 가장 쉬운 방법은 주소 형식의 이름을 사용하는 것입니다. (ex. `/menu/status`)
+- 홈페이지의 주소는 보통 `/`으로 합니다.
+- `MaterialApp`의 `routes` 파라미터는 `Map<String, WidgetBuilder>`을 인자로 합니다. 값을 추가하면 `MaterialApp`이 해당 `Navigator`에 주어진 Route를 추가하는 콜백을 호출합니다.
+
+```
+void main() {
+    runApp(MaterialApp(
+        home: const MyAppHome(),
+        routes: <String, WidgetBuilder> {
+            '/a': (BuildContext context) => const MyPage(title: Text('page A')),
+            '/b': (BuildContext context) => const MyPage(title: Text('page B')),
+            '/c': (BuildContext context) => const MyPage(title: Text('page C')),
+        },
+    ));
+}
+```
+
+### 페이지 반환
+- `Navigator.pop`의 2번째 인자는 해당 페이지를 생성한 `Navigator.push` 메소드의 반환값이 됩니다.
 
 ## Class
 ### Tween<T>
