@@ -1086,7 +1086,21 @@ void main() {
 ```
 
 #### 페이지 반환
-- `Navigator.pop`의 2번째 인자는 해당 페이지를 생성한 `Navigator.push` 메소드의 반환값이 됩니다.
+- `Navigator.pop`의 2번째 인자는 해당 페이지를 생성한 `Navigator.push` 메소드가 반환하는 Future의 잠재적 값이 됩니다.
+- 아래 예제에서 `value`의 값은 `Navigator.pop`의 2번째 인자이며, 타입은 `Navigator.push`의 2번째 인자로 제공한 `MaterialPageRoute`의 제너릭 타입과 같습니다.
+
+```
+bool? value = await Navigator.push(context, MaterialPageRoute<bool>(
+	builder: (BuildContext context) {
+		return Center(
+			child: GestureDetector(
+				child: const Text('OK'),
+				onTap: () { Navigator.pop(context, true); }
+			),
+		);
+	}
+));
+```
 
 ## Class
 ### Tween<T>
