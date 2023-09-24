@@ -1053,7 +1053,7 @@ Navigator.push(context, MaterialPageRoute<void>(
 ));
 ```
 
-- 만약 이름이 있는 Route를 추가한다면 다음 메소드를 사용하면 됩니다. (동작은 `Navigator.push`와 같습니다.)
+- 만약 이름이 있는 Route를 추가한다면 `Navigator.pushNamed` 메소드를 사용하면 됩니다. (동작은 `Navigator.push`와 같습니다.)
 
 > Navigator.pushNamed(`context`, `routeName`);
 
@@ -1100,6 +1100,29 @@ bool? value = await Navigator.push(context, MaterialPageRoute<bool>(
 		);
 	}
 ));
+```
+
+#### 페이지 인자
+- `Navigator.pushNamed`의 3번째 선택 인자 `arguments`를 통해서 페이지에 인자를 전달할 수 있습니다.
+- 인자의 타입은 String, int 등이 사용됩니다. (보통 Map을 사용합니다.) 
+- 전달한 인자는 해당 페이지의 생성자로 전달됩니다.
+
+> Navigator.pushNamed(`context`, `routeName`, `arguments`);
+
+```
+class StatusRoute {
+	StatusRoute({ required this.name, required this.level });
+	final String name;
+	final String level;
+}
+
+void navigate() {
+	Navigator.pushNamed(
+		context,
+		'/status',
+		arguments: StatusRoute(name: 'Steve', level: 5),
+	);
+}
 ```
 
 ## Class
