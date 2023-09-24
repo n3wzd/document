@@ -426,6 +426,7 @@ int adder(int a, int b) {
 	- 함수를 호출할 때 매개변수의 이름을 직접 지시할 수 있습니다.
 	- 이름이 있는 매개변수의 타입은 반드시 nullable이어야 합니다.
 - 기본값이 존재하는 `디폴트 매개변수`를 사용할 수 있습니다.
+- `@required` 또는 `required` 키워드를 붙여서 필수 매개변수임을 명시할 수 있습니다.
 
 ```
 double div(int a, [int b = 2]) {
@@ -443,6 +444,14 @@ void printer({String? name, int? level}) {
 void main() {
 	printer(level: 5, name: 'steve'); // steve's level = 5
 }
+```
+
+```
+Status({
+	String clan,
+	required String name,
+	required int level,
+})
 ```
 
 ### 익명 함수 (Anonymous Function)
