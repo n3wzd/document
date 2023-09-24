@@ -1150,6 +1150,30 @@ Tween<Offset>(
 Offset(double dx, double dy)
 ```
 
+### Function
+- `Function`은 함수 클래스이며, 모든 함수 타입의 최상위 객체입니다.
+- `Function` 자체에는 아무런 값을 가지지 않습니다.
+- 함수 타입을 저장하는 프로퍼티는 저장할 함수의 반환 타입, 파라미터 타입과 이름, 제너릭 타입을 선언해야 합니다.
+	- 반환 타입이 void면 타입 표기를 생략할 수 있습니다.
+	- 파라미터의 이름은 생략 가능합니다.
+
+```
+void foo1() {};
+int foo2(int a, int b) { return a + b; };
+
+Function() f1 = foo1;
+int Function(int a, int b) f2 = foo2;
+```
+
+- 프로퍼티의 타입을 `Function`만으로 표기하는 경우, 모든 함수를 담을 수 있습니다.
+- 그러나 이 프로퍼티를 통해 함수를 호출할 수 없습니다.
+	- 단, static 타입 값을 다루는 함수는 호출 가능합니다.
+
+```
+Function foo = (int n) => "$n";
+print(foo(1)); // 정상적으로 동작합니다.
+```
+
 ## Example
 ### Stateless Widget
 - 'Stateless Widget'를 출력합니다.
