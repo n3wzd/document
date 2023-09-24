@@ -1657,6 +1657,96 @@ class _GestureDetectorExampleState extends State<GestureDetectorExample> {
 
 ![](images/Flutter-Example-GestureDetector.png)
 
+### Navigator
+- 3개의 페이지가 있습니다.
+- 홈페이지의 버튼 2개를 통해 각 페이지로 이동할 수 있습니다.
+
+```
+import 'package:flutter/material.dart';
+
+void main() {
+	runApp(MaterialApp(
+		initialRoute: '/',
+		routes: {
+			'/': (context) => const HomeRoute(),
+			'/second': (context) => const SecondRoute(),
+			'/third': (context) => const ThirdRoute(),
+		},
+	));
+}
+
+class HomeRoute extends StatelessWidget {
+	const HomeRoute({Key? key}) : super(key: key);
+
+	@override
+	Widget build(BuildContext context) {
+		return Scaffold(
+			appBar: AppBar(
+				title: const Text('Home'),
+				backgroundColor: Colors.yellow,
+			),
+			body: Center(
+				child: Column(
+					mainAxisAlignment: MainAxisAlignment.center,
+					children: <Widget>[
+						ElevatedButton(
+							child: const Text('Second!'),
+							onPressed: () {
+								Navigator.pushNamed(context, '/second');
+							},
+						),
+						ElevatedButton(
+							child: const Text('Third!'),
+							onPressed: () {
+								Navigator.pushNamed(context, '/third');
+							},
+						),
+					],
+				),
+			),
+		);
+	}
+}
+
+class SecondRoute extends StatelessWidget {
+	const SecondRoute({Key? key}) : super(key: key);
+
+	@override
+	Widget build(BuildContext context) {
+		return Scaffold(
+			appBar: AppBar(
+				title: const Text("Second Page"),
+				backgroundColor: Colors.blue,
+			), // AppBar
+			body: Center(
+				child: ElevatedButton(
+					onPressed: () {
+						Navigator.pop(context);
+					},
+					child: const Text('Back!'),
+				),
+			),
+		);
+	}
+}
+
+class ThirdRoute extends StatelessWidget {
+	const ThirdRoute({Key? key}) : super(key: key);
+
+	@override
+	Widget build(BuildContext context) {
+		return Scaffold(
+			appBar: AppBar(
+				title: const Text("Third Page"),
+				backgroundColor: Colors.green,
+			),
+		);
+	}
+}
+```
+
+![](images/Flutter-Example-Navigator.png)
+
 ## 출처 (Reference)
 https://www.geeksforgeeks.org/flutter-tutorial/
 
