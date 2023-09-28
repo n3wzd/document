@@ -269,6 +269,79 @@ Drawer(
 )
 ```
 
+### Column
+- `Column`은 수직 방향으로 하위 위젯들을 나열하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|children|List<Widget>|하위 위젯 목록|
+
+```
+Column(
+	children: <Widget>[
+		...
+	],
+)
+```
+
+### Row
+- `Row`은 수평 방향으로 하위 위젯들을 나열하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|children|List<Widget>|하위 위젯 목록|
+
+```
+Row(
+	children: <Widget>[
+		...
+	],
+)
+```
+
+### Stack
+- `Stack`은 모서리를 기준으로 하위 위젯들을 배치하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|children|List<Widget>|하위 위젯 목록|
+
+```
+Stack(
+	children: <Widget>[
+		...
+	],
+)
+```
+
+### Positioned
+- `Positioned`은 `Stack` 내부에서 하위 위젯의 위치를 조정하는 위젯입니다.
+- 상대 위치는 `Stack`의 모서리를 기준으로 합니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|left|double|왼쪽 모서리간 거리|
+|right|double|오른쪽 모서리간 거리|
+|top|double|위쪽 모서리간 거리|
+|bottom|double|아래쪽 모서리간 거리|
+|width|double|`child` 너비|
+|height|double|`child` 높이|
+
+```
+Stack(
+	children: <Widget>[
+		Positioned(
+			left: 40,
+			top: 30,
+			child: Container(
+				...
+			),
+		),
+	],
+)
+```
+
 ### ClipRect
 - `ClipRect`는 사각형 클립을 제공하는 위젯입니다.
 
