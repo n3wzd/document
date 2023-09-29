@@ -81,62 +81,6 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
-### Container
-- `Container`는 위젯의 UI, 위치, 크기를 제어하는 위젯입니다.
-- Container의 구조는 `HTML`의 `Box Model`하고 유사합니다.
-
-```
-|-Container----------------------------|
-|    margin                            |
-|     |--border--------------------|   |
-|     |      padding               |   |
-|     |           child            |   |
-|     |                            |   |
-|     |----------------------------|   |
-|                                      |
-|--------------------------------------|
-```
-
-|파라미터|타입|의미|
-|---|---|---|
-|child|Widget|하위 위젯|
-|color|Color|컨테이너 배경색|
-|width|double|컨테이너 너비|
-|height|double|컨테이너 높이|
-|margin|EdgeInsetsGeometry|컨테이너를 둘러싼 여백|
-|padding|EdgeInsetsGeometry|border와 child간 여백|
-
-```
-Container(
-	height: 200,
-	width: 200,
-	color: Colors.yellow,
-)
-```
-
-### Padding
-- `Padding`은 padding을 제공하는 위젯입니다.
-- `Padding`은 `Container.padding`과 동일한 동작을 합니다. 실제로 `Container`에서 `padding` 프로퍼티를 설정하면 `Container`는 `Padding` 위젯을 빌드합니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|child|Widget|하위 위젯|
-|padding|EdgeInsetsGeometry|border와 child간 여백|
-
-```
-Padding(
-	padding: EdgeInsets.all(16.0),
-	child: Text('Hello World!'),
-)
-```
-
-### Text
-- `Text`는 텍스트를 제공하는 위젯입니다.
-
-```
-Text('Hello World!')
-```
-
 ### Scaffold
 - `Scaffold`는 앱의 기본 디자인 레이아웃을 제공하는 위젯입니다.
 
@@ -269,6 +213,205 @@ Drawer(
 )
 ```
 
+### ClipRect
+- `ClipRect`는 사각형 클립을 제공하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+
+```
+ClipRect(
+	child: Container(
+		height: 200,
+		width: 200,
+		color: Colors.yellow,
+	),
+)
+```
+
+### ClipRRect
+- `ClipRRect`는 모서리가 둥근 사각형 클립을 제공하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|borderRadius|BorderRadiusGeometry|모서리 반지름|
+
+```
+ClipRRect(
+	child: Container(
+		height: 200,
+		width: 200,
+		color: Colors.yellow,
+	),
+	borderRadius: BorderRadius.circular(30.0),
+)
+```
+
+### Opacity
+- `Opacity`는 투명도를 제공하는 위젯입니다.
+- 투명도 값 범위는 \[0.0, 1.0\]입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|opacity|double|투명도|
+
+```
+Opacity(
+	child: FlutterLogo(size: 150.0),
+	opacity: 0.5,
+)
+```
+
+### Text
+- `Text`는 텍스트를 제공하는 위젯입니다.
+
+```
+Text('Hello World!')
+```
+
+### RichText
+- `RichText`는 텍스트를 꾸미는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|text|InlineSpan|텍스트 위젯|
+|textAlign|TextAlign|텍스트 정렬 방식|
+|textDirection|TextDirection|텍스트 방향|
+|selectionColor|Color|텍스트 선택시 색상|
+|maxLines|int|텍스트 최대 라인 개수|
+
+```
+RichText(
+	text: const TextSpan(text: 'Hello'),
+	selectionColor: const Colors.blue,
+)
+```
+
+### Builder
+- `Builder` 위젯은 `StatelessWidget`을 정의하는 또 다른 방법입니다.
+
+-  `Center` 위젯 내부에서 `StatelessWidget`을 사용한다고 합시다.
+```
+class Foo extends StatelessWidget {
+	const Foo({super.key});
+	@override
+	Widget build(BuildContext context) => const Text('foo');
+}
+...
+const Center(child: Foo())
+```
+
+- 이는 `Builder`를 사용해서 다음과 같이 대체할 수 있습니다. (`StatelessWidget`을 별도로 정의하지 않고 바로 사용할 수 있습니다.)
+```
+Center(
+	child: Builder(
+		builder: (BuildContext context) => const Text('foo'),
+	),
+)
+```
+
+### Function
+- `Function`은 함수 클래스이며, 모든 함수 타입의 최상위 객체입니다.
+- `Function` 자체에는 아무런 값을 가지지 않습니다.
+- 함수 타입을 저장하는 프로퍼티는 저장할 함수의 반환 타입, 파라미터 타입과 이름, 제너릭 타입을 선언해야 합니다.
+	- 반환 타입이 void면 타입 표기를 생략할 수 있습니다.
+	- 파라미터의 이름은 생략 가능합니다.
+
+```
+void foo1() {};
+int foo2(int a, int b) { return a + b; };
+
+Function() f1 = foo1;
+int Function(int a, int b) f2 = foo2;
+```
+
+- 프로퍼티의 타입을 `Function`만으로 표기하는 경우, 모든 함수를 담을 수 있습니다.
+- 그러나 이 프로퍼티를 통해 함수를 호출할 수 없습니다.
+	- 단, static 타입 값을 다루는 함수는 호출 가능합니다.
+
+```
+Function foo = (int n) => "$n";
+print(foo(1)); // 정상적으로 동작합니다.
+```
+
+## Layout
+### Container
+- `Container`는 위젯의 UI, 위치, 크기를 제어하는 위젯입니다.
+- Container의 구조는 `HTML`의 `Box Model`하고 유사합니다.
+
+```
+|-Container----------------------------|
+|    margin                            |
+|     |--border--------------------|   |
+|     |      padding               |   |
+|     |           child            |   |
+|     |                            |   |
+|     |----------------------------|   |
+|                                      |
+|--------------------------------------|
+```
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|color|Color|컨테이너 배경색|
+|width|double|컨테이너 너비|
+|height|double|컨테이너 높이|
+|margin|EdgeInsetsGeometry|컨테이너를 둘러싼 여백|
+|padding|EdgeInsetsGeometry|border와 child간 여백|
+
+```
+Container(
+	height: 200,
+	width: 200,
+	color: Colors.yellow,
+)
+```
+
+### Padding
+- `Padding`은 padding을 제공하는 위젯입니다.
+- `Padding`은 `Container.padding`과 동일한 동작을 합니다. 실제로 `Container`에서 `padding` 프로퍼티를 설정하면 `Container`는 `Padding` 위젯을 빌드합니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|padding|EdgeInsetsGeometry|border와 child간 여백|
+
+```
+Padding(
+	padding: EdgeInsets.all(16.0),
+	child: Text('Hello World!'),
+)
+```
+
+### Expanded
+- `Expanded`는 flex 레이아웃을 제공하는 위젯입니다.
+- flex 레이아웃은 해당 위젯의 크기를 스크린 끝까지 자동으로 맞춰줍니다.
+- 여러 아이템들이 행 또는 열을 이룰 때, flex 값은 각 아이템들이 상대적으로 차지하는 공간을 결정합니다. 만약 아이템 A의 flex가 2, 아이템 B의 flex가 1이면, A와 B는 2:1 크기 비율로 공간을 차지합니다.
+
+```
+A.flex = 2, B.flex = 1
+|----A----|--B--|
+```
+
+|파라미터|타입|의미|
+|---|---|---|
+|flex|int|flex 값|
+|child|Widget|하위 위젯|
+
+```
+Expanded(
+	flex: 2,
+	child: Container(
+		color: Colors.amber,
+		height: 100,
+	),
+ )
+```
+
 ### Column
 - `Column`은 수직 방향으로 하위 위젯들을 나열하는 위젯입니다.
 
@@ -342,98 +485,18 @@ Stack(
 )
 ```
 
-### ClipRect
-- `ClipRect`는 사각형 클립을 제공하는 위젯입니다.
+### EdgeInsets
+- `EdgeInsets`은 4개의 값을 제공하는 클래스입니다.
+- 주로 사각형과 관련된 프로퍼티에서 값으로 사용됩니다. (ex. padding)
 
-|파라미터|타입|의미|
-|---|---|---|
-|child|Widget|하위 위젯|
+1. 전체
+> EdgeInsets.all(8.0)
 
-```
-ClipRect(
-	child: Container(
-		height: 200,
-		width: 200,
-		color: Colors.yellow,
-	),
-)
-```
+2. 수직-수평
+> EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0)
 
-### ClipRRect
-- `ClipRRect`는 모서리가 둥근 사각형 클립을 제공하는 위젯입니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|child|Widget|하위 위젯|
-|borderRadius|BorderRadiusGeometry|모서리 반지름|
-
-```
-ClipRRect(
-	child: Container(
-		height: 200,
-		width: 200,
-		color: Colors.yellow,
-	),
-	borderRadius: BorderRadius.circular(30.0),
-)
-```
-
-### Opacity
-- `Opacity`는 투명도를 제공하는 위젯입니다.
-- 투명도 값 범위는 \[0.0, 1.0\]입니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|child|Widget|하위 위젯|
-|opacity|double|투명도|
-
-```
-Opacity(
-	child: FlutterLogo(size: 150.0),
-	opacity: 0.5,
-)
-```
-
-### RichText
-- `RichText`는 텍스트를 꾸미는 위젯입니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|text|InlineSpan|텍스트 위젯|
-|textAlign|TextAlign|텍스트 정렬 방식|
-|textDirection|TextDirection|텍스트 방향|
-|selectionColor|Color|텍스트 선택시 색상|
-|maxLines|int|텍스트 최대 라인 개수|
-
-```
-RichText(
-	text: const TextSpan(text: 'Hello'),
-	selectionColor: const Colors.blue,
-)
-```
-
-### Builder
-- `Builder` 위젯은 `StatelessWidget`을 정의하는 또 다른 방법입니다.
-
--  `Center` 위젯 내부에서 `StatelessWidget`을 사용한다고 합시다.
-```
-class Foo extends StatelessWidget {
-	const Foo({super.key});
-	@override
-	Widget build(BuildContext context) => const Text('foo');
-}
-...
-const Center(child: Foo())
-```
-
-- 이는 `Builder`를 사용해서 다음과 같이 대체할 수 있습니다. (`StatelessWidget`을 별도로 정의하지 않고 바로 사용할 수 있습니다.)
-```
-Center(
-	child: Builder(
-		builder: (BuildContext context) => const Text('foo'),
-	),
-)
-```
+3. 상-하-좌-우
+> EdgeInsets.only(left: 8.0, right: 10.0, top: 12.0, bottom: 14.0)
 
 ## UI Components
 ### AlertDialog
@@ -524,31 +587,6 @@ Icon(
 	color: Colors.yellow,
 	size: 20.0,
 )
-```
-
-### Expanded
-- `Expanded`는 flex 레이아웃을 제공하는 위젯입니다.
-- flex 레이아웃은 해당 위젯이 스크린 너머로 초과하는 것을 자동으로 방지해줍니다.
-- 여러 아이템들이 행 또는 열을 이룰 때, flex 값은 각 아이템들이 상대적으로 차지하는 공간을 결정합니다. 만약 아이템 A의 flex가 2, 아이템 B의 flex가 1이면, A와 B는 2:1 크기 비율로 공간을 차지합니다.
-
-```
-A.flex = 2, B.flex = 1
-|----A----|--B--|
-```
-
-|파라미터|타입|의미|
-|---|---|---|
-|flex|int|flex 값|
-|child|Widget|하위 위젯|
-
-```
-Expanded(
-	flex: 2,
-	child: Container(
-		color: Colors.amber,
-		height: 100,
-	),
- )
 ```
 
 ### CircularProgressIndicator
@@ -799,6 +837,30 @@ AnimatedContainer(
 		...
 	),
 )
+```
+
+### Tween<T>
+- `Tween<T>`은 `T` 타입에 대해 시작에서 종료까지 선형 차이를 의미하는 클래스입니다.
+- `Tween<T>`은 주로 애니메이션에서 사용됩니다.
+- `animate` 메소드는 `Animation<T>`를 반환합니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|begin|`T`|시작 값|
+|end|`T`|종료 값|
+
+```
+Tween<Offset>(
+	begin: const Offset(0.0, 0.0),
+	end: const Offset(50.0, 100.0),
+)
+```
+
+### Offset
+- `Offset`은 2D 좌표에서 변화량을 의미하는 클래스입니다.
+
+```
+Offset(double dx, double dy)
 ```
 
 ### InkWell
@@ -1196,55 +1258,6 @@ void navigate() {
 		arguments: StatusRoute(name: 'Steve', level: 5),
 	);
 }
-```
-
-## Class
-### Tween<T>
-- `Tween<T>`은 `T` 타입에 대해 시작에서 종료까지 선형 차이를 의미하는 클래스입니다.
-- `Tween<T>`은 주로 애니메이션에서 사용됩니다.
-- `animate` 메소드는 `Animation<T>`를 반환합니다.
-
-|프로퍼티|타입|의미|
-|---|---|---|
-|begin|`T`|시작 값|
-|end|`T`|종료 값|
-
-```
-Tween<Offset>(
-	begin: const Offset(0.0, 0.0),
-	end: const Offset(50.0, 100.0),
-)
-```
-
-### Offset
-- `Offset`은 2D 좌표에서 변화량을 의미하는 클래스입니다.
-
-```
-Offset(double dx, double dy)
-```
-
-### Function
-- `Function`은 함수 클래스이며, 모든 함수 타입의 최상위 객체입니다.
-- `Function` 자체에는 아무런 값을 가지지 않습니다.
-- 함수 타입을 저장하는 프로퍼티는 저장할 함수의 반환 타입, 파라미터 타입과 이름, 제너릭 타입을 선언해야 합니다.
-	- 반환 타입이 void면 타입 표기를 생략할 수 있습니다.
-	- 파라미터의 이름은 생략 가능합니다.
-
-```
-void foo1() {};
-int foo2(int a, int b) { return a + b; };
-
-Function() f1 = foo1;
-int Function(int a, int b) f2 = foo2;
-```
-
-- 프로퍼티의 타입을 `Function`만으로 표기하는 경우, 모든 함수를 담을 수 있습니다.
-- 그러나 이 프로퍼티를 통해 함수를 호출할 수 없습니다.
-	- 단, static 타입 값을 다루는 함수는 호출 가능합니다.
-
-```
-Function foo = (int n) => "$n";
-print(foo(1)); // 정상적으로 동작합니다.
 ```
 
 ## Example
