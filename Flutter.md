@@ -522,6 +522,14 @@ Stack(
 3. 상-하-좌-우
 > EdgeInsets.only(left: 8.0, right: 10.0, top: 12.0, bottom: 14.0)
 
+### Alignment
+- `Alignment`는 사각형의 중심점 값을 제공하는 클래스입니다.
+- 주로 정렬 프로퍼티에서 값으로 사용됩니다.
+- 중심은 (0.0, 0.0)이며, 중심에서 사각형 모서리까지 거리는 1.0입니다.
+- 값이 증가하는 방향이 오른쪽입니다.
+
+> Alignment(x, y)
+
 ## UI Components
 ### AlertDialog
 - `AlertDialog`는 경고 메시지 창을 표시하는 위젯입니다.
