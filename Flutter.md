@@ -364,11 +364,12 @@ print(foo(1)); // 정상적으로 동작합니다.
 |파라미터|타입|의미|
 |---|---|---|
 |child|Widget|하위 위젯|
-|color|Color|배경색|
 |width|double|너비|
 |height|double|높이|
-|margin|EdgeInsetsGeometry|border를 둘러싼 여백|
 |padding|EdgeInsetsGeometry|border와 child간 여백|
+|margin|EdgeInsetsGeometry|border를 둘러싼 여백|
+|alignment|AlignmentGeometry|`child` 배치 방식|
+|color|Color|배경색|
 
 ```
 Container(
@@ -380,7 +381,6 @@ Container(
 
 ### Padding
 - `Padding`은 padding을 제공하는 위젯입니다.
-- `Padding`은 `Container.padding`과 동일한 동작을 합니다. 실제로 `Container`에서 `padding` 프로퍼티를 설정하면 `Container`는 `Padding` 위젯을 빌드합니다.
 
 |파라미터|타입|의미|
 |---|---|---|
