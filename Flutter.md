@@ -339,8 +339,8 @@ print(foo(1)); // 정상적으로 동작합니다.
 
 ## Layout
 ### Container
-- `Container`는 위젯의 UI, 위치, 크기를 제어하는 위젯입니다.
-- Container의 구조는 `HTML`의 `Box Model`하고 유사합니다.
+- `Container`는 기본적인 컨테이너 위젯입니다.
+- `Container`의 구조는 HTML의 Box Model하고 유사합니다.
 
 ```
 |-Container----------------------------|
@@ -354,13 +354,20 @@ print(foo(1)); // 정상적으로 동작합니다.
 |--------------------------------------|
 ```
 
+- `Container`는 특정한 레이아웃이 없으며, 다른 위젯의 레이아웃을 따릅니다. 그렇기에 `Container`의 레이아웃 동작은 다소 복잡합니다. (위쪽일수록 우선 순위가 높습니다.)
+1. `alignment` 조건을 적용합니다.
+2. `Container` 크기를 하위 위젯의 크기에 맞게 조정합니다.
+3. `width`, `height`, `constraints` 조건을 적용합니다.
+4. `Container` 크기를 상위 위젯의 크기에 맞게 확장합니다.
+5. 최대한 작아지는 방향으로 크기를 조정합니다.
+
 |파라미터|타입|의미|
 |---|---|---|
 |child|Widget|하위 위젯|
-|color|Color|컨테이너 배경색|
-|width|double|컨테이너 너비|
-|height|double|컨테이너 높이|
-|margin|EdgeInsetsGeometry|컨테이너를 둘러싼 여백|
+|color|Color|배경색|
+|width|double|너비|
+|height|double|높이|
+|margin|EdgeInsetsGeometry|border를 둘러싼 여백|
 |padding|EdgeInsetsGeometry|border와 child간 여백|
 
 ```
