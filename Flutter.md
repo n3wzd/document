@@ -412,6 +412,23 @@ Expanded(
  )
 ```
 
+### SizedBox
+- `SizedBox`은 고정된 크기를 가진 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|width|double|너비|
+|height|double|높이|
+|child|Widget|하위 위젯|
+
+```
+SizedBox(
+	width: 20,
+	height: 30,
+	child: Text('Sized!'),
+)
+```
+
 ### Column
 - `Column`은 수직 방향으로 하위 위젯들을 나열하는 위젯입니다.
 
