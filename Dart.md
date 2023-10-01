@@ -782,26 +782,26 @@ void main() {
 
 ```
 void main() {
-  late String name;
-  name = "steve"; // 나중에 변수를 초기화할 수 있습니다.
-  print(name); // 사용 전에는 초기화가 되어 있어야 합니다.
+	late String name;
+	name = "steve"; // 나중에 변수를 초기화할 수 있습니다.
+	print(name); // 사용 전에는 초기화가 되어 있어야 합니다.
 }
 ```
 
 - `Lazy initialization`은 초기화와 관련된 복잡한 연산이나 과정을 해당 값을 사용하기 전까지 미루는 기법입니다.
-- late 키워드를 사용해서 Lazy initialization가 적용됩니다.
+- late 키워드를 사용하면 Lazy initialization가 적용됩니다.
 
 ```
 String getWeapon() {
-  print("New Item!!");
-  return "Saber";
+	print("New Item!!");
+	return "Saber";
 }
 
 void main() {
-  print("Let's Go!");
-  late String weapon = getWeapon();
-  print("Battle Start!"); // 이 구문이 먼저 실행됩니다.
-  print(weapon);
+	print("Let's Go!");
+	late String weapon = getWeapon();
+	print("Battle Start!"); // 이 구문이 먼저 실행됩니다.
+	print(weapon);
 }
 ```
 
