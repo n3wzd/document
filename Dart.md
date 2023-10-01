@@ -766,11 +766,11 @@ void main(){
 ```
 void main() {
 	String? value = 'test';
-    if(value is String) {
-	     // value의 타입이 String?에서 String으로 자동 변환됩니다.
-        print(value.length); // 4
-    } else {
-        print('value is Stirng?'); // value가 null이면 여기가 실행됩니다.
+	if(value is String) {
+		// value의 타입이 String?에서 String으로 자동 변환됩니다.
+		print(value.length); // 4
+	} else {
+        	print('value is Stirng?'); // value가 null이면 여기가 실행됩니다.
 	}
 }
 ```
