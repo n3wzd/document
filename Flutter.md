@@ -594,6 +594,21 @@ Stack(
 )
 ```
 
+### SafeArea
+- `SafeArea`는 OS로 인한 UI 침입을 막아주는 컨테이너 위젯입니다.
+- OS에 따라 여유 공간이 부족하여 디바이스의 UI가 가려지는 현상이 발생할 수 있습니다. `SafeArea`로 감싸면 문제가 자동으로 해결됩니다.
+- `SafeArea`는 일반적으로 `Scaffold`의 `body`에서 사용됩니다.
+
+```
+SafeArea(
+	child: Text('Safe!'),
+)
+```
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+
 ### EdgeInsets
 - `EdgeInsets`은 4개의 값을 제공하는 클래스입니다.
 - 주로 사각형과 관련된 프로퍼티에서 값으로 사용됩니다. (ex. padding)
