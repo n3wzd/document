@@ -392,6 +392,10 @@ Function foo = (int n) => "$n";
 print(foo(1)); // 정상적으로 동작합니다.
 ```
 
+- `VoidCallback`은 빈 `Function`을 의미합니다. (typedef)
+
+> VoidCallback = void Function()
+
 ## Layout
 ### Container
 - `Container`는 기본적인 컨테이너 위젯입니다.
@@ -1147,6 +1151,26 @@ TextFormField(
 			return 'empty text';
 		}
 		return null;
+	},
+)
+```
+
+### IconButton
+- `IconButton`는 `Icon`을 포함하는 버튼 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|icon|Widget|아이콘 위젯|
+|iconSize|double|아이콘 크기|
+|color|Color|아이콘 색|
+|onPressed|VoidCallback|버튼 누를 시 실행되는 콜백|
+
+```
+IconButton(
+	iconSize: 32,
+	icon: const Icon(Icons.favorite),
+	onPressed: () {
+		...
 	},
 )
 ```
