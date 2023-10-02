@@ -430,12 +430,14 @@ print(foo(1)); // 정상적으로 동작합니다.
 Container(
 	height: 200,
 	width: 200,
+	alignment: Alignment.center,
 	color: Colors.yellow,
 )
 ```
 
 ### Padding
-- `Padding`은 padding을 제공하는 위젯입니다.
+- `Padding`은 `padding`을 제공하는 위젯입니다.
+- `padding`이 있는 `Container`와 비슷하지만, `Padding`은 `padding` 이외의 기능은 가지고 있지 않다는 점에서 차이가 있습니다.
 
 |파라미터|타입|의미|
 |---|---|---|
@@ -461,14 +463,14 @@ A.flex = 2, B.flex = 1
 
 |파라미터|타입|의미|
 |---|---|---|
-|flex|int|flex 값|
 |child|Widget|하위 위젯|
+|flex|int|flex 값|
 
 ```
 Expanded(
 	flex: 2,
 	child: Container(
-		color: Colors.amber,
+		color: Colors.blue,
 		height: 100,
 	),
  )
@@ -476,13 +478,13 @@ Expanded(
 
 ### SizedBox
 - `SizedBox`은 고정된 크기를 가진 위젯입니다.
-- 레이아웃에서 빈 공간을 넣을 때 유용하게 사용됩니다.
+- 레이아웃에서 빈 공간을 추가하는 용도로도 사용할 수 있습니다.
 
 |파라미터|타입|의미|
 |---|---|---|
+|child|Widget|하위 위젯|
 |width|double|너비|
 |height|double|높이|
-|child|Widget|하위 위젯|
 
 ```
 SizedBox(
@@ -492,12 +494,34 @@ SizedBox(
 )
 ```
 
+### FractionallySizedBox
+- `FractionallySizedBox`은 전체 공간에서 주어진 비율만큼 하위 위젯의 공간을 제한하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|widthFactor|double|너비 비율|
+|heightFactor|double|높이 비율|
+|alignment|AlignmentGeometry|`child` 배치 방식|
+
+```
+FractionallySizedBox(
+	widthFactor: 0.5,
+	heightFactor: 0.5,
+	alignment: FractionalOffset.center,
+	child: child: Container(
+		color: Colors.blue,
+	),
+),
+```
+
 ### Column
 - `Column`은 수직 방향으로 하위 위젯들을 나열하는 위젯입니다.
 
 |파라미터|타입|의미|
 |---|---|---|
 |children|List<Widget>|하위 위젯 목록|
+|mainAxisAlignment|MainAxisAlignment|위젯 정렬 시작점(시작, 끝, 중심)|
 
 ```
 Column(
@@ -513,6 +537,7 @@ Column(
 |파라미터|타입|의미|
 |---|---|---|
 |children|List<Widget>|하위 위젯 목록|
+|mainAxisAlignment|MainAxisAlignment|위젯 정렬 시작점(시작, 끝, 중심)|
 
 ```
 Row(
@@ -579,12 +604,39 @@ Stack(
 > EdgeInsets.only(left: 8.0, right: 10.0, top: 12.0, bottom: 14.0)
 
 ### Alignment
-- `Alignment`는 사각형의 중심점 값을 제공하는 클래스입니다.
-- 주로 정렬 프로퍼티에서 값으로 사용됩니다.
-- 중심은 (0.0, 0.0)이며, 중심에서 사각형 모서리까지 거리는 1.0입니다.
-- 값이 증가하는 방향이 오른쪽입니다.
+- `Alignment`는 2D 좌표계 값을 제공하는 클래스입니다.
+- 원점은 중심인 (0.0, 0.0)입니다.
+- 정렬 프로퍼티의 값으로 사용할 수 있습니다.
 
 > Alignment(x, y)
+
+```
+              |
+     -------(0,-1)------
+     |        |        |
+     |        |        |
+--(-1,0)----(0,0)----(1,0)--
+     |        |        |
+     |        |        |
+     -------(0,1)-------
+              |
+```
+
+### FractionalOffset
+- `FractionalOffset`는 2D 좌표계 값을 제공하는 클래스입니다.
+- 원점은 상단 좌측인 (0.0, 0.0)입니다.
+- `Alignment`와 동일한 정보를 가지고 있으므로, `Alignment`를 사용할 수 있는 곳에는 `FractionalOffset`도 사용할 수 있습니다.
+
+> FractionalOffset(x, y)
+
+```
+    |        |
+--(0,0)----(1,0)--
+    |        |
+    |        |
+--(0,1)----(1,1)--
+    |        |
+```
 
 ## UI Components
 ### AlertDialog
