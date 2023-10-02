@@ -291,9 +291,14 @@ RichText(
 ```
 
 ### Builder
-- `Builder` 위젯은 `StatelessWidget`을 정의하는 또 다른 방법입니다.
+- `Builder` 위젯을 사용해서 `StatelessWidget`을 정의할 수 있습니다.
+- `builder` 파라미터는 위젯을 생성하는 빌드 함수를 값으로 합니다. (`StatelessWidget`의 빌드 함수와 같습니다.)
 
--  `Center` 위젯 내부에서 `StatelessWidget`을 사용한다고 합시다.
+|파라미터|타입|의미|
+|---|---|---|
+|builder|WidgetBuilder|빌드 함수|
+
+-  `Center` 위젯 내부에서 `StatelessWidget`을 사용한다면,
 ```
 class Foo extends StatelessWidget {
 	const Foo({super.key});
@@ -312,6 +317,56 @@ Center(
 	),
 )
 ```
+
+### StreamBuilder
+- `StreamBuilder` 위젯을 사용해서 특정 Stream에 맞게 상태가 변화하는 `StatefulWidget`을 정의할 수 있습니다.
+- `StreamBuilder`의 제너릭 타입은 Stream의 잠재적 값 타입입니다.
+- `builder` 파라미터의 빌드 함수는 추가적으로 `AsyncSnapshot` 인자를 가집니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|stream|Stream\<T\>|사용할 Stream|
+|builder|AsyncWidgetBuilder\<T\>|비동기 빌드 함수|
+
+```
+StreamBuilder<T>(
+	stream: ...,
+	builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
+		if (snapshot.hasError) {
+			...
+		} else {
+			switch (snapshot.connectionState) {
+				case ConnectionState.none: ...
+				case ConnectionState.waiting: ...
+				case ConnectionState.active: ...
+				case ConnectionState.done: ...
+			}
+		}
+	}
+)
+```
+
+### AsyncSnapshot
+- `AsyncSnapshot`은 비동기 연산에서 사용되는 데이터 묶음 클래스입니다.
+- `AsyncSnapshot`의 제너릭 타입은 Future 또는 Stream의 잠재적 값 타입입니다.
+- 주로 `StreamBuilder`에서 사용됩니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|data||비동기 연산의 잠재적 값|
+|connectionState|ConnectionState|비동기 연산과 연결 상태|
+|hasError|bool|에러 발생시 true|
+|error|Object|비동기 연산에서 발생한 error 객체|
+|stackTrace|StackTrace|비동기 연산에서 발생한 `StackTrace`|
+
+### ConnectionState
+- `ConnectionState`은 비동기 연산의 연결 상태 값을 정의한 enum입니다.
+- 비동기 연산이 진행되면서 Future 또는 Stream의 잠재적 값(data)이 변화합니다.
+
+1. `none`: 비동기 연산과 연결되지 않은 초기 상태
+2. `waiting`: 비동기 연산과 연결이 되었으며 연산이 시작되기 이전 상태 (이때 data는 보통 null을 가짐)
+3. `active`: 비동기 연산이 진행 중인 상태 (data가 결정되었으나 값이 바뀔 수 있음)
+4. `done`: 비동기 연산이 종료된 상태 (data가 완전히 결정됨)
 
 ### Function
 - `Function`은 함수 클래스이며, 모든 함수 타입의 최상위 객체입니다.
