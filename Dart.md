@@ -304,6 +304,17 @@ void main() {
 |toString()|현재 값을 String으로 변환|
 |substring(`lo`, _`hi`_)|현재 문자열을 `lo` 인덱스부터 `hi` 인덱스까지 자른 문자열 반환 (`hi` 생략시 마지막 인덱스까지)|
 
+### 템플릿 리터럴 (Template Literal)
+- Dart에서도 Javascript의 `템플릿 리터럴`을 사용할 수 있습니다.
+	- 백틱 대신에 작은 따옴표가 사용됩니다.
+	- 변수 단독이면 중괄호를 생략할 수 있습니다.
+- Dart 2.0.0부터는 문자열 표현시 이 방법이 권장됩니다.
+
+```
+'${user.name}'s level: ${user.level}.' // Steve's level: 5
+'$minutesPadding$minutes:$secondsPadding$seconds' // 15:58
+```
+
 ## 제어문 (Control Flow)
 ### if
 - Dart의 조건문은 자바스크립트와 동일합니다. (`if`, `else`, `else if`)
