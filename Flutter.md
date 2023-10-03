@@ -429,6 +429,7 @@ print(foo(1)); // 정상적으로 동작합니다.
 |margin|EdgeInsetsGeometry|border를 둘러싼 여백|
 |alignment|AlignmentGeometry|`child` 배치 방식|
 |color|Color|배경색|
+|decoration|Decoration|데코레이션|
 
 ```
 Container(
