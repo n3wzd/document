@@ -1105,6 +1105,74 @@ Theme(
 )
 ```
 
+## Input
+### TextField
+- `TextField`는 텍스트를 입력할 수 있는 박스를 제공하는 위젯입니다.
+- `onSubmitted` 콜백의 인자의 값은 입력된 텍스트입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|controller|TextEditingController|텍스트 수정을 제어하는 컨트롤러|
+|onSubmitted|ValueChanged\<T\>|텍스트 제출시 호출되는 콜백|
+
+```
+TextField(
+	controller: _controller,
+	onSubmitted: (String value) async {
+		// value = 입력된 텍스트 값
+		...
+	},
+)
+```
+
+### IconButton
+- `IconButton`는 `Icon`을 포함하는 버튼 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|icon|Widget|아이콘 위젯|
+|iconSize|double|아이콘 크기|
+|color|Color|아이콘 색|
+|onPressed|VoidCallback|버튼 누를 시 실행되는 콜백|
+
+```
+IconButton(
+	iconSize: 32,
+	icon: const Icon(Icons.favorite),
+	onPressed: () {
+		...
+	},
+)
+```
+
+### Slider
+- `Slider`는 슬라이더 입력을 제공하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|value|double|현재 값|
+|max|double|최댓값|
+|min|double|최솟값|
+|divisions|int|분할 구간 개수|
+|label|String|슬라이드시 표시되는 라벨 값|
+|onChanged|ValueChanged\<double\>|값이 변화될 때마다 실행되는 콜백|
+|onChangeStart|ValueChanged\<double\>|값 변경 시작시 실행되는 콜백|
+|onChangeEnd|ValueChanged\<double\>|값 변경 완료시 실행되는 콜백|
+
+```
+Slider(
+	value: _currentSliderValue,
+	max: 100,
+	divisions: 5,
+	label: _currentSliderValue.round().toString(),
+	onChanged: (double value) {
+		setState(() {
+			_currentSliderValue = value;
+		});
+	},
+),
+```
+
 ## Form
 ### Form
 - `Form` 위젯은 폼과 관련된 위젯들의 조상 위젯 역할을 합니다.
@@ -1127,25 +1195,6 @@ Form(
 - `Form` 위젯 내부에 있으면 `FormState`의 메소드를 사용할 수 있습니다. (상태 정보 저장, 리셋, 유효성 검사 등)
 - `GlobalKey`를 사용하면 `FormField`에 저장된 상태 정보를 다른 필드에서도 가져올 수 있습니다.
 
-### TextField
-- `TextField`는 텍스트를 입력할 수 있는 박스를 제공하는 위젯입니다.
-- `onSubmitted` 콜백의 인자의 값은 입력된 텍스트입니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|controller|TextEditingController|텍스트 수정을 제어하는 컨트롤러|
-|onSubmitted|ValueChanged\<T\>|텍스트 제출시 호출되는 콜백|
-
-```
-TextField(
-	controller: _controller,
-	onSubmitted: (String value) async {
-		// value = 입력된 텍스트 값
-		...
-	},
-)
-```
-
 ### TextFormField
 - `TextFormField`는 `TextField`를 포함한 `FormField` 위젯입니다.
 - `validator` 콜백은 유효성 검사할 때 호출되는 함수입니다.
@@ -1167,26 +1216,6 @@ TextFormField(
 			return 'empty text';
 		}
 		return null;
-	},
-)
-```
-
-### IconButton
-- `IconButton`는 `Icon`을 포함하는 버튼 위젯입니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|icon|Widget|아이콘 위젯|
-|iconSize|double|아이콘 크기|
-|color|Color|아이콘 색|
-|onPressed|VoidCallback|버튼 누를 시 실행되는 콜백|
-
-```
-IconButton(
-	iconSize: 32,
-	icon: const Icon(Icons.favorite),
-	onPressed: () {
-		...
 	},
 )
 ```
