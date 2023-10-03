@@ -399,7 +399,6 @@ print(foo(1)); // 정상적으로 동작합니다.
 ## Layout
 ### Container
 - `Container`는 기본적인 컨테이너 위젯입니다.
-- `Container`에는 많은 기능이 포함되어 있다는 이점이 있으나, 그로 인해 동작이 복잡해서 예측이 어렵다는 단점이 있습니다.
 - `Container`의 구조는 HTML의 Box Model하고 유사합니다.
 
 ```
