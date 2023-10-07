@@ -47,12 +47,12 @@ import 'package:flutter/material.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-	const MyApp({Key? key}) : super(key: key);
-	
-	@override
-	Widget build(BuildContext context) {
-		return Container();
-	}
+  const MyApp({Key? key}) : super(key: key);
+  
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }
 ```
 
@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
 - `StatefulWidget`는 생성된 이후에도 빌드 함수가 여러 번 호출될 수 있습니다.
 - `StatefulWidget`의 빌드 메소드는 `State`에서 정의됩니다.
 - `createState()` 메소드를 통해 `State`을 생성합니다.
-	- 이 메소드에선 `State` 반환을 제외한 다른 로직은 추가될 수 없습니다. (`State` 반환 로직만 있어야 합니다.)
+  - 이 메소드에선 `State` 반환을 제외한 다른 로직은 추가될 수 없습니다. (`State` 반환 로직만 있어야 합니다.)
 - `StatefulWidget`는 불변 클래스(`@immutable`)이므로 모든 프로퍼티는 `final`이어야 합니다.
 - 하위 위젯의 상태가 런타임 중간에 바뀔 수 있다면 `StatefulWidget`가 적합합니다.
 
@@ -71,17 +71,17 @@ import 'package:flutter/material.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
-	const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
  
-	@override
- 	_MyAppState createState() => _MyAppState();
+  @override
+   _MyAppState createState() => _MyAppState();
 }
- 
+
 class _MyAppState extends State<MyApp> {
-	@override
- 	Widget build(BuildContext context) {
-		return Container();
-	}
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }
 ```
 
@@ -89,6 +89,16 @@ class _MyAppState extends State<MyApp> {
 - `State`은 상태를 정의하는 클래스이며, `StatefulWidget`와 같이 사용됩니다.
 - `State` 객체는 빌드 중간에 변할 수 있습니다. 즉, 프로퍼티의 값은 변경될 수 있습니다.
 - `State`는 빌드 메소드를 가지며, `StatefulWidget`가 빌드할 하위 위젯이 여기서 정의됩니다.
+- `widget` 프로퍼티는 `StatefulWidget`을 가리킵니다. `widget`을 통해 `StatefulWidget`의 프로퍼티를 가져올 수 있습니다.
+
+```
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+```
 
 #### setState()
 - `setState()`은 상태가 변경되었음을 프레임워크에 통지하는 메소드입니다.
@@ -121,9 +131,9 @@ class _MyAppState extends State<MyApp> {
 **Before**
 ```
 class Foo extends StatelessWidget {
-	const Foo({super.key});
-	@override
-	Widget build(BuildContext context) => const Text('foo');
+  const Foo({super.key});
+  @override
+  Widget build(BuildContext context) => const Text('foo');
 }
 ...
 const Center(child: Foo())
@@ -132,9 +142,9 @@ const Center(child: Foo())
 **After**
 ```
 Center(
-	child: Builder(
-		builder: (BuildContext context) => const Text('foo'),
-	),
+  child: Builder(
+    builder: (BuildContext context) => const Text('foo'),
+  ),
 )
 ```
 
@@ -151,19 +161,19 @@ Center(
 
 ```
 StreamBuilder<T>(
-	stream: ...,
-	builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
-		if (snapshot.hasError) {
-			...
-		} else {
-			switch (snapshot.connectionState) {
-				case ConnectionState.none: ...
-				case ConnectionState.waiting: ...
-				case ConnectionState.active: ...
-				case ConnectionState.done: ...
-			}
-		}
-	}
+  stream: ...,
+  builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
+    if (snapshot.hasError) {
+      ...
+    } else {
+      switch (snapshot.connectionState) {
+        case ConnectionState.none: ...
+        case ConnectionState.waiting: ...
+        case ConnectionState.active: ...
+        case ConnectionState.done: ...
+      }
+    }
+  }
 )
 ```
 
@@ -193,8 +203,8 @@ StreamBuilder<T>(
 - `Function`은 함수 클래스이며, 모든 함수 타입의 최상위 객체입니다.
 - `Function` 자체에는 아무런 값을 가지지 않습니다.
 - 함수 타입을 저장하는 프로퍼티는 저장할 함수의 반환 타입, 파라미터 타입과 이름, 제너릭 타입을 선언해야 합니다.
-	- 반환 타입이 void면 타입 표기를 생략할 수 있습니다.
-	- 파라미터의 이름은 생략 가능합니다.
+  - 반환 타입이 void면 타입 표기를 생략할 수 있습니다.
+  - 파라미터의 이름은 생략 가능합니다.
 
 ```
 void foo1() {};
@@ -206,7 +216,7 @@ int Function(int a, int b) f2 = foo2;
 
 - 프로퍼티의 타입을 `Function`만으로 표기하는 경우, 모든 함수를 담을 수 있습니다.
 - 그러나 이 프로퍼티를 통해 함수를 호출할 수 없습니다.
-	- 단, static 타입 값을 다루는 함수는 호출 가능합니다.
+  - 단, static 타입 값을 다루는 함수는 호출 가능합니다.
 
 ```
 Function foo = (int n) => "$n";
@@ -255,10 +265,10 @@ print(foo(1)); // 정상적으로 동작합니다.
 
 ```
 Container(
-	height: 200,
-	width: 200,
-	alignment: Alignment.center,
-	color: Colors.yellow,
+  height: 200,
+  width: 200,
+  alignment: Alignment.center,
+  color: Colors.yellow,
 )
 ```
 
@@ -273,8 +283,8 @@ Container(
 
 ```
 Padding(
-	padding: EdgeInsets.all(16.0),
-	child: Text('Hello World!'),
+  padding: EdgeInsets.all(16.0),
+  child: Text('Hello World!'),
 )
 ```
 
@@ -295,11 +305,11 @@ A.flex = 2, B.flex = 1
 
 ```
 Expanded(
-	flex: 2,
-	child: Container(
-		color: Colors.blue,
-		height: 100,
-	),
+  flex: 2,
+  child: Container(
+    color: Colors.blue,
+    height: 100,
+  ),
  )
 ```
 
@@ -315,9 +325,9 @@ Expanded(
 
 ```
 SizedBox(
-	width: 20,
-	height: 30,
-	child: Text('Sized!'),
+  width: 20,
+  height: 30,
+  child: Text('Sized!'),
 )
 ```
 
@@ -333,12 +343,12 @@ SizedBox(
 
 ```
 FractionallySizedBox(
-	widthFactor: 0.5,
-	heightFactor: 0.5,
-	alignment: FractionalOffset.center,
-	child: child: Container(
-		color: Colors.blue,
-	),
+  widthFactor: 0.5,
+  heightFactor: 0.5,
+  alignment: FractionalOffset.center,
+  child: child: Container(
+    color: Colors.blue,
+  ),
 ),
 ```
 
@@ -352,9 +362,9 @@ FractionallySizedBox(
 
 ```
 Column(
-	children: <Widget>[
-		...
-	],
+  children: <Widget>[
+    ...
+  ],
 )
 ```
 
@@ -368,9 +378,9 @@ Column(
 
 ```
 Row(
-	children: <Widget>[
-		...
-	],
+  children: <Widget>[
+    ...
+  ],
 )
 ```
 
@@ -383,9 +393,9 @@ Row(
 
 ```
 Stack(
-	children: <Widget>[
-		...
-	],
+  children: <Widget>[
+    ...
+  ],
 )
 ```
 
@@ -405,15 +415,15 @@ Stack(
 
 ```
 Stack(
-	children: <Widget>[
-		Positioned(
-			left: 40,
-			top: 30,
-			child: Container(
-				...
-			),
-		),
-	],
+  children: <Widget>[
+    Positioned(
+      left: 40,
+      top: 30,
+      child: Container(
+        ...
+      ),
+    ),
+  ],
 )
 ```
 
@@ -424,7 +434,7 @@ Stack(
 
 ```
 SafeArea(
-	child: Text('Safe!'),
+  child: Text('Safe!'),
 )
 ```
 
@@ -509,13 +519,13 @@ SafeArea(
 
 ```
 Scaffold(
-	backgroundColor: const Color.fromARGB(255, 217, 249, 255),
-	appBar: AppBar(
-		...
-	),
-	body: const Center(
-		child: Text(...)
-	),
+  backgroundColor: const Color.fromARGB(255, 217, 249, 255),
+  appBar: AppBar(
+    ...
+  ),
+  body: const Center(
+    child: Text(...)
+  ),
 )
 ```
 
@@ -532,11 +542,11 @@ Scaffold(
 
 ```
 MaterialApp(
-	debugShowCheckedModeBanner = false,
-	title: 'MyApp',
-	home: Scaffold(
-		...
-	),
+  debugShowCheckedModeBanner = false,
+  title: 'MyApp',
+  home: Scaffold(
+    ...
+  ),
 )
 ```
 
@@ -552,12 +562,12 @@ MaterialApp(
 
 ```
 AppBar(
-	leading: const Icon(Icons.menu),
-	backgroundColor: Colors.blue,
-	title: const Text(
-	    "MyApp",
-		textAlign: TextAlign.start,
-	),
+  leading: const Icon(Icons.menu),
+  backgroundColor: Colors.blue,
+  title: const Text(
+      "MyApp",
+    textAlign: TextAlign.start,
+  ),
 )
 ```
 
@@ -577,23 +587,23 @@ AppBar(
 
 ```
 bottomNavigationBar: BottomNavigationBar(
-	items: const <BottomNavigationBarItem>[
-		BottomNavigationBarItem(
-			icon: Icon(Icons.home),
-			label: 'Home',
-		),
-		BottomNavigationBarItem(
-			icon: Icon(Icons.business),
-			label: 'Business',
-		),
-		BottomNavigationBarItem(
-			icon: Icon(Icons.school),
-			label: 'School',
-		),
-	],
-	currentIndex: _selectedIndex,
-	selectedItemColor: Color.fromARGB(255, 79, 205, 255),
-	onTap: _onItemTapped,
+  items: const <BottomNavigationBarItem>[
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: 'Home',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.business),
+      label: 'Business',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.school),
+      label: 'School',
+    ),
+  ],
+  currentIndex: _selectedIndex,
+  selectedItemColor: Color.fromARGB(255, 79, 205, 255),
+  onTap: _onItemTapped,
 )
 ```
 
@@ -607,9 +617,9 @@ bottomNavigationBar: BottomNavigationBar(
 
 ```
 Drawer(
-	child: ListView(
-		...
-	),
+  child: ListView(
+    ...
+  ),
 )
 ```
 
@@ -624,20 +634,20 @@ Drawer(
 
 ```
 AlertDialog(
-	title: const Text("Alert Dialog Box"),
-	content: const Text("This is Alert Dialog Box"),
-	actions: <Widget>[
-		TextButton(
-			onPressed: () {
-				Navigator.of(ctx).pop();
-			},
+  title: const Text("Alert Dialog Box"),
+  content: const Text("This is Alert Dialog Box"),
+  actions: <Widget>[
+    TextButton(
+      onPressed: () {
+        Navigator.of(ctx).pop();
+      },
             child: Container(
                 color: Color.fromARGB(255, 204, 253, 255),
                 padding: const EdgeInsets.all(14),
                 child: const Text("ok"),
-			),
-		),
-	],
+      ),
+    ),
+  ],
 )
 ```
 
@@ -651,17 +661,17 @@ AlertDialog(
 
 ```
 SimpleDialog(
-	title:const Text('Simple Dialog Box'),
-	children: <Widget>[
-		SimpleDialogOption(
-			onPressed: () { },
-			child:const Text('Option 1'),
-		),
-		SimpleDialogOption(
-			onPressed: () { },
-			child: const Text('Option 2'),
-		),
-	],
+  title:const Text('Simple Dialog Box'),
+  children: <Widget>[
+    SimpleDialogOption(
+      onPressed: () { },
+      child:const Text('Option 1'),
+    ),
+    SimpleDialogOption(
+      onPressed: () { },
+      child: const Text('Option 2'),
+    ),
+  ],
 )
 ```
 
@@ -675,14 +685,14 @@ SimpleDialog(
 
 ```
 showDialog(
-	context: context,
-	builder: (BuildContext context) {
-		return Expanded(
-	        child: AlertDialog(
-	            ...
-			),
-		);
-	},
+  context: context,
+  builder: (BuildContext context) {
+    return Expanded(
+          child: AlertDialog(
+              ...
+      ),
+    );
+  },
 )
 ```
 
@@ -697,17 +707,17 @@ showDialog(
 
 ```
 Icon(
-	Icons.favorite,
-	color: Colors.yellow,
-	size: 20.0,
+  Icons.favorite,
+  color: Colors.yellow,
+  size: 20.0,
 )
 ```
 
 ### CircularProgressIndicator
 - `CircularProgressIndicator`는 원형 모양의 진행도를 표시하는 위젯입니다.
 - 진행도 위젯은 2가지 타입을 가지고 있습니다.
-	- `indeterminate`: 진행도가 특정 값을 가지지 않습니다. (진행 상태만 파악할 수 있습니다.)
-	- `determinate`: 진행도가 특정 값을 가집니다. 진행도 값 범위는 \[0.0, 1.0\]입니다.
+  - `indeterminate`: 진행도가 특정 값을 가지지 않습니다. (진행 상태만 파악할 수 있습니다.)
+  - `determinate`: 진행도가 특정 값을 가집니다. 진행도 값 범위는 \[0.0, 1.0\]입니다.
 
 |파라미터|타입|의미|
 |---|---|---|
@@ -717,9 +727,9 @@ Icon(
 
 ```
 CircularProgressIndicator(
-	backgroundColor: Colors.blue,
-	strokeWidth: 10,
-	value: null,
+  backgroundColor: Colors.blue,
+  strokeWidth: 10,
+  value: null,
 )
 ```
 
@@ -729,9 +739,9 @@ CircularProgressIndicator(
 
 ```
 LinearProgressIndicator(
-	backgroundColor: Colors.green,
-	strokeWidth: 10,
-	value: null,
+  backgroundColor: Colors.green,
+  strokeWidth: 10,
+  value: null,
 )
 ```
 
@@ -745,20 +755,20 @@ LinearProgressIndicator(
 
 ```
 DefaultTabController(
-	length: 5,
-	child: Scaffold(
-		appBar: AppBar(
-			bottom: const TabBar(
-				tabs: [
-					Tab(icon: Icon(Icons.music_note)),
-					Tab(icon: Icon(Icons.music_video)),
-					Tab(icon: Icon(Icons.camera_alt)),
-					Tab(icon: Icon(Icons.grade)),
-					Tab(icon: Icon(Icons.email)),
-				],
-			),
-		),
-	),
+  length: 5,
+  child: Scaffold(
+    appBar: AppBar(
+      bottom: const TabBar(
+        tabs: [
+          Tab(icon: Icon(Icons.music_note)),
+          Tab(icon: Icon(Icons.music_video)),
+          Tab(icon: Icon(Icons.camera_alt)),
+          Tab(icon: Icon(Icons.grade)),
+          Tab(icon: Icon(Icons.email)),
+        ],
+      ),
+    ),
+  ),
 )
 ```
 
@@ -774,7 +784,7 @@ DefaultTabController(
 - `ListView`는 스크롤 가능한 리스트를 표시하는 위젯입니다.
 - 일반적으로 `ListView`의 `child` 위젯은 스크린에 표시될 때만 오브젝트가 존재합니다. 즉, `ListView` 아이템이 스크롤되어 스크린에 표시되면 해당 아이템의 오브젝트가 생성되고, 스크린에서 사라지면 해당 오브젝트가 소멸됩니다.
 - `ListView`의 기본 생성자는 사용 가능한 모든 아이템을 한꺼번에 빌드를 수행합니다. 리스트의 아이템 개수가 적다면 기본 생성자가 적합합니다.
-	- `children` 파라미터를 통해 모든 아이템을 나열합니다.
+  - `children` 파라미터를 통해 모든 아이템을 나열합니다.
 
 |파라미터|타입|의미|
 |---|---|---|
@@ -784,21 +794,21 @@ DefaultTabController(
 
 ```
 ListView(
-	scrollDirection: Axis.horizontal,
-	padding: const EdgeInsets.all(4),
-	children: <Widget>[
-		Container(
-			...
-		),
-		Container(
-			...
-		),
-	],
+  scrollDirection: Axis.horizontal,
+  padding: const EdgeInsets.all(4),
+  children: <Widget>[
+    Container(
+      ...
+    ),
+    Container(
+      ...
+    ),
+  ],
 )
 ```
 
 - `ListView.builder` 생성자는 실제로 스크린에 표시되는 아이템만 빌드합니다. 리스트 아이템 개수가 많다면 `builder` 생성자가 적합합니다.
-	- `itemBuilder` 파라미터를 통해 아이템 틀을 작성합니다. `itemBuilder`는 함수를 값으로 하며, 이 함수는 `BuildContext`와 현재 아이템의 인덱스를 의미하는 `int` 파라미터를 갖습니다.
+  - `itemBuilder` 파라미터를 통해 아이템 틀을 작성합니다. `itemBuilder`는 함수를 값으로 하며, 이 함수는 `BuildContext`와 현재 아이템의 인덱스를 의미하는 `int` 파라미터를 갖습니다.
 
 |파라미터|타입|의미|
 |---|---|---|
@@ -808,13 +818,13 @@ ListView(
 
 ```
 ListView.builder(
-	padding: const EdgeInsets.all(8),
-	itemCount: 10,
-	itemBuilder: (BuildContext context, int index) {
-		return Container(
-			...
-		);
-	}
+  padding: const EdgeInsets.all(8),
+  itemCount: 10,
+  itemBuilder: (BuildContext context, int index) {
+    return Container(
+      ...
+    );
+  }
 )
 ```
 
@@ -833,19 +843,19 @@ ListView.builder(
 
 ```
 GridView.count(
-	primary: false,
-	padding: const EdgeInsets.all(20),
-	crossAxisSpacing: 10,
-	mainAxisSpacing: 10,
-	crossAxisCount: 2,
-	children: <Widget>[
-		Container(
-			...
-		),
-		Container(
- 			...
-		),
-	],
+  primary: false,
+  padding: const EdgeInsets.all(20),
+  crossAxisSpacing: 10,
+  mainAxisSpacing: 10,
+  crossAxisCount: 2,
+  children: <Widget>[
+    Container(
+      ...
+    ),
+    Container(
+       ...
+    ),
+  ],
 )
 ```
 
@@ -859,11 +869,11 @@ GridView.count(
 
 ```
 ClipRect(
-	child: Container(
-		height: 200,
-		width: 200,
-		color: Colors.yellow,
-	),
+  child: Container(
+    height: 200,
+    width: 200,
+    color: Colors.yellow,
+  ),
 )
 ```
 
@@ -877,12 +887,12 @@ ClipRect(
 
 ```
 ClipRRect(
-	child: Container(
-		height: 200,
-		width: 200,
-		color: Colors.yellow,
-	),
-	borderRadius: BorderRadius.circular(30.0),
+  child: Container(
+    height: 200,
+    width: 200,
+    color: Colors.yellow,
+  ),
+  borderRadius: BorderRadius.circular(30.0),
 )
 ```
 
@@ -897,8 +907,8 @@ ClipRRect(
 
 ```
 Opacity(
-	child: FlutterLogo(size: 150.0),
-	opacity: 0.5,
+  child: FlutterLogo(size: 150.0),
+  opacity: 0.5,
 )
 ```
 
@@ -922,8 +932,8 @@ Text('Hello World!')
 
 ```
 RichText(
-	text: const TextSpan(text: 'Hello'),
-	selectionColor: const Colors.blue,
+  text: const TextSpan(text: 'Hello'),
+  selectionColor: const Colors.blue,
 )
 ```
 
@@ -940,8 +950,8 @@ RichText(
 
 ```
 AnimationController(
-	duration: const Duration(seconds: 3),
-	vsync: this,
+  duration: const Duration(seconds: 3),
+  vsync: this,
 )
 ```
 
@@ -958,8 +968,8 @@ AnimationController(
 
 ```
 CurvedAnimation(
-	parent: _controller,
-	curve: Curves.elasticIn,
+  parent: _controller,
+  curve: Curves.elasticIn,
 )
 ```
 
@@ -973,15 +983,15 @@ CurvedAnimation(
 
 ```
 SlideTransition(
-	position: Tween<Offset>(
-		begin: Offset.zero,
-		end: const Offset(1.5, 0.0),
-	).animate(CurvedAnimation(
-		...
-	)),
-	child: const Padding(
-		...
-	),
+  position: Tween<Offset>(
+    begin: Offset.zero,
+    end: const Offset(1.5, 0.0),
+  ).animate(CurvedAnimation(
+    ...
+  )),
+  child: const Padding(
+    ...
+  ),
 )
 ```
 
@@ -995,15 +1005,15 @@ SlideTransition(
 
 ```
 RotationTransition(
-	turns: Tween(
-		begin: 0.0,
-		end: 0.15,
-	).animate(CurvedAnimation(
-		...
-	)),
-	child: const Padding(
-		...
-	),
+  turns: Tween(
+    begin: 0.0,
+    end: 0.15,
+  ).animate(CurvedAnimation(
+    ...
+  )),
+  child: const Padding(
+    ...
+  ),
 )
 ```
 
@@ -1016,7 +1026,7 @@ RotationTransition(
 
 ```
 FlutterLogo(
-	size: 150.0
+  size: 150.0
 )
 ```
 
@@ -1031,10 +1041,10 @@ FlutterLogo(
 
 ```
 Material(
-	color: Colors.yellow,
-	child: InkWell(
-		...
-	),
+  color: Colors.yellow,
+  child: InkWell(
+    ...
+  ),
 )
 ```
 
@@ -1051,13 +1061,13 @@ Material(
 |curve|Curve|커브 오브젝트|
 ```
 AnimatedContainer(
-	height: 50,
-	width: 50,
-	duration: const Duration(seconds: 2),
-	curve: Curves.easeIn,
-	child: Material(
-		...
-	),
+  height: 50,
+  width: 50,
+  duration: const Duration(seconds: 2),
+  curve: Curves.easeIn,
+  child: Material(
+    ...
+  ),
 )
 ```
 
@@ -1073,8 +1083,8 @@ AnimatedContainer(
 
 ```
 Tween<Offset>(
-	begin: const Offset(0.0, 0.0),
-	end: const Offset(50.0, 100.0),
+  begin: const Offset(0.0, 0.0),
+  end: const Offset(50.0, 100.0),
 )
 ```
 
@@ -1091,11 +1101,11 @@ Offset(double dx, double dy)
 
 ```
 InkWell(
-	onTap: () {
-		setState(() {
-			sideLength == 50 ? sideLength = 100 : sideLength = 50;
-		});
-	},
+  onTap: () {
+    setState(() {
+      sideLength == 50 ? sideLength = 100 : sideLength = 50;
+    });
+  },
 )
 ```
 
@@ -1111,8 +1121,8 @@ InkWell(
 
 ```
 ThemeData(
-	brightness: Brightness.light,
-	primaryColor: Colors.green,
+  brightness: Brightness.light,
+  primaryColor: Colors.green,
 )
 ```
 
@@ -1127,12 +1137,12 @@ ThemeData(
 
 ```
 Theme(
-	data: Theme.of(context).copyWith(
-		colorScheme: Theme.of(context).colorScheme,
-	),
-	child: Container(
-		...
-	),
+  data: Theme.of(context).copyWith(
+    colorScheme: Theme.of(context).colorScheme,
+  ),
+  child: Container(
+    ...
+  ),
 )
 ```
 
@@ -1148,11 +1158,11 @@ Theme(
 
 ```
 TextField(
-	controller: _controller,
-	onSubmitted: (String value) async {
-		// value = 입력된 텍스트 값
-		...
-	},
+  controller: _controller,
+  onSubmitted: (String value) async {
+    // value = 입력된 텍스트 값
+    ...
+  },
 )
 ```
 
@@ -1168,16 +1178,20 @@ TextField(
 
 ```
 IconButton(
-	iconSize: 32,
-	icon: const Icon(Icons.favorite),
-	onPressed: () {
-		...
-	},
+  iconSize: 32,
+  icon: const Icon(Icons.favorite),
+  onPressed: () {
+    ...
+  },
 )
 ```
 
 ### Slider
 - `Slider`는 슬라이더 입력을 제공하는 위젯입니다.
+- `onChanged` 프로퍼티는 콜백을 값으로 합니다.
+	- 이 콜백은 드래그를 통해 슬라이더 값이 변경되면 호출되며, 변경된 슬라이더 값을 인자로 합니다.
+- UI에 표시되는 슬라이더 현재 값은 `value` 프로퍼티로 표현됩니다.
+- 만약 드래그를 통해 실시간으로 UI 슬라이더 값을 업데이트하려면 `onChanged` 콜백에서 `value`을 조정하는 `State.setState`을 호출하면 됩니다. (`StatefulWidget` 필요)
 
 |파라미터|타입|의미|
 |---|---|---|
@@ -1192,15 +1206,15 @@ IconButton(
 
 ```
 Slider(
-	value: _currentSliderValue,
-	max: 100,
-	divisions: 5,
-	label: _currentSliderValue.round().toString(),
-	onChanged: (double value) {
-		setState(() {
-			_currentSliderValue = value;
-		});
-	},
+  value: _sliderValue,
+  max: 100,
+  divisions: 5,
+  label: _sliderValue.round().toString(),
+  onChanged: (double value) {
+    setState(() {
+      _sliderValue = value;
+    });
+  },
 ),
 ```
 
@@ -1214,10 +1228,10 @@ Slider(
 
 ```
 Form(
-	key: _formKey,
-	child: Column(
-		...
-	),
+  key: _formKey,
+  child: Column(
+    ...
+  ),
 )
 ```
 
@@ -1229,8 +1243,8 @@ Form(
 ### TextFormField
 - `TextFormField`는 `TextField`를 포함한 `FormField` 위젯입니다.
 - `validator` 콜백은 유효성 검사할 때 호출되는 함수입니다.
-	- 이 콜백의 인자는 입력된 텍스트를 값으로 합니다.
-	- 오류가 발생하면, 오류 메시지를 반환합니다. 오류가 없다면 null을 반환합니다.
+  - 이 콜백의 인자는 입력된 텍스트를 값으로 합니다.
+  - 오류가 발생하면, 오류 메시지를 반환합니다. 오류가 없다면 null을 반환합니다.
 
 |파라미터|타입|의미|
 |---|---|---|
@@ -1239,15 +1253,15 @@ Form(
 
 ```
 TextFormField(
-	decoration: const InputDecoration(
-		hintText: 'Enter your ID',
-	),
-	validator: (String? value) {
-		if (value == null || value.isEmpty) {
-			return 'empty text';
-		}
-		return null;
-	},
+  decoration: const InputDecoration(
+    hintText: 'Enter your ID',
+  ),
+  validator: (String? value) {
+    if (value == null || value.isEmpty) {
+      return 'empty text';
+    }
+    return null;
+  },
 )
 ```
 
@@ -1262,14 +1276,14 @@ TextFormField(
 
 ```
 GestureDetector(
-	onTap: () {
-		setState(() {
-			_lightIsOn = !_lightIsOn;
-		});
-	},
-	child: Container(
-		child: Text(_lightIsOn ? 'TURN LIGHT OFF' : 'TURN LIGHT ON'),
-	),
+  onTap: () {
+    setState(() {
+      _lightIsOn = !_lightIsOn;
+    });
+  },
+  child: Container(
+    child: Text(_lightIsOn ? 'TURN LIGHT OFF' : 'TURN LIGHT ON'),
+  ),
 )
 ```
 - `GestureDetector`에서 제스처 콜백 종류는 다음이 있습니다.
@@ -1326,8 +1340,8 @@ Row                    Row
 ```
 
 - 불일치한 Element는 비활성되고 Element 트리에서 삭제됩니다. 이후, Flutter는 위젯 트리의 알맞은 레벨로 이동하여 적합한 위젯이 있는지를  탐색합니다.
-	- 알맞은 위젯을 찾으면, 해당 위젯과 Element를 대응하고 Element 트리를 업데이트합니다.
-	- 알맞은 위젯을 찾지 못하면, 해당 위젯에 대응하는 새로운 Element를 생성합니다.
+  - 알맞은 위젯을 찾으면, 해당 위젯과 Element를 대응하고 Element 트리를 업데이트합니다.
+  - 알맞은 위젯을 찾지 못하면, 해당 위젯에 대응하는 새로운 Element를 생성합니다.
 - 아래 예시에는 적합한 위젯이 존재하므로, 각 Element가 알맞은 위젯과 매칭됩니다. (만약 key가 없다면 타입만 비교될 것이며, Element의 순서가 바뀌지 않을 것입니다.)
 ```
 Widget Tree            Element Tree
@@ -1384,8 +1398,8 @@ Row                     Row
 ### GlobalKey
 - `GlobalKey`는 앱 전체에서 고유한 Key를 가지는 Key 클래스입니다.
 - `GlobalKey`은 주로 다음 용도로 사용됩니다.
-	- 정보를 유지하며 위젯의 부모를 변경할 수 있습니다.
-	- 어떤 위젯의 정보를 다른 위젯 트리에서 접근할 수 있습니다.
+  - 정보를 유지하며 위젯의 부모를 변경할 수 있습니다.
+  - 어떤 위젯의 정보를 다른 위젯 트리에서 접근할 수 있습니다.
 - 일반적으로 `GlobalKey`를 갖는 Element를 매칭할 때는 `LocalKey`에 비해 비용이 비쌉니다.
 
 ### LocalKey
@@ -1422,7 +1436,7 @@ Navigator.push(context, MaterialPageRoute<void>(
                         Navigator.pop(context);
                     },
                 ),
-		    ),
+        ),
         );
     },
 ));
@@ -1466,14 +1480,14 @@ void main() {
 
 ```
 bool? value = await Navigator.push(context, MaterialPageRoute<bool>(
-	builder: (BuildContext context) {
-		return Center(
-			child: GestureDetector(
-				child: const Text('OK'),
-				onTap: () { Navigator.pop(context, true); }
-			),
-		);
-	}
+  builder: (BuildContext context) {
+    return Center(
+      child: GestureDetector(
+        child: const Text('OK'),
+        onTap: () { Navigator.pop(context, true); }
+      ),
+    );
+  }
 ));
 ```
 
@@ -1486,95 +1500,122 @@ bool? value = await Navigator.push(context, MaterialPageRoute<bool>(
 
 ```
 class StatusRoute {
-	StatusRoute({ required this.name, required this.level });
-	final String name;
-	final String level;
+  StatusRoute({ required this.name, required this.level });
+  final String name;
+  final String level;
 }
 
 void navigate() {
-	Navigator.pushNamed(
-		context,
-		'/status',
-		arguments: StatusRoute(name: 'Steve', level: 5),
-	);
+  Navigator.pushNamed(
+    context,
+    '/status',
+    arguments: StatusRoute(name: 'Steve', level: 5),
+  );
 }
 ```
 
 ## Example
-### Stateless Widget
+### StatelessWidget
 - 'Stateless Widget'를 출력합니다.
+
 ```
 import 'package:flutter/material.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-	const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
   
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-			debugShowCheckedModeBanner: false,
-			home: Scaffold(
-				backgroundColor: const Color.fromARGB(255, 217, 249, 255),
-				appBar: AppBar(
-					leading: const Icon(Icons.menu),
-					backgroundColor: Colors.blue,
-					title: const Text(
-					    "MyApp",
-						textAlign: TextAlign.start,
-					),
-				),
-				body: const Center(
-				child: Text(
-					"Stateless Widget",
-					style: TextStyle(color: Colors.black, fontSize: 30),
-					),
-				),
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 217, 249, 255),
+        appBar: AppBar(
+          leading: const Icon(Icons.menu),
+          backgroundColor: Colors.blue,
+          title: const Text(
+              "MyApp",
+            textAlign: TextAlign.start,
+          ),
+        ),
+        body: const Center(
+        child: Text(
+          "Stateless Widget",
+          style: TextStyle(color: Colors.black, fontSize: 30),
+          ),
+        ),
+      ),
+    );
+  }
 }
 ```
 
 ![](images/Flutter-Example-StatelessWidget.png)
 
-### Stateful Widget
-- 'Stateful Widget'를 출력합니다.
+### StatefulWidget
+- 버튼을 누르면 가운데 수가 1씩 증가합니다.
+
 ```
 import 'package:flutter/material.dart';
-void main() => runApp(const MyApp());
 
-class MyApp extends StatefulWidget {
-	const MyApp({Key? key}) : super(key: key);
-
-	@override
-	_MyAppState createState() => _MyAppState();
+void main() {
+  runApp(const MyApp());
 }
 
-class _MyAppState extends State<MyApp> {
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-			debugShowCheckedModeBanner: false,
-			home: Scaffold(
-				backgroundColor: const Color.fromARGB(255, 217, 249, 255),
-				appBar: AppBar(
-					leading: const Icon(Icons.menu),
-					backgroundColor: Colors.blue,
-					title: const Text(
-					    "MyApp",
-						textAlign: TextAlign.start,
-					),
-				),
-				body: const Center(
-				child: Text(
-					"Stateful Widget",
-					style: TextStyle(color: Colors.black, fontSize: 30),
-					),
-				),
-			),
-		);
-	}
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: const StatefulWidgetExample(title: 'Stateful Example'),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class StatefulWidgetExample extends StatefulWidget {
+  const StatefulWidgetExample({super.key, required this.title});
+  final String title;
+
+  @override
+  State<StatefulWidgetExample> createState() => _StatefulWidgetExampleState();
+}
+
+class _StatefulWidgetExampleState extends State<StatefulWidgetExample> {
+  int _counter = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'Button Counting',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            _counter++;
+          });
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
 }
 ```
 
@@ -1588,23 +1629,23 @@ import 'package:flutter/material.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-	const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
   
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-			home: Scaffold(
-				appBar: AppBar(
-					leading: const Icon(Icons.menu),
-					backgroundColor: Colors.blue,
-					title: const Text(
-					    "MyApp",
-						textAlign: TextAlign.start,
-					),
-				),
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          leading: const Icon(Icons.menu),
+          backgroundColor: Colors.blue,
+          title: const Text(
+              "MyApp",
+            textAlign: TextAlign.start,
+          ),
+        ),
+      ),
+    );
+  }
 }
 ```
 
@@ -1619,53 +1660,53 @@ import 'package:flutter/material.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
-	const MyApp({super.key});
+  const MyApp({super.key});
 
-	@override
-	State<MyApp> createState() => _MyAppState();
+  @override
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-	int _selectedIndex = 0;
-	static const List<Widget> contents = <Widget>[
-		Text('0. Home'),
-		Text('1. Business'),
-		Text('2. School'),
-	];
+  int _selectedIndex = 0;
+  static const List<Widget> contents = <Widget>[
+    Text('0. Home'),
+    Text('1. Business'),
+    Text('2. School'),
+  ];
 
-	void _onItemTapped(int index) {
-		setState(() {
-			_selectedIndex = index;
-		});
-	}
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-			home: Scaffold(
-				body: Center(child: contents[_selectedIndex]),
-				bottomNavigationBar: BottomNavigationBar(
-					items: const <BottomNavigationBarItem>[
-						BottomNavigationBarItem(
-							icon: Icon(Icons.home),
-							label: 'Home',
-						),
-						BottomNavigationBarItem(
-							icon: Icon(Icons.business),
-							label: 'Business',
-						),
-						BottomNavigationBarItem(
-							icon: Icon(Icons.school),
-							label: 'School',
-						),
-					],
-					currentIndex: _selectedIndex,
-					selectedItemColor: Color.fromARGB(255, 79, 205, 255),
-					onTap: _onItemTapped,
-				),
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(child: contents[_selectedIndex]),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.business),
+              label: 'Business',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              label: 'School',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Color.fromARGB(255, 79, 205, 255),
+          onTap: _onItemTapped,
+        ),
+      ),
+    );
+  }
 }
 ```
 
@@ -1678,45 +1719,45 @@ import 'package:flutter/material.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-	const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
  
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-			home: Scaffold(
-				appBar: AppBar(
-					backgroundColor: Colors.green,
-				),
-				drawer: Drawer(
-					child: ListView(
-						children: [
-							const DrawerHeader(
-								decoration: BoxDecoration(
-									color: Colors.green,
-								),
-								child: Text(
-									"Drawer",
-									style: TextStyle(fontSize: 30.0, color: Colors.white),
-								),
-							),
-							ListTile(
-								leading: const Icon(Icons.person),
-								title: const Text('Profile'),
-							),
-							ListTile(
-								leading: const Icon(Icons.book),
-								title: const Text('Information'),
-							),
-							ListTile(
-								leading: const Icon(Icons.logout),
-								title: const Text('LogOut'),
-							),
-						],
-					),
-				),
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.green,
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                ),
+                child: Text(
+                  "Drawer",
+                  style: TextStyle(fontSize: 30.0, color: Colors.white),
+                ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.person),
+                title: const Text('Profile'),
+              ),
+              ListTile(
+                leading: const Icon(Icons.book),
+                title: const Text('Information'),
+              ),
+              ListTile(
+                leading: const Icon(Icons.logout),
+                title: const Text('LogOut'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 ```
 
@@ -1730,57 +1771,57 @@ import 'package:flutter/material.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-	const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
  
-	@override
-	Widget build(BuildContext context) {
-		return const MaterialApp(
-			home: HomePage(),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: HomePage(),
+    );
+  }
 }
  
 class HomePage extends StatefulWidget {
-	const HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
  
-	@override
-	_HomePageState createState() => _HomePageState();
+  @override
+  _HomePageState createState() => _HomePageState();
 }
  
 class _HomePageState extends State<HomePage> {
-	@override
-	Widget build(BuildContext context) {
-		return Scaffold(
-			body: Container(
-				child: Center(
-					child: ElevatedButton(
-						onPressed: () {
-							showDialog(
-								context: context,
-								builder: (ctx) => AlertDialog(
-									title: const Text("Alert Dialog Box"),
-									content: const Text("This is Alert Dialog Box"),
-							        actions: <Widget>[
-						                TextButton(
-							                onPressed: () {
-						                        Navigator.of(ctx).pop();
-						                    },
-						                    child: Container(
-						                        color: Color.fromARGB(255, 204, 253, 255),
-						                        padding: const EdgeInsets.all(14),
-						                        child: const Text("ok"),
-											),
-										),
-									],
-								),
-							);
-						},
-						child: const Text("Show Dialog"),
-					),
-				),
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        child: Center(
+          child: ElevatedButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text("Alert Dialog Box"),
+                  content: const Text("This is Alert Dialog Box"),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                      child: Container(
+                        color: Color.fromARGB(255, 204, 253, 255),
+                        padding: const EdgeInsets.all(14),
+                        child: const Text("ok"),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+            child: const Text("Show Dialog"),
+          ),
+        ),
+      ),
+    );
+  }
 }
 ```
 
@@ -1794,41 +1835,41 @@ import 'package:flutter/material.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
-	const MyApp({super.key});
-	
-	@override
-	State<MyApp> createState() => _MyApp ();
+  const MyApp({super.key});
+  
+  @override
+  State<MyApp> createState() => _MyApp ();
 }
 
 class _MyApp extends State<MyApp> with SingleTickerProviderStateMixin {
-	late final AnimationController _controller = AnimationController(
-		duration: const Duration(seconds: 3),
-		vsync: this,
-	)..repeat(reverse: true);
-	late final Animation<Offset> _offsetAnimation = Tween<Offset>(
-		begin: Offset.zero,
-		end: const Offset(1.5, 0.0),
-	).animate(CurvedAnimation(
-		parent: _controller,
-		curve: Curves.elasticIn,
-	));
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(seconds: 3),
+    vsync: this,
+  )..repeat(reverse: true);
+  late final Animation<Offset> _offsetAnimation = Tween<Offset>(
+    begin: Offset.zero,
+    end: const Offset(1.5, 0.0),
+  ).animate(CurvedAnimation(
+    parent: _controller,
+    curve: Curves.elasticIn,
+  ));
 
-	@override
-	void dispose() {
-		_controller.dispose();
-		super.dispose();
-	}
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
-	@override
-	Widget build(BuildContext context) {
-		return SlideTransition(
-			position: _offsetAnimation,
-			child: const Padding(
-				padding: EdgeInsets.all(8.0),
-				child: FlutterLogo(size: 150.0),
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return SlideTransition(
+      position: _offsetAnimation,
+      child: const Padding(
+        padding: EdgeInsets.all(8.0),
+        child: FlutterLogo(size: 150.0),
+      ),
+    );
+  }
 }
 ```
 
@@ -1843,53 +1884,104 @@ import 'package:flutter/material.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-	const MyApp({super.key});
+  const MyApp({super.key});
 
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-			home: Scaffold(
-				body: const Center(
-					child: InkWellExample(),
-				),
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: const Center(
+          child: InkWellExample(),
+        ),
+      ),
+    );
+  }
 }
 
 class InkWellExample extends StatefulWidget {
-	const InkWellExample({super.key});
+  const InkWellExample({super.key});
 
-	@override
-	State<InkWellExample> createState() => _InkWellExampleState();
+  @override
+  State<InkWellExample> createState() => _InkWellExampleState();
 }
 
 class _InkWellExampleState extends State<InkWellExample> {
-	double length = 50;
+  double length = 50;
 
-	@override
-	Widget build(BuildContext context) {
-		return AnimatedContainer(
-			height: length,
-			width: length,
-			duration: const Duration(seconds: 2),
-			curve: Curves.easeIn,
-			child: Material(
-				color: Colors.yellow,
-				child: InkWell(
-					onTap: () {
-						setState(() {
-							length == 50 ? length = 100 : length = 50;
-						});
-					},
-				),
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      height: length,
+      width: length,
+      duration: const Duration(seconds: 2),
+      curve: Curves.easeIn,
+      child: Material(
+        color: Colors.yellow,
+        child: InkWell(
+          onTap: () {
+            setState(() {
+              length == 50 ? length = 100 : length = 50;
+            });
+          },
+        ),
+      ),
+    );
+  }
 }
 ```
 
 ![](images/Flutter-Example-InkWell.png)
+
+### Slider
+- 슬라이드바를 조절할 수 있습니다.
+
+```
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: SliderExample(),
+        ),
+      ),
+    );
+  }
+}
+
+class SliderExample extends StatefulWidget {
+  const SliderExample({super.key});
+
+  @override
+  State<SliderExample> createState() => _SliderExampleState();
+}
+
+class _SliderExampleState extends State<SliderExample> {
+  double sliderValue = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Slider(
+      value: sliderValue,
+      max: 100,
+      divisions: 5,
+      label: sliderValue.round().toString(),
+      onChanged: (double value) {
+        setState(() {
+          sliderValue = value;
+        });
+      },
+    );
+  }
+}
+```
+
+![](images/Flutter-Example-Slider.png)
 
 ### Form
 - `TextFormField`를 포함한 `Form`입니다.
@@ -1902,62 +1994,62 @@ import 'package:flutter/material.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-	const MyApp({super.key});
+  const MyApp({super.key});
 
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-			home: Scaffold(
-				appBar: AppBar(title: const Text('Form App')),
-				body: const FormExample(),
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Form App')),
+        body: const FormExample(),
+      ),
+    );
+  }
 }
 
 class FormExample extends StatefulWidget {
-	const FormExample({super.key});
+  const FormExample({super.key});
 
-	@override
-	State<FormExample> createState() => _FormExampleState();
+  @override
+  State<FormExample> createState() => _FormExampleState();
 }
 
 class _FormExampleState extends State<FormExample> {
-	final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-	@override
-	Widget build(BuildContext context) {
-		return Form(
- 			key: _formKey,
-			child: Column(
-				crossAxisAlignment: CrossAxisAlignment.start,
- 				children: <Widget>[
-					TextFormField(
- 						decoration: const InputDecoration(
- 							hintText: 'Enter your ID',
-						),
-						validator: (String? value) {
-							if (value == null || value.isEmpty) {
-								return 'Please enter some text';
-							}
- 							return null;
-						},
-					),
-					Padding(
-            					padding: const EdgeInsets.symmetric(vertical: 16.0),
-            					child: ElevatedButton(
-              						onPressed: () {
-                						if (_formKey.currentState!.validate()) {
-	 								// submit 완료
-								}
-	 						},
-							child: const Text('Submit'),
-						),
-					),
-				],
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+       key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+         children: <Widget>[
+          TextFormField(
+             decoration: const InputDecoration(
+               hintText: 'Enter your ID',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+               return null;
+            },
+          ),
+          Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                   // submit 완료
+                }
+               },
+              child: const Text('Submit'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 ```
 
@@ -1972,59 +2064,59 @@ import 'package:flutter/material.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-	const MyApp({super.key});
+  const MyApp({super.key});
 
-	@override
-	Widget build(BuildContext context) {
-		return const MaterialApp(
-			home: GestureDetectorExample(),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: GestureDetectorExample(),
+    );
+  }
 }
 
 class GestureDetectorExample extends StatefulWidget {
-	const GestureDetectorExample({super.key});
+  const GestureDetectorExample({super.key});
 
-	@override
-	State<GestureDetectorExample> createState() => _GestureDetectorExampleState();
+  @override
+  State<GestureDetectorExample> createState() => _GestureDetectorExampleState();
 }
 
 class _GestureDetectorExampleState extends State<GestureDetectorExample> {
-	bool _lightIsOn = false;
+  bool _lightIsOn = false;
 
-	@override
-	Widget build(BuildContext context) {
-		return Scaffold(
-			body: Container(
-				alignment: FractionalOffset.center,
-				child: Column(
-					mainAxisAlignment: MainAxisAlignment.center,
-					children: <Widget>[
-						Padding(
-							padding: const EdgeInsets.all(8.0),
-							child: Icon(
-								Icons.lightbulb_outline,
-								color: _lightIsOn ? Colors.yellow.shade600 : Colors.black,
-								size: 60,
-							),
-						),
-						GestureDetector(
-							onTap: () {
-								setState(() {
-									_lightIsOn = !_lightIsOn;
-								});
-							},
-							child: Container(
-								color: Colors.yellow.shade600,
-								padding: const EdgeInsets.all(8),
-								child: Text(_lightIsOn ? 'TURN LIGHT OFF' : 'TURN LIGHT ON'),
-							),
-						),
-					],
-				),
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        alignment: FractionalOffset.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.lightbulb_outline,
+                color: _lightIsOn ? Colors.yellow.shade600 : Colors.black,
+                size: 60,
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  _lightIsOn = !_lightIsOn;
+                });
+              },
+              child: Container(
+                color: Colors.yellow.shade600,
+                padding: const EdgeInsets.all(8),
+                child: Text(_lightIsOn ? 'TURN LIGHT OFF' : 'TURN LIGHT ON'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 ```
 
@@ -2038,83 +2130,83 @@ class _GestureDetectorExampleState extends State<GestureDetectorExample> {
 import 'package:flutter/material.dart';
 
 void main() {
-	runApp(MaterialApp(
-		initialRoute: '/',
-		routes: {
-			'/': (context) => const HomeRoute(),
-			'/second': (context) => const SecondRoute(),
-			'/third': (context) => const ThirdRoute(),
-		},
-	));
+  runApp(MaterialApp(
+    initialRoute: '/',
+    routes: {
+      '/': (context) => const HomeRoute(),
+      '/second': (context) => const SecondRoute(),
+      '/third': (context) => const ThirdRoute(),
+    },
+  ));
 }
 
 class HomeRoute extends StatelessWidget {
-	const HomeRoute({Key? key}) : super(key: key);
+  const HomeRoute({Key? key}) : super(key: key);
 
-	@override
-	Widget build(BuildContext context) {
-		return Scaffold(
-			appBar: AppBar(
-				title: const Text('Home'),
-				backgroundColor: Colors.yellow,
-			),
-			body: Center(
-				child: Column(
-					mainAxisAlignment: MainAxisAlignment.center,
-					children: <Widget>[
-						ElevatedButton(
-							child: const Text('Second!'),
-							onPressed: () {
-								Navigator.pushNamed(context, '/second');
-							},
-						),
-						ElevatedButton(
-							child: const Text('Third!'),
-							onPressed: () {
-								Navigator.pushNamed(context, '/third');
-							},
-						),
-					],
-				),
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home'),
+        backgroundColor: Colors.yellow,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              child: const Text('Second!'),
+              onPressed: () {
+                Navigator.pushNamed(context, '/second');
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Third!'),
+              onPressed: () {
+                Navigator.pushNamed(context, '/third');
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class SecondRoute extends StatelessWidget {
-	const SecondRoute({Key? key}) : super(key: key);
+  const SecondRoute({Key? key}) : super(key: key);
 
-	@override
-	Widget build(BuildContext context) {
-		return Scaffold(
-			appBar: AppBar(
-				title: const Text("Second Page"),
-				backgroundColor: Colors.blue,
-			), // AppBar
-			body: Center(
-				child: ElevatedButton(
-					onPressed: () {
-						Navigator.pop(context);
-					},
-					child: const Text('Back!'),
-				),
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Second Page"),
+        backgroundColor: Colors.blue,
+      ), // AppBar
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Back!'),
+        ),
+      ),
+    );
+  }
 }
 
 class ThirdRoute extends StatelessWidget {
-	const ThirdRoute({Key? key}) : super(key: key);
+  const ThirdRoute({Key? key}) : super(key: key);
 
-	@override
-	Widget build(BuildContext context) {
-		return Scaffold(
-			appBar: AppBar(
-				title: const Text("Third Page"),
-				backgroundColor: Colors.green,
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Third Page"),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
 }
 ```
 
