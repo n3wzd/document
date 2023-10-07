@@ -1514,6 +1514,15 @@ void navigate() {
 }
 ```
 
+## Performance
+간혹 Flutter 애플리케이션 구동 시 프레임 저하 등 성능 이슈가 발생할 수 있습니다. 성능 이슈의 원인은 주로 다음이 있습니다.
+
+1. 비싼 빌드 비용
+2. 비효율적인 애니메이션
+
+빌드를 많이 할수록, 빌드하는 위젯이 많을수록 비용이 증가합니다. 그러므로 빌드 횟수 및 빌드할 위젯의 개수는 가급적 최소화하는 것이 좋습니다.
+추가로, 런타임 중간에 변하지 않는 위젯은 `const`로 하는 것이 좋습니다. Flutter가 빌드를 다시 수행하면 `const` 위젯은 이미 존재시 스킵되므로 전체적인 빌드 효율이 향상됩니다.
+
 ## Example
 ### StatelessWidget
 - 'Stateless Widget'를 출력합니다.
@@ -2217,4 +2226,8 @@ https://www.geeksforgeeks.org/flutter-tutorial/
 
 https://api.flutter.dev/index.html
 
-Key - https://nsinc.tistory.com/214
+**Key**
+https://nsinc.tistory.com/214
+
+**Performance**
+https://www.blog.finotes.com/post/frame-rate-issues-in-flutter-apps-and-how-to-solve-them
