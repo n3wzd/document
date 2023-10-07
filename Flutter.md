@@ -34,11 +34,12 @@ Fluttet 프레임워크는 복잡성에 따라 간단하게 3가지 `레이어(L
 `네비게이터(Navigator)`는 Route간 이동을 처리하는 위젯입니다. Navigator는 Route들을 스택(stack) 구조로 관리합니다.
 
 ## Widget
-### Stateless Widget
-- `Stateless Widget`은 런타임 중간에 상태를 변경되지 않는 위젯입니다. 즉, 빌드 이후에는 상태가 변경되지 않습니다.
-- `Stateless Widget`는 생성될 때 빌드 함수가 1번만 호출됩니다.
-- `Stateless Widget`은 `build()` 메소드를 오버라이드해야 합니다. 이 메소드는 `BuildContext`을 인자로 하며, 위젯을 반환합니다. 여기서
-- 아이콘, 텍스트 등이 `Stateless Widget`에 해당됩니다.
+### StatelessWidget
+- `StatelessWidget`은 빌드 이후에 상태가 변경되지 않는 위젯입니다.
+- `StatelessWidget`는 생성될 때 빌드 함수가 1번만 호출됩니다.
+- 빌드 메소드 `build()`는 하위 위젯을 빌드하는 메소드입니다. 이 함수는 빌드할 하위 위젯을 반환합니다.
+- `StatelessWidget`는 불변 클래스(`@immutable`)이므로 모든 프로퍼티는 `final`이어야 합니다.
+- 하위 위젯의 상태가 런타임 중간에 바뀌지 않는다면 `StatelessWidget`가 적합합니다.
 
 ```
 import 'package:flutter/material.dart';
@@ -55,12 +56,14 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-### Stateful Widget
-- `Stateful Widget`은 빌드 이후에도 상태가 변경될 수 있는 위젯입니다.
-- `Stateful Widget`은 `createState()` 메소드를 오버라이드해야 합니다. 이 메소드는 상태를 반환합니다.
-- `State`은 위젯의 속성이 가지고 있는 개체의 데이터를 저장합니다.
-- `State`은 `build()` 메소드를 오버라이드해야 합니다. (`Stateless Widget`의 `build()`와 같습니다.)
-- `State.setState` 메소드는 호출될 때 해당 `State`의 내부 상태가 변경되었음을 프레임워크에 통지합니다.
+### StatefulWidget
+- `StatefulWidget`은 빌드 이후에도 상태가 변경될 수 있는 위젯입니다.
+- `StatefulWidget`는 생성된 이후에도 빌드 함수가 여러 번 호출될 수 있습니다.
+- `StatefulWidget`의 빌드 메소드는 `State`에서 정의됩니다.
+- `createState()` 메소드를 통해 `State`을 생성합니다.
+	- 이 메소드에선 `State` 반환을 제외한 다른 로직은 추가될 수 없습니다. (`State` 반환 로직만 있어야 합니다.)
+- `StatefulWidget`는 불변 클래스(`@immutable`)이므로 모든 프로퍼티는 `final`이어야 합니다.
+- 하위 위젯의 상태가 런타임 중간에 바뀔 수 있다면 `StatefulWidget`가 적합합니다.
 
 ```
 import 'package:flutter/material.dart';
@@ -82,18 +85,40 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
+### State
+- `State`은 상태를 정의하는 클래스이며, `StatefulWidget`와 같이 사용됩니다.
+- `State` 객체는 빌드 중간에 변할 수 있습니다. 즉, 프로퍼티의 값은 변경될 수 있습니다.
+- `State`는 빌드 메소드를 가지며, `StatefulWidget`가 빌드할 하위 위젯이 여기서 정의됩니다.
+
+#### setState()
+- `setState()`은 상태가 변경되었음을 프레임워크에 통지하는 메소드입니다.
+- 이 메소드가 호출되면 빌드가 다시 수행됩니다. 즉, 빌드 메소드가 다시 호출됩니다.
+- 이 메소드는 콜백을 인자로 합니다. 이 콜백에서 프로퍼티 변경 로직을 정의할 수 있습니다.
+
+> setState(() { _myState = newValue; });
+
+#### initState()
+- `initState()`은 현재 위젯이 위젯 트리에 새로 추가될 때 호출되는 메소드입니다.
+- 생성자와 비슷한 용도로 사용할 수 있습니다. (참고: `State`의 생성자는 오버라이드해도 동작하지 않습니다.)
+
+> initState() { ... }
+
+#### dispose()
+- `dispose()`은 현재 위젯이 위젯 트리에 완전히 제거될 때 호출되는 메소드입니다.
+- 소멸자와 비슷한 용도로 사용할 수 있습니다.
+
+> dispose() { ... }
+
 ### BuildContext
 - `BuildContext`은 위젯 트리 내에서 위젯을 찾는데 사용됩니다.
+- 빌드 함수의 인자로 사용됩니다.
 
 ### Builder
 - `Builder` 위젯을 사용해서 `StatelessWidget`을 정의할 수 있습니다.
-- `builder` 파라미터는 위젯을 생성하는 빌드 함수를 값으로 합니다. (`StatelessWidget`의 빌드 함수와 같습니다.)
+- `builder` 파라미터는 빌드 함수를 값으로 합니다.
+- `StatelessWidget`을 별도로 정의하지 않고 바로 사용하고자 한다면 `Builder`가 적합합니다.
 
-|파라미터|타입|의미|
-|---|---|---|
-|builder|WidgetBuilder|빌드 함수|
-
--  `Center` 위젯 내부에서 `StatelessWidget`을 사용한다면,
+**Before**
 ```
 class Foo extends StatelessWidget {
 	const Foo({super.key});
@@ -104,7 +129,7 @@ class Foo extends StatelessWidget {
 const Center(child: Foo())
 ```
 
-- 이는 `Builder`를 사용해서 다음과 같이 대체할 수 있습니다. (`StatelessWidget`을 별도로 정의하지 않고 바로 사용할 수 있습니다.)
+**After**
 ```
 Center(
 	child: Builder(
@@ -117,6 +142,7 @@ Center(
 - `StreamBuilder` 위젯을 사용해서 특정 Stream에 맞게 상태가 변화하는 `StatefulWidget`을 정의할 수 있습니다.
 - `StreamBuilder`의 제너릭 타입은 Stream의 잠재적 값 타입입니다.
 - `builder` 파라미터의 빌드 함수는 추가적으로 `AsyncSnapshot` 인자를 가집니다.
+- Stream 연산에 따라 빌드가 수행될 필요가 있다면 `StreamBuilder`가 적합합니다.
 
 |파라미터|타입|의미|
 |---|---|---|
@@ -187,6 +213,7 @@ Function foo = (int n) => "$n";
 print(foo(1)); // 정상적으로 동작합니다.
 ```
 
+### VoidCallback
 - `VoidCallback`은 빈 `Function`을 의미합니다. (typedef)
 
 > VoidCallback = void Function()
@@ -2093,7 +2120,7 @@ class ThirdRoute extends StatelessWidget {
 
 ![](images/Flutter-Example-Navigator.png)
 
-## 출처 (Reference)
+## Reference
 https://www.geeksforgeeks.org/flutter-tutorial/
 
 https://api.flutter.dev/index.html
