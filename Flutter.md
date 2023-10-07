@@ -36,7 +36,7 @@ Fluttet 프레임워크는 복잡성에 따라 간단하게 3가지 `레이어(L
 ## Widget
 ### StatelessWidget
 - `StatelessWidget`은 빌드 이후에 상태가 변경되지 않는 위젯입니다.
-- `StatelessWidget`는 생성될 때 빌드 함수가 1번만 호출됩니다.
+- `StatelessWidget`는 생성될 때 빌드 메소드가 1번만 호출됩니다.
 - 빌드 메소드 `build()`는 하위 위젯을 빌드하는 메소드입니다. 이 함수는 빌드할 하위 위젯을 반환합니다.
 - `StatelessWidget`는 불변 클래스(`@immutable`)이므로 모든 프로퍼티는 `final`이어야 합니다.
 - 하위 위젯의 상태가 런타임 중간에 바뀌지 않는다면 `StatelessWidget`가 적합합니다.
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
 
 ### StatefulWidget
 - `StatefulWidget`은 빌드 이후에도 상태가 변경될 수 있는 위젯입니다.
-- `StatefulWidget`는 생성된 이후에도 빌드 함수가 여러 번 호출될 수 있습니다.
+- `StatefulWidget`는 생성된 이후에도 빌드 메소드가 여러 번 호출될 수 있습니다.
 - `StatefulWidget`의 빌드 메소드는 `State`에서 정의됩니다.
 - `createState()` 메소드를 통해 `State`을 생성합니다.
   - 이 메소드에선 `State` 반환을 제외한 다른 로직은 추가될 수 없습니다. (`State` 반환 로직만 있어야 합니다.)
@@ -121,11 +121,11 @@ class _MyAppState extends State<MyApp> {
 
 ### BuildContext
 - `BuildContext`은 위젯 트리 내에서 위젯을 찾는데 사용됩니다.
-- 빌드 함수의 인자로 사용됩니다.
+- 빌드 메소드의 인자로 사용됩니다.
 
 ### Builder
 - `Builder` 위젯을 사용해서 `StatelessWidget`을 정의할 수 있습니다.
-- `builder` 파라미터는 빌드 함수를 값으로 합니다.
+- `builder` 파라미터는 빌드 메소드를 값으로 합니다.
 - `StatelessWidget`을 별도로 정의하지 않고 바로 사용하고자 한다면 `Builder`가 적합합니다.
 
 **Before**
@@ -151,13 +151,13 @@ Center(
 ### StreamBuilder
 - `StreamBuilder` 위젯을 사용해서 특정 Stream에 맞게 상태가 변화하는 `StatefulWidget`을 정의할 수 있습니다.
 - `StreamBuilder`의 제너릭 타입은 Stream의 잠재적 값 타입입니다.
-- `builder` 파라미터의 빌드 함수는 추가적으로 `AsyncSnapshot` 인자를 가집니다.
+- `builder` 파라미터의 빌드 메소드는 추가적으로 `AsyncSnapshot` 인자를 가집니다.
 - Stream 연산에 따라 빌드가 수행될 필요가 있다면 `StreamBuilder`가 적합합니다.
 
 |파라미터|타입|의미|
 |---|---|---|
 |stream|Stream\<T\>|사용할 Stream|
-|builder|AsyncWidgetBuilder\<T\>|비동기 빌드 함수|
+|builder|AsyncWidgetBuilder\<T\>|비동기 빌드 메소드|
 
 ```
 StreamBuilder<T>(
