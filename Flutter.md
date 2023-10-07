@@ -35,8 +35,9 @@ Fluttet 프레임워크는 복잡성에 따라 간단하게 3가지 `레이어(L
 
 ## Widget
 ### Stateless Widget
-- `Stateless Widget`은 런타임 중간에 상태를 변경할 수 없는 위젯입니다. 즉, 빌드 이후에는 상태가 변경되지 않습니다.
-- `Stateless Widget`은 `build()` 메소드를 오버라이드해야 합니다. 이 메소드는 `BuildContext`을 인자로 하며, 위젯을 반환합니다. 여기서 `BuildContext`은 위젯 트리 내에서 위젯을 찾는데 사용됩니다.
+- `Stateless Widget`은 런타임 중간에 상태를 변경되지 않는 위젯입니다. 즉, 빌드 이후에는 상태가 변경되지 않습니다.
+- `Stateless Widget`는 생성될 때 빌드 함수가 1번만 호출됩니다.
+- `Stateless Widget`은 `build()` 메소드를 오버라이드해야 합니다. 이 메소드는 `BuildContext`을 인자로 하며, 위젯을 반환합니다. 여기서
 - 아이콘, 텍스트 등이 `Stateless Widget`에 해당됩니다.
 
 ```
@@ -81,214 +82,8 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
-### Scaffold
-- `Scaffold`는 앱의 기본 디자인 레이아웃을 제공하는 위젯입니다.
-
-```
-|-----------------|
-|    appbar       |
-|-----------------|
-|                 |
-|    content      |
-|                 |
-|                 |
-|           float |
-|-----------------|
-| bottomBar       |
-|-----------------|
-```
-
-|파라미터|타입|의미|
-|---|---|---|
-|appbar|PreferredSizeWidget|상단 바|
-|body|Widget|주 내용|
-|floatingActionButton|Widget|우측 하단 코너의 버튼|
-|drawer|Widget|슬라이드 메뉴/패널|
-|bottomNavigationBar|Widget|하단 메뉴|
-|backgroundColor|Color|스캐폴드 배경색|
-
-```
-Scaffold(
-	backgroundColor: const Color.fromARGB(255, 217, 249, 255),
-	appBar: AppBar(
-		...
-	),
-	body: const Center(
-		child: Text(...)
-	),
-)
-```
-
-### MaterialApp
-- `MaterialApp`은 `매터리얼 위젯(Material widget)`들을 감싸는(wrap) 위젯입니다. `MaterialApp`을 통해서 `MaterialApp`의 하위 위젯에 접근할 수 있습니다.
-- 일부 위젯은 `MaterialApp`을 조상 위젯으로 요구합니다. (ex. `Scaffold`)
-
-|파라미터|타입|의미|
-|---|---|---|
-|home|Widget|앱의 기본 루트(default route)일 때 표시되는 위젯|
-|title|String|디바이스에 표시되는 앱의 1줄 설명문|
-|color|Color|애플리케이션 색|
-|debugShowCheckedModeBanner|bool|디버그시 앱 상단 DEBUG 배너 표시 유무|
-
-```
-MaterialApp(
-	debugShowCheckedModeBanner = false,
-	title: 'MyApp',
-	home: Scaffold(
-		...
-	),
-)
-```
-
-### AppBar
-- `AppBar`는 앱 상단 메뉴를 표시하는 위젯입니다.
-- `Scaffold`의 `appBar` 파라미터에 적용할 수 있습니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|backgrounColor|Color|메뉴바 색상|
-|leading|Widget|title 이전에 표시되는 위젯|
-|title|Widget|메뉴바 제목으로 표시되는 위젯|
-
-```
-AppBar(
-	leading: const Icon(Icons.menu),
-	backgroundColor: Colors.blue,
-	title: const Text(
-	    "MyApp",
-		textAlign: TextAlign.start,
-	),
-)
-```
-
-### BottomNavigationBar
-- `BottomNavigationBar`는 앱 하단 메뉴를 표시하는 위젯입니다.
-- `Scaffold`의 `bottomNavigationBar` 파라미터에 적용할 수 있습니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|backgrounColor|Color|메뉴바 색상|
-|currentIndex|int|현재 아이템 인덱스|
-|iconSize|double|아이콘 크기|
-|selectedFontSize|double|선택된 아이템 폰트 크기|
-|selectedIconColor|Color|선택된 아이템 색상|
-|items|List\<BottomNavigationBarItem\>|메뉴 아이템 목록|
-|onTap|ValueChanged\<int\>|아이템을 선택할 때 호출되는 메소드|
-
-```
-bottomNavigationBar: BottomNavigationBar(
-	items: const <BottomNavigationBarItem>[
-		BottomNavigationBarItem(
-			icon: Icon(Icons.home),
-			label: 'Home',
-		),
-		BottomNavigationBarItem(
-			icon: Icon(Icons.business),
-			label: 'Business',
-		),
-		BottomNavigationBarItem(
-			icon: Icon(Icons.school),
-			label: 'School',
-		),
-	],
-	currentIndex: _selectedIndex,
-	selectedItemColor: Color.fromARGB(255, 79, 205, 255),
-	onTap: _onItemTapped,
-)
-```
-
-### Drawer
-- `Drawer`는 `Scaffold` 모서리에서 수평으로 슬라이드하면 나타나는 매터리얼 디자인 패널 위젯입니다.
-- Scaffold의 `drawer` 파라미터에 적용할 수 있습니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|child|Widget|하위 위젯|
-
-```
-Drawer(
-	child: ListView(
-		...
-	),
-)
-```
-
-### ClipRect
-- `ClipRect`는 사각형 클립을 제공하는 위젯입니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|child|Widget|하위 위젯|
-
-```
-ClipRect(
-	child: Container(
-		height: 200,
-		width: 200,
-		color: Colors.yellow,
-	),
-)
-```
-
-### ClipRRect
-- `ClipRRect`는 모서리가 둥근 사각형 클립을 제공하는 위젯입니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|child|Widget|하위 위젯|
-|borderRadius|BorderRadiusGeometry|모서리 반지름|
-
-```
-ClipRRect(
-	child: Container(
-		height: 200,
-		width: 200,
-		color: Colors.yellow,
-	),
-	borderRadius: BorderRadius.circular(30.0),
-)
-```
-
-### Opacity
-- `Opacity`는 투명도를 제공하는 위젯입니다.
-- 투명도 값 범위는 \[0.0, 1.0\]입니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|child|Widget|하위 위젯|
-|opacity|double|투명도|
-
-```
-Opacity(
-	child: FlutterLogo(size: 150.0),
-	opacity: 0.5,
-)
-```
-
-### Text
-- `Text`는 텍스트를 제공하는 위젯입니다.
-
-```
-Text('Hello World!')
-```
-
-### RichText
-- `RichText`는 텍스트를 꾸미는 위젯입니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|text|InlineSpan|텍스트 위젯|
-|textAlign|TextAlign|텍스트 정렬 방식|
-|textDirection|TextDirection|텍스트 방향|
-|selectionColor|Color|텍스트 선택시 색상|
-|maxLines|int|텍스트 최대 라인 개수|
-
-```
-RichText(
-	text: const TextSpan(text: 'Hello'),
-	selectionColor: const Colors.blue,
-)
-```
+### BuildContext
+- `BuildContext`은 위젯 트리 내에서 위젯을 찾는데 사용됩니다.
 
 ### Builder
 - `Builder` 위젯을 사용해서 `StatelessWidget`을 정의할 수 있습니다.
@@ -659,6 +454,138 @@ SafeArea(
 ```
 
 ## UI Components
+### Scaffold
+- `Scaffold`는 앱의 기본 디자인 레이아웃을 제공하는 위젯입니다.
+
+```
+|-----------------|
+|    appbar       |
+|-----------------|
+|                 |
+|    content      |
+|                 |
+|                 |
+|           float |
+|-----------------|
+| bottomBar       |
+|-----------------|
+```
+
+|파라미터|타입|의미|
+|---|---|---|
+|appbar|PreferredSizeWidget|상단 바|
+|body|Widget|주 내용|
+|floatingActionButton|Widget|우측 하단 코너의 버튼|
+|drawer|Widget|슬라이드 메뉴/패널|
+|bottomNavigationBar|Widget|하단 메뉴|
+|backgroundColor|Color|스캐폴드 배경색|
+
+```
+Scaffold(
+	backgroundColor: const Color.fromARGB(255, 217, 249, 255),
+	appBar: AppBar(
+		...
+	),
+	body: const Center(
+		child: Text(...)
+	),
+)
+```
+
+### MaterialApp
+- `MaterialApp`은 `매터리얼 위젯(Material widget)`들을 감싸는(wrap) 위젯입니다. `MaterialApp`을 통해서 `MaterialApp`의 하위 위젯에 접근할 수 있습니다.
+- 일부 위젯은 `MaterialApp`을 조상 위젯으로 요구합니다. (ex. `Scaffold`)
+
+|파라미터|타입|의미|
+|---|---|---|
+|home|Widget|앱의 기본 루트(default route)일 때 표시되는 위젯|
+|title|String|디바이스에 표시되는 앱의 1줄 설명문|
+|color|Color|애플리케이션 색|
+|debugShowCheckedModeBanner|bool|디버그시 앱 상단 DEBUG 배너 표시 유무|
+
+```
+MaterialApp(
+	debugShowCheckedModeBanner = false,
+	title: 'MyApp',
+	home: Scaffold(
+		...
+	),
+)
+```
+
+### AppBar
+- `AppBar`는 앱 상단 메뉴를 표시하는 위젯입니다.
+- `Scaffold`의 `appBar` 파라미터에 적용할 수 있습니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|backgrounColor|Color|메뉴바 색상|
+|leading|Widget|title 이전에 표시되는 위젯|
+|title|Widget|메뉴바 제목으로 표시되는 위젯|
+
+```
+AppBar(
+	leading: const Icon(Icons.menu),
+	backgroundColor: Colors.blue,
+	title: const Text(
+	    "MyApp",
+		textAlign: TextAlign.start,
+	),
+)
+```
+
+### BottomNavigationBar
+- `BottomNavigationBar`는 앱 하단 메뉴를 표시하는 위젯입니다.
+- `Scaffold`의 `bottomNavigationBar` 파라미터에 적용할 수 있습니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|backgrounColor|Color|메뉴바 색상|
+|currentIndex|int|현재 아이템 인덱스|
+|iconSize|double|아이콘 크기|
+|selectedFontSize|double|선택된 아이템 폰트 크기|
+|selectedIconColor|Color|선택된 아이템 색상|
+|items|List\<BottomNavigationBarItem\>|메뉴 아이템 목록|
+|onTap|ValueChanged\<int\>|아이템을 선택할 때 호출되는 메소드|
+
+```
+bottomNavigationBar: BottomNavigationBar(
+	items: const <BottomNavigationBarItem>[
+		BottomNavigationBarItem(
+			icon: Icon(Icons.home),
+			label: 'Home',
+		),
+		BottomNavigationBarItem(
+			icon: Icon(Icons.business),
+			label: 'Business',
+		),
+		BottomNavigationBarItem(
+			icon: Icon(Icons.school),
+			label: 'School',
+		),
+	],
+	currentIndex: _selectedIndex,
+	selectedItemColor: Color.fromARGB(255, 79, 205, 255),
+	onTap: _onItemTapped,
+)
+```
+
+### Drawer
+- `Drawer`는 `Scaffold` 모서리에서 수평으로 슬라이드하면 나타나는 매터리얼 디자인 패널 위젯입니다.
+- Scaffold의 `drawer` 파라미터에 적용할 수 있습니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+
+```
+Drawer(
+	child: ListView(
+		...
+	),
+)
+```
+
 ### AlertDialog
 - `AlertDialog`는 경고 메시지 창을 표시하는 위젯입니다.
 
@@ -864,7 +791,115 @@ ListView.builder(
 )
 ```
 
+### GridView
+- `GridView`는 스크롤이 가능한 2D 그리드 레이아웃 위젯입니다.
+- `GridView`에서 가장 자주 사용되는 생성자는 타일 개수가 고정된 그리드를 생성하는 `GridView.count`입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|primary|bool|상위 스크롤 뷰 사용 유무|
+|padding|EdgeInsetsGeometry|그리드 바깥 여백 간격|
+|crossAxisSpacing|double|아이템간 간격(세로)|
+|mainAxisSpacing|double|아이템간 간격(가로)|
+|crossAxisCount|double|세로 줄 개수|
+|children|List\<Widget\>|아이템 목록|
+
+```
+GridView.count(
+	primary: false,
+	padding: const EdgeInsets.all(20),
+	crossAxisSpacing: 10,
+	mainAxisSpacing: 10,
+	crossAxisCount: 2,
+	children: <Widget>[
+		Container(
+			...
+		),
+		Container(
+ 			...
+		),
+	],
+)
+```
+
 ## Design & Animations
+### ClipRect
+- `ClipRect`는 사각형 클립을 제공하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+
+```
+ClipRect(
+	child: Container(
+		height: 200,
+		width: 200,
+		color: Colors.yellow,
+	),
+)
+```
+
+### ClipRRect
+- `ClipRRect`는 모서리가 둥근 사각형 클립을 제공하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|borderRadius|BorderRadiusGeometry|모서리 반지름|
+
+```
+ClipRRect(
+	child: Container(
+		height: 200,
+		width: 200,
+		color: Colors.yellow,
+	),
+	borderRadius: BorderRadius.circular(30.0),
+)
+```
+
+### Opacity
+- `Opacity`는 투명도를 제공하는 위젯입니다.
+- 투명도 값 범위는 \[0.0, 1.0\]입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|opacity|double|투명도|
+
+```
+Opacity(
+	child: FlutterLogo(size: 150.0),
+	opacity: 0.5,
+)
+```
+
+### Text
+- `Text`는 텍스트를 제공하는 위젯입니다.
+
+```
+Text('Hello World!')
+```
+
+### RichText
+- `RichText`는 텍스트를 꾸미는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|text|InlineSpan|텍스트 위젯|
+|textAlign|TextAlign|텍스트 정렬 방식|
+|textDirection|TextDirection|텍스트 방향|
+|selectionColor|Color|텍스트 선택시 색상|
+|maxLines|int|텍스트 최대 라인 개수|
+
+```
+RichText(
+	text: const TextSpan(text: 'Hello'),
+	selectionColor: const Colors.blue,
+)
+```
+
 ### AnimationController
 - `AnimationController`은 애니메이션을 제어하는 위젯입니다.
 - `AnimationController`는 `TickerProvider` 오브젝트를 사용합니다. `TickerProvider`는 `Ticker` 오브젝트와 인터페이스하는 클래스이며, `Ticker`는 애니메이션 프레임마다 콜백을 한번씩 호출하는 클래스입니다.
@@ -1034,37 +1069,6 @@ InkWell(
 			sideLength == 50 ? sideLength = 100 : sideLength = 50;
 		});
 	},
-)
-```
-
-### GridView
-- `GridView`는 스크롤이 가능한 2D 그리드 레이아웃 위젯입니다.
-- `GridView`에서 가장 자주 사용되는 생성자는 타일 개수가 고정된 그리드를 생성하는 `GridView.count`입니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|primary|bool|상위 스크롤 뷰 사용 유무|
-|padding|EdgeInsetsGeometry|그리드 바깥 여백 간격|
-|crossAxisSpacing|double|아이템간 간격(세로)|
-|mainAxisSpacing|double|아이템간 간격(가로)|
-|crossAxisCount|double|세로 줄 개수|
-|children|List\<Widget\>|아이템 목록|
-
-```
-GridView.count(
-	primary: false,
-	padding: const EdgeInsets.all(20),
-	crossAxisSpacing: 10,
-	mainAxisSpacing: 10,
-	crossAxisCount: 2,
-	children: <Widget>[
-		Container(
-			...
-		),
-		Container(
- 			...
-		),
-	],
 )
 ```
 
