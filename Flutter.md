@@ -432,15 +432,94 @@ Stack(
 - OS에 따라 여유 공간이 부족하여 디바이스의 UI가 가려지는 현상이 발생할 수 있습니다. `SafeArea`로 감싸면 문제가 자동으로 해결됩니다.
 - `SafeArea`는 일반적으로 `Scaffold`의 `body`에서 사용됩니다.
 
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+
 ```
 SafeArea(
   child: Text('Safe!'),
 )
 ```
 
+### ListView
+- `ListView`는 스크롤 가능한 리스트를 표시하는 위젯입니다.
+- 일반적으로 `ListView`의 `child` 위젯은 스크린에 표시될 때만 오브젝트가 존재합니다. 즉, `ListView` 아이템이 스크롤되어 스크린에 표시되면 해당 아이템의 오브젝트가 생성되고, 스크린에서 사라지면 해당 오브젝트가 소멸됩니다.
+- `ListView`의 기본 생성자는 사용 가능한 모든 아이템을 한꺼번에 빌드를 수행합니다. 리스트의 아이템 개수가 적다면 기본 생성자가 적합합니다.
+  - `children` 파라미터를 통해 모든 아이템을 나열합니다.
+
 |파라미터|타입|의미|
 |---|---|---|
-|child|Widget|하위 위젯|
+|children|List\<Widget\>|리스트 아이템 목록|
+|scrollDirection|Axis|스크롤 방향|
+|padding|EdgeInsetsGeometry|아이템간 간격|
+
+```
+ListView(
+  scrollDirection: Axis.horizontal,
+  padding: const EdgeInsets.all(4),
+  children: <Widget>[
+    Container(
+      ...
+    ),
+    Container(
+      ...
+    ),
+  ],
+)
+```
+
+- `ListView.builder` 생성자는 실제로 스크린에 표시되는 아이템만 빌드합니다. 리스트 아이템 개수가 많다면 `builder` 생성자가 적합합니다.
+  - `itemBuilder` 파라미터를 통해 아이템 틀을 작성합니다. `itemBuilder`는 함수를 값으로 하며, 이 함수는 `BuildContext`와 현재 아이템의 인덱스를 의미하는 `int` 파라미터를 갖습니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|itemCount|int|아이템 개수|
+|scrollDirection|Axis|스크롤 방향|
+|padding|EdgeInsetsGeometry|아이템간 간격|
+
+```
+ListView.builder(
+  padding: const EdgeInsets.all(8),
+  itemCount: 10,
+  itemBuilder: (BuildContext context, int index) {
+    return Container(
+      ...
+    );
+  }
+)
+```
+
+### GridView
+- `GridView`는 스크롤이 가능한 2D 그리드 레이아웃 위젯입니다.
+- `GridView`에서 가장 자주 사용되는 생성자는 타일 개수가 고정된 그리드를 생성하는 `GridView.count`입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|primary|bool|상위 스크롤 뷰 사용 유무|
+|padding|EdgeInsetsGeometry|그리드 바깥 여백 간격|
+|crossAxisSpacing|double|아이템간 간격(세로)|
+|mainAxisSpacing|double|아이템간 간격(가로)|
+|crossAxisCount|double|세로 줄 개수|
+|children|List\<Widget\>|아이템 목록|
+
+```
+GridView.count(
+  primary: false,
+  padding: const EdgeInsets.all(20),
+  crossAxisSpacing: 10,
+  mainAxisSpacing: 10,
+  crossAxisCount: 2,
+  children: <Widget>[
+    Container(
+      ...
+    ),
+    Container(
+       ...
+    ),
+  ],
+)
+```
 
 ### EdgeInsets
 - `EdgeInsets`은 4개의 값을 제공하는 클래스입니다.
@@ -491,6 +570,27 @@ SafeArea(
 ```
 
 ## UI Components
+### MaterialApp
+- `MaterialApp`은 `매터리얼 위젯(Material widget)`들을 감싸는(wrap) 위젯입니다. `MaterialApp`을 통해서 `MaterialApp`의 하위 위젯에 접근할 수 있습니다.
+- 일부 위젯은 `MaterialApp`을 조상 위젯으로 요구합니다. (ex. `Scaffold`)
+
+|파라미터|타입|의미|
+|---|---|---|
+|home|Widget|앱의 기본 루트(default route)일 때 표시되는 위젯|
+|title|String|디바이스에 표시되는 앱의 1줄 설명문|
+|color|Color|애플리케이션 색|
+|debugShowCheckedModeBanner|bool|디버그시 앱 상단 DEBUG 배너 표시 유무|
+
+```
+MaterialApp(
+  debugShowCheckedModeBanner = false,
+  title: 'MyApp',
+  home: Scaffold(
+    ...
+  ),
+)
+```
+
 ### Scaffold
 - `Scaffold`는 앱의 기본 디자인 레이아웃을 제공하는 위젯입니다.
 
@@ -525,27 +625,6 @@ Scaffold(
   ),
   body: const Center(
     child: Text(...)
-  ),
-)
-```
-
-### MaterialApp
-- `MaterialApp`은 `매터리얼 위젯(Material widget)`들을 감싸는(wrap) 위젯입니다. `MaterialApp`을 통해서 `MaterialApp`의 하위 위젯에 접근할 수 있습니다.
-- 일부 위젯은 `MaterialApp`을 조상 위젯으로 요구합니다. (ex. `Scaffold`)
-
-|파라미터|타입|의미|
-|---|---|---|
-|home|Widget|앱의 기본 루트(default route)일 때 표시되는 위젯|
-|title|String|디바이스에 표시되는 앱의 1줄 설명문|
-|color|Color|애플리케이션 색|
-|debugShowCheckedModeBanner|bool|디버그시 앱 상단 DEBUG 배너 표시 유무|
-
-```
-MaterialApp(
-  debugShowCheckedModeBanner = false,
-  title: 'MyApp',
-  home: Scaffold(
-    ...
   ),
 )
 ```
@@ -621,6 +700,13 @@ Drawer(
     ...
   ),
 )
+```
+
+### Text
+- `Text`는 텍스트를 제공하는 위젯입니다.
+
+```
+Text('Hello World!')
 ```
 
 ### AlertDialog
@@ -780,162 +866,33 @@ DefaultTabController(
 |---|---|---|
 |tabs|List\<Widget\>|탭 위젯|
 
-### ListView
-- `ListView`는 스크롤 가능한 리스트를 표시하는 위젯입니다.
-- 일반적으로 `ListView`의 `child` 위젯은 스크린에 표시될 때만 오브젝트가 존재합니다. 즉, `ListView` 아이템이 스크롤되어 스크린에 표시되면 해당 아이템의 오브젝트가 생성되고, 스크린에서 사라지면 해당 오브젝트가 소멸됩니다.
-- `ListView`의 기본 생성자는 사용 가능한 모든 아이템을 한꺼번에 빌드를 수행합니다. 리스트의 아이템 개수가 적다면 기본 생성자가 적합합니다.
-  - `children` 파라미터를 통해 모든 아이템을 나열합니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|children|List\<Widget\>|리스트 아이템 목록|
-|scrollDirection|Axis|스크롤 방향|
-|padding|EdgeInsetsGeometry|아이템간 간격|
-
-```
-ListView(
-  scrollDirection: Axis.horizontal,
-  padding: const EdgeInsets.all(4),
-  children: <Widget>[
-    Container(
-      ...
-    ),
-    Container(
-      ...
-    ),
-  ],
-)
-```
-
-- `ListView.builder` 생성자는 실제로 스크린에 표시되는 아이템만 빌드합니다. 리스트 아이템 개수가 많다면 `builder` 생성자가 적합합니다.
-  - `itemBuilder` 파라미터를 통해 아이템 틀을 작성합니다. `itemBuilder`는 함수를 값으로 하며, 이 함수는 `BuildContext`와 현재 아이템의 인덱스를 의미하는 `int` 파라미터를 갖습니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|itemCount|int|아이템 개수|
-|scrollDirection|Axis|스크롤 방향|
-|padding|EdgeInsetsGeometry|아이템간 간격|
-
-```
-ListView.builder(
-  padding: const EdgeInsets.all(8),
-  itemCount: 10,
-  itemBuilder: (BuildContext context, int index) {
-    return Container(
-      ...
-    );
-  }
-)
-```
-
-### GridView
-- `GridView`는 스크롤이 가능한 2D 그리드 레이아웃 위젯입니다.
-- `GridView`에서 가장 자주 사용되는 생성자는 타일 개수가 고정된 그리드를 생성하는 `GridView.count`입니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|primary|bool|상위 스크롤 뷰 사용 유무|
-|padding|EdgeInsetsGeometry|그리드 바깥 여백 간격|
-|crossAxisSpacing|double|아이템간 간격(세로)|
-|mainAxisSpacing|double|아이템간 간격(가로)|
-|crossAxisCount|double|세로 줄 개수|
-|children|List\<Widget\>|아이템 목록|
-
-```
-GridView.count(
-  primary: false,
-  padding: const EdgeInsets.all(20),
-  crossAxisSpacing: 10,
-  mainAxisSpacing: 10,
-  crossAxisCount: 2,
-  children: <Widget>[
-    Container(
-      ...
-    ),
-    Container(
-       ...
-    ),
-  ],
-)
-```
-
 ## Design & Animations
-### ClipRect
-- `ClipRect`는 사각형 클립을 제공하는 위젯입니다.
+### Color
+- `Color`는 색을 표현하는 클래스입니다.
+- HTML 색 코드로 `Color`를 생성할 수 있습니다. (ARGB 순서)
+> Color(0xFFFFFFFF);
 
-|파라미터|타입|의미|
-|---|---|---|
-|child|Widget|하위 위젯|
+- ARGB의 값을 따로 제공할 수도 있습니다.
+> Color.fromARGB(int a, int r, int g, int b)
 
-```
-ClipRect(
-  child: Container(
-    height: 200,
-    width: 200,
-    color: Colors.yellow,
-  ),
-)
-```
+### Colors
+- `Colors`는 상수를 통해 색을 가져오는 클래스입니다.
 
-### ClipRRect
-- `ClipRRect`는 모서리가 둥근 사각형 클립을 제공하는 위젯입니다.
+> Colors.orange
 
-|파라미터|타입|의미|
-|---|---|---|
-|child|Widget|하위 위젯|
-|borderRadius|BorderRadiusGeometry|모서리 반지름|
+### MaterialStateProperty
 
-```
-ClipRRect(
-  child: Container(
-    height: 200,
-    width: 200,
-    color: Colors.yellow,
-  ),
-  borderRadius: BorderRadius.circular(30.0),
-)
-```
+### MaterialState
+- `MaterialState`은 `Material` 위젯의 상호작용 상태를 저장한 enum입니다.
+- 상태의 종류는 다음이 있습니다.
 
-### Opacity
-- `Opacity`는 투명도를 제공하는 위젯입니다.
-- 투명도 값 범위는 \[0.0, 1.0\]입니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|child|Widget|하위 위젯|
-|opacity|double|투명도|
-
-```
-Opacity(
-  child: FlutterLogo(size: 150.0),
-  opacity: 0.5,
-)
-```
-
-### Text
-- `Text`는 텍스트를 제공하는 위젯입니다.
-
-```
-Text('Hello World!')
-```
-
-### RichText
-- `RichText`는 텍스트를 꾸미는 위젯입니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|text|InlineSpan|텍스트 위젯|
-|textAlign|TextAlign|텍스트 정렬 방식|
-|textDirection|TextDirection|텍스트 방향|
-|selectionColor|Color|텍스트 선택시 색상|
-|maxLines|int|텍스트 최대 라인 개수|
-
-```
-RichText(
-  text: const TextSpan(text: 'Hello'),
-  selectionColor: const Colors.blue,
-)
-```
+1. `hovered`
+2. `focused`
+3. `pressed`
+4. `dragged`
+5. `selected`
+6. `disabled`
+7. `error`
 
 ### AnimationController
 - `AnimationController`은 애니메이션을 제어하는 위젯입니다.
@@ -1143,6 +1100,76 @@ Theme(
   child: Container(
     ...
   ),
+)
+```
+
+### ClipRect
+- `ClipRect`는 사각형 클립을 제공하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+
+```
+ClipRect(
+  child: Container(
+    height: 200,
+    width: 200,
+    color: Colors.yellow,
+  ),
+)
+```
+
+### ClipRRect
+- `ClipRRect`는 모서리가 둥근 사각형 클립을 제공하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|borderRadius|BorderRadiusGeometry|모서리 반지름|
+
+```
+ClipRRect(
+  child: Container(
+    height: 200,
+    width: 200,
+    color: Colors.yellow,
+  ),
+  borderRadius: BorderRadius.circular(30.0),
+)
+```
+
+### Opacity
+- `Opacity`는 투명도를 제공하는 위젯입니다.
+- 투명도 값 범위는 \[0.0, 1.0\]입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|opacity|double|투명도|
+
+```
+Opacity(
+  child: FlutterLogo(size: 150.0),
+  opacity: 0.5,
+)
+```
+
+### RichText
+- `RichText`는 텍스트를 꾸미는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|text|InlineSpan|텍스트 위젯|
+|textAlign|TextAlign|텍스트 정렬 방식|
+|textDirection|TextDirection|텍스트 방향|
+|selectionColor|Color|텍스트 선택시 색상|
+|maxLines|int|텍스트 최대 라인 개수|
+
+```
+RichText(
+  text: const TextSpan(text: 'Hello'),
+  selectionColor: const Colors.blue,
 )
 ```
 
