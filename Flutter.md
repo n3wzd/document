@@ -352,6 +352,19 @@ FractionallySizedBox(
 ),
 ```
 
+### Spacer
+- `Spacer`는 빈 공간을 제공하는 위젯입니다.
+- `flex`를 사용할 수 있습니다. (기본값 = 1)
+- 주로 `Column`, `Row` 내부에서 사용됩니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|flex|int|flex 값|
+
+```
+Spacer()
+```
+
 ### Column
 - `Column`은 수직 방향으로 하위 위젯들을 나열하는 위젯입니다.
 
