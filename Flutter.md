@@ -969,6 +969,29 @@ CurvedAnimation(
 )
 ```
 
+### AnimatedContainer
+- `AnimatedContainer`는 `Container`에서 애니메이션을 포함한 위젯입니다.
+- `AnimatedContainer`의 내부에는 자체`AnimationController`가 포함되어 있습니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|width|double|너비|
+|height|double|높이|
+|duration|Duration|애니메이션 지속 시간|
+|curve|Curve|커브 오브젝트|
+```
+AnimatedContainer(
+  height: 50,
+  width: 50,
+  duration: const Duration(seconds: 2),
+  curve: Curves.easeIn,
+  child: Material(
+    ...
+  ),
+)
+```
+
 ### SlideTransition
 - `SlideTransition`은 아이템의 위치 애니메이션을 수행하는 위젯입니다.
 
@@ -1013,19 +1036,6 @@ RotationTransition(
 )
 ```
 
-### FlutterLogo
-- `FlutterLogo`는 Flutter의 로고 이미지를 포함한 위젯입니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|size|double|로고 크기|
-
-```
-FlutterLogo(
-  size: 150.0
-)
-```
-
 ### Material
 - `Material` 위젯은 Clipping, Elevation, Ink 등을 사용할 때 이들의 조상 위젯 역할을 합니다.
 
@@ -1044,53 +1054,6 @@ Material(
 )
 ```
 
-### AnimatedContainer
-- `AnimatedContainer`는 `Container`에서 애니메이션을 포함한 위젯입니다.
-- `AnimatedContainer`의 내부에는 자체`AnimationController`가 포함되어 있습니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|child|Widget|하위 위젯|
-|width|double|너비|
-|height|double|높이|
-|duration|Duration|애니메이션 지속 시간|
-|curve|Curve|커브 오브젝트|
-```
-AnimatedContainer(
-  height: 50,
-  width: 50,
-  duration: const Duration(seconds: 2),
-  curve: Curves.easeIn,
-  child: Material(
-    ...
-  ),
-)
-```
-
-### Tween<T>
-- `Tween<T>`은 `T` 타입에 대해 시작에서 종료까지 선형 차이를 의미하는 클래스입니다.
-- `Tween<T>`은 주로 애니메이션에서 사용됩니다.
-- `animate` 메소드는 `Animation<T>`를 반환합니다.
-
-|프로퍼티|타입|의미|
-|---|---|---|
-|begin|`T`|시작 값|
-|end|`T`|종료 값|
-
-```
-Tween<Offset>(
-  begin: const Offset(0.0, 0.0),
-  end: const Offset(50.0, 100.0),
-)
-```
-
-### Offset
-- `Offset`은 2D 좌표에서 변화량을 의미하는 클래스입니다.
-
-```
-Offset(double dx, double dy)
-```
-
 ### InkWell
 - `InkWell`은 터치 제스처에 반응하는 직사각형 영역의 매터리얼 위젯입니다.
 - `InkWell`을 사용하려면 `Material` 위젯을 조상 위젯으로 해야 합니다.
@@ -1102,23 +1065,6 @@ InkWell(
       sideLength == 50 ? sideLength = 100 : sideLength = 50;
     });
   },
-)
-```
-
-### ThemeData
-- `ThemeData`는 테마를 정의하는 위젯입니다.
-- `MaterialApp`의 `theme`, `Theme`의 `data` 등에서 값으로 사용됩니다.
-- `ThemeData.copyWith` 메소드는 테마 오브젝트를 복사합니다. (인자를 제공해서 원하는 파라미터를 수정할 수 있습니다.)
-
-|파라미터|타입|의미|
-|---|---|---|
-|brightness|Brightness|밝기 테마|
-|primaryColor|Color|앱의 주요 부분의 배경 색|
-
-```
-ThemeData(
-  brightness: Brightness.light,
-  primaryColor: Colors.green,
 )
 ```
 
@@ -1141,6 +1087,39 @@ Theme(
   ),
 )
 ```
+
+### ThemeData
+- `ThemeData`는 테마를 정의하는 위젯입니다.
+- `MaterialApp`의 `theme`, `Theme`의 `data` 등에서 값으로 사용됩니다.
+- `ThemeData.copyWith` 메소드는 테마 오브젝트를 복사합니다. (인자를 제공해서 원하는 파라미터를 수정할 수 있습니다.)
+
+|파라미터|타입|의미|
+|---|---|---|
+|colorScheme|ColorScheme|적용할 ColorScheme|
+|brightness|Brightness|밝기 테마|
+|primaryColor|Color|앱의 주요 부분의 배경 색|
+
+```
+ThemeData(
+  brightness: Brightness.light,
+  primaryColor: Colors.green,
+)
+```
+
+### ColorScheme
+- `ColorScheme`는 대부분의 위젯 색상에 적용 가능한 color system 클래스입니다.
+- 특정 역할에 따라 알맞은 색상을 자동 배정합니다.
+	- primary: 핵심 컴포넌트 (활성 상태, 중요 버튼 등)
+	- secondary: 세부 컴포넌트
+ 	- tertiary: primary, secondary와 대조되는 색상
+
+|파라미터|타입|의미|
+|---|---|---|
+|primary|Color|primary 색상|
+|secondary|Color|secondary 색상|
+|tertiary|Color|tertiary 색상|
+|background|Color|배경 색상|
+|outline|Color|테두리 색상|
 
 ### ClipRect
 - `ClipRect`는 사각형 클립을 제공하는 위젯입니다.
@@ -1210,6 +1189,43 @@ RichText(
   text: const TextSpan(text: 'Hello'),
   selectionColor: const Colors.blue,
 )
+```
+
+### FlutterLogo
+- `FlutterLogo`는 Flutter의 로고 이미지를 포함한 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|size|double|로고 크기|
+
+```
+FlutterLogo(
+  size: 150.0
+)
+```
+
+### Tween<T>
+- `Tween<T>`은 `T` 타입에 대해 시작에서 종료까지 선형 차이를 의미하는 클래스입니다.
+- `Tween<T>`은 주로 애니메이션에서 사용됩니다.
+- `animate` 메소드는 `Animation<T>`를 반환합니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|begin|`T`|시작 값|
+|end|`T`|종료 값|
+
+```
+Tween<Offset>(
+  begin: const Offset(0.0, 0.0),
+  end: const Offset(50.0, 100.0),
+)
+```
+
+### Offset
+- `Offset`은 2D 좌표에서 변화량을 의미하는 클래스입니다.
+
+```
+Offset(double dx, double dy)
 ```
 
 ## Input
