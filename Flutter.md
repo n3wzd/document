@@ -881,11 +881,37 @@ DefaultTabController(
 > Colors.orange
 
 ### MaterialStateProperty
+- `MaterialStateProperty`는 사용자와 위젯의 상호작용 상태에 따라 주어진 아이템을 반환하는 인터페이스 클래스입니다.
+- 상호작용 종류는 `MaterialState`에 정의되어 있습니다.
+- 인터페이스 함수는 `resolve` 프로퍼티에 저장됩니다.
+- `resolve`가 반환하는 아이템의 타입은 제너릭으로 정의됩니다.
+- `resolve` 함수는 `Set<MaterialState>`을 인자로 하며, 이는 현재 사용자와 위젯간 상호작용 상태를 의미합니다.
+
+**정적 메소드**
+- `all`은 `resolve`는 어떤 상태에서든 단일 아이템을 반환합니다.
+> MaterialStateProperty.all\<T\>(T value) → MaterialStateProperty\<T\>
+
+- `resolveWith`에선 `resolve`를 직접 제공할 수 있습니다.
+> MaterialStateProperty.resolveWith\<T\>(MaterialPropertyResolver\<T\> callback) → MaterialStateProperty\<T\>
+
+```
+MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+  const Set<MaterialState> interactiveStates = <MaterialState>{
+    MaterialState.pressed,
+    MaterialState.hovered,
+    MaterialState.focused,
+  };
+  if (states.any(interactiveStates.contains)) {
+    return Colors.blue;
+  }
+  return Colors.red;
+})
+```
 
 ### MaterialState
-- `MaterialState`은 `Material` 위젯의 상호작용 상태를 저장한 enum입니다.
-- 상태의 종류는 다음이 있습니다.
+- `MaterialState`은 `Material` 위젯의 상호작용 상태를 정의한 enum입니다.
 
+**상태 종류**
 1. `hovered`
 2. `focused`
 3. `pressed`
@@ -1862,6 +1888,57 @@ class _HomePageState extends State<HomePage> {
 ```
 
 ![](images/Flutter-Example-AlertDialog.png)
+
+### MaterialStateProperty
+- 버튼을 터치하면 색상 애니메이션이 재생됩니다.
+
+```
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: const Center(
+          child: MaterialStatePropertyExample(),
+        ),
+      ),
+    );
+  }
+}
+
+class MaterialStatePropertyExample extends StatelessWidget {
+  const MaterialStatePropertyExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          const Set<MaterialState> interactiveStates = <MaterialState>{
+            MaterialState.pressed,
+            MaterialState.hovered,
+            MaterialState.focused,
+          };
+          if (states.any(interactiveStates.contains)) {
+            return Colors.blue;
+          }
+          return Colors.red;
+        }),
+      ),
+      onPressed: () {},
+      child: const Text('Button'),
+    );
+  }
+}
+```
+
+![](images/Flutter-Example-MaterialStateProperty.png)
 
 ### AnimationController
 - `CurvedAnimation`와 `SlideTransition`이 적용된 애니메이션입니다.
