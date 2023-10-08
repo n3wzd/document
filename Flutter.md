@@ -933,6 +933,22 @@ MaterialStateProperty.resolveWith((Set<MaterialState> states) {
 6. `disabled`
 7. `error`
 
+### ButtonStyle
+- `ButtonStyle`은 버튼의 style을 정의하는 클래스입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|backgroundColor|MaterialStateProperty\<Color\>|배경 색상|
+|iconColor|MaterialStateProperty\<Color\>|Icon 색상|
+|shape|MaterialStateProperty\<OutlinedBorder\>|버튼 외형|
+
+```
+ButtonStyle(
+  iconColor: MaterialStateProperty.all(const Color(0xCCFFFFFF)),
+  backgroundColor: MaterialStateProperty.all(Colors.transparent),
+)
+```
+
 ### AnimationController
 - `AnimationController`은 애니메이션을 제어하는 위젯입니다.
 - `AnimationController`는 `TickerProvider` 오브젝트를 사용합니다. `TickerProvider`는 `Ticker` 오브젝트와 인터페이스하는 클래스이며, `Ticker`는 애니메이션 프레임마다 콜백을 한번씩 호출하는 클래스입니다.
