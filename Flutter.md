@@ -1219,23 +1219,77 @@ TextField(
 )
 ```
 
-### IconButton
-- `IconButton`는 `Icon`을 포함하는 버튼 위젯입니다.
+### TextButton
+- `TextButton`는 텍스트를 포함한 버튼 위젯입니다.
+- `onPressed`는 버튼 누를 시 실행되는 콜백을 값으로 합니다. 만약 이 값이 null이면 버튼은 비활성됩니다.
 
 |파라미터|타입|의미|
 |---|---|---|
+|onPressed|VoidCallback|버튼 누를 시 실행되는 콜백|
+|child|Widget|하위 위젯|
+|style|ButtonStyle|버튼 스타일|
+
+```
+TextButton(
+  style: TextButton.styleFrom(
+    textStyle: const TextStyle(fontSize: 20),
+  ),
+  onPressed: () {},
+  child: const Text('Button'),
+)
+```
+
+### OutlinedButton
+- `OutlinedButton`는 테두리가 있는 버튼 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|onPressed|VoidCallback|버튼 누를 시 실행되는 콜백|
+|child|Widget|하위 위젯|
+|style|ButtonStyle|버튼 스타일|
+
+```
+OutlinedButton(
+  onPressed: () {},
+  child: const Text('Click Me'),
+)
+```
+
+### ElevatedButton
+- `ElevatedButton`는 Material 디자인이 적용된 버튼 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|onPressed|VoidCallback|버튼 누를 시 실행되는 콜백|
+|child|Widget|하위 위젯|
+|style|ButtonStyle|버튼 스타일|
+
+```
+ElevatedButton(
+  style: ElevatedButton.styleFrom(
+    textStyle: const TextStyle(fontSize: 20)
+  ),
+  onPressed: () {},
+  child: const Text('Button'),
+)
+```
+
+### IconButton
+- `IconButton`는 `Icon`을 포함한 버튼 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|onPressed|VoidCallback|버튼 누를 시 실행되는 콜백|
 |icon|Widget|아이콘 위젯|
 |iconSize|double|아이콘 크기|
 |color|Color|아이콘 색|
-|onPressed|VoidCallback|버튼 누를 시 실행되는 콜백|
+|style|ButtonStyle|버튼 스타일|
 
 ```
 IconButton(
   iconSize: 32,
   icon: const Icon(Icons.favorite),
-  onPressed: () {
-    ...
-  },
+  onPressed: () {},
 )
 ```
 
