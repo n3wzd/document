@@ -879,6 +879,24 @@ DefaultTabController(
 |---|---|---|
 |tabs|List\<Widget\>|탭 위젯|
 
+### DraggableScrollableSheet
+- `DraggableScrollableSheet`는 드래그해서 확장할 수 있는 스크롤 가능한 컨테이너 위젯입니다.
+- 파라미터를 통해 컨테이너의 크기를 설정할 수 있으며, 값의 범위는 \[0.0, 1.0\]입니다. (1.0이면 상위 위젯과 같은 크기)
+- 빌드 메소드 `ScrollableWidgetBuilder`는 2개의 인자 `Context`, `ScrollController`를 가집니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|builder|ScrollableWidgetBuilder|빌드 메소드|
+|initialChildSize|double|초기 Child 크기 비율|
+|maxChildSize|double|최대 Child 크기 비율|
+|minChildSize|double|최소 Child 크기 비율|
+
+### ScrollController
+- `ScrollController`는 스크롤 동작을 감지하는 클래스입니다.
+
+### ScrollPosition
+- `ScrollPosition`는 현재 스크롤 위치 정보를 저장하는 클래스입니다.
+
 ## Design & Animations
 ### Color
 - `Color`는 색을 표현하는 클래스입니다.
@@ -1987,6 +2005,48 @@ class _HomePageState extends State<HomePage> {
 ```
 
 ![](images/Flutter-Example-AlertDialog.png)
+
+### DraggableScrollableSheet
+- 드래그해서 확장 가능한 컨테이너입니다.
+
+```
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: const HomePage()));
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SizedBox.expand(
+        child: DraggableScrollableSheet(
+          builder: (BuildContext context, ScrollController scrollController) {
+            return Container(
+              color: Colors.grey[100],
+              child: ListView.builder(
+                controller: scrollController,
+                itemCount: 25,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(title: Text('Item $index'));
+                },
+              ),
+            );
+          },
+          initialChildSize: 0.5,
+          minChildSize: 0.25,
+          maxChildSize: 1.0,
+        ),
+      ),
+    );
+  }
+}
+```
+
+![](images/Flutter-Example-DraggableScrollableSheet.png)
 
 ### MaterialStateProperty
 - 버튼을 터치하면 색상 애니메이션이 재생됩니다.
