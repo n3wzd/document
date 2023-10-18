@@ -2308,13 +2308,13 @@ class _FormExampleState extends State<FormExample> {
             },
           ),
           Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
                    // submit 완료
                 }
-               },
+              },
               child: const Text('Submit'),
             ),
           ),
