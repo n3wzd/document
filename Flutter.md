@@ -503,6 +503,23 @@ ListView.builder(
 )
 ```
 
+### ListTile
+- `ListTile`은 `ListView`의 아이템으로 사용되는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|title|Widget|하위 위젯|
+|onTap|GestureTapCallback|탭 제스처 콜백|
+|leading|Widget|`title` 이전에 표시되는 위젯|
+|trailing|Widget|`title` 이후에 표시되는 위젯|
+
+```
+ListTile(
+  title: Text('$index'),
+  onTap: () {},
+)
+```
+
 ### GridView
 - `GridView`는 스크롤이 가능한 2D 그리드 레이아웃 위젯입니다.
 - `GridView`에서 가장 자주 사용되는 생성자는 타일 개수가 고정된 그리드를 생성하는 `GridView.count`입니다.
@@ -890,6 +907,28 @@ DefaultTabController(
 |initialChildSize|double|초기 Child 크기 비율|
 |maxChildSize|double|최대 Child 크기 비율|
 |minChildSize|double|최소 Child 크기 비율|
+|controller|DraggableScrollableController|`DraggableScrollableController` 오브젝트|
+
+```
+DraggableScrollableSheet(
+  initialChildSize: 0.5,
+  minChildSize: 0.1,
+  maxChildSize: 0.9,
+  builder: (BuildContext context, ScrollController scrollController) {
+    ...
+  },
+);
+```
+
+### DraggableScrollableController
+- `DraggableScrollableController`는 `DraggableScrollableSheet`의 동작을 제어하는 클래스입니다.
+- `DraggableScrollableSheet`의 `controller` 파라미터에 대입할 수 있습니다.
+
+|메소드|기능|
+|---|---|
+|jumpTo|드래그 위치를 특정 위치로 변경합니다|
+|animateTo|jumpTo와 비슷한데, 애니메이션이 적용됩니다|
+|reset|드래그 위치를 초기 위치로 변경합니다|
 
 ### ScrollController
 - `ScrollController`는 스크롤 동작을 감지하는 클래스입니다.
