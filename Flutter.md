@@ -2008,38 +2008,62 @@ class _HomePageState extends State<HomePage> {
 
 ### DraggableScrollableSheet
 - 드래그해서 확장 가능한 컨테이너입니다.
+- 화살표 버튼을 누르면 확장/축소를 토글할 수 있습니다.
 
 ```
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(home: const HomePage()));
+  runApp(MaterialApp(home: HomePage()));
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final minChildSize = 0.1;
+  final maxChildSize = 0.9;
+  bool _isExpand = false;
+
+  @override
   Widget build(BuildContext context) {
+    DraggableScrollableController controller = DraggableScrollableController();
     return Scaffold(
-      body: SizedBox.expand(
-        child: DraggableScrollableSheet(
-          builder: (BuildContext context, ScrollController scrollController) {
-            return Container(
-              color: Colors.grey[100],
-              child: ListView.builder(
-                controller: scrollController,
-                itemCount: 25,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(title: Text('Item $index'));
-                },
-              ),
-            );
-          },
-          initialChildSize: 0.5,
-          minChildSize: 0.25,
-          maxChildSize: 1.0,
-        ),
+      body: DraggableScrollableSheet(
+        initialChildSize: minChildSize,
+        minChildSize: minChildSize,
+        maxChildSize: maxChildSize,
+        controller: controller,
+        builder: (BuildContext context, ScrollController scrollController) {
+          return Container(
+            color: Colors.grey[100],
+            child: ListView.builder(
+              controller: scrollController,
+              itemCount: 11,
+              itemBuilder: (BuildContext context, int index) {
+                return index == 0 ?
+                  ListTile(
+                    leading: Icon(_isExpand ? Icons.arrow_drop_down : Icons.arrow_drop_up),
+                    onTap: () async {
+                      await controller.animateTo(_isExpand ? minChildSize : maxChildSize,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeInOutQuart);
+                      setState(() {
+                        _isExpand = !_isExpand;
+                      });
+                    }
+                  )
+                  : ListTile(
+                    title: Text('$index'),
+                  );
+              },
+            ),
+          );
+        },
       ),
     );
   }
