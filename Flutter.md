@@ -466,6 +466,7 @@ SafeArea(
 |children|List\<Widget\>|리스트 아이템 목록|
 |scrollDirection|Axis|스크롤 방향|
 |padding|EdgeInsetsGeometry|아이템간 간격|
+|itemExtent|double|아이템 길이(스크롤 방향 기준)|
 
 ```
 ListView(
