@@ -505,6 +505,7 @@ ListView.builder(
 
 ### ListTile
 - `ListTile`은 `ListView`의 아이템으로 사용되는 위젯입니다.
+- Tile의 색상을 표시하려면 `Material`을 조상 위젯으로 해야 합니다.
 
 |파라미터|타입|의미|
 |---|---|---|
@@ -512,6 +513,10 @@ ListView.builder(
 |onTap|GestureTapCallback|탭 제스처 콜백|
 |leading|Widget|`title` 앞쪽에 표시되는 위젯|
 |trailing|Widget|`title` 뒤쪽에 표시되는 위젯|
+|textColor|Color|텍스트 색상|
+|selectedColor|Color|선택된 아이템의 텍스트/아이콘 색상|
+|tileColor|Color|아이템의 배경 색상|
+|selectedTileColor|Color|선택된 아이템의 배경 색상|
 
 ```
 ListTile(
