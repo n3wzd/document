@@ -510,8 +510,8 @@ ListView.builder(
 |---|---|---|
 |title|Widget|하위 위젯|
 |onTap|GestureTapCallback|탭 제스처 콜백|
-|leading|Widget|`title` 이전에 표시되는 위젯|
-|trailing|Widget|`title` 이후에 표시되는 위젯|
+|leading|Widget|`title` 앞쪽에 표시되는 위젯|
+|trailing|Widget|`title` 뒤쪽에 표시되는 위젯|
 
 ```
 ListTile(
@@ -2086,7 +2086,7 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (BuildContext context, int index) {
                 return index == 0 ?
                   ListTile(
-                    leading: Icon(_isExpand ? Icons.arrow_drop_down : Icons.arrow_drop_up),
+                    title: Icon(_isExpand ? Icons.arrow_drop_down : Icons.arrow_drop_up),
                     onTap: () async {
                       await controller.animateTo(_isExpand ? minChildSize : maxChildSize,
                           duration: const Duration(milliseconds: 500),
