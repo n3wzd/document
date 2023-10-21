@@ -231,6 +231,7 @@ print(foo(1)); // 정상적으로 동작합니다.
 ## Layout
 ### Container
 - `Container`는 기본적인 컨테이너 위젯입니다.
+- `Container`는 다양한 기능을 가지고 있다는 이점이 있습니다. 하지만 기능이 많아서 동작을 예측하기 어려운 편입니다.
 - `Container`의 구조는 HTML의 Box Model하고 유사합니다.
 
 ```
@@ -245,7 +246,7 @@ print(foo(1)); // 정상적으로 동작합니다.
 |--------------------------------------|
 ```
 
-- `Container`는 특정한 레이아웃이 없으며, 다른 위젯의 레이아웃을 따릅니다. 그렇기에 `Container`의 레이아웃 동작은 다소 복잡합니다. (위쪽일수록 우선 순위가 높습니다.)
+- `Container`는 특정한 레이아웃이 없으며, 다른 위젯의 레이아웃을 따릅니다. (위쪽일수록 우선 순위가 높습니다.)
 1. `alignment` 조건을 적용합니다.
 2. `Container` 크기를 하위 위젯의 크기에 맞게 조정합니다.
 3. `width`, `height`, `constraints` 조건을 적용합니다.
@@ -274,7 +275,6 @@ Container(
 
 ### Padding
 - `Padding`은 `padding`을 제공하는 위젯입니다.
-- `padding`이 있는 `Container`와 비슷하지만, `Padding`은 `padding` 이외의 기능은 가지고 있지 않다는 점에서 차이가 있습니다.
 
 |파라미터|타입|의미|
 |---|---|---|
@@ -284,6 +284,34 @@ Container(
 ```
 Padding(
   padding: EdgeInsets.all(16.0),
+  child: Text('Hello World!'),
+)
+```
+
+### Center
+- `Center`은 가운데 정렬을 제공하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+
+```
+Center(
+  child: Text('Hello World!'),
+)
+```
+
+### Align
+- `Align`은 정렬을 제공하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|alignment|AlignmentGeometry|정렬 방법|
+
+```
+Align(
+  alignment: Alignment.centerLeft,
   child: Text('Hello World!'),
 )
 ```
