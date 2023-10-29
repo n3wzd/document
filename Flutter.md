@@ -148,6 +148,24 @@ Center(
 )
 ```
 
+### StatefulBuilder
+- `StatefulBuilder` 위젯을 사용해서 `StatefulWidget`을 정의할 수 있습니다.
+- `builder` 파라미터는 빌드 메소드를 값으로 합니다.
+- 빌드 메소드의 `setState` 프로퍼티는 `StatefulWidget`의 `setState`과 동일한 역할을 합니다.
+- `StatefulWidget`을 별도로 정의하지 않고 바로 사용하고자 한다면 `StatefulBuilder`가 적합합니다.
+
+```
+StatefulBuilder(
+  builder: (BuildContext context, StateSetter setState) => IconButton(
+    icon: const Icon(Icons.repeat, color: ColorTheme.lightGrey)
+    iconSize: 35,
+    onPressed: () {
+      setState(() {});
+    },
+  ),
+),
+```
+
 ### StreamBuilder
 - `StreamBuilder` 위젯을 사용해서 특정 Stream에 맞게 상태가 변화하는 `StatefulWidget`을 정의할 수 있습니다.
 - `StreamBuilder`의 제너릭 타입은 Stream의 잠재적 값 타입입니다.
