@@ -217,6 +217,23 @@ StreamBuilder<T>(
 3. `active`: 비동기 연산이 진행 중인 상태 (data가 결정되었으나 값이 바뀔 수 있음)
 4. `done`: 비동기 연산이 종료된 상태 (data가 완전히 결정됨)
 
+### MediaQuery
+- `MediaQuery`는 미디어 쿼리를 서브 트리 구조로 저장하는 클래스입니다.
+- static 메소드인 `of`를 사용해서 `MediaQueryData`를 가져올 수 있습니다.
+  - `of`는 `BuildContext`를 인자로 합니다.
+
+```
+// 현재 기기의 화면 높이
+MediaQuery.of(context).size.height
+```
+
+### MediaQueryData
+- `MediaQuery`는 현재 기기(미디어)에 대한 정보를 제공하는 클래스입니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|size|Size|화면 크기|
+
 ### Function
 - `Function`은 함수 클래스이며, 모든 함수 타입의 최상위 객체입니다.
 - `Function` 자체에는 아무런 값을 가지지 않습니다.
