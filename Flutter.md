@@ -565,6 +565,7 @@ ListView.builder(
 |selectedColor|Color|선택된 아이템의 텍스트/아이콘 색상|
 |tileColor|Color|아이템의 배경 색상|
 |selectedTileColor|Color|선택된 아이템의 배경 색상|
+|minVerticalPadding|double|`title`과 아이템 상단 모서리간 최소 간격 (기본값 = 4)|
 
 ```
 ListTile(
@@ -719,8 +720,10 @@ Scaffold(
 |파라미터|타입|의미|
 |---|---|---|
 |backgrounColor|Color|메뉴바 색상|
-|leading|Widget|title 이전에 표시되는 위젯|
+|leading|Widget|`title` 이전에 표시되는 위젯|
 |title|Widget|메뉴바 제목으로 표시되는 위젯|
+|centerTitle|bool|`title`의 위치를 중심으로 설정할 것인지 유무|
+|flexibleSpace|Widget|`AppBar` 뒤쪽에 위치되는 위젯 (높이는 `AppBar`와 동일)|
 
 ```
 AppBar(
