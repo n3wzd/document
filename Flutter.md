@@ -808,9 +808,25 @@ Drawer(
 ### Text
 - `Text`는 텍스트를 제공하는 위젯입니다.
 
+|파라미터|타입|의미|
+|---|---|---|
+|style|TextStyle|텍스트 스타일|
+|maxLines|int|표시되는 최대 줄 수|
+|overflow|TextOverflow|텍스트가 UI 초과시 처리되는 방법|
+
 ```
 Text('Hello World!')
 ```
+
+### TextOverflow
+- 텍스트가 UI 초과시 처리되는 방법을 정의한 `enum`입니다.
+
+|값|의미|
+|---|---|
+|`clip`|초과된 텍스트를 표시하지 않습니다.|
+|`fade`|초과된 텍스트를 흐릿하게 표시합니다.|
+|`ellipsis`|초과된 텍스트를 '...'으로 대체하여 표시합니다.|
+|`visible`|초과된 텍스트를 그대로 표시합니다.|
 
 ### AlertDialog
 - `AlertDialog`는 경고 메시지 창을 표시하는 위젯입니다.
