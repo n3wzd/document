@@ -646,8 +646,8 @@ LayoutBuilder(
 |minHeight|double|최소 높이|
 |maxHeight|double|최대 높이|
 
-> minWidth \<= Size.width \<= maxWidth
-> minHeight \<= Size.height \<= maxHeight
+- minWidth \<= Size.width \<= maxWidth
+- minHeight \<= Size.height \<= maxHeight
 
 ### EdgeInsets
 - `EdgeInsets`은 4개의 값을 제공하는 클래스입니다.
