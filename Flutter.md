@@ -622,6 +622,33 @@ GridView.count(
 )
 ```
 
+### LayoutBuilder
+- `LayoutBuilder`는 상위 위젯의 크기에 의존하여 위젯을 빌드하는 클래스입니다.
+- `BoxConstraints`을 통해 상위 위젯의 크기를 구할 수 있습니다.
+- 빌드 메소드는 `BuildContext`, `BoxConstraints`을 인자로 합니다.
+
+```
+LayoutBuilder(
+  builder: (context, constraints) {
+    ...
+  }
+);
+```
+
+### BoxConstraints
+- `BoxConstraints`는 `RenderBox` 레이아웃을 제공하는 클래스입니다.
+- 박스 레이아웃의 크기 정보를 포함하고 있습니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|minWidth|double|최소 너비|
+|maxWidth|double|최대 너비|
+|minHeight|double|최소 높이|
+|maxHeight|double|최대 높이|
+
+> minWidth \<= Size.width \<= maxWidth
+> minHeight \<= Size.height \<= maxHeight
+
 ### EdgeInsets
 - `EdgeInsets`은 4개의 값을 제공하는 클래스입니다.
 - 주로 사각형과 관련된 프로퍼티에서 값으로 사용됩니다. (ex. padding)
@@ -816,6 +843,18 @@ Drawer(
 
 ```
 Text('Hello World!')
+```
+
+### TextSpan
+- `TextSpan`는 텍스트를 포함한 span입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|text|String|텍스트 내용|
+|style|TextStyle|텍스트 스타일|
+
+```
+TextSpan(text: 'text');
 ```
 
 ### TextOverflow
@@ -1019,11 +1058,64 @@ DraggableScrollableSheet(
 |animateTo|jumpTo와 비슷한데, 애니메이션이 적용됩니다|
 |reset|드래그 위치를 초기 위치로 변경합니다|
 
+### SingleChildScrollView
+- `SingleChildScrollView`는 단일 위젯에 스크롤 기능을 추가해주는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|scrollDirection|Axis|스크롤 방향|
+|ScrollController|ScrollController|`ScrollController` 오브젝트|
+
+```
+SingleChildScrollView(
+  scrollDirection: Axis.horizontal,
+  child: ...
+);
+```
+
 ### ScrollController
 - `ScrollController`는 스크롤 동작을 감지하는 클래스입니다.
 
+|메소드|기능|
+|---|---|
+|jumpTo|스크롤 위치를 특정 위치로 변경합니다|
+|animateTo|jumpTo와 비슷한데, 애니메이션이 적용됩니다|
+
+```
+ScrollController controller = ScrollController();
+SingleChildScrollView(
+  controller: controller,
+  child: ...
+);
+```
+
 ### ScrollPosition
 - `ScrollPosition`는 현재 스크롤 위치 정보를 저장하는 클래스입니다.
+
+### TextPainter
+- `TextPainter`는 `TextSpan`을 페인트하는 클래스입니다.
+- 주로 `TextSpan`의 길이를 구할 때 사용됩니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|text|InlineSpan|텍스트 위젯|
+|maxLines|int|최대 줄 수|
+|textDirection|TextDirection|텍스트 방향|
+
+|메소드|기능|
+|---|---|
+|layout|텍스트의 시각적 위치를 계산합니다|
+
+```
+TextPainter textPainter = TextPainter(
+  text: TextSpan(text: text),
+  maxLines: 1,
+  textDirection: TextDirection.ltr)
+..layout(minWidth: 0, maxWidth: double.infinity);
+
+double textWidth = textPainter.size.width;
+```
 
 ## Design & Animations
 ### Color
