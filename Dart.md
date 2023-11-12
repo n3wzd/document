@@ -1561,5 +1561,14 @@ Start
 End
 ```
 
+### isolate
+- `isolate`는 독립된 작업을 수행하는 모델입니다.
+- 스레드, 프로세스와 비슷하지만, isolate는 자신만의 메모리를 가지고 다른 isolate가 자신의 상태에 접근할 수 없다는 차이가 있습니다.
+- 일반적으로 Dart 애플리케이션은 main isolate에서 수행됩니다.
+- isolate를 추가로 생성해서 백그라운드 작업을 별도로 수행할 수 있습니다. (이러한 isolate를 백그라운드 워커라고 합니다.)
+
 ## 출처 (Reference)
 https://dart-tutorial.com/
+
+**isolate**
+https://dart-ko.dev/language/concurrency
