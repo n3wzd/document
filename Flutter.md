@@ -1608,6 +1608,28 @@ Slider(
 ),
 ```
 
+### Checkbox
+- `Checkbox`는 체크박스 입력을 제공하는 위젯입니다.
+- 체크박스를 클릭하면 `value`가 토글됩니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|value|bool|체크 유무|
+|onChanged|ValueChanged\<bool?\>|`value` 변경시 실행되는 콜백|
+|checkColor|Color|check icon 색|
+
+```
+Checkbox(
+  checkColor: Colors.white,
+  value: checkMode,
+  onChanged: (bool? value) {
+    setState(() {
+      checkMode = !checkMode;
+    });
+  },
+),
+```
+
 ## Form
 ### Form
 - `Form` 위젯은 폼과 관련된 위젯들의 조상 위젯 역할을 합니다.
@@ -1902,6 +1924,26 @@ void navigate() {
     arguments: StatusRoute(name: 'Steve', level: 5),
   );
 }
+```
+
+### WillPopScope
+- `WillPopScope`은 현재 페이지가 pop될 때 실행되는 콜백을 제공하는 위젯입니다.
+- `WillPopCallback`은 Future\<bool\>을 반환합니다. 만약 값이 true면 pop이 실행되고, false면 pop이 실행되지 않습니다.
+	- 이 점을 활용해서 뒤로가기 버튼을 통한 페이지 종료를 방지할 수 있습니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|onWillPop|WillPopCallback|하위 위젯|
+
+```
+WillPopScope(
+  child: Scaffold(
+    ...
+  ),
+onWillPop: () {
+  return Future<bool>.value(false);
+},
 ```
 
 ## Performance
