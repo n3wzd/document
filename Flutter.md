@@ -2049,8 +2049,6 @@ void navigate() {
 |start|시작|
 |stop|중지|
 
-## dart.io
-
 ## dart:async
 ### Stream
 - `Stream`은 비동기 이벤트를 다룰 때 사용되는 클래스입니다.
@@ -2178,6 +2176,41 @@ subscription.pause();
 ...
 subscription.resume();
 ```
+
+## dart.io
+### Directory
+- `Directory`는 디렉터리를 표현하는 클래스입니다.
+- `list` 메소드를 통해서 디렉터리에 포함된 파일과 서브 디렉터리를 가져올 수 있습니다.
+	- 이 메소드의 `recursive` 파라미터를 true로 하면 서브 디렉터리 내부의 파일들도 가져올 수 있습니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|path|String|디렉터리 경로|
+
+|메소드|반환|기능|
+|---|---|---|
+|list()|Stream<\FileSystemEntity\>|해당 디렉터리에 포함된 파일, 서브 디렉터리를 Stream으로 반환|
+|listSync()|List\<FileSystemEntity\>|`list`의 출력을 List로 반환|
+
+### FileSystemEntity
+- `FileSystemEntity`은 `File`, `Directory`, `Link`의 상위 클래스입니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|path|String|파일 경로|
+|uri|Uri|`Uri` 반환|
+
+|static 메소드|반환|기능|
+|---|---|---|
+|isDirectory()|Future\<bool\>|현재 엔티티가 디렉터리면 true 반환|
+|isDirectorySync()|bool|`isDirectory`와 동일|
+
+### Uri
+- `Uri`는 URI를 표현하는 클래스입니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|pathSegments|List\<String\>|분할된 경로 문자열 목록 반환|
 
 ## Performance
 간혹 Flutter 애플리케이션 구동 시 프레임 저하 등 성능 이슈가 발생할 수 있습니다. 성능 이슈의 원인은 주로 다음이 있습니다.
