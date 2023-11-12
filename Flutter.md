@@ -2066,7 +2066,7 @@ void navigate() {
 |---|---|
 |take()|현재 `Stream`에서 주어진 횟수만큼 실행되는 `Stream` 반환|
 |where()|현재 `Stream`에서 특정 조건일 때만 실행되는 `Stream` 반환|
-|listen()|현재 `Stream`에서 값 변경시 실행되는 콜백 설정 및 `StreamSubscription` 반환|
+|listen()|현재 `Stream`에서 값 업데이트시 실행되는 콜백 설정 및 `StreamSubscription` 반환|
 
 #### Stream.periodic
 - 주기적으로 동작하는 `Stream` 생성합니다.
@@ -2111,6 +2111,72 @@ StreamSubscription<void> subscription = Stream<void>.fromFuture(
     seekToNext();
   }
 );
+```
+
+### StreamController
+- `StreamController`는 `Stream`을 제어하는 클래스입니다.
+- 기본적으로 `Stream`을 포함하고 있으며, 주어진 메소드를 통해 이 `Stream`을 제어합니다.
+- `add` 메소드 실행시 현재 `Stream`의 이벤트가 수행됩니다.
+	- 이때 해당 `Stream`과 연결된 `StreamBuilder`의 빌드가 수행됩니다.
+
+|생성자|기능|
+|---|---|
+|StreamController()|`Stream`을 포함한 `StreamController` 생성|
+|StreamController.broadcast()|broadcast `Stream`을 포함한 `StreamController` 생성|
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|stream|Stream|현재 포함된 `Stream`|
+|onCancel|Function|`Stream` 취소시 실행되는 콜백|
+|onListen|Function|`Stream` 값 업데이트시 실행되는 콜백|
+|onPause|Function|`Stream` 일시정지시 실행되는 콜백|
+|onResume|Function|`Stream` 재개시 실행되는 콜백|
+
+|메소드|기능|
+|---|---|
+|add()|`Stream`에 특정 값 전송|
+|close()|`Stream` 종료|
+
+```
+StreamController<bool> streamController = StreamController<bool>.broadcast();
+StreamBuilder<bool> streamBuilder(builder) => StreamBuilder<bool>(
+  stream: streamController.stream,
+  builder: builder,
+);
+...
+streamController.add(true); // streamBuilder 빌드 수행
+...
+streamController.close();
+```
+
+### StreamSubscription
+- `StreamSubscription`는 특정 `Stream`을 구독하는 추상 클래스입니다.
+- 주로 `Stream.listen` 메소드에서 반환되는 인스턴스를 사용합니다.
+- 특정 `Stream`을 일시정지하는 용도로 사용할 수 있습니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|isPaused|bool|현재 일시정지면 true|
+
+|메소드|기능|
+|---|---|
+|onData()|`Stream` 값 업데이트시 실행되는 콜백 (설정 가능)|
+|onDone()|`Stream` 종료시 실행되는 콜백 (설정 가능)|
+|pause()|`Stream` 일시정지|
+|resume()|`Stream` 재개|
+|cancel()|`Stream` 연결 끊기|
+
+```
+StreamSubscription<double> subscription = stream.listen((x) {
+    print(x);
+  }, onDone: () {
+    print('End');
+  }
+);
+...
+subscription.pause();
+...
+subscription.resume();
 ```
 
 ## Performance
