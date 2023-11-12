@@ -2024,6 +2024,31 @@ void navigate() {
 }
 ```
 
+## Asyncronous
+### Timer
+- `Timer`는 주어진 시간 뒤에 실행되는 콜백을 제공하는 클래스입니다.
+- `cancel` 메소드로 해당 `Timer`를 취소할 수 있습니다.
+- 일시정지는 제공되지 않습니다.
+
+> Timer(Duration duration, void callback())
+- `duration` 시간 뒤에 주어진 콜백을 실행합니다.
+
+> Timer.periodic(Duration duration, void callback(Timer timer))
+- `duration` 시간마다 주어진 콜백을 실행합니다.
+
+### Stopwatch
+- `Stopwatch`는 경과 시간을 측정하는 클래스입니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|elapsed|Duration|경과 시간|
+
+|메소드|기능|
+|---|---|
+|reset|리셋|
+|start|시작|
+|stop|중지|
+
 ## Performance
 간혹 Flutter 애플리케이션 구동 시 프레임 저하 등 성능 이슈가 발생할 수 있습니다. 성능 이슈의 원인은 주로 다음이 있습니다.
 
