@@ -2052,6 +2052,9 @@ void navigate() {
 ## dart:async
 ### Stream
 - `Stream`은 비동기 이벤트를 다룰 때 사용되는 클래스입니다.
+- `Stream`은 크게 2가지 종류로 구분할 수 있습니다.
+	- `single subscription`: 한 곳에서만 listen이 가능합니다.
+	- `broadcast`: 여러 곳에서 listen이 가능합니다.
 
 |생성자|기능|
 |---|---|
