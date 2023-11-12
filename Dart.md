@@ -671,7 +671,7 @@ void main() {
 }
 ```
 
-## 파일 (FIie)
+## 파일 (File)
 - `File` 객체는 파일 정보를 저장합니다. (`dart:io`에 포함되어 있습니다.)
 - File 객체의 생성자는 파일 경로를 인자로 합니다.
 - File의 프로퍼티/메소드로 파일을 제어하거나 파일의 정보를 가져올 수 있습니다.
@@ -1521,9 +1521,9 @@ End
 ```
 
 ### Stream
-- Dart에서 `Stream` 객체는 여러 개의 `Future`를 다룰 때 사용됩니다.
-- Stream 역시 잠재적 값을 가지며, 이 값은 비동기 작업 중간에 달라질 수 있습니다.
-- Stream은 `Iterable`을 사용해서 생성합니다.
+- Dart에서 `Stream` 객체는 비동기 이벤트나 여러 개의 `Future`를 다룰 때 자주 사용됩니다.
+- Stream도 잠재적 값을 가지며, 이 값은 비동기 작업 중간에 달라질 수 있습니다.
+- Stream은 여러가지 방법으로 생성할 수 있습니다. (아래는 `Iterable` 사용)
 	- `async*` 함수를 사용해서 Stream을 생성할 수 있습니다. `async*` 함수에서 사용 가능한 `yield` 키워드는 Stream의 값을 변경합니다. (`yield`는 Iterable에서 값을 생성할 때도 사용됩니다.)
 	- `yield*`은 Iterable이나 Stream을 반환하는 함수를 호출할 때 사용됩니다.
 	- `Stream.fromIterable` 메소드로 즉시 Stream을 생성할 수 있습니다.
