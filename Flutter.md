@@ -2049,6 +2049,70 @@ void navigate() {
 |start|시작|
 |stop|중지|
 
+## dart.io
+
+## dart:async
+### Stream
+- `Stream`은 비동기 이벤트를 다룰 때 사용되는 클래스입니다.
+
+|생성자|기능|
+|---|---|
+|Stream()|`Stream` 생성|
+|Stream.empty()|broadcast `Stream` 생성|
+|Stream.fromFuture()|단일 Future를 구독한 `Stream` 생성|
+|Stream.periodic()|주기적으로 동작하는 `Stream` 생성|
+
+|메소드|기능|
+|---|---|
+|take()|현재 `Stream`에서 주어진 횟수만큼 실행되는 `Stream` 반환|
+|where()|현재 `Stream`에서 특정 조건일 때만 실행되는 `Stream` 반환|
+|listen()|현재 `Stream`에서 값 변경시 실행되는 콜백 설정 및 `StreamSubscription` 반환|
+
+#### Stream.periodic
+- 주기적으로 동작하는 `Stream` 생성합니다.
+- `take` 메소드를 사용해서 실행 횟수를 제한할 수 있습니다.
+
+```
+// 0.5초마다 40번 실행되는 Stream 생성
+// x: 0 → 39
+// 반환값: 0.0 → 0.9...
+
+int delay = 20000;
+Stream<double> stream = Stream.periodic(
+  const Duration(milliseconds: 500),
+  (x) => x * 1.0 / (delay / 500))
+  .take(delay ~/ 500);
+```
+
+#### Stream.where
+- `where` 메소드는 `Stream`이 실행되는 조건을 설정합니다.
+
+```
+// state이 ProcessingState.completed일 때만 실행되는 Stream 생성
+
+audioPlayer.processingStateStream
+  .where((state) => state == ProcessingState.completed)
+  .listen((state) {
+    ...
+  }
+);
+```
+
+#### Stream.listen
+- `listen` 메소드는 `Stream` 계산값 변동시 실행되는 콜백을 설정합니다.
+- 반환되는 `StreamSubscription`을 통해서 `Stream`을 제어할 수 있습니다.
+
+```
+// 5초 뒤에 seekToNext() 메소드 실행하는 Future를 구독한 Stream 생성
+
+StreamSubscription<void> subscription = Stream<void>.fromFuture(
+  Future<void>.delayed(Duration(milliseconds: 5000), () {}))
+  .listen((x) {
+    seekToNext();
+  }
+);
+```
+
 ## Performance
 간혹 Flutter 애플리케이션 구동 시 프레임 저하 등 성능 이슈가 발생할 수 있습니다. 성능 이슈의 원인은 주로 다음이 있습니다.
 
