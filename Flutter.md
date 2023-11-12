@@ -1677,7 +1677,7 @@ TextFormField(
 )
 ```
 
-## Gesture
+## Detector
 ### GestureDetector
 - `GestureDetector`는 제스처를 감지하는 위젯입니다.
 - `child` 내에서 특정 제스처를 감지하면 알맞은 콜백을 호출합니다. (각 제스처에 대한 콜백은 파라미터를 통해 설정할 수 있습니다.)
@@ -1721,6 +1721,42 @@ GestureDetector(
 - onHorizontalDragStart
 - onHorizontalDragUpdate
 - onHorizontalDragEnd
+
+### WillPopScope
+- `WillPopScope`은 현재 페이지가 pop될 때 실행되는 콜백을 제공하는 위젯입니다.
+- `WillPopCallback`은 Future\<bool\>을 반환합니다. 만약 값이 true면 pop이 실행되고, false면 pop이 실행되지 않습니다.
+	- 이 점을 활용해서 뒤로가기 버튼을 통한 페이지 종료를 방지할 수 있습니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|child|Widget|하위 위젯|
+|onWillPop|WillPopCallback|하위 위젯|
+
+```
+WillPopScope(
+  child: Scaffold(
+    ...
+  ),
+onWillPop: () {
+  return Future<bool>.value(false);
+},
+```
+
+### AppLifecycleState
+- `AppLifecycleState`는 애플리케이션 구동 상태를 정의한 enum입니다.
+- 구체적인 상태의 내용은 OS마다 다를 수 있습니다.
+
+1. `detached`: 뷰 없이 플러터 엔진만 작동되는 상태 (애플리케이션이 종료되기 직전)
+2. `resumed`: 뷰가 제공되고 사용자의 입력도 받는 상태
+3. `inactive`: 최소한의 뷰만 제공되며 사용자의 입력은 받지 않는 상태
+4. `paused`: 뷰가 제공되지 않고 사용자의 입력도 받지 않는 상태 (Android, iOS 한정 상태)
+5. `hidden`: 뷰가 숨겨진 상태
+
+```
+Android 기준 상태
+백그라운드 전환: `resumed` > `inactive` > `paused`
+포그라운드 전환: `paused`> `inactive` > `resumed`
+```
 
 ## Key
 - Key는 위젯을 식별하는 용도로 사용됩니다.
@@ -1924,26 +1960,6 @@ void navigate() {
     arguments: StatusRoute(name: 'Steve', level: 5),
   );
 }
-```
-
-### WillPopScope
-- `WillPopScope`은 현재 페이지가 pop될 때 실행되는 콜백을 제공하는 위젯입니다.
-- `WillPopCallback`은 Future\<bool\>을 반환합니다. 만약 값이 true면 pop이 실행되고, false면 pop이 실행되지 않습니다.
-	- 이 점을 활용해서 뒤로가기 버튼을 통한 페이지 종료를 방지할 수 있습니다.
-
-|파라미터|타입|의미|
-|---|---|---|
-|child|Widget|하위 위젯|
-|onWillPop|WillPopCallback|하위 위젯|
-
-```
-WillPopScope(
-  child: Scaffold(
-    ...
-  ),
-onWillPop: () {
-  return Future<bool>.value(false);
-},
 ```
 
 ## Performance
