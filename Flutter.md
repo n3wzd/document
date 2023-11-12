@@ -1076,6 +1076,11 @@ SingleChildScrollView(
 
 ### ScrollController
 - `ScrollController`는 스크롤 동작을 감지하는 클래스입니다.
+- `jumpTo` 등 `ScrollPosition` 관련 메소드는 `hasClients`가 true여야 동작합니다.
+
+|프로퍼티|타입|의미|
+|---|---|---|
+|hasClients|bool|`ScrollPosition` 첨부(attached) 유무|
 
 |메소드|기능|
 |---|---|
@@ -1088,10 +1093,23 @@ SingleChildScrollView(
   controller: controller,
   child: ...
 );
+...
+if (controller.hasClients) {
+  controller.jumpTo(0);
+}
 ```
 
 ### ScrollPosition
 - `ScrollPosition`는 현재 스크롤 위치 정보를 저장하는 클래스입니다.
+
+### NeverScrollableScrollPhysics
+- `NeverScrollableScrollPhysics`는 사용자가 스크롤을 하는 제스처를 방지하는 위젯입니다.
+
+```
+SingleChildScrollView(
+  physics: const NeverScrollableScrollPhysics(),
+);
+```
 
 ### TextPainter
 - `TextPainter`는 `TextSpan`을 페인트하는 클래스입니다.
@@ -1756,6 +1774,50 @@ onWillPop: () {
 Android 기준 상태
 백그라운드 전환: `resumed` > `inactive` > `paused`
 포그라운드 전환: `paused`> `inactive` > `resumed`
+```
+
+### WidgetsBindingObserver
+- `WidgetsBindingObserver`는 애플리케이션의 `AppLifecycleState`에 대한 콜백을 추가하는 mixin입니다.
+- 적용할 위젯에 mixin으로 추가됩니다.
+- 위젯 생성시 `addObserver`, 위젯 제거시 `removeObserver`를 호출해야 합니다.
+- `didChangeAppLifecycleState`을 오버라이드해서 상태에 맞는 콜백을 추가할 수 있습니다. (이 메소드는 `AppLifecycleState`을 인자로 합니다.)
+
+```
+class _PageState extends State<Page> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance?.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        ...
+        break;
+      case AppLifecycleState.inactive:
+        ...
+        break;
+      case AppLifecycleState.detached:
+        ...
+        break;
+      case AppLifecycleState.paused:
+        ...
+        break;
+      default:
+        ...
+        break;
+    }
+  }
+  ...
+}
 ```
 
 ## Key
