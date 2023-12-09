@@ -195,6 +195,10 @@ StreamBuilder<T>(
 )
 ```
 
+### FutureBuilder
+- `FutureBuilder` 위젯을 사용해서 특정 Future가 실행되면 빌드되는 `StatefulWidget`을 정의할 수 있습니다.
+- 사용 방법은 Stream 대신 Future가 사용된다는 점을 제외하면 `StreamBuilder`와 거의 유사합니다.
+
 ### AsyncSnapshot
 - `AsyncSnapshot`은 비동기 연산에서 사용되는 데이터 묶음 클래스입니다.
 - `AsyncSnapshot`의 제너릭 타입은 Future 또는 Stream의 잠재적 값 타입입니다.
@@ -657,6 +661,9 @@ GridView.count(
 )
 ```
 
+### Wrap
+- `Wrap`은 하위 위젯들을 좌측 상단부터 한 줄씩 나열하는 레이아웃 위젯입니다. (텍스트 글자가 나열되는 것과 비슷하게 정렬됩니다.)
+
 ### LayoutBuilder
 - `LayoutBuilder`는 상위 위젯의 크기에 의존하여 위젯을 빌드하는 클래스입니다.
 - `BoxConstraints`을 통해 상위 위젯의 크기를 구할 수 있습니다.
@@ -752,7 +759,7 @@ Visibility (
 
 ## UI Components
 ### MaterialApp
-- `MaterialApp`은 `매터리얼 위젯(Material widget)`들을 감싸는(wrap) 위젯입니다. `MaterialApp`을 통해서 `MaterialApp`의 하위 위젯에 접근할 수 있습니다.
+- `MaterialApp`은 `매터리얼 위젯(Material widget)`들을 감싸는 위젯입니다. `MaterialApp`을 통해서 `MaterialApp`의 하위 위젯에 접근할 수 있습니다.
 - 일부 위젯은 `MaterialApp`을 조상 위젯으로 요구합니다. (ex. `Scaffold`)
 
 |파라미터|타입|의미|
@@ -1192,6 +1199,47 @@ TextPainter textPainter = TextPainter(
 double textWidth = textPainter.size.width;
 ```
 
+### NavigationBar
+- `NavigationBar`는 네비게이션 바를 제공하는 위젯입니다.
+- 여러 `NavigationDestination` 중에서 1개를 선택할 수 있습니다.
+- 탭뷰를 구현할 수 있습니다.
+
+```
+NavigationBar(
+  destinations: const [
+    NavigationDestination(
+      icon: Icon(Icons.star),
+      label: 'Favorite',
+    ),
+    NavigationDestination(
+      icon: Icon(Icons.present_to_all),
+      label: 'All',
+    ),
+  ],
+  backgroundColor: ColorPalette.transparent,
+  selectedIndex: _selectedPageIndex,
+  indicatorColor: Colors.green,
+  onDestinationSelected: (index) {
+    _selectedPageIndex = index;
+  },
+),
+```
+
+### NavigationDestination
+- `NavigationDestination`는 `NavigationBar`의 아이템으로 사용되는 위젯입니다.
+
+### Chip
+- `Chip`은 칩 디자인으로 구성된 위젯입니다.
+- 해시태그 목록 등을 표시할 때는 이 위젯이 적합할 수 있습니다.
+
+```
+Chip(
+  label: Text('tag#1'),
+  backgroundColor: Colors.green,
+  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+),
+```
+
 ## Design & Animations
 ### Color
 - `Color`는 색을 표현하는 클래스입니다.
@@ -1363,6 +1411,26 @@ RotationTransition(
     ...
   ),
 )
+```
+
+### ScaleTransition
+- `ScaleTransition`은 아이템의 크기 애니메이션을 수행하는 위젯입니다.
+
+### LinearGradient
+- `LinearGradient`는 선형 그라데이션을 그리는 위젯입니다.
+
+### RadialGradient
+- `RadialGradient`는 원형 그라데이션을 그리는 위젯입니다.
+
+### Image
+- `Image`는 이미지 파일을 표시하는 위젯입니다.
+
+```
+Image.asset(
+  'assets/image.png',
+  width: 300,
+  height: 200,
+),
 ```
 
 ### Material
@@ -1634,6 +1702,7 @@ ElevatedButton(
 
 ### IconButton
 - `IconButton`는 `Icon`을 포함한 버튼 위젯입니다.
+- 아이콘의 색상은 `Icon.color`를 우선으로 합니다. (Icon.color 값 존재시 disable되도 아이콘 색은 Icon.color을 따름)
 
 |파라미터|타입|의미|
 |---|---|---|
@@ -1683,6 +1752,15 @@ Slider(
 ),
 ```
 
+### RangeSlider
+- `RangeSlider`는 범위 슬라이더 입력을 제공하는 위젯입니다.
+- 값으로 `RangeValues`가 사용된다는 점을 제외하면 사용법은 `Slider`와 같습니다.
+
+### RangeValues
+- `RangeValues`는 범위를 표현하는 클래스입니다.
+
+> RangeValues(double start, double end)
+
 ### Checkbox
 - `Checkbox`는 체크박스 입력을 제공하는 위젯입니다.
 - 체크박스를 클릭하면 `value`가 토글됩니다.
@@ -1704,6 +1782,78 @@ Checkbox(
   },
 ),
 ```
+
+### Switch
+- `Switch`는 스위치 입력을 제공하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|value|bool|체크 유무|
+|onChanged|ValueChanged\<bool?\>|`value` 변경시 실행되는 콜백|
+|activeColor|Color|값이 true일 때 색|
+
+```
+Switch(
+  value: _value,
+  activeColor: Colors.blue,
+  onChanged: _onChanged,
+);
+```
+
+### DropdownButton
+- `DropdownButton`는 아이템 목록 입력을 제공하는 위젯입니다.
+- `value`의 값은 여러 `DropdownButton` 중에서 선택된 것의 `value` 값입니다.
+- 제너릭은 `value`의 타입을 결정합니다.
+- `isExpanded` 프로퍼티는 내부 컨텐츠의 너비를 수평으로 채울지를 결정합니다.
+
+```
+DropdownButton<T>(
+  value: menuValue,
+  icon: const Icon(Icons.arrow_drop_down),
+  onChanged: _onChanged,
+  isExpanded: true,
+  dropdownColor: Colors.grey,
+  items: List<DropdownMenuItem<T>>.generate(valueList.length, (index) {
+    return DropdownMenuItem<T>(
+	value: _valueList[index]['value'],
+	child: Text(_valueList[index]['label']);
+  }),
+),
+```
+
+### DropdownMenuItem
+- `DropdownButton`의 목록 아이템을 구성하는 위젯입니다.
+
+### PopupMenuButton
+- `PopupMenuButton`는 아이템 목록 입력을 제공하는 위젯입니다.
+- `DropdownButton`과 비슷하지만, `PopupMenuButton`는 입력 버튼이 선택된 값 텍스트 대신 고정된 아이콘을 표시한다는 점이 다릅니다.
+
+```
+PopupMenuButton(
+  color: Colors.yellow,
+  icon: const Icon(Icons.add, color: ColorPalette.grey),
+  onSelected: (value) {
+    if (value == 0) {
+      // action 0
+    } else if (value == 1) {
+      // action 1
+    }
+  },
+  itemBuilder: (context) => <PopupMenuEntry>[
+    PopupMenuItem(
+      value: 0,
+      child: Text('action 0'),
+    ),
+    PopupMenuItem(
+      value: 1,
+      child: Text('action 1'),
+    ),
+  ],
+),
+```
+
+### PopupMenuEntry
+- `PopupMenuEntry`는 `PopupMenuButton`의 아이템을 구성하는 위젯입니다.
 
 ## Form
 ### Form
