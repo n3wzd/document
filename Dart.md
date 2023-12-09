@@ -1185,6 +1185,30 @@ void main() {
 }
 ```
 
+- dart의 enum에서는 클래스처럼 프로퍼티와 메소드를 가질 수 있습니다.
+- 이를 활용해서 String을 enum으로 변환하는 기능을 추가할 수 있습니다.
+
+```
+enum OrderMethod {
+  name('name'),
+  level('level'),
+  undefined('undefined');
+
+  const OrderMethod(this.code);
+  final String code;
+
+  factory OrderMethod.toEnum(String code) {
+    return OrderMethod.values.firstWhere((value) => value.code == code,
+        orElse: () => OrderMethod.undefined);
+  }
+
+  @override
+  String toString() {
+    return code;
+  }
+}
+```
+
 ### abstract
 - Dart에서는 `추상 클래스`를 사용할 수 있습니다.  (C++의 추상 클래스와 거의 같습니다.)
 - 추상 클래스만으로는 인스턴스를 생성할 수 없으며, 추상 클래스를 상속하는 클래스를 통해서 인스턴스를 생성할 수 있습니다.
