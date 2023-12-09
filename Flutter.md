@@ -1570,6 +1570,18 @@ Opacity(
 )
 ```
 
+### AnimatedOpacity
+- `AnimatedOpacity`는 애니메이션이 적용된 투명도를 제공하는 위젯입니다.
+- `duration` 프로퍼티를 통해 애니메이션 지속 시간을 정할 수 있습니다.
+
+```
+AnimatedOpacity(
+  opacity: _opacityLevel,
+  duration: const Duration(seconds: 3),
+  child: const FlutterLogo(),
+),
+```
+
 ### RichText
 - `RichText`는 텍스트를 꾸미는 위젯입니다.
 
