@@ -568,6 +568,8 @@ ListView.builder(
 )
 ```
 
+- `ListTile.selected` 생성자는 아이템간 구분선을 자동으로 생성합니다.
+
 ### ListTile
 - `ListTile`은 `ListView`의 아이템으로 사용되는 위젯입니다.
 - Tile의 색상을 표시하려면 `Material`을 조상 위젯으로 해야 합니다.
@@ -589,6 +591,39 @@ ListTile(
   title: Text('$index'),
   onTap: () {},
 )
+```
+
+### ReorderableListView
+- `ReorderableListView`는 사용자가 직접 정렬이 가능한 ListView 위젯입니다.
+- 재정렬되면 `onReorder` 프로퍼티의 콜백이 호출됩니다.
+
+```
+ReorderableListView(
+  onReorder: (oldIndex, newIndex) {
+    setState(() {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    final String item = items.removeAt(oldIndex);
+    items.insert(newIndex, item);
+  });
+},
+```
+
+### Dismissible
+- `Dismissible`은 드래그로 특정 위젯을 삭제할 수 있는 위젯입니다.
+- 위젯이 삭제되면 `onDismissed` 프로퍼티에 저장된 콜백이 호출됩니다.
+- 위젯이 삭제될 수 있으므로 `key`는 고유한 값을 가져야 합니다.
+
+```
+Dismissible(
+  key: UniqueKey(),
+  onDismissed: (DismissDirection direction) {
+    setState(() {
+      removeItem(index);
+    });
+  },
+  child: ...
 ```
 
 ### GridView
@@ -649,6 +684,21 @@ LayoutBuilder(
 - minWidth \<= Size.width \<= maxWidth
 - minHeight \<= Size.height \<= maxHeight
 
+### Visibility
+- `Visibility`는 위젯의 표시 유무를 결정하는 위젯입니다.
+
+|파라미터|타입|의미|
+|---|---|---|
+|visible|bool|표시 유무|
+|child|Widget|하위 위젯|
+
+```
+Visibility (
+  visible: _isVisible,
+  child: ...
+);
+```
+
 ### EdgeInsets
 - `EdgeInsets`은 4개의 값을 제공하는 클래스입니다.
 - 주로 사각형과 관련된 프로퍼티에서 값으로 사용됩니다. (ex. padding)
@@ -696,6 +746,9 @@ LayoutBuilder(
 --(0,1)----(1,1)--
     |        |
 ```
+
+### CrossAxisAlignment
+- `CrossAxisAlignment`는 양끝에 2개의 축이 있는 상황에서 배치 방법을 정의한 enum입니다.
 
 ## UI Components
 ### MaterialApp
@@ -866,6 +919,10 @@ TextSpan(text: 'text');
 |`fade`|초과된 텍스트를 흐릿하게 표시합니다.|
 |`ellipsis`|초과된 텍스트를 '...'으로 대체하여 표시합니다.|
 |`visible`|초과된 텍스트를 그대로 표시합니다.|
+
+### Dialog
+- `Dialog`는 기본적인 메시지 창 위젯입니다.
+- 특정 디자인이 적용되지 않으므로 커스타마이징이 자유롭습니다.
 
 ### AlertDialog
 - `AlertDialog`는 경고 메시지 창을 표시하는 위젯입니다.
@@ -1820,6 +1877,22 @@ class _PageState extends State<Page> with WidgetsBindingObserver {
 }
 ```
 
+### NotificationListener
+- `NotificationListener`은 `Notification`을 감지하는 위젯입니다.
+- 스크롤의 움직임을 감지할 때 사용할 수 있습니다.
+
+```
+NotificationListener<ScrollNotification>(
+  onNotification: (scrollNotification) {
+    if (scrollNotification is ScrollEndNotification) {
+      // scroll is end.
+    }
+    return true;
+  },
+  child: ...
+)
+```
+
 ## Key
 - Key는 위젯을 식별하는 용도로 사용됩니다.
 - 일반적인 `StatefulWidget`은 Key를 저장하는 `key` 프로퍼티를 가지고 있습니다.
@@ -1915,6 +1988,9 @@ Row                     Row
 ### LocalKey
 - `LocalKey`는 `GlobalKey`가 아닌 Key 클래스입니다.
 - `LocalKey`의 Key는 같은 부모 노드를 가지는 위젯 집합 내에서만 유일성을 갖습니다.
+
+### UniqueKey
+- `UniqueKey`는 고유 키를 생성하는 클래스입니다.
 
 ## Navigator
 ### Route
