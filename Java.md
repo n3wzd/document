@@ -1936,5 +1936,123 @@ Double doubleObject = 3.14;  // Autoboxing
 double doubleValue = doubleObject;  // Unboxing
 ```
 
+## File
+파일 처리는 Java에서 프로그램이 파일을 읽고 쓸 수 있도록 하는 부분입니다. Java에서 파일 처리는 `java.io` 패키지를 통해 제공됩니다. Java 7부터는 `java.nio.file` 패키지를 통해 향상된 파일 처리 기능이 추가되었으며, Java NIO를 사용하는 것이 권장됩니다.
+
+### Java I/O
+#### File
+`File` 클래스를 사용하여 파일을 나타냅니다.
+
+```
+import java.io.File;
+
+File file = new File("example.txt");
+```
+
+#### 파일 읽기
+파일에서 데이터를 읽기 위해 `FileInputStream`과 `BufferedReader`를 사용합니다.
+
+```
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+try {
+    File file = new File("example.txt");
+    FileInputStream fis = new FileInputStream(file);
+    BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+
+    String line;
+    while ((line = br.readLine()) != null) {
+        System.out.println(line);
+    }
+
+    br.close();
+    fis.close();
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+#### 파일 쓰기
+파일에 데이터를 쓰기 위해 `FileOutputStream`과 `BufferedWriter`를 사용합니다.
+
+```
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+
+try {
+    File file = new File("example.txt");
+    FileOutputStream fos = new FileOutputStream(file);
+    BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+
+    String content = "Hello, File Handling in Java!";
+    bw.write(content);
+
+    bw.close();
+    fos.close();
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+### Java NIO (New I/O)
+Java NIO를 사용하면 더 효율적이고 간편한 파일 처리가 가능합니다.
+
+#### 파일 읽기
+```
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
+try {
+    Path path = Paths.get("example.txt");
+    List<String> lines = Files.readAllLines(path);
+
+    for (String line : lines) {
+        System.out.println(line);
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+#### 파일 쓰기
+```
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
+
+try {
+    Path path = Paths.get("example.txt");
+    String content = "Hello, File Handling in Java!";
+    Files.write(path, Collections.singleton(content));
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+#### 파일 삭제
+```
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+try {
+    Path path = Paths.get("example.txt");
+    Files.delete(path);
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
 ## 출처 (Reference)
 https://www.w3schools.com/java/java_syntax.asp
