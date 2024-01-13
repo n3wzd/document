@@ -1936,7 +1936,83 @@ Double doubleObject = 3.14;  // Autoboxing
 double doubleValue = doubleObject;  // Unboxing
 ```
 
-## File
+### 정규 표현식 (Regular Expressions)
+정규 표현식은 문자열의 검색, 매칭, 패턴 매칭 등과 같은 작업을 수행하는 데 사용되는 강력한 도구입니다. Java에서는 `java.util.regex` 패키지를 통해 정규 표현식을 지원하고 있습니다.
+
+#### 기본 문법
+정규 표현식은 문자열의 패턴을 나타내며, 다양한 문자와 메타 문자를 사용하여 이루어집니다.
+
+- **문자 클래스 (Character Classes):**
+    - `[abc]`: a, b, c 중 하나와 일치
+    - `[^abc]`: a, b, c를 제외한 다른 문자와 일치
+    - `[a-z]`: 소문자 a부터 z까지 중 하나와 일치
+    - `[A-Z]`: 대문자 A부터 Z까지 중 하나와 일치
+- **메타 문자 (Meta Characters):**
+    - `.`: 어떤 문자와 일치
+    - `^`: 문자열의 시작
+    - `$`: 문자열의 끝
+    - `*`: 앞의 문자가 0회 이상 반복
+    - `+`: 앞의 문자가 1회 이상 반복
+    - `?`: 앞의 문자가 0회 또는 1회 등장
+    - `|`: 둘 중 하나
+    - `()`: 그룹화
+
+#### Java에서의 사용
+Java에서는 `Pattern`과 `Matcher` 클래스를 사용하여 정규 표현식을 처리합니다.
+
+```
+import java.util.regex.*;
+
+public class RegexExample {
+    public static void main(String[] args) {
+        String input = "Hello, regex in Java!";
+        String patternString = ".*regex.*";
+
+        // 패턴 컴파일
+        Pattern pattern = Pattern.compile(patternString);
+
+        // 매처 생성
+        Matcher matcher = pattern.matcher(input);
+
+        // 패턴 매칭 확인
+        if (matcher.matches()) {
+            System.out.println("Pattern matched!");
+        } else {
+            System.out.println("Pattern not matched!");
+        }
+    }
+}
+```
+
+아래는 정규 표현식을 사용하여 주어진 문자열에서 숫자 및 대문자를 추출하는 간단한 예제입니다.
+
+```
+import java.util.regex.*;
+
+public class RegexExample {
+    public static void main(String[] args) {
+        String input = "The code is 12345. Java Regex is powerful.";
+
+        // 숫자 추출 예제
+        Pattern digitPattern = Pattern.compile("\\d+");
+        Matcher digitMatcher = digitPattern.matcher(input);
+
+        while (digitMatcher.find()) {
+            System.out.println("Number: " + digitMatcher.group());
+        }
+
+        // 대문자 추출 예제
+        Pattern uppercasePattern = Pattern.compile("[A-Z]");
+        Matcher uppercaseMatcher = uppercasePattern.matcher(input);
+
+        while (uppercaseMatcher.find()) {
+            System.out.println("Uppercase letter: " + uppercaseMatcher.group());
+        }
+    }
+}
+```
+
+## 파일 (File)
 파일 처리는 Java에서 프로그램이 파일을 읽고 쓸 수 있도록 하는 부분입니다. Java에서 파일 처리는 `java.io` 패키지를 통해 제공됩니다. Java 7부터는 `java.nio.file` 패키지를 통해 향상된 파일 처리 기능이 추가되었으며, Java NIO를 사용하는 것이 권장됩니다.
 
 ### Java I/O
@@ -2051,6 +2127,79 @@ try {
     Files.delete(path);
 } catch (IOException e) {
     e.printStackTrace();
+}
+```
+
+## 예외 (Exceptions)
+Java에서 예외(Exceptions)는 프로그램 실행 중에 발생할 수 있는 오류 또는 예기치 않은 상황을 나타냅니다. 예외는 프로그램이 정상적으로 실행되는 데 방해가 되는 상황에서 발생하며, 예외 처리를 통해 이러한 상황을 다루거나 전파할 수 있습니다.
+
+예외의 종류는 다음이 있습니다:
+1.  **Checked Exceptions:**
+    -   컴파일러가 강제하는 예외로, 코드 작성 시에 반드시 예외 처리를 해주어야 합니다.
+    -   `IOException`, `SQLException` 등이 여기에 속합니다.
+2.  **Unchecked Exceptions:**
+    -   컴파일러가 강제하지 않는 예외로, 실행 중에 발생하는 예외입니다.
+    -   `RuntimeException` 클래스와 그 하위 클래스들이 여기에 속합니다.
+    -   `NullPointerException`, `ArrayIndexOutOfBoundsException` 등이 여기에 속합니다.
+3.  **Error:**
+    -   프로그램에서 복구할 수 없는 치명적인 오류를 나타냅니다.
+    -   프로그래머가 직접적으로 처리하지 않아도 되는 예외입니다.
+    -   `OutOfMemoryError`, `StackOverflowError` 등이 여기에 속합니다.
+
+### 예외 처리 (Exception Handling)
+Java에서는 예외 처리를 통해 예외 상황을 다룰 수 있습니다. 예외 처리는 `try`, `catch`, `finally` 블록을 사용하여 구현됩니다.
+
+```
+try {
+    // 예외가 발생할 수 있는 코드
+    // 예외 발생 시 예외 객체가 던져짐
+} catch (ExceptionType1 e1) {
+    // 예외 타입1에 대한 처리
+} catch (ExceptionType2 e2) {
+    // 예외 타입2에 대한 처리
+} finally {
+    // 항상 실행되는 블록
+    // (예외 발생 여부와 상관없이)
+}
+```
+
+### 예외 발생 (Throwing Exceptions)
+`throw` 키워드를 사용하여 직접 예외를 던질 수 있습니다.
+
+```
+if (someCondition) {
+    throw new SomeException("Custom error message");
+}
+```
+
+### 사용자 정의 예외 (Custom Exceptions)
+프로그래머가 필요에 따라 예외 클래스를 직접 정의하여 사용할 수 있습니다. 이를 통해 특정한 예외 상황에 대한 처리를 유연하게 구현할 수 있습니다.
+
+```
+// 사용자 정의 예외 클래스
+class CustomException extends Exception {
+    public CustomException(String message) {
+        super(message);
+    }
+}
+
+// 사용자 정의 예외 발생 예제
+try {
+    throw new CustomException("Custom exception message");
+} catch (CustomException e) {
+    System.out.println("Custom exception caught: " + e.getMessage());
+}
+```
+
+### 예외 체인 (Exception Chaining)
+하나의 예외가 다른 예외를 유발할 수 있습니다. 이러한 상황에서는 `getCause()` 메서드를 사용하여 원인 예외를 확인할 수 있습니다.
+
+```
+try {
+    // 어떤 예외 발생
+} catch (Exception e) {
+    // 다른 예외로 변환하여 던지기
+    throw new CustomException("Custom exception message", e);
 }
 ```
 
