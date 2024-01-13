@@ -1811,5 +1811,130 @@ public class DateTimeFormatterExample {
 }
 ```
 
+### Iterator
+`Iterator`는 Java 컬렉션 프레임워크에서 컬렉션 요소를 순회(traverse)하기 위한 인터페이스입니다. `Iterator`는 모든 컬렉션 클래스에서 사용할 수 있으며, 컬렉션 내의 요소에 접근하고 반복할 때 사용됩니다. `Iterator`를 통해 컬렉션의 내부 구조를 노출시키지 않고, 안전하게 요소에 접근할 수 있습니다.
+
+- `Iterator`는 단방향 순회만 지원하므로, 역방향으로 순회하거나 다시 앞으로 돌아갈 수 없습니다.
+- `Iterator`의 `remove()` 메서드는 반드시 `next()` 메서드 호출 후에 사용되어야 하며, 그렇지 않으면 `IllegalStateException`이 발생합니다.
+- `Iterator`는 컬렉션의 크기나 내부 구조에 대한 정보를 제공하지 않습니다. 그저 다음 요소가 있는지 여부와 다음 요소를 가져올 뿐입니다.
+
+#### Iterator 인터페이스 메서드
+- `boolean hasNext()`: 다음에 읽을 요소가 있는지 여부를 확인합니다.
+- `E next()`: 다음 요소를 반환하고 커서를 다음 위치로 이동시킵니다.
+- `void remove()`: 현재 가리키고 있는 요소를 제거합니다. (optional)
+
+```
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class IteratorExample {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Java");
+        list.add("Python");
+        list.add("C++");
+
+        // Iterator 생성
+        Iterator<String> iterator = list.iterator();
+
+        // hasNext()와 next()를 사용하여 순회
+        while (iterator.hasNext()) {
+            String element = iterator.next();
+            System.out.println(element);
+        }
+    }
+}
+```
+
+#### Iterator를 사용한 요소 제거
+```
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class IteratorExample {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Java");
+        list.add("Python");
+        list.add("C++");
+
+        // Iterator 생성
+        Iterator<String> iterator = list.iterator();
+
+        // 요소 제거
+        while (iterator.hasNext()) {
+            String element = iterator.next();
+            if (element.equals("Java")) {
+                iterator.remove();
+            }
+        }
+
+        System.out.println("Remaining Elements: " + list);
+    }
+}
+```
+
+### Wrapper
+Wrapper 클래스는 기본 데이터 타입(primitive data type)을 객체로 다루기 위해 제공되는 클래스들을 말합니다. 기본 데이터 타입에 대응하는 Wrapper 클래스들은 해당 데이터 타입의 값을 감싸고 있는 객체를 생성할 수 있도록 도와줍니다. Wrapper 클래스들은 `java.lang` 패키지에 속해 있습니다.
+
+다음은 기본 데이터 타입과 그에 해당하는 Wrapper 클래스들입니다:
+- **byte**: `Byte`
+- **short**: `Short`
+- **int**: `Integer`
+- **long**: `Long`
+- **float**: `Float`
+- **double**: `Double`
+- **char**: `Character`
+- **boolean**: `Boolean`
+
+Wrapper 클래스는 주로 컬렉션 프레임워크에서 기본 데이터 타입을 다룰 때 유용하게 사용됩니다. 또한, 메서드의 매개변수로 객체를 요구하는 경우에 기본 데이터 타입을 객체로 변환할 필요가 있을 때 Wrapper 클래스를 사용할 수 있습니다. Java 5부터는 Autoboxing과 Unboxing을 통해 기본 데이터 타입과 Wrapper 클래스 간의 변환이 자동으로 이루어지므로 편리하게 사용할 수 있습니다.
+
+#### 객체 생성
+```
+Integer intObject = new Integer(10);
+Double doubleObject = new Double(3.14);
+Boolean boolObject = new Boolean(true);
+```
+    
+#### 값의 얻기 및 설정
+```
+int intValue = intObject.intValue();
+double doubleValue = doubleObject.doubleValue();
+boolean boolValue = boolObject.booleanValue();
+```
+
+#### 문자열로 변환
+```String intStr = Integer.toString(10);
+String doubleStr = Double.toString(3.14);
+String boolStr = Boolean.toString(true);
+```
+
+#### 문자열을 해당 타입으로 변환
+```
+int intFromString = Integer.parseInt("10");
+double doubleFromString = Double.parseDouble("3.14");
+boolean boolFromString = Boolean.parseBoolean("true");
+```
+
+#### 정적 상수 및 메서드
+```
+int maxInt = Integer.MAX_VALUE;
+int minInt = Integer.MIN_VALUE;
+
+double maxDouble = Double.MAX_VALUE;
+double minDouble = Double.MIN_VALUE;
+
+char digitChar = Character.forDigit(5, 10);  // 5를 10진수로 표현한 문자
+```
+
+#### Auto(un)boxing
+```
+Integer intObject = 10;  // Autoboxing
+int intValue = intObject;  // Unboxing
+
+Double doubleObject = 3.14;  // Autoboxing
+double doubleValue = doubleObject;  // Unboxing
+```
+
 ## 출처 (Reference)
 https://www.w3schools.com/java/java_syntax.asp
