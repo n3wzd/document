@@ -29,11 +29,67 @@ public static void main(String[] args) {
 }
 ```
 
-### Print
+### 출력
 `System.out.println()` 메서드를 사용해서 콘솔 화면에 텍스트를 출력할 수 있습니다.
 
 ```
 System.out.println("Hello, Java!");` 
+```
+
+### 입력
+Java에서 사용자 입력을 받기 위해서는 `java.util.Scanner` 클래스나 `BufferedReader` 클래스 등을 활용할 수 있습니다.
+
+#### Scanner 클래스 사용
+```
+import java.util.Scanner;
+
+public class UserInputExample {
+    public static void main(String[] args) {
+        // Scanner 객체 생성
+        Scanner scanner = new Scanner(System.in);
+
+        // 정수 입력 받기
+        System.out.print("Enter an integer: ");
+        int intValue = scanner.nextInt();
+        System.out.println("You entered: " + intValue);
+
+        // 문자열 입력 받기
+        System.out.print("Enter a string: ");
+        String stringValue = scanner.next();
+        System.out.println("You entered: " + stringValue);
+
+        // 사용이 끝난 후에는 닫아주기
+        scanner.close();
+    }
+}
+```
+
+#### BufferedReader 및 InputStreamReader
+```
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+public class UserInputExample {
+    public static void main(String[] args) throws IOException {
+        // InputStreamReader와 BufferedReader 객체 생성
+        InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+        // 정수 입력 받기
+        System.out.print("Enter an integer: ");
+        int intValue = Integer.parseInt(bufferedReader.readLine());
+        System.out.println("You entered: " + intValue);
+
+        // 문자열 입력 받기
+        System.out.print("Enter a string: ");
+        String stringValue = bufferedReader.readLine();
+        System.out.println("You entered: " + stringValue);
+
+        // 사용이 끝난 후에는 닫아주기
+        bufferedReader.close();
+    }
+}
 ```
 
 ### 주석 (Comment)
@@ -1287,6 +1343,473 @@ public class MyClass {
 
 ### Java API 패키지
 Java에서 제공하는 API(Java Standard Edition API) 역시 패키지로 구성되어 있습니다. 예를 들어, `java.lang`, `java.util`, `java.io`와 같은 패키지는 Java에서 제공하는 다양한 클래스와 인터페이스를 포함하고 있습니다.
+
+### ArrayList
+`ArrayList`는 Java에서 제공하는 동적 배열(dynamic array)로, 크기를 동적으로 조절할 수 있는 배열을 나타냅니다. `ArrayList`는 `java.util` 패키지에 속해 있습니다. 다른 배열과 달리 크기를 동적으로 조절할 수 있어, 요소를 추가하거나 제거할 때 유연하게 대처할 수 있습니다. 다만, 요소를 중간에서 추가 또는 삭제할 때 많은 데이터를 이동시켜야 하므로, 이 점을 고려하여 사용해야 합니다.
+
+#### ArrayList 생성
+```
+import java.util.ArrayList;
+
+public class ArrayListExample {
+    public static void main(String[] args) {
+        // 빈 ArrayList 생성
+        ArrayList<String> stringList = new ArrayList<>();
+
+        // 초기 크기 지정하여 생성
+        ArrayList<Integer> intList = new ArrayList<>(10);
+    }
+}
+```
+
+#### 요소 추가 및 접근
+```
+import java.util.ArrayList;
+
+public class ArrayListExample {
+    public static void main(String[] args) {
+        ArrayList<String> stringList = new ArrayList<>();
+
+        // 요소 추가
+        stringList.add("Java");
+        stringList.add("Python");
+        stringList.add("C++");
+
+        // 요소 접근
+        System.out.println("First Element: " + stringList.get(0));
+        System.out.println("Second Element: " + stringList.get(1));
+    }
+}
+```
+
+#### 요소 수정
+```
+import java.util.ArrayList;
+
+public class ArrayListExample {
+    public static void main(String[] args) {
+        ArrayList<String> stringList = new ArrayList<>();
+
+        stringList.add("Java");
+        stringList.add("Python");
+
+        // 요소 수정
+        stringList.set(1, "C++");
+        System.out.println("Updated Second Element: " + stringList.get(1));
+    }
+}
+```
+
+#### 요소 제거
+```
+import java.util.ArrayList;
+
+public class ArrayListExample {
+    public static void main(String[] args) {
+        ArrayList<String> stringList = new ArrayList<>();
+
+        stringList.add("Java");
+        stringList.add("Python");
+
+        // 요소 제거
+        stringList.remove("Java");
+        System.out.println("Remaining Elements: " + stringList);
+    }
+}
+```
+
+#### ArrayList 크기 및 순회
+```
+import java.util.ArrayList;
+
+public class ArrayListExample {
+    public static void main(String[] args) {
+        ArrayList<String> stringList = new ArrayList<>();
+
+        stringList.add("Java");
+        stringList.add("Python");
+
+        // ArrayList 크기
+        System.out.println("Size of ArrayList: " + stringList.size());
+
+        // ArrayList 순회
+        for (String element : stringList) {
+            System.out.println(element);
+        }
+    }
+}
+```
+
+### LinkedList
+`LinkedList`는 Java에서 제공하는 데이터 구조 중 하나로, 이중 연결 리스트(doubly linked list)로 구현되어 있습니다. `LinkedList`는 각 요소가 이전 요소와 다음 요소의 참조를 가지고 있어 요소의 삽입 및 삭제가 배열에 비해 빠르게 이루어질 수 있는 장점이 있습니다. 하지만 인덱스로 직접 접근하는 것은 느리며, 메모리 사용량이 좀 더 큽니다.
+
+#### LinkedList 생성
+```
+import java.util.LinkedList;
+
+public class LinkedListExample {
+    public static void main(String[] args) {
+        // 빈 LinkedList 생성
+        LinkedList<String> linkedList = new LinkedList<>();
+
+        // 기존 컬렉션으로부터 생성
+        // List<String> anotherList = Arrays.asList("Apple", "Banana", "Orange");
+        // LinkedList<String> linkedListFromList = new LinkedList<>(anotherList);
+    }
+}
+```
+
+#### 요소 추가 및 접근
+```
+import java.util.LinkedList;
+
+public class LinkedListExample {
+    public static void main(String[] args) {
+        LinkedList<String> linkedList = new LinkedList<>();
+
+        // 요소 추가
+        linkedList.add("Java");
+        linkedList.add("Python");
+
+        // 요소 접근
+        System.out.println("First Element: " + linkedList.getFirst());
+        System.out.println("Last Element: " + linkedList.getLast());
+    }
+}
+```
+
+#### 요소 추가 및 제거
+```
+import java.util.LinkedList;
+
+public class LinkedListExample {
+    public static void main(String[] args) {
+        LinkedList<String> linkedList = new LinkedList<>();
+
+        // 요소 추가
+        linkedList.add("Java");
+        linkedList.add("Python");
+
+        // 특정 위치에 요소 추가
+        linkedList.add(1, "C++");
+
+        // 요소 제거
+        linkedList.remove("Java");
+        linkedList.remove(1);
+
+        // 모든 요소 제거
+        linkedList.clear();
+    }
+}
+```
+
+#### 크기 및 순회
+```
+import java.util.LinkedList;
+
+public class LinkedListExample {
+    public static void main(String[] args) {
+        LinkedList<String> linkedList = new LinkedList<>();
+
+        // 요소 추가
+        linkedList.add("Java");
+        linkedList.add("Python");
+        linkedList.add("C++");
+
+        // LinkedList 크기
+        System.out.println("Size of LinkedList: " + linkedList.size());
+
+        // LinkedList 순회
+        for (String element : linkedList) {
+            System.out.println(element);
+        }
+    }
+}
+```
+
+### HashMap 
+`HashMap`은 Java에서 제공하는 해시 맵 자료구조로, 키와 값을 쌍으로 저장하는데 사용됩니다. 이는 해시 함수를 통해 키와 값 간의 매핑을 구현하므로 매우 빠른 검색, 삽입 및 삭제를 제공합니다. `HashMap`은 `java.util` 패키지에 속해 있습니다.
+
+`HashMap`은 키와 값이 `null`이 될 수 있으며, 동시에 여러 쓰레드에서 안전하지 않습니다. 만약 멀티쓰레드 환경에서 사용해야 한다면 `ConcurrentHashMap`을 고려해야 합니다. 해시 맵의 성능은 일반적으로 매우 좋지만, 적재율이 높아지면 충돌이 발생할 가능성이 있으므로 적절한 적재율을 선택하는 것이 중요합니다.
+
+#### HashMap 생성
+```
+import java.util.HashMap;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        // 빈 HashMap 생성
+        HashMap<String, Integer> hashMap = new HashMap<>();
+
+        // 초기 용량 및 load factor 지정하여 생성
+        // HashMap<String, Integer> anotherMap = new HashMap<>(16, 0.75f);
+    }
+}
+```
+
+#### 요소 추가 및 접근
+```
+import java.util.HashMap;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        HashMap<String, Integer> hashMap = new HashMap<>();
+
+        // 요소 추가
+        hashMap.put("Java", 8);
+        hashMap.put("Python", 3);
+        hashMap.put("C++", 14);
+
+        // 요소 접근
+        System.out.println("Java's Version: " + hashMap.get("Java"));
+    }
+}
+```
+
+#### 요소 수정
+```
+import java.util.HashMap;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        HashMap<String, Integer> hashMap = new HashMap<>();
+
+        hashMap.put("Java", 8);
+
+        // 요소 수정
+        hashMap.put("Java", 11);
+        System.out.println("Updated Java's Version: " + hashMap.get("Java"));
+    }
+}
+```
+
+#### 요소 제거
+```
+import java.util.HashMap;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        HashMap<String, Integer> hashMap = new HashMap<>();
+
+        hashMap.put("Java", 8);
+        hashMap.put("Python", 3);
+
+        // 요소 제거
+        hashMap.remove("Java");
+        System.out.println("Remaining Elements: " + hashMap);
+    }
+}
+```
+
+#### 크기 및 순회
+```
+import java.util.HashMap;
+import java.util.Map;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        HashMap<String, Integer> hashMap = new HashMap<>();
+
+        hashMap.put("Java", 8);
+        hashMap.put("Python", 3);
+        hashMap.put("C++", 14);
+
+        // HashMap 크기
+        System.out.println("Size of HashMap: " + hashMap.size());
+
+        // HashMap 순회
+        for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+    }
+}
+```
+
+### HashSet
+`HashSet`은 Java에서 제공하는 집합(set)을 구현한 클래스 중 하나입니다. `HashSet`은 중복을 허용하지 않으며, 요소의 순서를 유지하지 않습니다. `HashSet`은 `java.util` 패키지에 속해 있습니다. `HashSet`은 내부적으로 `HashMap`을 기반으로 하고 있습니다.
+
+`HashSet`은 해시 테이블을 사용하여 요소를 저장하므로, 요소의 추가 및 검색이 매우 빠릅니다. 또한 중복된 요소를 허용하지 않으므로, 집합 연산에 유용하게 사용될 수 있습니다. 그러나 순서가 중요한 경우에는 사용하지 않는 것이 좋습니다.
+
+#### HashSet 생성
+```
+import java.util.HashSet;
+
+public class HashSetExample {
+    public static void main(String[] args) {
+        // 빈 HashSet 생성
+        HashSet<String> hashSet = new HashSet<>();
+
+        // 다른 컬렉션으로부터 생성
+        // Set<String> anotherSet = new HashSet<>(Arrays.asList("Apple", "Banana", "Orange"));
+    }
+}
+```
+
+#### 요소 추가
+```
+import java.util.HashSet;
+
+public class HashSetExample {
+    public static void main(String[] args) {
+        HashSet<String> hashSet = new HashSet<>();
+
+        // 요소 추가
+        hashSet.add("Java");
+        hashSet.add("Python");
+        hashSet.add("C++");
+        hashSet.add("Java"); // 중복된 요소는 무시됨
+
+        System.out.println("HashSet: " + hashSet);
+    }
+}
+```
+
+#### 요소 제거
+```
+import java.util.HashSet;
+
+public class HashSetExample {
+    public static void main(String[] args) {
+        HashSet<String> hashSet = new HashSet<>();
+
+        hashSet.add("Java");
+        hashSet.add("Python");
+
+        // 요소 제거
+        hashSet.remove("Java");
+
+        System.out.println("Remaining Elements: " + hashSet);
+    }
+}
+```
+
+#### 크기 및 순회
+```
+import java.util.HashSet;
+
+public class HashSetExample {
+    public static void main(String[] args) {
+        HashSet<String> hashSet = new HashSet<>();
+
+        hashSet.add("Java");
+        hashSet.add("Python");
+        hashSet.add("C++");
+
+        // HashSet 크기
+        System.out.println("Size of HashSet: " + hashSet.size());
+
+        // HashSet 순회
+        for (String element : hashSet) {
+            System.out.println(element);
+        }
+    }
+}
+```
+
+### java.time
+Java에서는 `java.time` 패키지를 통해 날짜와 시간을 다룰 수 있습니다. 이 패키지는 Java 8부터 도입되었으며, 이전의 `java.util.Date` 및 `java.util.Calendar` 클래스보다 강력하고 편리한 API를 제공합니다. `java.time` 패키지의 클래스들은 불변(immutable)하며, 스레드 안전(thread-safe)하게 설계되어 있습니다.
+
+#### LocalDate
+`LocalDate` 클래스는 날짜 정보를 나타냅니다. 연, 월, 일을 각각 표현합니다.
+
+```
+import java.time.LocalDate;
+
+public class DateExample {
+    public static void main(String[] args) {
+        // 현재 날짜
+        LocalDate currentDate = LocalDate.now();
+        System.out.println("Current Date: " + currentDate);
+
+        // 특정 날짜 생성
+        LocalDate specificDate = LocalDate.of(2022, 1, 1);
+        System.out.println("Specific Date: " + specificDate);
+    }
+}
+```
+
+#### LocalTime
+`LocalTime` 클래스는 시간 정보를 나타냅니다. 시, 분, 초를 각각 표현합니다.
+
+```
+import java.time.LocalTime;
+
+public class TimeExample {
+    public static void main(String[] args) {
+        // 현재 시간
+        LocalTime currentTime = LocalTime.now();
+        System.out.println("Current Time: " + currentTime);
+
+        // 특정 시간 생성
+        LocalTime specificTime = LocalTime.of(12, 30, 45);
+        System.out.println("Specific Time: " + specificTime);
+    }
+}
+```
+
+#### LocalDateTime
+`LocalDateTime` 클래스는 날짜와 시간을 모두 포함하는 클래스입니다.
+
+```
+import java.time.LocalDateTime;
+
+public class DateTimeExample {
+    public static void main(String[] args) {
+        // 현재 날짜와 시간
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        System.out.println("Current Date and Time: " + currentDateTime);
+
+        // 특정 날짜와 시간 생성
+        LocalDateTime specificDateTime = LocalDateTime.of(2022, 1, 1, 12, 30, 45);
+        System.out.println("Specific Date and Time: " + specificDateTime);
+    }
+}
+```
+
+#### Period and Duration
+`Period` 클래스는 두 날짜 간의 차이를 나타내며, `Duration` 클래스는 두 시간 간의 차이를 나타냅니다.
+
+```
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+
+public class PeriodExample {
+    public static void main(String[] args) {
+        LocalDate startDate = LocalDate.of(2022, 1, 1);
+        LocalDate endDate = LocalDate.of(2022, 12, 31);
+
+        // 두 날짜 간의 기간
+        Period period = Period.between(startDate, endDate);
+        System.out.println("Period: " + period.getYears() + " years, " +
+                           period.getMonths() + " months, " +
+                           period.getDays() + " days");
+
+        // 두 날짜 간의 일 수 차이
+        long daysDifference = ChronoUnit.DAYS.between(startDate, endDate);
+        System.out.println("Days Difference: " + daysDifference + " days");
+    }
+}
+```
+
+#### DateTimeFormatter
+`DateTimeFormatter` 클래스를 사용하여 날짜와 시간을 원하는 형식으로 변환할 수 있습니다.
+
+```
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class DateTimeFormatterExample {
+    public static void main(String[] args) {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        // 원하는 형식으로 변환
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = currentDateTime.format(formatter);
+        System.out.println("Formatted Date and Time: " + formattedDateTime);
+    }
+}
+```
 
 ## 출처 (Reference)
 https://www.w3schools.com/java/java_syntax.asp
