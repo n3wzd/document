@@ -777,6 +777,51 @@ public class Example {
 #### 전역 스코프 (Global Scope)
 Java에서는 전역 스코프가 없습니다. 가장 가까운 스코프는 클래스 스코프이며, 클래스의 멤버 변수로 선언된 변수가 해당 클래스의 전역 스코프에 해당합니다.
 
+### Lambda Expressions
+Lambda 표현식은 Java 8부터 도입된 기능으로, 익명 함수의 간결한 형태를 제공합니다. 주로 함수형 인터페이스(Functional Interface)를 구현하는데 사용되며, 코드를 더 간결하게 작성할 수 있도록 도와줍니다.
+
+```
+(parameters) -> expression
+```
+
+- `(parameters)`: 입력 매개변수의 타입과 이름을 나타냅니다.
+- `->`: Lambda 연산자로, 매개변수와 표현식을 분리합니다.
+- `expression`: Lambda 표현식의 본문으로, 수행할 코드를 나타냅니다.
+
+```
+// 익명 클래스
+Runnable runnable1 = new Runnable() {
+    public void run() {
+        System.out.println("Hello from anonymous class!");
+    }
+};
+
+// Lambda 표현식
+Runnable runnable2 = () -> System.out.println("Hello from Lambda expression!");
+```
+
+#### Functional Interface
+Lambda 표현식은 함수형 인터페이스를 구현하는데 사용할 수 있습니다. 함수형 인터페이스는 하나의 추상 메서드를 갖는 인터페이스로, `@FunctionalInterface`을 통해 명시할 수 있습니다.
+
+```
+@FunctionalInterface
+interface MyFunction {
+    void myMethod();
+}
+
+MyFunction myFunction = () -> System.out.println("Hello from MyFunction!");
+myFunction.myMethod();
+```
+
+#### 매개변수
+Lambda 표현식도 일반 메서드처럼 매개변수를 가질 수 있습니다.
+
+```
+// 두 개의 매개변수를 받아 합을 반환하는 Lambda 표현식
+MathOperation addition = (a, b) -> a + b;
+System.out.println("10 + 5 = " + addition.operation(10, 5));
+```
+
 ## OOP
 객체 지향 프로그래밍(Object-Oriented Programming, OOP)은 소프트웨어를 객체(object)로 모델링하고, 이 객체들 간의 상호 작용을 통해 프로그램을 구성하는 프로그래밍 패러다임입니다. Java는 객체 지향 프로그래밍 언어로서 OOP의 기본 원칙을 강력하게 지원합니다.
 
@@ -2202,6 +2247,72 @@ try {
     throw new CustomException("Custom exception message", e);
 }
 ```
+
+## 쓰레드 (Thread)
+Java에서 쓰레드는 동시에 여러 작업을 수행하기 위한 실행 단위입니다. Java는 멀티쓰레드 프로그래밍을 지원하며, 쓰레드를 생성하고 관리하기 위한 다양한 클래스와 메서드를 제공합니다. 쓰레드를 사용하면 여러 작업을 동시에 실행하여 시스템의 성능을 향상시킬 수 있습니다.
+
+### 쓰레드 생성
+Java에서는 두 가지 방법으로 쓰레드를 생성할 수 있습니다.
+
+1. **`Thread` 클래스 확장:**
+    -   `Thread` 클래스를 상속받아 사용자 정의 클래스에서 `run` 메서드를 오버라이딩합니다.
+```
+class MyThread extends Thread {
+    public void run() {
+        // 쓰레드에서 실행될 코드
+    }
+}
+
+// 쓰레드 생성 및 실행
+MyThread myThread = new MyThread();
+myThread.start();
+```
+    
+2. **`Runnable` 인터페이스 구현:**
+    - `Runnable` 인터페이스를 구현한 클래스에서 `run` 메서드를 정의합니다.
+    
+```
+class MyRunnable implements Runnable {
+    public void run() {
+        // 쓰레드에서 실행될 코드
+    }
+}
+
+// 쓰레드 생성 및 실행
+Thread myThread = new Thread(new MyRunnable());
+myThread.start();
+```
+
+### 쓰레드 실행
+쓰레드를 실행하기 위해서는 `start` 메서드를 호출합니다. `start` 메서드는 내부적으로 `run` 메서드를 호출하고, 이때 `run` 메서드에 정의된 코드가 쓰레드에서 실행됩니다.
+
+```
+class MyThread extends Thread {
+    public void run() {
+        // 쓰레드에서 실행될 코드
+    }
+}
+
+// 쓰레드 생성 및 실행
+MyThread myThread = new MyThread();
+myThread.start();
+```
+
+### 쓰레드 생명주기
+쓰레드는 여러 상태를 가지며, 이를 생명주기(Thread Lifecycle)라고 합니다. 주요한 쓰레드 상태는 다음과 같습니다:
+
+1. **New :**
+    - 쓰레드가 생성되었지만 `start` 메서드가 호출되지 않은 상태입니다.
+2. **Runnable:**
+    - `start` 메서드가 호출되어 쓰레드가 실행 대기 상태로 들어간 상태입니다.
+3. **Blocked:**
+    - 쓰레드가 락(lock) 등의 이유로 다른 쓰레드에 의해 차단된 상태입니다.
+4. **Waiting:**
+    - `Object.wait()`이나 `Thread.join()`과 같은 메서드에 의해 대기 중인 상태입니다.
+5. **Timed Waiting:**
+    - 제한된 시간 동안 대기하는 상태로, `Thread.sleep()`이나 `Object.wait(timeout)`과 같은 메서드에 의해 발생합니다.
+6. **Terminated:**
+    - 쓰레드의 `run` 메서드가 종료된 상태입니다.
 
 ## 출처 (Reference)
 https://www.w3schools.com/java/java_syntax.asp
