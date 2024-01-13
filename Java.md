@@ -1082,5 +1082,211 @@ class Cat extends Animal {
 
 위의 예제에서 `Dog` 클래스와 `Cat` 클래스는 모두 `Animal` 클래스를 상속받아 `makeSound` 메서드를 재정의하고 있습니다.
 
+### 추상 클래스 (Abstract Class)
+추상 클래스는 일반 클래스와 유사하지만, 추상 메서드를 가질 수 있습니다. 추상 메서드는 선언만 있고 구현이 없는 메서드로, 해당 클래스를 상속받는 하위 클래스에서 반드시 구현되어야 합니다.
+
+```
+// 추상 클래스
+abstract class Shape {
+    // 추상 메서드
+    abstract void draw();
+
+    // 일반 메서드
+    void display() {
+        System.out.println("Displaying the shape");
+    }
+}
+```
+
+추상 클래스를 상속받는 클래스는 추상 메서드를 반드시 구현해야 합니다.
+
+```
+class Circle extends Shape {
+    @Override
+    void draw() {
+        System.out.println("Drawing a circle");
+    }
+}
+
+class Rectangle extends Shape {
+    @Override
+    void draw() {
+        System.out.println("Drawing a rectangle");
+    }
+}
+```
+
+### 인터페이스 (Interface)
+인터페이스는 추상 메서드와 상수만을 가질 수 있는데, Java 8부터는 디폴트 메서드와 정적 메서드를 가질 수 있게 되었습니다. 인터페이스는 다중 상속이 가능하며, 클래스가 여러 인터페이스를 구현할 수 있습니다.
+
+```
+// 인터페이스
+interface Animal {
+    // 추상 메서드
+    void makeSound();
+
+    // 디폴트 메서드
+    default void eat() {
+        System.out.println("Eating");
+    }
+}
+```
+
+인터페이스를 구현하는 클래스는 모든 추상 메서드를 구현해야 합니다.
+
+```
+class Dog implements Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Bark");
+    }
+}
+```
+
+### 내부 클래스(Inner Classes)
+내부 클래스는 Java에서 클래스 내에 다른 클래스를 정의하는 기능을 제공하는 개념입니다. 내부 클래스는 주로 외부 클래스의 멤버에 쉽게 접근하거나, 논리적으로 그룹화된 코드를 구성할 때 사용됩니다.
+
+#### 멤버 내부 클래스 (Member Inner Class)
+외부 클래스의 멤버로 정의되는 내부 클래스입니다. 주로 외부 클래스의 인스턴스 변수에 쉽게 접근할 수 있도록 설계됩니다.
+
+```
+public class OuterClass {
+    private int outerVariable = 10;
+
+    // 멤버 내부 클래스
+    public class InnerClass {
+        void displayOuter() {
+            System.out.println("Outer Variable: " + outerVariable);
+        }
+    }
+}
+```
+
+```
+OuterClass outerObj = new OuterClass();
+OuterClass.InnerClass innerObj = outerObj.new InnerClass();
+innerObj.displayOuter(); // Outer Variable: 10
+```
+
+#### 정적 내부 클래스 (Static Nested Class)
+내부 클래스가 정적으로 선언된 경우를 말합니다. 정적 내부 클래스는 외부 클래스의 인스턴스에 종속되지 않으며, 외부 클래스의 정적 멤버에만 접근할 수 있습니다.
+
+```
+public class OuterClass {
+    private static int staticOuterVariable = 20;
+
+    // 정적 내부 클래스
+    public static class StaticInnerClass {
+        void displayOuter() {
+            System.out.println("Static Outer Variable: " + staticOuterVariable);
+        }
+    }
+}
+```
+
+```
+OuterClass.StaticInnerClass staticInnerObj = new OuterClass.StaticInnerClass();
+staticInnerObj.displayOuter(); // Static Outer Variable: 20
+``` 
+
+#### 지역 내부 클래스 (Local Inner Class)
+메서드나 코드 블록 내에서 정의되는 내부 클래스를 말합니다. 지역 내부 클래스는 외부 클래스의 멤버에 접근할 수 있고, 메서드의 매개변수나 지역 변수에도 접근할 수 있습니다. 지역 내부 클래스는 해당 메서드나 블록 내에서만 사용 가능합니다.
+
+```
+public class OuterClass {
+    private int outerVariable = 30;
+
+    // 메서드 내에서 정의된 지역 내부 클래스
+    public void localInnerClassMethod() {
+        final int localVariable = 40;
+
+        class LocalInnerClass {
+            void displayOuter() {
+                System.out.println("Outer Variable: " + outerVariable);
+                System.out.println("Local Variable: " + localVariable);
+            }
+        }
+
+        LocalInnerClass localInnerObj = new LocalInnerClass();
+        localInnerObj.displayOuter();
+    }
+}
+```
+
+```
+OuterClass outerObj = new OuterClass();
+outerObj.localInnerClassMethod(); // Outer Variable: 30, Local Variable: 40
+```
+
+#### 익명 내부 클래스 (Anonymous Inner Class):
+클래스의 이름이 없는 내부 클래스를 익명 내부 클래스라고 합니다. 주로 인터페이스의 구현체나 추상 클래스의 파생 클래스를 생성할 때 사용됩니다.
+
+```
+public interface MyInterface {
+    void myMethod();
+}
+
+public class OuterClass {
+    public MyInterface getMyInterfaceInstance() {
+        return new MyInterface() {
+            @Override
+            public void myMethod() {
+                System.out.println("Implementation of myMethod");
+            }
+        };
+    }
+}
+```
+
+익명 내부 클래스는 인터페이스의 구현체를 생성하고 해당 인터페이스의 메서드를 재정의할 수 있습니다.
+
+```
+OuterClass outerObj = new OuterClass();
+MyInterface myInterfaceObj = outerObj.getMyInterfaceInstance();
+myInterfaceObj.myMethod(); // Implementation of myMethod
+```
+
+## 패키지(Packages)
+패키지는 Java에서 코드를 구조화하고 관리하는 데 사용되는 방법 중 하나입니다. 패키지는 클래스들을 그룹화하여 서로 관련 있는 클래스들을 함께 묶어주는 개념입니다. 이는 코드의 가독성과 유지보수성을 향상시키며, 클래스 이름의 충돌을 방지하는 데 도움이 됩니다.
+
+- **이름 충돌 방지:** 다양한 라이브러리나 프로젝트에서 동일한 이름의 클래스를 사용해야 할 때 패키지를 사용하여 충돌을 방지할 수 있습니다.
+- **코드 구조화:** 패키지를 사용하면 코드를 논리적으로 그룹화하고 구조화할 수 있습니다. 서로 관련 있는 클래스들은 함께 묶여 있어 가독성이 높아집니다.
+- **접근 제어:** 패키지 내에서는 다른 패키지의 클래스에 대한 접근을 제어할 수 있습니다. `public`, `protected`, `default`, `private`과 같은 접근 제어자를 활용할 수 있습니다.
+
+### 패키지 생성
+패키지는 소스 코드 상단에 `package` 키워드를 사용하여 정의됩니다. 디렉토리 구조와 일치하게 하기 위해 패키지 선언은 소스 파일의 맨 첫 줄에 위치해야 합니다.
+
+패키지 이름은 모두 소문자로 작성되어야 합니다. 또한 패키지 이름 사이에는 마침표(`.`)를 사용하여 계층을 표현합니다.
+
+```
+// 패키지 선언
+package com.example.myproject;
+
+// 클래스 선언
+public class MyClass {
+    // 클래스 내용
+}
+```
+
+위의 예제에서 `MyClass`는 `com.example.myproject` 패키지에 속하는 클래스입니다. 디렉토리 구조에서도 `com/example/myproject`와 같이 저장됩니다.
+
+### 패키지 사용
+다른 패키지에 속한 클래스를 사용하기 위해서는 해당 클래스의 패키지를 명시해주어야 합니다. `import` 키워드를 사용하여 다른 패키지의 클래스를 현재 파일에서 사용할 수 있도록 선언합니다.
+
+```
+// 다른 패키지의 클래스 사용
+import com.example.otherproject.OtherClass;
+
+public class MyClass {
+    public static void main(String[] args) {
+        OtherClass other = new OtherClass();
+        // ...
+    }
+}
+```
+
+### Java API 패키지
+Java에서 제공하는 API(Java Standard Edition API) 역시 패키지로 구성되어 있습니다. 예를 들어, `java.lang`, `java.util`, `java.io`와 같은 패키지는 Java에서 제공하는 다양한 클래스와 인터페이스를 포함하고 있습니다.
+
 ## 출처 (Reference)
 https://www.w3schools.com/java/java_syntax.asp
