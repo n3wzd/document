@@ -142,6 +142,18 @@ System.out.println(intValue);    // 10
 
 위의 예제에서 `double` 값이 `int`로 강제 형 변환되었습니다. 소수 부분은 버려지고 정수 부분만 남게 됩니다.
 
+### 특수 문자 (Special Characters)
+Java에서는 특수 문자(Special Characters)를 사용하여 특별한 의미나 동작을 나타냅니다. 이러한 특수 문자는 주로 이스케이프 시퀀스(escape sequence)라고 불리며 역슬래시(`\`)로 시작합니다.
+
+- `\n`: 개행 문자 (New Line)
+- `\t`: 탭 문자 (Tab)
+- `\\`: 역슬래시 (Backslash)
+- `\"`: 큰따옴표 (Double Quote)
+- `\'`: 작은따옴표 (Single Quote)
+- `\r`: 캐리지 리턴 (Carriage Return)
+- `\b`: 백스페이스 (Backspace)
+- `\f`: 페이지 넘김 (Form Feed)
+
 ## 연산자(Operators)
 Java에서는 다양한 연산자(Operators)를 제공하여 변수 및 값들 간의 다양한 연산을 수행할 수 있습니다. 여러 가지 종류의 연산자가 있으며, 각각은 특정한 동작을 수행합니다.
 
@@ -332,6 +344,382 @@ String fruits = "Apple,Orange,Banana";
 String[] fruitArray = fruits.split(",");
 // fruitArray: ["Apple", "Orange", "Banana"]
 ```
+
+## 조건문 (Conditional Statements)
+Java에서 조건문은 주어진 조건에 따라 프로그램의 실행 흐름을 제어하는 데 사용됩니다. Java에서는 `if`, `else`, `else if`, `switch` 등 다양한 조건문이 제공됩니다.
+
+### if
+`if` 문은 주어진 조건이 참일 때 특정 블록의 코드를 실행합니다.
+
+```
+int x = 10;
+
+if (x > 5) {
+    System.out.println("x는 5보다 큽니다.");
+}
+```
+
+### if...else
+`if...else` 문은 주어진 조건이 참이면 하나의 블록을 실행하고, 거짓이면 다른 블록을 실행합니다.
+
+```
+int y = 3;
+
+if (y % 2 == 0) {
+    System.out.println("y는 짝수입니다.");
+} else {
+    System.out.println("y는 홀수입니다.");
+}
+```
+
+### else if
+`else if` 문은 여러 개의 조건을 순차적으로 검사하며, 처음으로 참이 되는 조건의 블록만 실행합니다.
+
+```
+int score = 85;
+
+if (score >= 90) {
+    System.out.println("A 학점");
+} else if (score >= 80) {
+    System.out.println("B 학점");
+} else if (score >= 70) {
+    System.out.println("C 학점");
+} else {
+    System.out.println("D 학점");
+}
+```
+
+### switch
+`switch` 문은 특정 변수의 값에 따라 다양한 경우(case)를 처리하는 데 사용됩니다. `switch` 문에서 각 `case`는 해당하는 값과 일치할 때 실행됩니다. `break` 문을 사용하여 각 `case`에서 실행을 멈춥니다.
+
+- 각 `case`는 서로 겹치지 않아야 합니다.
+- `default`는 선택 사항이며, 어떤 `case`와도 일치하지 않을 때 실행됩니다.
+- `break`를 사용하지 않으면 일치하는 `case` 이후의 모든 코드가 실행됩니다.
+
+```
+int day = 3;
+
+switch (day) {
+    case 1:
+        System.out.println("월요일");
+        break;
+    case 2:
+        System.out.println("화요일");
+        break;
+    case 3:
+        System.out.println("수요일");
+        break;
+    default:
+        System.out.println("다른 요일");
+}
+```
+
+## 반복문 (Loop Statements)
+Java에서 반복문은 프로그램에서 동일한 코드 블록을 여러 번 실행할 때 사용됩니다.
+
+### while
+`while` 문은 주어진 조건이 참인 동안 계속해서 반복됩니다. 조건이 처음부터 거짓이면 코드 블록은 실행되지 않습니다.
+
+```
+while (조건식) {
+    // 반복 실행될 코드 블록
+}
+```
+
+### do-while
+`do-while` 문은 `while` 문과 유사하지만, 코드 블록이 최소한 한 번은 실행된다는 차이가 있습니다. 조건이 거짓이어도 최초 한 번은 코드 블록이 실행됩니다.
+
+```
+do {
+    // 반복 실행될 코드 블록
+} while (조건식);
+```
+
+### for
+`for` 문은 초기화 식, 조건식, 증감식으로 구성되어 있습니다. 초기화 식은 반복문이 시작할 때 딱 한 번 실행되며, 조건식은 각 반복마다 평가되어 참일 경우에만 반복문이 실행됩니다. 증감식은 각 반복이 끝난 후 실행됩니다.
+
+```
+for (초기화식; 조건식; 증감식) {
+    // 반복 실행될 코드 블록
+}
+```
+
+### for each
+`for each` 문는 배열 또는 컬렉션과 같은 iterable 객체의 모든 요소에 대해 반복적으로 작업할 때 사용됩니다. 이 반복문은 배열의 각 요소나 컬렉션의 각 항목을 차례로 처리할 때 간편하게 사용할 수 있습니다.
+
+```
+for (변수타입 변수명 : 배열 또는 컬렉션) {
+    // 배열 또는 컬렉션의 각 요소에 대한 작업
+}
+```
+
+```
+int[] numbers = {1, 2, 3, 4, 5};
+
+// For Each Loop를 사용하여 배열의 각 요소 출력
+for (int num : numbers) {
+    System.out.println(num);
+}
+```
+
+### break
+`break` 문은 반복문을 강제로 종료할 때 사용됩니다. `break`가 실행되면 가장 가까운 반복문(while, do-while, for)을 종료하고 해당 반복문 다음의 코드로 이동합니다.
+
+```
+for (int i = 0; i < 10; i++) {
+    if (i == 5) {
+        System.out.println("Loop is breaking at i = " + i);
+        break;
+    }
+    System.out.println(i);
+}
+```
+
+### continue
+`continue` 문은 반복문의 현재 반복을 중지하고 다음 반복으로 넘어갑니다. `continue`가 실행되면 반복문의 나머지 코드는 실행되지 않고, 다음 반복이 시작됩니다.
+
+```
+for (int i = 0; i < 5; i++) {
+    if (i == 2) {
+        System.out.println("Loop is continuing at i = " + i);
+        continue;
+    }
+    System.out.println(i);
+}
+```
+
+## 배열 (Array)
+Java에서 배열(Array)은 동일한 데이터 타입의 여러 값을 담을 수 있는 자료구조입니다. 배열은 크기가 고정되어 있으며, 각 요소는 인덱스를 통해 접근할 수 있습니다.
+
+### 배열 생성
+배열을 생성하는 방법은 다음과 같습니다:
+
+```
+// 선언과 생성을 동시에
+int[] numbers = new int[5];
+
+// 선언 후 나중에 생성
+int[] numbers;
+numbers = new int[5];
+```
+
+### 배열 초기화
+배열을 생성하면 각 요소에는 해당 데이터 타입의 기본 값이 할당됩니다. 초기값을 지정하여 배열을 초기화할 수 있습니다.
+
+```
+int[] numbers = {1, 2, 3, 4, 5};
+```
+
+```
+int[] numbers = new int[5];
+for (int i = 0; i < 5; i++) {
+    numbers[i] = i + 1;
+}
+```
+
+### 배열 요소 접근
+배열의 각 요소에는 인덱스를 사용하여 접근할 수 있습니다. 인덱스는 0부터 (배열의 길이 - 1)까지의 값을 가집니다.
+
+```
+int[] numbers = {1, 2, 3, 4, 5};
+
+// 배열 요소에 접근하여 출력
+System.out.println(numbers[0]); // 1
+System.out.println(numbers[2]); // 3
+```
+
+### 배열 길이
+배열의 길이는 `length` 속성을 통해 얻을 수 있습니다.
+
+```
+int[] numbers = {1, 2, 3, 4, 5};
+System.out.println("배열의 길이: " + numbers.length); // 5
+```
+
+### 다차원 배열
+Java에서는 다차원 배열도 지원합니다. 2차원 배열은 행(row)과 열(column)로 구성됩니다.
+
+```
+int[][] matrix = new int[3][4]; // 3행 4열의 2차원 배열
+```
+
+## 메서드(Method)
+Java에서 메서드(Method)는 코드의 논리적인 부분을 모듈화하고 재사용성을 높이기 위해 사용되는 코드 블록입니다. 메서드는 특정 작업을 수행하는 코드를 묶어서 호출할 수 있도록 합니다.
+
+### 메서드 선언
+메서드는 다음과 같이 선언됩니다.
+
+```
+modifier returnType methodName(parameter1Type parameter1Name, parameter2Type parameter2Name, ...) {
+    // 메서드의 실행 코드
+    return returnValue;
+}
+```
+
+- `modifier`: 메서드의 접근 제어자를 나타내며, public, private, protected, default 등이 사용될 수 있습니다.
+- `returnType`: 메서드가 반환하는 값의 데이터 타입을 나타냅니다. 메서드가 값을 반환하지 않을 경우 `void`를 사용합니다.
+- `methodName`: 메서드의 이름입니다.
+- `parameter1Type`, `parameter2Type`, ...: 메서드에 전달되는 매개변수의 데이터 타입과 이름입니다.
+- `returnValue`: 메서드가 반환하는 값입니다.
+
+### 메서드 호출
+메서드는 다음과 같이 호출됩니다:
+
+```
+returnType result = methodName(argument1, argument2, ...);
+```
+
+- `returnType`: 메서드가 반환하는 값의 데이터 타입입니다.
+- `methodName`: 호출하려는 메서드의 이름입니다.
+- `argument1`, `argument2`, ...: 메서드에 전달되는 인수(매개변수)입니다.
+
+아래 예제에서 `addNumbers` 메서드는 두 개의 정수를 받아 더하고 그 결과를 반환하는 간단한 메서드입니다.
+
+```
+public class Example {
+    public static void main(String[] args) {
+        // 메서드 호출
+        int sum = addNumbers(3, 4);
+        System.out.println("Sum: " + sum);
+    }
+
+    // 메서드 정의
+    public static int addNumbers(int a, int b) {
+        return a + b;
+    }
+}
+```
+
+### 매개변수 (Parameters)
+메서드 선언에서 매개변수는 메서드가 호출될 때 받게 되는 값을 저장하는 데 사용됩니다. 매개변수는 메서드의 정의 부분에서 명시되며, 메서드 내부에서 이 값을 사용할 수 있습니다.
+
+예를 들어, 다음 메서드에서 `a`와 `b`가 매개변수입니다:
+
+```
+public static int addNumbers(int a, int b) {
+    return a + b;
+}
+```
+
+### 전달인자 (Arguments)
+메서드를 호출할 때, 실제 값을 전달하여 매개변수에 할당됩니다. 이 전달되는 값들을 전달인자 또는 인수라고 합니다.
+
+```
+int result = addNumbers(3, 4);
+```
+
+위의 예제에서 `3`과 `4`는 `addNumbers` 메서드에 전달된 전달인자입니다. 이 값들은 메서드의 매개변수 `a`와 `b`에 각각 할당되어 메서드가 실행될 때 사용됩니다.
+
+매개변수와 전달인자의 개수와 데이터 타입이 일치해야 합니다. 위에서 선언한 `addNumbers` 메서드에서는 두 개의 `int` 매개변수가 필요하므로, 메서드 호출 시에도 두 개의 정수를 전달해야 합니다.
+
+### 기본값을 가지는 매개변수
+Java 8부터는 기본값을 가지는 매개변수를 정의할 수 있습니다. 이는 메서드를 호출할 때 해당 매개변수에 값을 전달하지 않으면 기본값이 사용되는 특성을 가집니다.
+
+```
+public static void exampleMethod(int a, int b, int c = 0) {
+    // 메서드 내용
+}
+```
+
+위의 예제에서 `c`는 기본값이 0으로 지정된 매개변수입니다. 호출 시에 `c`에 값을 전달하지 않으면 자동으로 0이 할당됩니다.
+
+### 메서드 오버로딩(Method Overloading)
+메서드 오버로딩은 같은 이름의 메서드가 서로 다른 매개변수를 갖도록 허용하는 것을 의미합니다. 메서드 이름은 동일하지만 매개변수의 개수, 데이터 타입, 순서가 다를 수 있습니다. 메서드 오버로딩은 코드의 가독성을 높이고 사용자에게 편의성을 제공합니다.
+
+메서드 오버로딩에 대한 툭징은 다음과 같습니다.
+
+- 메서드 이름은 동일해야 합니다.
+- 매개변수의 개수 또는 타입이 달라야 합니다.
+- 반환 타입이 다른 경우는 메서드 오버로딩이 아닙니다.
+
+```
+public class Example {
+
+    // 정수형 매개변수를 받는 메서드
+    public static int add(int a, int b) {
+        return a + b;
+    }
+
+    // 실수형 매개변수를 받는 메서드
+    public static double add(double a, double b) {
+        return a + b;
+    }
+
+    // 문자열 매개변수를 받는 메서드
+    public static String add(String a, String b) {
+        return a + b;
+    }
+
+    // 정수형과 실수형 매개변수를 받는 메서드
+    public static double add(int a, double b) {
+        return a + b;
+    }
+
+    // 여러 타입의 매개변수를 받는 메서드
+    public static int add(int a, int b, int c) {
+        return a + b + c;
+    }
+}
+```
+
+위의 예제에서 `add` 메서드는 여러 형태로 정의되어 있습니다. 이 메서드들은 매개변수의 타입이나 개수에 따라 구분됩니다.
+
+### 스코프 (Scope)
+Java에서 스코프(Scope)는 변수가 유효한 범위를 나타냅니다. 변수가 선언된 위치에 따라 해당 변수가 어디에서 접근 가능하고 어디서는 접근할 수 없는지를 결정합니다.
+
+#### 블록 스코프 (Block Scope)
+일반적으로 중괄호 `{}` 내에 선언된 변수는 해당 블록 내에서만 유효합니다. 블록은 주로 제어문(if, for, while 등) 내부, 메서드 내부, 클래스 블록 내부에서 발생합니다.
+
+```
+public class Example {
+    public static void main(String[] args) {
+        int x = 10; // 메서드 블록 스코프
+
+        if (x > 5) {
+            int y = 20; // if 블록 스코프
+            System.out.println(x + y);
+        }
+
+        // System.out.println(y); // 에러: y는 if 블록 외부에서는 사용할 수 없음
+    }
+}
+```
+
+#### 메서드 스코프 (Method Scope)
+메서드 내에서 선언된 변수는 해당 메서드 내에서만 유효합니다.
+
+```
+public class Example {
+    public static void main(String[] args) {
+        int a = 5; // main 메서드 스코프
+
+        doSomething(); // doSomething 메서드 호출
+
+        // System.out.println(b); // 에러: b는 main 메서드 외부에서는 사용할 수 없음
+    }
+
+    public static void doSomething() {
+        int b = 10; // doSomething 메서드 스코프
+        System.out.println(b);
+    }
+}
+```
+
+#### 클래스 스코프 (Class Scope)
+클래스 블록 내에서 선언된 변수는 해당 클래스 전체에서 사용할 수 있습니다.
+
+```
+public class Example {
+    private static int count = 0; // 클래스 스코프
+
+    public static void main(String[] args) {
+        System.out.println(count); // 클래스 스코프 변수 사용 가능
+    }
+}
+```
+
+#### 전역 스코프 (Global Scope)
+Java에서는 전역 스코프가 없습니다. 가장 가까운 스코프는 클래스 스코프이며, 클래스의 멤버 변수로 선언된 변수가 해당 클래스의 전역 스코프에 해당합니다.
 
 ## 출처 (Reference)
 https://www.w3schools.com/java/java_syntax.asp
