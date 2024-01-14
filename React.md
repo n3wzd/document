@@ -276,3 +276,63 @@ const MyLink = () => {
   return <a href="https://example.com" onClick={handleClick}>Click me</a>;
 };
 ```
+
+## 조건문(Conditional)
+조건문은 프로그램에서 특정 조건에 따라 다른 동작을 수행하도록 하는 제어 구조입니다. React에서 조건문은 주로 JSX 내에서 사용되며, 컴포넌트가 렌더링될 때 특정 조건에 따라 다른 내용을 표시할 수 있게 합니다.
+
+### JSX에서의 조건문
+JSX 내에서 JavaScript의 조건문을 사용하여 특정 조건에 따라 다른 UI를 렌더링할 수 있습니다.
+
+```
+const MyComponent = ({ isLoggedIn }) => {
+  return (
+    <div>
+      {isLoggedIn ? (
+        <p>Welcome, User!</p>
+      ) : (
+        <p>Please log in</p>
+      )}
+    </div>
+  );
+};
+```
+
+위의 예제에서는 `isLoggedIn`이 `true`이면 "Welcome, User!"를, 그렇지 않으면 "Please log in"을 렌더링합니다. 삼항 연산자(`? :`)를 사용하여 간단한 조건문을 작성할 수 있습니다.
+
+### if-else 문 사용
+삼항 연산자 이외에도 JavaScript의 `if-else`문을 사용하여 조건부 렌더링을 할 수 있습니다.
+
+```
+const MyComponent = ({ isLoggedIn }) => {
+  if (isLoggedIn) {
+    return <p>Welcome, User!</p>;
+  } else {
+    return <p>Please log in</p>;
+  }
+};
+```
+
+### 논리 연산자를 활용한 조건부 렌더링
+논리 연산자를 활용하여 간단한 조건부 렌더링도 가능합니다.
+
+```
+const MyComponent = ({ isLoggedIn }) => {
+  return isLoggedIn && <p>Welcome, User!</p>;
+};
+```
+
+이 예제에서는 `isLoggedIn`이 `true`이면 오른쪽의 JSX가 반환되고, `false`이면 `false`가 반환되어 아무것도 렌더링되지 않습니다.
+
+### 조건부 렌더링 함수
+조건부 렌더링을 처리하는 함수를 따로 작성하여 가독성을 높일 수도 있습니다.
+
+```
+const WelcomeMessage = () => <p>Welcome, User!</p>;
+const LoginMessage = () => <p>Please log in</p>;
+
+const MyComponent = ({ isLoggedIn }) => {
+  return isLoggedIn ? <WelcomeMessage /> : <LoginMessage />;
+};
+```
+
+이러한 방식은 복잡한 조건문을 함수로 분리하여 가독성을 높일 수 있습니다.
