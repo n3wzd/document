@@ -178,3 +178,101 @@ const ChildComponent = ({ message }) => {
 
 export default ChildComponent;
 ```
+
+## 이벤트 (Events)
+React에서 이벤트 처리는 사용자 상호 작용에 대응하여 애플리케이션의 동작을 제어하는 중요한 부분입니다. React는 일반적인 DOM 이벤트 시스템과 유사하지만 몇 가지 차이가 있습니다. 이벤트는 주로 JSX 문법을 통해 다뤄지며, 일반적인 HTML의 이벤트 핸들링과 유사하게 사용됩니다.
+
+### JSX에서의 이벤트 처리
+#### 이벤트 핸들러 등록
+JSX에서 이벤트 핸들러는 콜백 함수로 등록됩니다. 대부분의 이벤트 핸들러는 콜백 함수를 지정하는 방식으로 사용됩니다.
+
+```
+function handleClick() {
+  console.log('Button clicked!');
+}
+
+const MyComponent = () => {
+  return <button onClick={handleClick}>Click me</button>;
+};
+```
+
+#### 이벤트 객체 사용
+이벤트 핸들러 함수는 일반적으로 이벤트 객체를 받습니다. 이 객체를 사용하여 이벤트 정보에 접근할 수 있습니다.
+
+```
+function handleClick(event) {
+  console.log('Button clicked!', event.target);
+}
+
+const MyComponent = () => {
+  return <button onClick={handleClick}>Click me</button>;
+};
+```
+
+#### 이벤트 종류
+React에서 지원하는 일부 이벤트 종류는 다음과 같습니다: `onClick`, `onChange`, `onSubmit`, `onFocus`, `onBlur` 등이 있습니다.
+
+```
+const MyInput = () => {
+  const handleChange = (event) => {
+    console.log('Input changed:', event.target.value);
+  };
+
+  return <input type="text" onChange={handleChange} />;
+};
+```
+
+### 클래스 컴포넌트에서의 이벤트 처리
+```
+import React, { Component } from 'react';
+
+class MyComponent extends Component {
+  handleClick = () => {
+    console.log('Button clicked!');
+  };
+
+  render() {
+    return <button onClick={this.handleClick}>Click me</button>;
+  }
+}
+```
+
+### 이벤트 전파
+React에서는 이벤트가 자동으로 부모 컴포넌트로 전파되며, 부모에서 자식으로 전파되지 않습니다. 이를 중단하려면 `stopPropagation`을 사용합니다.
+
+```
+const ParentComponent = () => {
+  const handleParentClick = () => {
+    console.log('Parent clicked!');
+  };
+
+  return (
+    <div onClick={handleParentClick}>
+      <ChildComponent />
+    </div>
+  );
+};
+
+const ChildComponent = () => {
+  const handleChildClick = (event) => {
+    event.stopPropagation();
+    console.log('Child clicked!');
+  };
+
+  return <button onClick={handleChildClick}>Click me</button>;
+};
+```
+
+### 기본 동작 방지
+`preventDefault`를 사용하여 이벤트의 기본 동작을 방지할 수 있습니다.
+
+```
+const MyLink = () => {
+  const handleClick = (event) => {
+    event.preventDefault();
+    console.log('Link clicked!');
+  };
+
+  return <a href="https://example.com" onClick={handleClick}>Click me</a>;
+};
+```
