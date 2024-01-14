@@ -1,7 +1,5 @@
 # JSX
-JSX(JavaScript XML)는 React에서 사용되는 JavaScript의 확장 문법입니다. JSX는 React에서 UI를 작성하기 위한 강력하고 편리한 방법을 제공합니다.
-
-JSX는 XML과 비슷한 문법을 사용하여 JavaScript 코드 안에 마크업을 작성할 수 있게 해줍니다.
+JSX(JavaScript XML)는 React에서 사용되는 JavaScript의 확장 문법입니다. JSX는 React에서 UI를 작성하기 위한 강력하고 편리한 방법을 제공합니다. JSX는 XML과 비슷한 문법을 사용하여 JavaScript 코드 안에 마크업을 작성할 수 있게 해줍니다.
 
 JSX의 주요 특징과 사용법은 다음과 같습니다:
 
