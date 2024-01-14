@@ -1,7 +1,7 @@
 # JSX
 JSX(JavaScript XML)는 React에서 사용되는 JavaScript의 확장 문법입니다. JSX는 React에서 UI를 작성하기 위한 강력하고 편리한 방법을 제공합니다.
 
-JSX는 XML과 비슷한 문법을 사용하여 JavaScript 코드 안에 마크업을 작성할 수 있게 해줍니다. JSX는 React 엘리먼트를 생성하는 데 사용되며, 이 엘리먼트는 React 컴포넌트의 기본 빌딩 블록입니다.
+JSX는 XML과 비슷한 문법을 사용하여 JavaScript 코드 안에 마크업을 작성할 수 있게 해줍니다.
 
 JSX의 주요 특징과 사용법은 다음과 같습니다:
 
@@ -45,7 +45,7 @@ class MyComponent extends React.Component {
 const element = <img src="image.jpg" alt="An example image" />;
 ```
 
-JSX는 React 코드를 더 직관적이고 가독성 있게 만들어주며, JavaScript와의 통합이 자연스럽습니다. 하지만 JSX는 브라우저에서 직접 실행할 수 없고, 트랜스파일러를 통해 일반 JavaScript로 변환되어야 합니다.
+JSX는 React 코드를 더 직관적이고 가독성 있게 만들어주며, JavaScript와의 통합을 자연스럽게 해줍니다. 하지만 JSX는 브라우저에서 직접 실행할 수 없고, 트랜스파일러를 통해 일반 JavaScript로 변환되어야 합니다.
 
 ## React Fragment
 React Fragment는 JSX에서 여러 요소를 그룹화하기 위해 사용되는 빈 문법입니다. 기존에는 여러 요소를 하나의 부모 요소로 감싸는데 div 등의 태그를 사용해야 했지만, React Fragment를 사용하면 불필요한 DOM 요소 없이 여러 요소를 그룹화할 수 있습니다.
