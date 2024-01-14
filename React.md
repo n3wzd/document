@@ -622,3 +622,272 @@ const MyComponent = () => {
   return <div className="myComponent">Styled Text</div>;
 };
 ```
+
+## Hooks
+Hooks는 React v16.8에서 소개된 기능으로, 함수형 컴포넌트에서 상태(state) 및 React의 다양한 기능들을 사용할 수 있도록 해주는 API입니다. Hooks를 사용하면 함수형 컴포넌트에서도 클래스형 컴포넌트와 동일한 기능을 사용할 수 있어서 코드의 재사용성과 가독성을 높일 수 있습니다.
+
+### useState
+`useState`는 React에서 함수형 컴포넌트에서 상태(state)를 관리하기 위한 Hook입니다. 이를 사용하여 컴포넌트의 상태를 추가하고, 상태가 변경될 때마다 컴포넌트를 리렌더링할 수 있습니다.
+
+`useState`의 반환값은 배열이며, 첫 번째 요소는 현재 상태 값, 두 번째 요소는 상태를 갱신할 함수입니다.
+
+```
+import React, { useState } from 'react';
+
+const MyComponent = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+};
+```
+
+`useState` 함수는 하나의 인자를 받고, 이 인자는 초기 상태값입니다. (위의 예제에서는 `0`이 초기 상태값으로 설정되었습니다.)
+
+`useState`는 함수를 인자로 받을 수도 있습니다. 이렇게 사용하면 초기 상태값을 계산하는 데 함수를 사용할 수 있습니다. 이 함수는 컴포넌트가 처음 렌더링될 때만 실행되고, 이후 렌더링에서는 무시됩니다.
+
+```
+const [count, setCount] = useState(() => {
+  // 초기 상태값을 계산하는 함수
+  return someExpensiveComputation();
+});
+```
+
+### useEffect
+컴포넌트가 렌더링될 때마다 특정 작업을 수행하도록 설정할 수 있게 해주는 Hook입니다. 또한, 클래스형 컴포넌트의 라이프사이클 메서드와 유사한 역할을 합니다.
+
+1. **부수 효과 함수:**  `useEffect`의 첫 번째 매개변수로 전달되는 함수는 부수 효과를 정의하는 함수입니다.
+2. **의존성 배열:** `useEffect`의 두 번째 매개변수는 의존성 배열(dependency array)입니다. 이 배열에 있는 값이 변경될 때마다 부수 효과 함수가 다시 실행됩니다. 빈 배열을 전달하면 컴포넌트가 처음 마운트될 때, 그리고 컴포넌트가 렌더링될 때마다 부수 효과 함수가 실행됩니다.
+3. **Clean-up 함수:** `useEffect` 내부에서 반환된 함수는 clean-up 함수로, 컴포넌트가 언마운트되거나 의존성이 변경될 때 실행됩니다. 주로 구독 해제, 타이머 해제 등의 정리 작업에 사용됩니다.
+
+```
+import React, { useEffect, useState } from 'react';
+
+const MyComponent = () => {
+  const [data, setData] = useState(null);
+
+  // useEffect의 첫 번째 인자에는 부수 효과를 수행할 함수가 들어갑니다.
+  // 두 번째 인자에는 의존성 배열(dependency array)이 들어갑니다.
+  useEffect(() => {
+    // 부수 효과 수행
+    fetchData().then((result) => setData(result));
+
+    // clean-up 함수를 반환할 수 있음
+    return () => {
+      // 부수 효과 정리(clean-up)
+      cleanup();
+    };
+  }, []);
+
+  return <div>{data ? <p>Data: {data}</p> : <p>Loading...</p>}</div>;
+};
+```
+
+### useContext
+`useContext`는 React에서 컨텍스트(Context)를 활용할 때 사용하는 Hook 중 하나입니다. 컨텍스트는 React 컴포넌트 트리 안에서 전역적으로 데이터를 공유할 수 있도록 하는 메커니즘을 제공합니다. `useContext`를 사용하면 컨텍스트의 값을 간편하게 읽어올 수 있습니다.
+
+1. 컨텍스트를 생성합니다. `React.createContext`를 사용하여 컨텍스트를 만들고, 초기 값으로 제공할 값을 전달합니다.
+
+```
+// MyContext.js
+import { createContext } from 'react';
+
+const MyContext = createContext();
+export default MyContext;
+```
+
+2. 컨텍스트를 사용할 컴포넌트의 최상단에서 `MyContext.Provider`로 값을 제공합니다.
+
+```
+// App.js
+import React from 'react';
+import MyContext from './MyContext';
+
+const App = () => {
+  const contextValue = 'Hello from Context';
+
+  return (
+    <MyContext.Provider value={contextValue}>
+      <MyComponent />
+    </MyContext.Provider>
+  );
+};
+```
+
+3. `useContext` Hook을 사용하여 컨텍스트의 값을 읽어옵니다.
+
+```
+// MyComponent.js
+import React, { useContext } from 'react';
+import MyContext from './MyContext';
+
+const MyComponent = () => {
+  const contextValue = useContext(MyContext);
+
+  return <p>{contextValue}</p>;
+};
+```
+
+이제 `MyComponent`에서 `MyContext`의 값을 읽어와 사용할 수 있습니다.
+ 
+### useRef
+`useRef`는 React에서 DOM 요소에 직접적인 접근이 필요하거나, 함수형 컴포넌트에서 컴포넌트의 인스턴스 변수를 유지하거나, 컴포넌트 간 통신이 필요할 때 사용하는 Hook입니다. `useRef`로 생성된 객체는 `.current` 프로퍼티를 통해 현재 값을 유지하게 됩니다.
+
+```
+import React, { useRef, useEffect } from 'react';
+
+const MyComponent = () => {
+  // useRef를 사용하여 ref 객체 생성
+  const myRef = useRef(null);
+
+  useEffect(() => {
+    // ref 객체의 current 프로퍼티를 사용하여 DOM에 직접 접근
+    if (myRef.current) {
+      myRef.current.focus();
+    }
+  }, []);
+
+  return <input ref={myRef} />;
+};
+```
+
+### useReducer
+`useReducer`는 React에서 상태 관리를 위한 Hook 중 하나로, 상태 업데이트 로직을 컴포넌트 내부 또는 외부에 분리하여 관리할 때 사용됩니다. 주로 복잡한 상태 로직이나 여러 상태 값이 서로 연관되어 있을 때 활용됩니다.
+    
+```
+import React, { useReducer } from 'react';
+
+// reducer 함수: 현재 상태와 액션을 받아 새로운 상태를 반환
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    case 'DECREMENT':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+
+const Counter = () => {
+  // useReducer를 사용하여 상태와 디스패치 함수를 생성
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+
+  // 생성된 디스패치 함수를 사용하여 액션을 디스패치하고 상태를 업데이트할 수 있습니다.
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+      <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
+    </div>
+  );
+};
+
+```
+    
+### useCallback
+`useCallback`은 React에서 함수를 메모이제이션하고, 불필요한 렌더링을 방지하기 위한 Hook입니다. 특히, 자식 컴포넌트에게 콜백 함수를 전달할 때 사용하면 성능 최적화에 도움이 됩니다.
+
+```
+import React, { useState, useCallback } from 'react';
+
+const MyComponent = () => {
+  const [count, setCount] = useState(0);
+
+  // useCallback을 사용하여 함수를 메모이제이션
+  const handleClick = useCallback(() => {
+    setCount(count + 1);
+  }, [count]); // 의존성 배열에 count를 포함
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleClick}>Increment</button>
+    </div>
+  );
+};
+```
+
+### useMemo
+`useCallback`은 React에서 값을 메모이제이션하고, 불필요한 렌더링을 방지하기 위한 Hook입니다. `useMemo`는 주로 렌더링 시마다 동일한 결과를 생성하는 경우나, 특정 종속성이 변경될 때에만 다시 계산해야 하는 경우에 유용합니다.
+
+```
+import React, { useState, useMemo } from 'react';
+
+const MyComponent = () => {
+  const [count, setCount] = useState(0);
+
+  // useMemo를 사용하여 계산 비용이 높은 결과를 메모이제이션
+  const expensiveResult = useMemo(() => {
+    // count가 변경될 때에만 다시 계산
+    return someExpensiveCalculation(count);
+  }, [count]);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <p>Expensive Result: {expensiveResult}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+};
+```
+
+`useCallback`과 `useMemo`은 메모이제이션을 수행한다는 점은 동일하지만, `useCallback`은 함수를, `useMemo`은 값을 메모이제이션한다는 점에서 차이가 있습니다.
+
+### Custom Hook
+커스텀 훅(Custom Hook)은 React에서 로직을 재사용하기 위한 강력한 방법 중 하나입니다. 함수형 컴포넌트에서 상태 관리, 효과(effects), 그리고 다른 컴포넌트 로직을 추상화하여 새로운 훅으로 만들어서 사용할 수 있게 해줍니다.
+
+커스텀 훅은 "use"로 시작하는 이름을 가져야 합니다. 이는 React가 해당 함수가 훅으로 간주하도록 하는 규약입니다.
+
+- **상태와 효과 로직의 추상화:** 커스텀 훅을 사용하면 특정 컴포넌트에 종속되지 않고, 상태나 부수 효과 로직을 추상화할 수 있습니다.
+- **로직의 재사용:** 여러 컴포넌트에서 같은 로직을 사용하고 싶을 때 커스텀 훅을 만들면 해당 로직을 간편하게 재사용할 수 있습니다.
+- **설계 유연성:** 커스텀 훅을 통해 로직을 구성하면 컴포넌트가 간결해지고, 로직의 변경에 대한 유연성이 높아집니다.
+- **의존성 관리:** 커스텀 훅 내에서 사용하는 상태나 효과의 의존성을 컴포넌트에서 관리하면서, 훅의 사용자는 해당 의존성을 신경 쓰지 않고도 커스텀 훅을 사용할 수 있습니다.
+
+#### 커스텀 훅 생성
+```
+import { useState, useEffect } from 'react';
+
+// 커스텀 훅 생성
+const useCustomHook = (initialValue) => {
+  // 상태 관리
+  const [value, setValue] = useState(initialValue);
+
+  // 부수 효과 로직
+  useEffect(() => {
+    // some side effect
+    console.log('Custom Hook Effect:', value);
+  }, [value]);
+
+  // 사용자 정의 메서드
+  const increment = () => {
+    setValue(value + 1);
+  };
+
+  // 훅에서 반환하는 값
+  return { value, increment };
+};
+```
+
+#### 커스텀 훅 사용
+```
+import React from 'react';
+import useCustomHook from './useCustomHook';
+
+const MyComponent = () => {
+  // 커스텀 훅 사용
+  const { value, increment } = useCustomHook(0);
+
+  return (
+    <div>
+      <p>Value: {value}</p>
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+};
+```
