@@ -336,3 +336,85 @@ const MyComponent = ({ isLoggedIn }) => {
 ```
 
 이러한 방식은 복잡한 조건문을 함수로 분리하여 가독성을 높일 수 있습니다.
+
+## 리스트 (Lists)
+React에서 리스트는 동적인 데이터를 효과적으로 렌더링하는데 사용되는 중요한 개념입니다. 리스트는 배열이나 기타 반복 가능한(iterable) 객체를 매핑하여 여러 항목을 렌더링할 수 있도록 도와줍니다. React에서 리스트를 다루기 위한 주요 방법은 JSX 내에서 `map` 함수를 사용하는 것입니다.
+
+여러 항목을 렌더링할 경우, React에서 각 항목에 고유한 `key` 속성을 제공해야 합니다. 이는 React가 각 항목을 식별하는 데 사용됩니다.
+
+### 배열 매핑 (Mapping Arrays)
+가장 일반적인 방법으로 배열의 각 항목을 순회하면서 JSX로 변환하여 렌더링합니다.
+
+```
+const numbers = [1, 2, 3, 4, 5];
+
+const NumberList = () => {
+  return (
+    <ul>
+      {numbers.map((number) => (
+        <li key={number}>{number}</li>
+      ))}
+    </ul>
+  );
+};
+```
+
+위의 예제에서 `map` 함수를 사용하여 `numbers` 배열의 각 요소를 `<li>` 태그로 변환하여 리스트를 생성합니다.
+
+`map` 함수 내에서 조건부 렌더링을 사용하여 특정 조건에 따라 항목을 제외하거나 다른 형태로 렌더링할 수 있습니다.
+
+```
+const numbers = [1, 2, 3, 4, 5];
+
+const EvenNumbersList = () => {
+  return (
+    <ul>
+      {numbers.map((number) => (
+        number % 2 === 0 && <li key={number}>{number}</li>
+      ))}
+    </ul>
+  );
+};
+```
+
+### 컴포넌트 리스트
+리스트 내에서 또 다른 컴포넌트를 렌더링할 수 있습니다.
+
+```
+const data = [
+  { id: 1, text: 'Item 1' },
+  { id: 2, text: 'Item 2' },
+  { id: 3, text: 'Item 3' },
+];
+
+const ItemList = () => {
+  return (
+    <ul>
+      {data.map((item) => (
+        <ListItem key={item.id} text={item.text} />
+      ))}
+    </ul>
+  );
+};
+
+const ListItem = ({ text }) => {
+  return <li>{text}</li>;
+};
+```
+
+### React Fragment 사용
+여러 요소를 반환할 때, `map` 함수 내에서는 반드시 하나의 부모 요소로 감싸야 합니다. React Fragment (`<>...</>`)를 사용하여 불필요한 부모 요소 없이 여러 요소를 그룹화할 수 있습니다.
+
+```
+const numbers = [1, 2, 3, 4, 5];
+
+const NumberList = () => {
+  return (
+    <>
+      {numbers.map((number) => (
+        <span key={number}>{number}</span>
+      ))}
+    </>
+  );
+};
+```
