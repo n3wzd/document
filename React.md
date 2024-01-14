@@ -418,3 +418,57 @@ const NumberList = () => {
   );
 };
 ```
+
+## 폼 (Forms)
+React에서 폼은 사용자의 입력을 받고 처리하기 위한 중요한 요소입니다. React에서는 일반 HTML 폼과 비슷하지만, React의 컴포넌트 기능과 상태(State) 관리 기능을 통합하여 보다 동적이고 유연한 폼 처리를 제공합니다.
+
+React를 사용하여 폼을 처리할 때는 주로 제어 컴포넌트를 사용하여 상태를 관리하고, 이를 통해 유연하고 동적인 폼을 만들 수 있습니다.
+
+- **기본 Form 사용:** React에서 기본적인 폼을 사용할 때는 일반 HTML과 유사하게 `<form>` 태그와 여러 폼 요소들을 사용합니다.
+- **제어 컴포넌트(Controlled Components):** React에서는 폼 요소를 제어 컴포넌트로 만들어 사용하는 것이 일반적입니다. 제어 컴포넌트는 React 상태(State)를 사용하여 폼 요소의 값을 관리합니다.
+- **이벤트 핸들러:** 폼 요소에서 사용자 입력을 감지하려면 `onChange` 이벤트 핸들러를 사용합니다. 입력이 변경될 때마다 해당 이벤트가 발생하고, 이를 통해 상태를 업데이트할 수 있습니다.
+- **폼 데이터 제출:** 폼이 제출될 때는 `onSubmit` 이벤트 핸들러를 사용하여 폼 데이터를 처리합니다. 주로 이벤트 객체의 `preventDefault` 메서드를 호출하여 페이지의 새로고침을 방지합니다.
+- **비제어 컴포넌트(Uncontrolled Components):** React에서는 제어 컴포넌트 외에도 비제어 컴포넌트를 사용할 수도 있습니다. 비제어 컴포넌트는 React 상태(State)를 사용하지 않고, DOM에서 직접 값을 추출하는 방식입니다. 하지만 이 방식은 상태 관리가 더 어려우며, 주로 특별한 경우에 사용됩니다.
+
+```
+import React, { useState } from 'react';
+
+const MyForm = () => {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // 폼 데이터 처리 로직
+    console.log(formData);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Username:
+        <input type="text" name="username" value={formData.username} onChange={handleChange} />
+      </label>
+      <br />
+      <label>
+        Password:
+        <input type="password" name="password" value={formData.password} onChange={handleChange} />
+      </label>
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+```
+
+위의 예제에서 `useState`를 사용하여 `formData`라는 상태를 생성하고, 폼 요소의 값은 이 상태를 통해 제어됩니다.
