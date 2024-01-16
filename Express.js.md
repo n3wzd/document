@@ -92,3 +92,127 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something went wrong!');
 });
 ```
+
+## 라우팅 (Routing)
+Express.js에서 라우팅(Routing)은 클라이언트의 요청에 대한 응답을 처리하는 주요 메커니즘입니다. 라우터를 사용하여 애플리케이션의 각 엔드포인트(Endpoint)에 대한 동작을 정의할 수 있습니다. 라우팅은 HTTP 메소드(GET, POST, PUT, DELETE 등)와 경로에 따라 처리됩니다.
+
+라우터에서 요청을 처리하는 함수를 핸들러(Handler)라고 합니다. 핸들러는 클라이언트의 요청에 대한 응답을 생성합니다. 아래에서는 Express.js에서 라우팅과 핸들러의 사용에 대해 자세히 설명합니다.
+
+### 기본 라우팅
+Express.js에서 기본적인 라우팅은 `app.get()`, `app.post()`, `app.put()`, `app.delete()` 등의 메소드를 사용하여 정의됩니다. 아래는 간단한 GET 요청에 대한 라우팅 예제입니다.
+
+```
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
+```
+
+위의 코드에서 `/` 경로로의 GET 요청에 대한 핸들러 함수가 정의되어 있습니다. 요청이 들어오면 "Hello, World!"를 응답으로 보냅니다.
+
+
+### 다이나믹 라우팅
+Express에서는 동적인 경로 매개변수를 사용하여 다이나믹 라우팅을 구현할 수 있습니다.
+
+```
+app.get('/users/:userId', (req, res) => {
+  const userId = req.params.userId;
+  res.send(`User ID: ${userId}`);
+});
+```
+
+위의 코드에서 `:userId`는 동적인 매개변수로, 실제 요청에서 해당 위치에 들어온 값은 `req.params.userId`를 통해 접근할 수 있습니다.
+
+### 여러 핸들러 사용
+라우트에 여러 핸들러를 사용할 수 있습니다. 다음 핸들러로 전달하기 위해 `next` 함수를 사용합니다.
+
+```
+app.get('/example', (req, res, next) => {
+  // 첫 번째 핸들러
+  console.log('First handler');
+  next();
+}, (req, res) => {
+  // 두 번째 핸들러
+  console.log('Second handler');
+  res.send('Done');
+});
+```
+
+위의 코드에서 첫 번째 핸들러는 `next()`를 호출하여 다음 핸들러로 제어를 전달합니다.
+
+
+### 라우터 분리
+Express에서는 라우터를 모듈로 분리하여 관리할 수 있습니다. 이는 애플리케이션이 복잡해질 때 코드를 구조화하는 데 유용합니다.
+
+```
+// routes.js
+const express = require('express');
+const router = express.Router();
+
+router.get('/example', (req, res) => {
+  res.send('Example route');
+});
+
+module.exports = router;
+
+// app.js
+const express = require('express');
+const app = express();
+const routes = require('./routes');
+
+app.use('/', routes);
+```
+
+위의 예제에서 `/example` 경로는 `routes.js` 파일에 정의된 라우터에 의해 처리됩니다.
+
+## 템플릿 엔진 (Template Engine)
+Express.js에서 템플릿 엔진을 사용하면 동적인 HTML 페이지를 생성할 수 있습니다. 템플릿 엔진은 서버 측에서 데이터를 템플릿과 결합하여 클라이언트에게 돌려주는 역할을 합니다. Express.js에서는 주로 EJS(Embedded JavaScript)와 같은 템플릿 엔진을 많이 사용합니다.
+
+### 템플릿 엔진 설치
+템플릿 엔진을 npm을 통해 설치합니다. 여기서는 EJS를 예로 들겠습니다.
+    
+> npm install ejs
+    
+### Express에 템플릿 엔진 설정
+Express 앱에서 템플릿 엔진을 사용하려면 설정을 추가해야 합니다. `app.set()` 메서드를 사용하여 템플릿 엔진의 뷰 엔진을 설정합니다.
+
+```
+const express = require('express');
+const app = express();
+
+app.set('view engine', 'ejs');
+```
+
+위의 코드에서 `'view engine'`은 Express에게 사용할 뷰 엔진의 종류를 알려주며, `'ejs'`는 EJS를 사용하겠다는 의미입니다.
+
+### 템플릿 파일 생성
+EJS를 사용하는 경우 `.ejs` 확장자를 가진 템플릿 파일을 생성합니다. 예를 들어, `views` 폴더에 `index.ejs` 파일을 만들어 보겠습니다. 
+    
+```
+<!-- views/index.ejs -->
+<html>
+<head>
+  <title><%= title %></title>
+</head>
+<body>
+  <h1><%= message %></h1>
+</body>
+</html>
+```
+
+위의 예제에서 `<%= title %>`과 `<%= message %>`는 템플릿 엔진에 의해 동적으로 채워질 부분입니다.
+
+### 템플릿 렌더링
+라우터 핸들러에서 `res.render()` 메서드를 사용하여 템플릿을 렌더링합니다.
+
+```
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Express', message: 'Welcome to Express!' });
+});
+```
+
+위의 코드에서 `'index'`는 `views` 폴더에 있는 `index.ejs` 템플릿 파일을 참조합니다. 두 번째 인수로 전달된 객체는 템플릿에 전달될 데이터입니다.
+
+뷰 템플릿에서는 `<%= 변수명 %>`을 통해 서버에서 전달받은 데이터를 출력할 수 있습니다. 예를 들어, 위의 템플릿에서는 `title`과 `message`라는 변수를 사용하여 동적으로 HTML을 생성합니다.
