@@ -393,3 +393,85 @@ app.use((req, res, next) => {
 ```
 
 위의 미들웨어를 사용하면 뷰 템플릿에서 `isAuthenticated`와 `currentUser` 변수를 사용할 수 있습니다.
+
+## 테스트 (Test)
+Express.js 애플리케이션에서 테스트를 작성하려면 Mocha와 Chai와 같은 테스트 프레임워크 및 어서션 라이브러리를 사용할 수 있습니다.
+
+### 테스트 프레임워크와 어서션 라이브러리 설치
+
+> npm install mocha chai supertest --save-dev` 
+
+- `mocha`: JavaScript 및 Node.js를 위한 테스트 프레임워크.
+- `chai`: 강력한 어서션(assertion) 라이브러리.
+- `supertest`: HTTP 요청을 테스트하는 데 사용되는 라이브러리.
+
+### 테스트 디렉토리 및 설정
+프로젝트 루트에 `test` 디렉토리를 생성하고, 그 안에 `mocha.opts` 파일을 만듭니다.
+
+```
+// test/mocha.opts
+--recursive
+--timeout 3000
+--exit
+```
+
+이 파일은 Mocha의 옵션을 설정하는데 사용됩니다.
+
+### 테스트 작성
+예를 들어, Express 앱에서 사용자 관리를 위한 API를 테스트하는 경우를 가정해 봅시다.
+
+```
+// test/user.test.js
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const app = require('../app'); // Express 앱 가져오기
+const expect = chai.expect;
+
+chai.use(chaiHttp);
+
+describe('User API', () => {
+  it('should return all users', (done) => {
+    chai.request(app)
+      .get('/api/users')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.users).to.be.an('array');
+        done();
+      });
+  });
+
+  it('should create a new user', (done) => {
+    chai.request(app)
+      .post('/api/users')
+      .send({ name: 'John Doe', email: 'john@example.com', password: 'password' })
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.message).to.equal('User created successfully');
+        expect(res.body.user).to.be.an('object');
+        done();
+      });
+  });
+
+  // ... (다른 테스트도 동일하게 작성)
+});
+```
+
+### 테스트 실행
+`package.json` 파일에서 테스트 명령을 추가합니다.
+
+```
+// package.json
+{
+  "scripts": {
+    "test": "mocha"
+  }
+}
+```
+
+그리고 터미널에서 다음 명령어를 실행하여 테스트를 실행합니다.
+
+> npm test
+
+테스트를 실행하면 Mocha가 `test` 디렉토리 내의 테스트 파일을 찾아 실행하고 결과를 출력합니다.
