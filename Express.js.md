@@ -475,3 +475,65 @@ describe('User API', () => {
 > npm test
 
 테스트를 실행하면 Mocha가 `test` 디렉토리 내의 테스트 파일을 찾아 실행하고 결과를 출력합니다.
+
+## 보안 (Security)
+보안은 소프트웨어 및 시스템 개발에서 매우 중요한 측면 중 하나이며, 애플리케이션의 안전성과 신뢰성을 보장하는 데 필수적입니다.
+
+### HTTPS
+HTTPS는 데이터를 암호화하여 중간자 공격을 방지하고 데이터의 안전성을 보장합니다. Express.js 애플리케이션에서 HTTPS를 사용하려면 SSL/TLS 인증서를 설정해야 합니다.
+
+```
+const https = require('https');
+const fs = require('fs');
+
+const options = {
+  key: fs.readFileSync('path/to/private-key.pem'),
+  cert: fs.readFileSync('path/to/certificate.pem'),
+};
+
+const server = https.createServer(options, app);
+```
+
+### Helmet
+Helmet은 Express 애플리케이션의 기본 보안 헤더를 설정하여 여러 보안 취약점을 방지합니다. 예를 들어, XSS(Cross-Site Scripting) 공격을 방지하기 위한 헤더를 설정합니다.
+
+```
+const helmet = require('helmet');
+app.use(helmet());
+```
+
+### CORS 관리
+Cross-Origin Resource Sharing (CORS)는 다른 도메인에서 리소스에 접근하는 것을 제어하는 메커니즘입니다. `cors` 미들웨어를 사용하여 특정 도메인에서만 요청을 허용할 수 있습니다.
+
+```
+const cors = require('cors');
+app.use(cors());
+```
+
+### 사용자 입력 검증
+사용자 입력은 항상 신뢰할 수 없습니다. 따라서 입력을 검증하고 정제하여 삽입 공격 및 다른 보안 문제를 방지해야 합니다. `express-validator`와 같은 라이브러리를 사용하여 사용자 입력을 검증할 수 있습니다.
+
+```
+const { body, validationResult } = require('express-validator');
+
+app.post('/login', [
+  body('username').isLength({ min: 5 }),
+  body('password').isLength({ min: 8 }),
+], (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  // 로그인 로직
+});
+```
+
+### 인증 및 권한 부여
+사용자의 신원을 확인하고 권한을 부여하여 인가된 사용자만이 특정 기능에 액세스할 수 있도록 해야 합니다. Passport와 같은 라이브러리를 사용하여 사용자 인증 및 세션 관리를 구현할 수 있습니다.
+
+```
+const passport = require('passport');
+
+app.use(passport.initialize());
+app.use(passport.session());
+```
