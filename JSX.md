@@ -45,6 +45,10 @@ const element = <img src="image.jpg" alt="An example image" />;
 
 JSX는 React 코드를 더 직관적이고 가독성 있게 만들어주며, JavaScript와의 통합을 자연스럽게 해줍니다. 하지만 JSX는 브라우저에서 직접 실행할 수 없고, 트랜스파일러를 통해 일반 JavaScript로 변환되어야 합니다.
 
+JSX에서 주의사항은 다음과 같습니다:
+- **단일 루트 엘리먼트 사용:** JSX에서는 하나의 루트 엘리먼트만 반환해야 합니다. 여러 엘리먼트를 반환하려면 이들을 하나의 컨테이너 엘리먼트로 감싸야 합니다.
+- **속성명은 CamelCase 사용:** JSX에서는 HTML 속성 이름을 사용할 때 CamelCase를 사용해야 합니다. (예: `className`, `htmlFor`)
+
 ## React Fragment
 React Fragment는 JSX에서 여러 요소를 그룹화하기 위해 사용되는 빈 문법입니다. 기존에는 여러 요소를 하나의 부모 요소로 감싸는데 div 등의 태그를 사용해야 했지만, React Fragment를 사용하면 불필요한 DOM 요소 없이 여러 요소를 그룹화할 수 있습니다.
 
