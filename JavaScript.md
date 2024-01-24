@@ -761,9 +761,8 @@ console.log(obj.prop); // 오류 발생!
 ```
 
 ### Spread Syntax
-- `Spread Syntax`는 배열에 다른 배열 추가를 쉽게 해주는 방법을 제공합니다.
-- 복사할 배열 앞에 `...`을 붙이면 해당 배열의 원소들이 그대로 추가됩니다.
-- 객체도 Spread Syntax를 사용할 수 있습니다. 이때는 열거 가능한(enumerable) 프로퍼티만 복사됩니다.
+- `Spread Syntax`는 객체나 배열의 속성이나 요소를 풀어서 가져옵니다.
+- 객체도 Spread Syntax를 사용할 수 있으며, 열거 가능한(enumerable) 프로퍼티만 복사됩니다.
 - 값의 복사는 얕은 복사로 진행됩니다.
 
 ```
@@ -771,6 +770,22 @@ const arr1 = [3, 4];
 const arr2 = [1, 2, ...arr1, 5]; // [ 1, 2, 3, 4, 5 ]
 const obj1 = { b: 2 };
 const obj2 = { a: 1, ...obj1, c: 3 }; // { a: 1, b: 2, c: 3 }
+```
+
+### Rest Syntax
+- `Rest Syntax`는 여러 개의 인자를 배열 또는 객체로 묶어주는 역할을 합니다.
+- 함수의 매개변수에서도 사용할 수 있습니다.
+
+```
+const [first, second, ...rest] = [1, 2, 3, 4, 5];
+console.log(first); // 1
+console.log(second); // 2
+console.log(rest); // [3, 4, 5]
+
+const { a, b, ...rest } = { a: 1, b: 2, c: 3, d: 4 };
+console.log(a); // 1
+console.log(b); // 2
+console.log(rest); // { c: 3, d: 4 }
 ```
 
 ### 분해대입 (Destructuring Assignment)
