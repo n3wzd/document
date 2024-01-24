@@ -236,6 +236,52 @@ export default ParentComponent;`
 </div>
 ```
 
+### Spread Syntax
+React에서 props를 전달할 때 JavaScript의 spread 연산자를 사용할 수 있습니다.
+
+부모 컴포넌트에서 `{...props}`를 사용하면 다음과 같이 받을 수 있습니다:
+
+```
+function ParentComponent() {
+  const person = {
+    name: "John",
+    age: 25,
+    gender: "Male",
+  };
+
+  return (
+    <ChildComponent {...person} />
+  );
+}
+```
+```
+function ChildComponent({ name, age, gender }) {
+  return (
+    <div>
+      <p>Name: {name}</p>
+      <p>Age: {age}</p>
+      <p>Gender: {gender}</p>
+    </div>
+  );
+}
+```
+
+자식 컴포넌트에서 `{...props}`를 사용하면 다음과 같이 받을 수 있습니다:
+```
+<ChildComponent name="John" age={25} />
+```
+
+```
+function ChildComponent({ ...props }) {
+  return (
+    <div>
+      <p>Name: {props.name}</p>
+      <p>Age: {props.age}</p>
+    </div>
+  );
+}
+```
+
 ## 이벤트 (Events)
 React에서 이벤트 처리는 사용자 상호 작용에 대응하여 애플리케이션의 동작을 제어하는 중요한 부분입니다. React는 일반적인 DOM 이벤트 시스템과 유사하지만 몇 가지 차이가 있습니다. 이벤트는 주로 JSX 문법을 통해 다뤄지며, 일반적인 HTML의 이벤트 핸들링과 유사하게 사용됩니다.
 
