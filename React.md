@@ -170,7 +170,7 @@ JSX에서 컴포넌트를 사용할 때, 속성을 추가하여 데이터를 전
 ```
  
 ### Props 수신
-자식 컴포넌트에서는 함수의 매개변수로 props를 받아 사용합니다.
+자식 컴포넌트에서는 함수의 매개변수로 `props`를 받아 사용합니다. (`props` 대신 다른 이름을 사용할 수 있습니다.)
 
 ```
 // 자식 컴포넌트
@@ -183,22 +183,7 @@ const ChildComponent = (props) => {
 export default ChildComponent;
 ```
 
-### 기본값 설정
-부모 컴포넌트가 데이터를 전달하지 않을 경우, 자식 컴포넌트에 설정된 기본값이 사용됩니다.
-
-```
-// 자식 컴포넌트
-import React from 'react';
-
-const ChildComponent = (props) => {
-  return <p>{props.message || 'Default Message'}</p>;
-};
-
-export default ChildComponent;
-```
-
-### Destructuring
-함수의 매개변수에서 분해대입을 사용하여 특정 props만 추출할 수 있습니다.
+함수의 매개변수에서 분해대입을 사용하여 특정 속성만 추출할 수 있습니다.
 
 ```
 // 자식 컴포넌트
@@ -209,6 +194,46 @@ const ChildComponent = ({ message }) => {
 };
 
 export default ChildComponent;
+```
+
+### children
+React에서 `children`은 컴포넌트의 속성 중 하나로, 해당 컴포넌트가 감싸고 있는 다른 React 엘리먼트나 컴포넌트를 나타냅니다. `children`을 이용하면 부모 컴포넌트에서 자식 컴포넌트에게 HTML 태그나 다른 React 컴포넌트를 포함한 내용을 전달할 수 있습니다.
+
+```
+// 부모 컴포넌트
+import React from 'react';
+
+const ParentComponent = () => {
+  return (
+    <div>
+      <h1>부모 컴포넌트</h1>
+      <ChildComponent>자식 컴포넌트의 내용</ChildComponent>
+    </div>
+  );
+};
+
+// 자식 컴포넌트
+const ChildComponent = (props) => {
+  return (
+    <div>
+      <h2>자식 컴포넌트</h2>
+      <p>{props.children}</p>
+    </div>
+  );
+};
+
+export default ParentComponent;` 
+```
+
+출력은 다음과 같습니다:
+```
+<div>
+  <h1>부모 컴포넌트</h1>
+  <div>
+    <h2>자식 컴포넌트</h2>
+    <p>안녕하세요, 자식 컴포넌트의 내용입니다!</p>
+  </div>
+</div>
 ```
 
 ## 이벤트 (Events)
