@@ -236,11 +236,10 @@ export default ParentComponent;`
 </div>
 ```
 
-### Spread Syntax
-React에서 props를 전달할 때 JavaScript의 spread 연산자를 사용할 수 있습니다.
+### Spread / Rest Syntax
+React에서 props를 전달할 때 JavaScript의 spread / rest 연산자를 사용할 수 있습니다.
 
-부모 컴포넌트에서 `{...props}`를 사용하면 다음과 같이 받을 수 있습니다:
-
+**spread 연산자**
 ```
 function ParentComponent() {
   const person = {
@@ -266,7 +265,7 @@ function ChildComponent({ name, age, gender }) {
 }
 ```
 
-자식 컴포넌트에서 `{...props}`를 사용하면 다음과 같이 받을 수 있습니다:
+**rest 연산자**
 ```
 <ChildComponent name="John" age={25} />
 ```
