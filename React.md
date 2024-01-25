@@ -345,7 +345,7 @@ class MyComponent extends Component {
 ```
 
 ### 이벤트 전파
-React에서는 이벤트가 자동으로 부모 컴포넌트로 전파되며, 부모에서 자식으로 전파되지 않습니다. 이를 중단하려면 `stopPropagation`을 사용합니다.
+React에서는 이벤트가 자동으로 부모 컴포넌트로 전파되며, 부모에서 자식으로 전파되지 않습니다. 부모 컴포넌트로 전파되는 것을 중단하려면 `stopPropagation`을 사용합니다.
 
 ```
 const ParentComponent = () => {
