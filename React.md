@@ -798,6 +798,35 @@ const handleIncrementFunctional = () => {
 |1번째 렌더링 이후|1|1|
 |2번째 렌더링 이후|1|2|
 
+#### 객체 상태
+객체를 상태 변수로 활용할 수 있습니다. 이때는 다음 사항을 유의해야 합니다:
+- 상태 변수는 렌더링 이전에 불변해야 하므로 객체 상태의 속성을 변경하는 연산은 리렌더링을 트리거하지 않습니다.
+- 리렌더링을 하려면 상태 갱신 함수를 실행해야 하며, 생태 갱신 함수의 인자로 새로운 객체를 제공해야 합니다. 이때 객체를 복사하는 작업을 고려할 수 있습니다.
+
+```
+const [shape, setShape] = useState({
+  color: 'orange',
+  position: initialPosition
+});
+
+// 리렌더링이 트리거되지 않음
+function handleMove1(dx, dy) {
+  shape.position.x += dx;
+  shape.position.y += dy;
+}
+
+// 리렌더링이 트리거됨
+function handleMove2(dx, dy) {
+  setShape({
+    ...shape,
+    position: {
+      x: shape.position.x + dx,
+      y: shape.position.y + dy,
+    }
+  });
+}
+```
+
 ### useEffect
 컴포넌트가 렌더링될 때마다 특정 작업을 수행하도록 설정할 수 있게 해주는 Hook입니다. 또한, 클래스형 컴포넌트의 라이프사이클 메서드와 유사한 역할을 합니다.
 
