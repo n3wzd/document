@@ -430,20 +430,6 @@ const MyComponent = ({ isLoggedIn }) => {
 
 이 예제에서는 `isLoggedIn`이 `true`이면 오른쪽의 JSX가 반환되고, `false`이면 `false`가 반환되어 아무것도 렌더링되지 않습니다.
 
-### 조건부 렌더링 함수
-조건부 렌더링을 처리하는 함수를 따로 작성하여 가독성을 높일 수도 있습니다.
-
-```
-const WelcomeMessage = () => <p>Welcome, User!</p>;
-const LoginMessage = () => <p>Please log in</p>;
-
-const MyComponent = ({ isLoggedIn }) => {
-  return isLoggedIn ? <WelcomeMessage /> : <LoginMessage />;
-};
-```
-
-이러한 방식은 복잡한 조건문을 함수로 분리하여 가독성을 높일 수 있습니다.
-
 ## 리스트 (Lists)
 React에서 리스트는 동적인 데이터를 효과적으로 렌더링하는데 사용되는 중요한 개념입니다. 리스트는 배열이나 기타 반복 가능한(iterable) 객체를 매핑하여 여러 항목을 렌더링할 수 있도록 도와줍니다. React에서 리스트를 다루기 위한 주요 방법은 JSX 내에서 `map`, `filter` 등 함수를 사용하는 것입니다.
 
@@ -741,6 +727,7 @@ Hooks는 React v16.8에서 소개된 기능으로, 함수 컴포넌트에서 상
 - 각 컴포넌트마다 고유합니다.
 - 리렌더링이 발생하기 이전에는 변경되지 않습니다.
 - 실제 저장되는 위치는 컴포넌트 외부입니다.
+- 렌더 트리에서 동일한 컴포넌트가 동일한 위치에서 렌더링되면 해당 컴포넌트의 상태는 변경되지 않습니다.
 
 `useState`는 React에서 함수 컴포넌트에서 상태를 관리하기 위한 Hook입니다. 이를 사용하여 컴포넌트의 상태를 추가하고, 상태가 변경될 때마다 컴포넌트를 리렌더링할 수 있습니다.
 
