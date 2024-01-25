@@ -764,13 +764,38 @@ const MyComponent = () => {
 `useState` 함수는 하나의 인자를 받고, 이 인자는 초기 상태값입니다. (위의 예제에서는 `0`이 초기 상태값으로 설정되었습니다.) `setCount`가 호출되면 `count`는 새로운 값을 가지며 컴포넌트가 리렌더링됩니다.
 
 `useState`는 함수를 인자로 받을 수도 있습니다. 이렇게 사용하면 초기 상태값을 계산하는 데 함수를 사용할 수 있습니다. 이 함수는 컴포넌트가 처음 렌더링될 때만 실행되고, 이후 렌더링에서는 실행되지 않습니다.
-
 ```
 const [count, setCount] = useState(() => {
   // 초기 상태값을 계산하는 함수
   return someExpensiveComputation();
 });
 ```
+
+#### 함수형 업데이트
+상태 갱신 함수는 함수를 인자로 할 수 있습니다. 상태 갱신 함수가 제공한 함수들은 큐에 등록되며 렌더링될 때 순차적으로 실행되면서 상태를 업데이트합니다.
+
+```
+const [count, setCount] = useState(0);
+
+// 값 업데이트 사용
+const handleIncrement = () => {
+  setCount(count + 1);
+  setCount(count + 1);
+};
+
+// 함수형 업데이트 사용
+const handleIncrementFunctional = () => {
+  setCount((prevCount) => prevCount + 1);
+  setCount((prevCount) => prevCount + 1);
+};
+```
+
+위의 예제에서 두 업데이트 함수는 모두 렌더링을 2번 실행하지만 출력 결과는 다릅니다.
+
+|count|값|함수형|
+|---|---|---|
+|이전|0|0|
+|이후|1|2|
 
 ### useEffect
 컴포넌트가 렌더링될 때마다 특정 작업을 수행하도록 설정할 수 있게 해주는 Hook입니다. 또한, 클래스형 컴포넌트의 라이프사이클 메서드와 유사한 역할을 합니다.
