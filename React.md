@@ -832,6 +832,56 @@ function handleMove2(dx, dy) {
 - 상태 변수는 적을수록 좋습니다. 불필요하고 중복된 상태는 가급적 피하는 것이 좋습니다.
 - props는 가급적 상태로 사용하지 않는 것이 좋습니다.
 - 리렌더링되면 지역 객체는 새로운 주소값을 가지므로, 상태 객체와 비교 연산시 객체 자체 보다는 ID나 인덱스 등 객체의 속성을 활용해야 합니다.
+- 컴포넌트를 "Controlled"(props에 의한 제어) 또는 "Uncontrolled"(상태에 의한 제어)으로 분리하여 설계하면 편리합니다.
+
+#### 공통 상태
+하나의 상태로 복수의 컴포넌트를 제어해야 하는 경우가 있습니다. 이때는 다음 전략을 따릅니다:
+
+1. 공유할 상태를 컴포넌트의 공통 부모로 배치합니다.
+2. 공통 부모에서 정보와 이벤트 핸들러를 props를 통해 하위 컴포넌트로 전달합니다.
+3. 하위 컴포넌트에서는 전달받은 이벤트를 사용하여 공통 부모의 상태를 갱신할 수 있습니다.
+
+```
+import { useState } from 'react';
+
+// 공통 부모 컴포넌트
+export default function SyncedInputs() {
+  const [text, setText] = useState('');
+
+  function handleChange(e) {
+    setText(e.target.value);
+  }
+
+  return (
+    <>
+      <Input
+        label="First input"
+        value={text}
+        onChange={handleChange}
+      />
+      <Input
+        label="Second input"
+        value={text}
+        onChange={handleChange}
+      />
+    </>
+  );
+}
+
+// 하위 컴포넌트
+function Input({ label, value, onChange }) {
+  return (
+    <label>
+      {label}
+      {' '}
+      <input
+        value={value}
+        onChange={onChange}
+      />
+    </label>
+  );
+}
+```
 
 ### useEffect
 컴포넌트가 렌더링될 때마다 특정 작업을 수행하도록 설정할 수 있게 해주는 Hook입니다. 또한, 클래스형 컴포넌트의 라이프사이클 메서드와 유사한 역할을 합니다.
