@@ -772,6 +772,16 @@ const obj1 = { b: 2 };
 const obj2 = { a: 1, ...obj1, c: 3 }; // { a: 1, b: 2, c: 3 }
 ```
 
+- 객체를 복사할 때, 같은 속성이 겹치면 가장 마지막에 나오는 객체의 속성 값이 적용됩니다.
+```
+const obj1 = { a: 1, b: 2 };
+const obj2 = { b: 3, c: 4 };
+
+const mergedObj = { ...obj1, ...obj2 };
+
+console.log(mergedObj); // { a: 1, b: 3, c: 4 }
+```
+
 ### Rest Syntax
 - `Rest Syntax`는 여러 개의 인자를 배열 또는 객체로 묶어주는 역할을 합니다.
 - 함수의 매개변수에서도 사용할 수 있습니다.
