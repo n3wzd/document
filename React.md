@@ -1010,22 +1010,79 @@ const MyComponent = () => {
 Reducer를 컨텍스트와 결합하면 모든 컴포넌트 요소에서 해당 상태를 읽거나 업데이트할 수 있습니다.
 
 ### useRef
-`useRef`는 React에서 DOM 요소에 직접적인 접근이 필요하거나, 함수 컴포넌트에서 컴포넌트의 인스턴스 변수를 유지하거나, 컴포넌트 간 통신이 필요할 때 사용하는 Hook입니다. `useRef`로 생성된 객체는 `.current` 프로퍼티를 통해 현재 값을 유지하게 됩니다.
+#### ref
+- `useRef`은 React에게 `ref`를 제공합니다.
+- `ref`는 `current`라는 단일 속성을 가진 JavaScript 객체로, 읽거나 설정할 수 있습니다. 주로 렌더링에 사용되지 않는 값을 보존할 때 사용됩니다.
+- 상태와 마찬가지로 `ref`를 사용하면 컴포넌트의 리렌더링 간에 정보를 보존할 수 있습니다.
+- 상태와 달리 `ref`의 `current`값을 변경해도 렌더링을 트리거하지 않습니다.
+- 렌더링 중에는 `ref.current`를 접근하지 않는 것이 좋습니다.
+
+```
+import { useState, useRef } from 'react';
+
+export default function Chat() {
+  const [text, setText] = useState('');
+  const [isSending, setIsSending] = useState(false);
+
+  // 리렌더링 이후에도 정보를 유지하기 위해 ref를 사용합니다.
+  const timeoutRef = useRef(null);
+
+  // 타이머를 설정하고 리렌더링합니다.
+  function handleSend() {
+    setIsSending(true);
+    timeoutRef.current = setTimeout(() => {
+      alert('Sent!');
+      setIsSending(false);
+    }, 3000);
+  }
+
+  // 설정된 타이머를 해제하고 리렌더링합니다.
+  function handleUndo() {
+    setIsSending(false);
+    clearTimeout(timeoutRef.current);
+  }
+
+  return (
+    <>
+      <input
+        disabled={isSending}
+        value={text}
+        onChange={e => setText(e.target.value)}
+      />
+      <button
+        disabled={isSending}
+        onClick={handleSend}>
+        {isSending ? 'Sending...' : 'Send'}
+      </button>
+      {isSending &&
+        <button onClick={handleUndo}>
+          Undo
+        </button>
+      }
+    </>
+  );
+}
+```
+
+#### DOM
+- 컴포넌트는 기본적으로 DOM 노드를 노출하지 않습니다. DOM 노드에 직접 접근하기 위해 `ref`를 사용할 수 있습니다.
+- `<div ref={myRef}>`와 같이 전달하여 DOM 노드를 `myRef.current`에 등록합니다. 이후 `myRef.current`을 사용해서 DOM 노드에 접근할 수 있습니다.
+- ref를 통해 관리되는 DOM 노드를 변경하는 것은 가급적 피해야 합니다. 만약 등록된 DOM 노드를 수정해야 한다면, React가 업데이트하지 않는 부분만 수정해야 합니다.
 
 ```
 import React, { useRef, useEffect } from 'react';
 
 const MyComponent = () => {
-  // useRef를 사용하여 ref 객체 생성
   const myRef = useRef(null);
 
   useEffect(() => {
-    // ref 객체의 current 프로퍼티를 사용하여 DOM에 직접 접근
+    // ref의 current 프로퍼티를 사용하여 등록한 DOM 노드에 직접 접근
     if (myRef.current) {
       myRef.current.focus();
     }
   }, []);
 
+  // DOM 노드를 ref의 current 프로퍼티에 등록
   return <input ref={myRef} />;
 };
 ```
