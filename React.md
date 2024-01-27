@@ -895,6 +895,41 @@ function Input({ label, value, onChange }) {
 }
 ```
 
+### useReducer
+`useReducer`는 React에서 상태 관리를 위한 Hook 중 하나로, 상태 업데이트 로직을 컴포넌트와 분리하여 관리할 때 사용됩니다. `useState`보다 코드가 복잡하지만, 여러 상태 값이나 복잡한 상태 로직을 관리할 때 편리합니다.
+
+reducer 함수에서는 상태 업데이트 로직만 관리하는 것이 바람직합니다. (예: reducer 함수에서 `alert`을 사용하지 않아야 합니다.)
+
+```
+import React, { useReducer } from 'react';
+
+// reducer 함수: 현재 상태와 액션을 받아 새로운 상태를 반환
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    case 'DECREMENT':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+
+const Counter = () => {
+  // useReducer를 사용하여 상태와 디스패치 함수를 생성
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+
+  // 생성된 디스패치 함수를 사용하여 액션을 디스패치하고 상태를 업데이트할 수 있습니다.
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+      <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
+    </div>
+  );
+};
+```
+
 ### useEffect
 컴포넌트가 렌더링될 때마다 특정 작업을 수행하도록 설정할 수 있게 해주는 Hook입니다. 또한, 클래스형 컴포넌트의 라이프사이클 메서드와 유사한 역할을 합니다.
 
@@ -991,40 +1026,6 @@ const MyComponent = () => {
 
   return <input ref={myRef} />;
 };
-```
-
-### useReducer
-`useReducer`는 React에서 상태 관리를 위한 Hook 중 하나로, 상태 업데이트 로직을 컴포넌트 내부 또는 외부에 분리하여 관리할 때 사용됩니다. 주로 복잡한 상태 로직이나 여러 상태 값이 서로 연관되어 있을 때 활용됩니다.
-    
-```
-import React, { useReducer } from 'react';
-
-// reducer 함수: 현재 상태와 액션을 받아 새로운 상태를 반환
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
-      return { count: state.count + 1 };
-    case 'DECREMENT':
-      return { count: state.count - 1 };
-    default:
-      return state;
-  }
-};
-
-const Counter = () => {
-  // useReducer를 사용하여 상태와 디스패치 함수를 생성
-  const [state, dispatch] = useReducer(reducer, { count: 0 });
-
-  // 생성된 디스패치 함수를 사용하여 액션을 디스패치하고 상태를 업데이트할 수 있습니다.
-  return (
-    <div>
-      <p>Count: {state.count}</p>
-      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
-      <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
-    </div>
-  );
-};
-
 ```
     
 ### useCallback
