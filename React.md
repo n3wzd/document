@@ -744,7 +744,7 @@ const MyComponent = () => {
 ## Hooks
 Hooks는 React v16.8에서 소개된 기능으로, 함수 컴포넌트에서 상태(state) 및 React의 다양한 기능들을 사용할 수 있도록 해주는 API입니다. Hooks를 사용하면 함수 컴포넌트에서도 클래스형 컴포넌트와 동일한 기능을 사용할 수 있어서 코드의 재사용성과 가독성을 높일 수 있습니다.
 
-컴포넌트 내의 모든 Hooks은 어느 상황이든 컴포넌트의 최상단에서 호출되어야 합니다.
+컴포넌트 내의 모든 Hooks은 어느 상황이든 컴포넌트의 최상단에서 호출되어야 합니다. (예: 조건문 등으로 인해 일부 상황에서만 Hooks이 호출되면 안됩니다.)
 
 ### useState
 상태(state)는 컴포넌트가 리렌더링되도 변경되지 않는 정보이며, 리렌더링 간에 정보를 유지해야 할 때 사용됩니다. 상태 변수의 특징은 다음과 같습니다:
@@ -1058,34 +1058,36 @@ const MyComponent = () => {
 ```
 
 ### useEffect
-컴포넌트가 렌더링될 때마다 특정 작업을 수행하도록 설정할 수 있게 해주는 Hook입니다. 클래스형 컴포넌트의 라이프사이클 메서드와 유사한 역할을 합니다.
+`useEffect`는 컴포넌트가 렌더링될 때마다 특정 작업을 수행하도록 설정할 수 있게 해주는 Hook입니다. 클래스형 컴포넌트의 라이프사이클 메서드와 유사한 역할을 합니다.
 
 1. **부수 효과 함수:**  `useEffect`의 첫 번째 매개변수로 전달되는 함수는 부수 효과를 정의하는 함수입니다.
-2. **의존성 배열:** `useEffect`의 두 번째 매개변수는 의존성 배열(dependency array)입니다. 이 배열에 있는 값이 변경될 때마다 부수 효과 함수가 다시 실행됩니다. 빈 배열을 전달하면 컴포넌트가 처음 마운트될 때, 그리고 컴포넌트가 렌더링될 때마다 부수 효과 함수가 실행됩니다.
-3. **Clean-up 함수:** `useEffect` 내부에서 반환된 함수는 clean-up 함수로, 컴포넌트가 언마운트되거나 의존성이 변경될 때 실행됩니다. 주로 구독 해제, 타이머 해제 등의 정리 작업에 사용됩니다.
+2. **의존성 배열:** `useEffect`의 두 번째 매개변수는 의존성 배열(dependency array)로, 부수 효과 함수에서 사용된 변수들을 포함해야 합니다. 배열에 있는 변수들이 변경될 때마다 부수 효과 함수가 다시 실행됩니다. 배열이 비어있다면, 컴포넌트가 처음 마운트될 때, 그리고 컴포넌트가 렌더링될 때마다 부수 효과 함수가 실행됩니다.
+3. **정리 함수:** 부수 효과 함수는 정리(clean-up) 함수를 반환할 수 있으며, 이는 컴포넌트가 언마운트되거나 의존성이 변경될 때 실행됩니다. 주로 구독 해제, 타이머 해제 등의 정리 작업에 사용됩니다.
 
 ```
 import React, { useEffect, useState } from 'react';
 
-const MyComponent = () => {
-  const [data, setData] = useState(null);
+const MyComponent = ({slowMode}) => {
+  const [count, setCount] = useState(0);
 
-  // useEffect의 첫 번째 인자에는 부수 효과를 수행할 함수가 들어갑니다.
-  // 두 번째 인자에는 의존성 배열(dependency array)이 들어갑니다.
+  // useEffect의 1번째 인자에는 부수 효과를 수행할 함수가 들어갑니다.
+  // 2번째 인자에는 의존성 배열이 들어갑니다.
   useEffect(() => {
     // 부수 효과 수행
-    fetchData().then((result) => setData(result));
+    function onTick() {
+      setCount(c => c + 1);
+    }
+    const intervalId = setInterval(onTick, slowMode ? 1500 : 1000);
 
-    // clean-up 함수를 반환할 수 있음
-    return () => {
-      // 부수 효과 정리(clean-up)
-      cleanup();
-    };
-  }, []);
+    // 정리 함수를 반환할 수 있음
+    return () => clearInterval(intervalId);
+  }, [slowMode]);
 
-  return <div>{data ? <p>Data: {data}</p> : <p>Loading...</p>}</div>;
+  return <h1>{count}</h1>;
 };
 ```
+
+※ React의 Strict Mode는 의도적으로 컴포넌트를 2번 마운트하여 버그를 찾습니다. 2번 마운트되므로 한번 렌더링이 발생할 때마다 부수 효과 함수는 2번 호출됩니다. 일반적으로 이 문제에 대한 해결책은 정리 함수를 구현하는 것으로, 부수 효과 함수가 수행하던 작업을 중지하거나 취소해야 합니다.
 
 ### useCallback
 `useCallback`은 React에서 함수를 메모이제이션하고, 불필요한 렌더링을 방지하기 위한 Hook입니다. 특히, 자식 컴포넌트에게 콜백 함수를 전달할 때 사용하면 성능 최적화에 도움이 됩니다.
