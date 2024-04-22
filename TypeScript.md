@@ -142,6 +142,22 @@ let u: undefined = undefined;
 let n: null = null;
 ```
 
+### 캐스팅 (casting)
+#### angle-bracket(<>) 구문
+JSX를 사용하지 않는 환경에서 주로 사용됩니다.
+
+```
+let someValue: any = "this is a string";
+let strLength: number = (<string>someValue).length;
+```
+        
+#### as 구문
+JSX와 함께 사용할 때나 TypeScript의 JSX와 충돌을 피하기 위해 사용됩니다.
+
+```
+let someValue: any = "this is a string";
+let strLength: number = (someValue as string).length;
+```
 
 ## 배열 (Array)
 TypeScript에서 배열(Array)은 동적으로 할당된 요소들의 집합을 나타내는 데이터 구조입니다. 전체적인 사용법은 JavaScript와 같습니다.
