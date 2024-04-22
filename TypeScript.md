@@ -134,12 +134,21 @@ function warnUser(): void {
 }
 ```
 
-#### Null, Undefined
-단독으로는 그다지 유용하지 않지만, 다른 타입의 하위 타입으로 사용됩니다.
+#### null
+null은 값이 없음을 나타냅니다. 변수에 null을 할당할 수 있습니다.
 
 ```
-let u: undefined = undefined;
-let n: null = null;
+let foo: string | null;
+foo = "Hello"; // 올바른 할당
+foo = null;    // 올바른 할당
+```
+
+#### undefined
+undefined는 값이 할당되지 않았음을 나타냅니다. 기본적으로 변수를 선언하고 초기화하지 않았을 때 해당 변수는 undefined 값을 가집니다.
+
+```
+let bar: number;
+console.log(bar); // 출력: undefined
 ```
 
 ### 캐스팅 (casting)
@@ -306,6 +315,31 @@ console.log(myVar);
 
 myVar = "Hello"; // 문자열 할당
 console.log(myVar);
+```
+
+### keyof
+`keyof` 연산자는 객체의 모든 속성 키(key)를 문자열 리터럴 유니온으로 가져옵니다.
+
+```
+const person = {
+    name: 'John',
+    age: 30,
+    email: 'john@example.com'
+};
+
+type PersonKeys = keyof typeof person; // "name" | "age" | "email"
+```
+
+`keyof` 연산자는 주로 제네릭 타입과 함께 사용되어 객체의 속성 키를 동적으로 처리하는 데 유용합니다.
+
+```
+function getProperty<T, K extends keyof T>(obj: T, key: K) {
+    return obj[key];
+}
+
+const nameValue = getProperty(person, 'name'); // nameValue의 타입은 string입니다.
+const ageValue = getProperty(person, 'age'); // ageValue의 타입은 number입니다.
+const emailValue = getProperty(person, 'email'); // emailValue의 타입은 string입니다.
 ```
 
 ## 함수 (function)
