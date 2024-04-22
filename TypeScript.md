@@ -613,3 +613,94 @@ const userWithoutAge: UserWithoutAge = {
     email: 'john@example.com'
 };
 ```
+
+## Null Safety
+### strictNullChecks
+TypeScript의 `strictNullChecks` 옵션은 `null`과 `undefined`의 사용을 엄격하게 관리할 수 있도록 합니다. 이 옵션을 활성화하면 `null` 및 `undefined`를 값으로 사용할 때 관련된 에러 및 경고가 발생하게 됩니다.
+
+```
+{
+    "compilerOptions": {
+        "strictNullChecks": true
+    }
+}
+```
+
+`strictNullChecks` 옵션을 사용하면 다음과 같은 상황에서 컴파일러 오류가 발생할 수 있습니다.
+
+```
+let foo: string;
+foo = null; // 에러: null은 string에 할당될 수 없습니다.
+
+let bar: number | null;
+console.log(bar.toFixed(2)); // 에러: bar가 null이 될 수 있으므로 'toFixed'를 호출할 수 없습니다.
+```
+
+### Optional Chaining
+Optional Chaining 연산자는 `?.` 으로 표시되며, 현재 위치에서 속성 값이 null 또는 undefined이라면 undefined를 반환합니다.
+
+```
+const user = {
+    name: 'John',
+    address: {
+        city: 'New York',
+        postalCode: '10001'
+    }
+};
+
+console.log(user?.address?.city); // 출력: New York
+console.log(user?.address?.country); // 출력: undefined
+```
+
+### Nullish Coalescing
+Nullish Coalescing 연산자는 `??` 으로 표시되며, 첫 번째 피연산자가 null 또는 undefined인 경우에만 두 번째 피연산자가 반환되며, 그렇지 않으면 첫 번째 피연산자의 값을 반환합니다.
+
+```
+let x: number | undefined | null;
+console.log(x ?? 0); // 출력: 0
+
+x = 10;
+console.log(x ?? 0); // 출력: 10
+```
+
+## 기타 (Other)
+### Definitely Typed
+Definitely Typed는 수많은 JavaScript 라이브러리 및 프레임워크에 대한 TypeScript 타입 정의 파일을 제공합니다. 이러한 타입 정의 파일은 해당 라이브러리의 API를 TypeScript에서 사용할 수 있도록 설명하며, 코드 자동 완성 및 타입 검사를 가능하게 합니다.
+
+Definitely Typed는 일반적으로 `@types` 스코프 내에 NPM 패키지로 제공됩니다. 예를 들어, jQuery에 대한 타입 정의 파일은 `@types/jquery` 패키지에 포함되어 있습니다. 이러한 패키지는 다음과 같이 설치할 수 있습니다.
+
+```
+npm install @types/jquery --save-dev
+```
+
+이렇게 하면 TypeScript 프로젝트에서 jQuery를 사용할 때 코드 자동 완성 및 타입 검사가 가능해집니다.
+
+### Template Literal Types
+Template Literal Types는 TypeScript 4.1에서 도입된 기능으로, 문자열 리터럴 타입을 사용하여 동적으로 문자열 유형을 생성할 수 있습니다.
+
+```
+type Greeting = "Hello, " | "Hi, " | "Hey, ";
+type Name = "Alice" | "Bob" | "Charlie";
+
+type GreetingMessage = `${Greeting}${Name}`;
+```
+
+위의 코드에서 `GreetingMessage`는 다음과 같은 문자열이 가능합니다: `"Hello, Alice"`, `"Hi, Bob"`, `"Hey, Charlie"`
+
+### Index Signature Labels
+Index Signature Labels은 Index Signature를 사용하여 객체의 속성에 동적으로 접근할 때 사용되는 라벨입니다. 일반적으로 TypeScript에서는 객체의 속성에 접근할 때 속성 이름을 직접 사용하거나, 문자열 Index Signature를 통해 동적으로 접근할 수 있습니다. Index Signature Labels는 이러한 동적인 접근에 대한 명시적인 타입 검사를 제공하기 위해 사용됩니다.
+
+```
+interface MyObject {
+    [key: string]: number; // Index Signature Label
+}
+
+const obj: MyObject = {
+    a: 1,
+    b: 2,
+    c: 3
+};
+
+console.log(obj['a']); // 출력: 1
+console.log(obj['b']); // 출력: 2
+```
