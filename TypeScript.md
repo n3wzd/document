@@ -358,3 +358,224 @@ let greet = function(name: string) {
     console.log(`Hello, ${name}!`);
 };
 ```
+
+## 클래스 (class)
+클래스는 객체 지향 프로그래밍의 핵심 요소이며, 데이터와 해당 데이터를 처리하는 메서드를 포함하는 사용자 정의 데이터 유형을 만들 수 있도록 해줍니다.
+
+```
+class Person {
+    name: string;
+    age: number;
+
+    constructor(name: string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+
+    greet() {
+        console.log(`Hello, my name is ${this.name}.`);
+    }
+}
+```
+
+
+### 객체 생성
+클래스를 사용하여 객체를 생성할 때 `new` 키워드를 사용합니다.
+
+```
+let person1 = new Person("John", 30);
+let person2 = new Person("Alice", 25);
+
+person1.greet(); // 출력: Hello, my name is John.
+person2.greet(); // 출력: Hello, my name is Alice.
+```
+
+### 상속
+클래스는 다른 클래스로부터 상속을 받을 수 있습니다. 상속을 통해 코드의 재사용성을 높일 수 있습니다.
+
+```
+class Employee extends Person {
+    department: string;
+
+    constructor(name: string, age: number, department: string) {
+        super(name, age);
+        this.department = department;
+    }
+
+    introduce() {
+        console.log(`Hello, my name is ${this.name}, my department is ${this.department}.`);
+    }
+}
+```
+
+### 접근 제어자
+TypeScript는 접근 제어자를 지원하여 클래스의 속성과 메서드에 대한 접근을 제어할 수 있습니다.
+
+- `private`: 클래스 내부에서만 접근 가능
+- `protected` 하위 클래스에서만 접근 가능
+- `public`: 어디서든 접근 가능
+
+```
+class Person {
+    private name: string;
+    protected age: number;
+
+    constructor(name: string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+}
+```
+
+## 제네릭 (Generics)
+제네릭은 타입을 매개변수화하여 재사용 가능한 컴포넌트를 만드는 데 사용됩니다. 제네릭은 함수, 클래스, 인터페이스에서 사용할 수 있습니다.
+
+### 제네릭 함수
+제네릭 함수는 다음과 같이 선언됩니다.
+
+```
+function identity<T>(arg: T): T {
+    return arg;
+}
+
+let output = identity<string>("hello");
+console.log(output); // 출력: hello
+```
+
+제네릭 함수는 명시적으로 타입을 지정하지 않아도 타입을 추론할 수 있습니다.
+```
+let output = identity("hello");
+console.log(output); // 출력: hello
+```
+
+### 제네릭 클래스
+제네릭 클래스는 다음과 같이 선언됩니다.
+
+```
+class Box<T> {
+    private value: T;
+
+    constructor(value: T) {
+        this.value = value;
+    }
+
+    getValue(): T {
+        return this.value;
+    }
+}
+
+let numberBox = new Box<number>(10);
+console.log(numberBox.getValue()); // 출력: 10
+
+let stringBox = new Box<string>("hello");
+console.log(stringBox.getValue()); // 출력: hello
+```
+
+## 유틸리티 타입 (Utility Types)
+유틸리티 타입은 기존 타입을 변환하거나 다른 타입으로 변환하는데 사용되는 내장 타입들입니다. 유틸리티 타입을 사용하면 타입 정의에서 반복적으로 발생하는 일반적인 패턴을 간결하게 처리할 수 있습니다.
+
+### Partial\<T\>
+제네릭 타입 `T`의 모든 속성을 선택적으로 만들어주는 타입입니다.
+
+```
+interface User {
+    name: string;
+    age: number;
+}
+
+type PartialUser = Partial<User>;
+
+const partialUser: PartialUser = {
+    name: 'John'
+};
+```
+
+### Required\<T\>
+제네릭 타입 `T`의 모든 속성을 필수 속성으로 만들어주는 타입입니다.
+
+```
+interface User {
+    name?: string;
+    age?: number;
+}
+
+type RequiredUser = Required<User>;
+
+const requiredUser: RequiredUser = {
+    name: 'John',
+    age: 30
+};
+```
+
+### Readonly\<T\>
+제네릭 타입 `T`의 모든 속성을 읽기 전용으로 만들어주는 타입입니다.
+
+```
+interface User {
+    name: string;
+    age: number;
+}
+
+type ReadonlyUser = Readonly<User>;
+
+const readonlyUser: ReadonlyUser = {
+    name: 'John',
+    age: 30
+};
+
+// 아래 코드는 오류 발생
+readonlyUser.name = 'Alice';
+```
+
+### Record\<K, T\>
+키 `K`와 값 `T`의 쌍으로 이루어진 객체를 나타내는 타입입니다.
+
+```
+type Point = {
+    x: number;
+    y: number;
+};
+
+type PointRecord = Record<string, Point>;
+
+const points: PointRecord = {
+    p1: { x: 0, y: 0 },
+    p2: { x: 1, y: 1 }
+};
+```
+
+### Pick\<T, K\>
+제네릭 타입 `T`에서 일부 속성만 선택하여 새로운 타입을 만드는 타입입니다.
+
+```
+interface User {
+    name: string;
+    age: number;
+    email: string;
+}
+
+type UserSubset = Pick<User, 'name' | 'email'>;
+
+const userSubset: UserSubset = {
+    name: 'John',
+    email: 'john@example.com'
+};
+```
+
+### Omit\<T, K\>
+제네릭 타입 `T`에서 특정 속성들을 제외한 새로운 타입을 만드는 타입입니다.
+
+```
+interface User {
+    name: string;
+    age: number;
+    email: string;
+}
+
+type UserWithoutAge = Omit<User, 'age'>;
+
+const userWithoutAge: UserWithoutAge = {
+    name: 'John',
+    email: 'john@example.com'
+};
+```
