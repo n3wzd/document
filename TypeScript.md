@@ -114,6 +114,17 @@ create(null); // OK
 create(42); // Error
 ```
 
+#### Function
+함수 타입은 매개변수의 유형과 반환 유형을 지정하여 함수의 모양을 설명합니다.
+
+```
+type MathFunction = (x: number, y: number) => number;
+
+let add: MathFunction = function(x, y) {
+    return x + y;
+};
+```
+
 #### Void
 반환 값이 없는 함수의 반환 타입으로 사용됩니다.
 
@@ -266,4 +277,68 @@ class Employee implements Person {
         console.log(`Hello, my name is ${this.name}.`);
     }
 }
+```
+
+## 공용 유형 (Union Types)
+공용 유형은 여러 유형 중 하나를 나타낼 수 있는 특별한 유형입니다. 공용 유형은 파이프(`|`)로 구분된 두 개 이상의 유형으로 이루어집니다.
+
+```
+let myVar: number | string;
+
+myVar = 10; // 숫자 할당
+console.log(myVar);
+
+myVar = "Hello"; // 문자열 할당
+console.log(myVar);
+```
+
+## 함수 (function)
+TypeScript에서 함수는 JavaScript의 함수와 매우 유사하며, 추가적인 타입 시스템을 통해 매개변수 및 반환 값의 유형을 지정할 수 있습니다.
+
+```
+function add(x: number, y: number): number {
+    return x + y;
+}
+```
+
+위의 코드에서 `add` 함수는 `number` 타입의 `x`와 `y` 매개변수를 받고, `number`를 반환합니다.
+
+### 선택적 매개변수
+함수 매개변수를 선택적으로 만들려면 매개변수 이름 뒤에 물음표(`?`)를 붙입니다.
+
+```
+function greet(name?: string) {
+    if (name) {
+        console.log(`Hello, ${name}!`);
+    } else {
+        console.log(`Hello, stranger!`);
+    }
+}
+```
+
+### 기본 매개변수 값
+함수에 기본 매개변수 값을 할당할 수 있습니다.
+
+```
+function greet(name: string = "stranger") {
+    console.log(`Hello, ${name}!`);
+}
+```
+
+### 나머지 매개변수
+함수에서 임의의 수의 매개변수를 수용하기 위해 나머지 매개변수를 사용할 수 있습니다.
+
+```
+function sum(...numbers: number[]): number {
+    return numbers.reduce((total, num) => total + num, 0);
+}
+```
+
+### 익명 함수
+익명 함수는 이름이 없는 함수로, 주로 콜백 함수로 사용됩니다.
+
+```
+let greet = function(name: string) {
+    console.log(`Hello, ${name}!`);
+};
 ```
