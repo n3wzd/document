@@ -137,3 +137,96 @@ new Vue({
 });
 ```
 
+## Methods
+Vue.js에서 `methods`는 Vue 인스턴스 안에 정의된 함수들을 포함하는 객체입니다. 이 객체 안에 정의된 함수들은 Vue 인스턴스의 데이터를 조작하거나, 이벤트를 처리하거나, 다른 비동기 동작을 수행할 수 있습니다.
+
+```
+<div id="app">  
+	<p>Click on the box below:</p>  
+	<div v-on:click="writeText">  
+		{{ text }}  
+	</div>  
+</div>  
+  
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>  
+	<script>  
+		const  app = Vue.createApp({  
+			data() {  
+				return  {  
+			text:  ''  
+			}  
+		},  
+		methods: {  
+			writeText() {  
+				this.text  =  'Hello World!'  
+				}  
+			}  
+		})  
+	app.mount('#app')  
+</script>
+```
+
+## Event Modifiers
+이벤트 수식어(event modifiers)는 DOM 이벤트에 대한 특정한 수식어를 제공하여 이벤트 처리를 보다 편리하게 할 수 있습니다.
+
+- `.stop`: 이벤트의 전파를 중지시킵니다. 클릭 이벤트의 경우 부모 엘리먼트로의 이벤트 전파를 막습니다.
+- `.prevent`: 이벤트의 기본 동작을 취소합니다.
+- `.capture`: 이벤트를 캡처 모드로 설정합니다. 이는 이벤트를 하위 요소에서 상위 요소로 전파하는 대신 상위 요소에서 하위 요소로 전파하는 것을 의미합니다.
+- `.self`: 이벤트가 자기 자신의 엘리먼트에서만 트리거될 때만 동작합니다.
+- `.once`: 이벤트 핸들러를 한 번만 실행하도록 합니다.
+- `.passive`: 스크롤 동작에 사용되며, 스크롤 이벤트 핸들러를 막지 않고 스크롤 성능을 향상시킵니다.
+
+## CSS Binding
+CSS 바인딩을 사용해서 동적으로 스타일을 적용할 수 있습니다.
+
+### 객체 구문 (Object Syntax)
+Vue 인스턴스의 데이터에 따라 인라인 스타일을 동적으로 지정할 수 있습니다.
+
+```
+<div v-bind:style="{ color: textColor, fontSize: textSize + 'px' }">Styled Text</div>
+```
+
+### 배열 구문 (Array Syntax)
+여러 개의 스타일 객체를 배열에 추가하여 조건부로 스타일을 적용할 수 있습니다.
+
+```
+<div v-bind:style="[baseStyles, additionalStyles]">Styled Text</div>
+```
+
+### 클래스 바인딩 (Class Binding)
+클래스를 동적으로 적용하기 위해 `v-bind:class` 디렉티브를 사용할 수 있습니다.
+
+```
+<div v-bind:class="{ active: isActive, 'text-danger': hasError }">Styled Text</div>
+```
+
+위의 예제에서 `isActive`와 `hasError`는 Vue 인스턴스의 데이터입니다. 데이터의 상태에 따라 클래스가 동적으로 추가 또는 제거됩니다.
+
+## Computed Properties
+계산된 속성(Computed Properties)은 Vue 인스턴스의 데이터를 기반으로 계산된 값을 반환하는 속성입니다. 이러한 계산된 속성은 일반 데이터 속성처럼 사용되지만, Vue 인스턴스의 데이터가 변경될 때마다 자동으로 다시 계산되며, 이를 효율적으로 캐시하여 성능을 향상시킵니다. 주로 복잡한 계산이 필요할 때 유용합니다.
+
+- **캐싱(Caching):** 계산된 속성은 종속된 데이터가 변경될 때만 다시 계산됩니다. 그렇기 때문에 필요에 따라 여러 번 접근하더라도 계산은 한 번만 수행됩니다.
+- **지연 계산(Lazy Evaluation):** 계산된 속성은 실제로 접근되기 전까지는 계산되지 않습니다. 따라서 해당 값이 필요한 시점에만 계산이 수행됩니다.
+
+계산된 속성을 사용할 때는 `computed` 속성을 사용하여 정의합니다.
+
+```
+var vm = new Vue({
+  data: {
+    width: 10,
+    height: 5
+  },
+  computed: {
+    area: function () {
+      return this.width * this.height;
+    }
+  }
+});
+```
+
+위의 예제에서 `area`는 계산된 속성으로, `width`와 `height` 데이터 속성을 기반으로 계산됩니다. 이러한 계산된 속성을 템플릿에서 사용할 때에는 일반 데이터 속성과 동일하게 접근할 수 있습니다.
+
+```
+<div>{{ area }}</div>
+```
+
