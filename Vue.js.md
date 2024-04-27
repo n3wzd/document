@@ -240,7 +240,6 @@ var vm = new Vue({
   },
   watch: {
     someData(newValue, oldValue) {
-      // 데이터가 변경될 때마다 호출됩니다.
       console.log('New value: ', newValue);
       console.log('Old value: ', oldValue);
     }
