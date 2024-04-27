@@ -230,3 +230,22 @@ var vm = new Vue({
 <div>{{ area }}</div>
 ```
 
+## Watchers
+Watchers는 데이터의 변화를 감지하고 이에 대응하여 특정 동작을 수행하는 방법을 제공합니다. 주로 데이터 변경에 대한 처리나 비동기 작업을 수행하기 위해 사용됩니다.
+
+```
+var vm = new Vue({
+  data: {
+    someData: 'initial value'
+  },
+  watch: {
+    someData(newValue, oldValue) {
+      // 데이터가 변경될 때마다 호출됩니다.
+      console.log('New value: ', newValue);
+      console.log('Old value: ', oldValue);
+    }
+  }
+});
+```
+
+위 Watchers는 `someData`의 값이 변경될 때마다 호출되며, 새 값과 이전 값이 인수로 전달됩니다.
