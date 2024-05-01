@@ -244,3 +244,324 @@ print(message)  # 출력: Hello, Alice
 add = lambda x, y: x + y
 print(add(3, 5))  # 출력: 8
 ```
+
+## Class
+클래스(class)는 객체 지향 프로그래밍(OOP)의 핵심 개념 중 하나입니다. 클래스는 데이터와 해당 데이터를 처리하는 메서드(함수)를 함께 포함하는 사용자 정의 데이터 유형을 정의하는 데 사용됩니다. 객체(object)는 클래스의 인스턴스(instance)이며, 클래스에서 정의한 속성(attribute)과 메서드를 가집니다.
+
+```
+class 클래스명:
+    def __init__(self, 매개변수):
+        self.속성1 = 초기값1
+        self.속성2 = 초기값2
+        # ...
+
+    def 메서드1(self, 매개변수):
+        # 메서드가 실행할 코드
+
+# 객체 생성
+객체변수 = 클래스명(인수)
+```
+
+- `class`: 클래스를 정의하는 키워드입니다.
+- `클래스명`: 클래스의 이름으로, 관례적으로 대문자로 시작합니다.
+- `__init__`: 초기화 메서드(constructor)로, 객체가 생성될 때 자동으로 호출되는 특별한 메서드입니다.
+- `self`: 객체 자신을 가리키는 인자로, 클래스 내의 다른 메서드나 속성에 접근할 때 사용됩니다.
+- `매개변수`: 메서드나 초기화 메서드의 입력 값으로, 필요한 경우 생략할 수 있습니다.
+- `속성`: 클래스의 데이터를 나타내는 변수입니다.
+- `메서드`: 클래스 내에서 수행되는 함수로, 클래스의 데이터를 조작하고 처리하는 기능을 수행합니다.
+- `객체변수`: 클래스의 인스턴스로, 클래스를 기반으로 생성된 객체를 가리킵니다.
+- `인수`: 클래스의 초기화 메서드에 전달되는 값으로, 필요한 경우 생략할 수 있습니다.
+
+### Inheritance
+상속(inheritance)은 기존 클래스의 속성과 메서드를 다른 클래스에서 재사용하는 것을 의미합니다. 상속을 통해 기존 클래스를 확장하여 새로운 클래스를 정의할 수 있습니다.
+
+```
+class 부모클래스:
+    # 부모 클래스의 속성과 메서드 정의
+
+class 자식클래스(부모클래스):
+    # 자식 클래스의 속성과 메서드 정의
+```
+
+### Polymorphism
+다형성(Polymorphism)은 같은 이름의 메서드가 서로 다른 클래스에서 다른 방식으로 동작할 수 있는 능력을 말합니다. 다형성은 상속과 함께 사용됩니다.
+
+파이썬에서 다형성은 다음과 같은 형태로 구현됩니다:
+- **메서드 오버라이딩(Method Overriding)**: 부모 클래스의 메서드를 자식 클래스에서 재정의하는 것입니다. 이 때, 자식 클래스에서 오버라이딩한 메서드는 부모 클래스의 메서드를 숨깁니다. 이를 통해 같은 이름의 메서드가 서로 다른 동작을 수행할 수 있습니다.
+- **동적 바인딩(Dynamic Binding)**: 파이썬에서는 메서드 호출 시점에 실제로 호출할 메서드를 결정합니다. 따라서 같은 이름의 메서드가 여러 클래스에 존재할 때, 해당 객체의 타입에 따라 호출되는 메서드가 달라집니다.
+
+```
+class Animal:
+    def speak(self):
+        print("동물이 소리를 냅니다.")
+
+class Dog(Animal):
+    def speak(self):
+        print("멍멍!")
+
+class Cat(Animal):
+    def speak(self):
+        print("야옹!")
+
+# 다형성을 이용한 메서드 호출
+def animal_sound(animal):
+    animal.speak()
+
+# 객체 생성
+my_dog = Dog()
+my_cat = Cat()
+
+# 다형성을 이용한 메서드 호출
+animal_sound(my_dog)  # 출력: 멍멍!
+animal_sound(my_cat)  # 출력: 야옹!
+```
+
+## Iterators
+반복자(Iterators)는 순회 가능한(iterable) 객체의 요소를 한 번에 하나씩 접근할 수 있도록 하는 객체입니다. 반복자를 사용하면 컬렉션의 각 요소를 순차적으로 처리할 수 있습니다. 반복자는 `__iter__()`와 `__next__()`라는 두 가지 메서드를 가지고 있습니다.
+
+- `__iter__()`: 반복자 객체 자신을 반환합니다. `iter()` 함수에 의해 호출되며, 반복자 객체를 생성하고 반환합니다.
+- `__next__()`: 다음 요소를 반환합니다. 만약 더 이상 요소가 없다면 `StopIteration` 예외를 발생시킵니다.
+
+파이썬에서는 대부분의 내장 컬렉션(예: 리스트, 튜플, 세트)이 이미 순회 가능한(iterable) 객체이며, 이들은 내부적으로 반복자를 구현하고 있습니다. 따라서 대부분의 경우에는 직접 반복자를 구현할 필요는 없습니다. 그러나 사용자 정의 객체나 특수한 요구 사항이 있는 경우 반복자를 직접 구현할 수 있습니다.
+
+반복자를 사용하는 일반적인 방법은 `for` 루프와 함께 사용하는 것입니다. `for` 루프는 내부적으로 컬렉션의 반복자를 사용하여 요소를 순회합니다.
+
+```
+class MyIterator:
+    def __init__(self, max_num):
+        self.max_num = max_num
+        self.current = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.current < self.max_num:
+            self.current += 1
+            return self.current
+        else:
+            raise StopIteration
+
+# 반복자 객체 생성
+my_iter = MyIterator(5)
+
+# 반복자를 사용하여 순회
+for num in my_iter:
+    print(num)
+```
+
+## Scope
+파이썬에서 스코프(scope)는 변수와 함수가 접근 가능한 범위를 나타냅니다. 스코프는 변수와 함수가 정의된 위치에 따라 결정되며, 변수와 함수는 해당 스코프 내에서만 유효합니다.
+
+파이썬에서는 다음과 같은 스코프 유형이 있습니다:
+- **전역 스코프(Global Scope)**: 전역 스코프는 모듈 파일의 최상위 레벨에서 정의된 변수와 함수를 포함합니다. 전역 스코프에 정의된 변수와 함수는 모든 함수 내에서 접근할 수 있습니다.
+- **지역 스코프(Local Scope)**: 지역 스코프는 함수 내에서 정의된 변수와 함수를 포함합니다. 지역 스코프에 정의된 변수와 함수는 해당 함수 내에서만 유효하며, 함수 외부에서는 접근할 수 없습니다.
+
+파이썬에서는 LEGB 규칙을 사용하여 변수의 스코프를 결정합니다. LEGB는 Local, Enclosing, Global, Built-in의 약어로, 변수를 찾을 때 참조되는 순서를 나타냅니다.
+
+- **Local(지역)**: 함수 내에서 정의된 변수
+- **Enclosing(비교적 가까운 상위 함수)**: 중첩 함수 내에서 정의된 변수
+- **Global(전역)**: 전역 스코프에 정의된 변수
+- **Built-in(내장)**: 파이썬 언어에서 미리 정의된 변수
+
+```
+x = 10  # 전역 스코프
+
+def outer():
+    y = 20  # outer 함수의 지역 스코프
+    
+    def inner():
+        z = 30  # inner 함수의 지역 스코프
+        print(x)  # 전역 변수 x에 접근
+        print(y)  # outer 함수의 변수 y에 접근
+        print(z)  # inner 함수의 변수 z에 접근
+    
+    inner()
+
+outer()
+```
+
+## Modules
+파이썬 모듈은 파이썬 코드를 담고 있는 파일로, 함수, 변수, 클래스 등을 정의할 수 있습니다. 모듈은 코드의 재사용을 촉진하고 프로그램을 모듈화하여 관리하기 쉽게 만듭니다.
+
+모듈은 다음과 같은 형태로 사용됩니다:
+- **내장 모듈(Built-in Modules)**: 파이썬에 기본으로 포함된 모듈들입니다. 예를 들어, `math`, `random`, `os` 등이 있습니다.
+- **표준 라이브러리(Standard Library)**: 파이썬이 함께 제공하는 라이브러리로, 다양한 기능을 제공합니다. 예를 들어, `datetime`, `re`, `json` 등이 있습니다.  
+- **사용자 정의 모듈(User-defined Modules)**: 사용자가 직접 작성한 모듈로, 프로젝트에서 자주 사용되는 코드를 모듈로 만들어 재사용할 수 있습니다.
+    
+### import
+모듈을 사용하려면 `import` 문을 사용하여 해당 모듈을 가져와야 합니다. 예를 들어, `math` 모듈을 사용하려면 다음과 같이 작성합니다:
+
+```
+import math
+
+print(math.sqrt(16))  # 출력: 4.0
+```
+
+또는 모듈을 별칭(alias)을 사용하여 가져올 수도 있습니다:
+
+```
+import math as m
+
+print(m.sqrt(16))  # 출력: 4.0
+```
+
+특정 모듈에서 특정 함수 또는 변수만 가져오려면 `from` 키워드를 사용할 수 있습니다:
+
+```
+from math import sqrt
+
+print(sqrt(16))  # 출력: 4.0
+```
+
+또는 모든 함수 및 변수를 가져올 수 있습니다:
+
+```
+from math import *
+
+print(sqrt(16))  # 출력: 4.0
+```
+
+## Dates
+파이썬에서는 `datetime` 모듈을 사용하여 날짜와 시간을 처리할 수 있습니다. 이 모듈을 사용하면 날짜 및 시간 객체를 생성하고, 날짜 및 시간 간의 연산을 수행하고, 날짜 및 시간을 서식화(formatting)할 수 있습니다.
+
+`datetime` 모듈에서 주로 활용되는 클래스들은 다음과 같습니다:
+- `datetime`: 날짜와 시간 정보를 모두 포함하는 객체를 나타냅니다.
+- `date`: 날짜 정보만을 나타내는 객체를 나타냅니다.
+- `time`: 시간 정보만을 나타내는 객체를 나타냅니다.
+- `timedelta`: 두 날짜 또는 시간 간의 차이를 나타내는 객체를 나타냅니다.
+
+```
+from datetime import datetime, date, time, timedelta
+
+# 현재 날짜와 시간을 가져옵니다.
+now = datetime.now()
+print("현재 날짜와 시간:", now)
+
+# 날짜와 시간 정보를 직접 지정하여 객체를 생성합니다.
+custom_date = datetime(2024, 5, 1, 12, 30, 0)
+print("사용자 정의 날짜와 시간:", custom_date)
+
+# 날짜 객체를 생성합니다.
+today = date.today()
+print("오늘의 날짜:", today)
+
+# 시간 객체를 생성합니다.
+current_time = time(hour=12, minute=30, second=0)
+print("현재 시간:", current_time)
+
+# 두 날짜 간의 차이를 계산합니다.
+difference = custom_date - now
+print("두 날짜 간의 차이:", difference)
+
+# 날짜와 시간을 서식화합니다.
+formatted_date = now.strftime("%Y-%m-%d %H:%M:%S")
+print("서식화된 날짜와 시간:", formatted_date)
+
+# 날짜나 시간을 문자열로부터 파싱합니다.
+parsed_date = datetime.strptime("2024-05-01 12:30:00", "%Y-%m-%d %H:%M:%S")
+print("파싱된 날짜와 시간:", parsed_date)
+
+# 날짜에 대한 연산을 수행합니다.
+next_week = today + timedelta(weeks=1)
+print("다음 주:", next_week)
+```
+
+## Math
+파이썬의 `math` 모듈은 수학적인 계산을 위한 다양한 함수를 제공합니다.
+
+`math` 모듈에서 자주 사용되는 함수 및 상수는 다음과 같습니다:
+- **삼각함수**: `sin()`, `cos()`, `tan()`, `asin()`, `acos()`, `atan()` 등의 삼각함수를 제공합니다.
+- **지수 함수**: `exp()`, `pow()` 등의 지수 함수를 제공합니다.
+- **로그 함수**: `log()`, `log10()`, `log2()` 등의 로그 함수를 제공합니다.
+- **제곱근 함수**: `sqrt()` 함수를 제공하여 제곱근을 계산할 수 있습니다.
+- **상수**: `pi`, `e` 등의 상수를 제공합니다.
+
+```
+import math
+
+# 삼각함수 계산
+print("sin(0):", math.sin(0))  # 출력: 0.0
+print("cos(pi/2):", math.cos(math.pi / 2))  # 출력: 6.123233995736766e-17 (거의 0에 가까운 값)
+print("tan(0):", math.tan(0))  # 출력: 0.0
+
+# 지수 함수 계산
+print("exp(1):", math.exp(1))  # 출력: 2.718281828459045 (e의 값)
+print("2^3:", math.pow(2, 3))  # 출력: 8.0
+
+# 로그 함수 계산
+print("log(10):", math.log(10))  # 출력: 2.302585092994046 (기본은 자연로그)
+print("log10(100):", math.log10(100))  # 출력: 2.0 (밑이 10인 로그)
+
+# 제곱근 함수 계산
+print("sqrt(16):", math.sqrt(16))  # 출력: 4.0
+
+# 상수
+print("원주율(pi):", math.pi)  # 출력: 3.141592653589793
+print("자연상수(e):", math.e)   # 출력: 2.718281828459045
+```
+
+## JSON
+JSON(JavaScript Object Notation)은 데이터를 효율적으로 저장하고 교환하기 위한 경량의 데이터 형식입니다. 파이썬에서는 `json` 모듈을 사용하여 JSON 데이터를 처리하고 생성할 수 있습니다.
+
+`json` 모듈을 사용하여 다음과 같은 작업을 수행할 수 있습니다:
+- **JSON 인코딩(직렬화)**: 파이썬 데이터를 JSON 형식의 문자열로 변환하는 작업을 말합니다. 이는 `json.dumps()` 함수를 사용하여 수행할 수 있습니다.
+- **JSON 디코딩(역직렬화)**: JSON 형식의 문자열을 파이썬 데이터로 변환하는 작업을 말합니다. 이는 `json.loads()` 함수를 사용하여 수행할 수 있습니다.
+- **파일 입출력**: `json.dump()` 및 `json.load()` 함수를 사용하여 JSON 파일의 읽기 및 쓰기를 수행할 수 있습니다.
+
+```
+import json
+
+# 파이썬 데이터를 JSON 형식의 문자열로 인코딩(직렬화)
+data = {
+    "name": "John",
+    "age": 30,
+    "city": "New York"
+}
+json_string = json.dumps(data)
+print("JSON 형식의 문자열:", json_string)
+
+# JSON 형식의 문자열을 파이썬 데이터로 디코딩(역직렬화)
+decoded_data = json.loads(json_string)
+print("파이썬 데이터:", decoded_data)
+
+# JSON 파일 쓰기
+with open("data.json", "w") as json_file:
+    json.dump(data, json_file)
+
+# JSON 파일 읽기
+with open("data.json", "r") as json_file:
+    loaded_data = json.load(json_file)
+    print("JSON 파일에서 읽은 데이터:", loaded_data)
+```
+
+## RegEx
+정규 표현식(Regular Expression 또는 RegEx)은 문자열의 패턴을 검색, 추출 또는 대체하는 데 사용되는 강력한 도구입니다. 파이썬에서는 `re` 모듈을 사용하여 정규 표현식을 처리합니다.
+
+```
+import re
+
+# 정규 표현식을 사용하여 문자열 매치 검색
+pattern = r'apple'
+text = 'I have an apple'
+match = re.search(pattern, text)
+if match:
+    print('매치된 문자열:', match.group())
+else:
+    print('매치되는 문자열이 없습니다.')
+```
+
+## PIP
+Python Package Installer인 PIP는 파이썬 패키지를 설치, 관리하는 데 사용되는 패키지 관리자입니다. PIP를 사용하면 인터넷에서 다운로드한 패키지를 쉽게 설치하고 업데이트할 수 있습니다. PIP은 명령 프롬프트 또는 터미널에서 설치, 관리할 수 있습니다.
+
+**패키지 설치**
+`pip install package_name` 
+
+**특정 버전의 패키지 설치**
+`pip install package_name==version_number` 
+
+**패키지 업그레이드**
+`pip install --upgrade package_name` 
+
+**패키지 제거**
+`pip uninstall package_name` 
