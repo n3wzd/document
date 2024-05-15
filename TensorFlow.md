@@ -169,8 +169,128 @@ print("\n3D 텐서:")
 print(tensor_3d)
 ```
 
+## Keras
+Keras는 딥러닝 모델을 구축하고 훈련하기 위한 고수준 신경망 API입니다. Keras는 모듈화와 확장성이 뛰어나며, 사용자 친화적인 인터페이스를 제공하여 딥러닝 모델을 빠르고 쉽게 구현할 수 있도록 도와줍니다. TensorFlow 버전 1.14부터 Keras는 TensorFlow의 일부로 공식적으로 통합되었으며, TensorFlow에서 Keras API를 사용하여 딥러닝 모델을 구현할 수 있습니다.
+
+Keras API는 다음과 같은 특징을 갖습니다:
+
+1. **간결성**: Keras는 간결한 코드 작성을 통해 빠르게 모델을 구성할 수 있도록 설계되었습니다. 불필요한 상세 설정을 최소화하여 모델 구축을 단순화합니다.
+2. **모듈화**: Keras는 레이어, 손실 함수, 최적화 알고리즘 등과 같은 모든 구성 요소를 모듈화하여 제공합니다. 이러한 모듈화는 각 요소를 독립적으로 조합하여 다양한 종류의 모델을 쉽게 만들 수 있도록 합니다.
+3. **유연성**: Keras는 다양한 딥러닝 모델을 지원하며, 커스텀 레이어, 손실 함수, 최적화 알고리즘을 쉽게 정의하고 사용할 수 있습니다.
+
+### keras.models
+`keras.models`는 Keras에서 모델을 정의하고 구성하는 클래스들을 포함하는 모듈입니다. 이 모듈에는 Sequential, Functional API 등을 사용하여 신경망 모델을 구축하는 데 사용되는 클래스들이 포함되어 있습니다.
+
+모델을 만들 때는 일반적으로 다음 단계를 따릅니다:
+
+1. **모델 생성**: Sequential 등을 사용하여 인스턴스를 만듭니다.
+3. **모델 컴파일**: `compile()` 메서드를 사용하여 모델을 컴파일합니다. 이 때 최적화 알고리즘, 손실 함수, 평가 지표 등을 지정합니다.
+4. **모델 훈련**: `fit()` 메서드를 사용하여 모델을 훈련합니다. 훈련 데이터와 레이블을 전달하고, 에포크 수와 배치 크기를 지정합니다.
+5. **모델 평가 또는 예측**: `evaluate()` 메서드를 사용하여 테스트 데이터에 대한 모델의 성능을 평가하거나, `predict()` 메서드를 사용하여 새로운 데이터에 대한 예측을 생성합니다.
+
+```
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Flatten, Dense
+
+# MNIST 데이터셋 로드
+mnist = tf.keras.datasets.mnist
+(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+
+# 이미지 데이터 전처리
+train_images = train_images / 255.0
+test_images = test_images / 255.0
+
+# Sequential 모델 생성
+model = Sequential([
+    Flatten(input_shape=(28, 28)),   # 입력 이미지를 1차원으로 펼치는 레이어
+    Dense(128, activation='relu'),   # 128개의 뉴런을 가진 은닉층
+    Dense(10, activation='softmax')  # 10개의 뉴런을 가진 출력층
+])
+
+# 모델 컴파일
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+# 모델 훈련
+model.fit(train_images, train_labels, epochs=5)
+
+# 모델 평가
+test_loss, test_acc = model.evaluate(test_images, test_labels)
+print('Test accuracy:', test_acc)
+```
+
+#### Sequential
+Sequential 모델은 Keras에서 가장 간단한 형태의 신경망 모델을 만드는 데 사용되는 클래스입니다. 이 클래스를 사용하면 각 층을 순차적으로 쌓아서 신경망 모델을 만들 수 있습니다. 각 층은 입력과 출력이 연속되어 전달되는 구조를 가지며, 마지막 출력이 최종 예측이 됩니다.
+
+Sequential 모델은 간단한 구조의 신경망을 빠르게 구축하고 테스트할 때 유용합니다. 그러나 복잡한 모델 구조를 가진 경우에는 Functional API나 Model 클래스를 사용하는 것이 더 적합할 수 있습니다.
+
+Sequential 모델을 생성할 때, 초기화 과정에서 층을 구성할 수 있습니다. 층은 `Dense`, `Conv2D`, `MaxPooling2D` 등이 주로 사용됩니다.
+```
+from keras.models import Sequential
+from keras.layers import Dense
+
+# Sequential 모델 생성
+model = Sequential()
+
+model = Sequential([
+    Flatten(input_shape=(28, 28)),   # Flatten 층 추가
+    Dense(128, activation='relu'),   # Dense 층 추가
+    Dense(10, activation='softmax')  # Dense 층 추가
+])
+```
+
+또는 `add()` 메서드를 사용하여 Sequential 모델에 층을 추가할 수 있습니다.
+
+```
+model.add(Flatten(input_shape=(28, 28)))
+model.add(Dense(128, activation='relu'))
+model.add(Dense(10, activation='softmax'))
+```
+
+#### Functional API
+Functional API는 Keras에서 모델을 구축하는 또 다른 방법으로, Functional API를 사용하면 다중 입력, 다중 출력, 공유 레이어 등과 같은 복잡한 모델을 만들 수 있습니다.
+
+Functional API를 사용하여 모델을 구축하는 일반적인 단계는 다음과 같습니다:
+
+1. **Input 객체 생성**: 모델의 입력을 나타내는 Input 객체를 생성합니다. 이 객체는 shape을 지정하여 입력 데이터의 크기를 정의합니다.
+2.  **레이어 함수 호출**: 다양한 레이어를 함수처럼 호출하여 모델의 연산 그래프를 구성합니다. 이전 레이어의 출력을 다음 레이어의 입력으로 사용할 수 있습니다.
+3.  **Model 클래스 인스턴스화**: 입력과 출력을 지정하여 Model 클래스를 사용하여 모델을 정의하고 인스턴스화합니다. 이 인스턴스는 컴파일, 훈련 및 평가에 사용할 수 있습니다.
+
+```
+import tensorflow as tf
+from tensorflow.keras.layers import Input, Dense
+from tensorflow.keras.models import Model
+
+# 입력 데이터의 크기를 지정
+input_layer = Input(shape=(784,))
+
+# 은닉층 정의
+hidden1 = Dense(128, activation='relu')(input_layer)
+hidden2 = Dense(64, activation='relu')(hidden1)
+
+# 출력층 정의
+output_layer = Dense(10, activation='softmax')(hidden2)
+
+# 입력과 출력을 지정하여 모델 정의
+model = Model(inputs=input_layer, outputs=output_layer)
+```
+
+### keras.layers
+`keras.layers`는 Keras에서 제공하는 층(layer)을 정의하는 모듈입니다. 자주 사용되는 층들은 다음과 같습니다:
+
+1. **Dense**: 완전 연결 층을 생성하는 데 사용됩니다. 각 입력 뉴런이 이전 층의 모든 뉴런과 연결됩니다.
+2. **Conv2D**: 2D 컨볼루션 층을 생성하는 데 사용됩니다. 이미지 처리 및 컨볼루션 신경망에서 주로 사용됩니다.
+3. **MaxPooling2D**: 최대 풀링 층을 생성하는 데 사용됩니다. 입력의 각 패치에서 최댓값을 추출하여 출력을 생성합니다.
+4. **AveragePooling2D**: 평균 풀링 층을 생성하는 데 사용됩니다. 입력의 각 패치에서 평균 값을 추출하여 출력을 생성합니다.
+5. **Flatten**: 다차원 입력을 1차원 벡터로 펼치는 데 사용됩니다. 주로 완전 연결 층에 연결하기 전에 사용됩니다.
+6. **Dropout**: 드롭아웃을 적용하는 데 사용됩니다. 훈련 중에 일부 뉴런을 무작위로 비활성화하여 과적합을 줄입니다.
+7. **BatchNormalization**: 배치 정규화를 수행하는 데 사용됩니다. 훈련 중에 입력을 정규화하여 학습 속도를 향상시키고 안정성을 높입니다.
+8. **Embedding**: 단어나 범주형 데이터를 밀집 벡터로 변환하는 데 사용됩니다. 자연어 처리와 같은 텍스트 데이터에서 주로 사용됩니다.
+
 ## Convolutional Neural Network
-컨볼루셔널 신경망(Convolutional Neural Network, CNN)은 주로 이미지 인식 및 분류와 관련된 문제에 사용되는 딥러닝 신경망 아키텍처입니다. CNN은 이미지 처리에 특화되어 있으며, 이미지의 특징을 자동으로 학습하여 패턴을 인식하고 분류하는 데 사용됩니다.
+컨볼루셔널 신경망(Convolutional Neural Network, CNN)은 주로 이미지 인식 및 분류와 관련된 문제에 사용되는 딥러닝 신경망 아키텍처입니다. CNN은 이미지 등 공간정보 처리에 특화되어 있으며, 공간의 특징을 자동으로 학습하여 패턴을 인식하고 분류하는 데 사용됩니다.
 
 CNN의 전체적인 동작 과정은 다음과 같습니다:
 
@@ -297,126 +417,6 @@ model.fit(train_images, train_labels, epochs=5, batch_size=64)
 test_loss, test_acc = model.evaluate(test_images, test_labels)
 print('Test accuracy:', test_acc)
 ```
-
-## Keras
-Keras는 딥러닝 모델을 구축하고 훈련하기 위한 고수준 신경망 API입니다. Keras는 모듈화와 확장성이 뛰어나며, 사용자 친화적인 인터페이스를 제공하여 딥러닝 모델을 빠르고 쉽게 구현할 수 있도록 도와줍니다. TensorFlow 버전 1.14부터 Keras는 TensorFlow의 일부로 공식적으로 통합되었으며, TensorFlow에서 Keras API를 사용하여 딥러닝 모델을 구현할 수 있습니다.
-
-Keras API는 다음과 같은 특징을 갖습니다:
-
-1. **간결성**: Keras는 간결한 코드 작성을 통해 빠르게 모델을 구성할 수 있도록 설계되었습니다. 불필요한 상세 설정을 최소화하여 모델 구축을 단순화합니다.
-2. **모듈화**: Keras는 레이어, 손실 함수, 최적화 알고리즘 등과 같은 모든 구성 요소를 모듈화하여 제공합니다. 이러한 모듈화는 각 요소를 독립적으로 조합하여 다양한 종류의 모델을 쉽게 만들 수 있도록 합니다.
-3. **유연성**: Keras는 다양한 딥러닝 모델을 지원하며, 커스텀 레이어, 손실 함수, 최적화 알고리즘을 쉽게 정의하고 사용할 수 있습니다.
-
-### keras.models
-`keras.models`는 Keras에서 모델을 정의하고 구성하는 클래스들을 포함하는 모듈입니다. 이 모듈에는 Sequential, Functional API 등을 사용하여 신경망 모델을 구축하는 데 사용되는 클래스들이 포함되어 있습니다.
-
-모델을 만들 때는 일반적으로 다음 단계를 따릅니다:
-
-1. **모델 생성**: Sequential 등을 사용하여 인스턴스를 만듭니다.
-3. **모델 컴파일**: `compile()` 메서드를 사용하여 모델을 컴파일합니다. 이 때 최적화 알고리즘, 손실 함수, 평가 지표 등을 지정합니다.
-4. **모델 훈련**: `fit()` 메서드를 사용하여 모델을 훈련합니다. 훈련 데이터와 레이블을 전달하고, 에포크 수와 배치 크기를 지정합니다.
-5. **모델 평가 또는 예측**: `evaluate()` 메서드를 사용하여 테스트 데이터에 대한 모델의 성능을 평가하거나, `predict()` 메서드를 사용하여 새로운 데이터에 대한 예측을 생성합니다.
-
-```
-import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Flatten, Dense
-
-# MNIST 데이터셋 로드
-mnist = tf.keras.datasets.mnist
-(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
-
-# 이미지 데이터 전처리
-train_images = train_images / 255.0
-test_images = test_images / 255.0
-
-# Sequential 모델 생성
-model = Sequential([
-    Flatten(input_shape=(28, 28)),   # 입력 이미지를 1차원으로 펼치는 레이어
-    Dense(128, activation='relu'),   # 128개의 뉴런을 가진 은닉층
-    Dense(10, activation='softmax')  # 10개의 뉴런을 가진 출력층
-])
-
-# 모델 컴파일
-model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
-
-# 모델 훈련
-model.fit(train_images, train_labels, epochs=5)
-
-# 모델 평가
-test_loss, test_acc = model.evaluate(test_images, test_labels)
-print('Test accuracy:', test_acc)
-```
-
-#### Sequential
-Sequential 모델은 Keras에서 가장 간단한 형태의 신경망 모델을 만드는 데 사용되는 클래스입니다. 이 클래스를 사용하면 각 층을 순차적으로 쌓아서 신경망 모델을 만들 수 있습니다. 각 층은 입력과 출력이 연속되어 전달되는 구조를 가지며, 마지막 출력이 최종 예측이 됩니다.
-
-Sequential 모델은 간단한 구조의 신경망을 빠르게 구축하고 테스트할 때 유용합니다. 그러나 복잡한 모델 구조를 가진 경우에는 Functional API나 Model 클래스를 사용하는 것이 더 적합할 수 있습니다.
-
-Sequential 모델을 생성할 때, 초기화 과정에서 층을 구성할 수 있습니다. 층은 `Dense`, `Conv2D`, `MaxPooling2D` 등이 주로 사용됩니다.
-```
-from keras.models import Sequential
-from keras.layers import Dense
-
-# Sequential 모델 생성
-model = Sequential()
-
-model = Sequential([
-    Flatten(input_shape=(28, 28)),   # Flatten 층 추가
-    Dense(128, activation='relu'),   # Dense 층 추가
-    Dense(10, activation='softmax')  # Dense 층 추가
-])
-```
-
-또는 `add()` 메서드를 사용하여 Sequential 모델에 층을 추가할 수 있습니다.
-
-```
-model.add(Flatten(input_shape=(28, 28)))
-model.add(Dense(128, activation='relu'))
-model.add(Dense(10, activation='softmax'))
-```
-
-#### Functional API
-Functional API는 Keras에서 모델을 구축하는 또 다른 방법으로, Functional API를 사용하면 다중 입력, 다중 출력, 공유 레이어 등과 같은 복잡한 모델을 만들 수 있습니다.
-
-Functional API를 사용하여 모델을 구축하는 일반적인 단계는 다음과 같습니다:
-
-1. **Input 객체 생성**: 모델의 입력을 나타내는 Input 객체를 생성합니다. 이 객체는 shape을 지정하여 입력 데이터의 크기를 정의합니다.
-2.  **레이어 함수 호출**: 다양한 레이어를 함수처럼 호출하여 모델의 연산 그래프를 구성합니다. 이전 레이어의 출력을 다음 레이어의 입력으로 사용할 수 있습니다.
-3.  **Model 클래스 인스턴스화**: 입력과 출력을 지정하여 Model 클래스를 사용하여 모델을 정의하고 인스턴스화합니다. 이 인스턴스는 컴파일, 훈련 및 평가에 사용할 수 있습니다.
-
-```
-import tensorflow as tf
-from tensorflow.keras.layers import Input, Dense
-from tensorflow.keras.models import Model
-
-# 입력 데이터의 크기를 지정
-input_layer = Input(shape=(784,))
-
-# 은닉층 정의
-hidden1 = Dense(128, activation='relu')(input_layer)
-hidden2 = Dense(64, activation='relu')(hidden1)
-
-# 출력층 정의
-output_layer = Dense(10, activation='softmax')(hidden2)
-
-# 입력과 출력을 지정하여 모델 정의
-model = Model(inputs=input_layer, outputs=output_layer)
-```
-
-### keras.layers
-`keras.layers`는 Keras에서 제공하는 층(layer)을 정의하는 모듈입니다. 자주 사용되는 층들은 다음과 같습니다:
-
-1. **Dense**: 완전 연결 층을 생성하는 데 사용됩니다. 각 입력 뉴런이 이전 층의 모든 뉴런과 연결됩니다.
-2. **Conv2D**: 2D 컨볼루션 층을 생성하는 데 사용됩니다. 이미지 처리 및 컨볼루션 신경망에서 주로 사용됩니다.
-3. **MaxPooling2D**: 최대 풀링 층을 생성하는 데 사용됩니다. 입력의 각 패치에서 최댓값을 추출하여 출력을 생성합니다.
-4. **AveragePooling2D**: 평균 풀링 층을 생성하는 데 사용됩니다. 입력의 각 패치에서 평균 값을 추출하여 출력을 생성합니다.
-5. **Flatten**: 다차원 입력을 1차원 벡터로 펼치는 데 사용됩니다. 주로 완전 연결 층에 연결하기 전에 사용됩니다.
-6. **Dropout**: 드롭아웃을 적용하는 데 사용됩니다. 훈련 중에 일부 뉴런을 무작위로 비활성화하여 과적합을 줄입니다.
-7. **BatchNormalization**: 배치 정규화를 수행하는 데 사용됩니다. 훈련 중에 입력을 정규화하여 학습 속도를 향상시키고 안정성을 높입니다.
-8. **Embedding**: 단어나 범주형 데이터를 밀집 벡터로 변환하는 데 사용됩니다. 자연어 처리와 같은 텍스트 데이터에서 주로 사용됩니다.
 
 ## Recurrent Neural Network
 순환 신경망(Recurrent Neural Network, RNN)은 순차적인 데이터를 처리하는 딥러닝의 한 유형입니다. 이 신경망은 입력의 시퀀스를 순차적으로 처리하면서 이전 단계의 출력을 다음 단계의 입력으로 사용합니다. RNN은 주로 자연어 처리(Natural Language Processing, NLP) 및 시계열 데이터 등 순차 데이터를 처리하는 데 사용됩니다.
