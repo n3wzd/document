@@ -398,3 +398,184 @@ for i in range(400):
 
 print(generated_text)
 ```
+
+## TensorBoard
+TensorBoard는 TensorFlow에서 제공하는 시각화 도구이며, 다양한 그래프와 차트를 제공하여 모델의 학습 성능을 시각적으로 확인하고, 디버깅 및 최적화 작업을 도와줍니다.
+
+1. **훈련 및 평가 지표 시각화**:
+   - 손실(loss), 정확도(accuracy) 등의 지표를 그래프로 표시하여 훈련 및 평가 과정을 실시간으로 모니터링할 수 있습니다.
+   - 학습 속도, 오버피팅 여부 등을 쉽게 파악할 수 있습니다.
+2. **모델 그래프 시각화**:
+   - 신경망의 구조를 그래프로 시각화하여 각 층과 연결 관계를 명확하게 확인할 수 있습니다.
+   - 모델 구조를 이해하고 설계를 검토하는 데 도움이 됩니다.
+3. **가중치 히스토그램 및 분포 시각화**:
+   - 각 층의 가중치 및 편향의 히스토그램과 분포를 시각화하여 모델의 학습 과정을 세부적으로 분석할 수 있습니다.
+   - 가중치의 변화와 학습의 진행 상황을 파악할 수 있습니다.
+4. **이미지, 오디오, 텍스트 데이터 시각화**:
+   - 모델이 학습하는 중간 출력이나 결과를 시각화하여 데이터의 처리 과정을 이해할 수 있습니다.
+   - 예를 들어, 이미지 분류 모델의 중간 특징 맵이나 생성 모델의 출력 이미지를 시각화할 수 있습니다.
+5. **하이퍼파라미터 튜닝 시각화**:
+   - 하이퍼파라미터 조정에 따른 모델 성능 변화를 시각화하여 최적의 하이퍼파라미터를 찾는 데 도움을 줍니다.
+6. **임베딩 시각화**:
+   - 고차원 데이터를 저차원으로 시각화하여 데이터의 분포와 군집 구조를 파악할 수 있습니다.
+
+### Example
+ 특정 모델을 TensorBoard 콜백으로 연결하여 시각화를 할 수 있습니다.
+
+```
+import tensorflow as tf
+from tensorflow.keras.callbacks import TensorBoard
+
+# TensorBoard 로그 디렉토리 설정
+log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+
+# TensorBoard 콜백 설정
+tensorboard_callback = TensorBoard(log_dir=log_dir, histogram_freq=1)
+
+# 모델 정의
+model = tf.keras.models.Sequential([
+    tf.keras.layers.Flatten(input_shape=(28, 28)),
+    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.Dropout(0.2),
+    tf.keras.layers.Dense(10, activation='softmax')
+])
+
+# 모델 컴파일
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+# 모델 훈련
+model.fit(x_train,
+	y_train, 
+	epochs=5, 
+	validation_data=(x_test, y_test),
+	callbacks=[tensorboard_callback]
+)
+```
+
+터미널에서 다음 명령을 실행하여 TensorBoard를 시작합니다.
+
+```
+tensorboard --logdir=logs/fit
+```
+
+브라우저에서 `http://localhost:6006`을 열어 TensorBoard 대시보드를 확인할 수 있습니다.
+
+## Word Embedding
+단어 임베딩(Word Embedding)은 자연어 처리(NLP)에서 단어를 수치 벡터로 표현하는 기술입니다. 단어 임베딩을 통해 단어를 고정 길이의 실수 벡터로 변환할 수 있으며, 이러한 벡터는 단어의 의미적 유사성을 반영합니다. 즉, 의미가 비슷한 단어들은 임베딩 벡터 공간에서 서로 가깝게 위치하게 됩니다.
+
+1. **벡터 표현**:
+   - 단어를 고정 길이의 실수 벡터로 변환합니다.
+   - 벡터의 각 차원은 단어의 특정 의미적 특성을 나타냅니다.
+2. **의미적 유사성**:
+   - 임베딩 벡터 공간에서 의미가 유사한 단어들은 가까운 거리에 위치하게 됩니다.
+   - 예를 들어, "king"과 "queen", "apple"과 "fruit"은 각각 임베딩 벡터 공간에서 서로 가까운 위치에 있을 것입니다.
+3. **학습 방법**:
+   - 단어 임베딩은 주로 대규모 텍스트 데이터에서 학습됩니다.
+   - 대표적인 방법으로 Word2Vec, GloVe, FastText 등이 있습니다.
+
+### Word2Vec
+Word2Vec은 구글에서 개발한 단어 임베딩 기법으로, 단어를 벡터 공간에 임베딩하여 의미적으로 유사한 단어들이 가까운 거리에 위치하도록 합니다.
+
+Word2Vec에서 주로 사용되는 모델 종류는 다음과 같습니다:
+1. **CBOW (Continuous Bag of Words)**:
+   - CBOW 모델은 주변 단어들(Context words)을 통해 중심 단어(Target word)를 예측하는 방식입니다.
+   - 예를 들어, 문장에서 "The cat sits on the mat"가 있을 때, "The", "cat", "on", "the", "mat" 같은 주변 단어들을 사용하여 "sits"라는 중심 단어를 예측합니다.
+   - CBOW 모델은 문맥의 평균적인 표현을 통해 중심 단어를 예측하므로, 데이터셋이 클 때 효율적으로 학습할 수 있습니다.
+2. **Skip-gram**:
+   - Skip-gram 모델은 중심 단어(Target word)를 통해 주변 단어들(Context words)을 예측하는 방식입니다.
+   - 같은 예시에서, 중심 단어 "sits"를 사용하여 주변 단어들 "The", "cat", "on", "the", "mat"를 예측합니다.
+   - Skip-gram 모델은 희귀한 단어에 대한 표현을 학습하는 데 더 효과적입니다.
+
+Word2Vec의 학습 과정은 다음과 같습니다:
+
+1. **단어 벡터 초기화**:
+   - 각 단어는 임의의 작은 값으로 초기화된 고정 길이의 벡터로 표현됩니다.
+2. **단어 예측**:
+   - CBOW 모델에서는 주변 단어들을 평균하여 중심 단어를 예측합니다.
+   - Skip-gram 모델에서는 중심 단어를 사용하여 주변 단어들을 예측합니다.
+3. **손실 함수 계산**:
+   - 모델이 예측한 단어와 실제 단어 사이의 차이를 계산하여 손실을 구합니다.
+   - 일반적으로 음성 샘플링(Negative Sampling) 또는 계층적 소프트맥스(Hierarchical Softmax) 같은 방법을 사용하여 계산 효율성을 높입니다.
+4. **역전파를 통해 가중치 업데이트**:
+   - 손실을 최소화하기 위해 역전파 알고리즘을 사용하여 단어 벡터를 업데이트합니다.
+   - 이 과정은 반복적으로 수행되어 단어 벡터가 최적화됩니다.
+
+
+아래 예제는 TensorFlow의 Low-level API를 사용하여 CBOW 모델을 구현한 것입니다. 최종적으로 학습된 임베딩이 출력되며, 각 단어에 대한 임베딩 벡터를 확인할 수 있습니다.
+
+```
+import numpy as np
+import tensorflow as tf
+
+# 학습 데이터
+corpus = [
+    ['the', 'cat', 'sat', 'on', 'the', 'mat'],
+    ['the', 'dog', 'sat', 'on', 'the', 'rug'],
+    ['cats', 'and', 'dogs', 'are', 'friends']
+]
+
+# 단어 사전 생성
+word2idx = {}
+idx2word = {}
+for sentence in corpus:
+    for word in sentence:
+        if word not in word2idx:
+            idx = len(word2idx)
+            word2idx[word] = idx
+            idx2word[idx] = word
+
+# 데이터셋 생성
+window_size = 2
+data = []
+for sentence in corpus:
+    for i, target_word in enumerate(sentence):
+        for j in range(max(0, i - window_size), min(len(sentence), i + window_size + 1)):
+            if i != j:
+                context_word = sentence[j]
+                data.append((word2idx[target_word], word2idx[context_word]))
+
+# 모델 파라미터
+vocab_size = len(word2idx)
+embedding_dim = 100
+
+# CBOW 모델 구현
+class CBOWModel(tf.keras.Model):
+    def __init__(self, vocab_size, embedding_dim):
+        super(CBOWModel, self).__init__()
+        self.embedding = tf.keras.layers.Embedding(vocab_size, embedding_dim)
+        self.dense = tf.keras.layers.Dense(vocab_size, activation='softmax')
+
+    def call(self, inputs):
+        embedded = self.embedding(inputs)
+        embedded_avg = tf.reduce_mean(embedded, axis=1)
+        return self.dense(embedded_avg)
+
+# 데이터 배치 생성
+def generate_batch(data, batch_size):
+    for i in range(0, len(data), batch_size):
+        batch_data = data[i:i + batch_size]
+        target_words, context_words = zip(*batch_data)
+        yield np.array(target_words), np.array(context_words)
+
+# 모델 생성 및 컴파일
+model = CBOWModel(vocab_size, embedding_dim)
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy')
+
+# 모델 학습
+batch_size = 64
+num_epochs = 10
+for epoch in range(num_epochs):
+    print(f"Epoch {epoch+1}/{num_epochs}")
+    total_loss = 0
+    for target_words, context_words in generate_batch(data, batch_size):
+        loss = model.train_on_batch(target_words, context_words)
+        total_loss += loss
+    print(f"Loss: {total_loss}")
+
+# 학습된 단어 임베딩 출력
+embeddings = model.embedding.weights[0].numpy()
+for word, idx in word2idx.items():
+    print(f"{word}: {embeddings[idx]}")
+```
