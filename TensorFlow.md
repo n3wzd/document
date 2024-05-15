@@ -668,3 +668,13 @@ embeddings = model.embedding.weights[0].numpy()
 for word, idx in word2idx.items():
     print(f"{word}: {embeddings[idx]}")
 ```
+
+## TFLearn
+TFLearn은 TensorFlow를 기반으로 한 딥러닝 라이브러리 중 하나입니다. TensorFlow에 대한 고수준의 추상화를 제공하여 딥러닝 모델을 쉽게 구축하고 학습할 수 있도록 도와줍니다.
+
+1. **간편한 구현**: TFLearn은 TensorFlow의 복잡한 저수준 API보다 더 간편한 고수준 API를 제공합니다. 이를 통해 모델을 빠르게 구축하고 학습할 수 있습니다.
+2. **다양한 딥러닝 모델 지원**: TFLearn은 다양한 딥러닝 모델을 지원합니다. 이중에서도 신경망(Neural Networks), 합성곱 신경망(Convolutional Neural Networks), 순환 신경망(Recurrent Neural Networks) 등의 모델을 쉽게 구축할 수 있습니다.
+3. **모델 시각화**: TFLearn은 학습된 모델을 시각화할 수 있는 기능을 제공합니다. 이를 통해 모델의 구조와 학습 과정을 더 잘 이해하고 분석할 수 있습니다.
+4. **사전 제작된 모델과 레이어**: TFLearn은 사전 제작된 모델과 레이어를 제공하여 사용자가 모델을 더 쉽게 구성할 수 있도록 도와줍니다. 이를 통해 재사용 가능한 코드를 작성하고 모델을 빠르게 구축할 수 있습니다.
+
+TFLearn은 TensorFlow와 함께 사용되어 딥러닝 모델을 빠르고 효과적으로 구축하고 학습하는 데 도움이 되는 강력한 도구입니다.
