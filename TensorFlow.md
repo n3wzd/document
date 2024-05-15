@@ -289,6 +289,79 @@ model = Model(inputs=input_layer, outputs=output_layer)
 7. **BatchNormalization**: 배치 정규화를 수행하는 데 사용됩니다. 훈련 중에 입력을 정규화하여 학습 속도를 향상시키고 안정성을 높입니다.
 8. **Embedding**: 단어나 범주형 데이터를 밀집 벡터로 변환하는 데 사용됩니다. 자연어 처리와 같은 텍스트 데이터에서 주로 사용됩니다.
 
+## TensorBoard
+TensorBoard는 TensorFlow에서 제공하는 시각화 도구이며, 다양한 그래프와 차트를 제공하여 모델의 학습 성능을 시각적으로 확인하고, 디버깅 및 최적화 작업을 도와줍니다.
+
+1. **훈련 및 평가 지표 시각화**:
+   - 손실(loss), 정확도(accuracy) 등의 지표를 그래프로 표시하여 훈련 및 평가 과정을 실시간으로 모니터링할 수 있습니다.
+   - 학습 속도, 오버피팅 여부 등을 쉽게 파악할 수 있습니다.
+2. **모델 그래프 시각화**:
+   - 신경망의 구조를 그래프로 시각화하여 각 층과 연결 관계를 명확하게 확인할 수 있습니다.
+   - 모델 구조를 이해하고 설계를 검토하는 데 도움이 됩니다.
+3. **가중치 히스토그램 및 분포 시각화**:
+   - 각 층의 가중치 및 편향의 히스토그램과 분포를 시각화하여 모델의 학습 과정을 세부적으로 분석할 수 있습니다.
+   - 가중치의 변화와 학습의 진행 상황을 파악할 수 있습니다.
+4. **이미지, 오디오, 텍스트 데이터 시각화**:
+   - 모델이 학습하는 중간 출력이나 결과를 시각화하여 데이터의 처리 과정을 이해할 수 있습니다.
+   - 예를 들어, 이미지 분류 모델의 중간 특징 맵이나 생성 모델의 출력 이미지를 시각화할 수 있습니다.
+5. **하이퍼파라미터 튜닝 시각화**:
+   - 하이퍼파라미터 조정에 따른 모델 성능 변화를 시각화하여 최적의 하이퍼파라미터를 찾는 데 도움을 줍니다.
+6. **임베딩 시각화**:
+   - 고차원 데이터를 저차원으로 시각화하여 데이터의 분포와 군집 구조를 파악할 수 있습니다.
+
+### Example
+ 특정 모델을 TensorBoard 콜백으로 연결하여 시각화를 할 수 있습니다.
+
+```
+import tensorflow as tf
+from tensorflow.keras.callbacks import TensorBoard
+
+# TensorBoard 로그 디렉토리 설정
+log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+
+# TensorBoard 콜백 설정
+tensorboard_callback = TensorBoard(log_dir=log_dir, histogram_freq=1)
+
+# 모델 정의
+model = tf.keras.models.Sequential([
+    tf.keras.layers.Flatten(input_shape=(28, 28)),
+    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.Dropout(0.2),
+    tf.keras.layers.Dense(10, activation='softmax')
+])
+
+# 모델 컴파일
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+# 모델 훈련
+model.fit(x_train,
+	y_train, 
+	epochs=5, 
+	validation_data=(x_test, y_test),
+	callbacks=[tensorboard_callback]
+)
+```
+
+터미널에서 다음 명령을 실행하여 TensorBoard를 시작합니다.
+
+```
+tensorboard --logdir=logs/fit
+```
+
+브라우저에서 `http://localhost:6006`을 열어 TensorBoard 대시보드를 확인할 수 있습니다.
+
+## TFLearn
+TFLearn은 TensorFlow를 기반으로 한 딥러닝 라이브러리 중 하나입니다. TensorFlow에 대한 고수준의 추상화를 제공하여 딥러닝 모델을 쉽게 구축하고 학습할 수 있도록 도와줍니다.
+
+1. **간편한 구현**: TFLearn은 TensorFlow의 복잡한 저수준 API보다 더 간편한 고수준 API를 제공합니다. 이를 통해 모델을 빠르게 구축하고 학습할 수 있습니다.
+2. **다양한 딥러닝 모델 지원**: TFLearn은 다양한 딥러닝 모델을 지원합니다. 이중에서도 신경망(Neural Networks), 합성곱 신경망(Convolutional Neural Networks), 순환 신경망(Recurrent Neural Networks) 등의 모델을 쉽게 구축할 수 있습니다.
+3. **모델 시각화**: TFLearn은 학습된 모델을 시각화할 수 있는 기능을 제공합니다. 이를 통해 모델의 구조와 학습 과정을 더 잘 이해하고 분석할 수 있습니다.
+4. **사전 제작된 모델과 레이어**: TFLearn은 사전 제작된 모델과 레이어를 제공하여 사용자가 모델을 더 쉽게 구성할 수 있도록 도와줍니다. 이를 통해 재사용 가능한 코드를 작성하고 모델을 빠르게 구축할 수 있습니다.
+
+TFLearn은 TensorFlow와 함께 사용되어 딥러닝 모델을 빠르고 효과적으로 구축하고 학습하는 데 도움이 되는 강력한 도구입니다.
+
 ## Convolutional Neural Network
 컨볼루셔널 신경망(Convolutional Neural Network, CNN)은 주로 이미지 인식 및 분류와 관련된 문제에 사용되는 딥러닝 신경망 아키텍처입니다. CNN은 이미지 등 공간정보 처리에 특화되어 있으며, 공간의 특징을 자동으로 학습하여 패턴을 인식하고 분류하는 데 사용됩니다.
 
@@ -488,69 +561,6 @@ for i in range(400):
 print(generated_text)
 ```
 
-## TensorBoard
-TensorBoard는 TensorFlow에서 제공하는 시각화 도구이며, 다양한 그래프와 차트를 제공하여 모델의 학습 성능을 시각적으로 확인하고, 디버깅 및 최적화 작업을 도와줍니다.
-
-1. **훈련 및 평가 지표 시각화**:
-   - 손실(loss), 정확도(accuracy) 등의 지표를 그래프로 표시하여 훈련 및 평가 과정을 실시간으로 모니터링할 수 있습니다.
-   - 학습 속도, 오버피팅 여부 등을 쉽게 파악할 수 있습니다.
-2. **모델 그래프 시각화**:
-   - 신경망의 구조를 그래프로 시각화하여 각 층과 연결 관계를 명확하게 확인할 수 있습니다.
-   - 모델 구조를 이해하고 설계를 검토하는 데 도움이 됩니다.
-3. **가중치 히스토그램 및 분포 시각화**:
-   - 각 층의 가중치 및 편향의 히스토그램과 분포를 시각화하여 모델의 학습 과정을 세부적으로 분석할 수 있습니다.
-   - 가중치의 변화와 학습의 진행 상황을 파악할 수 있습니다.
-4. **이미지, 오디오, 텍스트 데이터 시각화**:
-   - 모델이 학습하는 중간 출력이나 결과를 시각화하여 데이터의 처리 과정을 이해할 수 있습니다.
-   - 예를 들어, 이미지 분류 모델의 중간 특징 맵이나 생성 모델의 출력 이미지를 시각화할 수 있습니다.
-5. **하이퍼파라미터 튜닝 시각화**:
-   - 하이퍼파라미터 조정에 따른 모델 성능 변화를 시각화하여 최적의 하이퍼파라미터를 찾는 데 도움을 줍니다.
-6. **임베딩 시각화**:
-   - 고차원 데이터를 저차원으로 시각화하여 데이터의 분포와 군집 구조를 파악할 수 있습니다.
-
-### Example
- 특정 모델을 TensorBoard 콜백으로 연결하여 시각화를 할 수 있습니다.
-
-```
-import tensorflow as tf
-from tensorflow.keras.callbacks import TensorBoard
-
-# TensorBoard 로그 디렉토리 설정
-log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-
-# TensorBoard 콜백 설정
-tensorboard_callback = TensorBoard(log_dir=log_dir, histogram_freq=1)
-
-# 모델 정의
-model = tf.keras.models.Sequential([
-    tf.keras.layers.Flatten(input_shape=(28, 28)),
-    tf.keras.layers.Dense(128, activation='relu'),
-    tf.keras.layers.Dropout(0.2),
-    tf.keras.layers.Dense(10, activation='softmax')
-])
-
-# 모델 컴파일
-model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
-
-# 모델 훈련
-model.fit(x_train,
-	y_train, 
-	epochs=5, 
-	validation_data=(x_test, y_test),
-	callbacks=[tensorboard_callback]
-)
-```
-
-터미널에서 다음 명령을 실행하여 TensorBoard를 시작합니다.
-
-```
-tensorboard --logdir=logs/fit
-```
-
-브라우저에서 `http://localhost:6006`을 열어 TensorBoard 대시보드를 확인할 수 있습니다.
-
 ## Word Embedding
 단어 임베딩(Word Embedding)은 자연어 처리(NLP)에서 단어를 수치 벡터로 표현하는 기술입니다. 단어 임베딩을 통해 단어를 고정 길이의 실수 벡터로 변환할 수 있으며, 이러한 벡터는 단어의 의미적 유사성을 반영합니다. 즉, 의미가 비슷한 단어들은 임베딩 벡터 공간에서 서로 가깝게 위치하게 됩니다.
 
@@ -668,13 +678,3 @@ embeddings = model.embedding.weights[0].numpy()
 for word, idx in word2idx.items():
     print(f"{word}: {embeddings[idx]}")
 ```
-
-## TFLearn
-TFLearn은 TensorFlow를 기반으로 한 딥러닝 라이브러리 중 하나입니다. TensorFlow에 대한 고수준의 추상화를 제공하여 딥러닝 모델을 쉽게 구축하고 학습할 수 있도록 도와줍니다.
-
-1. **간편한 구현**: TFLearn은 TensorFlow의 복잡한 저수준 API보다 더 간편한 고수준 API를 제공합니다. 이를 통해 모델을 빠르게 구축하고 학습할 수 있습니다.
-2. **다양한 딥러닝 모델 지원**: TFLearn은 다양한 딥러닝 모델을 지원합니다. 이중에서도 신경망(Neural Networks), 합성곱 신경망(Convolutional Neural Networks), 순환 신경망(Recurrent Neural Networks) 등의 모델을 쉽게 구축할 수 있습니다.
-3. **모델 시각화**: TFLearn은 학습된 모델을 시각화할 수 있는 기능을 제공합니다. 이를 통해 모델의 구조와 학습 과정을 더 잘 이해하고 분석할 수 있습니다.
-4. **사전 제작된 모델과 레이어**: TFLearn은 사전 제작된 모델과 레이어를 제공하여 사용자가 모델을 더 쉽게 구성할 수 있도록 도와줍니다. 이를 통해 재사용 가능한 코드를 작성하고 모델을 빠르게 구축할 수 있습니다.
-
-TFLearn은 TensorFlow와 함께 사용되어 딥러닝 모델을 빠르고 효과적으로 구축하고 학습하는 데 도움이 되는 강력한 도구입니다.
