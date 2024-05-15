@@ -328,3 +328,73 @@ model = Model(inputs=input_layer, outputs=output_layer)
 6. **Dropout**: 드롭아웃을 적용하는 데 사용됩니다. 훈련 중에 일부 뉴런을 무작위로 비활성화하여 과적합을 줄입니다.
 7. **BatchNormalization**: 배치 정규화를 수행하는 데 사용됩니다. 훈련 중에 입력을 정규화하여 학습 속도를 향상시키고 안정성을 높입니다.
 8. **Embedding**: 단어나 범주형 데이터를 밀집 벡터로 변환하는 데 사용됩니다. 자연어 처리와 같은 텍스트 데이터에서 주로 사용됩니다.
+
+## Recurrent Neural Network
+순환 신경망(Recurrent Neural Network, RNN)은 순차적인 데이터를 처리하는 딥러닝의 한 유형입니다. 이 신경망은 입력의 시퀀스를 순차적으로 처리하면서 이전 단계의 출력을 다음 단계의 입력으로 사용합니다. RNN은 주로 자연어 처리(Natural Language Processing, NLP) 및 시계열 데이터 등 순차 데이터를 처리하는 데 사용됩니다.
+
+RNN은 다음과 같이 구성됩니다:
+
+1. **입력층(Input Layer)**: 시퀀스의 각 요소를 표현하는 입력 데이터를 받습니다.
+2. **은닉 상태(Hidden State)**: 이전 단계의 출력을 기억하는 상태입니다. RNN은 이전 단계의 출력을 현재 단계의 입력과 결합하여 새로운 출력을 생성합니다.
+3. **은닉층(Hidden Layer)**: 입력 데이터와 이전 단계의 출력을 조합하여 새로운 출력을 생성하는 층입니다. 이 층은 일반적으로 순환적인 구조를 가지고 있으며, 같은 가중치를 모든 시간 단계에 공유합니다.
+4. **출력층(Output Layer)**: 모델의 최종 출력을 생성합니다. 분류 문제의 경우 소프트맥스 함수를 사용하여 클래스 확률을 출력하거나, 회귀 문제의 경우 선형 또는 비선형 활성화 함수를 사용하여 연속적인 값을 출력합니다.
+
+### Example
+다음은 간단한 텍스트 생성(Text Generation)의 예시입니다. 이전에 학습한 텍스트 데이터를 기반으로 새로운 텍스트를 생성합니다.
+```
+import tensorflow as tf
+from tensorflow.keras.layers import Dense, LSTM
+from tensorflow.keras.models import Sequential
+import numpy as np
+
+# 학습 데이터 불러오기
+text = open('test.txt', 'r').read()
+
+# 문자에서 고유한 글자 집합 생성
+chars = sorted(list(set(text)))
+char_indices = dict((c, i) for i, c in enumerate(chars))
+indices_char = dict((i, c) for i, c in enumerate(chars))
+
+# 입력 시퀀스와 타겟 시퀀스 생성
+maxlen = 40
+step = 3
+sentences = []
+next_chars = []
+for i in range(0, len(text) - maxlen, step):
+    sentences.append(text[i: i + maxlen])
+    next_chars.append(text[i + maxlen])
+    
+# 입력 데이터와 타겟 데이터 생성
+x = np.zeros((len(sentences), maxlen, len(chars)), dtype=np.bool)
+y = np.zeros((len(sentences), len(chars)), dtype=np.bool)
+for i, sentence in enumerate(sentences):
+    for t, char in enumerate(sentence):
+        x[i, t, char_indices[char]] = 1
+    y[i, char_indices[next_chars[i]]] = 1
+
+# RNN 모델 생성
+model = Sequential()
+model.add(LSTM(128, input_shape=(maxlen, len(chars))))
+model.add(Dense(len(chars), activation='softmax'))
+
+# 모델 컴파일
+model.compile(loss='categorical_crossentropy', optimizer='adam')
+
+# 모델 훈련
+model.fit(x, y, batch_size=128, epochs=20)
+
+# 텍스트 생성
+start_index = np.random.randint(0, len(text) - maxlen - 1)
+generated_text = text[start_index: start_index + maxlen]
+for i in range(400):
+    x_pred = np.zeros((1, maxlen, len(chars)))
+    for t, char in enumerate(generated_text):
+        x_pred[0, t, char_indices[char]] = 1
+    preds = model.predict(x_pred, verbose=0)[0]
+    next_index = np.argmax(preds)
+    next_char = indices_char[next_index]
+    generated_text += next_char
+    generated_text = generated_text[1:]
+
+print(generated_text)
+```
