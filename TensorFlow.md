@@ -209,40 +209,31 @@ print(tensor_3d)
 ## Keras
 Keras는 딥러닝 모델을 구축하고 훈련하기 위한 고수준 신경망 API입니다. Keras는 모듈화와 확장성이 뛰어나며, 사용자 친화적인 인터페이스를 제공하여 딥러닝 모델을 빠르고 쉽게 구현할 수 있도록 도와줍니다. TensorFlow 버전 1.14부터 Keras는 TensorFlow의 일부로 공식적으로 통합되었으며, TensorFlow에서 Keras API를 사용하여 딥러닝 모델을 구현할 수 있습니다.
 
-Keras API는 다음과 같은 특징을 갖습니다:
-
-1. **간결성**: Keras는 간결한 코드 작성을 통해 빠르게 모델을 구성할 수 있도록 설계되었습니다. 불필요한 상세 설정을 최소화하여 모델 구축을 단순화합니다.
-2. **모듈화**: Keras는 레이어, 손실 함수, 최적화 알고리즘 등과 같은 모든 구성 요소를 모듈화하여 제공합니다. 이러한 모듈화는 각 요소를 독립적으로 조합하여 다양한 종류의 모델을 쉽게 만들 수 있도록 합니다.
-3. **유연성**: Keras는 다양한 딥러닝 모델을 지원하며, 커스텀 레이어, 손실 함수, 최적화 알고리즘을 쉽게 정의하고 사용할 수 있습니다.
-
-### keras.models
-`keras.models`는 Keras에서 모델을 정의하고 구성하는 클래스들을 포함하는 모듈입니다. 이 모듈에는 Sequential, Functional API 등을 사용하여 신경망 모델을 구축하는 데 사용되는 클래스들이 포함되어 있습니다.
-
-모델을 만들 때는 일반적으로 다음 단계를 따릅니다:
-
-1. **모델 생성**: Sequential 등을 사용하여 인스턴스를 만듭니다.
+일반적으로 Keras API를 통해 딥러닝 모델을 활용하는 과정은 다음과 같습니다:
+1. **데이터 준비**: 모델 훈련에 사용할 데이터를 준비합니다. `keras.datasets`를 활용할 수 있습니다.
+2. **모델 생성**: `keras.models`에 포함된 모델을 사용하여 모델 인스턴스를 만듭니다.
 3. **모델 컴파일**: `compile()` 메서드를 사용하여 모델을 컴파일합니다. 이 때 최적화 알고리즘, 손실 함수, 평가 지표 등을 지정합니다.
 4. **모델 훈련**: `fit()` 메서드를 사용하여 모델을 훈련합니다. 훈련 데이터와 레이블을 전달하고, 에포크 수와 배치 크기를 지정합니다.
-5. **모델 평가 또는 예측**: `evaluate()` 메서드를 사용하여 테스트 데이터에 대한 모델의 성능을 평가하거나, `predict()` 메서드를 사용하여 새로운 데이터에 대한 예측을 생성합니다.
+5. **모델 평가**: `evaluate()` 메서드를 사용하여 테스트 데이터에 대한 모델의 성능을 평가합니다.
+6. **모델 예측**: `predict()` 메서드를 사용하여 새로운 데이터에 대한 예측을 생성합니다.
 
+아래는 MNIST 데이터셋을 사용하여 손글씨 숫자를 분류하는 간단한 모델입니다.
 ```
 import tensorflow as tf
+import numpy as np
+from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Flatten, Dense
 
-# MNIST 데이터셋 로드
-mnist = tf.keras.datasets.mnist
-(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+# 데이터 불러오기 및 전처리
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+x_train, x_test = x_train / 255.0, x_test / 255.0
 
-# 이미지 데이터 전처리
-train_images = train_images / 255.0
-test_images = test_images / 255.0
-
-# Sequential 모델 생성
+# 모델 구성
 model = Sequential([
-    Flatten(input_shape=(28, 28)),   # 입력 이미지를 1차원으로 펼치는 레이어
-    Dense(128, activation='relu'),   # 128개의 뉴런을 가진 은닉층
-    Dense(10, activation='softmax')  # 10개의 뉴런을 가진 출력층
+    Flatten(input_shape=(28, 28)),  # 입력 이미지를 1차원으로 펼침
+    Dense(128, activation='relu'),  # 은닉층
+    Dense(10, activation='softmax') # 출력층 (10개의 클래스에 대한 확률값)
 ])
 
 # 모델 컴파일
@@ -250,13 +241,88 @@ model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-# 모델 훈련
-model.fit(train_images, train_labels, epochs=5)
+# 모델 학습
+model.fit(x_train, y_train, epochs=5)
 
 # 모델 평가
-test_loss, test_acc = model.evaluate(test_images, test_labels)
-print('Test accuracy:', test_acc)
+loss, accuracy = model.evaluate(x_test, y_test)
+print(f'Test accuracy: {accuracy}')
+
+# 모델 예측
+predictions = model.predict(x_test)
+predicted_labels = np.argmax(predictions, axis=1)
+print("Predicted labels:", predicted_labels)
 ```
+
+### keras.datasets
+`keras.datasets`는 Keras 라이브러리에서 제공하는 다양한 데이터셋 모듈입니다. 이 모듈을 통해서 여러 표준 데이터셋을 손쉽게 다운로드하고할 수 있습니다. 주로 딥러닝 모델의 기본적인 성능 평가에 사용됩니다.
+
+데이터셋은 일반적으로 튜플 형태로 반환되며, `(x_train, y_train), (x_test, y_test)`와 같이 훈련 데이터와 테스트 데이터를 제공합니다.
+
+#### MNIST
+MNIST 데이터셋은 손으로 쓴 숫자 이미지 데이터셋으로, 0에서 9까지의 숫자가 포함되어 있습니다. 
+
+```
+from tensorflow.keras.datasets import mnist
+
+# 데이터셋 로드
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+# 데이터셋 확인
+print(f'Training data shape: {x_train.shape}, Training labels shape: {y_train.shape}')
+print(f'Test data shape: {x_test.shape}, Test labels shape: {y_test.shape}')
+```
+
+#### CIFAR-10
+CIFAR-10 데이터셋은 10개의 서로 다른 클래스에 속하는 60,000개의 32x32 컬러 이미지로 구성되어 있습니다.
+
+```
+from tensorflow.keras.datasets import cifar10
+
+# 데이터셋 로드
+(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+
+# 데이터셋 확인
+print(f'Training data shape: {x_train.shape}, Training labels shape: {y_train.shape}')
+print(f'Test data shape: {x_test.shape}, Test labels shape: {y_test.shape}')
+```
+
+#### IMDB
+IMDB 데이터셋은 50,000개의 영화 리뷰로 구성되어 있으며, 각 리뷰는 긍정적 또는 부정적 평가로 라벨링되어 있습니다. 자연어 처리 모델을 학습시키는 데 사용됩니다.
+
+```
+from tensorflow.keras.datasets import imdb
+
+# 데이터셋 로드 (빈도 상위 10,000개의 단어만 사용)
+(x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=10000)
+
+# 데이터셋 확인
+print(f'Training data shape: {x_train.shape}, Training labels shape: {y_train.shape}')
+print(f'Test data shape: {x_test.shape}, Test labels shape: {y_test.shape}')
+```
+
+#### 데이터셋 전처리
+로드한 데이터셋은 종종 전처리가 필요합니다. 예를 들어, 이미지 데이터는 정규화, 텍스트 데이터는 토큰화 등의 과정을 거칩니다.
+
+MNIST나 CIFAR-10 같은 이미지 데이터는 일반적으로 픽셀 값(0-255)을 0과 1 사이로 정규화합니다.
+
+```
+x_train = x_train.astype('float32') / 255.0
+x_test = x_test.astype('float32') / 255.0
+```
+
+IMDB 데이터셋의 경우, 단어를 인덱스로 변환하여 토큰화합니다.
+
+```
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+# 패딩
+x_train = pad_sequences(x_train, maxlen=500)
+x_test = pad_sequences(x_test, maxlen=500)
+```
+
+### keras.models
+`keras.models`는 Keras에서 모델을 정의하고 구성하는 클래스들을 포함하는 모듈입니다. 이 모듈에는 신경망 모델을 구축하는 데 사용되는 클래스들이 포함되어 있습니다.
 
 #### Sequential
 Sequential 모델은 Keras에서 가장 간단한 형태의 신경망 모델을 만드는 데 사용되는 클래스입니다. 이 클래스를 사용하면 각 층을 순차적으로 쌓아서 신경망 모델을 만들 수 있습니다. 각 층은 입력과 출력이 연속되어 전달되는 구조를 가지며, 마지막 출력이 최종 예측이 됩니다.
@@ -392,6 +458,18 @@ loss, accuracy = model.evaluate(x_test, y_test)
    - `steps`가 지정되지 않으면 `len(x) // batch_size`가 기본값으로 사용됩니다.
 
 반환 값으로 손실 값과 메트릭 값을 반환합니다. 반환되는 값의 개수는 모델을 컴파일할 때 지정한 메트릭의 수에 따라 달라집니다.
+
+### model.predict
+`model.predict` 메서드는 학습된 모델을 사용하여 입력 데이터에 대한 예측을 수행합니다. 주어진 입력에 대한 모델의 출력을 반환합니다.
+
+```
+predictions = model.predict(x)
+```
+- `x`: 입력 데이터입니다. 일반적으로 모델이 예측할 데이터의 특성을 포함하는 배열 또는 텐서입니다.
+
+반환값은 입력 데이터에 대한 예측 결과를 포함하는 `predictions` 배열 또는 텐서입니다. 이 배열의 크기 및 형태는 모델의 출력에 따라 달라집니다.
+
+`predictions` 배열의 각 요소는 해당 입력에 대한 모델의 출력을 나타냅니다. 예를 들어, 다중 클래스 분류 모델의 경우, 각 클래스에 대한 확률 값을 포함하는 배열이 반환될 수 있습니다. 이 확률 값은 모델이 각 클래스에 속할 확률을 나타냅니다.
 
 ## TensorBoard
 TensorBoard는 TensorFlow에서 제공하는 시각화 도구이며, 다양한 그래프와 차트를 제공하여 모델의 학습 성능을 시각적으로 확인하고, 디버깅 및 최적화 작업을 도와줍니다.
