@@ -1,4 +1,4 @@
-# Artificial Intelligence
+# AI
 인공지능(Artificial Intelligence, AI)은 컴퓨터 프로그램이 인간과 유사한 지능을 구현하고 인간의 학습, 추론, 문제 해결 등의 능력을 모방하도록 하는 기술 또는 시스템을 말합니다. 인공지능은 다양한 분야에서 사용되며, 기계 학습, 자연어 처리, 컴퓨터 비전 등과 같은 하위 분야를 포함합니다.
 
 ## 머신러닝 (Machine Learning)
