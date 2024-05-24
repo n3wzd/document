@@ -618,63 +618,38 @@ RNN은 다음과 같이 구성됩니다:
 	- 이전 단계의 은닉 상태를 다음 단계로 전달하는 순환적인 구조를 가지며 여러 번 반복됩니다.
 3. **출력층(Output Layer)**: 모델의 최종 출력을 생성합니다.
 
-다음은 간단한 텍스트 생성(Text Generation)의 예시입니다.
+다음은 0부터 9까지의 숫자 시퀀스를 예측하는 간단한 RNN 모델입니다.
 ```
-import tensorflow as tf
-from tensorflow.keras.layers import Dense, LSTM
-from tensorflow.keras.models import Sequential
 import numpy as np
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import SimpleRNN, Dense
 
-# 학습 데이터 불러오기
-text = open('test.txt', 'r').read()
+# 입력: [[0], [1], [2], [3], [4], [5], [6], [7], [8]]
+# 출력: [[1], [2], [3], [4], [5], [6], [7], [8], [9]]
 
-# 문자에서 고유한 글자 집합 생성
-chars = sorted(list(set(text)))
-char_indices = dict((c, i) for i, c in enumerate(chars))
-indices_char = dict((i, c) for i, c in enumerate(chars))
+# 입력 데이터 (samples, time steps, features)
+X = np.array([[[i]] for i in range(9)])
+# 출력 데이터 (samples, features)
+y = np.array([[i + 1] for i in range(9)])
 
-# 입력 시퀀스와 타겟 시퀀스 생성
-maxlen = 40
-step = 3
-sentences = []
-next_chars = []
-for i in range(0, len(text) - maxlen, step):
-    sentences.append(text[i: i + maxlen])
-    next_chars.append(text[i + maxlen])
-    
-# 입력 데이터와 타겟 데이터 생성
-x = np.zeros((len(sentences), maxlen, len(chars)), dtype=np.bool)
-y = np.zeros((len(sentences), len(chars)), dtype=np.bool)
-for i, sentence in enumerate(sentences):
-    for t, char in enumerate(sentence):
-        x[i, t, char_indices[char]] = 1
-    y[i, char_indices[next_chars[i]]] = 1
-
-# RNN 모델 생성
+# RNN 모델 구성
 model = Sequential()
-model.add(LSTM(128, input_shape=(maxlen, len(chars))))
-model.add(Dense(len(chars), activation='softmax'))
+model.add(SimpleRNN(10, input_shape=(1, 1)))
+model.add(Dense(1))
 
 # 모델 컴파일
-model.compile(loss='categorical_crossentropy', optimizer='adam')
+model.compile(optimizer='adam', loss='mse')
 
 # 모델 훈련
-model.fit(x, y, batch_size=128, epochs=20)
+model.fit(X, y, epochs=200, verbose=0)
 
-# 텍스트 생성
-start_index = np.random.randint(0, len(text) - maxlen - 1)
-generated_text = text[start_index: start_index + maxlen]
-for i in range(400):
-    x_pred = np.zeros((1, maxlen, len(chars)))
-    for t, char in enumerate(generated_text):
-        x_pred[0, t, char_indices[char]] = 1
-    preds = model.predict(x_pred, verbose=0)[0]
-    next_index = np.argmax(preds)
-    next_char = indices_char[next_index]
-    generated_text += next_char
-    generated_text = generated_text[1:]
+# 예측
+predictions = model.predict(X)
 
-print(generated_text)
+# 결과 출력
+for i in range(len(predictions)):
+    print(f'입력: {i} => 예측 출력: {predictions[i][0]:.2f}')
 ```
 
 ## Word Embedding
@@ -717,80 +692,108 @@ Word2Vec의 학습 과정은 다음과 같습니다:
    - 손실을 최소화하기 위해 역전파 알고리즘을 사용하여 단어 벡터를 업데이트합니다.
    - 이 과정은 반복적으로 수행되어 단어 벡터가 최적화됩니다.
 
+## Generative Adversarial Network
+Generative Adversarial Network(GAN, 생성적 적대 신경망)은 두 개의 신경망, 즉 생성자(Generator)와 판별자(Discriminator)가 경쟁하는 방식으로 작동합니다. 이 두 네트워크는 서로 대립하며 학습하는 과정에서 점점 더 정교한 결과를 만들어냅니다. GAN은 이미지 생성, 이미지 변환, 데이터 증강 등 다양한 분야에서 사용됩니다.
 
-아래 예제는 TensorFlow의 Low-level API를 사용하여 CBOW 모델을 구현한 것입니다. 최종적으로 학습된 임베딩이 출력되며, 각 단어에 대한 임베딩 벡터를 확인할 수 있습니다.
+1. **생성자(Generator)**:
+	- 생성자는 무작위 노이즈 벡터를 입력으로 받아서 가짜 데이터를 생성합니다. 이 데이터는 판별자를 속이기 위해 최대한 진짜 데이터와 유사하게 만들어야 합니다.
+	- 생성자는 판별자가 가짜 데이터를 '진짜'라고 잘못 분류하도록 속이는 방향으로 학습합니다.
+2.  **판별자(Discriminator)**:
+	- 판별자는 입력으로 받은 데이터가 진짜인지 가짜인지 판별하는 이진 분류기입니다. 진짜 데이터는 실제 데이터셋에서 가져온 것이고, 가짜 데이터는 생성자가 만든 것입니다.
+	- 판별자는 진짜와 가짜를 구별하는 방향으로 학습합니다.
 
-```
-import numpy as np
-import tensorflow as tf
+GAN의 전체적인 동작 과정은 다음과 같습니다:
 
-# 학습 데이터
-corpus = [
-    ['the', 'cat', 'sat', 'on', 'the', 'mat'],
-    ['the', 'dog', 'sat', 'on', 'the', 'rug'],
-    ['cats', 'and', 'dogs', 'are', 'friends']
-]
+1. **생성자(Generator)**:
+	- 생성자는 무작위 잠재 공간에서 무작위 벡터를 샘플링한 후, 이를 이미지로 변환하여 가짜 이미지를 생성합니다.
+2. **판별자(Discriminator)**:
+	- 판별자는 실제 이미지와 생성자가 생성한 가짜 이미지를 입력으로 받아, 각 이미지가 실제인지 혹은 가짜인지를 판별합니다.
+3. **경쟁(Adversarial) 과정**:
+	- 생성자와 판별자는 서로 대립하면서 학습합니다. 생성자는 가능한 한 실제 이미지와 비슷한 가짜 이미지를 생성하려고 노력하고, 판별자는 실제 이미지와 생성자가 생성한 가짜 이미지를 정확히 구별하려고 합니다.
+	- 이 경쟁적인 과정은 두 신경망이 서로를 개선하면서 최적의 성능을 달성하도록 합니다.
+4. **손실 함수(Loss Function)**:
+	- 생성자와 판별자는 각각 다른 손실 함수를 사용하여 학습됩니다.
+	- 생성자의 손실: 생성자는 판별자를 속이도록 학습하기 때문에, 생성된 가짜 이미지가 실제 이미지로 잘못 분류될 확률을 최소화하는 방향으로 학습됩니다. 일반적으로 생성자의 손실은 생성된 이미지가 진짜로 분류되었을 때의 로그 확률을 최대화하는 방식으로 정의됩니다.
+	- 판별자의 손실: 판별자는 실제 이미지와 가짜 이미지를 잘못 구별할 확률을 최소화하는 방향으로 학습됩니다. 일반적으로 이 손실은 실제 이미지에 대한 분류 오차와 가짜 이미지에 대한 분류 오차를 모두 고려합니다.
+5. **수렴**:
+	- 생성자와 판별자가 동시에 학습하면서 손실이 감소하고, 결국 생성자가 실제와 거의 구별할 수 없는 가짜 이미지를 생성할 수 있는 수준으로 발전합니다.
+	- 이때 생성된 이미지는 실제 이미지와 매우 유사해지며, 생성자와 판별자의 성능이 수렴하는 지점에 이르게 됩니다.
 
-# 단어 사전 생성
-word2idx = {}
-idx2word = {}
-for sentence in corpus:
-    for word in sentence:
-        if word not in word2idx:
-            idx = len(word2idx)
-            word2idx[word] = idx
-            idx2word[idx] = word
+최종적으로 생성자는 실제 데이터와 매우 유사한 가짜 데이터를 생성하고, 판별자는 생성된 가짜 데이터를 실제 데이터와 구별하기 어려운 수준까지 발전하게 됩니다.
 
-# 데이터셋 생성
-window_size = 2
-data = []
-for sentence in corpus:
-    for i, target_word in enumerate(sentence):
-        for j in range(max(0, i - window_size), min(len(sentence), i + window_size + 1)):
-            if i != j:
-                context_word = sentence[j]
-                data.append((word2idx[target_word], word2idx[context_word]))
+## Autoencoder
+Autoencoder는 입력 데이터의 효율적인 표현을 학습하는 신경망입니다. 입력 데이터를 저차원으로 인코딩한 후 다시 디코딩하여 원래의 입력을 복원하려고 시도합니다. 이를 통해 입력 데이터를 효과적으로 압축하고 잠재적인 특징을 추출할 수 있습니다. Autoencoder는 주로 데이터의 차원 축소, 잡음 제거, 특징 추출 용도로 활용됩니다.
 
-# 모델 파라미터
-vocab_size = len(word2idx)
-embedding_dim = 100
+1. **인코더(Encoder)**:
+	- 인코더는 입력 데이터를 저차원의 잠재 공간으로 매핑하는 신경망입니다.
+	- MLP 또는 CNN을 사용하여 인코더를 구성합니다.
+2. **디코더(Decoder)**:
+	- 디코더는 인코더가 생성한 저차원 표현을 다시 원래의 고차원 데이터로 디코딩하는 신경망입니다.
+	- MLP 또는 CNN을 사용하여 디코더를 구성합니다.
+3. **재구성 손실(Reconstruction Loss)**:
+	- 재구성 손실은 입력 데이터가 얼만큼 정확하게 재구성 됐는지를 측정하는 손실 함수입니다.
+	- 일반적으로 재구성 손실은 입력 데이터와 디코더가 생성한 재구성 데이터 간의 차이를 최소화하는 방향으로 학습됩니다.
 
-# CBOW 모델 구현
-class CBOWModel(tf.keras.Model):
-    def __init__(self, vocab_size, embedding_dim):
-        super(CBOWModel, self).__init__()
-        self.embedding = tf.keras.layers.Embedding(vocab_size, embedding_dim)
-        self.dense = tf.keras.layers.Dense(vocab_size, activation='softmax')
+Autoencoder의 전체적인 동작 과정은 다음과 같습니다:
 
-    def call(self, inputs):
-        embedded = self.embedding(inputs)
-        embedded_avg = tf.reduce_mean(embedded, axis=1)
-        return self.dense(embedded_avg)
+1. **압축과 특징 추출**:
+	- 인코더는 입력 데이터를 저차원으로 압축하면서 입력 데이터의 중요한 특징을 추출합니다.
+	- 이 저차원 표현은 입력 데이터의 효율적인 표현으로 사용될 수 있습니다.
+2. **재구성**:
+	- 디코더는 저차원의 표현을 입력으로 받아 원래의 입력 데이터를 재구성합니다.
+3. **평가와 응용**:
+	- 훈련된 Autoencoder는 주어진 입력 데이터에 대해 잠재 공간으로 매핑하고 재구성할 수 있습니다.
+	- 이러한 특성을 활용하여 데이터의 압축, 잡음 제거, 특징 추출 등 다양한 응용이 가능합니다.
 
-# 데이터 배치 생성
-def generate_batch(data, batch_size):
-    for i in range(0, len(data), batch_size):
-        batch_data = data[i:i + batch_size]
-        target_words, context_words = zip(*batch_data)
-        yield np.array(target_words), np.array(context_words)
+## Variational Autoencoder
+VAE(Variational Autoencoder)는 Autoencoder의 한 종류로, 잠재 변수를 사용하여 보다 유연하고 다양한 데이터 분포를 모델링할 수 있으며, 훈련된 모델로부터 새로운 데이터를 생성할 수 있습니다. VAE는 주로 이미지 생성, 잡음 제거, 복원 용도로 활용됩니다.
 
-# 모델 생성 및 컴파일
-model = CBOWModel(vocab_size, embedding_dim)
-model.compile(optimizer='adam', loss='sparse_categorical_crossentropy')
+1. **확률적 잠재 변수**:
+	- VAE는 확률적 잠재 변수를 사용하여 각 데이터에 대해 잠재 변수의 확률 분포를 모델링하고, 해당 데이터의 특성을 포착합니다.
+2. **변분 추론(Variational Inference)**:
+	- VAE는 변분 추론을 사용하여 데이터를 잠재 공간으로 매핑하는 동시에, 잠재 변수의 확률 분포를 학습합니다.
+3. **재구성 손실과 KL 발산 손실**:
+	- 재구성 손실(reconstruction loss): 입력 데이터가 얼만큼 정확하게 재구성 됐는지를 측정하는 손실 함수입니다.
+	- KL 발산 손실(Kullback-Leibler divergence loss): 잠재 변수의 확률 분포와 사전 분포 사이의 차이를 측정하는 손실 함수입니다.
+	- VAE는 이 두 손실을 최소화하는 방향으로 학습합니다.
 
-# 모델 학습
-batch_size = 64
-num_epochs = 10
-for epoch in range(num_epochs):
-    print(f"Epoch {epoch+1}/{num_epochs}")
-    total_loss = 0
-    for target_words, context_words in generate_batch(data, batch_size):
-        loss = model.train_on_batch(target_words, context_words)
-        total_loss += loss
-    print(f"Loss: {total_loss}")
+VAE의 전체적인 동작 과정은 다음과 같습니다:
 
-# 학습된 단어 임베딩 출력
-embeddings = model.embedding.weights[0].numpy()
-for word, idx in word2idx.items():
-    print(f"{word}: {embeddings[idx]}")
-```
+1. **인코더(Encoder)**:
+	- 인코더는 입력 데이터를 받아 잠재 공간의 확률 분포를 파라미터화합니다.
+2. **샘플링 과정(Sampling)**:
+	- 인코더가 파라미터화한 확률 분포에서 잠재 변수의 샘플을 추출합니다.
+	- 이 샘플은 잠재 공간에서 데이터를 대표하는 확률적인 표현입니다.
+3. **디코더(Decoder)**:
+	- 디코더는 잠재 변수 샘플을 입력으로 받아 원래의 입력 데이터를 재구성합니다. 
+4. **손실 함수 최적화**:
+	- VAE는 재구성 손실과 KL 발산 손실을 최소화하는 방향으로 학습됩니다.
+	- 재구성 손실은 입력 데이터를 잘 복원하는 것을 보장하고, KL 발산 손실은 잠재 공간의 확률 분포를 사전 분포와 근접하게 만듭니다.
+5. **샘플링과 생성**:
+	- 훈련된 VAE는 잠재 공간에서 샘플링하여 새로운 데이터를 생성할 수 있습니다.
+	- 잠재 공간에서 무작위한 점을 선택하고 디코더를 통해 해당 점에 해당하는 데이터를 생성합니다.
+
+## Procedural Content Generation
+Procedural Content Generation(PCG)은 컴퓨터 알고리즘을 사용하여 콘텐츠를 자동으로 생성하는 기법입니다. PCG는 무작위성을 도입하여 많은 변형과 다양한 콘텐츠를 생성할 수 있습니다. 이 방법은 게임, 영화, 음악, 그래픽 디자인 등 다양한 분야에서 사용될 수 있습니다.
+
+1. **무작위성(Randomness)**:
+	- 무작위성은 PCG의 핵심 요소 중 하나입니다. 무작위성을 도입하여 예측 불가능하고 다양한 콘텐츠를 생성할 수 있습니다.
+	- 예를 들어, 랜덤 시드(seed)를 사용하여 맵을 생성하면 같은 시드로 항상 동일한 맵을 생성할 수 있지만, 시드를 변경하면 다른 맵을 생성할 수 있습니다.
+2. **규칙 및 제약(Rules and Constraints)**:
+	- PCG는 무작위성에만 의존하지 않습니다. 특정 규칙과 제약을 통해 생성된 콘텐츠가 논리적이고 일관성 있게 만들어집니다.
+	- 예를 들어, 게임 맵에서는 벽이 방을 둘러싸야 하며, 통로는 연결되어야 하는 등의 규칙이 필요합니다.
+
+### PCG 기법
+1. **랜덤 생성(Random Generation)**:
+	- 무작위 수 생성기를 사용하여 콘텐츠를 생성합니다. 예를 들어, 랜덤 시드를 사용하여 무작위 맵을 생성할 수 있습니다.
+2. **규칙 기반 시스템(Rule-based Systems)**:
+	- 특정 규칙이나 조건에 따라 콘텐츠를 생성합니다. 예를 들어, 특정 패턴을 따르거나, 일정한 규칙에 따라 레벨을 생성하는 방식입니다.
+3. **프랙탈 생성(Fractal Generation)**:
+	- 프랙탈 알고리즘을 사용하여 자연스러운 형태를 생성합니다. 예를 들어, 산, 강, 해안선 등의 지형을 생성할 때 사용됩니다.
+4. **그래머 기반 생성(Grammar-based Generation)**:
+	- 문법 규칙을 사용하여 콘텐츠를 생성합니다. L-시스템(Lindenmayer Systems)과 같은 방법을 사용하여 식물이나 건물의 구조를 생성할 수 있습니다.
+5. **셀룰러 오토마타(Cellular Automata)**:
+	- 셀룰러 오토마타는 격자 형태의 셀들이 일정한 규칙에 따라 상태를 변화시키는 방식입니다. 예를 들어, 던전 맵을 생성할 때 사용될 수 있습니다.
+6. **진화적 알고리즘(Evolutionary Algorithms)**:
+	- 진화적 알고리즘을 사용하여 최적화된 콘텐츠를 생성합니다. 이는 자연 선택과 유사한 방식으로 콘텐츠를 반복적으로 개선합니다.
+
