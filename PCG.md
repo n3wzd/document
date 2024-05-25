@@ -1,4 +1,4 @@
-# Procedural Content Generation
+# PCG
 Procedural Content Generation(PCG)은 컴퓨터 알고리즘을 사용하여 콘텐츠를 자동으로 생성하는 기법입니다. PCG는 무작위성을 도입하여 많은 변형과 다양한 콘텐츠를 생성할 수 있습니다. 이 방법은 게임, 영화, 음악, 그래픽 디자인 등 다양한 분야에서 사용될 수 있습니다.
 
 1. **무작위성(Randomness)**:
