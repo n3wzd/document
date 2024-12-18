@@ -289,3 +289,22 @@ function resetBullet(bullet) {
 
 - 실시간 동적 처리 및 복잡한 그래픽 효과 → **Phaser.Shader**
 - 간단한 그래픽 및 일회성 정적 렌더링 → **HTML.Canvas**
+
+## Audio
+### Audio
+- Phaser의 `preload` 단계에서 로드된 오디오 파일 리소스입니다. 원본 데이터를 제공하며, 여러 사운드 인스턴스가 이 데이터를 참조합니다.
+
+```
+this.load.audio('bgMusic', 'assets/audio/background.mp3');
+```
+
+`bgMusic`은 오디오 파일 리소스의 키입니다.
+
+
+### Sound
+- `audio`를 기반으로 생성된 오디오 재생 컨트롤러입니다. 오디오를 재생, 일시 정지, 중지, 볼륨 조절 등의 작업을 수행합니다.
+
+```
+const bgSound = this.sound.add('bgMusic', { loop: true, volume: 0.5 });
+bgSound.play();
+```
