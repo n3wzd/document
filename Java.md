@@ -849,6 +849,7 @@ public class Car {
 }
 ```
 
+**public 클래스**는 반드시 **파일 이름**과 동일해야 합니다.
 
 ### 인스턴스 (Instance)
 클래스를 기반으로 생성된 실제 객체를 해당 클래스의 인스턴스라고 합니다.
@@ -2313,6 +2314,89 @@ myThread.start();
     - 제한된 시간 동안 대기하는 상태로, `Thread.sleep()`이나 `Object.wait(timeout)`과 같은 메서드에 의해 발생합니다.
 6. **Terminated:**
     - 쓰레드의 `run` 메서드가 종료된 상태입니다.
+
+## 어노테이션(Annotation)
+**어노테이션(Annotation)**은 **메타데이터**를 제공하는 특별한 형태의 코드입니다. 어노테이션은 코드에 대한 추가 정보를 제공하거나, 코드의 특정 동작을 지정하는 데 사용됩니다. 일반적으로 어노테이션은 프로그램의 실행에 직접적인 영향을 미치지는 않지만, 컴파일러나 런타임 환경에서 이를 처리하여 동작을 변경할 수 있습니다.
+
+1. **메타데이터 제공**: 어노테이션은 코드에 대한 설명을 추가하는 용도로 사용됩니다. 예를 들어, `@Override` 어노테이션은 메서드가 부모 클래스의 메서드를 오버라이드한다는 것을 명시적으로 나타냅니다.
+2. **컴파일러 및 런타임에서 처리**: 어노테이션은 주로 컴파일러나 런타임에서 처리되며, 코드의 동작을 제어하거나 특정 동작을 유도합니다.
+3. **코드의 가독성 향상**: 어노테이션을 사용하면 코드의 의도를 명확하게 나타낼 수 있어 가독성을 높이고, 코드의 유지보수를 용이하게 합니다.
+
+### 종류
+어노테이션은 크게 두 가지 유형으로 나눌 수 있습니다:
+1. **빌트인 어노테이션**: Java에서 기본적으로 제공하는 어노테이션입니다.
+    - `@Override`: 메서드가 부모 클래스에서 오버라이드된 메서드임을 나타냅니다.
+    - `@Deprecated`: 더 이상 사용되지 않는 메서드나 클래스에 붙여 사용을 권장하지 않음을 나타냅니다.
+    - `@SuppressWarnings`: 컴파일러 경고를 억제합니다.
+2. **사용자 정의 어노테이션**: 개발자가 필요에 따라 정의할 수 있는 어노테이션입니다.
+    -   예를 들어, `@Entity`, `@Controller`, `@RestController`와 같은 어노테이션은 Spring Framework에서 제공하는 사용자 정의 어노테이션입니다. 이러한 어노테이션은 특정 동작을 수행하거나 클래스의 역할을 정의하는 데 사용됩니다.
+
+`@Override` 예시: 부모 클래스의 메서드를 오버라이드할 때 사용합니다.
+```
+@Override
+public void myMethod() {
+    // 부모 클래스의 메서드를 오버라이드
+}
+```
+ 
+Spring의 `@RestController` 예시: Spring에서 RESTful API 컨트롤러를 정의할 때 사용됩니다.
+```
+@RestController
+public class UserController {
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        // 사용자 목록을 반환하는 메서드
+    }
+}
+```
+
+## JPA
+**JPA**는 **Java Persistence API**의 약자로, **자바 애플리케이션에서 데이터를 관계형 데이터베이스에 저장하고 관리하기 위한 표준 인터페이스**입니다. JPA는 데이터베이스와 객체 간의 매핑(Object-Relational Mapping, ORM)을 쉽게 구현할 수 있도록 도와줍니다.
+
+1. **ORM (Object-Relational Mapping)**: 객체와 데이터베이스 테이블을 매핑하는 기술로, 자바 객체를 데이터베이스의 행(row)으로 매핑하여 객체 지향 프로그래밍 방식으로 데이터베이스를 다룰 수 있습니다.
+2. **표준 명세**: JPA는 특정 구현체가 아니라, Java EE(Enterprise Edition)에서 정의한 **표준 인터페이스**입니다.
+3.  **Persistence Context (영속성 컨텍스트)**: JPA에서 엔티티 객체를 관리하는 환경입니다. 데이터베이스와의 연결을 관리하며, 엔티티 객체의 상태를 추적합니다.
+
+## Java Bean 규약
+Java Bean 규약에 따르면, 클래스의 필드에 접근하기 위해 다음과 같은 메서드 패턴이 사용됩니다:
+-   **Getter**: `get<FieldName>()` 또는 `is<FieldName>()` (boolean 필드의 경우)
+-   **Setter**: `set<FieldName>(value)`
+
+이 규약에 따라 Spring이나 Jackson 같은 라이브러리에서 자동으로 이 getter를 사용하여 값을 읽습니다. 즉, Java 클래스에서 Getter가 정의되어 있으면:
+- Spring, Jackson 같은 라이브러리에서 자동으로 필드 값을 참조할 수 있습니다.
+- Getter를 통해 JSON 직렬화, 데이터 바인딩 등이 이루어집니다.
+- Java Bean 규약에 따라 클래스의 필드가 "프로퍼티"로 간주됩니다.
+
+**getter 메서드**는 다음과 같은 양식을 따라야 합니다:
+```
+public <Type> get<PropertyName>() {
+    return <property>;
+}
+```
+
+아래 클래스는 `name`과 `email`이라는 **프로퍼티**를 가집니다. `getName()`과 `getEmail()` 메서드는 Spring이나 Jackson 같은 라이브러리가 `name`과 `email` 값에 접근할 때 사용됩니다.
+```
+public class User {
+    private String name;
+    private String email;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
+```
 
 ## 출처 (Reference)
 https://www.w3schools.com/java/java_syntax.asp
