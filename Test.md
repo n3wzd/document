@@ -11,6 +11,58 @@
 
 Maven 사용시, `mvn test`, Gradle 사용시 `gradle test` 명령어를 사용하여 테스트를 실행합니다.
 
+### 헬퍼 메서드 (Helper Method)
+**헬퍼 메서드**는 **반복적인 작업**을 하나의 메서드로 묶어 **재사용**할 수 있도록 도와주는 **일반적인 메서드**입니다. 테스트에서 반복적으로 사용되는 로직을 한 곳에 모아두면 코드가 간결하고 유지보수가 쉬워집니다.
+
+```
+public void registerAndVerifyUser(List<String> userJson, String expectedName, String expectedEmail) throws Exception {
+    mockMvc.perform(post("/api/users/register")
+            .contentType("application/json")
+            .content(userJson.get(0)))  // 첫 번째 사용자 데이터를 사용
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("name").value(expectedName))
+            .andExpect(jsonPath("email").value(expectedEmail));
+}
+```
+
+### 파라미터화된 테스트 (Parameterized Test)
+JUnit 5부터 사용 가능한 파라미터화된 테스트는 **같은 테스트 메서드를 여러 입력 값에 대해 반복 실행**할 수 있게 해주는 기능으로, 같은 테스트 메서드가 여러 다른 입력 값에 대해 실행되도록 할 수 있습니다. 이를 통해 테스트 케이스를 효율적으로 확장하고 관리할 수 있습니다. `@ParameterizedTest`를 사용하여 파라미터화된 테스트를 진행할 수 있습니다.
+
+- `@ValueSource`: 단일 타입의 데이터를 여러 번 테스트할 때 사용합니다.
+- `@MethodSource`: 외부 메서드에서 데이터를 가져오는 방식입니다.
+- `@CsvSource`: 테스트 데이터를 인라인으로 제공합니다.
+- `@CsvFileSource`: CSV 파일을 읽어 테스트 데이터를 제공합니다.
+
+```
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
+public class UserRegistrationTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @ParameterizedTest
+    @CsvSource({
+            "'{\"name\":\"Alice Smith\",\"email\":\"alice@example.com\"}', Alice Smith, alice@example.com",
+            "'{\"name\":\"Bob Johnson\",\"email\":\"bob@example.com\"}', Bob Johnson, bob@example.com"
+    })
+    public void testUserRegistration(String userJson, String expectedName, String expectedEmail) throws Exception {
+        mockMvc.perform(post("/api/users/register")
+                .contentType("application/json")
+                .content(userJson))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("name").value(expectedName))
+                .andExpect(MockMvcResultMatchers.jsonPath("email").value(expectedEmail));
+    }
+}
+```
+
 ## Mock
 **Mock**(모의 객체)는 소프트웨어 테스트에서 실제 객체의 동작을 시뮬레이션하는 가짜 객체입니다. 실제 객체 대신 사용하여 테스트 환경을 제어하고, 의존하는 외부 시스템이나 복잡한 객체의 동작을 대체하는 역할을 합니다. 주로 단위 테스트에서 사용됩니다.
 
