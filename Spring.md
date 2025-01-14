@@ -332,6 +332,92 @@ public class User {
 - `findAll(Sort sort)`: 정렬 기준으로 모든 엔티티 조회.
 - `findAll(Pageable pageable)`: 페이징된 엔티티 조회.
 
+### 쿼리 메서드 생성 규칙
+Spring Data JPA에서 **쿼리 메서드 생성 규칙**은 메서드 이름을 기반으로 자동으로 쿼리를 생성하는 방식입니다. 메서드 이름의 구조와 키워드를 사용하여 JPA가 적절한 JPQL 쿼리를 생성합니다. 이를 통해 복잡한 SQL을 작성하지 않고도 데이터를 쉽게 조회할 수 있습니다.
+
+메서드 이름의 구조는 다음과 같습니다:
+> `[키워드][조건][필드][연산자]` 
+
+-   **키워드**: `findBy`, `readBy`, `queryBy`, `countBy`, `deleteBy` 등.
+-   **조건**: `And`, `Or`, `Between`, `LessThan`, `GreaterThan` 등.
+-   **필드**: 엔티티 클래스에 정의된 필드 이름.
+-   **연산자**: `OrderBy` 등 정렬을 위한 추가 키워드.
+
+#### 기본 키워드
+- `findBy`: 데이터를 조회.
+- `readBy`: 데이터를 읽음(조회와 동일).
+- `queryBy`: 데이터를 쿼리(조회와 동일).
+- `countBy`: 데이터를 카운트.
+- `deleteBy`: 데이터를 삭제.
+
+#### 조건 연결자
+- `And`: 두 조건을 **AND** 연산으로 연결.
+- `Or`: 두 조건을 **OR** 연산으로 연결.
+
+#### 조건 키워드
+- `IsNull`, `IsNotNull`: 필드가 NULL인지 확인.
+- `IsTrue`, `IsFalse`: 필드가 Boolean일 때 true/false인지 확인.
+- `Between`: 두 값 사이의 범위를 확인.
+- `LessThan`, `LessThanEqual`: 값이 특정 값보다 작거나 같은지 확인.
+- `GreaterThan`, `GreaterThanEqual`: 값이 특정 값보다 크거나 같은지 확인.
+- `Like`, `NotLike`: 부분 일치 검색.
+- `In`, `NotIn`: 특정 값 목록에 포함되는지 확인.
+- `StartingWith`, `EndingWith`, `Containing`: 문자열 검색.
+
+#### 정렬 키워드
+- `OrderBy`: 결과를 정렬.
+- 필드 이름 뒤에 `Asc`(오름차순) 또는 `Desc`(내림차순)를 추가.
+
+
+#### 예제
+**기본 조회**
+```
+User findByEmail(String email); // 이메일로 조회
+List<User> findByName(String name); // 이름으로 조회
+```
+
+**복합 조건**
+```
+User findByNameAndEmail(String name, String email); // 이름과 이메일 모두 일치
+List<User> findByNameOrEmail(String name, String email); // 이름 또는 이메일 중 하나 일치
+```
+
+**조건 키워드**
+```
+List<User> findByAgeGreaterThan(int age); // age가 특정 값보다 큰 사용자 조회
+List<User> findByCreatedAtBetween(LocalDateTime start, LocalDateTime end); // 날짜 범위 조회
+List<User> findByNameLike(String name); // 이름이 특정 패턴과 일치
+```
+
+**정렬**
+```
+List<User> findByNameOrderByCreatedAtDesc(String name); // 이름으로 조회 후 생성일 내림차순 정렬
+```
+
+**Boolean 조건**
+```
+List<User> findByActiveTrue(); // active 필드가 true인 사용자 조회
+List<User> findByActiveFalse(); // active 필드가 false인 사용자 조회
+```
+
+#### 복잡한 쿼리
+만약 쿼리 메서드로 표현하기 어려운 복잡한 쿼리가 필요하다면, 다음 방법을 사용할 수 있습니다:
+
+##### `@Query`
+```
+@Query("SELECT u FROM User u WHERE u.name LIKE %:name%")
+List<User> searchByName(@Param("name") String name);
+```
+    
+##### 네이티브 쿼리 사용
+```
+@Query(value = "SELECT * FROM users WHERE name = ?1", nativeQuery = true)
+List<User> searchByNameNative(String name);
+```
+
+##### 커스텀 리포지토리 구현
+복잡한 비즈니스 로직이 필요한 경우, 리포지토리 인터페이스를 확장하여 직접 구현할 수 있습니다.
+
 ## Spring Web
 **Spring Web**은 Spring Framework의 일부로, 웹 애플리케이션 개발을 위한 다양한 기능을 제공하는 모듈입니다. Spring Web은 **웹 애플리케이션을 구축**하는 데 필요한 핵심 기능들을 제공하며, 주로 HTTP 요청 처리, RESTful 웹 서비스 구축, 웹 페이지 처리 등을 포함합니다.
 
@@ -630,3 +716,126 @@ public class WebFluxController {
     }
 }
 ```
+
+## Transactional
+### `@Transactional`
+`@Transactional`은 **트랜잭션 관리를 자동으로 처리**하는 데 사용됩니다. 이 어노테이션을 메서드나 클래스에 적용하면, 해당 메서드나 클래스에서 실행되는 모든 DB 작업이 하나의 트랜잭션으로 묶여서 실행됩니다.
+
+- **트랜잭션 시작**: 메서드가 실행되기 전에 트랜잭션이 시작됩니다.
+- **트랜잭션 커밋**: 메서드가 성공적으로 완료되면 트랜잭션이 커밋됩니다.
+- **트랜잭션 롤백**: 메서드 실행 중 예외가 발생하면 트랜잭션이 롤백됩니다.
+
+#### 메서드 적용
+트랜잭션이 메서드 단위로 관리됩니다.
+    
+```
+@Service
+public class UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Transactional
+    public void createUser(User user) {
+        userRepository.save(user);
+        // 예외가 발생하면 트랜잭션이 롤백됨
+    }
+}
+```
+    
+#### 클래스 적용
+클래스에 `@Transactional`을 적용하면 해당 클래스의 모든 메서드가 트랜잭션 내에서 실행됩니다.
+
+```
+@Service
+@Transactional  // 클래스 내 모든 메서드가 트랜잭션으로 관리됨
+public class UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    public void createUser(User user) {
+        userRepository.save(user);
+        // 예외가 발생하면 트랜잭션이 롤백됨
+    }
+
+    public void updateUser(User user) {
+        userRepository.save(user);
+        // 예외가 발생하면 트랜잭션이 롤백됨
+    }
+}
+```
+    
+#### 롤백 규칙 설정
+예외가 발생했을 때 **롤백할 예외**를 지정할 수 있습니다.
+    
+```
+@Transactional(rollbackFor = Exception.class)  // 모든 예외에 대해 롤백
+public void createUser(User user) throws Exception {
+    userRepository.save(user);
+    if (someCondition) {
+        throw new Exception("Something went wrong");
+    }
+}
+```
+    
+#### 읽기 전용 트랜잭션
+읽기 전용 트랜잭션을 설정하면, 트랜잭션이 데이터베이스에 변경을 가하지 않도록 최적화됩니다.
+    
+```
+@Transactional(readOnly = true)
+public User getUser(String userId) {
+    return userRepository.findById(userId).orElse(null);
+}
+```
+
+### `@Rollback`
+`@Rollback`은 **Spring의 테스트에서 트랜잭션을 롤백**하는 데 사용되는 어노테이션입니다. 이 어노테이션은 주로 데이터베이스에 반영된 변경 사항을 테스트 후 자동으로 롤백하려는 경우에 사용됩니다. 이를 통해 테스트 중에 DB에 데이터를 저장하거나 수정하더라도, 테스트가 끝난 후에 그 변경 사항이 실제 데이터베이스에 반영되지 않도록 할 수 있습니다.
+
+1.  **기본 동작**:
+    - `@Rollback`은 기본적으로 `true`로 설정되어 있으며, 이 경우 **테스트가 끝난 후 트랜잭션을 자동으로 롤백**합니다. 즉, 데이터베이스에 저장된 데이터는 실제로 반영되지 않습니다.
+2.  `@Rollback(false)`:
+    - `@Rollback(false)`를 설정하면 **테스트 후에 트랜잭션을 커밋**하여 데이터베이스에 반영되도록 할 수 있습니다.
+
+**롤백을 하는 경우**
+```
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional  // 테스트 메서드가 끝난 후 자동으로 롤백
+public class UserServiceTest {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Test
+    public void testSaveUser() {
+        User user = new User("Alice", "alice@example.com");
+        userRepository.save(user);
+        // 테스트가 끝나면 이 변경 사항은 DB에 반영되지 않음
+    }
+}
+```
+
+위 예시에서 `@Transactional`을 사용하면, **테스트가 끝난 후 트랜잭션이 롤백**되어 데이터베이스에 반영되지 않습니다. 이때 `@Rollback(true)`는 기본값이므로 명시하지 않아도 롤백됩니다.
+
+**롤백을 하지 않는 경우**
+```
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional
+@Rollback(false)  // 테스트 후 변경 사항을 DB에 반영
+public class UserServiceTest {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Test
+    public void testSaveUser() {
+        User user = new User("Alice", "alice@example.com");
+        userRepository.save(user);
+        // 테스트가 끝난 후 이 변경 사항은 DB에 반영됨
+    }
+}
+```
+
+위 예시에서는 `@Rollback(false)`를 사용하여 **테스트 후에도 데이터베이스에 변경 사항이 반영되도록** 설정합니다.
