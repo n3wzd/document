@@ -2401,5 +2401,21 @@ public class User {
 }
 ```
 
+## javax
+`Jakarta`와 `javax`는 Java 플랫폼에서 사용되는 패키지 이름의 두 가지 버전입니다. 그 차이는 주로 Java EE (Enterprise Edition)와 관련이 있습니다.
+
+Oracle은 더 이상 `javax` 패키지의 업데이트를 진행하지 않습니다. 새로운 프로젝트에서는 `Jakarta`를 사용하는 것이 권장됩니다.
+
+### javax (Java Extension)
+- `javax`는 Java의 초기 버전에서 사용되던 패키지 네임스페이스입니다.
+- `javax`는 Java EE (Enterprise Edition)의 일부로, 서블릿, JSP, EJB, JPA 등과 같은 엔터프라이즈 기능을 제공하는 클래스들을 포함하고 있었습니다.
+- `javax` 패키지는 Oracle이 Java EE를 관리할 때 사용되었습니다.
+
+### Jakarta
+- `Jakarta`는 `javax`의 후속 패키지 네임스페이스입니다.
+- 2017년에 Oracle은 Java EE의 관리 권한을 Eclipse 재단에 이전했으며, 그 이후 Java EE는 `Jakarta EE`로 이름이 변경되었습니다.
+- `Jakarta`는 `javax` 패키지를 계승하여, Java EE의 기술들을 Eclipse 재단의 관리 하에 발전시킵니다.
+- 이 변화는 Java EE의 라이센스가 변경되면서 발생했으며, 새로운 API와 기능들이 `Jakarta` 네임스페이스에서 관리됩니다.
+
 ## 출처 (Reference)
 https://www.w3schools.com/java/java_syntax.asp
