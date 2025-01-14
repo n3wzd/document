@@ -47,3 +47,130 @@ public class MyServiceTest {
 ```
 
 `MyRepository`의 실제 구현 대신 `mock`을 사용하고, `findData()` 메서드가 호출될 때 `"Mock Data"`를 반환하도록 설정합니다. 이를 통해 실제 데이터베이스나 외부 시스템을 호출하지 않고도 `MyService`의 `fetchData()` 메서드를 테스트할 수 있습니다.
+
+## MockMvc
+`MockMvc`는 **Spring MVC**의 테스트를 위한 도구로, **Spring Web** 애플리케이션을 테스트할 때 **서버를 실제로 실행하지 않고** HTTP 요청과 응답을 시뮬레이션할 수 있게 해주는 **Mocking 프레임워크**입니다. 이를 사용하면 **컨트롤러**의 동작을 테스트하고, 요청을 보내고 응답을 검증하는 등의 작업을 할 수 있습니다.
+
+`MockMvc`는 **Spring Test** 모듈에 포함되어 있으며, 실제 서버를 구동하지 않고도 애플리케이션의 **웹 계층**을 테스트할 수 있게 해줍니다. 주로 **컨트롤러**와 관련된 HTTP 요청/응답을 테스트할 때 사용됩니다.
+
+- **HTTP 요청 시뮬레이션**: `MockMvc`는 `GET`, `POST`, `PUT`, `DELETE` 등 다양한 HTTP 요청을 시뮬레이션하여 실제 서버 없이 테스트할 수 있습니다.
+- **응답 검증**: 요청에 대한 응답이 예상한 값과 일치하는지 확인할 수 있습니다. 예를 들어, 응답 상태 코드, 본문 내용, 헤더 등을 검증할 수 있습니다.
+- **컨트롤러 테스트**: 실제 애플리케이션을 실행하지 않고도, 컨트롤러의 동작을 테스트하고 검증할 수 있습니다.
+
+`MockMvc`는 주로 `@SpringBootTest`와 함께 사용하여 테스트 환경을 설정합니다. `@AutoConfigureMockMvc`를 통해 `MockMvc` 객체를 자동으로 설정할 수 있습니다.
+
+```
+@SpringBootTest
+@AutoConfigureMockMvc
+public class UserControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Test
+    public void testCreateUser() throws Exception {
+        String userJson = "{\"name\":\"Alice\",\"email\":\"alice@example.com\"}";
+
+        mockMvc.perform(post("/api/users/register")
+                .contentType("application/json")
+                .content(userJson))
+                .andExpect(status().isCreated())  // 상태 코드 201 확인
+                .andExpect(jsonPath("name").value("Alice"))  // 응답 본문에 name이 Alice인지 확인
+                .andExpect(jsonPath("email").value("alice@example.com"));  // 응답 본문에 email이 alice@example.com인지 확인
+    }
+}
+```
+
+- `perform(MockHttpServletRequestBuilder requestBuilder)`: HTTP 요청을 시뮬레이션합니다.
+- `andExpect(ResultMatcher... matchers)`: 요청 후의 응답을 검증합니다.
+
+## `@SpringBootTest`
+`@SpringBootTest`는 **Spring Boot** 애플리케이션을 테스트할 때 사용하는 애노테이션으로, **전체 Spring 애플리케이션 컨텍스트**를 로드하여 **통합 테스트**를 수행할 수 있게 해줍니다. 이 애노테이션을 사용하면 애플리케이션의 실제 실행 환경과 유사한 환경에서 테스트를 진행할 수 있습니다.
+
+`@SpringBootTest`는 Spring Boot 애플리케이션의 **전체 컨텍스트**를 로드하기 때문에, **애플리케이션의 모든 빈(bean)**, **자동 설정** 등을 포함하여 테스트를 실행합니다. 이를 통해 실제 애플리케이션에서의 동작을 정확하게 테스트할 수 있습니다.
+
+1.  **애플리케이션 컨텍스트 로딩**: `@SpringBootTest`는 테스트가 실행될 때 전체 Spring 컨텍스트를 로드합니다. 이를 통해 애플리케이션의 모든 빈과 설정이 초기화되고, 실제 애플리케이션 환경에서 테스트가 진행됩니다.
+2.  **통합 테스트**: 이 애노테이션은 통합 테스트를 위한 애노테이션으로, 실제 데이터베이스나 외부 시스템을 포함한 애플리케이션의 여러 컴포넌트가 제대로 동작하는지 테스트할 수 있습니다.
+3.  **테스트 환경 설정**: `@SpringBootTest`는 기본적으로 `@TestConfiguration`을 사용하여 테스트 환경을 설정합니다. 테스트 중에 필요한 설정을 추가할 수 있습니다.
+
+`@SpringBootTest`는 **테스트 클래스**에서 사용되어야 하며, **애플리케이션 코드**에서는 사용하지 않는 것이 좋습니다. 테스트 폴더 내에서 사용하는 것이 일반적입니다.
+
+#### 기본 사용
+`@SpringBootTest`는 애플리케이션의 실제 실행 환경을 시뮬레이션하므로, 애플리케이션 컨텍스트와 관련된 빈들이 모두 로드됩니다. 보통 `@Autowired`를 사용하여 필요한 빈을 주입받고 테스트를 진행합니다.
+
+```
+@SpringBootTest
+public class UserServiceTest {
+
+    @Autowired
+    private UserService userService;
+
+    @Test
+    public void testRegisterUser() {
+        User user = new User("Alice", "alice@example.com");
+        User savedUser = userService.registerUser(user);
+        
+        assertNotNull(savedUser);
+        assertEquals("Alice", savedUser.getName());
+    }
+}
+```
+
+#### 웹 애플리케이션 테스트
+`@SpringBootTest`는 웹 애플리케이션 테스트 시에도 사용됩니다. `MockMvc`와 함께 사용하여 실제 HTTP 요청을 시뮬레이션하고 응답을 검증할 수 있습니다.
+
+```
+@SpringBootTest
+@AutoConfigureMockMvc
+public class UserControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Test
+    public void testCreateUser() throws Exception {
+        String userJson = "{\"name\":\"Alice\",\"email\":\"alice@example.com\"}";
+
+        mockMvc.perform(post("/api/users/register")
+                .contentType("application/json")
+                .content(userJson))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.name").value("Alice"))
+                .andExpect(jsonPath("$.email").value("alice@example.com"));
+    }
+}
+```
+
+#### 특정 프로파일 사용
+특정 프로파일을 활성화하여 테스트할 때는 `@SpringBootTest`의 `properties`나 `webEnvironment` 속성을 사용하여 환경을 설정할 수 있습니다.
+
+```
+@SpringBootTest(properties = "spring.profiles.active=test")
+public class UserServiceTest {
+    // 테스트 코드
+}
+```
+
+**주요 속성**
+- `webEnvironment`: 웹 애플리케이션을 테스트할 때 사용합니다. `WebEnvironment`는 다음과 같은 옵션을 가질 수 있습니다:
+    - `MOCK`: 가짜 서블릿 환경을 사용하여 테스트합니다. 보통 `MockMvc`와 함께 사용됩니다.
+    - `RANDOM_PORT`: 임의의 포트에서 서버를 시작하여 테스트합니다.
+    - `DEFINED_PORT`: 지정된 포트에서 서버를 시작하여 테스트합니다.
+    - `NONE`: 웹 환경을 사용하지 않습니다.
+
+
+```
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class UserControllerTest {
+    // 테스트 코드
+}
+```
+
+- `properties`: 테스트에 필요한 설정 값을 `application.properties` 대신 지정할 수 있습니다.
+
+```
+@SpringBootTest(properties = "spring.datasource.url=jdbc:h2:mem:testdb")
+public class UserServiceTest {
+    // 테스트 코드
+}
+```
