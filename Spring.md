@@ -839,3 +839,124 @@ public class UserServiceTest {
 ```
 
 위 예시에서는 `@Rollback(false)`를 사용하여 **테스트 후에도 데이터베이스에 변경 사항이 반영되도록** 설정합니다.
+
+## Validation 
+### 검증 어노테이션
+검증 어노테이션은 Java Bean Validation API (`javax.validation`)에서 제공하는 어노테이션으로, 객체의 필드에 적용하여 해당 필드의 값이 특정 조건을 만족하는지 자동으로 검사할 수 있게 해줍니다. Spring에서는 이를 통해 요청 데이터가 올바른지 검증할 수 있습니다.
+
+- `@NotNull`: 값이 `null`이 아니어야 함.
+- `@NotBlank`: 값이 `null`이 아니고, 빈 문자열도 허용하지 않음.
+- `@Size`: 문자열, 배열, 컬렉션 등의 크기 범위를 지정.
+- `@Min` / `@Max`: 숫자의 최소값/최대값을 지정.
+- `@Email`: 이메일 형식이 유효한지 검증.
+- `@Pattern`: 정규식을 사용하여 문자열이 특정 패턴을 따르는지 검증.
+- `@Past` / `@Future`: 날짜가 과거/미래인지 검증.
+
+```
+import javax.validation.constraints.*;
+
+public class User {
+
+    @NotBlank(message = "Username is required")
+    private String userId;
+
+    @NotNull(message = "Password is required")
+    @Size(min = 8, message = "Password must be at least 8 characters long")
+    private String password;
+
+    @Email(message = "Email should be valid")
+    @NotBlank(message = "Email is required")
+    private String email;
+
+    // Getters and Setters
+}
+```
+
+검증 어노테이션이 적용된 필드에 잘못된 데이터가 들어오면, Spring은 자동으로 검증을 수행하고, 검증에 실패한 필드에 대해 오류를 발생시킵니다. 이 오류는 `MethodArgumentNotValidException`을 발생시키며, 이를 통해 클라이언트에게 적절한 오류 메시지를 전달할 수 있습니다.
+
+### 커스텀 검증 어노테이션
+커스텀 검증 어노테이션은 기존의 Java Bean Validation 어노테이션으로는 처리할 수 없는 복잡한 검증 로직을 구현할 때 사용합니다. 커스텀 어노테이션을 만들어서, 특정 조건을 만족하는지 검증할 수 있습니다.
+
+1.  **커스텀 어노테이션 정의**: `@Constraint` 어노테이션을 사용하여 커스텀 어노테이션을 정의합니다.
+2.  **검증 로직 구현**: `ConstraintValidator` 인터페이스를 구현하여 검증 로직을 작성합니다.
+
+**커스텀 어노테이션 정의**:
+```
+import javax.validation.Constraint;
+import javax.validation.Payload;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Constraint(validatedBy = PasswordComplexityValidator.class)
+@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER })
+@Retention(RetentionPolicy.RUNTIME)
+public @interface PasswordComplexity {
+    String message() default "Password must contain at least one number and one special character";
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
+}
+```
+- `@Constraint(validatedBy = ...)`:  **어떤 Validator 클래스**가 이 어노테이션을 처리할 것인지를 지정합니다.
+- `@Target`: 어노테이션이 **적용될 수 있는 위치**를 지정합니다.
+    - `ElementType.FIELD`: 필드에 적용 가능.
+    - `ElementType.METHOD`: 메서드에 적용 가능.
+    - `ElementType.PARAMETER`: 메서드 매개변수에 적용 가능.
+- `@Retention`: 어노테이션이 **어느 시점까지 유지될지**를 지정합니다.
+    - `RetentionPolicy.RUNTIME`: 런타임까지 유지되어 리플렉션으로 접근할 수 있음.
+- `message`: 검증이 실패했을 때 반환할 기본 오류 메시지를 정의합니다. 이 메시지는 `@Valid`를 사용하는 컨트롤러에서 자동으로 처리되거나, 사용자 정의 메시지로 대체할 수 있습니다.
+- `groups`: 검증 그룹을 정의합니다. 특정 상황에서만 검증을 수행하고 싶을 때 그룹을 활용할 수 있습니다.
+
+**검증 로직 구현**:
+```
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+// 이 클래스는 `ConstraintValidator` 인터페이스를 구현합니다.
+// 첫 번째 타입은 검증 대상 어노테이션 (`PasswordComplexity`)입니다.
+// 두 번째 타입은 검증할 데이터 타입 (`String`)입니다.
+public class PasswordComplexityValidator implements ConstraintValidator<PasswordComplexity, String> {
+
+    @Override
+    public void initialize(PasswordComplexity constraintAnnotation) {
+	    // 검증 클래스 초기화 메서드입니다.
+	    // 어노테이션에서 추가적인 속성을 받을 경우 이 메서드에서 처리할 수 있습니다.
+    }
+
+    @Override
+    public boolean isValid(String password, ConstraintValidatorContext context) {
+		// 검증 로직을 구현하는 핵심 메서드로, 항상 정의되어야 합니다.
+		// 입력 값 (`password`)과 검증 컨텍스트 (`context`)를 인수로 받습니다.
+		// 검증 조건을 만족하면 `true`, 그렇지 않으면 `false`를 반환합니다.
+		
+        if (password == null) {
+            return false;
+        }
+
+        boolean hasNumber = false;
+        boolean hasSpecialChar = false;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) {
+                hasNumber = true;
+            } else if (!Character.isLetterOrDigit(c)) {
+                hasSpecialChar = true;
+            }
+        }
+
+        return hasNumber && hasSpecialChar;
+    }
+}
+```
+
+**사용 예시**:
+```
+public class User {
+
+    @PasswordComplexity(message = "Password must contain at least one number and one special character")
+    private String password;
+
+    // Getters and Setters
+}
+```
