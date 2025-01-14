@@ -1387,6 +1387,9 @@ public class MyClass {
 }
 ```
 
+- `import`: 클래스 또는 인터페이스가 대상입니다.
+- `import static`: static 멤버(필드나 메서드)가 입니다.
+
 ### Java API 패키지
 Java에서 제공하는 API(Java Standard Edition API) 역시 패키지로 구성되어 있습니다. 예를 들어, `java.lang`, `java.util`, `java.io`와 같은 패키지는 Java에서 제공하는 다양한 클래스와 인터페이스를 포함하고 있습니다.
 
