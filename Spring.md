@@ -303,8 +303,10 @@ public class User {
 ### `CrudRepository `
 `CrudRepository`는 CRUD(Create, Read, Update, Delete) 작업을 위한 기본 메서드를 제공합니다.
 
-- `save(S entity)`: 엔티티를 저장하거나 업데이트.
+- `save(S entity)`: 엔티티를 저장하거나 업데이트. (엔티티의 상태에 따라 `persist()` 또는 `merge()`를 내부적으로 호출)
 - `saveAll(Iterable<S> entities)`: 여러 엔티티를 저장하거나 업데이트.
+- `persist(T entity)`: 새로운 엔티티를 저장. 기존 엔티티는 처리하지 않음.
+- `merge(T entity)`: 기존 엔티티를 업데이트하거나, 영속성 컨텍스트에 없는 엔티티를 저장.
 - `findById(ID id)`: ID로 엔티티를 조회. 없으면 `Optional.empty()` 반환.
 - `existsById(ID id)`: ID로 엔티티 존재 여부 확인.
 - `findAll()`: 모든 엔티티 조회.
