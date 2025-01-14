@@ -338,7 +338,7 @@ Spring Data JPA에서 **쿼리 메서드 생성 규칙**은 메서드 이름을 
 메서드 이름의 구조는 다음과 같습니다:
 > `[키워드][조건][필드][연산자]` 
 
--   **키워드**: `findBy`, `readBy`, `queryBy`, `countBy`, `deleteBy` 등.
+-   **키워드**: `findBy`, `readBy`, `queryBy`, `countBy`, `deleteBy`, `existsBy` 등.
 -   **조건**: `And`, `Or`, `Between`, `LessThan`, `GreaterThan` 등.
 -   **필드**: 엔티티 클래스에 정의된 필드 이름.
 -   **연산자**: `OrderBy` 등 정렬을 위한 추가 키워드.
