@@ -177,6 +177,71 @@ public void setUserService(UserService userService) {
 }
 ```
 
+### 자동 빈 등록
+빈이 자동으로 주입되는 경우는 **컴포넌트 스캔**이 활성화된 경우입니다. Spring에서는 특정 어노테이션을 사용하여 클래스가 빈으로 등록될 수 있습니다.
+
+1.  `@Component`: 일반적인 컴포넌트 클래스에 사용되어 빈으로 등록됩니다.
+    -   예: `@Component`, `@Service`, `@Repository`, `@Controller`
+2.  `@Service`: 서비스 클래스에 사용되며, `@Component`의 특성을 갖습니다.
+3.  `@Repository`: 데이터 접근 계층을 나타내는 클래스에 사용되며, `@Component`의 특성을 갖습니다.
+4.  `@Controller`: 웹 계층에서 사용하는 컨트롤러 클래스에 사용됩니다.
+
+### `@Configuration`
+Spring에서 설정 클래스를 정의할 때 사용하는 어노테이션입니다. 이 어노테이션이 붙은 클래스는 **빈 정의**를 포함하는 설정 클래스임을 나타내며, Spring의 **애플리케이션 컨텍스트**에 빈을 등록하거나 설정을 제공합니다.
+
+- `@Configuration`이 붙은 클래스는  **싱글톤** 패턴을 따르며, Spring 컨테이너에서 관리되는 **빈 설정**을 포함하고 있습니다.
+- 클래스 내에 `@Bean` 어노테이션을 사용하여 객체를 빈으로 등록할 수 있습니다. `@Bean` 메서드는 애플리케이션 컨텍스트에 등록된 **빈 객체**를 반환합니다.
+- `@Configuration` 클래스는 **컴포넌트 스캔**의 일부로 동작하므로, `@ComponentScan`을 통해 자동으로 스캔되거나 `@SpringBootApplication` 어노테이션을 통해 기본적으로 스캔됩니다.
+
+```
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppConfig {
+
+    // 빈을 정의하는 메서드
+    @Bean
+    public MyService myService() {
+        return new MyService();
+    }
+}
+```
+
+위 코드에서 `@Configuration` 어노테이션을 사용하여 `AppConfig` 클래스를 설정 클래스로 지정하고, `@Bean` 어노테이션을 사용하여 `MyService` 객체를 Spring 애플리케이션 컨텍스트에 빈으로 등록합니다.
+
+### `@ComponentScan`
+`@ComponentScan`은 Spring에서 **컴포넌트 스캔**을 활성화하는 어노테이션입니다. **컴포넌트 스캔**이란, Spring이 클래스패스를 검색하여 `@Component`, `@Service`, `@Repository`, `@Controller` 등의 어노테이션이 붙은 클래스를 찾아 자동으로 빈으로 등록하는 기능입니다.
+
+`@ComponentScan`은 기본적으로 **현재 클래스가 위치한 패키지와 그 하위 패키지**에서만 컴포넌트를 검색합니다. 예를 들어, `MyApplication` 클래스가 `com.example` 패키지에 위치해 있으면, `com.example`와 그 하위 패키지에 있는 `@Component` 어노테이션이 붙은 클래스들이 자동으로 빈으로 등록됩니다.
+
+```
+@ComponentScan(basePackages = "com.example")
+public class MyApplication {
+    // 컴포넌트 스캔을 통해 com.example 패키지에서 빈을 등록
+}
+```
+
+### `@SpringBootApplication`
+`@SpringBootApplication`은 Spring Boot 애플리케이션을 설정하기 위한 **복합 어노테이션**으로, Spring Boot 애플리케이션을 시작하는 클래스에 자동으로 사용됩니다. 이 어노테이션은 세 가지 중요한 어노테이션을 합친 형태입니다:
+
+- `@EnableAutoConfiguration`: Spring Boot의 자동 설정 기능을 활성화합니다. 애플리케이션의 클래스패스를 분석하고, 필요한 빈을 자동으로 설정합니다.
+- `@ComponentScan`: Spring의 컴포넌트 스캔을 활성화하여, `@Component`, `@Service`, `@Repository`, `@Controller` 등의 어노테이션이 붙은 클래스를 자동으로 빈으로 등록합니다.
+- `@Configuration`: 애플리케이션의 설정을 위한 클래스를 나타내며, `@Bean` 메서드를 통해 빈을 정의할 수 있게 합니다.
+
+`@SpringBootApplication`은 Spring Boot 애플리케이션을 설정하는 데 필요한 기본적인 설정을 자동으로 처리해줍니다. 이 어노테이션이 붙은 클래스는 애플리케이션의 진입점(즉, `main` 메서드를 포함한 클래스)으로 사용됩니다.
+
+```
+@SpringBootApplication
+public class MyApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MyApplication.class, args);
+    }
+}
+```
+
+`@SpringBootApplication`은 Spring Boot 애플리케이션의 진입점으로 사용되며, 이를 명시적으로 사용함으로써 프로젝트 내에서 일관된 방식으로 애플리케이션을 설정하고 실행할 수 있습니다. `@SpringBootApplication`을 명시적으로 사용하지 않아도 Spring Boot 애플리케이션을 실행할 수는 있지만, 애플리케이션을 간단하고 일관되게 설정하려면 `@SpringBootApplication`을 사용하는 것이 좋습니다.
+
 ## 엔티티(Entity)
 **엔티티(Entity)**는 **데이터베이스의 테이블과 1:1로 매핑되는 객체**입니다. 객체 지향 프로그래밍(OOP)과 관계형 데이터베이스(RDB) 간의 차이를 해결하기 위해 등장한 개념으로, 자바 클래스와 데이터베이스 테이블 간의 연결을 담당합니다.
 
@@ -962,3 +1027,250 @@ public class User {
     // Getters and Setters
 }
 ```
+
+## Security
+### `PasswordEncoder`
+`PasswordEncoder`는 비밀번호를 암호화하고 검증하는 메서드를 정의한 **인터페이스**입니다. 이 인터페이스는 비밀번호를 해시화하고, 나중에 해시된 비밀번호와 입력된 비밀번호를 비교하는 기능을 제공합니다.
+
+- `encode(CharSequence rawPassword)`: 주어진 평문 비밀번호를 해시화하여 암호화된 비밀번호를 반환합니다.
+- `matches(CharSequence rawPassword, String encodedPassword)`: 입력된 평문 비밀번호(`rawPassword`)와 이미 암호화된 비밀번호(`encodedPassword`)를 비교하여 일치하는지 여부를 반환합니다.
+
+### `BCryptPasswordEncoder`
+`BCryptPasswordEncoder`는 `PasswordEncoder` 인터페이스의 구현체로, **BCrypt 해시 함수**를 사용하여 비밀번호를 암호화합니다. BCrypt는 비밀번호 해시화에 사용되는 매우 안전한 알고리즘으로, **Salt**를 자동으로 생성하고, 여러 번의 해시 연산을 통해 비밀번호를 암호화합니다.
+
+- **Salt 자동 생성**: BCrypt는 비밀번호를 해시화할 때 자동으로 Salt를 생성하고 이를 해시 값에 포함시킵니다.
+- **비밀번호 검증**: `BCryptPasswordEncoder`는 입력된 비밀번호와 암호화된 비밀번호를 비교할 때, Salt를 포함하여 검증합니다.
+- **비용 인자**: 비용 인자는 **2의 거듭제곱**으로 계산되는 반복 횟수를 결정합니다. 기본 값은 `10`입니다. (예: 비용 인자가 10이면 2^10^번의 해시 연산을 수행합니다.) 해시 연산 횟수는 `BCryptPasswordEncoder`의 생성자에서 설정할 수 있습니다. 비용 인자는 최소 4, 최대 31까지 설정할 수 있으며, 비용 값이 커질수록 해시 연산이 더 많이 수행되므로 보안성이 높아지지만, 성능에 영향을 미칠 수 있습니다.
+
+```
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+public class PasswordExample {
+    public static void main(String[] args) {
+        // PasswordEncoder 인터페이스 사용
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        // 비밀번호 암호화
+        String rawPassword = "password123";
+        String encodedPassword = encoder.encode(rawPassword);
+        System.out.println("Encoded Password: " + encodedPassword);
+
+        // 비밀번호 검증
+        boolean matches = encoder.matches(rawPassword, encodedPassword);
+        System.out.println("Password matches: " + matches);
+    }
+}
+```
+
+**출력 예시:**
+```
+Encoded Password: $2a$10$E9Jd0ZyxHnQ2E8Fzv7IY7.Ws5lWhJ8wWgJwPsb6i9XhX5OqgxqL.q
+Password matches: true
+```
+
+`BCrypt`를 사용하면 생성되는 해시 값의 길이는 **고정된 길이**입니다. `BCrypt`에서 생성된 해시 값은 항상 **60자**입니다. 해시 값의 길이는 알고리즘 자체에 의해 결정되며, 사용자가 설정을 통해 이 길이를 바꿀 수는 없습니다.
+
+### ~~WebSecurityConfigurerAdapter~~
+> Spring Security 5.0 이후로는 더 이상`SecurityConfigurerAdapter`, `WebSecurityConfigurerAdapter`를 사용하지 않습니다.
+
+`WebSecurityConfigurerAdapter`는 Spring Security에서 제공하는 추상 클래스입니다. 이 클래스를 확장하여 애플리케이션의 보안 설정을 커스터마이즈할 수 있습니다. 이 클래스는 보안 관련 설정을 쉽게 정의할 수 있도록 여러 가지 기본 메서드를 제공합니다.
+
+### `@EnableWebSecurity`
+`@EnableWebSecurity`는 Spring Security를 애플리케이션에 활성화하는 어노테이션입니다. 이 어노테이션을 사용하면 Spring Security의 기본 보안 기능을 활성화합니다. `@EnableWebSecurity`는 주로 Spring Boot 애플리케이션에서 사용되며, 보안 설정을 전역적으로 적용할 수 있도록 합니다.
+
+### SecurityFilterChain
+`SecurityFilterChain`은 Spring Security에서 보안 필터 체인을 구성하는 새로운 방식입니다. Spring Security 5.x 이상에서는 `SecurityFilterChain`을 사용하여 보안 설정을 정의하고, HTTP 요청에 대한 보안 필터 체인을 설정합니다.
+
+- **보안 필터 체인 설정**: `SecurityFilterChain`은 HTTP 요청에 대한 보안 필터 체인을 설정하는 방법입니다. 이를 통해 요청을 처리할 때 어떤 보안 필터를 적용할지 정의합니다.
+- **HttpSecurity를 통한 설정**: `SecurityFilterChain`은 `HttpSecurity`를 통해 보안 설정을 구성합니다.
+- **구성 요소**: `SecurityFilterChain`은 요청에 대한 인증, 권한 부여, 로그인, 로그아웃 등을 설정하는 데 사용됩니다.
+
+```
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        // 보안 관련 설정
+        return http.build();
+    }
+}
+```
+
+### HttpSecurity
+`HttpSecurity`는 Spring Security에서 웹 애플리케이션의 HTTP 보안을 설정하는 데 사용되는 클래스입니다. 이 클래스는 애플리케이션의 HTTP 요청에 대해 인증, 권한 부여, 세션 관리, CSRF 보호 등 다양한 보안 설정을 할 수 있도록 도와줍니다.
+
+`HttpSecurity`를 사용하면 웹 애플리케이션에 대한 보안 설정을 다음과 같은 방식으로 구성할 수 있습니다:
+1. **인증 설정**: 로그인 페이지, 로그인 성공 후 리디렉션 URL 등을 설정합니다.
+    -   예: `formLogin()`, `loginPage()`, `loginProcessingUrl()`
+2. **권한 설정**: URL 패턴에 대한 접근 권한을 설정합니다.
+    -   예: `authorizeHttpRequests()`, `antMatchers()`, `permitAll()`, `authenticated()`
+3. **세션 관리**: 세션 고정 보호, 세션 타임아웃 등을 설정합니다.
+    -   예: `sessionManagement()`, `invalidSessionUrl()`, `maximumSessions()`
+4. **CSRF 보호**: Cross-Site Request Forgery(CSRF) 공격을 방지하는 설정입니다.
+    -   예: `csrf()`
+5. **로그인 및 로그아웃 설정**: 로그인 폼, 로그아웃 URL 등을 설정합니다.
+    -   예: `formLogin()`, `logout()`
+6. **기타 보안 설정**: CORS, 헤더 설정 등 다양한 보안 관련 설정을 지원합니다.
+    -   예: `cors()`, `headers()`
+
+```
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(authorizeRequests ->
+                authorizeRequests
+                    .antMatchers("/login", "/register").permitAll()  // 로그인, 회원가입은 누구나 접근 가능
+                    .anyRequest().authenticated()  // 나머지 요청은 인증된 사용자만 접근 가능
+            )
+            .formLogin(formLogin ->
+                formLogin
+                    .loginPage("/login")  // 커스텀 로그인 페이지
+                    .permitAll()  // 로그인 페이지 접근은 누구나 가능
+            )
+            .logout(logout ->
+                logout
+                    .permitAll()  // 로그아웃은 누구나 가능
+            );
+        return http.build();
+    }
+}
+```
+
+- `authorizeHttpRequests()`: HTTP 요청에 대한 권한을 설정합니다. 특정 URL에 대한 접근 권한을 설정할 수 있습니다.
+- `formLogin()`: 폼 기반 로그인 설정을 합니다. 로그인 페이지, 로그인 성공 후 리디렉션 URL 등을 설정할 수 있습니다.
+- `logout()`: 로그아웃 설정을 합니다. 로그아웃 후 리디렉션 URL 등을 설정할 수 있습니다.
+- `csrf()`: CSRF 보호 설정을 합니다. 기본적으로 Spring Security는 CSRF 보호를 활성화합니다.
+- `sessionManagement()`: 세션 관리 설정을 합니다. 세션 타임아웃, 세션 고정 보호 등을 설정할 수 있습니다.
+- `httpBasic()`: HTTP 기본 인증을 활성화합니다.
+- `headers()`: HTTP 헤더를 설정합니다. 보안 헤더를 추가하거나 수정할 수 있습니다.
+
+#### `authorizeHttpRequests()`
+`authorizeHttpRequests()`는 HTTP 요청에 대한 권한을 설정하는 새로운 방식입니다. Spring Security 6.x에서는 `authorizeRequests()` 대신 `authorizeHttpRequests()`를 사용하여 권한 설정을 해야 합니다. 또한 기존 방식인 메서드 체인 방식이 아닌 람다식을 통한 함수형을 사용해야 합니다.
+
+※ `authorizeRequests()`는 Spring Security 5.x와 그 이전 버전에서 사용되던 메서드로, 더 이상 사용하지 않습니다.
+
+#### `formLogin()`
+`formLogin()`은 **Spring Security**에서 제공하는 메서드로, **폼 기반 로그인**을 설정하는 데 사용됩니다. 이 메서드를 사용하면, 사용자가 웹 애플리케이션에 로그인할 수 있도록 폼 기반 로그인 페이지를 자동으로 설정할 수 있습니다. 로그인 폼을 구현하고, 사용자가 로그인 정보를 제출하면, 이를 처리하는 기본적인 기능을 Spring Security가 제공해 줍니다.
+
+1. **로그인 페이지 설정**:
+    - 기본적으로 `/login` URL이 로그인 페이지로 사용됩니다. 이 URL을 사용자가 방문하면 로그인 폼을 보여주고, 사용자가 로그인 정보를 제출하면 이를 처리합니다.
+    - 로그인 페이지는 **커스터마이징**할 수 있으며, `loginPage()` 메서드를 사용하여 다른 URL로 로그인 페이지를 지정할 수 있습니다.
+2. **로그인 성공 및 실패 처리**:
+    - 로그인 성공 후 리디렉션할 URL을 `defaultSuccessUrl()`로 설정할 수 있습니다.
+    - 로그인 실패 시 리디렉션할 URL을 `failureUrl()`로 설정할 수 있습니다.
+3. **사용자 인증 처리**:
+    - 로그인 폼에서 제출된 **아이디**와 **비밀번호**를 사용하여 인증을 수행합니다. 이 정보는 Spring Security가 자동으로 처리하며, 로그인 성공 시 사용자는 인증된 상태로 애플리케이션을 사용할 수 있습니다.
+4. **폼 기반 로그인 커스터마이징**:
+    - 로그인 페이지의 URL, 로그인 성공 및 실패 시 리디렉션 URL 등을 설정할 수 있습니다.
+    - 기본적으로 Spring Security는 `username`과 `password`라는 필드명을 가진 로그인 폼을 기대합니다. 하지만 이를 커스터마이징하여 다른 이름의 필드를 사용할 수도 있습니다.
+
+```
+.formLogin(formLogin -> 
+    formLogin
+        .loginPage("/login")  // 로그인 페이지 경로
+        .loginProcessingUrl("/login")  // 로그인 폼 제출 URL
+        .defaultSuccessUrl("/home", true)  // 로그인 성공 후 리디렉션할 URL
+        .failureUrl("/login?error=true")  // 로그인 실패 후 리디렉션할 URL
+        .permitAll()  // 로그인 페이지는 누구나 접근 가능
+)
+```
+
+- `loginPage(String loginPage)`: 로그인 페이지의 URL을 지정합니다. 기본값은 `/login`입니다. 이 URL을 사용자가 방문하면 로그인 폼을 표시합니다.
+- `loginProcessingUrl(String loginProcessingUrl)`: 로그인 폼에서 제출된 데이터를 처리할 URL을 설정합니다. 기본적으로 `/login` URL로 POST 요청을 보내면 Spring Security가 자동으로 처리합니다.
+- `defaultSuccessUrl(String defaultSuccessUrl)`: 로그인 성공 후 리디렉션할 URL을 설정합니다. `true`를 설정하면 로그인 후 항상 해당 URL로 리디렉션됩니다.
+- `failureUrl(String failureUrl)`: 로그인 실패 시 리디렉션할 URL을 설정합니다. 예를 들어, 로그인 실패 후 에러 메시지를 표시할 수 있는 페이지로 리디렉션할 수 있습니다.
+- `permitAll()`: 인증 여부와 관계없이 누구나 접근할 수 있도록 허용합니다.
+
+#### `logout()`
+`logout()`은 애플리케이션에서 **로그아웃 기능**을 설정하는 데 사용됩니다. 이 메서드는 사용자가 로그아웃할 때 처리해야 할 여러 작업을 자동으로 수행합니다. `logout()`을 설정하면 사용자가 로그아웃할 때 발생하는 보안 관련 작업들을 간편하게 처리할 수 있습니다.
+
+1. **세션 종료**:
+    - 사용자가 로그아웃하면 **세션**이 종료됩니다. Spring Security는 자동으로 사용자의 세션을 무효화하고, 로그인 상태를 제거합니다.
+2. **Authentication 객체 제거**:
+    - 로그아웃 시 `SecurityContext`에서 사용자의 인증 정보를 제거합니다. 즉, `SecurityContextHolder.clearContext()`가 호출되어 현재 인증된 사용자의 정보를 삭제합니다.
+3. **쿠키 제거**:
+    - 로그인 시 생성된 **JSESSIONID** 쿠키와 같은 세션 관련 쿠키가 자동으로 삭제됩니다.
+4. **로그아웃 성공 후 리디렉션**:
+    - 로그아웃 후 사용자를 특정 URL로 리디렉션할 수 있습니다. 예를 들어, 로그아웃 후 홈페이지나 로그인 페이지로 리디렉션할 수 있습니다.
+5. **로그아웃 성공/실패 처리**:
+    - 로그아웃이 성공적으로 처리되었을 때, 이를 처리하는 후속 작업을 지정할 수 있습니다. 예를 들어, 로그아웃 후 사용자에게 알림 메시지를 표시할 수 있습니다.
+
+**로그아웃의 흐름**
+1.  사용자가 `/logout` URL에 접근하면, Spring Security는 해당 요청을 처리하고 로그아웃을 수행합니다.
+2.  로그아웃 후 **세션이 종료**되고, **인증 정보가 삭제**됩니다.
+3.  로그아웃 후, `logoutSuccessUrl`에 설정된 URL로 리디렉션됩니다.
+
+```
+.logout(logout -> 
+    logout
+        .logoutUrl("/logout")  // 로그아웃 URL을 "/logout"로 설정
+        .logoutSuccessUrl("/login?logout")  // 로그아웃 후 "/login?logout"으로 리디렉션
+        .permitAll()  // 로그아웃 URL에 누구나 접근 가능
+);
+```
+
+- `logoutUrl(String logoutUrl)`: 로그아웃을 처리할 URL을 지정합니다. 기본값은 `/logout`입니다. 사용자가 이 URL을 호출하면 로그아웃이 처리됩니다.
+- `logoutSuccessUrl(String logoutSuccessUrl)`: 로그아웃이 성공적으로 처리된 후 리디렉션할 URL을 지정합니다.
+- `deleteCookies(String... cookies)`: 로그아웃 시 삭제할 쿠키를 지정합니다.
+- `invalidateHttpSession(boolean invalidateHttpSession)`: 로그아웃 시 HTTP 세션을 무효화할지 여부를 설정합니다. 기본값은 `true`로, 로그아웃 시 세션이 무효화됩니다.
+- `permitAll()`: 인증 여부와 관계없이 누구나 접근할 수 있도록 허용합니다.
+
+사용되며, 사용자의 요청에 대해 어떤 권한이 필요한지 또는 인증이 필요한지 등을 정의합니다.
+
+#### `requestMatchers()`
+`requestMatchers()`는 특정 URL 패턴에 대해 접근 권한을 설정하는 메서드입니다. URL 패턴을 지정하여, 해당 패턴에 맞는 요청에 대해 **인증 및 권한**을 설정할 수 있습니다.
+
+```
+.requestMatchers("/login", "/register").permitAll()  // /login, /register 경로는 누구나 접근 가능
+```
+
+※ `antMatchers`는 **Spring Security 5.x 이하**에서 사용되었으며, **Spring Security 5.x 이상**에서는 `requestMatchers`로 대체되었습니다. (기능은 동일하나, 더 유연하고 직관적인 방식이 적용되었습니다.)
+
+#### `anyRequest()`
+`anyRequest()`는 **모든 요청**에 대해 접근 권한을 설정하는 메서드입니다. 이 메서드는 특정 URL 패턴에 대한 설정 외에 **모든 요청에 대한 권한**을 설정할 때 사용됩니다.
+
+```
+.anyRequest().authenticated();  // 나머지 모든 요청은 인증된 사용자만 접근 가능
+```
+
+#### `authenticated()`
+`authenticated()`는 **인증된 사용자**만 해당 요청에 접근할 수 있도록 설정하는 메서드입니다.
+
+`authenticated()`는 보통 `anyRequest()`와 함께 사용되어, 모든 요청에 대해 인증된 사용자만 접근할 수 있도록 설정합니다.
+
+#### `hasRole()`
+`hasRole()`은 특정 **역할(role)**을 가진 사용자만 해당 URL에 접근할 수 있도록 설정하는 데 사용됩니다.
+
+```
+.antMatchers("/admin/**").hasRole("ADMIN")  // ADMIN 역할을 가진 사용자만 /admin/** 경로에 접근 가능
+```
+
+역할 이름 앞에 `ROLE_`이 자동으로 붙습니다. 예를 들어, `hasRole("ADMIN")`은 실제로 `ROLE_ADMIN`이라는 역할을 가진 사용자만 접근할 수 있게 설정하는 것입니다.
+
+#### `hasAuthority()`
+`hasAuthority()`는 특정 **권한(authority)**을 가진 사용자만 해당 URL에 접근할 수 있도록 설정하는 데 사용됩니다.
+
+```
+.antMatchers("/admin/**").hasAuthority("ADMIN_PRIVILEGE")  // "ADMIN_PRIVILEGE" 권한을 가진 사용자만 /admin/** 경로에 접근 가능
+```
+
+`hasRole()`과 달리, `hasAuthority()`에서 사용되는 권한은 `ROLE_` 접두어 없이 저장됩니다.
