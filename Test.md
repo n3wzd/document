@@ -69,6 +69,41 @@ public class UserRegistrationTest {
 ### `@AfterAll`
 테스트 클래스의 모든 테스트가 실행된 후 **한 번** 실행되는 메서드를 지정합니다. 테스트 종료 후 정리 작업(예: 리소스 해제, 테스트 환경 복원 등)을 수행할 때 사용됩니다.
 
+### `@TestMethodOrder`
+`@TestMethodOrder` 애너테이션은 테스트 클래스에서 메서드 실행 순서를 제어할 수 있도록 해줍니다. 이 애너테이션을 클래스 레벨에서 사용하고, 실행 순서를 결정하는 전략을 지정할 수 있습니다.
+
+1. `MethodOrderer.OrderAnnotation`: `@Order` 애너테이션에 의해 지정된 순서대로 테스트 메서드를 실행합니다.
+2. `MethodOrderer.Alphanumeric`: 메서드 이름을 알파벳 순서로 정렬하여 실행합니다.
+3. `MethodOrderer.Random`: 테스트 메서드를 무작위로 실행합니다.
+
+`@Order` 애너테이션은 테스트 메서드가 실행되는 순서를 지정하는 데 사용됩니다. `@Order`는 `@TestMethodOrder`와 함께 사용되며, 각 테스트 메서드에 적용하여 실행 순서를 명시적으로 설정할 수 있습니다.
+
+```
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class MyTest {
+
+    @Test
+    @Order(1)
+    void testMethod1() {
+        System.out.println("Test Method 1");
+    }
+
+    @Test
+    @Order(2)
+    void testMethod2() {
+        System.out.println("Test Method 2");
+    }
+
+    @Test
+    @Order(3)
+    void testMethod3() {
+        System.out.println("Test Method 3");
+    }
+}
+```
+
+위 코드에서는 `MethodOrderer.OrderAnnotation.class`를 사용하여 `@Order` 애너테이션에 의해 지정된 순서대로 테스트가 실행되도록 합니다.
+
 ## Mock
 **Mock**(모의 객체)는 소프트웨어 테스트에서 실제 객체의 동작을 시뮬레이션하는 가짜 객체입니다. 실제 객체 대신 사용하여 테스트 환경을 제어하고, 의존하는 외부 시스템이나 복잡한 객체의 동작을 대체하는 역할을 합니다. 주로 단위 테스트에서 사용됩니다.
 
