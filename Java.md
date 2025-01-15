@@ -2401,6 +2401,41 @@ public class User {
 }
 ```
 
+## Log
+### SLF4J
+**SLF4J** (Simple Logging Facade for Java)는 Java에서 로깅을 위한 추상화 라이브러리입니다. SLF4J는 다양한 로깅 프레임워크(Log4j, Logback, java.util.logging 등)를 추상화하여, 애플리케이션이 특정 로깅 구현체에 의존하지 않도록 해줍니다. 즉, SLF4J는 로깅 API를 제공하지만, 실제 로깅 동작은 다른 로깅 구현체가 처리합니다. 대표적인 로깅 구현체로는 **Logback**, **Log4j**, **java.util.logging** 등이 있습니다.
+
+1. **로깅 추상화**: SLF4J는 다양한 로깅 프레임워크의 차이를 숨기고, 공통된 인터페이스를 제공합니다. 이를 통해 개발자는 로깅 구현체를 변경할 때 코드 수정 없이 SLF4J API를 그대로 사용할 수 있습니다.
+2. **플러그인 시스템**: SLF4J는 실제 로깅 구현체를 선택할 수 있는 플러그인 시스템을 제공합니다. 예를 들어, Logback, Log4j, JDK 로깅 등 다양한 로깅 구현체를 SLF4J와 함께 사용할 수 있습니다.
+3. **로깅 성능 최적화**: SLF4J는 성능을 고려하여 설계되었으며, 로깅이 필요한 상황에서만 로깅을 활성화하는 방식으로 성능 저하를 최소화합니다.
+
+**로그 레벨**: SLF4J는 여러 로그 레벨을 지원합니다.
+- `TRACE`: 매우 상세한 로그 (주로 개발과 디버깅에 사용)
+- `DEBUG`: 디버깅을 위한 로그
+- `INFO`: 일반적인 정보성 로그
+- `WARN`: 경고 로그
+- `ERROR`: 오류 로그
+
+```
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class MyService {
+
+    private static final Logger logger = LoggerFactory.getLogger(MyService.class);
+
+    public void performAction() {
+        logger.info("Action performed.");
+        try {
+            // Some logic
+            logger.debug("Debugging information.");
+        } catch (Exception e) {
+            logger.error("An error occurred: ", e);
+        }
+    }
+}
+```
+
 ## javax
 `Jakarta`와 `javax`는 Java 플랫폼에서 사용되는 패키지 이름의 두 가지 버전입니다. 그 차이는 주로 Java EE (Enterprise Edition)와 관련이 있습니다.
 
