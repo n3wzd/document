@@ -1276,3 +1276,104 @@ formLogin은 기본적으로 세션 기반 인증을 사용합니다. RESTful AP
 ```
 
 `hasRole()`과 달리, `hasAuthority()`에서 사용되는 권한은 `ROLE_` 접두어 없이 저장됩니다.
+
+## IO
+### jsonwebtoken
+`jsonwebtoken`은 **JWT (JSON Web Token)**을 생성하고 검증하는 데 사용되는 Java 라이브러리입니다. JWT는 주로 웹 애플리케이션에서 사용자 인증 및 권한 부여에 사용되는 표준 토큰 형식입니다. 이 라이브러리는 JWT를 쉽게 생성하고 파싱할 수 있도록 도와줍니다.
+
+1. **JWT 생성**: 사용자의 정보를 포함하는 JWT를 생성할 수 있습니다.
+2. **JWT 파싱 및 검증**: JWT 토큰을 파싱하여 헤더와 페이로드를 추출할 수 있습니다.
+3. **유효성 검사**: JWT의 만료 여부를 확인하거나, 특정 클레임이 유효한지 검사할 수 있습니다.
+
+**주요 클래스와 메서드**
+1. `Jwts`: JWT를 생성하거나 파싱하는 유틸리티 클래스입니다.
+    - `Jwts.builder()`: JWT를 생성하는 빌더 객체를 반환.
+    - `Jwts.parser()`: JWT를 파싱하는 파서 객체를 반환.
+2. `Claims`: JWT의 페이로드를 나타내는 클래스입니다. 클레임 데이터를 포함하고 있습니다.    
+    - `setSubject()`: 사용자 ID와 같은 주체 정보를 설정.
+    - `getSubject()`: 설정된 주체 정보를 반환.
+3. `SignatureAlgorithm`: JWT 서명에 사용할 알고리즘을 정의하는 열거형 클래스입니다.
+    - 예: `HS256`, `RS256`, `HS384` 등.
+4. `JwtException`: JWT 파싱이나 검증 중에 발생할 수 있는 예외 클래스입니다.
+
+**JWT 생성:**
+```
+String jwtToken = Jwts.builder()
+        .setSubject("user123")  // 사용자 ID
+        .setIssuedAt(new Date())  // 발급 시간
+        .setExpiration(new Date(System.currentTimeMillis() + 3600000))  // 만료 시간 (1시간)
+        .signWith(SignatureAlgorithm.HS256, "mySecretKey")  // 서명
+        .compact();  // 토큰 생성
+```
+
+**JWT 검증:**
+```
+try {
+    Claims claims = Jwts.parser()
+            .setSigningKey("mySecretKey")  // 서명 검증에 사용할 비밀 키
+            .parseClaimsJws(jwtToken)  // 토큰 파싱
+            .getBody();  // 페이로드 추출
+    String userId = claims.getSubject();  // 사용자 ID 추출
+    // 유효한 토큰
+} catch (JwtException e) {
+    // 유효하지 않은 토큰
+}
+```
+
+## Log
+### Logback
+**Logback**은 Java용 로깅 프레임워크로, 로깅의 성능과 유연성을 높이기 위해 설계되었으며, **Spring Boot**에서 기본 로깅 구현체로 사용됩니다. **Spring Boot** 프로젝트에서는 **Logback**과 **SLF4J**가 기본적으로 포함되어 있기 때문에, 별도로 `build.gradle`에 추가할 필요가 없습니다.
+
+1.**SLF4J와의 통합**: Logback은 SLF4J와 함께 사용됩니다. SLF4J는 로깅 API를 제공하고, Logback은 실제 로깅 동작을 처리하는 구현체입니다. 즉, SLF4J는 로깅 인터페이스를 제공하고, Logback은 그 구현을 제공합니다.
+2. **성능 최적화**: Logback은 성능에 중점을 두고 설계되었습니다. 특히, **비동기 로깅** 기능을 제공하여 고성능 애플리케이션에서 로깅 성능을 최적화할 수 있습니다.
+3. **구성 가능성**: Logback은 XML 또는 Groovy를 사용하여 로깅을 매우 유연하게 구성할 수 있습니다. 이를 통해 로그 출력 형식, 로그 파일의 크기 제한, 로그 파일의 회전 정책 등을 설정할 수 있습니다.
+4. **다양한 출력 옵션**: Logback은 로그를 **콘솔**, **파일**, **원격 서버** 등 다양한 출력 대상으로 보낼 수 있습니다.
+5. **로그 회전 (Rolling)**: Logback은 로그 파일이 일정 크기나 시간에 따라 회전하도록 설정할 수 있습니다. 예를 들어, 하루 단위로 로그 파일을 새로 생성하거나, 파일 크기가 일정 크기를 넘으면 새로운 파일로 로그를 기록하도록 할 수 있습니다.
+6. **자동화된 로그 레벨 설정**: Logback은 로그 레벨을 동적으로 설정할 수 있으며, `logback-spring.xml` 파일을 통해 애플리케이션의 로깅 동작을 조정할 수 있습니다.
+
+#### `logback-spring.xml`
+Logback은 `logback-spring.xml` 파일을 통해 설정할 수 있습니다. Spring Boot에서는 기본적으로 `logback-spring.xml` 파일을 사용하며, 이 파일은 `src/main/resources` 폴더에 위치합니다.
+
+- **Appender**: 로그를 출력할 대상을 정의합니다. (콘솔, 파일 등).
+- **Root**: 애플리케이션의 기본 로거를 정의합니다.
+- **Logger**: 특정 패키지나 클래스에 대한 로깅 설정을 정의합니다.
+- **Encoder**: 로그 메시지의 출력 형식을 정의합니다.
+- **RollingPolicy**: 로그 파일이 일정 크기를 초과하거나 특정 주기가 지나면 새 파일로 롤링(분리)되도록 설정합니다.
+
+```
+<configuration>
+
+    <!-- 콘솔 출력 설정 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 로그 파일 설정 -->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/application.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/application-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory> <!-- 30일간의 로그를 보관 -->
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 로그 레벨 설정 -->
+    <logger name="com.example" level="INFO"/>
+    <logger name="org.springframework" level="DEBUG"/>
+
+    <!-- 루트 로그 레벨 설정 -->
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
+
+</configuration>
+```
+
+`logback-spring.xml` 파일이 없어도 Spring Boot 애플리케이션은 로그를 출력할 수 있습니다. 이때는 기본 설정으로 로그를 출력합니다.
+
