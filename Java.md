@@ -2417,24 +2417,45 @@ public class User {
 - `ERROR`: 오류 로그
 
 ```
+package com.example.demo;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-public class MyService {
+@SpringBootApplication
+public class DemoApplication implements CommandLineRunner {
 
-    private static final Logger logger = LoggerFactory.getLogger(MyService.class);
+    private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);
 
-    public void performAction() {
-        logger.info("Action performed.");
-        try {
-            // Some logic
-            logger.debug("Debugging information.");
-        } catch (Exception e) {
-            logger.error("An error occurred: ", e);
-        }
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        logger.trace("This is a trace message");
+        logger.debug("This is a debug message");
+        logger.info("This is an info message");
+        logger.warn("This is a warn message");
+        logger.error("This is an error message");
     }
 }
 ```
+
+#### Logger
+`Logger`는 로그 메시지를 기록하는 기능을 제공하는 인터페이스입니다. 
+
+- `debug(String msg)`: `DEBUG` 레벨의 로그를 기록합니다.
+- `info(String msg)`: `INFO` 레벨의 로그를 기록합니다.
+- `warn(String msg)`: `WARN` 레벨의 로그를 기록합니다.
+- `error(String msg)`: `ERROR` 레벨의 로그를 기록합니다.
+- `trace(String msg)`: `TRACE` 레벨의 로그를 기록합니다.
+
+#### LoggerFactory
+`LoggerFactory`는 `Logger` 인스턴스를 생성하는 팩토리 클래스입니다.
 
 ## javax
 `Jakarta`와 `javax`는 Java 플랫폼에서 사용되는 패키지 이름의 두 가지 버전입니다. 그 차이는 주로 Java EE (Enterprise Edition)와 관련이 있습니다.
