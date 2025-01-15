@@ -1200,6 +1200,8 @@ public class SecurityConfig {
 - `failureUrl(String failureUrl)`: 로그인 실패 시 리디렉션할 URL을 설정합니다. 예를 들어, 로그인 실패 후 에러 메시지를 표시할 수 있는 페이지로 리디렉션할 수 있습니다.
 - `permitAll()`: 인증 여부와 관계없이 누구나 접근할 수 있도록 허용합니다.
 
+formLogin은 기본적으로 세션 기반 인증을 사용합니다. RESTful API를 설계할 때는 formLogin 대신 토큰 기반 인증 방식을 사용하는 것이 일반적입니다.
+
 #### `logout()`
 `logout()`은 애플리케이션에서 **로그아웃 기능**을 설정하는 데 사용됩니다. 이 메서드는 사용자가 로그아웃할 때 처리해야 할 여러 작업을 자동으로 수행합니다. `logout()`을 설정하면 사용자가 로그아웃할 때 발생하는 보안 관련 작업들을 간편하게 처리할 수 있습니다.
 
@@ -1234,7 +1236,7 @@ public class SecurityConfig {
 - `invalidateHttpSession(boolean invalidateHttpSession)`: 로그아웃 시 HTTP 세션을 무효화할지 여부를 설정합니다. 기본값은 `true`로, 로그아웃 시 세션이 무효화됩니다.
 - `permitAll()`: 인증 여부와 관계없이 누구나 접근할 수 있도록 허용합니다.
 
-사용되며, 사용자의 요청에 대해 어떤 권한이 필요한지 또는 인증이 필요한지 등을 정의합니다.
+`formLogin`과 마찬가지로 Spring Security에서 기본적으로 세션 기반으로 동작합니다.
 
 #### `requestMatchers()`
 `requestMatchers()`는 특정 URL 패턴에 대해 접근 권한을 설정하는 메서드입니다. URL 패턴을 지정하여, 해당 패턴에 맞는 요청에 대해 **인증 및 권한**을 설정할 수 있습니다.
