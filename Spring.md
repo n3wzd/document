@@ -163,6 +163,8 @@ public UserController(UserService userService) {
 }
 ```
 
+Spring 4.3 이상에서는 생성자 주입을 사용할 때 @Autowired 어노테이션을 생략할 수 있습니다.
+
 #### Setter 주입
 `@Autowired`를 setter 메서드에 붙여서 의존성을 주입할 수도 있습니다. 선택적 의존성 주입에 유용하지만, 필수 의존성에 대해서는 적합하지 않습니다.
 
