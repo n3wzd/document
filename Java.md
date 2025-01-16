@@ -2495,6 +2495,26 @@ public class DemoApplication implements CommandLineRunner {
 #### LoggerFactory
 `LoggerFactory`는 `Logger` 인스턴스를 생성하는 팩토리 클래스입니다.
 
+## UUID
+Java에서는 `java.util.UUID` 클래스를 사용하여 UUID를 생성할 수 있습니다.
+
+```
+import java.util.UUID;
+
+public class UUIDExample {
+    public static void main(String[] args) {
+        // UUIDv4 생성
+        UUID uuid = UUID.randomUUID();
+        System.out.println("Generated UUID: " + uuid.toString());
+    }
+}
+```
+
+**출력 예시:**
+```
+Generated UUID: 4a3e6c9f-bf8f-4d3d-8f6a-3b9b5b6f0db7
+```
+
 ## javax
 `Jakarta`와 `javax`는 Java 플랫폼에서 사용되는 패키지 이름의 두 가지 버전입니다. 그 차이는 주로 Java EE (Enterprise Edition)와 관련이 있습니다.
 
