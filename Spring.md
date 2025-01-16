@@ -134,6 +134,41 @@ public class MyBean {
 
 Bean의 라이프사이클은 주로 Singleton 스코프에 적용됩니다. Prototype 스코프의 Bean은 생성된 후에는 Spring 컨테이너에 의해 관리되지 않으므로 소멸 단계가 없습니다.
 
+### 컨텍스트
+Spring 컨텍스트의 생성 흐름은 Spring 애플리케이션이 시작될 때부터 **빈(Bean)**이 생성되고 초기화되는 과정까지를 포함합니다. 이 흐름은 크게 **빈 생성**, **의존성 주입**, **초기화**로 나눌 수 있습니다. 아래는 Spring 컨텍스트의 생성 흐름을 단계별로 설명한 것입니다.
+
+#### 1. Spring 애플리케이션 시작
+Spring 애플리케이션이 시작되면, Spring Boot의 경우 `SpringApplication.run()` 메서드가 호출됩니다. 이 메서드는 `SpringApplication` 객체를 생성하고, 애플리케이션 컨텍스트를 초기화합니다.
+
+#### 2. `ApplicationContext` 생성
+Spring은 `ApplicationContext`라는 인터페이스를 통해 애플리케이션의 모든 빈(Bean)을 관리합니다. 이 `ApplicationContext`는 애플리케이션이 시작될 때 자동으로 생성됩니다.
+
+#### 3. Bean 정의 스캔
+Spring은 **빈 정의(Bean definition)**를 스캔하여 `ApplicationContext`에 등록합니다. 이 과정에서 `@Component`, `@Service`, `@Repository`, `@Controller` 등과 같은 어노테이션을 사용하여 빈을 정의합니다.
+- **컴포넌트 스캔**: `@ComponentScan` 어노테이션을 사용하여 지정된 패키지에서 빈을 자동으로 검색합니다.
+- **Java Config 사용**: `@Configuration` 클래스를 사용하여 빈을 명시적으로 정의할 수 있습니다. 이때 `@Bean` 어노테이션을 사용하여 객체를 생성하고 관리합니다.
+
+#### 4. Bean 인스턴스화
+빈 정의가 등록되면, Spring은 **빈 인스턴스를 생성**합니다. 이때 빈의 생성자는 호출되며, 의존성 주입이 이루어집니다.
+- **생성자 주입**: Spring은 생성자에 주입할 의존성을 자동으로 해결하여 생성자를 호출합니다.
+- **필드 주입**: 필드에 `@Autowired` 또는 `@Value` 어노테이션을 사용하면, Spring은 해당 필드에 값을 주입합니다.
+- **메서드 주입**: `@Autowired`가 있는 메서드를 통해 의존성을 주입할 수 있습니다.
+
+#### 5. 초기화
+빈이 생성되고 의존성 주입이 완료되면, Spring은 빈을 초기화합니다. 이 과정에서 **초기화 메서드**가 호출될 수 있습니다.
+-  @PostConstruct`: 빈의 초기화가 끝난 후 호출되는 메서드입니다. `@PostConstruct` 어노테이션을 사용하면, 빈이 초기화된 후 실행할 작업을 정의할 수 있습니다.
+-  InitializingBean` 인터페이스: `afterPropertiesSet()` 메서드를 구현하여 초기화 작업을 수행할 수 있습니다.
+-  @Bean(initMethod)`: `@Configuration` 클래스에서 `@Bean` 어노테이션을 사용하여 초기화 메서드를 지정할 수 있습니다.
+
+#### 6. AOP 적용
+빈이 초기화된 후, **AOP(Aspect-Oriented Programming)**가 적용될 수 있습니다. AOP는 빈의 메서드 호출 전후에 특정 작업을 수행하는 기능입니다. 예를 들어, `@Transactional` 어노테이션을 사용하여 트랜잭션을 관리하거나, `@Around` 어노테이션을 사용하여 메서드 실행 전후에 로깅 등을 수행할 수 있습니다.
+
+#### 7. 빈 사용
+빈이 초기화되고 AOP가 적용되면, 이제 애플리케이션에서 빈을 사용할 수 있습니다. 빈은 `@Autowired` 또는 `@Inject` 등을 사용하여 다른 빈에 주입될 수 있습니다. Spring은 빈을 관리하고, 필요한 시점에 의존성을 주입합니다.
+
+#### 8. 애플리케이션 종료
+애플리케이션이 종료되면, Spring은 **빈의 소멸** 작업을 수행합니다. 이때 `@PreDestroy` 어노테이션이나 `DisposableBean` 인터페이스를 사용하여 소멸 작업을 정의할 수 있습니다.
+
 ### 의존성 주입 (Dependency Injection)
 의존성 주입은 객체가 다른 객체를 생성하는 대신, 외부에서 필요한 객체를 주입받는 방식입니다. 이는 객체 간의 결합도를 낮추고, 유연한 코드 작성을 가능하게 합니다.
 
@@ -241,6 +276,63 @@ public class MyApplication {
 ```
 
 `@SpringBootApplication`은 Spring Boot 애플리케이션의 진입점으로 사용되며, 이를 명시적으로 사용함으로써 프로젝트 내에서 일관된 방식으로 애플리케이션을 설정하고 실행할 수 있습니다. `@SpringBootApplication`을 명시적으로 사용하지 않아도 Spring Boot 애플리케이션을 실행할 수는 있지만, 애플리케이션을 간단하고 일관되게 설정하려면 `@SpringBootApplication`을 사용하는 것이 좋습니다.
+
+### @Value
+`@Value` 어노테이션을 사용하면 `application.properties` 또는 `application.yml` 파일에 정의된 값을 바로 주입받을 수 있습니다.
+
+```
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+@Service
+public class EmailService {
+
+    @Value("${spring.mail.host}")
+    private String mailHost;
+
+    @Value("${spring.mail.port}")
+    private int mailPort;
+
+    public void printMailSettings() {
+        System.out.println("Mail Host: " + mailHost);
+        System.out.println("Mail Port: " + mailPort);
+    }
+}
+```
+
+이렇게 하면 `application.properties`에 설정된 `spring.mail.host`와 `spring.mail.port` 값을 `EmailService` 클래스에서 바로 사용할 수 있습니다.
+
+`@Value`는 **Spring 컨텍스트가 초기화된 후**에 값을 주입하기 때문에, 클래스의 생성자에서 `@Value`를 사용하는 경우, 생성자에서 사용된 값은 Spring 컨텍스트가 초기화된 후에 주입됩니다. 따라서 생성자 내에서 `@Value`가 주입되지 않은 상태에서 해당 필드를 참조하면 `null`이 될 수 있습니다.
+
+만약 생성자에서 사용하고자 한다면, 생성자 인자에 제공하면 됩니다.
+```
+public  EmailSender(EmailProviderRepository  emailProviderRepository,
+				@Value("${spring.mail.username}") String  mailUserName,
+				@Value("${spring.mail.password}") String  mailPassword) {
+	...
+}
+```
+
+### `@ConfigurationProperties`
+`@ConfigurationProperties`를 사용하면 설정 파일에서 값을 Java 객체에 매핑할 수 있습니다. 이 방법은 여러 설정 항목을 한 번에 다룰 때 유용합니다.
+
+```
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@Component
+@ConfigurationProperties(prefix = "spring.mail")
+public class MailProperties {
+
+    private String host;
+    private int port;
+    private String username;
+    private String password;
+
+    // Getters and Setters
+    
+}
+```
 
 ## 엔티티(Entity)
 **엔티티(Entity)**는 **데이터베이스의 테이블과 1:1로 매핑되는 객체**입니다. 객체 지향 프로그래밍(OOP)과 관계형 데이터베이스(RDB) 간의 차이를 해결하기 위해 등장한 개념으로, 자바 클래스와 데이터베이스 테이블 간의 연결을 담당합니다.
@@ -1373,6 +1465,106 @@ Logback은 `logback-spring.xml` 파일을 통해 설정할 수 있습니다. Spr
     </root>
 
 </configuration>
+```
+
+## Mail
+### 의존성 추가
+Spring Boot에서는 이메일을 보내기 위해 `spring-boot-starter-mail` 의존성을 사용합니다. 이 의존성을 추가하면 이메일 발송을 위한 기본적인 기능을 사용할 수 있습니다.
+
+`build.gradle`:
+```
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+}
+```
+
+### 애플리케이션 설정
+이메일을 보내기 위해 SMTP 서버와 관련된 설정을 `application.properties` 파일에 추가해야 합니다. 예를 들어, Gmail을 사용할 경우 아래와 같은 설정을 추가할 수 있습니다.
+
+- `spring.mail.host`: SMTP 서버 주소 (예: Gmail의 경우 `smtp.gmail.com`).
+- `spring.mail.port`: SMTP 서버 포트 (예: Gmail의 경우 587번 포트를 사용).
+- `spring.mail.username`: 발송할 이메일 계정.
+- `spring.mail.password`: 이메일 계정의 비밀번호.
+- `spring.mail.properties.mail.smtp.auth`: SMTP 인증을 사용 여부.
+- `spring.mail.properties.mail.smtp.starttls.enable`: STARTTLS를 활성화 여부.
+
+`application.properties`:
+```
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=your-email@gmail.com
+spring.mail.password=your-email-password
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+spring.mail.properties.mail.smtp.ssl.trust=smtp.gmail.com
+```
+
+### `JavaMailSender`
+`JavaMailSender`는 Spring Framework에서 제공하는 인터페이스로, 이메일을 보내는 기능을 제공합니다. 이 인터페이스는 JavaMail API를 기반으로 하며, 이메일을 보내는 다양한 기능을 추상화하여 제공합니다. `javaMailSender` 생성 시,`application.properties`에 설정된 값들이 자동으로 반영됩니다.
+
+- `send(MimeMessage message)`: `MimeMessage` 객체를 사용하여 이메일을 전송합니다.
+- `createMimeMessage()`: 새로운 `MimeMessage` 객체를 생성합니다.
+
+Spring Boot의 자동 설정은 `JavaMailSenderImpl`을 생성하고, 이를 `JavaMailSender` 인터페이스로 등록합니다. 이 빈은 Spring Boot의 **자동 구성**에 의해 설정되므로, 별도로 `JavaMailSenderImpl`을 수동으로 생성할 필요는 없습니다.
+
+```
+@Autowired
+private JavaMailSender mailSender;
+
+public void sendEmail(String to, String subject, String text) {
+    MimeMessage message = mailSender.createMimeMessage();
+    MimeMessageHelper helper = new MimeMessageHelper(message, true);
+    helper.setTo(to);
+    helper.setSubject(subject);
+    helper.setText(text, true); // HTML 형식으로 설정
+
+    mailSender.send(message); // 이메일 발송
+}
+```
+
+단, `JavaMailSender` 인터페이스 자체는 메일 서버의 설정을 직접 수정하는 메서드를 제공하지 않습니다. `JavaMailSender`는 메일을 보내는 기능만을 제공하는 인터페이스이고, 메일 서버 설정은 `JavaMailSenderImpl` 클래스에서 수행됩니다. 따라서, `JavaMailSender` 인터페이스를 사용하면서 메일 서버 설정을 변경하려면, `JavaMailSenderImpl`을 사용해야 합니다.
+
+### `JavaMailSenderImpl`
+`JavaMailSenderImpl`는 `JavaMailSender` 인터페이스의 기본 구현체입니다. 이 클래스는 이메일을 전송하기 위해 필요한 SMTP 서버 설정과 이메일 발송을 처리하는 기능을 제공합니다.
+
+1. **SMTP 서버 설정**:
+    - `setHost()`: SMTP 서버의 호스트 주소를 설정합니다.
+    - `setPort()`: SMTP 서버의 포트 번호를 설정합니다.
+    - `setUsername()`: SMTP 서버에 로그인할 사용자 이름을 설정합니다.
+    - `setPassword()`: SMTP 서버에 로그인할 비밀번호를 설정합니다.
+2. **메일 전송**:
+    - `send()`: `MimeMessage` 객체를 전달하여 이메일을 전송합니다.
+    - `createMimeMessage()`: 이메일 내용을 설정할 수 있는 `MimeMessage` 객체를 생성합니다.
+3. **추가 설정**:
+    - `setProtocol()`: 이메일 전송에 사용할 프로토콜을 설정합니다. (예: "smtp")
+    - `setJavaMailProperties()`: 이메일 전송에 사용할 JavaMail 관련 속성들을 설정할 수 있습니다.
+
+`JavaMailSenderImpl`을 직접 생성하여 사용하면 Spring의 자동 설정을 우회하게 되어, `application.properties`에 설정된 값들이 적용되지 않습니다. 따라서 `JavaMailSenderImpl`을 수동으로 생성하는 경우, `application.properties`의 설정을 직접 코드에서 반영해야 합니다.
+
+```
+JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+Properties props = mailSender.getJavaMailProperties();
+props.put("mail.smtp.auth", "true");
+props.put("mail.smtp.starttls.enable", "true");
+```
+
+### `MimeMessageHelper`
+`MimeMessageHelper`는 `MimeMessage` 객체를 보다 쉽게 설정할 수 있도록 도와주는 클래스입니다. `MimeMessage`는 JavaMail API에서 이메일 메시지를 나타내는 클래스입니다.
+
+- `setTo(String... to)`: 이메일 수신자의 이메일 주소를 설정합니다.
+- `setSubject(String subject)`: 이메일 제목을 설정합니다.
+- `setText(String text, boolean isHtml)`: 이메일 본문을 설정합니다. `isHtml`을 `true`로 설정하면 HTML 형식의 이메일을 보낼 수 있습니다.
+- `addAttachment(String filename, File file)`: 이메일에 첨부파일을 추가합니다.
+
+```
+MimeMessage message = mailSender.createMimeMessage();
+MimeMessageHelper helper = new MimeMessageHelper(message, true); // true는 멀티파트 이메일(첨부파일 등)을 사용할 때 필요
+
+helper.setTo("recipient@example.com");
+helper.setSubject("Test Email");
+helper.setText("<h1>This is a test email</h1>", true); // HTML 형식 이메일
+
+mailSender.send(message); // 이메일 발송
 ```
 
 `logback-spring.xml` 파일이 없어도 Spring Boot 애플리케이션은 로그를 출력할 수 있습니다. 이때는 기본 설정으로 로그를 출력합니다.
