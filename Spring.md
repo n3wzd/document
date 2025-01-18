@@ -527,7 +527,6 @@ Spring Data JPA에서 **쿼리 메서드 생성 규칙**은 메서드 이름을 
 - `OrderBy`: 결과를 정렬.
 - 필드 이름 뒤에 `Asc`(오름차순) 또는 `Desc`(내림차순)를 추가.
 
-
 #### 예제
 **기본 조회**
 ```
@@ -559,23 +558,21 @@ List<User> findByActiveTrue(); // active 필드가 true인 사용자 조회
 List<User> findByActiveFalse(); // active 필드가 false인 사용자 조회
 ```
 
-#### 복잡한 쿼리
+#### `@Query`
 만약 쿼리 메서드로 표현하기 어려운 복잡한 쿼리가 필요하다면, 다음 방법을 사용할 수 있습니다:
-
-##### `@Query`
 ```
 @Query("SELECT u FROM User u WHERE u.name LIKE %:name%")
 List<User> searchByName(@Param("name") String name);
 ```
     
-##### 네이티브 쿼리 사용
-```
-@Query(value = "SELECT * FROM users WHERE name = ?1", nativeQuery = true)
-List<User> searchByNameNative(String name);
-```
+#### `@Modifying`
+`@Modifying`은 Spring Data JPA에서 **데이터 변경 작업(INSERT, UPDATE, DELETE)**을 수행하는 쿼리를 사용할 때 필요한 어노테이션입니다. JPA의 기본 동작은 SELECT와 같은 **조회 작업**을 처리하기 위한 것이므로, 데이터 변경 작업을 명시적으로 선언하기 위해 `@Modifying`을 사용합니다.
 
-##### 커스텀 리포지토리 구현
-복잡한 비즈니스 로직이 필요한 경우, 리포지토리 인터페이스를 확장하여 직접 구현할 수 있습니다.
+1. **데이터 변경 작업에 필수**: `@Query`와 함께 사용되며, JPQL 또는 네이티브 쿼리로 데이터를 삽입, 수정, 삭제할 때 필요합니다.
+2. **트랜잭션 필요**: 데이터 변경 작업이므로 트랜잭션이 필요합니다.
+    -  사용자 정의 JPQL 또는 네이티브 쿼리에서 `@Modifying`을 사용하는 경우에는 트랜잭션을 명시적으로 선언해야 합니다.
+    - 트랜잭션이 없으면 `javax.persistence.TransactionRequiredException`이 발생할 수 있습니다.
+3. **반환값**: 업데이트된 행(row)의 개수를 반환합니다. 반환값은 `int` 또는 `long`으로 받을 수 있습니다.
 
 ## Spring Web
 **Spring Web**은 Spring Framework의 일부로, 웹 애플리케이션 개발을 위한 다양한 기능을 제공하는 모듈입니다. Spring Web은 **웹 애플리케이션을 구축**하는 데 필요한 핵심 기능들을 제공하며, 주로 HTTP 요청 처리, RESTful 웹 서비스 구축, 웹 페이지 처리 등을 포함합니다.
