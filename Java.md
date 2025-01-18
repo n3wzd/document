@@ -2439,6 +2439,17 @@ public class User {
 }
 ```
 
+## URI
+Java에서 URI는 `java.net.URI` 클래스를 통해 다룰 수 있습니다. 이 클래스는 URI를 나타내고, URI를 생성하고 조작하는 다양한 메서드를 제공합니다.
+
+### URI
+`URI` 클래스는 URI를 표현하는데 필요한 다양한 메서드를 제공합니다. 예를 들어, URI를 구성하고, 이를 문자열로 변환하거나, URI의 구성 요소를 분리할 수 있습니다.
+
+- `URI.create(String uri)`: 문자열로부터 URI 객체를 생성합니다.
+- `URI.getScheme()`: URI의 스킴을 반환합니다. 예: `http`, `https`, `ftp`
+- `URI.getHost()`: URI의 호스트를 반환합니다.
+- `URI.getPath()`: URI의 경로를 반환합니다.
+
 ## Log
 ### SLF4J
 **SLF4J** (Simple Logging Facade for Java)는 Java에서 로깅을 위한 추상화 라이브러리입니다. SLF4J는 다양한 로깅 프레임워크(Log4j, Logback, java.util.logging 등)를 추상화하여, 애플리케이션이 특정 로깅 구현체에 의존하지 않도록 해줍니다. 즉, SLF4J는 로깅 API를 제공하지만, 실제 로깅 동작은 다른 로깅 구현체가 처리합니다. 대표적인 로깅 구현체로는 **Logback**, **Log4j**, **java.util.logging** 등이 있습니다.
