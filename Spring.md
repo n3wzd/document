@@ -1588,7 +1588,6 @@ mailSender.send(message); // 이메일 발송
 
 - 프로토콜 (http/https)
 - 호스트 (localhost)
-- 포트 (8080)
 - 경로 (/api/users)
 
 ```
@@ -1608,7 +1607,6 @@ public String generateLink(String email) {
 
 - 프로토콜 (http/https)
 - 호스트 (localhost)
-- 포트 (8080)
 - 경로 (/api/users)
 - 쿼리 파라미터 (?param=value)
 
