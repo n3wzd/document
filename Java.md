@@ -2398,6 +2398,50 @@ public class UserController {
 2. **표준 명세**: JPA는 특정 구현체가 아니라, Java EE(Enterprise Edition)에서 정의한 **표준 인터페이스**입니다.
 3.  **Persistence Context (영속성 컨텍스트)**: JPA에서 엔티티 객체를 관리하는 환경입니다. 데이터베이스와의 연결을 관리하며, 엔티티 객체의 상태를 추적합니다.
 
+### JPQL
+JPQL은 JPA에서 사용되는 객체 지향 쿼리 언어입니다. JPQL은 SQL과 유사하지만, 데이터베이스 테이블 대신 **JPA 엔티티 객체와 그 필드**를 대상으로 쿼리를 작성합니다. 이는 데이터베이스의 특정 구현에 독립적이며, JPA 엔티티를 중심으로 작동하도록 설계되었습니다.
+
+1. **객체 지향 쿼리**
+    - JPQL은 데이터베이스 테이블이 아닌 **엔티티 클래스와 필드**를 대상으로 쿼리를 작성합니다.
+    - 예: SQL의 `SELECT * FROM users`는 JPQL에서 `SELECT u FROM User u`로 작성됩니다.
+2. **데이터베이스 독립성**
+    - JPQL은 데이터베이스에 의존하지 않으며, JPA 구현체(Hibernate 등)가 JPQL을 SQL로 변환합니다.
+    - 따라서 데이터베이스를 변경하더라도 JPQL 코드를 수정할 필요가 없습니다.
+3. **동적 또는 정적 쿼리**
+    - JPQL은 정적 쿼리(애노테이션으로 정의)와 동적 쿼리(EntityManager를 사용하여 런타임에 생성) 모두 지원합니다.
+4. **SQL과의 차이점**
+    - JPQL은 SQL처럼 테이블과 컬럼 이름을 사용하지 않고, **엔티티 이름과 필드 이름**을 사용합니다.
+    - 예: SQL의 `users` 테이블 → JPQL의 `User` 엔티티.
+
+#### SELECT
+```
+@Query("SELECT u FROM User u WHERE u.name = :name")
+List<User> findByName(@Param("name") String name);
+```
+
+-   `User`는 엔티티 클래스 이름.
+-   `u.name`은 엔티티 클래스의 필드 이름.
+
+#### UPDATE
+```
+@Modifying
+@Query("UPDATE User u SET u.password = :password WHERE u.userId = :userId")
+int updatePassword(@Param("password") String password, @Param("userId") Long userId);
+```
+
+#### DELETE 쿼리
+```
+@Modifying
+@Query("DELETE FROM User u WHERE u.userId = :userId")
+int deleteById(@Param("userId") Long userId);
+```
+
+#### JOIN 쿼리
+```
+@Query("SELECT u FROM User u JOIN u.roles r WHERE r.name = :roleName")
+List<User> findByRoleName(@Param("roleName") String roleName);
+```
+
 ## Java Bean 규약
 Java Bean 규약에 따르면, 클래스의 필드에 접근하기 위해 다음과 같은 메서드 패턴이 사용됩니다:
 -   **Getter**: `get<FieldName>()` 또는 `is<FieldName>()` (boolean 필드의 경우)
@@ -2524,50 +2568,6 @@ public class UUIDExample {
 **출력 예시:**
 ```
 Generated UUID: 4a3e6c9f-bf8f-4d3d-8f6a-3b9b5b6f0db7
-```
-
-## JPQL
-JPQL은 **Java Persistence API (JPA)**에서 사용되는 객체 지향 쿼리 언어입니다. JPQL은 SQL과 유사하지만, 데이터베이스 테이블 대신 **JPA 엔티티 객체와 그 필드**를 대상으로 쿼리를 작성합니다. 이는 데이터베이스의 특정 구현에 독립적이며, JPA 엔티티를 중심으로 작동하도록 설계되었습니다.
-
-1. **객체 지향 쿼리**
-    - JPQL은 데이터베이스 테이블이 아닌 **엔티티 클래스와 필드**를 대상으로 쿼리를 작성합니다.
-    - 예: SQL의 `SELECT * FROM users`는 JPQL에서 `SELECT u FROM User u`로 작성됩니다.
-2. **데이터베이스 독립성**
-    - JPQL은 데이터베이스에 의존하지 않으며, JPA 구현체(Hibernate 등)가 JPQL을 SQL로 변환합니다.
-    - 따라서 데이터베이스를 변경하더라도 JPQL 코드를 수정할 필요가 없습니다.
-3. **동적 또는 정적 쿼리**
-    - JPQL은 정적 쿼리(애노테이션으로 정의)와 동적 쿼리(EntityManager를 사용하여 런타임에 생성) 모두 지원합니다.
-4. **SQL과의 차이점**
-    - JPQL은 SQL처럼 테이블과 컬럼 이름을 사용하지 않고, **엔티티 이름과 필드 이름**을 사용합니다.
-    - 예: SQL의 `users` 테이블 → JPQL의 `User` 엔티티.
-
-### SELECT
-```
-@Query("SELECT u FROM User u WHERE u.name = :name")
-List<User> findByName(@Param("name") String name);
-```
-
--   `User`는 엔티티 클래스 이름.
--   `u.name`은 엔티티 클래스의 필드 이름.
-
-### UPDATE
-```
-@Modifying
-@Query("UPDATE User u SET u.password = :password WHERE u.userId = :userId")
-int updatePassword(@Param("password") String password, @Param("userId") Long userId);
-```
-
-### DELETE 쿼리
-```
-@Modifying
-@Query("DELETE FROM User u WHERE u.userId = :userId")
-int deleteById(@Param("userId") Long userId);
-```
-
-### JOIN 쿼리
-```
-@Query("SELECT u FROM User u JOIN u.roles r WHERE r.name = :roleName")
-List<User> findByRoleName(@Param("roleName") String roleName);
 ```
 
 ## javax
