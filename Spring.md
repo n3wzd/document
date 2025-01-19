@@ -633,6 +633,56 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
+### OncePerRequestFilter
+`OncePerRequestFilter`는 **Spring Web**에서 제공하는 필터 클래스입니다. 이 필터는 요청이 처리될 때 한 번만 실행되도록 보장합니다. 즉, 요청 당 단 한 번만 필터가 적용되도록 하여, 여러 번 호출되는 것을 방지합니다.
+
+- **요청당 한 번만 실행**: `OncePerRequestFilter`는 요청이 들어올 때마다 한 번만 실행되도록 보장합니다. 이 필터는 여러 번 호출되는 것을 방지하기 위해 사용됩니다.
+- **필터 체인에서 사용**: `OncePerRequestFilter`는 Spring Security의 필터 체인에서 사용될 수 있습니다. 일반적으로 인증, 인가, 로깅 등의 작업을 필터에서 처리할 때 사용됩니다.
+- **doFilterInternal 메서드 구현**: `OncePerRequestFilter`를 상속받아 필터를 구현할 때, `doFilterInternal` 메서드를 오버라이드하여 필터 로직을 작성합니다. 이 메서드는 요청이 들어올 때마다 한 번만 호출됩니다.
+
+#### `doFilterInternal`
+`doFilterInternal`은 `OncePerRequestFilter` 클래스에서 제공하는 추상 메서드로, 이 메서드는 요청이 들어올 때마다 한 번만 실행되도록 보장되는 필터에서 실제 필터 로직을 작성하는 곳입니다.
+
+1. **필터 로직 처리**: `doFilterInternal` 메서드 안에서 요청에 대해 필요한 처리를 합니다. 예를 들어, 인증, 권한 검사, 로깅, 데이터 변환 등을 할 수 있습니다.
+2. **다음 필터로 전달**: 필터 로직을 처리한 후, `filterChain.doFilter(request, response)`를 호출하여 요청을 필터 체인의 다음 필터로 전달합니다. 이 호출이 없으면 필터 체인의 다른 필터가 실행되지 않습니다.
+
+** 주요 매개변수**
+- `HttpServletRequest request`: 클라이언트의 요청을 나타내는 객체입니다. 요청에 포함된 데이터를 읽고, 필요한 경우 수정할 수 있습니다.
+- `HttpServletResponse response`: 서버의 응답을 나타내는 객체입니다. 응답을 수정하거나 설정할 수 있습니다.
+- `FilterChain filterChain`: 필터 체인 내의 다음 필터를 호출하는 객체입니다. `filterChain.doFilter(request, response)`를 호출하여 요청을 다음 필터로 전달합니다.
+
+```
+@Component
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
+    private final JwtTokenProvider jwtTokenProvider;
+
+    public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider) {
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        // 요청 헤더에서 토큰 추출
+        String token = jwtTokenProvider.resolveToken(request);
+
+        // 토큰이 유효하면 인증 정보를 SecurityContext에 설정
+        if (token != null && jwtTokenProvider.validateToken(token)) {
+            Authentication authentication = jwtTokenProvider.getAuthentication(token);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        }
+
+        // 필터 체인의 다음 필터로 요청을 전달
+        filterChain.doFilter(request, response);
+    }
+}
+```
+
+### addFilterBefore
+`addFilterBefore()`는 특정 필터를 **기존 필터보다 먼저 실행되도록** 추가하는 데 사용됩니다. 첫 번째 인자는 추가할 필터이고, 두 번째 인자는 해당 필터가 실행될 위치를 지정하는 필터입니다.
+
+두 번째 필터가 필터 체인에 존재하지 않으면, 예외가 발생하지 않고, 첫 번째 필터는 정상적으로 실행되며, 두 번째 필터는 필터 체인에서 생략됩니다.
+
 ## Spring MVC
 **Spring MVC**는 **Spring Web** 모듈 내에서 웹 애플리케이션에서 **HTTP 요청을 처리하고 응답을 반환**하는 데 특화된 부분으로,  **모델-뷰-컨트롤러(MVC)** 아키텍처를 구현하는 **웹 프레임워크**입니다. **Spring MVC**는 웹 요청을 처리하고, 적절한 응답을 반환하는 과정을 효율적으로 관리하는 데 사용됩니다.
 
@@ -665,7 +715,7 @@ public class UserController {
     // 요청을 처리하는 메서드들
 }
 ```
-    
+
 ### `@RequestMapping`
 **HTTP 요청을 메서드에 매핑**하는 데 사용됩니다. 기본적으로 `@RequestMapping`은 모든 HTTP 메서드(GET, POST, PUT, DELETE 등)를 처리할 수 있지만, 더 구체적인 요청을 처리하려면 `@GetMapping`, `@PostMapping` 등을 사용할 수 있습니다.
     
@@ -1365,6 +1415,97 @@ formLogin은 기본적으로 세션 기반 인증을 사용합니다. RESTful AP
 ```
 
 `hasRole()`과 달리, `hasAuthority()`에서 사용되는 권한은 `ROLE_` 접두어 없이 저장됩니다.
+
+### SecurityContext
+`SecurityContext`는 **Spring Security**에서 사용자의 인증 정보를 저장하고 관리하는 컨테이너입니다. 이 객체는 현재 실행 중인 스레드에 대한 인증 상태를 추적하며, 보안 관련 작업을 수행할 때 사용됩니다.
+
+1. **인증 정보 저장**: `SecurityContext`는 사용자가 인증되었을 때, 인증 정보를 저장합니다. 예를 들어, 사용자가 로그인하면, 그 사용자의 `Authentication` 객체가 `SecurityContext`에 저장됩니다.
+2. **인증 정보 제공**: 애플리케이션에서 요청을 처리하는 동안, `SecurityContext`에 저장된 `Authentication` 객체를 통해 현재 인증된 사용자의 정보를 가져올 수 있습니다. 이를 통해 사용자가 어떤 권한을 가지고 있는지 확인하거나, 인증 정보를 기반으로 액세스를 제어할 수 있습니다.
+3. **스레드 로컬(ThreadLocal)**: `SecurityContext`는 기본적으로 **스레드 로컬**(ThreadLocal)을 사용하여 각 요청마다 독립적인 인증 정보를 저장합니다. 이는 멀티스레드 환경에서 각 요청이 서로 다른 인증 정보를 갖도록 보장합니다.
+
+Spring Security는 보통 요청을 처리하는 동안, 보안 필터에서 `SecurityContext`를 설정합니다. 예를 들어, JWT 인증을 처리하는 필터에서 JWT 토큰을 검증하고, 인증된 사용자의 정보를 `SecurityContext`에 설정합니다.
+
+`SecurityContext`에 인증 정보가 설정되지 않으면, Spring Security는 해당 요청을 인증되지 않은 사용자로 간주하고, 권한이 없는 페이지에 접근하려는 경우 403 Forbidden을 발생시킵니다.
+
+### SecurityContextHolder
+`SecurityContextHolder`는 현재 스레드에 대한 `SecurityContext`를 저장하고 관리하는 클래스입니다. `SecurityContextHolder`는 하나의 `SecurityContext`만을 저장합니다.
+
+- `getContext()`: `SecurityContext`를 가져옵니다.
+- `setContext()`: `SecurityContext`를 설정합니다.
+
+```
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+String username = authentication.getName();  // 인증된 사용자의 이름
+Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();  // 권한 정보
+```
+
+### Authentication
+`Authentication` 인터페이스는 **사용자 인증 정보**를 나타냅니다. Spring Security의 인증 과정에서 사용자의 자격 증명을 포함하고 있는 객체입니다. 이 객체는 사용자가 제공한 자격 증명이 유효한지 확인하는 데 사용됩니다.
+
+- **인증된 사용자 정보**: `Authentication` 객체는 사용자의 이름, 비밀번호, 권한(roles) 등의 인증 정보를 포함합니다.
+- **권한(Authorities)**: 사용자가 가진 권한(roles)을 포함할 수 있습니다.
+
+**프로퍼티**: 
+- `Principal`: 인증된 사용자의 기본 정보(예: 사용자 이름).
+- `Credentials`: 사용자가 제공한 자격 증명(예: 비밀번호).
+
+**메서드**:
+- `getPrincipal()`: 인증된 사용자의 기본 정보(보통 `UserDetails` 객체)를 반환합니다.
+- `getCredentials()`: 사용자가 제공한 자격 증명(예: 비밀번호)을 반환합니다.
+- `getAuthorities()`: 사용자의 권한 목록을 반환합니다.
+- `isAuthenticated()`: 인증 여부를 반환합니다.
+
+```
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+String username = (String) authentication.getPrincipal();
+Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+```
+
+위 예시에서는 `SecurityContextHolder`를 통해 현재 인증된 사용자의 `Authentication` 객체를 가져오고, 사용자의 이름과 권한을 추출합니다.
+
+### User
+`User` 객체는 보통 사용자 정보를 포함하는 **VO(Value Object)**로 사용되며, Spring Security에서는 `UserDetails` 인터페이스를 구현하여 인증 및 권한 관련 기능을 제공합니다.
+
+- 사용자 이름 (`username`): 사용자의 고유 식별자입니다. 로그인 시 사용됩니다.
+- 비밀번호 (`password`): 사용자의 비밀번호입니다.
+- 권한 (`authorities`): 사용자가 가진 권한 목록입니다. 예를 들어, `ROLE_USER`, `ROLE_ADMIN` 등의 권한이 포함됩니다.
+
+### UserDetails
+`UserDetails` 인터페이스는 **사용자에 대한 상세 정보**를 제공하는 객체입니다. `UserDetails`는 `Authentication` 객체에서 `Principal`로 사용되는 객체이며, 인증된 사용자의 정보를 표현하는 데 사용됩니다.
+
+- **사용자 정보 제공**: `UserDetails`는 사용자 이름, 비밀번호, 권한(roles) 등 사용자의 상세 정보를 제공합니다.
+- **사용자 정의**: `UserDetails`는 구현체가 필요하며, 보통 사용자 정보를 저장하는 클래스가 이를 구현합니다. 예를 들어, `User` 클래스를 구현하여 사용자 정보를 담을 수 있습니다.
+- **권한 관리**: `UserDetails`는 사용자가 가진 권한을 `GrantedAuthority` 객체의 목록으로 반환합니다.
+
+**메서드**:
+- `getUsername()`: 사용자의 이름을 반환합니다.
+- `getPassword()`: 사용자의 비밀번호를 반환합니다.
+- `getAuthorities()`: 사용자의 권한 목록을 반환합니다.
+- `isAccountNonExpired()`, `isAccountNonLocked()`, `isCredentialsNonExpired()`, `isEnabled()`: 사용자의 계정 상태를 확인합니다.
+
+### UsernamePasswordAuthenticationToken
+`UsernamePasswordAuthenticationToken`은 **인증 정보**를 나타내는 클래스입니다. 사용자가 로그인할 때 입력한 사용자 이름과 비밀번호를 기반으로 인증을 시도하는 데 사용됩니다.
+
+- **인증 정보 객체**: 이 클래스는 사용자 이름(username)과 비밀번호(password)와 같은 인증 정보를 캡슐화합니다.
+- **Authentication 인터페이스 구현**: `UsernamePasswordAuthenticationToken`은 `Authentication` 인터페이스를 구현하므로, Spring Security의 인증 시스템에서 인증 요청을 표현하는 데 사용됩니다.
+- **인증 요청에 사용**: 사용자가 로그인할 때 입력한 정보를 담고 있으며, 이 객체는 `AuthenticationManager`를 통해 인증 프로세스를 시작하는 데 사용됩니다.
+
+```
+UsernamePasswordAuthenticationToken authenticationToken = 
+    new UsernamePasswordAuthenticationToken(username, password);
+```
+
+이 객체는 `AuthenticationManager`에 의해 처리되며, 사용자가 제공한 자격 증명이 올바른지 확인합니다.
+
+### UsernamePasswordAuthenticationFilter
+`UsernamePasswordAuthenticationFilter`는 **사용자 인증을 처리하는 필터**입니다. 주로 사용자가 로그인할 때 HTTP 요청에서 사용자 이름과 비밀번호를 추출하고, 이를 `UsernamePasswordAuthenticationToken`으로 변환하여 인증을 처리합니다.
+
+- **HTTP 요청 처리**: `UsernamePasswordAuthenticationFilter`는 HTTP 요청에서 사용자의 자격 증명(사용자 이름, 비밀번호)을 추출하여 인증을 처리합니다.
+- **인증 필터**: 이 필터는 인증 요청을 처리하며, `AuthenticationManager`에 인증을 위임합니다.
+- **POST 요청 처리**: 기본적으로 이 필터는 `/login` 경로로 오는 POST 요청을 처리하며, 요청 본문에서 사용자 이름과 비밀번호를 추출합니다.
+- **인증 처리**: 인증이 성공하면 `SecurityContextHolder`에 인증된 사용자 정보를 설정하고, 이후 요청에서 인증된 사용자로 처리됩니다.
+
+`Authentication`과 `UserDetails`는 **Spring Security**에서 인증 및 권한 부여(Authorization) 관련 작업을 수행하는 핵심 인터페이스입니다. 이 두 인터페이스는 인증된 사용자의 정보를 관리하고, 인증 과정에서 중요한 역할을 합니다.
 
 ## IO
 ### jsonwebtoken
