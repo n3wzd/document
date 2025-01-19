@@ -1760,12 +1760,12 @@ public class UserController {
 `@Valid`와 동일하게 객체의 유효성 검사를 트리거하지만, **Validation Group**을 지정할 수 있다는 추가적인 기능이 있습니다. 특정 그룹을 지정하여 해당 그룹에 포함된 필드만 유효성 검사를 수행할 수 있습니다.
 
 ```
-public class CreateGroup {
-    // 빈 클래스, Create에 관련된 유효성 검사 그룹
+public interface CreateGroup {
+    // 빈 인터페이스, Create에 관련된 유효성 검사 그룹
 }
 
-public class UpdateGroup {
-    // 빈 클래스, Update에 관련된 유효성 검사 그룹
+public interface UpdateGroup {
+    // 빈 인터페이스, Update에 관련된 유효성 검사 그룹
 }
 ```
 
