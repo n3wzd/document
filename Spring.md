@@ -1728,3 +1728,78 @@ context.setVariable("verificationCode", verificationCode);
 
 return templateEngine.process("emailTemplate", context);
 ```
+
+## Validation
+### `@Valid`
+`@Valid`는 **Java Bean Validation**을 위한 어노테이션으로, 객체의 유효성을 검사할 때 사용됩니다. 이 어노테이션을 사용하면 객체의 필드에 설정된 제약 조건(예: `@NotNull`, `@Size`, `@Email` 등)이 검증됩니다.
+
+- **DTO**나 **엔티티** 객체에 대한 유효성 검사를 수행할 때 사용됩니다.
+- 일반적으로 **컨트롤러**에서 요청 파라미터를 객체로 바인딩할 때 사용하며, **서비스**나 **메서드 파라미터**에서도 유효성 검사를 트리거할 수 있습니다.
+
+```
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@Valid @RequestBody UserDTO userDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body("Invalid input");
+        }
+        // 유효성 검사를 통과하면 로직 실행
+        return ResponseEntity.ok("User registered successfully");
+    }
+}
+```
+- 이 예제에서 `@Valid`는 `userDTO` 객체가 **컨트롤러 메서드**로 전달될 때 유효성 검사를 수행합니다.
+- 유효성 검사가 실패하면, `BindingResult` 객체에 오류가 기록되며, 이를 통해 유효성 검사 결과를 확인할 수 있습니다.
+
+`BindingResult`는 유효성 검사 결과를 담고 있는 객체로, `@Valid` 또는 `@Validated`로 유효성 검사를 하는 객체 바로 뒤에 와야 합니다. 즉, 메서드 인자에서 `@Valid`와 `BindingResult`의 순서는 반드시 `@Valid` 객체 뒤에 `BindingResult`가 와야 합니다.
+
+### `@Validated`
+`@Valid`와 동일하게 객체의 유효성 검사를 트리거하지만, **Validation Group**을 지정할 수 있다는 추가적인 기능이 있습니다. 특정 그룹을 지정하여 해당 그룹에 포함된 필드만 유효성 검사를 수행할 수 있습니다.
+
+```
+public class CreateGroup {
+    // 빈 클래스, Create에 관련된 유효성 검사 그룹
+}
+
+public class UpdateGroup {
+    // 빈 클래스, Update에 관련된 유효성 검사 그룹
+}
+```
+
+```
+public class User {
+
+    @NotNull(groups = {CreateGroup.class, UpdateGroup.class}) // 여러 그룹에 대한 유효성 검사
+    @Size(min = 6, groups = CreateGroup.class) // CreateGroup에 대해서만 유효성 검사
+    private String username;
+
+    @Size(min = 6, groups = CreateGroup.class)  // CreateGroup에 대해서만 유효성 검사
+    private String password;
+
+    @NotNull(groups = UpdateGroup.class)  // UpdateGroup에 대해서만 유효성 검사
+    private String email;
+
+    // Getter, Setter
+}
+```
+
+```
+@RestController
+public class UserController {
+
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@Validated(CreateGroup.class) @RequestBody User user) {
+        // CreateGroup에 해당하는 필드만 검증
+        return ResponseEntity.ok("User registered");
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> update(@Validated(UpdateGroup.class) @RequestBody User user) {
+        // UpdateGroup에 해당하는 필드만 검증
+        return ResponseEntity.ok("User updated");
+    }
+}
+```
