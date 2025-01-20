@@ -410,6 +410,26 @@ public class User {
 }
 ```
 
+### @Lob
+
+`@Lob` 어노테이션은 "Large Object"를 나타냅니다. 이 어노테이션은 데이터베이스에 저장할 때 큰 크기의 데이터를 처리할 수 있도록 도와줍니다. `@Lob`은 `BLOB`(Binary Large Object) 또는 `CLOB`(Character Large Object) 타입으로 매핑됩니다.
+
+- `BLOB`: 이진 데이터(예: 이미지, 비디오 등)
+- `CLOB`: 텍스트 데이터(예: 긴 텍스트, JSON, XML 등)
+
+```
+@Lob
+@Column(name = "address_components", columnDefinition = "json")
+private String addressComponents;
+```
+
+`JSON` 형식의 문자열을 저장하기 위해 `CLOB` 타입으로 매핑됩니다.
+
+### `@Lob` 사용 시 주의 사항:
+
+- **성능**: `@Lob`을 사용한 필드는 `LAZY` 로딩을 기본으로 하므로, 데이터를 실제로 사용할 때만 로딩됩니다. 즉, 데이터를 읽을 때 성능에 영향을 미칠 수 있습니다.
+- **데이터베이스 지원**: 데이터베이스마다 `BLOB` 또는 `CLOB` 타입을 지원하지 않는 경우가 있을 수 있으므로, 사용하는 데이터베이스에서 이를 지원하는지 확인해야 합니다.
+
 ## 서비스(Service)
 **서비스(Service)**는 **애플리케이션의 비즈니스 로직을 처리하는 계층**입니다. Spring 애플리케이션에서는 일반적으로 서비스 계층을 사용하여 컨트롤러(Controller)와 데이터 액세스 계층(Repository) 사이의 중간 역할을 수행합니다.
 
@@ -682,6 +702,32 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 `addFilterBefore()`는 특정 필터를 **기존 필터보다 먼저 실행되도록** 추가하는 데 사용됩니다. 첫 번째 인자는 추가할 필터이고, 두 번째 인자는 해당 필터가 실행될 위치를 지정하는 필터입니다.
 
 두 번째 필터가 필터 체인에 존재하지 않으면, 예외가 발생하지 않고, 첫 번째 필터는 정상적으로 실행되며, 두 번째 필터는 필터 체인에서 생략됩니다.
+
+### RestTemplate
+`RestTemplate`은 Spring Framework에서 제공하는 HTTP 클라이언트로, RESTful 웹 서비스와 상호작용하기 위해 사용됩니다. 이를 통해 HTTP 요청을 보내고, 응답을 받을 수 있습니다. `RestTemplate`은 HTTP GET, POST, PUT, DELETE 등의 요청을 손쉽게 처리할 수 있도록 도와줍니다.
+
+1. **HTTP 요청 전송**: `RestTemplate`을 사용하면 HTTP 요청을 전송할 수 있습니다. 예를 들어, GET 요청을 보내서 서버로부터 데이터를 가져오거나, POST 요청을 보내서 데이터를 서버에 전송할 수 있습니다.
+2. **응답 처리**: 서버로부터 받은 응답을 Java 객체로 변환할 수 있습니다. 예를 들어, JSON 응답을 Java 객체로 변환하거나, XML 응답을 Java 객체로 변환할 수 있습니다.
+3. **다양한 HTTP 메서드 지원**: GET, POST, PUT, DELETE 등의 HTTP 메서드를 지원합니다.
+
+#### getForObject
+`getForObject` 메서드는 지정된 URL로 GET 요청을 보내고, 응답을 `String` 형식으로 반환합니다.
+```
+RestTemplate restTemplate = new RestTemplate();
+String url = "https://api.example.com/data";
+String response = restTemplate.getForObject(url, String.class);
+```
+
+#### postForEntity
+`postForEntity`는 POST 요청을 보내고, 서버의 응답을 `ResponseEntity` 객체로 반환합니다.
+```
+RestTemplate restTemplate = new RestTemplate();
+String url = "https://api.example.com/data";
+Map<String, String> requestBody = new HashMap<>();
+requestBody.put("key", "value");
+
+ResponseEntity<String> response = restTemplate.postForEntity(url, requestBody, String.class);
+```
 
 ## Spring MVC
 **Spring MVC**는 **Spring Web** 모듈 내에서 웹 애플리케이션에서 **HTTP 요청을 처리하고 응답을 반환**하는 데 특화된 부분으로,  **모델-뷰-컨트롤러(MVC)** 아키텍처를 구현하는 **웹 프레임워크**입니다. **Spring MVC**는 웹 요청을 처리하고, 적절한 응답을 반환하는 과정을 효율적으로 관리하는 데 사용됩니다.
