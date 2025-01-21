@@ -1,4 +1,4 @@
-﻿# JAVA
+# JAVA
 ## 도입 (Intro)
 Java는 1995년에 선보인 객체지향 프로그래밍 언어입니다. 플랫폼 독립적이며, 간결하고 확장성이 뛰어나며 안정성이 높은 특징을 가지고 있습니다. Java는 다양한 응용 분야에서 사용되며, 특히 웹 개발, 모바일 애플리케이션, 기업 시스템에서 널리 사용되고 있습니다.
 
@@ -2569,6 +2569,140 @@ public class UUIDExample {
 ```
 Generated UUID: 4a3e6c9f-bf8f-4d3d-8f6a-3b9b5b6f0db7
 ```
+
+## JSON
+### Jackson
+**Jackson**은 **Java**에서 JSON 데이터를 처리하기 위한 **라이브러리**입니다. 주로 JSON을 Java 객체로 변환하거나, Java 객체를 JSON 형식으로 변환하는 데 사용됩니다. Jackson은 **빠르고 유연하며** 다양한 기능을 제공하는 JSON 처리 라이브러리로, Java에서 JSON을 다루는 표준적인 도구로 널리 사용됩니다.
+
+1. **객체-JSON 변환**:
+    - JSON 문자열을 Java 객체로 변환하거나, Java 객체를 JSON 문자열로 변환할 수 있습니다.
+2. **어노테이션 지원**:
+    - Jackson은 **어노테이션**을 통해 JSON과 Java 객체 간의 매핑을 커스터마이즈할 수 있습니다.
+    - 예를 들어, **`@JsonProperty`**, **`@JsonIgnore`**, **`@JsonInclude`** 등의 어노테이션을 사용하여 변환 방식을 제어할 수 있습니다.
+3. **다양한 데이터 포맷 지원**:
+    - Jackson은 JSON 외에도 **XML**, **YAML**, **CSV**와 같은 다른 데이터 포맷도 지원합니다.
+4. **스트리밍 API**:
+    - Jackson은 **스트리밍 API**를 제공하여 대용량 JSON 데이터를 효율적으로 처리할 수 있습니다.
+5. **성능**:
+    - Jackson은 **빠르고 효율적**인 성능을 제공하여, 대규모 시스템에서 JSON 처리가 필요한 경우에도 적합합니다.
+
+#### ObjectMapper
+Jackson은 **`ObjectMapper`** 클래스를 주로 사용하여 JSON을 처리합니다. 이 클래스는 JSON 데이터를 Java 객체로 변환하거나, Java 객체를 JSON 형식으로 변환하는 다양한 메서드를 제공합니다.
+
+#### JSON -> Java
+
+```
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        // JSON 문자열
+        String jsonString = "{\"name\":\"John\",\"age\":30}";
+
+        // ObjectMapper 생성
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // JSON 문자열을 Person 객체로 변환
+        Person person = objectMapper.readValue(jsonString, Person.class);
+
+        // 출력
+        System.out.println("Name: " + person.getName());
+        System.out.println("Age: " + person.getAge());
+    }
+}
+
+class Person {
+    private String name;
+    private int age;
+
+    // Getter, Setter
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+```
+
+#### Java -> JSON
+```
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        // Person 객체 생성
+        Person person = new Person();
+        person.setName("John");
+        person.setAge(30);
+
+        // ObjectMapper 생성
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Person 객체를 JSON 문자열로 변환
+        String jsonString = objectMapper.writeValueAsString(person);
+
+        // 출력
+        System.out.println(jsonString); // {"name":"John","age":30}
+    }
+}
+
+class Person {
+    private String name;
+    private int age;
+
+    // Getter, Setter
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+```
+
+#### @JsonProperty
+`@JsonProperty`는 JSON 키와 Java 필드명을 다르게 매핑하고 싶을 때 사용합니다.
+    
+```
+@JsonProperty("full_name")
+private String name;
+```
+
+#### @JsonIgnore
+`@JsonIgnore`는 JSON으로 변환할 때 특정 필드를 제외하고 싶을 때 사용합니다.
+
+```
+@JsonIgnore
+private int age;
+```
+
+#### @JsonInclude
+`@JsonInclude`는 특정 조건에 따라 필드를 포함하거나 제외할 수 있습니다.
+    
+```
+@JsonInclude(JsonInclude.Include.NON_NULL)
+private String middleName; // null일 경우 제외
+```
+    
 
 ## javax
 `Jakarta`와 `javax`는 Java 플랫폼에서 사용되는 패키지 이름의 두 가지 버전입니다. 그 차이는 주로 Java EE (Enterprise Edition)와 관련이 있습니다.
