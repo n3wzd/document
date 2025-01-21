@@ -710,6 +710,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 2. **응답 처리**: 서버로부터 받은 응답을 Java 객체로 변환할 수 있습니다. 예를 들어, JSON 응답을 Java 객체로 변환하거나, XML 응답을 Java 객체로 변환할 수 있습니다.
 3. **다양한 HTTP 메서드 지원**: GET, POST, PUT, DELETE 등의 HTTP 메서드를 지원합니다.
 
+Spring에서는 `RestTemplate`을 빈(bean)으로 등록하여 사용할 수 있습니다. 이렇게 하면 의존성 주입을 통해 애플리케이션에서 손쉽게 `RestTemplate`을 사용할 수 있습니다.
+
 #### getForObject
 `getForObject` 메서드는 지정된 URL로 GET 요청을 보내고, 응답을 `String` 형식으로 반환합니다.
 ```
@@ -727,6 +729,59 @@ Map<String, String> requestBody = new HashMap<>();
 requestBody.put("key", "value");
 
 ResponseEntity<String> response = restTemplate.postForEntity(url, requestBody, String.class);
+```
+
+### RestClient
+**Spring Framework 6.1**부터 도입된 `RestClient`는 더 현대적인 HTTP 클라이언트 API로 설계되었으며, 기존의 `RestTemplate`와 `WebClient`의 장점을 결합한 방식으로 동작합니다.
+
+1. **동기식 API 지원**:
+    - `RestTemplate`처럼 동기적으로 동작합니다.
+    - 비동기 작업이 필요하면 `WebClient`를 사용하는 것이 적합합니다.
+2. **간결하고 유연한 API**:
+    - `RestTemplate`보다 직관적이고 간결한 방식으로 HTTP 요청을 작성할 수 있습니다.
+3. **구성 가능**:
+    - `RestClient.Builder`를 통해 요청 로깅, 기본 헤더, 타임아웃 등 다양한 설정을 추가할 수 있습니다.
+4. **기반 구현**:
+    - 내부적으로 `HttpComponents`와 같은 HTTP 클라이언트 라이브러리를 사용하여 더 나은 성능을 제공합니다.
+
+```
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestClient;
+
+@Configuration
+public class RestClientConfig {
+
+    @Bean
+    public RestClient restClient() {
+        return RestClient.builder()
+                .baseUrl("https://api.example.com")
+                .build();
+    }
+}
+```
+
+```
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
+
+@Service
+public class MyService {
+
+    private final RestClient restClient;
+
+    public MyService(RestClient restClient) {
+        this.restClient = restClient;
+    }
+
+    public String fetchData() {
+        return restClient
+                .get()
+                .uri("/data")
+                .retrieve()
+                .body(String.class);
+    }
+}
 ```
 
 ## Spring MVC
@@ -1810,6 +1865,107 @@ public String generateLink() {
 ```
 
 웹 애플리케이션의 컨텍스트 경로가 `/myapp`이라면, 이 코드는 `/myapp/new-path`와 같은 URL을 생성합니다.
+
+### UriComponentsBuilder
+UriComponentsBuilder는 URI(Uniform Resource Identifier)를 동적으로 생성하고 조합할 때 사용되는 유틸리티 클래스입니다. 주로 **REST API 호출** 시 동적으로 URL을 구성하거나, 쿼리 파라미터를 추가하는 데 사용됩니다.
+
+1. **유연한 URI 생성**:
+    - 경로, 쿼리 파라미터, 호스트 등을 동적으로 추가하여 URI를 생성할 수 있습니다.
+2. **안전한 URL 인코딩**:
+    - 자동으로 URL 인코딩을 처리하므로, 직접 문자열을 조작할 때 발생할 수 있는 문제를 방지합니다.
+3. **체이닝 방식**:
+    - 빌더 패턴을 사용하여 코드가 간결하고 읽기 쉽습니다.
+
+|메서드|설명|
+|---|---|
+|`scheme(String scheme)`|URI의 스킴(예: `http`, `https`)을 설정.|
+|`host(String host)`|호스트(예: `api.example.com`)를 설정.|
+|`port(int port)`|포트 번호를 설정.|
+|`path(String path)`|경로를 설정하거나 추가.|
+|`queryParam(String name, Object... values)`|쿼리 파라미터를 추가.|
+|`build()`|URI를 빌드하며, 인코딩되지 않은 상태로 반환.|
+|`buildAndExpand(Object... uriVariables)`|URI 템플릿 변수를 동적으로 치환.|
+|`toUriString()`|URI를 문자열로 반환.|
+|`toUri()`|URI 객체를 반환.|
+
+#### 기본 URI 생성
+
+```java
+import org.springframework.web.util.UriComponentsBuilder;
+
+public class UriBuilderExample {
+    public static void main(String[] args) {
+        String uri = UriComponentsBuilder.newInstance()
+                .scheme("https")
+                .host("api.example.com")
+                .path("/users/{id}")
+                .buildAndExpand(123)
+                .toUriString();
+
+        System.out.println(uri); // 출력: https://api.example.com/users/123
+    }
+}
+```
+
+#### 쿼리 파라미터 추가
+
+```java
+String uri = UriComponentsBuilder.newInstance()
+        .scheme("https")
+        .host("api.example.com")
+        .path("/search")
+        .queryParam("query", "spring framework")
+        .queryParam("page", 1)
+        .build()
+        .toUriString();
+
+System.out.println(uri);
+// 출력: https://api.example.com/search?query=spring+framework&page=1
+```
+
+#### `buildAndExpand`
+`buildAndExpand`를 사용해 템플릿 변수에 값을 동적으로 삽입합니다.
+
+```java
+String uri = UriComponentsBuilder.newInstance()
+        .scheme("https")
+        .host("api.example.com")
+        .path("/users/{userId}/posts/{postId}")
+        .buildAndExpand(123, 456)
+        .toUriString();
+
+System.out.println(uri);
+// 출력: https://api.example.com/users/123/posts/456
+```
+
+#### URI 확장
+기존 URI를 기반으로 새로운 경로나 파라미터를 추가합니다.
+
+```java
+String uri = UriComponentsBuilder.fromUriString("https://api.example.com/users")
+        .path("/{id}")
+        .queryParam("active", true)
+        .buildAndExpand(123)
+        .toUriString();
+
+System.out.println(uri);
+// 출력: https://api.example.com/users/123?active=true
+```
+
+#### `toUri()`
+`toUri()`를 사용하여 `java.net.URI` 객체를 반환합니다.
+
+```java
+URI uri = UriComponentsBuilder.newInstance()
+        .scheme("https")
+        .host("api.example.com")
+        .path("/users")
+        .build()
+        .toUri();
+
+System.out.println(uri);
+// 출력: https://api.example.com/users
+```
 
 ## Template
 ### Thymeleaf
