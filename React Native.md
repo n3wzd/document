@@ -164,6 +164,7 @@ const MyComponent = () => {
 };
 ```
 
+
 ## Package
 ### React Navigation
 **React Navigation**은 **React Native** 애플리케이션에서 화면 간 이동(네비게이션)을 관리하는 라이브러리입니다. 이 라이브러리는 모바일 앱에서 흔히 필요한 여러 종류의 **네비게이션 패턴 및 관련 UI**를 제공합니다.
@@ -523,3 +524,228 @@ export default HomeScreen;
 ```
 
 위 코드에서는 `useRouter` 훅을 사용하여 `router.push('/profile')`로 `/profile` 경로로 이동합니다. `router.push()`는 URL을 변경하고 해당 경로로 이동하게 만듭니다.
+
+### `axios`
+`axios`는 외부 라이브러리로, HTTP 요청을 보다 쉽게 관리할 수 있도록 도와줍니다. `fetch`보다 많은 기능을 제공하며, 개발자 경험을 개선합니다.
+
+- Promise 기반으로 작동.
+- 요청 및 응답에 대한 인터셉터(interceptor) 기능 제공.
+- HTTP 상태 코드를 기반으로 자동 에러 처리가 가능.
+- JSON 데이터를 자동으로 변환.
+- 요청 취소, 타임아웃 설정, 기본 URL 설정 등 추가 기능 제공.
+
+설치:
+```
+npm install axios
+```
+
+**GET 요청**
+```
+import axios from 'axios';
+
+axios
+  .get('https://jsonplaceholder.typicode.com/posts/1')
+  .then((response) => {
+    console.log(response.data); // JSON 데이터 자동 파싱
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+```
+
+**POST 요청**
+```
+import axios from 'axios';
+
+axios
+  .post('https://jsonplaceholder.typicode.com/posts', {
+    title: 'foo',
+    body: 'bar',
+    userId: 1,
+  })
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+```
+
+|**특징**|**fetch**|**axios**|
+|---|---|---|
+|**내장 여부**|브라우저와 Node.js에 내장|별도 설치 필요 (`npm install axios`)|
+|**Promise 기반**|지원|지원|
+|**JSON 자동 파싱**|직접 `response.json()` 호출 필요|자동 파싱|
+|**에러 처리**|네트워크 오류만 `catch`로 처리 가능|HTTP 상태 코드도 자동으로 처리 가능|
+|**인터셉터**|지원하지 않음|지원|
+|**타임아웃 설정**|직접 구현 필요|기본적으로 제공|
+|**요청 취소**|직접 구현 필요|기본적으로 제공|
+
+### React Native Dotenv
+`react-native-dotenv`는 React Native 애플리케이션에서 `.env` 파일을 사용하여 환경 변수를 관리할 수 있게 해주는 패키지입니다. 이를 통해 민감한 정보(예: API 키, 서버 URL 등)를 코드와 분리하고, 환경별(개발, 테스트, 프로덕션)로 다른 값을 설정할 수 있습니다.
+
+- `.env` 파일에 정의된 변수를 애플리케이션 코드에서 사용할 수 있도록 제공합니다.
+- 환경 변수 값을 쉽게 변경할 수 있어, 환경에 따라 다른 설정을 적용하는 데 유용합니다.
+- 민감한 정보를 코드베이스에서 분리하여 보안성을 높입니다.
+
+설치: 
+```
+npm install react-native-dotenv
+```
+
+**`.env` 파일 생성**
+프로젝트 루트 디렉터리에 `.env` 파일을 생성하고, 환경 변수를 정의합니다:
+
+```
+API_URL=https://api.example.com
+API_KEY=your_api_key_here
+```
+
+**`babel.config.js` 수정**
+Babel 설정 파일에 `react-native-dotenv` 플러그인을 추가합니다:
+```
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: ['babel-preset-expo'],
+    plugins: [
+      ['module:react-native-dotenv', {
+        moduleName: '@env',
+        path: '.env',
+        safe: false,
+        allowUndefined: true,
+      }],
+    ],
+  };
+};
+```
+
+**`env.d.ts` 설정** (TypeScript 사용시)
+```
+declare module "@env" {
+    export const API_URL: string;
+    export const API_KEY: string;
+}
+```
+
+**환경 변수 사용**
+`.env` 파일에 정의된 변수를 애플리케이션에서 가져와 사용할 수 있습니다:
+```
+import { API_URL, API_KEY } from '@env';
+
+console.log('API URL:', API_URL);
+console.log('API Key:', API_KEY);
+```
+
+### React Native Keychain
+`react-native-keychain`은 **iOS의 Keychain**과 **Android의 Keystore**를 사용하여 민감한 데이터를 안전하게 저장하는 라이브러리입니다. 이 라이브러리는 **암호화된 저장소**에 데이터를 저장하고, 앱이 종료되거나 시스템이 재시작되더라도 데이터를 안전하게 유지할 수 있도록 합니다.
+
+- **iOS Keychain**과 **Android Keystore**를 사용하여 안전한 데이터 저장
+- 데이터 저장 시 자동으로 암호화 처리
+- 사용자가 로그인한 후, 로그인 토큰이나 비밀번호와 같은 민감한 정보를 안전하게 저장할 수 있음
+
+설치:
+```
+npm install react-native-keychain
+```
+
+
+```
+import * as Keychain from 'react-native-keychain';
+
+// 토큰 저장
+const storeToken = async (token: string) => {
+  try {
+    await Keychain.setGenericPassword('user_token', token);
+  } catch (e) {
+    console.error('Failed to save token:', e);
+  }
+};
+
+// 토큰 가져오기
+const getToken = async () => {
+  try {
+    const credentials = await Keychain.getGenericPassword();
+    return credentials ? credentials.password : null;
+  } catch (e) {
+    console.error('Failed to fetch token:', e);
+  }
+};
+
+// 토큰 삭제
+const removeToken = async () => {
+  try {
+    await Keychain.resetGenericPassword();
+  } catch (e) {
+    console.error('Failed to remove token:', e);
+  }
+};
+```
+
+### React Native Secure Storage
+`react-native-secure-storage`는 **iOS의 Keychain**과 **Android의 EncryptedSharedPreferences**를 사용하여 민감한 데이터를 안전하게 저장하는 라이브러리입니다. 이 라이브러리도 데이터를 **암호화하여 저장**하며, 보안이 중요한 정보를 안전하게 보관할 수 있습니다.
+
+- **iOS Keychain**과 **Android EncryptedSharedPreferences**를 사용하여 안전한 데이터 저장
+- 데이터 암호화 및 복호화 처리
+- **react-native-keychain**과 비슷한 기능을 제공하지만, Android에서는 EncryptedSharedPreferences를 사용하여 저장
+
+설치:
+```
+npm install react-native-secure-storage
+```
+
+`react-native-secure-storage.d.ts` 설정: (TypeScripte 사용시)
+```
+// src/types/react-native-secure-storage.d.ts
+
+declare module 'react-native-secure-storage' {
+  interface SecureStorageOptions {
+    accessible?: string;
+    authenticationType?: string;
+  }
+
+  interface SecureStorage {
+    setItem(key: string, value: string, options?: SecureStorageOptions): Promise<void>;
+    getItem(key: string): Promise<string | null>;
+    removeItem(key: string): Promise<void>;
+    getAllItems(): Promise<{ [key: string]: string }>;
+  }
+
+  const SecureStorage: SecureStorage;
+
+  export default SecureStorage;
+}
+```
+
+사용 예시:
+```
+import SecureStorage from 'react-native-secure-storage';
+
+// 토큰 저장
+const storeToken = async (token: string) => {
+  try {
+    await SecureStorage.setItem('user_token', token);
+  } catch (e) {
+    console.error('Failed to save token:', e);
+  }
+};
+
+// 토큰 가져오기
+const getToken = async () => {
+  try {
+    const token = await SecureStorage.getItem('user_token');
+    return token;
+  } catch (e) {
+    console.error('Failed to fetch token:', e);
+  }
+};
+
+// 토큰 삭제
+const removeToken = async () => {
+  try {
+    await SecureStorage.removeItem('user_token');
+  } catch (e) {
+    console.error('Failed to remove token:', e);
+  }
+};
+```
