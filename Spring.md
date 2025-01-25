@@ -1608,6 +1608,119 @@ UsernamePasswordAuthenticationToken authenticationToken =
 
 `Authentication`과 `UserDetails`는 **Spring Security**에서 인증 및 권한 부여(Authorization) 관련 작업을 수행하는 핵심 인터페이스입니다. 이 두 인터페이스는 인증된 사용자의 정보를 관리하고, 인증 과정에서 중요한 역할을 합니다.
 
+## Exception
+### `@ControllerAdvice`
+`@ControllerAdvice`는 **Spring Framework**에서 제공하는 **애플리케이션 전역에서 발생하는 예외를 처리하기 위한 어노테이션**입니다. 이를 사용하면 여러 컨트롤러에서 발생할 수 있는 예외들을 중앙에서 처리할 수 있게 되어, 코드의 중복을 줄이고, 예외 처리를 일관되게 할 수 있습니다.
+
+- **전역 예외 처리**: 애플리케이션 내 모든 컨트롤러에서 발생하는 예외를 한 곳에서 처리할 수 있습니다.
+- **모든 컨트롤러에 적용**: 특정 컨트롤러나 메서드에만 적용되는 것이 아니라, 모든 컨트롤러에 적용되어 전역적으로 예외를 처리합니다.
+- **모든 종류의 예외 처리**: 특정 예외뿐만 아니라, `Exception`을 사용하여 예기치 못한 예외도 처리할 수 있습니다.
+
+#### 전역 예외 처리
+```
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    // 특정 예외 처리
+    @ExceptionHandler(ServiceException.class)
+    public ResponseEntity<String> handleServiceException(ServiceException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("서비스 오류가 발생했습니다.");
+    }
+
+    // 모든 예외 처리
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
+    }
+}
+```
+
+#### 모델 속성 설정
+특정 데이터를 모든 컨트롤러에서 공통적으로 사용할 수 있도록 모델 속성을 설정할 수 있습니다.
+
+```
+@ControllerAdvice
+public class GlobalModelAttribute {
+
+    @ModelAttribute("appName")
+    public String appName() {
+        return "My Application";
+    }
+}
+```
+
+위 예시에서는 모든 컨트롤러에서 `appName`이라는 속성을 사용할 수 있게 됩니다.
+
+#### 전역 바인딩 설정
+`@ControllerAdvice`를 사용하여 공통적인 바인딩 규칙을 설정할 수 있습니다.
+
+```
+@ControllerAdvice
+public class GlobalBinding {
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.addValidators(new CustomValidator());
+    }
+}
+```
+
+위 예시에서는 모든 요청에 대해 `CustomValidator`를 사용하여 유효성 검사를 할 수 있습니다.
+
+#### 특정 패키지 내의 컨트롤러에만 적용
+`basePackages` 속성을 사용하여 `com.example.locaquest.controller` 패키지 내의 모든 컨트롤러에서 발생하는 예외를 처리합니다.
+
+```
+@ControllerAdvice(basePackages = "com.example.locaquest.controller")
+public class UserControllerAdvice {
+
+    @ExceptionHandler(ServiceException.class)
+    public ResponseEntity<String> handleServiceException(ServiceException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("서비스 오류가 발생했습니다.");
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
+    }
+}
+```
+
+#### 특정 컨트롤러 클래스에만 적용
+`assignableTypes` 속성을 사용하여 `UserController` 클래스에서 발생하는 예외만 처리하도록 지정합니다.
+```
+@ControllerAdvice(assignableTypes = UserController.class)
+public class UserControllerAdvice {
+
+    @ExceptionHandler(ServiceException.class)
+    public ResponseEntity<String> handleServiceException(ServiceException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("서비스 오류가 발생했습니다.");
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
+    }
+}
+```
+
+`UserController`와 `AdminController`에서 발생하는 예외를 처리하도록 `@ControllerAdvice`를 설정합니다.
+```
+@ControllerAdvice(assignableTypes = {UserController.class, AdminController.class})
+public class GlobalControllerAdvice {
+
+    @ExceptionHandler(ServiceException.class)
+    public ResponseEntity<String> handleServiceException(ServiceException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("서비스 오류가 발생했습니다.");
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
+    }
+}
+```
+
 ## IO
 ### jsonwebtoken
 `jsonwebtoken`은 **JWT (JSON Web Token)**을 생성하고 검증하는 데 사용되는 Java 라이브러리입니다. JWT는 주로 웹 애플리케이션에서 사용자 인증 및 권한 부여에 사용되는 표준 토큰 형식입니다. 이 라이브러리는 JWT를 쉽게 생성하고 파싱할 수 있도록 도와줍니다.

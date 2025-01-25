@@ -100,7 +100,6 @@ const MyComponent = () => {
   );
 };
 ```
-    
 
 ### Button
 **Button**은 **기본 버튼** 컴포넌트로, 사용자가 클릭할 수 있는 버튼을 생성합니다. 기본적인 버튼 스타일을 제공하며, `onPress` 속성으로 버튼 클릭 이벤트를 처리할 수 있습니다.
@@ -694,7 +693,7 @@ const removeToken = async () => {
 npm install react-native-secure-storage
 ```
 
-`react-native-secure-storage.d.ts` 설정: (TypeScripte 사용시)
+`react-native-secure-storage.d.ts` 설정: (TypeScript 사용시)
 ```
 // src/types/react-native-secure-storage.d.ts
 
