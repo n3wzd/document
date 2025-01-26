@@ -370,20 +370,31 @@ const MyForm = () => {
     - `register` 함수는 필드를 등록하고, 필드에 유효성 검사 규칙을 추가할 수 있습니다.
     - 예: `register('name', { required: '이름을 입력해주세요.' })`
     - `name`은 필드의 이름을 의미하고, 두 번째 인자로는 유효성 검사 규칙을 객체 형태로 전달합니다.
-2. `handleSubmit`: 폼 제출을 처리하는 함수입니다.
+2. `control`: 폼의 상태를 관리합니다.
+	- `control`을 `useController` 또는 `Controller`에 전달하여 폼 필드를 관리합니다.
+3. `handleSubmit`: 폼 제출을 처리하는 함수입니다.
     - `handleSubmit`은 유효성 검사를 통과한 데이터만 `onSubmit` 함수로 전달합니다.
     - 예: `<form onSubmit={handleSubmit(onSubmit)}></form>`
-3. `formState`: 폼의 상태를 추적하는 객체입니다.
+4. `formState`: 폼의 상태를 추적하는 객체입니다.
     - `formState.errors`: 유효성 검사 오류를 추적하는 객체입니다.
     - 예: `formState.errors.name`은 `name` 필드에 대한 오류를 추적합니다.
-4. `setValue`: 필드 값을 동적으로 설정할 수 있는 함수입니다.
+5. `setValue`: 필드 값을 동적으로 설정할 수 있는 함수입니다.
     - 예: `setValue('name', 'John Doe')`는 `name` 필드의 값을 `'John Doe'`로 설정합니다.
-5. `watch`: 필드 값을 실시간으로 추적할 수 있는 함수입니다.
+6. `watch`: 필드 값을 실시간으로 추적할 수 있는 함수입니다.
     - 예: `const name = watch('name')`는 `name` 필드의 값을 실시간으로 추적합니다.
-6. `reset`: 폼을 초기화하는 함수입니다.
+7. `reset`: 폼을 초기화하는 함수입니다.
     - 예: `reset()`을 호출하면 폼을 초기 상태로 되돌립니다.
-7. `clearErrors`: 특정 필드 또는 모든 필드의 오류를 제거하는 함수입니다.
+8. `clearErrors`: 특정 필드 또는 모든 필드의 오류를 제거하는 함수입니다.
     - 예: `clearErrors('name')`는 `name` 필드의 오류를 제거합니다.
+
+`register`는 기본적인 폼 필드와 유효성 검사에 사용되며, `control`은 더 복잡한 폼 상태 관리 및 외부 라이브러리와의 통합을 위해 사용됩니다.
+
+|**특징**|`register`|`control`|
+|---|---|---|
+|**주요 역할**|폼 필드를 등록하고, 유효성 검사 규칙을 설정|폼 상태를 관리하고, 필드 값을 추적|
+|**사용되는 위치**|기본 HTML 입력 요소 (예: `<input>`, `<select>`)와 함께 사용|`useController` 또는 `Controller`와 함께 사용|
+|**사용 예시**|`<input {...register('fieldName', { rules })} />`|`<Controller control={control} name="fieldName" />`|
+|**핸들러 제공 여부**|`value`, `onChange`, `onBlur` 등의 필드 관련 핸들러 반환|`field.value`, `field.onChange`, `field.onBlur` 제공|
 
 #### 유효성 검사
 ```
@@ -423,6 +434,51 @@ return (
 - `maxLength`: 최대 길이를 설정합니다.
 - `pattern`: 정규식을 사용하여 값이 특정 패턴과 일치하는지 검사합니다.
 - `validate`: 사용자 정의 검증 함수를 사용하여 유효성 검사를 추가합니다.
+
+#### useController
+`useController`는 `react-hook-form` 라이브러리에서 제공하는 훅으로, 폼 필드와 관련된 상태를 관리하고, 해당 필드에 대한 유효성 검사 및 입력 값을 처리할 수 있게 해줍니다. `useController`는 `useForm` 훅과 함께 사용되며, 주로 폼 필드에 대해 더 세밀한 제어가 필요할 때 사용됩니다.
+
+```
+import React from 'react';
+import { TextInput, Text, View } from 'react-native';
+import { useController } from 'react-hook-form';
+
+const MyInput = ({ control, name, rules, errors }) => {
+  // useController를 사용하여 필드의 상태를 관리합니다.
+  const { field } = useController({
+    name,
+    control,
+    rules, // 유효성 검사 규칙
+  });
+
+  return (
+    <View>
+      <TextInput
+        style={{ borderWidth: 1, padding: 10 }}
+        placeholder={name}
+        onChangeText={field.onChange} // onChange 이벤트에 연결
+        onBlur={field.onBlur} // onBlur 이벤트에 연결
+        {...field}
+      />
+      {errors[name] && <Text style={{ color: 'red' }}>{errors[name]?.message}</Text>}
+    </View>
+  );
+};
+
+export default MyInput;
+```
+
+`useController`는 다음과 같은 값을 반환합니다:
+- `field`:
+    - `onChange`: 필드의 값이 변경될 때 호출되는 함수.
+    - `onBlur`: 필드가 포커스를 잃을 때 호출되는 함수.
+    - `name`: 필드의 이름 (이 값은 `useController`를 호출할 때 지정한 `name`입니다).
+    - `ref`: 필드에 대한 레퍼런스 (주로 `useRef`와 결합되어 사용).
+- `fieldState`:
+    - `invalid`: 필드가 유효성 검사에서 실패한 경우 `true`.
+    - `isTouched`: 필드가 사용자가 상호작용한 경우 `true`.
+    - `isDirty`: 필드의 값이 초기 값과 다르면 `true`.
+    - `error`: 해당 필드의 오류 메시지.
 
 ### Expo Router
 `expo-router`는 Expo에서 제공하는 라우팅 라이브러리로, React Navigation을 기반으로 하여 React 앱의 네비게이션을 간편하게 설정할 수 있도록 도와줍니다. 이 라이브러리는 특히 파일 기반 라우팅을 지원하여, 페이지마다 별도의 설정 없이 파일 및 폴더 구조만으로 라우팅을 자동으로 처리할 수 있게 합니다.
@@ -723,7 +779,7 @@ import SecureStorage from 'react-native-secure-storage';
 // 토큰 저장
 const storeToken = async (token: string) => {
   try {
-    await SecureStorage.setItem('user_token', token);
+    await SecureStorage.set('user_token', token);
   } catch (e) {
     console.error('Failed to save token:', e);
   }
@@ -732,7 +788,7 @@ const storeToken = async (token: string) => {
 // 토큰 가져오기
 const getToken = async () => {
   try {
-    const token = await SecureStorage.getItem('user_token');
+    const token = await SecureStorage.get('user_token');
     return token;
   } catch (e) {
     console.error('Failed to fetch token:', e);
@@ -742,7 +798,54 @@ const getToken = async () => {
 // 토큰 삭제
 const removeToken = async () => {
   try {
-    await SecureStorage.removeItem('user_token');
+    await SecureStorage.remove('user_token');
+  } catch (e) {
+    console.error('Failed to remove token:', e);
+  }
+};
+```
+
+### Expo Secure Store
+`expo-secure-store`는 Expo 프로젝트에서 보안 저장소 기능을 제공하는 라이브러리입니다. 이 라이브러리는 중요한 데이터(예: 토큰, 사용자 인증 정보 등)를 안전하게 저장하고 관리할 수 있도록 도와줍니다. `expo-secure-store`는 데이터를 암호화하여 저장하므로 민감한 정보를 안전하게 처리할 수 있습니다.
+
+- **암호화된 저장소**: 데이터를 안전하게 암호화하여 저장합니다.
+- **플랫폼 독립성**: iOS와 Android에서 동일한 API를 사용하여 안전한 저장소에 접근할 수 있습니다.
+- **간단한 API**: 간단한 메서드를 사용하여 데이터를 저장, 가져오기, 삭제할 수 있습니다.
+
+설치:
+```
+expo install expo-secure-store
+```
+
+- `setItemAsync(key, value)`: 지정된 `key`에 `value`를 저장합니다.
+- `getItemAsync(key)`: 지정된 `key`에 해당하는 값을 가져옵니다.
+- `deleteItemAsync(key)`: 지정된 `key`에 해당하는 값을 삭제합니다.
+```
+import * as SecureStore from 'expo-secure-store';
+
+// 토큰 저장
+const storeToken = async (token: string) => {
+  try {
+    await SecureStore.setItemAsync('user_token', token);  // 'setItemAsync' 사용
+  } catch (e) {
+    console.error('Failed to save token:', e);
+  }
+};
+
+// 토큰 가져오기
+const getToken = async () => {
+  try {
+    const token = await SecureStore.getItemAsync('user_token');  // 'getItemAsync' 사용
+    return token;
+  } catch (e) {
+    console.error('Failed to fetch token:', e);
+  }
+};
+
+// 토큰 삭제
+const removeToken = async () => {
+  try {
+    await SecureStore.deleteItemAsync('user_token');  // 'deleteItemAsync' 사용
   } catch (e) {
     console.error('Failed to remove token:', e);
   }
