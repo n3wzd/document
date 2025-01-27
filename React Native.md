@@ -580,6 +580,61 @@ export default HomeScreen;
 
 위 코드에서는 `useRouter` 훅을 사용하여 `router.push('/profile')`로 `/profile` 경로로 이동합니다. `router.push()`는 URL을 변경하고 해당 경로로 이동하게 만듭니다.
 
+#### Tabs
+`Tabs`는 `Expo Router`에서 제공하는 하단 탭 네비게이션 컴포넌트를 설정하기 위한 기본 구성 요소입니다. `react-navigation`의 `createBottomTabNavigator`를 내부적으로 활용하여 동작하며, `Expo Router`의 파일 기반 라우팅 시스템과 함께 사용됩니다.
+
+```
+import { Tabs } from 'expo-router';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+export default function Layout() {
+  return (
+    <Tabs>
+      {/* Home Tab */}
+      <Tabs.Screen
+        name="home"
+        options={{
+          title: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home-outline" color={color} size={size} />
+          ),
+        }}
+      />
+      {/* Profile Tab */}
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person-outline" color={color} size={size} />
+          ),
+        }}
+      />
+      {/* Settings Tab */}
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: 'Settings',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="settings-outline" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tabs>
+  );
+}
+```
+
+`Tabs.Screen` 옵션:
+1. `name`: 라우트 이름. `app` 디렉토리 내의 파일 이름과 일치해야 합니다.
+2. `options`: 화면 설정 옵션.
+    - `title`: 탭의 제목.
+    - `tabBarIcon`: 탭 아이콘 설정.
+    - `tabBarStyle`: 탭 바의 스타일 설정.
+
+자세한 사용법:
+> https://docs.expo.dev/router/advanced/tabs/
+
 ### `axios`
 `axios`는 외부 라이브러리로, HTTP 요청을 보다 쉽게 관리할 수 있도록 도와줍니다. `fetch`보다 많은 기능을 제공하며, 개발자 경험을 개선합니다.
 
@@ -851,3 +906,37 @@ const removeToken = async () => {
   }
 };
 ```
+
+### React Native Vector Icons
+`react-native-vector-icons`는 React Native 애플리케이션에서 확장 가능한 벡터 아이콘을 사용할 수 있게 해주는 라이브러리입니다. 다양한 인기 있는 아이콘 세트를 제공하며, 버튼, 네비게이션, UI 요소 등에서 활용할 수 있습니다.
+
+1. **아이콘 세트 제공**: MaterialIcons, FontAwesome, Ionicons, Feather 등 다양한 아이콘 세트를 지원합니다.
+2. **확장 가능**: 벡터 기반 아이콘이므로 크기를 조정해도 품질 손상이 없습니다.
+3. **커스터마이징 가능**: 색상, 크기 등 다양한 스타일을 쉽게 적용할 수 있습니다.
+4. **크로스 플랫폼**: iOS와 Android에서 모두 사용할 수 있습니다.
+
+설치 :
+```
+npm install react-native-vector-icons
+```
+
+React Native 0.60 이상에서는 자동 링크가 적용됩니다. 그렇지 않은 경우 `android/app/build.gradle`에 다음을 추가하세요:
+
+```
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+```
+
+#### 사용
+```
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+const App = () => {
+  return (
+    <Icon name="home" size={30} color="#900" />
+  );
+};
+
+export default App;
+```
+
+이 코드는 MaterialIcons 세트에서 `home` 아이콘을 가져와 크기와 색상을 설정한 예제입니다.
