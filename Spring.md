@@ -411,7 +411,6 @@ public class User {
 ```
 
 ### @Lob
-
 `@Lob` 어노테이션은 "Large Object"를 나타냅니다. 이 어노테이션은 데이터베이스에 저장할 때 큰 크기의 데이터를 처리할 수 있도록 도와줍니다. `@Lob`은 `BLOB`(Binary Large Object) 또는 `CLOB`(Character Large Object) 타입으로 매핑됩니다.
 
 - `BLOB`: 이진 데이터(예: 이미지, 비디오 등)
@@ -425,10 +424,48 @@ private String addressComponents;
 
 `JSON` 형식의 문자열을 저장하기 위해 `CLOB` 타입으로 매핑됩니다.
 
-### `@Lob` 사용 시 주의 사항:
-
+참고사항:
 - **성능**: `@Lob`을 사용한 필드는 `LAZY` 로딩을 기본으로 하므로, 데이터를 실제로 사용할 때만 로딩됩니다. 즉, 데이터를 읽을 때 성능에 영향을 미칠 수 있습니다.
 - **데이터베이스 지원**: 데이터베이스마다 `BLOB` 또는 `CLOB` 타입을 지원하지 않는 경우가 있을 수 있으므로, 사용하는 데이터베이스에서 이를 지원하는지 확인해야 합니다.
+
+### `@Embeddable`
+`@Embeddable`은 **내장 가능한 클래스**를 정의할 때 사용합니다. 이 클래스는 다른 엔티티의 일부로 포함될 수 있으며, 데이터베이스 테이블의 컬럼으로 매핑됩니다.
+    
+- 독립적으로 엔티티가 아니며, 다른 엔티티에 포함되어야 합니다.
+- 데이터베이스 테이블의 컬럼에 매핑되지만, 독립적인 테이블을 가지지 않습니다.
+- 주로 복합 키나 반복적으로 사용되는 필드 그룹을 정의할 때 사용됩니다.
+
+```
+@Embeddable
+public class UserAchievementKey implements Serializable {
+    private int userId;
+    private int achvId;
+
+    // Getters, Setters, equals, hashCode
+}
+```
+
+### `@EmbeddedId`
+`@EmbeddedId`는 복합 키(Composite Key)를 엔티티의 기본 키로 설정할 때 사용됩니다. `@Embeddable`로 정의된 클래스와 함께 사용됩니다.
+    
+- 복합 키를 정의하기 위해 사용되며, 해당 키 클래스는 반드시 `@Embeddable`로 정의되어야 합니다.
+- 복합 키는 JPA에서 `Serializable` 인터페이스를 구현해야 합니다.
+- 복합 키 클래스는 `equals`와 `hashCode` 메서드를 반드시 구현해야 합니다.
+
+```
+@Entity
+@Table(name = "user_achievements")
+public class UserAchievement {
+
+    @EmbeddedId
+    private UserAchievementKey id;
+
+    @Column(name = "achieved_at", nullable = false)
+    private LocalDateTime achievedAt;
+
+    // Getters, Setters
+}
+```
 
 ## 서비스(Service)
 **서비스(Service)**는 **애플리케이션의 비즈니스 로직을 처리하는 계층**입니다. Spring 애플리케이션에서는 일반적으로 서비스 계층을 사용하여 컨트롤러(Controller)와 데이터 액세스 계층(Repository) 사이의 중간 역할을 수행합니다.
