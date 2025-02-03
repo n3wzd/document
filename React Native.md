@@ -967,3 +967,261 @@ const decoded = jwtDecode(token);
 console.log(decoded);
 // 예시 출력: { sub: "1234567890", name: "John Doe", iat: 1516239022 }
 ```
+
+### React Query
+**React Query**는 React 애플리케이션에서 **서버 상태**를 관리하고 **비동기 데이터 fetching**을 간소화하는 라이브러리입니다. 클라이언트 애플리케이션에서 서버와의 데이터를 주고받을 때 필요한 여러 가지 작업을 효율적으로 처리할 수 있게 도와줍니다.
+
+1. **데이터 fetching**: 서버에서 데이터를 가져오는 작업을 훅을 통해 간편하게 처리할 수 있습니다. 비동기 요청을 작성할 때의 번거로움을 줄여줍니다.
+2. **자동 캐싱**: 데이터를 한 번 요청하면, React Query가 이를 **자동으로 캐시**하여 불필요한 네트워크 요청을 줄이고 성능을 최적화합니다.
+3. **데이터 갱신**: 사용자가 데이터를 수정하거나 새로고침 할 때 **자동으로 최신 데이터**를 가져올 수 있도록 합니다. 또한, **백그라운드에서 데이터 업데이트**가 가능합니다.
+4. **로딩/에러 상태 관리**: 서버 요청에 대한 로딩 상태, 에러 상태 등을 자동으로 관리해 줍니다.
+5. **자동 리페칭 (Re-fetching)**: 특정 조건에 맞춰 데이터를 자동으로 다시 가져올 수 있습니다. 예를 들어, 사용자가 페이지를 다시 방문하거나 데이터가 일정 시간이 지나면 재요청합니다.
+
+설치:
+```
+npm install react-query
+```
+
+#### useQuery
+`useQuery`는 **React Query**에서 데이터를 가져오는 비동기 작업을 처리하는 훅입니다.
+    
+```
+import { useQuery } from 'react-query';
+import axios from 'axios';
+
+const fetchData = async () => {
+  const response = await axios.get('https://api.example.com/data');
+  return response.data;
+};
+
+const MyComponent = () => {
+  const { data, isLoading, error } = useQuery('dataKey', fetchData);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return <div>{JSON.stringify(data)}</div>;
+};
+```
+
+React Query는 데이터가 성공적으로 가져와지면 해당 데이터를 **자동으로 캐시**합니다. 이렇게 캐시된 데이터는 동일한 쿼리 키를 사용하는 다른 `useQuery` 훅에서 사용될 수 있습니다.
+
+##### 쿼리 키(Query Key)
+`useQuery`는 데이터를 요청할 때 **쿼리 키**를 사용하여 데이터를 식별합니다. 쿼리 키는 데이터를 요청하는데 사용되는 고유한 문자열 또는 배열입니다. 쿼리 키를 기반으로 React Query는 데이터를 캐시하고, 재요청 시 해당 캐시 데이터를 반환합니다.
+```
+const { data, isLoading } = useQuery('dataKey', fetchData);
+```
+
+`'dataKey'`는 해당 데이터를 식별하는 쿼리 키입니다. 이 키는 요청한 데이터가 다른 곳에서 사용될 때도 동일한 데이터를 참조하는 데 사용됩니다.
+
+##### 쿼리 함수(Query Function)
+`useQuery`의 두 번째 인자로 전달되는 **쿼리 함수**는 데이터를 실제로 가져오는 비동기 함수입니다. 이 함수는 Promise를 반환하고, React Query는 이 Promise가 해결되면 데이터를 저장하고, 컴포넌트는 그 데이터를 사용하게 됩니다.
+
+```
+const fetchData = async () => {
+  const response = await axios.get('/api/data');
+  return response.data;
+};
+
+const { data, isLoading } = useQuery('dataKey', fetchData);
+```
+
+쿼리 함수는 **비동기**로 데이터를 가져오며, 네트워크 요청이 완료될 때까지 기다립니다.
+
+##### 상태 관리
+`useQuery`는 다음과 같은 **상태**를 관리합니다:
+- **isLoading**: 데이터가 로딩 중일 때 `true`로 설정됩니다. 처음 데이터가 요청되거나, 네트워크 요청이 실패했을 때 로딩 상태가 표시됩니다.
+- **isError**: 데이터 요청에 오류가 발생했을 때 `true`로 설정됩니다.
+- **data**: 쿼리 함수가 반환한 데이터를 저장합니다.
+- **error**: 쿼리 함수에서 오류가 발생했을 때 그 오류를 저장합니다.
+- **isSuccess**: 요청이 성공적으로 완료되었을 때 `true`로 설정됩니다.
+
+#### useMutation
+`useMutation`는 데이터를 서버에 보내는 데 사용되는 훅입니다.
+    
+```
+import { useMutation } from 'react-query';
+import axios from 'axios';
+
+const sendData = async (newData) => {
+  await axios.post('https://api.example.com/data', newData);
+};
+
+const MyComponent = () => {
+  const { mutate } = useMutation(sendData);
+
+  const handleSubmit = async () => {
+	const newData = { name: 'New Data' };
+	mutate(newData);
+  };
+
+  return (
+	<div>
+	  <button onClick={handleSubmit}>Submit</button>
+	</div>
+  );
+};
+```
+
+### Redux
+Redux는 **상태를 전역으로 관리**하는 상태 관리 라이브러리입니다. 애플리케이션의 상태는 **액션**을 통해 변경되며, 이를 처리하는 **리듀서**가 상태를 반환합니다.
+
+- **예측 가능성**: 상태 변경이 명확하게 추적됩니다.
+- **디버깅**: Redux DevTools를 사용하여 상태의 변화를 추적할 수 있습니다.
+- **확장성**: 복잡한 애플리케이션에서 유리합니다.
+- **보일러플레이트 코드**가 많습니다. 많은 설정과 코드가 필요합니다.
+
+구조:
+- **State**: 애플리케이션의 전역 상태를 저장합니다.
+- **Action**: 상태를 변경할 때 사용하는 객체입니다. 상태 변경을 설명하는 정보입니다.
+- **Reducer**: 액션을 받아서 새로운 상태를 반환하는 순수 함수입니다.
+- **Store**: 상태를 저장하고, 액션을 리듀서에 전달하여 상태를 변경하는 객체입니다.
+- **Dispatch**: 액션을 store에 전달하는 방법입니다.
+
+설치:
+```
+npm install redux react-redux
+```
+
+#### Action 
+`increment()`는 액션을 반환하는 함수입니다. 이 액션은 상태를 변경하는 타입 정보를 포함합니다.
+
+```
+// actions.js
+export const increment = () => ({
+  type: 'INCREMENT'
+});
+```
+
+#### Reducer 
+`counterReducer`는 액션을 처리하여 새로운 상태를 반환하는 함수입니다. 액션 타입에 따라 상태를 변경합니다.
+
+```
+// reducer.js
+const initialState = {
+  count: 0
+};
+
+const counterReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { ...state, count: state.count + 1 };
+    default:
+      return state;
+  }
+};
+
+export default counterReducer;
+```
+
+#### Store
+`createStore`로 상태를 보관합니다.
+
+```
+// store.js
+import { createStore } from 'redux';
+import counterReducer from './reducer';
+
+const store = createStore(counterReducer);
+export default store;
+```
+
+#### Provider
+`Provider`를 사용하여 전역 상태를 자식 컴포넌트에 전달합니다.
+
+```
+// App.js
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from './store';
+import Counter from './Counter';
+
+const App = () => (
+  <Provider store={store}>
+    <Counter />
+  </Provider>
+);
+
+export default App;
+```
+
+#### 상태 사용
+- **useSelector**: 전역 상태를 가져옵니다.
+- **useDispatch**: 액션을 dispatch하여 상태를 변경합니다.
+
+```
+// Counter.js
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { increment } from './actions';
+
+const Counter = () => {
+  const count = useSelector((state) => state.count);
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => dispatch(increment())}>Increment</button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+### Zustand
+Zustand는 Redux보다 간단하고 가벼운 상태 관리 라이브러리로, **보일러플레이트 코드**를 최소화하고 **간단한 API**로 상태를 관리할 수 있도록 도와줍니다. **React Context**를 사용하여 상태를 관리하고, **컴포넌트 간 상태 공유**가 가능합니다.
+
+- **간단함**: 설정이 간단하고, 상태 관리가 직관적입니다.
+- **빠른 리렌더링**: 상태 변경 시, 리렌더링을 최소화할 수 있습니다.
+- **성능**: 상태를 변경할 때 최소한의 리렌더링을 수행하여 성능이 뛰어납니다.
+- **상대적으로 적은 기능**: Redux와 비교하면 디버깅 도구나 고급 기능이 부족할 수 있습니다.
+- **유연성 부족**: 복잡한 상태 관리나 여러 액션을 처리하는 데 있어 Redux만큼 유연하지 않을 수 있습니다.
+
+설치:
+```
+npm install zustand
+```
+
+Zustand는 상태를 **store**에 저장하고, **setter**와 **getter**로 상태를 변경하고 읽습니다.
+
+#### 설정
+- **create**: Zustand의 `create` 함수는 상태를 설정하고 반환하는 훅을 만듭니다.
+- **set**: `set`을 사용하여 상태를 변경합니다.
+
+```
+// useStore.js
+import create from 'zustand';
+
+const useStore = create((set) => ({
+  count: 0,
+  increment: () => set((state) => ({ count: state.count + 1 })),
+  decrement: () => set((state) => ({ count: state.count - 1 })),
+}));
+
+export default useStore;
+```
+
+#### 사용
+- **useStore**: 상태를 읽고 변경할 수 있는 커스텀 훅입니다. 각 컴포넌트는 이 훅을 사용하여 상태를 공유합니다.
+
+```
+// Counter.js
+import React from 'react';
+import useStore from './useStore';
+
+const Counter = () => {
+  const { count, increment, decrement } = useStore();
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
+    </div>
+  );
+};
+
+export default Counter;
+```
