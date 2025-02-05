@@ -1225,3 +1225,346 @@ const Counter = () => {
 
 export default Counter;
 ```
+
+### Expo Location
+`expo-location`은 React Native(Expo)에서  **위치 정보를 다루는 라이브러리**입니다.  
+이를 사용하면 **GPS 기반 현재 위치 조회, 실시간 위치 추적, 위치 권한 요청** 등의 기능을 쉽게 구현할 수 있습니다.
+
+권한 요청 → 위치 가져오기 → 지속적 추적을 손쉽게 처리할 수 있어 **위치 기반 서비스(지도, 내비게이션, 위치 기록 등)** 개발에 적합합니다.
+
+설치:
+```
+npx expo install expo-location
+```
+
+#### 현재 위치 가져오기
+```
+import * as Location from 'expo-location';
+import { useState, useEffect } from 'react';
+import { Text, View } from 'react-native';
+
+export default function App() {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('위치 권한이 필요합니다.');
+        return;
+      }
+
+      let loc = await Location.getCurrentPositionAsync({});
+      setLocation(loc);
+    })();
+  }, []);
+
+  return (
+    <View>
+      <Text>위치: {location ? `${location.coords.latitude}, ${location.coords.longitude}` : '로딩 중...'}</Text>
+      {errorMsg && <Text>오류: {errorMsg}</Text>}
+    </View>
+  );
+}
+```
+
+---
+
+#### 지속적인 위치 추적
+```
+import * as Location from 'expo-location';
+import { useState, useEffect } from 'react';
+import { Text, View } from 'react-native';
+
+export default function App() {
+  const [location, setLocation] = useState(null);
+
+  useEffect(() => {
+    let subscription;
+
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        return;
+      }
+
+      subscription = await Location.watchPositionAsync(
+        { accuracy: Location.Accuracy.High, timeInterval: 5000, distanceInterval: 10 },
+        (loc) => setLocation(loc)
+      );
+    })();
+
+    return () => subscription?.remove(); // 컴포넌트 언마운트 시 추적 해제
+  }, []);
+
+  return (
+    <View>
+      <Text>위치: {location ? `${location.coords.latitude}, ${location.coords.longitude}` : '로딩 중...'}</Text>
+    </View>
+  );
+}
+```
+
+#### 백그라운드 위치 추적
+```
+import * as Location from 'expo-location';
+import * as TaskManager from 'expo-task-manager';
+
+const LOCATION_TASK_NAME = "background-location-task";
+
+// 백그라운드 위치 추적 작업 정의
+TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
+  if (error) {
+    console.error("위치 업데이트 오류:", error);
+    return;
+  }
+  if (data) {
+    const { locations } = data;
+    console.log("백그라운드 위치 업데이트:", locations);
+  }
+});
+
+// 백그라운드 위치 업데이트 시작
+const startBackgroundLocation = async () => {
+  const { status } = await Location.requestBackgroundPermissionsAsync();
+  if (status !== "granted") {
+    console.log("배경 위치 권한이 필요합니다.");
+    return;
+  }
+
+  await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
+    accuracy: Location.Accuracy.High,
+    timeInterval: 5000, // 5초마다 업데이트
+    distanceInterval: 10, // 10m 이동 시 업데이트
+    deferredUpdatesInterval: 60000, // 60초마다 배터리 절약 모드에서 업데이트
+  });
+
+  console.log("백그라운드 위치 추적 시작됨!");
+};
+```
+
+### Expo Task Manager
+**`expo-task-manager`**는 **Expo** 환경에서 **백그라운드 작업**을 처리하고 관리할 수 있도록 도와주는 라이브러리입니다. 이를 통해 **백그라운드 작업**(예: 위치 추적, 푸시 알림 등)을 앱이 백그라운드 상태일 때도 지속적으로 실행할 수 있습니다.
+
+1. **백그라운드 작업 관리**
+    - `expo-task-manager`는 **백그라운드 작업**을 등록하고, 그 작업이 완료되었을 때 알림을 받을 수 있도록 합니다. 예를 들어, 위치 추적, 파일 다운로드 등을 백그라운드에서 처리할 수 있습니다.
+2. **백그라운드 위치 추적**
+    - `Location.startLocationUpdatesAsync`와 같이 **위치 추적 작업**을 등록할 때 `expo-task-manager`를 활용하여 **백그라운드에서 위치 추적**을 계속 수행할 수 있습니다.
+3. **작업 실행 상태 추적**
+    - 등록된 작업이 실행 중인지 아니면 완료되었는지를 추적할 수 있습니다. 이는 작업이 종료되었거나, 특정 상태에 도달했을 때 앱에 알림을 보내거나 다른 작업을 처리하는 데 유용합니다.
+
+설치:
+```
+npm install expo-task-manager
+```
+
+사용:
+```
+import * as TaskManager from 'expo-task-manager';
+import * as Location from 'expo-location';
+
+const LOCATION_TASK_NAME = 'background-location-task';
+
+// 백그라운드에서 실행될 작업 등록
+TaskManager.defineTask(LOCATION_TASK_NAME, ({ data, error }) => {
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  const { locations } = data;
+  if (locations) {
+    console.log("New location:", locations);
+  }
+});
+
+// 위치 추적 시작
+async function startLocationTracking() {
+  await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
+    accuracy: Location.Accuracy.Balanced,
+    timeInterval: 5000, // 5초마다 업데이트
+    distanceInterval: 10, // 10m 이동 시 업데이트
+  });
+}
+```
+
+### Expo Sensors
+`expo-sensors`는 Expo 프레임워크에서 제공하는 **센서 관련 API**입니다. 이 패키지는 **기기에서 사용할 수 있는 다양한 센서들**에 접근하여 데이터를 얻고, 이를 애플리케이션에서 활용할 수 있도록 돕습니다. 예를 들어, **가속도계(accelerometer)**, **자이로스코프(gyroscope)**, **자기장 센서(magnetometer)**, **기울기 센서(gravimeter)** 등을 통해 장치의 물리적 움직임, 방향, 회전 등을 실시간으로 감지할 수 있습니다.
+
+- **Accelerometer**: 기기의 **가속도**를 측정하여 기기 움직임을 감지합니다. (예: 기기 기울기, 빠르게 움직이는 속도 등)
+- **Gyroscope**: 기기의 **회전**을 측정하여 회전 운동을 추적합니다. (예: 화면 회전 감지)
+- **Magnetometer**: 기기의 **자기장**을 측정하여 방향을 추정합니다. (예: 나침반 기능)
+- **Barometer**: 기기의 **기압**을 측정하여 고도나 날씨 변화를 추적합니다.
+- **DeviceMotion**: 여러 센서의 정보를 결합하여 **기기의 움직임**을 종합적으로 추적합니다.
+
+설치:
+```
+expo install expo-sensors
+```
+
+#### 사용
+**가속도계 데이터를 실시간으로 받아와서 화면에 표시**하는 예시입니다.
+```
+import { useEffect, useState } from 'react';
+import { Accelerometer } from 'expo-sensors';
+
+export default function App() {
+  const [accelerometerData, setAccelerometerData] = useState({
+    x: 0,
+    y: 0,
+    z: 0,
+  });
+
+  useEffect(() => {
+    const subscription = Accelerometer.addListener((accelerometerData) => {
+      setAccelerometerData(accelerometerData);
+    });
+
+    // Clean up the subscription when the component unmounts
+    return () => subscription.remove();
+  }, []);
+
+  return (
+    <View>
+      <Text>Accelerometer data:</Text>
+      <Text>X: {accelerometerData.x}</Text>
+      <Text>Y: {accelerometerData.y}</Text>
+      <Text>Z: {accelerometerData.z}</Text>
+    </View>
+  );
+}
+```
+
+### AsyncStorage
+`AsyncStorage`는 **React Native**에서 제공하는 **비동기적(key-value) 데이터 저장 방식**입니다. 이 저장소는 **앱이 종료된 후에도 데이터를 유지**할 수 있으며, 간단한 설정으로 **영구 저장 가능한 데이터를** 저장할 수 있습니다.
+
+- **비동기적**: 데이터를 **비동기적으로 저장하고 불러옵니다.**
+- **영구 저장**: 앱을 종료하더라도 데이터가 저장되어 유지됩니다.
+- **간단한 데이터 저장**: `key-value` 형태로 데이터를 저장합니다.
+- **보안 미지원**: 민감한 데이터는 암호화되지 않으므로 보안이 중요한 데이터에는 적합하지 않습니다.
+
+설치:
+```
+npm install @react-native-async-storage/async-storage
+```
+
+※ `react-native-async-storage`는 구버전으로, 더 이상 지원되지 않습니다.
+
+#### 데이터 저장
+```
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// 데이터 저장
+const storeData = async () => {
+  try {
+    await AsyncStorage.setItem('user_token', '123456'); // key-value로 저장
+  } catch (error) {
+    console.error("저장 실패", error);
+  }
+};
+```
+
+#### 데이터 읽기
+```
+// 데이터 읽기
+const getData = async () => {
+  try {
+    const value = await AsyncStorage.getItem('user_token');
+    if(value !== null) {
+      console.log('저장된 값:', value);
+    }
+  } catch (error) {
+    console.error("불러오기 실패", error);
+  }
+};
+```
+
+#### 데이터 삭제
+```
+// 데이터 삭제
+const removeData = async () => {
+  try {
+    await AsyncStorage.removeItem('user_token');
+    console.log('데이터 삭제 완료');
+  } catch (error) {
+    console.error("삭제 실패", error);
+  }
+};
+```
+
+#### 모든 데이터 삭제
+```
+// 모든 데이터 삭제
+const clearData = async () => {
+  try {
+    await AsyncStorage.clear();
+    console.log('모든 데이터 삭제 완료');
+  } catch (error) {
+    console.error("초기화 실패", error);
+  }
+};
+```
+
+### react-native-maps
+`react-native-maps`는 **React Native** 환경에서 **지도**를 표시하고, **마커**와 **경로** 등을 추가할 수 있게 도와주는 라이브러리입니다.  이 라이브러리는 **Google Maps**, **Apple Maps**, **OpenStreetMap** 등을 사용하여 지도 위에 다양한 요소를 추가할 수 있습니다.
+
+1. **지도 표시**: `MapView` 컴포넌트를 사용하여 기본적인 지도 표시.
+2. **마커 추가**: 지도에 특정 위치를 표시할 수 있는 `Marker` 컴포넌트 제공.
+3. **경로 그리기**: 두 지점 간의 경로를 그릴 수 있는 기능.
+4. **실시간 위치 추적**: 현재 위치를 받아서 지도에 표시하거나, **사용자 위치**에 따라 지도를 업데이트.
+5. **다양한 지도 제공**: Google Maps, Apple Maps, OpenStreetMap 등 여러 지도 제공 옵션이 있음.
+
+설치:
+```
+npm install react-native-maps
+```
+
+#### 지도 표시
+```
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import MapView from "react-native-maps";
+
+const MapScreen = () => {
+  return (
+    <View style={styles.container}>
+      <MapView 
+        style={styles.map} 
+        initialRegion={{
+          latitude: 37.5665,
+          longitude: 126.9780,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
+        }} 
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+  map: { flex: 1 },
+});
+
+export default MapScreen;
+```
+
+|속성|설명|
+|---|---|
+|`initialRegion`|지도에 처음 표시할 중심 위치와 줌 수준 설정|
+|`region`|지도 중심을 동적으로 업데이트할 때 사용 (매번 리렌더링 필요)|
+|`style`|지도 컴포넌트의 크기 지정|
+|`provider`|`google`을 설정하면 iOS에서도 Google Maps 사용 가능|
+|`showsUserLocation`|사용자의 현재 위치를 지도에 표시|
+
+#### 마커 추가
+`Marker` 컴포넌트를 사용하여 특정 위치에 마커를 추가할 수 있습니다.
+
+```
+import MapView, { Marker } from "react-native-maps";
+
+<MapView style={styles.map} initialRegion={{ latitude: 37.5665, longitude: 126.9780, latitudeDelta: 0.01, longitudeDelta: 0.01 }}>
+  <Marker coordinate={{ latitude: 37.5665, longitude: 126.9780 }} title="서울" description="서울의 중심" />
+</MapView>
+```
