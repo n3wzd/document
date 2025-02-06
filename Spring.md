@@ -2039,8 +2039,7 @@ UriComponentsBuilder는 URI(Uniform Resource Identifier)를 동적으로 생성�
 |`toUri()`|URI 객체를 반환.|
 
 #### 기본 URI 생성
-
-```java
+```
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class UriBuilderExample {
@@ -2058,8 +2057,7 @@ public class UriBuilderExample {
 ```
 
 #### 쿼리 파라미터 추가
-
-```java
+```
 String uri = UriComponentsBuilder.newInstance()
         .scheme("https")
         .host("api.example.com")
@@ -2075,8 +2073,7 @@ System.out.println(uri);
 
 #### `buildAndExpand`
 `buildAndExpand`를 사용해 템플릿 변수에 값을 동적으로 삽입합니다.
-
-```java
+```
 String uri = UriComponentsBuilder.newInstance()
         .scheme("https")
         .host("api.example.com")
@@ -2091,7 +2088,7 @@ System.out.println(uri);
 #### URI 확장
 기존 URI를 기반으로 새로운 경로나 파라미터를 추가합니다.
 
-```java
+```
 String uri = UriComponentsBuilder.fromUriString("https://api.example.com/users")
         .path("/{id}")
         .queryParam("active", true)
@@ -2105,7 +2102,7 @@ System.out.println(uri);
 #### `toUri()`
 `toUri()`를 사용하여 `java.net.URI` 객체를 반환합니다.
 
-```java
+```
 URI uri = UriComponentsBuilder.newInstance()
         .scheme("https")
         .host("api.example.com")

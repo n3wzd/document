@@ -19,10 +19,20 @@ Node.js를 사용하려면 먼저 공식 웹 사이트에서 Node.js를 다운�
 > node (파일명)
 
 ## 모듈 (Modules)
-Node.js에서 모듈은 코드를 논리적으로 구성하고 재사용 가능하게 만드는 데 사용되는 단위입니다. 모듈을 사용하여 코드를 분리하고 각 부분을 독립적으로 개발하고 테스트할 수 있습니다. Node.js는 CommonJS 스펙을 따르며, 모듈 시스템은 `require` 및 `module.exports`를 사용하여 구현됩니다.
+Node.js에서 모듈은 코드를 논리적으로 구성하고 재사용 가능하게 만드는 데 사용되는 단위입니다. 모듈을 사용하여 코드를 분리하고 각 부분을 독립적으로 개발하고 테스트할 수 있습니다. 
 
-### 모듈 생성 및 내보내기
-모듈은 파일 단위로 생성되며, 각 파일이 하나의 모듈을 나타냅니다.
+Node.js에서 모듈은 일반적으로 싱글톤처럼 동작합니다. 즉, 하나의 모듈을 여러 번 `require()` 하더라도 메모리 상에는 단 하나의 인스턴스만 존재하게 됩니다. Node.js는 `require()`를 통해 모듈을 처음 로드할 때 메모리에 캐시합니다. 이후 같은 모듈을 다시 요구하면 캐시된 인스턴스를 반환합니다.
+
+### CommonJS (CJS)
+Node.js는 **CommonJS** 스펙을 따르며, 모듈 시스템은 `require` 및 `module.exports`를 사용하여 구현됩니다. 모듈을 로드할 때 프로그램 실행이 멈추고 모듈을 먼저 로드하는 동기적 로딩을 사용합니다.
+
+- 서버 사이드 환경에서 널리 사용됩니다.
+- 동기적 로딩 방식으로 인해 브라우저 환경에서는 직접 사용하기 어렵습니다.
+
+ECMAScript 2015 (ES6) 모듈은 JavaScript 표준에 공식적으로 포함된 모듈 시스템으로, 새로운 프로젝트를 시작한다면 ES Modules를 사용하여 더 현대적이고 표준적인 방식으로 개발하는 것이 좋습니다. 하지만 기존 프로젝트와의 호환성이나 개발팀의 선호도에 따라 CommonJS를 사용할 수도 있습니다.
+
+#### 모듈 생성
+`module.exports`: 모듈에서 내보낼 값을 지정합니다.
 
 ```
 // math.js
@@ -44,10 +54,8 @@ module.exports = {
 };
 ```
 
-위의 코드에서 `add`와 `subtract` 함수를 정의하고, `module.exports`를 사용하여 해당 함수들을 외부로 노출합니다.
-
-### 모듈 가져오기
-모듈을 다른 파일에서 사용하려면 `require` 함수를 사용합니다. 예를 들어, `app.js` 파일에서 `math.js` 모듈을 가져와서 사용할 수 있습니다.
+#### 모듈 가져오기
+모듈을 다른 파일에서 사용하려면 `require` 함수를 사용합니다.
 
 ```
 // app.js
@@ -63,8 +71,6 @@ console.log('Sum:', sum);
 const difference = math.subtract(8, 4);
 console.log('Difference:', difference);
 ```
-
-위의 코드에서 `require('./math')`는 현재 디렉토리에 있는 `math.js` 모듈을 가져옵니다. 그리고 `math.add` 및 `math.subtract`를 통해 해당 모듈의 함수들을 사용합니다.
 
 ### 내장 모듈
 Node.js는 기본적으로 몇 가지 내장 모듈을 제공합니다. 이러한 모듈들은 별도의 설치 없이 사용할 수 있습니다. 몇 가지 예시는 다음과 같습니다:
@@ -268,23 +274,23 @@ MySQL과 Node.js를 연동하려면 MySQL 드라이버를 사용하여 Node.js �
 - `mysql2` 모듈이 성능 측면에서 뛰어나며, 더 많은 기능을 제공합니다.
 - `mysql` 모듈은 여전히 많은 프로젝트에서 사용되고 있으며, 작은 프로젝트나 기존 코드베이스에서 업그레이드하기 어려운 경우에는 유용할 수 있습니다.
 
-#### 성능
+**성능**:
 - **mysql:** `mysql` 모듈은 비동기 I/O를 사용하면서도, 백그라운드에서 동기적인 쿼리를 수행하므로, 성능에 제한이 있을 수 있습니다.
 - **mysql2:** `mysql2` 모듈은 비동기 I/O를 완전히 활용하여 성능이 높습니다. 특히, Connection Pooling 기능을 내장하고 있어 더 효과적으로 여러 연결을 관리할 수 있습니다.
 
-#### Promise 및 async/await 지원
+**Promise 및 async/await 지원**:
 - **mysql:** `mysql` 모듈은 Callback 스타일의 인터페이스를 주로 사용하며, Promise나 async/await를 직접 지원하지 않습니다. Promise를 사용하려면 추가적인 래퍼 함수나 라이브러리를 사용해야 합니다.
 - **mysql2:** `mysql2` 모듈은 기본적으로 Promises를 지원하고 있어, Callback 스타일과 함께 async/await를 쉽게 사용할 수 있습니다.
 
-#### Prepared Statements
+**Prepared Statements**:
 - **mysql:** `mysql` 모듈은 Prepared Statements를 지원하지만, 일부 제한 사항이 있을 수 있습니다.
 - **mysql2:** `mysql2` 모듈은 더욱 향상된 Prepared Statements 지원을 제공하고, 더 많은 옵션과 기능을 제공합니다.
 
-#### Multiple Statements
+**Multiple Statements**:
 - **mysql:** `mysql` 모듈은 Multiple Statements 기능을 가지고 있지만, 기본적으로 비활성화되어 있습니다.
 - **mysql2:** `mysql2` 모듈은 Multiple Statements를 활성화한 채로 제공되며, 여러 쿼리를 한 번에 실행할 수 있습니다.
 
-#### 자료형 변환
+**자료형 변환**:
 - **mysql:** `mysql` 모듈은 자동으로 JavaScript 데이터 유형으로 변환하는 기능이 제한적입니다.
 - **mysql2:** `mysql2` 모듈은 더 나은 자료형 변환 기능을 제공하고, JavaScript와 MySQL 간의 데이터 유형 변환을 더 정확하게 처리합니다.
 
@@ -297,6 +303,7 @@ const mysql = require('mysql2');
 const connection = mysql.createConnection({
   host: 'localhost',  // MySQL 서버 호스트
   user: 'root',       // MySQL 사용자명
+  port: 3306,       // MySQL 포트
   password: 'password', // MySQL 비밀번호
   database: 'dbname'   // 연결할 데이터베이스 이름
 });
@@ -320,7 +327,7 @@ connection.end((err) => {
 });
 ```
 
-### 쿼리 수행
+### 쿼리
 MySQL 연결이 설정되면 쿼리를 수행하여 데이터베이스와 상호 작용할 수 있습니다.
 
 ```
@@ -346,10 +353,43 @@ connection.query('INSERT INTO tableName SET ?', newRecord, (err, results) => {
 });
 ```
 
-### 주의사항
-- 실제 프로덕션 환경에서는 연결 풀링을 고려하여 여러 요청에 대해 효율적으로 MySQL 연결을 관리해야 합니다.
-- 연결 정보는 보안을 위해 환경 변수나 별도의 설정 파일에 저장하는 것이 좋습니다.
-- SQL 쿼리를 수행할 때 사용자의 입력을 쿼리에 직접 삽입하지 않도록 주의해야 합니다. 이는 SQL 삽입 공격을 방지하는 데 도움이 됩니다.
+### Connection Pool
+연결 풀(Connection Pool)은 데이터베이스와의 연결을 미리 여러 개 생성해 놓고, 필요할 때마다 연결 풀에서 연결을 가져다 사용하고, 사용이 끝나면 다시 풀로 반환하는 방식입니다. 많은 사용자가 동시에 접속하는 웹 애플리케이션에서는 연결 풀을 사용하여 시스템 부하를 분산하고 안정적인 서비스를 제공할 수 있습니다.
+
+- **성능 향상:** 매번 새로운 연결을 생성하는 오버헤드를 줄여 성능을 향상시킵니다.
+- **자원 효율성:** 불필요한 연결 생성을 방지하여 시스템 자원을 효율적으로 사용할 수 있습니다.
+- **안정성:** 연결이 끊어졌을 때 자동으로 재연결하거나, 최대 연결 수를 제한하여 시스템 과부하를 방지할 수 있습니다.
+
+**작동 방식**:
+1. **초기화:** 애플리케이션 시작 시 미리 설정된 크기만큼 연결을 생성하여 풀에 저장합니다.
+2. **요청 처리:**
+    - 클라이언트 요청이 들어오면 풀에서 사용 가능한 연결을 하나 가져옵니다.
+    - 가져온 연결을 사용하여 데이터베이스 작업을 수행합니다.
+    - 작업이 완료되면 연결을 풀로 반환합니다.
+3. **연결 관리:**
+    - 연결이 손상되거나 오랫동안 사용되지 않은 연결은 풀에서 제거합니다.
+    - 풀에 연결이 부족하면 새로운 연결을 생성하여 풀에 추가합니다.
+
+```
+const mysql = require('mysql2/promise');
+
+const pool = mysql.createPool({
+  host: 'your_host',
+  user: 'your_user',
+  password: 'your_password',
+  database: 'your_database',
+  connectionLimit: 10 // 최대 연결 수 설정
+});
+
+// 쿼리 실행
+pool.query('SELECT * FROM users')
+  .then(([rows, fields]) => {
+    console.log(rows);
+  })
+  .catch(err => {
+    console.error(err);
+  });
+```
 
 ## http-server
 `http-server`는 Node.js 환경에서 동작하는 간단한 HTTP 웹 서버입니다. 이 도구를 사용하면 로컬 디렉토리를 기반으로 간단한 정적 파일(HTML, CSS, JavaScript, 이미지 등)을 제공할 수 있습니다.
@@ -357,16 +397,69 @@ connection.query('INSERT INTO tableName SET ?', newRecord, (err, results) => {
 이 도구는 프로젝트의 개발 및 테스트 단계에서 로컬에서만 사용되며, 실제로 배포할 때는 더 강력하고 안전한 웹 서버 솔루션을 사용하는 것이 일반적입니다.하지만 간단한 정적 파일을 빠르게 서빙하고 테스트하는 데에는 유용하며, 주로 로컬 디렉토리에서 CORS 정책을 준수하기 위해 사용됩니다.
 
 **과정**
-1. `http-server`을 설치합니다.
+4. `http-server`을 설치합니다.
 > npm install http-server -g
 
-2. `http-server`를 실행합니다.
+5. `http-server`를 실행합니다.
 > npx http-server
 
-3. 서버에 접속합니다.
+6. 서버에 접속합니다.
 > http://127.0.0.1:8080
 
 가끔씩 외부 소스 파일(예: script.js)이 업데이트되지 않는 경우가 발생할 수 있습니다. 이는 캐시 파일이 로드되어 변경 사항이 반영되지 않은 것입니다. 이 문제는 캐시를 사용하지 않도록 설정하여 해결할 수 있습니다.
 > npx http-server -c-1
 
 `-c`는 캐시 유지 시간을 설정하는 옵션입니다. `-c-1`을 사용하면 캐시를 사용하지 않습니다.
+
+## Nodemon
+**Nodemon**은 Node.js 개발자가 애플리케이션을 개발할 때 매우 유용하게 활용하는 도구입니다. Node.js 애플리케이션을 실행하고, **코드를 변경할 때마다 자동으로 애플리케이션을 다시 시작**해주는 역할을 합니다.
+
+- **자동 재시작:** 코드 변경 시 자동으로 애플리케이션을 재시작합니다.
+- **파일 감시:** 특정 디렉토리 또는 파일의 변경 사항을 감지합니다.
+- **커스텀 스크립트 실행:** 애플리케이션 시작 전후에 커스텀 스크립트를 실행할 수 있습니다.
+- **다양한 옵션 지원:** 포트 변경, 지연 시간 설정 등 다양한 옵션을 제공합니다.
+
+**설치:**
+```
+npm install -g nodemon
+```
+
+**실행:**
+```
+npm run dev
+```
+
+## TypeScript
+Node.js에서도 TypeScript를 사용할 수 있습니다.
+
+### tsconfig.json
+**tsconfig.json** 파일은 TypeScript 프로젝트의 컴파일 옵션을 정의하는 핵심 설정 파일입니다. 이 파일을 통해 프로젝트의 컴파일 방식, 출력 형식, 타입 검사 수준 등을 세밀하게 조절할 수 있습니다.
+
+```
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
+```
+
+- **target:** 생성될 JavaScript 코드의 ES 버전을 지정합니다. (예: es5, es6, esnext)
+- **module:** 모듈 시스템을 지정합니다. (예: commonjs, es2015)
+- **outDir:** 컴파일된 JavaScript 파일이 저장될 디렉토리를 지정합니다.
+- **rootDir:** 소스 코드의 루트 디렉토리를 지정합니다.
+- **strict:** 엄격한 타입 검사를 활성화합니다.
+- **esModuleInterop:** CommonJS와 ES Modules 간의 상호 운용성을 위한 옵션입니다.
+- **skipLibCheck:** 타입 정의 파일 검사를 생략합니다.
+- **forceConsistentCasingInFileNames:** 파일 이름의 대소문자를 일관되게 유지합니다.
+- **allowJs:** JavaScript 파일을 포함하여 컴파일할 수 있도록 허용합니다.
+- **declaration:** 타입 정의 파일(.d.ts)을 생성합니다.
+- **sourceMap:** 소스맵 파일을 생성하여 디버깅을 용이하게 합니다.
+- **baseUrl:** 모듈 해결 시 기본 경로를 설정합니다.
+- **paths:** 모듈 별칭을 설정합니다.
