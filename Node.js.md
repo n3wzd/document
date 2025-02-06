@@ -10,31 +10,19 @@
 7.  **V8 엔진:** Node.js는 구글에서 개발한 V8 JavaScript 엔진을 사용하여 JavaScript 코드를 빠르게 실행합니다.
 
 ## 시작
-Node.js로 시작하는 방법은 다음과 같은 단계를 따릅니다.
-
 ### 1. Node.js 설치
-Node.js를 사용하려면 먼저 공식 웹 사이트에서 Node.js를 다운로드하고 설치해야 합니다. [Node.js 공식 웹 사이트](https://nodejs.org/)에서 최신 버전을 다운로드하고 설치합니다. 설치 프로세스는 운영 체제에 따라 다르지만, 대개는 기본 설정으로 진행됩니다.
+Node.js를 사용하려면 먼저 공식 웹 사이트에서 Node.js를 다운로드하고 설치해야 합니다. [Node.js 공식 웹 사이트](https://nodejs.org/)에서 최신 버전을 다운로드하고 설치합니다.
 
-### 2. 개발 환경 설정
-Node.js를 설치한 후에는 개발 환경을 설정해야 합니다. 텍스트 에디터(예: Visual Studio Code, Sublime Text 등)를 선택하고 프로젝트를 시작할 디렉토리를 생성합니다.
-
-### 3. 터미널(커맨드 라인)에서 실행
-터미널(또는 명령 프롬프트)을 열고 프로젝트 디렉토리로 이동합니다. 그리고 다음 명령어를 실행하여 코드를 실행합니다.
+### 2. 실행
+터미널을 열고 프로젝트 디렉토리로 이동합니다. 그리고 다음 명령어를 실행하여 코드를 실행합니다.
 
 > node (파일명)
-
-### 4. NPM 초기화 (선택 사항)
-만약 프로젝트를 시작할 때 npm(노드 패키지 매니저)을 사용하려면 프로젝트 디렉토리에서 다음 명령어를 실행하여 `package.json` 파일을 생성합니다.
-
-> npm init
-
-이 명령어를 실행하면 프로젝트에 대한 정보를 입력하라는 프롬프트가 나타납니다. 적절한 값을 입력한 후에는 `package.json` 파일이 생성됩니다.
 
 ## 모듈 (Modules)
 Node.js에서 모듈은 코드를 논리적으로 구성하고 재사용 가능하게 만드는 데 사용되는 단위입니다. 모듈을 사용하여 코드를 분리하고 각 부분을 독립적으로 개발하고 테스트할 수 있습니다. Node.js는 CommonJS 스펙을 따르며, 모듈 시스템은 `require` 및 `module.exports`를 사용하여 구현됩니다.
 
 ### 모듈 생성 및 내보내기
-모듈은 파일 단위로 생성되며, 각 파일이 하나의 모듈을 나타냅니다. 예를 들어, `math.js` 파일에 다음과 같은 코드가 있다고 가정해 봅시다.
+모듈은 파일 단위로 생성되며, 각 파일이 하나의 모듈을 나타냅니다.
 
 ```
 // math.js
@@ -105,29 +93,14 @@ NPM (Node Package Manager)은 Node.js 패키지를 관리하고 배포하기 위
 5. **온라인 패키지 검색:** NPM 웹사이트에서는 수많은 패키지를 검색하고 해당 패키지의 문서를 확인할 수 있습니다. [NPM 웹사이트](https://www.npmjs.com/)
 
 ### NPM 명령어
-- **패키지 설치:**
-    `npm install 패키지이름` 
-    
-- **글로벌 패키지 설치:**
-    `npm install -g 패키지이름` 
-    
-- **패키지 삭제:**
-    `npm uninstall 패키지이름` 
-    
-- **개발 의존성으로 패키지 설치:**
-    `npm install --save-dev 패키지이름` 
-    
-- **NPM 스크립트 실행:**
-    `npm run 스크립트이름` 
-    
-- **패키지 업데이트:**
-    `npm update` 
-    
-- **NPM 버전 확인:**
-    `npm -v` 
-    
-- **패키지 검색:**
-    `npm search 패키지이름` 
+- **패키지 설치:** `npm install 패키지이름` 
+- **글로벌 패키지 설치:** `npm install -g 패키지이름` 
+- **패키지 삭제:** `npm uninstall 패키지이름` 
+- **개발 의존성으로 패키지 설치:** `npm install --save-dev 패키지이름` 
+- **NPM 스크립트 실행:** `npm run 스크립트이름` 
+- **패키지 업데이트:** `npm update` 
+- **NPM 버전 확인:** `npm -v` 
+- **패키지 검색:** `npm search 패키지이름` 
 
 ### NPX
 `npm`과 `npx`는 둘 다 Node.js 패키지 관리 도구에 속하며, JavaScript 패키지를 설치하고 실행하는 데 사용됩니다. `npm`은 프로젝트의 종속성을 관리하고 스크립트를 실행하는 데에 사용되며, `npx`는 글로벌로 설치하지 않고도 일시적으로 필요한 패키지를 실행할 때 사용됩니다.
@@ -170,7 +143,7 @@ server.listen(PORT, () => {
 
 위의 코드에서 `createServer` 메서드로 서버를 생성하고, 요청(`req`)과 응답(`res`)을 다루는 콜백 함수를 전달합니다. 서버는 3000번 포트에서 실행되며, 요청이 들어올 때마다 "Hello, World!"를 응답으로 보냅니다.
 
-### HTTP 클라이언트 만들기
+### HTTP 클라이언트
 `http` 모듈은 HTTP 클라이언트도 만들 수 있습니다. 다른 서버로 HTTP 요청을 보내고 응답을 받는 데 사용됩니다.
 
 ```
@@ -203,7 +176,7 @@ const req = http.request(options, (res) => {
 req.end();
 ```
 
-위의 코드에서 `http.request` 메서드로 HTTP 요청을 생성하고, 요청에 대한 응답을 처리하기 위해 이벤트 리스너를 등록합니다. 이 예제에서는 간단한 GET 요청을 www.example.com으로 보내고 응답을 콘솔에 출력합니다.
+위의 코드에서 `http.request` 메서드로 HTTP 요청을 생성하고, 요청에 대한 응답을 처리하기 위해 이벤트 리스너를 등록합니다. 이 예제에서는 간단한 GET 요청을 `www.example.com`으로 보내고 응답을 콘솔에 출력합니다.
 
 ## fs
 Node.js의 `fs` 모듈은 파일 시스템과 상호 작용하기 위한 메서드를 제공하는 내장 모듈입니다. 이 모듈을 사용하면 파일을 읽고 쓰며, 디렉토리를 생성하고 삭제할 수 있습니다.
@@ -282,102 +255,6 @@ fs.rmdir('exampleDir', (err) => {
   }
   console.log('Directory deleted successfully!');
 });
-```
-
-## url
-Node.js의 `url` 모듈은 URL(Uniform Resource Locator)에 대한 다양한 작업을 수행할 수 있는 기능을 제공하는 내장 모듈입니다. URL은 웹 리소스에 대한 주소를 나타내는 데 사용되며, `url` 모듈을 사용하면 URL을 파싱하고 조작하는 기능을 쉽게 사용할 수 있습니다.
-
-### URL 파싱 및 조작
-`url` 모듈을 사용하여 주어진 URL을 파싱하고, 각각의 구성 요소를 조작할 수 있습니다.
-
-```
-const url = require('url');
-
-// URL 파싱
-const myURL = new URL('https://www.example.com/path?query=123#fragment');
-
-console.log('href:', myURL.href);
-console.log('protocol:', myURL.protocol);
-console.log('host:', myURL.host);
-console.log('hostname:', myURL.hostname);
-console.log('pathname:', myURL.pathname);
-console.log('search:', myURL.search);
-console.log('hash:', myURL.hash);
-```
-
-위의 코드에서 `URL` 생성자를 사용하여 URL을 파싱하고, 다양한 프로퍼티를 출력합니다.
-
-### Query String 다루기
-`query` 문자열을 다루는데 도움을 주는 `querystring` 모듈과 함께 사용하여 URL의 쿼리 문자열을 파싱하거나 문자열로 변환할 수 있습니다.
-
-```
-const url = require('url');
-const querystring = require('querystring');
-
-const myURL = new URL('https://www.example.com/path?query=123&name=John');
-
-// 쿼리 파싱
-const queryObject = querystring.parse(myURL.search.slice(1));
-console.log('Parsed Query:', queryObject);
-
-// 쿼리 문자열 생성
-const newQuery = querystring.stringify({ age: 25, city: 'New York' });
-console.log('New Query String:', newQuery);
-```
-
-### URL Resolving
-두 개의 상대적인 URL을 합쳐서 절대적인 URL을 생성할 수 있습니다.
-
-```
-const url = require('url');
-
-const baseURL = 'https://www.example.com/path/';
-const relativeURL = '../subpath/page.html';
-
-const resolvedURL = new URL(relativeURL, baseURL);
-console.log('Resolved URL:', resolvedURL.href);
-```
-
-## Events
-Node.js에서 `Events` 모듈은 이벤트 기반 프로그래밍을 지원하기 위한 핵심 모듈 중 하나입니다. 이벤트는 객체에서 발생하는 특정 동작이나 상태 변화를 나타냅니다. `Events` 모듈을 사용하면 이벤트를 발생시키고 해당 이벤트에 대한 리스너를 등록할 수 있습니다.
-
-1.  **이벤트 객체 (EventEmitter):** `events` 모듈에서 제공하는 주요 객체로, 이벤트를 발생시키고 리스너를 관리하는 데 사용됩니다. 클래스로 구현되어 있으며, 객체가 이벤트를 발생시킬 수 있도록 합니다.
-2.  **이벤트:** 특정한 상황이나 동작을 나타내는 신호입니다. 이벤트는 문자열 형태로 식별되며, 예를 들어 "click", "data", "error" 등이 될 수 있습니다.
-3.  **이벤트 리스너:** 특정 이벤트가 발생했을 때 실행되는 콜백 함수입니다. 이벤트가 발생하면 연결된 모든 이벤트 리스너가 실행됩니다.
-
-### 기본 사용법
-1.  **모듈 가져오기:**
-```
-const EventEmitter = require('events');
-```
-    
-2.  **이벤트 객체 생성:**
-```
-const myEmitter = new EventEmitter();
-```
-    
-3.  **이벤트 리스너 등록:**
-```
-myEmitter.on('event', () => {
-  console.log('Event occurred!');
-});
-```
-    
-4.  **이벤트 발생:**
-```
-myEmitter.emit('event');
-```
-
-5.  **이벤트 리스너 제거:**
-```
-const myListener = () => {
-  console.log('Event occurred!');
-};
-
-myEmitter.on('event', myListener);
-
-// 리스너 제거
-myEmitter.removeListener('event', myListener);
 ```
 
 ## MySQL
@@ -473,7 +350,6 @@ connection.query('INSERT INTO tableName SET ?', newRecord, (err, results) => {
 - 실제 프로덕션 환경에서는 연결 풀링을 고려하여 여러 요청에 대해 효율적으로 MySQL 연결을 관리해야 합니다.
 - 연결 정보는 보안을 위해 환경 변수나 별도의 설정 파일에 저장하는 것이 좋습니다.
 - SQL 쿼리를 수행할 때 사용자의 입력을 쿼리에 직접 삽입하지 않도록 주의해야 합니다. 이는 SQL 삽입 공격을 방지하는 데 도움이 됩니다.
-- 위의 예제 코드는 간단한 MySQL 연동을 보여주는 것이며, 실제 프로젝트에서는 보다 효율적이고 안전한 방식으로 구현해야 합니다.
 
 ## http-server
 `http-server`는 Node.js 환경에서 동작하는 간단한 HTTP 웹 서버입니다. 이 도구를 사용하면 로컬 디렉토리를 기반으로 간단한 정적 파일(HTML, CSS, JavaScript, 이미지 등)을 제공할 수 있습니다.
@@ -494,19 +370,3 @@ connection.query('INSERT INTO tableName SET ?', newRecord, (err, results) => {
 > npx http-server -c-1
 
 `-c`는 캐시 유지 시간을 설정하는 옵션입니다. `-c-1`을 사용하면 캐시를 사용하지 않습니다.
-
-## Passport
-`Passport`는 Node.js 기반의 웹 애플리케이션에서 사용자 인증을 간편하게 구현할 수 있도록 도와주는 미들웨어입니다. 
-
-4. **다양한 인증 전략**: Passport는 많은 인증 제공업체(Google, Facebook, Twitter, GitHub 등)와의 통합을 지원하며, 다양한 인증 전략을 제공하여 사용자를 인증할 수 있습니다.
-5. **세션 관리**: Passport는 세션을 사용하여 사용자의 로그인 상태를 추적합니다. 세션을 설정하고 유지함으로써 사용자의 인증 상태를 유지할 수 있습니다.
-6. **미들웨어 편의성**: Passport는 Express와 함께 사용하기 쉽도록 설계되었습니다. Express의 미들웨어로 사용되며, 간단한 설정만으로도 인증을 구현할 수 있습니다.
-7. **사용자 정의 가능**: Passport는 확장 가능하며, 사용자 정의 인증 전략을 만들어 기존의 인증 제공업체 외에도 사용자의 자체 인증 시스템을 통합할 수 있습니다.
-
-### passport-google-oauth20
-`passport-google-oauth20`은 Passport.js와 함께 사용되는 Google OAuth 2.0 전략을 제공하는 Passport의 확장 모듈입니다. 이 모듈을 사용하면 Express 애플리케이션에서 Google 계정을 통한 사용자 인증을 구현할 수 있습니다.
-
-### express-session
-`express-session`은 Express 애플리케이션에서 세션을 구현하기 위한 미들웨어입니다. 클라이언트에 세션 ID를 부여하고, 서버 측에 세션 데이터를 저장하여 세션을 관리합니다.
-
-주로 Passport.js와 함께 사용되며, 사용자 인증 후에 세션을 저장하고 관리할 수 있습니다.
