@@ -2697,12 +2697,66 @@ private int age;
 
 #### @JsonInclude
 `@JsonInclude`는 특정 조건에 따라 필드를 포함하거나 제외할 수 있습니다.
-    
+
 ```
 @JsonInclude(JsonInclude.Include.NON_NULL)
 private String middleName; // null일 경우 제외
 ```
+
+## Security
+### crypto
+`crypto`는 Java Cryptography Extension (JCE)의 일부로, Java에서 암호화, 복호화 및 다른 보안 기능을 처리하기 위해 제공되는 라이브러리입니다. 이 라이브러리는 다양한 암호화 알고리즘을 지원하며, 데이터를 안전하게 처리하고 보호하는 데 중요한 역할을 합니다.
+
+`crypto` 패키지는 다양한 암호화 알고리즘을 지원합니다. 그 예로는 다음과 같습니다:
+- **AES**: 대칭키 알고리즘, 고속 암호화에 사용
+- **RSA**: 비대칭키 알고리즘, 공개키/비공개키 암호화에 사용
+- **DES**: 대칭키 알고리즘, 예전 암호화 방식
+- **HMAC**: 메시지 인증 코드, 해시 함수를 기반으로 한 암호화
+
+#### Cipher
+**암호화 및 복호화**를 담당하는 클래스입니다. `Cipher` 객체는 암호화 알고리즘(예: AES, RSA)을 선택하고, 이를 통해 데이터를 암호화하거나 복호화할 수 있습니다.
+
+```
+Cipher cipher = Cipher.getInstance("RSA");
+cipher.init(Cipher.ENCRYPT_MODE, privateKey);
+byte[] encryptedData = cipher.doFinal(data);
+```
     
+#### KeyGenerator
+**대칭키 암호화**(예: AES, DES)에 필요한 **암호화 키**를 생성하는 클래스입니다.
+    
+```
+KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+keyGen.init(128);  // 키 길이
+SecretKey secretKey = keyGen.generateKey();
+```
+    
+#### KeyPairGenerator
+**비대칭키**(예: RSA, DSA)의 **공개키**와 **비공개키** 쌍을 생성하는 클래스입니다.
+
+```
+KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
+keyPairGen.initialize(2048);  // 키 길이
+KeyPair keyPair = keyPairGen.generateKeyPair();
+```
+    
+#### Mac
+**메시지 인증 코드**(MAC)를 생성하여, 메시지의 무결성 및 인증을 제공하는 클래스입니다. 주로 HMAC(해시 기반 메시지 인증 코드)를 사용합니다.
+
+```
+Mac mac = Mac.getInstance("HmacSHA256");
+mac.init(secretKey);
+byte[] macResult = mac.doFinal(data);
+```
+    
+#### SecretKeyFactory:
+**비밀 키**(대칭키)를 특정 형식으로 복원하거나 변환할 때 사용되는 클래스입니다.
+    
+```
+SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 256);
+SecretKey secret = keyFactory.generateSecret(spec);
+```
 
 ## javax
 `Jakarta`와 `javax`는 Java 플랫폼에서 사용되는 패키지 이름의 두 가지 버전입니다. 그 차이는 주로 Java EE (Enterprise Edition)와 관련이 있습니다.
