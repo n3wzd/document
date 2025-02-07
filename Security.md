@@ -150,3 +150,25 @@ A에서 B로 대칭키를 보내는 과정입니다.
 3. A는 받은 공개키로 보유한 대칭키를 암호화하고 B에게 전송합니다.
 4. B는 받은 암호화된 대칭키를 비공개키로 복호화합니다.
 ```
+
+### PEM
+PEM (Privacy-Enhanced Mail) 형식은 주로 암호화된 데이터를 텍스트 형식으로 저장하고 전송하기 위해 설계된 형식입니다. PEM 형식은 데이터를 **Base64**로 인코딩한 후, 이를 **헤더**와 **푸터**로 감싸는 방식입니다.
+
+1. **헤더와 푸터**:
+    - `-----BEGIN PUBLIC KEY-----`와 `-----END PUBLIC KEY-----` 부분은 이 데이터가 **공개키**라는 것을 명시합니다.
+2. **Base64로 인코딩된 데이터**:
+    - 실제 키 데이터는 **Base64로 인코딩**된 이진 데이터입니다. Base64는 이진 데이터를 **ASCII 문자**로 변환하는 방식으로, 이진 데이터가 텍스트 형식으로 안전하게 전송될 수 있도록 합니다.
+
+예를 들어, RSA 공개키를 PEM 형식으로 표현한 것은 다음과 같습니다:
+
+```text
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7Ue7kIcE3fXZkM7JZ8uX
+vBdXhztkcHPCm7vnEjO+xUKXtkfnyo31z5oCkeqQlrNmw0azB79qkgHqs6YP9O4z
+8GcACXcHpcT1+O3y+mgmFQt2AgtOTqIxlEwHzg3OAyH6pVEjOtsZsmUnH+DQvZG9
+qWmTP5ZD3RHV58kZGJjyXYyIbwzLHF9DboyQmAX5Vq9hsdqb5UqkqwmipfZmcU4s
+3mYnbMNp/J6faYeie5q59t1m4kQ8j4z3slYVr4JY0g/qw3RYo5lszzh4RzgT05dG
+s0L9b7zxwVr+Ikm8XrJ7dO5KP4pqfkmxhbVuLdoVoMi6DgA1IcU7Jl2VFT1E0xu2
+hwIDAQAB
+-----END PUBLIC KEY-----
+```

@@ -2758,6 +2758,52 @@ KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 256);
 SecretKey secret = keyFactory.generateSecret(spec);
 ```
 
+## lombok
+Lombok은 자바 개발 생산성을 높이기 위해 반복적인 코드를 줄여주는 라이브러리입니다. 자바 개발을 하다 보면 클래스를 만들 때 getter, setter, toString, 생성자 등과 같은 메소드를 반복적으로 작성해야 하는 경우가 많습니다. Lombok은 이러한 반복적인 코드를 어노테이션 몇 개로 간단하게 대체하여 개발자가 핵심 로직에 집중할 수 있도록 도와줍니다.
+
+- **@Getter, @Setter:** 필드에 대한 getter와 setter 메소드를 자동으로 생성
+- **@ToString:** 객체의 문자열 표현을 자동으로 생성
+- **@EqualsAndHashCode:** equals()와 hashCode() 메소드를 자동으로 생성
+- **@NoArgsConstructor, @AllArgsConstructor:** 기본 생성자 또는 모든 필드를 포함하는 생성자를 자동으로 생성
+- **@Builder:** 빌더 패턴을 사용하여 객체를 생성할 수 있도록 지원
+- **@Data:** 위의 모든 기능을 한 번에 적용
+
+### 사용 예시
+```
+@Data
+public class User {
+    private String name;
+    private int age;
+}
+```
+
+위 코드는 다음과 같은 코드를 작성한 것과 동일합니다.
+
+```
+public class User {
+    private String name;
+    private int age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    // ... toString, equals, hashCode 등 생략
+}
+```
+
 ## javax
 `Jakarta`와 `javax`는 Java 플랫폼에서 사용되는 패키지 이름의 두 가지 버전입니다. 그 차이는 주로 Java EE (Enterprise Edition)와 관련이 있습니다.
 
