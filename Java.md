@@ -2804,6 +2804,16 @@ public class User {
 }
 ```
 
+`@RequiredArgsConstructor`는 `final`이 붙은 필드에 대한 생성자를 자동 생성합니다.
+```
+@Service
+@RequiredArgsConstructor
+public class UserService {
+    private final UserRepository userRepository;
+    ...
+}
+```
+
 ## javax
 `Jakarta`와 `javax`는 Java 플랫폼에서 사용되는 패키지 이름의 두 가지 버전입니다. 그 차이는 주로 Java EE (Enterprise Edition)와 관련이 있습니다.
 
