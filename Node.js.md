@@ -850,6 +850,9 @@ npm install ws
 ```
 
 ### WebSocket 서버
+웹소켓 서버는 객체를 만들고 `.on('connection', callback)`을 설정해야 시작됩니다.
+- `close()`: 연결 종료
+
 ```typescript
 import WebSocket, { WebSocketServer } from 'ws';
 
@@ -882,6 +885,10 @@ console.log('WebSocket 서버가 8080 포트에서 실행 중...');
 ```
 
 ### WebSocket 클라이언트
+웹소켓 클라이언트는 생성 즉시 실행됩니다.
+- `send()`: 메시지 전송
+- `close()`: 연결 종료
+
 ```typescript
 import WebSocket from 'ws';
 
@@ -911,3 +918,4 @@ ws.on('error', (error) => {
     console.error('WebSocket 오류:', error);
 });
 ```
+

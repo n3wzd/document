@@ -1226,6 +1226,26 @@ const Counter = () => {
 export default Counter;
 ```
 
+#### getState
+`getState`는 Zustand의 **상태를 직접 가져오는 함수**입니다. 주로 **컴포넌트 외부에서 상태를 접근하거나 업데이트할 때 사용**됩니다.
+
+```javascript
+// Zustand store 정의
+import create from 'zustand';
+
+const useStore = create((set) => ({
+  count: 0,
+  increment: () => set((state) => ({ count: state.count + 1 })),
+}));
+
+// 컴포넌트 외부에서 상태와 업데이트 함수 사용하기
+const state = useStore.getState(); // 상태를 가져옴
+console.log(state.count);  // 현재 상태 출력
+
+// 상태 업데이트하기
+state.increment();  // 상태를 변경하는 액션 호출
+```
+
 ### Expo Location
 `expo-location`은 React Native(Expo)에서  **위치 정보를 다루는 라이브러리**입니다.  
 이를 사용하면 **GPS 기반 현재 위치 조회, 실시간 위치 추적, 위치 권한 요청** 등의 기능을 쉽게 구현할 수 있습니다.
@@ -1567,4 +1587,53 @@ import MapView, { Marker } from "react-native-maps";
 <MapView style={styles.map} initialRegion={{ latitude: 37.5665, longitude: 126.9780, latitudeDelta: 0.01, longitudeDelta: 0.01 }}>
   <Marker coordinate={{ latitude: 37.5665, longitude: 126.9780 }} title="서울" description="서울의 중심" />
 </MapView>
+```
+
+### WebSocket
+Expo에서 웹소켓을 사용하려면, 기본적으로 **`WebSocket` API**를 사용하면 됩니다. Expo는 네이티브 코드 없이 웹소켓을 지원하므로, 기본적으로 제공하는 `WebSocket` 클래스를 통해 서버와의 연결을 관리할 수 있습니다.
+
+#### 웹소켓 연결
+웹소켓 연결 요청은 클라이언트에서 **`WebSocket`** 객체를 생성하면서 자동으로 이루어집니다.
+    
+```
+const socket = new WebSocket('ws://yourserver.com/socket');
+```
+    
+#### 웹소켓 이벤트 처리
+웹소켓 연결이 열리면 `onopen` 이벤트가 발생하고, 메시지가 오면 `onmessage` 이벤트가 발생합니다. 오류가 발생하면 `onerror`, 연결이 종료되면 `onclose` 이벤트가 발생합니다.
+    
+```
+socket.onopen = () => {
+  console.log('WebSocket connected');
+  // 연결이 성공했을 때 할 일
+};
+
+socket.onmessage = (event) => {
+  console.log('Message received: ', event.data);
+  // 서버에서 받은 메시지 처리
+};
+
+socket.onerror = (error) => {
+  console.log('WebSocket error: ', error);
+  // 오류 처리
+};
+
+socket.onclose = (event) => {
+  console.log('WebSocket closed: ', event);
+  // 연결 종료 처리
+};
+```
+    
+#### 메시지 보내기
+클라이언트에서 서버로 메시지를 보내려면 `send` 메서드를 사용합니다.
+
+```
+socket.send('Hello, server!');
+```
+
+#### 웹소켓 연결 종료
+연결을 종료하려면 `close` 메서드를 호출합니다.
+
+```
+socket.close();
 ```
