@@ -135,6 +135,37 @@ const MyComponent = () => {
 ### Animated
 `Animated`는 React Native에서 애니메이션을 구현할 때 사용하는 기본적인 라이브러리입니다. 성능을 최적화하면서 부드러운 애니메이션을 제공하기 위해 **네이티브 드라이버(native driver)** 를 활용할 수 있도록 설계되었습니다.
 
+예제:
+```
+import React, { useRef, useEffect } from "react";
+import { View, Animated } from "react-native";
+
+const MyComponent = () => {
+  const animation = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(animation, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: false,
+    }).start();
+  }, []);
+
+  return (
+    <Animated.View
+      style={{
+        width: 100,
+        height: 100,
+        backgroundColor: "blue",
+        opacity: animation, // 애니메이션 적용
+      }}
+    />
+  );
+};
+
+export default MyComponent;
+```
+
 #### 애니메이션 값
 애니메이션의 상태를 저장하는 값입니다.
 - `Animated.Value(number)`: 단일 값 애니메이션 (예: opacity, scale 등)
@@ -1885,4 +1916,47 @@ const styles = StyleSheet.create({
 });
 
 export default ChartComponent;
+```
+
+### React Native Picker Select
+`react-native-picker-select`는 **React Native**에서 드롭다운 또는 콤보박스를 만들 때 유용하게 사용되는 라이브러리입니다. 이 라이브러리는 **iOS와 Android에서 모두 작동하며**, 기본 드롭다운처럼 동작하지만, 훨씬 더 **커스터마이징 가능한 UI**와 **다양한 기능**을 제공합니다.
+
+1. **유연한 스타일링**: 기본 스타일을 쉽게 변경할 수 있어, 앱의 디자인에 맞게 드롭다운을 꾸밀 수 있습니다.
+2. **다양한 입력 타입 지원**: 기본 드롭다운 외에도 텍스트 입력, 다중 선택 등 다양한 기능을 지원합니다.
+3. **아이템 필터링**: 선택 가능한 아이템을 필터링할 수 있는 기능도 제공하여, 대규모 목록을 처리할 때 유용합니다.
+4. **검색 기능**: 선택할 항목이 많을 경우, 검색을 통해 항목을 필터링할 수 있는 기능도 내장되어 있습니다.
+
+설치:
+```
+npm install @react-native-picker/picker
+```
+
+예시:
+```tsx
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
+
+const ComboBox = () => {
+  const [selectedValue, setSelectedValue] = useState(null);
+
+  const pickerItems = [
+    { label: 'Java', value: 'java' },
+    { label: 'JavaScript', value: 'javascript' },
+    { label: 'Python', value: 'python' },
+  ];
+
+  return (
+    <View>
+      <Text>선택된 값: {selectedValue}</Text>
+      <RNPickerSelect
+        onValueChange={(value) => setSelectedValue(value)}
+        items={pickerItems}
+        placeholder={{ label: '언어를 선택하세요', value: null }}
+      />
+    </View>
+  );
+};
+
+export default ComboBox;
 ```
