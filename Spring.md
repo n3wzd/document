@@ -664,6 +664,28 @@ public ResponseEntity<User> createUser(@RequestBody User user) {
 }
 ```
 
+### `@RequestPart`
+`@RequestPart`는 **Spring MVC**에서 **멀티파트 파일 업로드** 또는 **복합 객체**를 처리할 때 사용되는 어노테이션입니다. 이 어노테이션은 HTTP 요청에서 `multipart/form-data` 형식으로 전송된 부분을 처리할 때 사용됩니다. 주로 파일 업로드와 JSON 등의 데이터를 함께 처리하는 경우에 사용됩니다.
+
+```
+@PostMapping("/upload")
+public ResponseEntity<String> uploadFile(
+		@RequestPart("file") MultipartFile file,
+		@RequestPart("metadata") String metadata) {
+	
+	// 파일 처리
+	String filename = file.getOriginalFilename();
+	// metadata 처리 (예: JSON)
+	System.out.println("Metadata: " + metadata);
+	
+	return ResponseEntity.ok("File uploaded successfully: " + filename);
+}
+```
+
+위에서 클라이언트는 `multipart/form-data` 형식으로 두 가지를 전송해야 합니다:
+- `"file"`: 업로드할 파일
+- `"metadata"`: 파일에 대한 메타데이터(예: JSON 형식)
+
 ### `@SessionAttributes`
 **세션**에 특정 속성을 저장하고, 해당 속성에 접근할 수 있도록 하는 어노테이션입니다. 주로 **세션 기반 웹 애플리케이션**에서 사용됩니다.
 
@@ -684,6 +706,41 @@ public class UserController {
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // 보안 설정
 }
+```
+
+### MultipartFile
+`MultipartFile`은 Spring에서 파일 업로드를 처리하는 데 사용되는 인터페이스입니다. `multipart/form-data` 형식으로 전송된 파일 데이터를 쉽게 처리할 수 있게 도와주는 기능을 제공합니다.
+
+`getOriginalFilename()`: 업로드된 파일의 원래 이름을 반환합니다.
+```
+String originalFileName = file.getOriginalFilename();
+```
+
+`getSize()`: 업로드된 파일의 크기(바이트 단위)를 반환합니다.
+```
+long size = file.getSize();
+```
+
+`getContentType()`: 파일의 MIME 타입을 반환합니다. 예를 들어, 이미지 파일의 경우 `image/jpeg` 등의 값이 반환됩니다.
+```
+String contentType = file.getContentType();
+```
+
+`isEmpty()`: 업로드된 파일이 비어 있는지 확인합니다. 파일이 없으면 `true`를 반환합니다.
+```
+if (file.isEmpty()) {
+	// 파일이 비어 있을 경우 처리
+}
+```
+
+`transferTo(File dest)`: 파일을 서버의 지정된 위치에 저장하는 메서드입니다.
+```
+file.transferTo(new File("path/to/save"));
+```
+
+`getBytes()`: 파일의 내용을 바이트 배열로 반환합니다.
+```
+byte[] fileBytes = file.getBytes();
 ```
 
 ### OncePerRequestFilter

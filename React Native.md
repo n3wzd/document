@@ -1960,3 +1960,126 @@ const ComboBox = () => {
 
 export default ComboBox;
 ```
+
+### Expo Image Picker
+`expo-image-picker`는 **Expo** 프레임워크에서 제공하는 라이브러리로, 사용자가 **기기에서 이미지를 선택**하거나 **카메라로 사진을 찍을 수 있도록 도와주는 도구**입니다. 이 모듈을 사용하면 갤러리나 카메라* 쉽게 열어 이미지를 선택하고 이를 앱 내에서 처리할 수 있습니다.
+
+1. **갤러리에서 이미지 선택**: 사용자가 기기의 갤러리에서 이미지를 선택할 수 있습니다.
+2. **카메라로 사진 촬영**: 사용자가 카메라를 열어 사진을 찍을 수 있습니다.
+3. **이미지 메타데이터**: 선택한 이미지의 크기, 유형 등 메타데이터를 가져올 수 있습니다.
+4. **이미지 편집**: 편집할 수 있도록 이미지 크기를 자르거나 비율을 맞출 수 있습니다.
+
+설치:
+```
+npm install expo-image-picker
+```
+
+#### 갤러리에서 이미지 선택
+```javascript
+import * as ImagePicker from 'expo-image-picker';
+import React, { useState } from 'react';
+import { Button, Image, View } from 'react-native';
+
+export default function App() {
+  const [image, setImage] = useState(null);
+
+  const pickImage = async () => {
+    // 갤러리 접근 권한 요청
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (permissionResult.status !== 'granted') {
+      alert('갤러리 권한이 필요합니다.');
+      return;
+    }
+
+    // 갤러리에서 이미지 선택
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['image'],
+      allowsEditing: true, // 이미지 편집 허용
+      aspect: [4, 3], // 비율 설정
+      quality: 1, // 품질 설정 (0~1)
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri); // 선택한 이미지 URI 설정
+    }
+  };
+
+  return (
+    <View>
+      <Button title="이미지 선택" onPress={pickImage} />
+      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+    </View>
+  );
+}
+```
+
+#### 카메라 사진 촬영
+```javascript
+const takePhoto = async () => {
+  // 카메라 권한 요청
+  const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+  if (permissionResult.status !== 'granted') {
+    alert('카메라 권한이 필요합니다.');
+    return;
+  }
+
+  // 카메라로 사진 촬영
+  const result = await ImagePicker.launchCameraAsync({
+    allowsEditing: true,
+    aspect: [4, 3],
+    quality: 1,
+  });
+
+  if (!result.canceled) {
+    setImage(result.assets[0].uri); // 촬영한 이미지 URI 설정
+  }
+};
+```
+
+### Expo File System
+`expo-file-system`은 **Expo SDK**의 모듈로, **파일 시스템에 접근하고 파일을 읽고 쓸 수 있는 기능**을 제공합니다. 이 모듈을 사용하면 모바일 디바이스의 파일 시스템에서 파일을 저장, 읽기, 삭제, 디렉터리 작업 등을 할 수 있습니다. 주로 로컬 파일을 관리하거나, 외부 파일을 앱에 저장하는 경우에 유용합니다.
+
+1. **파일 읽기/쓰기**:
+    - 로컬 파일을 읽거나 수정할 수 있습니다.
+    - 파일을 새로 생성하거나 기존 파일을 수정할 수 있습니다.
+2. **디렉토리 작업**:
+    - 디렉토리를 생성하거나 삭제하고, 디렉토리의 내용을 읽을 수 있습니다.
+3. **파일 다운로드/업로드**:
+    - 네트워크를 통해 파일을 다운로드하거나 로컬 시스템에서 업로드할 수 있습니다.
+4. **파일 정보 조회**:
+    - 파일의 크기, 생성일, 수정일 등을 가져올 수 있습니다.
+5. **파일 경로 관리**:
+    - 앱에서 사용되는 다양한 파일 경로를 다룰 수 있습니다 (예: 로컬 파일 시스템 경로, 임시 경로 등).
+
+설치:
+```
+expo install expo-file-system
+```
+
+#### 주요 메서드
+- **writeAsStringAsync(uri, string, options?)**: 문자열 데이터를 파일에 저장합니다.
+- **readAsStringAsync(uri, options?)**: 파일에서 문자열 데이터를 읽습니다.
+- **deleteAsync(uri, options?)**: 파일을 삭제합니다.
+- **getInfoAsync(uri, options?)**: 파일 또는 디렉터리의 정보를 반환합니다.
+- **makeDirectoryAsync(uri, options?)**: 디렉터리를 생성합니다.
+
+### mime
+`mime`은 Node.js에서 MIME 타입(MIME type)을 다루는 데 사용하는 npm 패키지입니다. 파일 확장자를 MIME 타입으로 변환하거나, MIME 타입을 파일 확장자로 변환하는 기능을 제공합니다.
+
+설치:
+```
+npm install mime
+```
+
+예제:
+```javascript
+const mime = require('mime');
+
+// 파일 확장자로 MIME 타입 얻기
+console.log(mime.getType('example.txt')); // 'text/plain'
+console.log(mime.getType('image.png')); // 'image/png'
+
+// MIME 타입으로 파일 확장자 얻기
+console.log(mime.getExtension('text/html')); // 'html'
+console.log(mime.getExtension('application/json')); // 'json'
+```
