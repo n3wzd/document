@@ -1,5 +1,4 @@
-# Test
-## JUnit
+# JUnit
 **JUnit**은 자바에서 **단위 테스트(Unit Test)**를 작성하고 실행할 수 있게 도와주는 프레임워크입니다. **단위 테스트**는 애플리케이션의 개별적인 기능이나 메서드가 예상대로 작동하는지 확인하는 테스트입니다. JUnit은 테스트를 작성하고, 실행하고, 결과를 확인하는 과정을 간소화해줍니다.
 
 1. **테스트 메서드 정의**: `@Test` 어노테이션을 사용하여 테스트할 메서드를 정의합니다.
@@ -11,7 +10,7 @@
 
 Maven 사용시, `mvn test`, Gradle 사용시 `gradle test` 명령어를 사용하여 테스트를 실행합니다.
 
-### 헬퍼 메서드 (Helper Method)
+## 헬퍼 메서드 (Helper Method)
 **헬퍼 메서드**는 **반복적인 작업**을 하나의 메서드로 묶어 **재사용**할 수 있도록 도와주는 **일반적인 메서드**입니다. 테스트에서 반복적으로 사용되는 로직을 한 곳에 모아두면 코드가 간결하고 유지보수가 쉬워집니다.
 
 ```
@@ -25,7 +24,7 @@ public void registerAndVerifyUser(List<String> userJson, String expectedName, St
 }
 ```
 
-### 파라미터화된 테스트 (Parameterized Test)
+## 파라미터화된 테스트 (Parameterized Test)
 JUnit 5부터 사용 가능한 파라미터화된 테스트는 **같은 테스트 메서드를 여러 입력 값에 대해 반복 실행**할 수 있게 해주는 기능으로, 같은 테스트 메서드가 여러 다른 입력 값에 대해 실행되도록 할 수 있습니다. 이를 통해 테스트 케이스를 효율적으로 확장하고 관리할 수 있습니다. `@ParameterizedTest`를 사용하여 파라미터화된 테스트를 진행할 수 있습니다.
 
 - `@ValueSource`: 단일 타입의 데이터를 여러 번 테스트할 때 사용합니다.
@@ -177,7 +176,7 @@ public class UserControllerTest {
 - `perform(MockHttpServletRequestBuilder requestBuilder)`: HTTP 요청을 시뮬레이션합니다.
 - `andExpect(ResultMatcher... matchers)`: 요청 후의 응답을 검증합니다.
 
-## `@SpringBootTest`
+### `@SpringBootTest`
 `@SpringBootTest`는 **Spring Boot** 애플리케이션을 테스트할 때 사용하는 애노테이션으로, **전체 Spring 애플리케이션 컨텍스트**를 로드하여 **통합 테스트**를 수행할 수 있게 해줍니다. 이 애노테이션을 사용하면 애플리케이션의 실제 실행 환경과 유사한 환경에서 테스트를 진행할 수 있습니다.
 
 `@SpringBootTest`는 Spring Boot 애플리케이션의 **전체 컨텍스트**를 로드하기 때문에, **애플리케이션의 모든 빈(bean)**, **자동 설정** 등을 포함하여 테스트를 실행합니다. 이를 통해 실제 애플리케이션에서의 동작을 정확하게 테스트할 수 있습니다.
