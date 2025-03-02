@@ -47,8 +47,34 @@
 - **네이티브 코드 수정이 필요 없을 때**: Expo에서 제공하는 API로 충분히 앱을 개발할 수 있다면 Expo가 적합합니다.
 - **간단한 앱 개발**: 빠르게 프로토타입을 만들거나, 기본적인 기능을 구현할 때 유용합니다.
 
+#### 설치
+회원가입:
+> https://expo.dev/
+
+패키지 설치:
+```
+npm install -g eas-cli
+```
+
+프로젝트 생성:
+```
+npx create-expo-app [프로젝트 이름]
+```
+
+실행:
+```
+npm start
+```
+
+출력된 QR코드를 `Expo Go` 앱으로 스캔합니다.
+
+빌드(안드로이드):
+```
+eas build -p android --profile preview
+```
+
 #### Expo Eject
-**Expo Eject**는 **Expo 프로젝트**에서 **Expo의 관리형 환경**을 벗어나 **React Native CLI** 환경으로 변환하는 과정입니다. Expo는 기본적으로 많은 기능을 제공하지만, 때로는 **네이티브 코드 수정**이나 **고급 설정**이 필요한 경우가 있습니다. 이때 **Expo Eject**를 사용하여 Expo의 제한을 벗어나 **직접 네이티브 코드**를 수정하거나 **React Native CLI**에서 제공하는 기능을 활용할 수 있습니다.
+**Expo Eject**는 **Expo 프로젝트**에서 Expo의 관리형 환경을 벗어나 **React Native CLI** 환경으로 변환하는 과정입니다. Expo는 기본적으로 많은 기능을 제공하지만, 때로는 네이티브 코드 수정이나 고급 설정이 필요한 경우가 있습니다. 이때 **Expo Eject**를 사용하여 Expo의 제한을 벗어나 **직접 네이티브 코드**를 수정하거나 **React Native CLI**에서 제공하는 기능을 활용할 수 있습니다.
 
 ## UI
 ### View
