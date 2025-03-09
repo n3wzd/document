@@ -1,10 +1,5 @@
 /.obsidian
 /images/.obsidian
-_site
-.sass-cache
-.jekyll-cache
-.jekyll-metadata
-vendor
 posts_formmater.py
 
 # Vim
