@@ -9,7 +9,7 @@ layout: archive
 {% if paginator %}
   {% assign posts = paginator.posts %}
 {% else %}
-  {% assign posts = site.posts %}
+  {% assign posts = site.posts | slice: 0, site.paginate %}
 {% endif %}
 
 {% assign entries_layout = page.entries_layout | default: 'list' %}
@@ -17,4 +17,8 @@ layout: archive
   {% include documents-collection.html entries=posts type=entries_layout %}
 </div>
 
-{% include paginator.html %}
+{% if paginator %}
+  {% include paginator.html %}
+{% else %}
+  {% include paginator-first.html posts=site.posts paginate_path=site.paginate_path %}
+{% endif %}

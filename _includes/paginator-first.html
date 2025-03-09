@@ -1,0 +1,50 @@
+<nav class="pagination">
+    <ul>
+        {% assign total_pages = include.posts | size | divided_by: site.paginate %}
+        {% assign remainder = include.posts | size | modulo: site.paginate %}
+        {% if remainder > 0 %}
+        {% assign total_pages = total_pages | plus: 1 %}
+        {% endif %}
+        {% assign total_pages = total_pages | at_least: 1 %}
+
+        {% assign current_page = 1 %}
+        {% assign next_page = current_page | plus: 1 %}
+        {% assign previous_page = current_page | minus: 1 %}
+        {% assign next_href = include.paginate_path | replace: ':num', next_page | replace: '//', '/' %}
+        {% assign previous_href = include.paginate_path | replace: ':num', previous_page | replace: '//', '/' | replace: "/page1", "/" %}
+
+        {% if previous_page >= 1 %}
+        <li><a href="{{ previous_href }}">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a></li>
+        {% else %}
+        <li><a href="#" class="disabled"><span aria-hidden="true">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</span></a></li>
+        {% endif %}
+
+        {% if total_pages > 5 %}
+            {% assign max_value = 5 %}
+        {% else %}
+            {% assign max_value = total_pages %}
+        {% endif %}
+
+        {% for index in (1..max_value) %}
+        {% if index == current_page %}
+            <li><a href="#" class="disabled current">{{ index }}</a></li>
+        {% else %}
+            <li><a href="{{ include.paginate_path | replace: ':num', index }}">{{ index }}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        {% if total_pages > 6 %}
+            <li><a href="#" class="disabled">&hellip;</a></li>
+        {% endif %}
+
+        {% if total_pages >= 6 %}
+            <li><a href="{{ include.paginate_path | replace: ':num', total_pages }}">{{ total_pages }}</a></li>
+        {% endif %}
+        
+        {% if total_pages >= next_page %}
+            <li><a href="{{ next_href }}">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a></li>
+        {% else %}
+            <li><a href="#" class="disabled"><span aria-hidden="true">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</span></a></li>
+        {% endif %}
+    </ul>
+</nav>
