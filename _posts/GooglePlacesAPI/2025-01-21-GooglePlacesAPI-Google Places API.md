@@ -1,4 +1,11 @@
-# Google Places API
+---
+categories:
+- GooglePlacesAPI
+date: '2025-01-21'
+title: '[GooglePlacesAPI] Google Places API'
+---
+
+{% raw %}
 Google Places API는 Google의 위치 기반 서비스 API 중 하나로, 사용자가 요청한 위치에 대한 장소 정보(예: 음식점, 관광지, 상점 등)를 제공하는 API입니다. 이 API는 위치 기반 데이터를 활용하여 특정 장소의 세부 정보(이름, 주소, 평점, 사진 등)와 같은 정보를 반환합니다.
 
 - **장소 검색**: 특정 지역 내에서 장소를 검색할 수 있습니다. 예를 들어, "서울" 근처의 "음식점"을 찾거나 "카페"를 검색할 수 있습니다.
@@ -67,7 +74,7 @@ Google Places API는 여러 가지 기능을 제공하는데, 주로 장소 검�
 ```
 
 자세한 설명:
-> https://developers.google.com/maps/documentation/javascript/places?hl=ko
+> https://developers.google.com/maps/documentation/javascript/places?hl=ko<br>
 
 ### Place Details API
 이 API는 `place_id`를 사용하여 특정 장소의 세부 정보를 가져옵니다.
@@ -140,7 +147,7 @@ Google Places API는 여러 가지 기능을 제공하는데, 주로 장소 검�
 ```
 
 장소 유형 목록:
-> https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=ko&_gl=1*smh0xr*_up*MQ..*_ga*Mjk0MDgwNzUzLjE3MzczNzA3OTc.*_ga_NRWSTWS78N*MTczNzM3MDc5Ny4xLjAuMTczNzM3MDgxOC4wLjAuMA..
+> https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=ko&_gl=1*smh0xr*_up*MQ..*_ga*Mjk0MDgwNzUzLjE3MzczNzA3OTc.*_ga_NRWSTWS78N*MTczNzM3MDc5Ny4xLjAuMTczNzM3MDgxOC4wLjAuMA..<br>
 
 ### Place Autocomplete API
 이 API는 사용자가 입력하는 검색어에 대해 자동완성 기능을 제공합니다.
@@ -188,3 +195,4 @@ Google Places API는 여러 가지 기능을 제공하는데, 주로 장소 검�
 
 **출력:**
 - 이미지 파일 (응답은 이미지 형태로 반환됨)
+{% endraw %}

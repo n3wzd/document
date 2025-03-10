@@ -1,4 +1,11 @@
-# Maven
+---
+categories:
+- BuildAutomation
+date: '2025-01-13'
+title: '[BuildAutomation] Maven'
+---
+
+{% raw %}
 **Maven**은 **Java 기반의 빌드 자동화 도구**입니다. 프로젝트의 빌드, 의존성 관리, 테스트 실행, 배포 등을 자동화하는 데 도움을 줍니다. Maven은 Apache Software Foundation에서 개발하였으며, Java 생태계에서 널리 사용되고 있습니다.
 
 1. **빌드 자동화**: Maven은 프로젝트를 컴파일, 테스트, 패키징, 배포하는 과정을 자동화합니다. 빌드 과정은 `pom.xml` 파일에 정의된 설정에 따라 자동으로 처리됩니다.
@@ -11,3 +18,4 @@
 1. `pom.xml` (Project Object Model): Maven 프로젝트의 핵심 파일입니다. 이 파일에는 프로젝트의 정보, 의존성, 빌드 설정, 플러그인 등을 정의합니다. XML 형식으로 작성되며, 프로젝트의 모든 설정, 사용할 라이브러리(의존성)을 포함하고 있습니다.
 2. **Maven Repository**: Maven은 Maven Central Repository라는 중앙 저장소를 통해 의존성을 다운로드합니다. 이 외에도 다른 저장소를 지정할 수 있습니다.
 3. **Maven 플러그인**: Maven은 다양한 작업을 자동화할 수 있는 플러그인을 지원합니다. 예를 들어, `maven-compiler-plugin`은 Java 소스를 컴파일하고, `maven-surefire-plugin`은 단위 테스트를 실행합니다.
+{% endraw %}

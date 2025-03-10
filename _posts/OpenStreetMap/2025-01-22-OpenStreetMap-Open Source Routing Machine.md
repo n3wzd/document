@@ -1,4 +1,11 @@
-# Open Source Routing Machine
+---
+categories:
+- OpenStreetMap
+date: '2025-01-22'
+title: '[OpenStreetMap] Open Source Routing Machine'
+---
+
+{% raw %}
 OSRM (Open Source Routing Machine)은 OSM (OpenStreetMap) 데이터를 기반으로 빠르고 효율적인 경로 계산을 제공하는 오픈소스 라우팅 엔진입니다. OSRM은 특히 자동차, 자전거, 도보와 같은 다양한 이동 수단에 대해 경로를 계산하는 데 사용됩니다.
 
 1. **빠른 경로 계산**:
@@ -72,3 +79,4 @@ http://router.project-osrm.org/route/v1/driving/13.388860,52.517037;13.397634,52
 - **geometry**: 경로를 따라가는 선의 좌표 정보입니다.
 - **distance**: 전체 경로의 거리(미터 단위).
 - **duration**: 전체 경로의 소요 시간(초 단위).
+{% endraw %}
