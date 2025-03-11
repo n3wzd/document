@@ -16,7 +16,7 @@ AI:AI, TensorFlow;
 API:GooglePlacesAPI, OpenStreetMap;
 OS:OS;
 Blog:Jekyll, MkDocs;
-기타:정보처리기사, Book;
+Other:Cert, Book;
 {% endcapture %}
 
 <nav class="nav__list">
