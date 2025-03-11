@@ -1,35 +1,38 @@
 {% assign sum = site.posts | size %}
 
-{% assign categories = {
-    "Algorithm": "BOJ, Programmers, Algorithm, PCG",
-    "Design & Practice": "Design, Practice",
-    "Languages": "JavaScript, TypeScript, Dart, Python, Java, XML",
-    "Web": "Web, HTML, CSS, JSX",
-    "Frontend": "React, ReactNative, Flutter, Angular, VueJs",
-    "Backend": "NodeJs, ExpressJs, Spring, Django",
-    "Frameworks": "NET5, PhaserJs",
-    "Database": "Database, SQLite, Redis, Kafka, Zookeeper",
-    "Server": "Server, Architecture, Container, Security",
-    "Build": "Git, VCS, BuildAutomation",
-    "Test": "JUnit, JMeter",
-    "AI": "AI, TensorFlow",
-    "API": "GooglePlacesAPI, OpenStreetMap",
-    "OS": "OS",
-    "Blog": "Jekyll, MkDocs",
-    "기타": "정보처리기사, Book"
-} %}
-  
+{% capture categories %}
+Algorithm:BOJ, Programmers, Algorithm, PCG;
+Design & Practice:Design, Practice;
+Languages:JavaScript, TypeScript, Dart, Python, Java, XML;
+Web:Web, HTML, CSS, JSX;
+Frontend:React, ReactNative, Flutter, Angular, VueJs;
+Backend:NodeJs, ExpressJs, Spring, Django;
+Frameworks:NET5, PhaserJs;
+Database:Database, SQLite, Redis, Kafka, Zookeeper;
+Server:Server, Architecture, Container, Security;
+Build:Git, VCS, BuildAutomation;
+Test:JUnit, JMeter;
+AI:AI, TensorFlow;
+API:GooglePlacesAPI, OpenStreetMap;
+OS:OS;
+Blog:Jekyll, MkDocs;
+기타:정보처리기사, Book;
+{% endcapture %}
 
 <nav class="nav__list">
   <ul class="nav__items" id="category_tag_menu">
       <li>
-            📂 <span style="font-size: 0.9em;">전체 {{sum}}</style> 
+          📂 <span style="font-size: 0.9em;">전체 {{ sum }}</span> 
       </li>
       <li>
-        {% for category_name in categories %}
-            <span class="nav__sub-title">{{ category_name[0] }}</span>
+        {% assign category_list = categories | split: ";" %}
+        {% for category_item in category_list %}
+            {% assign category_pair = category_item | split: ":" %}
+            {% assign category_name = category_pair[0] %}
+            {% assign subcategories = category_pair[1] | split: ", " %}
+            
+            <span class="nav__sub-title">{{ category_name }}</span>
             <ul>
-                {% assign subcategories = category_name[1] | split: ", " %}
                 {% for subcategory in subcategories %}
                     {% for category in site.categories %}
                         {% if category[0] == subcategory %}
