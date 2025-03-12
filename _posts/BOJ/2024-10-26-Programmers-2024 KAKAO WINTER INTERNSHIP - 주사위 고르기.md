@@ -100,5 +100,5 @@ vector<int> solution(vector<vector<int>> diceInput) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/258709
+https://school.programmers.co.kr/learn/courses/30/lessons/258709<br>
 {% endraw %}

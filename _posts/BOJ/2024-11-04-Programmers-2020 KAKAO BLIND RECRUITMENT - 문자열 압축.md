@@ -56,5 +56,5 @@ int solution(string s) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/60057
+https://school.programmers.co.kr/learn/courses/30/lessons/60057<br>
 {% endraw %}

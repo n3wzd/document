@@ -61,5 +61,5 @@ int solution(string dirs) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/49994
+https://school.programmers.co.kr/learn/courses/30/lessons/49994<br>
 {% endraw %}

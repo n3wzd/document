@@ -68,5 +68,5 @@ int solution(vector<int> diffs, vector<int> times, long long limit) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/340212
+https://school.programmers.co.kr/learn/courses/30/lessons/340212<br>
 {% endraw %}

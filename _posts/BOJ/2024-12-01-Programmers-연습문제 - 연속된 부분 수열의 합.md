@@ -63,5 +63,5 @@ vector<int> solution(vector<int> S, int K) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/178870
+https://school.programmers.co.kr/learn/courses/30/lessons/178870<br>
 {% endraw %}

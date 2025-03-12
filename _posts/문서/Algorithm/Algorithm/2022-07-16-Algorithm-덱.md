@@ -31,12 +31,12 @@ C++ deque.h에서 덱을 제공한다.
 슬라이딩 윈도우에서 최대/소는 나이브하게 구하면 O(N<sup>2</sup>) 시간이 걸리지만, `덱`을 사용하면 O(N)으로 구할 수 있다.
 
 ## 연관 문제
-https://www.acmicpc.net/problem/10866
-https://www.acmicpc.net/problem/5430
+https://www.acmicpc.net/problem/10866<br>
+https://www.acmicpc.net/problem/5430<br>
 
 ### 슬라이딩 윈도우 최대/소
-https://www.acmicpc.net/problem/11003
+https://www.acmicpc.net/problem/11003<br>
 
 ## 참고
-https://namu.wiki/w/%ED%81%90(%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0)
+https://namu.wiki/w/%ED%81%90(%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0)<br>
 {% endraw %}

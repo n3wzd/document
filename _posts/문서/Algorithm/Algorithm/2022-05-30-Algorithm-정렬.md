@@ -69,9 +69,9 @@ int main()
 ```
 
 ### 연관 문제
-https://www.acmicpc.net/problem/2751
-https://www.acmicpc.net/problem/11650
-https://www.acmicpc.net/problem/1517
+https://www.acmicpc.net/problem/2751<br>
+https://www.acmicpc.net/problem/11650<br>
+https://www.acmicpc.net/problem/1517<br>
 
 ## 카운팅 정렬
 카운팅 정렬은 원소의 값을 인덱스로 하고, 해당 원소의 출현 횟수를 값으로 하는 배열을 사용해서 정렬하는 방법이다.
@@ -125,9 +125,9 @@ int main()
 ```
 
 ### 연관 문제
-https://www.acmicpc.net/problem/10989
-https://www.acmicpc.net/problem/12899
+https://www.acmicpc.net/problem/10989<br>
+https://www.acmicpc.net/problem/12899<br>
 
 ## 참고
-https://namu.wiki/w/%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98
+https://namu.wiki/w/%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98<br>
 {% endraw %}

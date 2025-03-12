@@ -87,5 +87,5 @@ vector<int> solution(vector<vector<int>> usersI, vector<int> emoticonsI) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/150368
+https://school.programmers.co.kr/learn/courses/30/lessons/150368<br>
 {% endraw %}

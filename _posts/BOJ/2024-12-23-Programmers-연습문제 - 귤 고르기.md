@@ -50,5 +50,5 @@ int solution(int k, vector<int> T) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/138476
+https://school.programmers.co.kr/learn/courses/30/lessons/138476<br>
 {% endraw %}

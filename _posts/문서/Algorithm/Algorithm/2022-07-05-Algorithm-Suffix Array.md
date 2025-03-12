@@ -292,13 +292,13 @@ int main() {
 LCP는 인접 접미사간 공통 접두사의 길이를 저장한다. 이 점을 활용해 한 문자열에서 2번 이상 반복되는 모든 부분 문자열을 빠르게 스캔할 수 있다.
 
 ## 관련 문제
-https://www.acmicpc.net/problem/9248
-https://www.acmicpc.net/problem/1605
-https://www.acmicpc.net/problem/11479
+https://www.acmicpc.net/problem/9248<br>
+https://www.acmicpc.net/problem/1605<br>
+https://www.acmicpc.net/problem/11479<br>
 
 ## 참고
-https://jason9319.tistory.com/141
-https://plzrun.tistory.com/entry/Suffix-Array-ONlogNlgN%EA%B3%BC-ONlogN-%EA%B5%AC%ED%98%84-%EB%B0%8F-%EC%84%A4%EB%AA%85
-https://www.geeksforgeeks.org/?p=137029
-https://en.wikipedia.org/wiki/Suffix_array
+https://jason9319.tistory.com/141<br>
+https://plzrun.tistory.com/entry/Suffix-Array-ONlogNlgN%EA%B3%BC-ONlogN-%EA%B5%AC%ED%98%84-%EB%B0%8F-%EC%84%A4%EB%AA%85<br>
+https://www.geeksforgeeks.org/?p=137029<br>
+https://en.wikipedia.org/wiki/Suffix_array<br>
 {% endraw %}

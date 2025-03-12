@@ -96,5 +96,5 @@ int solution(vector<string> user_id, vector<string> banned_id) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/64064
+https://school.programmers.co.kr/learn/courses/30/lessons/64064<br>
 {% endraw %}

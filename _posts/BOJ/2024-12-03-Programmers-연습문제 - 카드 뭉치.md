@@ -53,5 +53,5 @@ string solution(vector<string> cards1, vector<string> cards2, vector<string> goa
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/159994
+https://school.programmers.co.kr/learn/courses/30/lessons/159994<br>
 {% endraw %}

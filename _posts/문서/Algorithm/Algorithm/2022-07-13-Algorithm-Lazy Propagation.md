@@ -183,12 +183,12 @@ int main() {
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/10999
-https://www.acmicpc.net/problem/12844
-https://www.acmicpc.net/problem/13925
-https://www.acmicpc.net/problem/10070
+https://www.acmicpc.net/problem/10999<br>
+https://www.acmicpc.net/problem/12844<br>
+https://www.acmicpc.net/problem/13925<br>
+https://www.acmicpc.net/problem/10070<br>
 
 ## 참고
-https://book.acmicpc.net/ds/segment-tree-lazy-propagation
-https://overnap.com/bottom-up-segment-tree-and-commutative-property/
+https://book.acmicpc.net/ds/segment-tree-lazy-propagation<br>
+https://overnap.com/bottom-up-segment-tree-and-commutative-property/<br>
 {% endraw %}

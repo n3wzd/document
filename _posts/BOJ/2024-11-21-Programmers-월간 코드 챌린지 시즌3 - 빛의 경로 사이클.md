@@ -67,5 +67,5 @@ vector<int> solution(vector<string> grid) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/86052
+https://school.programmers.co.kr/learn/courses/30/lessons/86052<br>
 {% endraw %}

@@ -74,5 +74,5 @@ int solution(int n, vector<vector<int>> roads, int K) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12978
+https://school.programmers.co.kr/learn/courses/30/lessons/12978<br>
 {% endraw %}

@@ -62,8 +62,8 @@ vector<int> solution(vector<int> L) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/154539
+https://school.programmers.co.kr/learn/courses/30/lessons/154539<br>
 
 ### 같은 문제
-https://www.acmicpc.net/problem/17298
+https://www.acmicpc.net/problem/17298<br>
 {% endraw %}

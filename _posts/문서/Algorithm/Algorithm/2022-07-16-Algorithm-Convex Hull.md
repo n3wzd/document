@@ -134,10 +134,10 @@ int main() {
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/1708
-https://www.acmicpc.net/problem/7420
-https://www.acmicpc.net/problem/3878
+https://www.acmicpc.net/problem/1708<br>
+https://www.acmicpc.net/problem/7420<br>
+https://www.acmicpc.net/problem/3878<br>
 
 ## 참고
-https://www.crocus.co.kr/1288
+https://www.crocus.co.kr/1288<br>
 {% endraw %}

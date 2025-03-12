@@ -110,10 +110,10 @@ int main() {
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/13275
-https://www.acmicpc.net/problem/11046
+https://www.acmicpc.net/problem/13275<br>
+https://www.acmicpc.net/problem/11046<br>
 
 ## 참고
-https://www.crocus.co.kr/1075
-https://www.scaler.com/topics/data-structures/manachers-algorithm/
+https://www.crocus.co.kr/1075<br>
+https://www.scaler.com/topics/data-structures/manachers-algorithm/<br>
 {% endraw %}

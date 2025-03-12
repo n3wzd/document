@@ -57,5 +57,5 @@ int solution(vector<vector<int>> data, int col, int lo, int hi) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/147354
+https://school.programmers.co.kr/learn/courses/30/lessons/147354<br>
 {% endraw %}

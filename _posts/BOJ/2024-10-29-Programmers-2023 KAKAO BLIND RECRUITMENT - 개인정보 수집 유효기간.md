@@ -69,5 +69,5 @@ vector<int> solution(string todayS, vector<string> terms, vector<string> privaci
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/150370
+https://school.programmers.co.kr/learn/courses/30/lessons/150370<br>
 {% endraw %}

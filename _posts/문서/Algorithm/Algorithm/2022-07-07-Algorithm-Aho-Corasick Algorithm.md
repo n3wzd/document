@@ -276,12 +276,12 @@ int main() {
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/9250
-https://www.acmicpc.net/problem/10256
-https://www.acmicpc.net/problem/2809
+https://www.acmicpc.net/problem/9250<br>
+https://www.acmicpc.net/problem/10256<br>
+https://www.acmicpc.net/problem/2809<br>
 
 ## 참고
-https://pangtrue.tistory.com/305
-https://loosie.tistory.com/m/587
-https://koosaga.com/157
+https://pangtrue.tistory.com/305<br>
+https://loosie.tistory.com/m/587<br>
+https://koosaga.com/157<br>
 {% endraw %}

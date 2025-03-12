@@ -81,5 +81,5 @@ vector<int> solution(vector<string> gems) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/67258
+https://school.programmers.co.kr/learn/courses/30/lessons/67258<br>
 {% endraw %}

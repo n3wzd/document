@@ -89,12 +89,12 @@ set은 상시 정렬이 되어 있다는 점에서 `우선순위 큐`와 비슷�
 원소 추가/삭제가 발생하는 목록에서 `이분 탐색`할 때도 활용할 수 있다. 선형 리스트는 삭제 시간이 O(N)이지만, set 자료구조는 O(log N)이므로 더 빠르게 탐색할 수 있다.
 
 ## 관련 문제
-https://www.acmicpc.net/problem/14425
-https://www.acmicpc.net/problem/1620
-https://www.acmicpc.net/problem/1202
+https://www.acmicpc.net/problem/14425<br>
+https://www.acmicpc.net/problem/1620<br>
+https://www.acmicpc.net/problem/1202<br>
 
 ## 참고
-https://blockdmask.tistory.com/87
-https://life-with-coding.tistory.com/305
-https://stackoverflow.com/questions/10141841/difference-between-stdset-and-stdpriority-queue
+https://blockdmask.tistory.com/87<br>
+https://life-with-coding.tistory.com/305<br>
+https://stackoverflow.com/questions/10141841/difference-between-stdset-and-stdpriority-queue<br>
 {% endraw %}

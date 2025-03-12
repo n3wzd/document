@@ -38,5 +38,5 @@ vector<int> solution(vector<int> numbers) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/68644
+https://school.programmers.co.kr/learn/courses/30/lessons/68644<br>
 {% endraw %}

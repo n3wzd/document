@@ -31,5 +31,5 @@ int solution(vector<int> a, vector<int> b) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/70128
+https://school.programmers.co.kr/learn/courses/30/lessons/70128<br>
 {% endraw %}

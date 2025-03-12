@@ -75,5 +75,5 @@ vector<int> solution(int target) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/131129
+https://school.programmers.co.kr/learn/courses/30/lessons/131129<br>
 {% endraw %}

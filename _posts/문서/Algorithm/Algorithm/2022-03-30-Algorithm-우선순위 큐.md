@@ -190,11 +190,11 @@ struct compare{
 위의 예시를 사용하면 오름차순이 된다. 만약 a < b이라면, 내림차순이 된다. (sort 비교 함수와 달리, 부등호 방향이 반대라는 점을 유의하자)
 
 ## 연관 문제
-https://www.acmicpc.net/problem/11279
-https://www.acmicpc.net/problem/11286
-https://www.acmicpc.net/problem/1655
+https://www.acmicpc.net/problem/11279<br>
+https://www.acmicpc.net/problem/11286<br>
+https://www.acmicpc.net/problem/1655<br>
 
 ## 참고
-https://chanhuiseok.github.io/posts/ds-4/
-https://doorrock.tistory.com/13
+https://chanhuiseok.github.io/posts/ds-4/<br>
+https://doorrock.tistory.com/13<br>
 {% endraw %}

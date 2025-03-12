@@ -51,5 +51,5 @@ vector<int> solution(vector<int> P, vector<int> S) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42586
+https://school.programmers.co.kr/learn/courses/30/lessons/42586<br>
 {% endraw %}

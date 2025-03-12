@@ -57,5 +57,5 @@ int solution(vector<vector<string>> book_time) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/155651
+https://school.programmers.co.kr/learn/courses/30/lessons/155651<br>
 {% endraw %}

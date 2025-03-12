@@ -48,9 +48,9 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/11402
-https://www.acmicpc.net/problem/15718
+https://www.acmicpc.net/problem/11402<br>
+https://www.acmicpc.net/problem/15718<br>
 
 ## 참고
-https://bowbowbow.tistory.com/2
+https://bowbowbow.tistory.com/2<br>
 {% endraw %}

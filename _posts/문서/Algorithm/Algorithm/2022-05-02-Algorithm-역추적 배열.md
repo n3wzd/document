@@ -39,7 +39,7 @@ while (!stk.empty())	// 정방향 출력
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/12852
-https://www.acmicpc.net/problem/9019
-https://www.acmicpc.net/problem/9252
+https://www.acmicpc.net/problem/12852<br>
+https://www.acmicpc.net/problem/9019<br>
+https://www.acmicpc.net/problem/9252<br>
 {% endraw %}

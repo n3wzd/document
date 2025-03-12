@@ -122,10 +122,10 @@ int main() {
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/13713
-https://www.acmicpc.net/problem/16229
+https://www.acmicpc.net/problem/13713<br>
+https://www.acmicpc.net/problem/16229<br>
 
 ## 참고
-https://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/
-https://anz1217.tistory.com/66
+https://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/<br>
+https://anz1217.tistory.com/66<br>
 {% endraw %}

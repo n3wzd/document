@@ -52,5 +52,5 @@ int solution(int N, vector<int> S, int W) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12979
+https://school.programmers.co.kr/learn/courses/30/lessons/12979<br>
 {% endraw %}

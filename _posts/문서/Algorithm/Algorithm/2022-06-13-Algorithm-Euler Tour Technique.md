@@ -175,10 +175,10 @@ int main() {
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/14268
-https://www.acmicpc.net/problem/14287
-https://www.acmicpc.net/problem/2820
+https://www.acmicpc.net/problem/14268<br>
+https://www.acmicpc.net/problem/14287<br>
+https://www.acmicpc.net/problem/2820<br>
 
 ## 참고
-https://anz1217.tistory.com/41
+https://anz1217.tistory.com/41<br>
 {% endraw %}

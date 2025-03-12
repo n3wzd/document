@@ -42,5 +42,5 @@ int solution(vector<int> D, int budget) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12982
+https://school.programmers.co.kr/learn/courses/30/lessons/12982<br>
 {% endraw %}

@@ -56,5 +56,5 @@ vector<ll> solution(vector<ll> numbers) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/77885
+https://school.programmers.co.kr/learn/courses/30/lessons/77885<br>
 {% endraw %}

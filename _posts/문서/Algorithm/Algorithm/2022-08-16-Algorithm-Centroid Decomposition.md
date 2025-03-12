@@ -187,13 +187,13 @@ int CTR_Tree(int root) {
 
 ## 연관 문제
 ### 일반
-https://www.acmicpc.net/problem/5820
-https://www.acmicpc.net/problem/13854
+https://www.acmicpc.net/problem/5820<br>
+https://www.acmicpc.net/problem/13854<br>
 
 ### 센트로이드 트리
-https://www.acmicpc.net/problem/13514
+https://www.acmicpc.net/problem/13514<br>
 
 ## 참고
-https://justicehui.github.io/hard-algorithm/2020/08/25/centroid/
-https://www.secmem.org/blog/2021/04/14/centroid-of-a-tree/
+https://justicehui.github.io/hard-algorithm/2020/08/25/centroid/<br>
+https://www.secmem.org/blog/2021/04/14/centroid-of-a-tree/<br>
 {% endraw %}

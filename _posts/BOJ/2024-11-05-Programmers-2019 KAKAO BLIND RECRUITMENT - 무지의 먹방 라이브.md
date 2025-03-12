@@ -90,5 +90,5 @@ int solution(vector<int> food_times, ll k) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42891
+https://school.programmers.co.kr/learn/courses/30/lessons/42891<br>
 {% endraw %}

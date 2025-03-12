@@ -71,5 +71,5 @@ int solution(int n, vector<vector<int>> results) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/49191
+https://school.programmers.co.kr/learn/courses/30/lessons/49191<br>
 {% endraw %}

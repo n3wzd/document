@@ -88,5 +88,5 @@ string solution(string id) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/72410
+https://school.programmers.co.kr/learn/courses/30/lessons/72410<br>
 {% endraw %}

@@ -99,9 +99,9 @@ int main() {
 ```
 
 ### 관련 문제
-https://www.acmicpc.net/problem/12899
-https://www.acmicpc.net/problem/2243
-https://www.acmicpc.net/problem/1168
+https://www.acmicpc.net/problem/12899<br>
+https://www.acmicpc.net/problem/2243<br>
+https://www.acmicpc.net/problem/1168<br>
 
 ## Lazy없는 구간 업데이트? (구간 업데이트 + 단일 반환)
 다음 쿼리를 구현해보자.
@@ -201,8 +201,8 @@ int main() {
 ```
 
 ### 관련 문제
-https://www.acmicpc.net/problem/16975
-https://www.acmicpc.net/problem/14268
-https://www.acmicpc.net/problem/3392
-https://www.acmicpc.net/problem/17353
+https://www.acmicpc.net/problem/16975<br>
+https://www.acmicpc.net/problem/14268<br>
+https://www.acmicpc.net/problem/3392<br>
+https://www.acmicpc.net/problem/17353<br>
 {% endraw %}

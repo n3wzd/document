@@ -96,10 +96,10 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/11001
-https://www.acmicpc.net/problem/13261
+https://www.acmicpc.net/problem/11001<br>
+https://www.acmicpc.net/problem/13261<br>
 
 ## 참고
-https://stonejjun.tistory.com/58
-https://seastar105.tistory.com/34
+https://stonejjun.tistory.com/58<br>
+https://seastar105.tistory.com/34<br>
 {% endraw %}

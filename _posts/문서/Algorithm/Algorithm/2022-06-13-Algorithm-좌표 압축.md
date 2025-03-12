@@ -60,9 +60,9 @@ int main()
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/18870
-https://www.acmicpc.net/problem/5419
+https://www.acmicpc.net/problem/18870<br>
+https://www.acmicpc.net/problem/5419<br>
 
 ## 참고
-https://mangu.tistory.com/90
+https://mangu.tistory.com/90<br>
 {% endraw %}

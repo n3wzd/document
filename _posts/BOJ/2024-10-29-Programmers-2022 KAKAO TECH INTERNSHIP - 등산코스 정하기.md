@@ -108,5 +108,5 @@ vector<int> solution(int n, vector<vector<int>> paths, vector<int> gates, vector
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/118669
+https://school.programmers.co.kr/learn/courses/30/lessons/118669<br>
 {% endraw %}

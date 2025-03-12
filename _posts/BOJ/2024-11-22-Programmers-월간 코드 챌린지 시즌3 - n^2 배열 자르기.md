@@ -50,5 +50,5 @@ vector<int> solution(int n, ll left, ll right) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/87390
+https://school.programmers.co.kr/learn/courses/30/lessons/87390<br>
 {% endraw %}

@@ -53,5 +53,5 @@ vector<int> solution(string s) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/70129
+https://school.programmers.co.kr/learn/courses/30/lessons/70129<br>
 {% endraw %}

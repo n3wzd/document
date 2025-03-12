@@ -58,5 +58,5 @@ vector<int> solution(vector<int> lottos, vector<int> win_nums) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/77484
+https://school.programmers.co.kr/learn/courses/30/lessons/77484<br>
 {% endraw %}

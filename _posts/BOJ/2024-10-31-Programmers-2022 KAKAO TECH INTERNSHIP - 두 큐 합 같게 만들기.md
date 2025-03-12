@@ -57,5 +57,5 @@ int solution(vector<int> queue1, vector<int> queue2) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/118667
+https://school.programmers.co.kr/learn/courses/30/lessons/118667<br>
 {% endraw %}

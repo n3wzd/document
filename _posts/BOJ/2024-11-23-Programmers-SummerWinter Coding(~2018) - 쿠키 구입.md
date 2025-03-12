@@ -61,5 +61,5 @@ int solution(vector<int> cookie) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/49995
+https://school.programmers.co.kr/learn/courses/30/lessons/49995<br>
 {% endraw %}

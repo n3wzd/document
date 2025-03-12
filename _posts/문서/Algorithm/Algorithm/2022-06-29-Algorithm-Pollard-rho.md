@@ -29,7 +29,7 @@ n의 약수 p가 있다고 했을 때(아직 p의 값은 알 수 없다), 위의
 위의 수열을 그래프로 표현하면 다음과 비슷하다. 실제로 ρ하고 비슷하게 생겼다.
 ![](images/Pollard_rho_cycle.png)
 
-(그림 출처 - https://en.wikipedia.org/wiki/Pollard%27s_rho_algorithm)
+(그림 출처 - https://en.wikipedia.org/wiki/Pollard%27s_rho_algorithm)<br>
 
 모듈러 적용 이전 원래 수열에서 수 a, b가 있다고 하자. 만약 a, b가 ρ모양 그래프에서 같은 위치에 있다면 다음이 성립할 것이다.
 > a ≡ b (mod p)<br>
@@ -180,9 +180,9 @@ int main() {
 ※ Visual Studio에선 __int128를 지원하지 않는다. 대신 시간이 약간 더 오래걸리지만 unsigned long long으로 대체할 수 있다.
 
 ## 연관 문제
-https://www.acmicpc.net/problem/4149
+https://www.acmicpc.net/problem/4149<br>
 
 ## 참고
-https://blog.naver.com/PostView.nhn?blogId=jinhan814&logNo=222141831551&categoryNo=6&parentCategoryNo=6&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView
-https://aruz.tistory.com/140
+https://blog.naver.com/PostView.nhn?blogId=jinhan814&logNo=222141831551&categoryNo=6&parentCategoryNo=6&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView<br>
+https://aruz.tistory.com/140<br>
 {% endraw %}

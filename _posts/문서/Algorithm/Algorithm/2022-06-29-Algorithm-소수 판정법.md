@@ -71,11 +71,11 @@ int main()
 ```
 
 ### 연관 문제
-https://www.acmicpc.net/problem/1978
-https://www.acmicpc.net/problem/1929
+https://www.acmicpc.net/problem/1978<br>
+https://www.acmicpc.net/problem/1929<br>
 
 ### 참고
-https://continuous-development.tistory.com/204
+https://continuous-development.tistory.com/204<br>
 
 ## 밀러-라빈 소수 판정법 (Miller-Rabin Primality Test)
 `밀러-라빈 소수 판정법`은 페르마 소수 판정법을 개선한 소수 판정법이다. 특정 큰 수 1개를 빠르게 판정할 때는 이 방법이 적합하다.
@@ -113,7 +113,7 @@ x를 알고 있다면 s와 d는 어렵지 않게 구할 수 있다.
 - x < 3,474,749,660,383 → a=2,3,5,7,11,13
 - x < 341,550,071,728,321 → a=2,3,5,7,11,13,17
 
-(출처 -  https://ko.wikipedia.org/wiki/%EB%B0%80%EB%9F%AC-%EB%9D%BC%EB%B9%88_%EC%86%8C%EC%88%98%ED%8C%90%EB%B3%84%EB%B2%95)
+(출처 -  https://ko.wikipedia.org/wiki/%EB%B0%80%EB%9F%AC-%EB%9D%BC%EB%B9%88_%EC%86%8C%EC%88%98%ED%8C%90%EB%B3%84%EB%B2%95)<br>
 
 ```
 > isPrime(x) // x가 소수이면 true<br>
@@ -194,10 +194,10 @@ int main() {
 ```
 
 ### 연관 문제
-https://www.acmicpc.net/problem/5615
+https://www.acmicpc.net/problem/5615<br>
 
 ### 참고
-https://aruz.tistory.com/142
-https://rebro.kr/46
-https://ko.wikipedia.org/wiki/%EB%B0%80%EB%9F%AC-%EB%9D%BC%EB%B9%88_%EC%86%8C%EC%88%98%ED%8C%90%EB%B3%84%EB%B2%95
+https://aruz.tistory.com/142<br>
+https://rebro.kr/46<br>
+https://ko.wikipedia.org/wiki/%EB%B0%80%EB%9F%AC-%EB%9D%BC%EB%B9%88_%EC%86%8C%EC%88%98%ED%8C%90%EB%B3%84%EB%B2%95<br>
 {% endraw %}

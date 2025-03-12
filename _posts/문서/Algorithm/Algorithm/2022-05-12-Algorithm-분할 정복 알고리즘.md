@@ -71,11 +71,11 @@ Tip2.
 문제 분할을 그래프로 표현했을 때, **유한한 트리 구조** 일 때, DP를 사용할 수 있다. 자세한 내용은 `DFS/BFS` 외전 참고.
 
 ## 연관 문제
-https://www.acmicpc.net/problem/1992
-https://www.acmicpc.net/problem/1629
+https://www.acmicpc.net/problem/1992<br>
+https://www.acmicpc.net/problem/1629<br>
 
 `DP` 편도 참고하면 좋다.
 
 ## 참고
-https://namu.wiki/w/%EB%B6%84%ED%95%A0%20%EC%A0%95%EB%B3%B5%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98
+https://namu.wiki/w/%EB%B6%84%ED%95%A0%20%EC%A0%95%EB%B3%B5%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98<br>
 {% endraw %}

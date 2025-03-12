@@ -46,5 +46,5 @@ string solution(vector<int> food) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/134240
+https://school.programmers.co.kr/learn/courses/30/lessons/134240<br>
 {% endraw %}

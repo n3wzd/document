@@ -61,5 +61,5 @@ int solution(string user_skill, vector<string> skill_trees) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/49993
+https://school.programmers.co.kr/learn/courses/30/lessons/49993<br>
 {% endraw %}

@@ -66,5 +66,5 @@ ll solution(int a, int b, vector<int> G, vector<int> S, vector<int> W, vector<in
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/86053
+https://school.programmers.co.kr/learn/courses/30/lessons/86053<br>
 {% endraw %}

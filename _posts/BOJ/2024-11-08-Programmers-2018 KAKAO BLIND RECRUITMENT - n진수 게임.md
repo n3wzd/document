@@ -67,5 +67,5 @@ string solution(int n, int t, int m, int p) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17687
+https://school.programmers.co.kr/learn/courses/30/lessons/17687<br>
 {% endraw %}

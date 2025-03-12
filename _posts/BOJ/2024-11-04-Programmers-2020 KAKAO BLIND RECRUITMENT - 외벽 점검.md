@@ -73,5 +73,5 @@ int solution(int n, vector<int> weakI, vector<int> distI) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/60062
+https://school.programmers.co.kr/learn/courses/30/lessons/60062<br>
 {% endraw %}

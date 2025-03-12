@@ -98,8 +98,8 @@ int main()
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/17435
+https://www.acmicpc.net/problem/17435<br>
 
 ## 참고
-https://www.geeksforgeeks.org/sparse-table/
+https://www.geeksforgeeks.org/sparse-table/<br>
 {% endraw %}

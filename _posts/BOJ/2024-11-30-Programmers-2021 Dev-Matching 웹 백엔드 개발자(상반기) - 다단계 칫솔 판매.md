@@ -76,5 +76,5 @@ vector<int> solution(vector<string> E, vector<string> R, vector<string> S, vecto
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/77486
+https://school.programmers.co.kr/learn/courses/30/lessons/77486<br>
 {% endraw %}

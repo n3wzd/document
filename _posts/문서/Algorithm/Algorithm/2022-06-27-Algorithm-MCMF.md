@@ -131,12 +131,12 @@ int main() {
 그래프의 모든 가중치를 음수로 바꾸고 MCMF를 그대로 수행하면 된다. 이때 구한 최소 비용을 다시 양수로 바꾼 것이 최대 비용이다.
 
 ## 관련 문제
-https://www.acmicpc.net/problem/11408
-https://www.acmicpc.net/problem/11409
-https://www.acmicpc.net/problem/11111
-https://www.acmicpc.net/problem/11493
+https://www.acmicpc.net/problem/11408<br>
+https://www.acmicpc.net/problem/11409<br>
+https://www.acmicpc.net/problem/11111<br>
+https://www.acmicpc.net/problem/11493<br>
 
 ## 참고
-https://anz1217.tistory.com/54
-https://www.crocus.co.kr/1090
+https://anz1217.tistory.com/54<br>
+https://www.crocus.co.kr/1090<br>
 {% endraw %}

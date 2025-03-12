@@ -104,5 +104,5 @@ vector<int> solution(int n, vector<int> info) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/92342
+https://school.programmers.co.kr/learn/courses/30/lessons/92342<br>
 {% endraw %}

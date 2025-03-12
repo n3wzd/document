@@ -82,11 +82,11 @@ PostOrder(v)
 - 트리에서 `DP`를 사용하는 경우, 일반적으로 서브 트리 단위로 문제를 분할한다. (부모-자식 노드 탐색)
 
 ## 관련 문제
-https://www.acmicpc.net/problem/1991
-https://www.acmicpc.net/problem/1967
-https://www.acmicpc.net/problem/4803
+https://www.acmicpc.net/problem/1991<br>
+https://www.acmicpc.net/problem/1967<br>
+https://www.acmicpc.net/problem/4803<br>
 
 ## 참고
-https://namu.wiki/w/%ED%8A%B8%EB%A6%AC(%EA%B7%B8%EB%9E%98%ED%94%84)
-https://jiwondh.github.io/2017/10/15/tree/
+https://namu.wiki/w/%ED%8A%B8%EB%A6%AC(%EA%B7%B8%EB%9E%98%ED%94%84)<br>
+https://jiwondh.github.io/2017/10/15/tree/<br>
 {% endraw %}

@@ -110,5 +110,5 @@ int solution(vector<vector<int>> b, vector<int> aloc, vector<int> bloc) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/92345
+https://school.programmers.co.kr/learn/courses/30/lessons/92345<br>
 {% endraw %}

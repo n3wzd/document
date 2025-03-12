@@ -110,9 +110,9 @@ int main()
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/15649
-https://www.acmicpc.net/problem/15650
+https://www.acmicpc.net/problem/15649<br>
+https://www.acmicpc.net/problem/15650<br>
 
 ## 참고
-https://ko.wikipedia.org/wiki/%ED%87%B4%EA%B0%81%EA%B2%80%EC%83%89
+https://ko.wikipedia.org/wiki/%ED%87%B4%EA%B0%81%EA%B2%80%EC%83%89<br>
 {% endraw %}

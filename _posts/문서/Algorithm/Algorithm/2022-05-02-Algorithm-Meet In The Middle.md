@@ -24,10 +24,10 @@ title: '[Algorithm] Meet In The Middle'
 	- ex. 가방의 최대 용량이 10이고 결과 집합은 계산하고 남는 가방 용량을 저장했을 때, 만약 A의 원소 a의 남은 가방 용량이 3이라면, a는 10-3 용량을 사용하였고, 7보다 같거나 큰 여유 공간이 필요하다. 따라서 B에서 7보다 같거나 큰 경우를 고려한다. `lower_bound`를 통해 B의 목표값 위치를 찾아서 수식을 통해 A, B가 조합된 경우의 수를 빠르게 구한다.
 
 ## 연관 문제
-https://www.acmicpc.net/problem/1450
+https://www.acmicpc.net/problem/1450<br>
 
 ## 참고
-https://www.geeksforgeeks.org/meet-in-the-middle/
-https://velog.io/@flaxinger/ALGO-Meet-In-The-Middle
-https://sesang06.tistory.com/185
+https://www.geeksforgeeks.org/meet-in-the-middle/<br>
+https://velog.io/@flaxinger/ALGO-Meet-In-The-Middle<br>
+https://sesang06.tistory.com/185<br>
 {% endraw %}

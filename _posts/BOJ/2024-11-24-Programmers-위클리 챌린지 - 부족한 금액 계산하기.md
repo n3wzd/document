@@ -36,5 +36,5 @@ ll solution(int price, int money, int count) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/82612
+https://school.programmers.co.kr/learn/courses/30/lessons/82612<br>
 {% endraw %}

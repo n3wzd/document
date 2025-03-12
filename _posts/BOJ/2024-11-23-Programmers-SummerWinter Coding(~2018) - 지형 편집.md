@@ -77,5 +77,5 @@ ll solution(vector<vector<int>> land2D, int P, int Q) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12984
+https://school.programmers.co.kr/learn/courses/30/lessons/12984<br>
 {% endraw %}

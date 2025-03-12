@@ -59,5 +59,5 @@ int solution(vector<int> numsI) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12977
+https://school.programmers.co.kr/learn/courses/30/lessons/12977<br>
 {% endraw %}

@@ -37,5 +37,5 @@ int solution(string t, string p) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/147355
+https://school.programmers.co.kr/learn/courses/30/lessons/147355<br>
 {% endraw %}

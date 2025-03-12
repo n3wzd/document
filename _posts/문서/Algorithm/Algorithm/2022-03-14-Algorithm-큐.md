@@ -26,9 +26,9 @@ C++ queue.h에서 큐를 제공한다.
 큐가 비어 있을 때 조회/삭제 연산을 하면 오류가 발생한다. 조회/삭제 전에는 큐가 비어 있는지 검사하는 것이 좋다.
 
 ## 연관 문제
-https://www.acmicpc.net/problem/18258
-https://www.acmicpc.net/problem/1021
+https://www.acmicpc.net/problem/18258<br>
+https://www.acmicpc.net/problem/1021<br>
 
 ## 참고
-https://namu.wiki/w/%ED%81%90(%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0)
+https://namu.wiki/w/%ED%81%90(%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0)<br>
 {% endraw %}

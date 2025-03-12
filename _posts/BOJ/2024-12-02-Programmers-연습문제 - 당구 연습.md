@@ -84,5 +84,5 @@ vector<int> solution(int m, int n, int X1, int Y1, vector<vector<int>> balls) {<
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/169198
+https://school.programmers.co.kr/learn/courses/30/lessons/169198<br>
 {% endraw %}

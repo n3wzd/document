@@ -52,8 +52,8 @@ int main()
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/11758
+https://www.acmicpc.net/problem/11758<br>
 
 ## 참고
-https://degurii.tistory.com/47#our_vector
+https://degurii.tistory.com/47#our_vector<br>
 {% endraw %}

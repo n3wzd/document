@@ -12,14 +12,14 @@ title: '[Algorithm] 애드 혹'
 애드 혹 문제는 일종의 기타 분류로 볼 수 있으며, 굳이 분류한다면 구현, 그리디, 수학, 스위핑 유형으로 분류된다.
 
 ## 예시
-https://www.acmicpc.net/problem/1034
-https://www.acmicpc.net/problem/1069
-https://www.acmicpc.net/problem/15927
-https://www.acmicpc.net/problem/16161
-https://www.acmicpc.net/problem/13322
+https://www.acmicpc.net/problem/1034<br>
+https://www.acmicpc.net/problem/1069<br>
+https://www.acmicpc.net/problem/15927<br>
+https://www.acmicpc.net/problem/16161<br>
+https://www.acmicpc.net/problem/13322<br>
 
 ## 참고
-https://www.geeksforgeeks.org/what-are-ad-hoc-problems-in-competitive-programming/
-https://ndb796.tistory.com/474
-https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=neoteny3&logNo=221472340994
+https://www.geeksforgeeks.org/what-are-ad-hoc-problems-in-competitive-programming/<br>
+https://ndb796.tistory.com/474<br>
+https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=neoteny3&logNo=221472340994<br>
 {% endraw %}

@@ -46,5 +46,5 @@ int solution(vector<int> A) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/133502
+https://school.programmers.co.kr/learn/courses/30/lessons/133502<br>
 {% endraw %}

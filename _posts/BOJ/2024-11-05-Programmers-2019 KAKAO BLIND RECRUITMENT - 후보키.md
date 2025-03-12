@@ -94,5 +94,5 @@ int solution(vector<vector<string>> relation) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42890
+https://school.programmers.co.kr/learn/courses/30/lessons/42890<br>
 {% endraw %}

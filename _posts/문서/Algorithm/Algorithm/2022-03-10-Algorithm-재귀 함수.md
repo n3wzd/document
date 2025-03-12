@@ -68,6 +68,6 @@ Func(2)의 실행 결과.
 	- 시간이 오래 걸린다면, 반복문으로 바꾼다.
 
 ## 참고
-https://ko.wikipedia.org/wiki/%EC%9E%AC%EA%B7%80_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99)
-https://namu.wiki/w/%EC%9E%AC%EA%B7%80%ED%95%A8%EC%88%98
+https://ko.wikipedia.org/wiki/%EC%9E%AC%EA%B7%80_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99)<br>
+https://namu.wiki/w/%EC%9E%AC%EA%B7%80%ED%95%A8%EC%88%98<br>
 {% endraw %}

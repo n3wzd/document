@@ -95,5 +95,5 @@ bool solution(int N, vector<vector<int>> paths, vector<vector<int>> orders) {<br
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/67260
+https://school.programmers.co.kr/learn/courses/30/lessons/67260<br>
 {% endraw %}

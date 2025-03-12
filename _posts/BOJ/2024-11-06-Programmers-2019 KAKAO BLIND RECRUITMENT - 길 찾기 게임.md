@@ -108,5 +108,5 @@ vector<vector<int>> solution(vector<vector<int>> nodeinfo) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42892
+https://school.programmers.co.kr/learn/courses/30/lessons/42892<br>
 {% endraw %}

@@ -82,5 +82,5 @@ int solution(vector<string> board) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/169199
+https://school.programmers.co.kr/learn/courses/30/lessons/169199<br>
 {% endraw %}

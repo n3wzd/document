@@ -91,5 +91,5 @@ int solution(vector<int> sales1, vector<vector<int>> links) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/72416
+https://school.programmers.co.kr/learn/courses/30/lessons/72416<br>
 {% endraw %}

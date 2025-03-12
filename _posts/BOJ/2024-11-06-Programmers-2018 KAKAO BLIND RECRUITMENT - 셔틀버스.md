@@ -84,5 +84,5 @@ string solution(int n, int p, int m, vector<string> timetables) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17678
+https://school.programmers.co.kr/learn/courses/30/lessons/17678<br>
 {% endraw %}

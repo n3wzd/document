@@ -78,5 +78,5 @@ int solution(vector<vector<int>> board) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/67259
+https://school.programmers.co.kr/learn/courses/30/lessons/67259<br>
 {% endraw %}

@@ -88,5 +88,5 @@ vector<string> solution(vector<vector<string>> plans) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/176962
+https://school.programmers.co.kr/learn/courses/30/lessons/176962<br>
 {% endraw %}

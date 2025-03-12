@@ -82,5 +82,5 @@ int solution(int h1, int m1, int s1, int h2, int m2, int s2) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/250135
+https://school.programmers.co.kr/learn/courses/30/lessons/250135<br>
 {% endraw %}

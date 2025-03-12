@@ -228,11 +228,11 @@ int main()
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/2150
-https://www.acmicpc.net/problem/4196
-https://www.acmicpc.net/problem/4013
+https://www.acmicpc.net/problem/2150<br>
+https://www.acmicpc.net/problem/4196<br>
+https://www.acmicpc.net/problem/4013<br>
 
 ## 참고
-https://jason9319.tistory.com/98
-https://yjg-lab.tistory.com/188
+https://jason9319.tistory.com/98<br>
+https://yjg-lab.tistory.com/188<br>
 {% endraw %}

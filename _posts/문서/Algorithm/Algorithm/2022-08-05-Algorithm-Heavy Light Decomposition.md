@@ -259,11 +259,11 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/13512
-https://www.acmicpc.net/problem/13510
-https://www.acmicpc.net/problem/2927
-https://www.acmicpc.net/problem/17429
+https://www.acmicpc.net/problem/13512<br>
+https://www.acmicpc.net/problem/13510<br>
+https://www.acmicpc.net/problem/2927<br>
+https://www.acmicpc.net/problem/17429<br>
 
 ## 참고
-https://justicehui.github.io/hard-algorithm/2020/01/24/hld/
+https://justicehui.github.io/hard-algorithm/2020/01/24/hld/<br>
 {% endraw %}

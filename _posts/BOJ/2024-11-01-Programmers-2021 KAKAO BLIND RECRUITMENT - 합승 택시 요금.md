@@ -69,5 +69,5 @@ int solution(int n, int s, int a, int b, vector<vector<int>> fares) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/72413
+https://school.programmers.co.kr/learn/courses/30/lessons/72413<br>
 {% endraw %}

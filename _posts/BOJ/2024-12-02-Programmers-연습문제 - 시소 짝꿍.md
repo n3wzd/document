@@ -60,5 +60,5 @@ ll solution(vector<int> weights) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/152996
+https://school.programmers.co.kr/learn/courses/30/lessons/152996<br>
 {% endraw %}

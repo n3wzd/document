@@ -224,16 +224,16 @@ C++의 algorithm.h에선 이분 탐색과 관련된 함수를 제공한다.
 또한 `set`, `map`, `multimap`에서도 전용 lower_bound, upper_bound 메소드를 제공한다.
 
 ## 연관 문제
-https://www.acmicpc.net/problem/1920
-https://www.acmicpc.net/problem/10816
-https://www.acmicpc.net/problem/1654
-https://www.acmicpc.net/problem/1300
-https://www.acmicpc.net/problem/17951
-https://www.acmicpc.net/problem/1202
+https://www.acmicpc.net/problem/1920<br>
+https://www.acmicpc.net/problem/10816<br>
+https://www.acmicpc.net/problem/1654<br>
+https://www.acmicpc.net/problem/1300<br>
+https://www.acmicpc.net/problem/17951<br>
+https://www.acmicpc.net/problem/1202<br>
 
 ## 참고
-https://satisfactoryplace.tistory.com/39
-https://namu.wiki/w/%EC%9D%B4%EC%A7%84%20%ED%83%90%EC%83%89
-https://blog.naver.com/bestmaker0290/220820005454
-https://chanhuiseok.github.io/posts/algo-55/
+https://satisfactoryplace.tistory.com/39<br>
+https://namu.wiki/w/%EC%9D%B4%EC%A7%84%20%ED%83%90%EC%83%89<br>
+https://blog.naver.com/bestmaker0290/220820005454<br>
+https://chanhuiseok.github.io/posts/algo-55/<br>
 {% endraw %}

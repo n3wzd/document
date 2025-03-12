@@ -860,10 +860,10 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/3444
-https://www.acmicpc.net/problem/13159
+https://www.acmicpc.net/problem/3444<br>
+https://www.acmicpc.net/problem/13159<br>
 
 ## 참고
-https://aruz.tistory.com/180
-https://justicehui.github.io/tag/#/Splay-Tree
+https://aruz.tistory.com/180<br>
+https://justicehui.github.io/tag/#/Splay-Tree<br>
 {% endraw %}

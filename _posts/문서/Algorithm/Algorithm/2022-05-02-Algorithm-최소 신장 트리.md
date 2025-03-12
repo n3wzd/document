@@ -221,8 +221,8 @@ int main()
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/1197
+https://www.acmicpc.net/problem/1197<br>
 
 ## 참고
-https://ongveloper.tistory.com/376
+https://ongveloper.tistory.com/376<br>
 {% endraw %}

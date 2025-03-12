@@ -73,5 +73,5 @@ string solution(string video_len, string pos, string op_start, string op_end, ve
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/340213
+https://school.programmers.co.kr/learn/courses/30/lessons/340213<br>
 {% endraw %}

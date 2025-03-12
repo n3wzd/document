@@ -56,5 +56,5 @@ int solution(int n, vector<int> tops1) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/258705
+https://school.programmers.co.kr/learn/courses/30/lessons/258705<br>
 {% endraw %}

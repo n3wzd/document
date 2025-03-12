@@ -83,5 +83,5 @@ string solution(vector<int> numbers, string hand) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/67256
+https://school.programmers.co.kr/learn/courses/30/lessons/67256<br>
 {% endraw %}

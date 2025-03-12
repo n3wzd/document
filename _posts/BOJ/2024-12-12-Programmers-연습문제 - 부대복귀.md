@@ -68,5 +68,5 @@ vector<int> solution(int n, vector<vector<int>> R, vector<int> S, int D) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/132266
+https://school.programmers.co.kr/learn/courses/30/lessons/132266<br>
 {% endraw %}

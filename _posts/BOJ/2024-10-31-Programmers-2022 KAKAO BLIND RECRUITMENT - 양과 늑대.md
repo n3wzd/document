@@ -91,5 +91,5 @@ int solution(vector<int> infoI, vector<vector<int>> edges) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/92343
+https://school.programmers.co.kr/learn/courses/30/lessons/92343<br>
 {% endraw %}

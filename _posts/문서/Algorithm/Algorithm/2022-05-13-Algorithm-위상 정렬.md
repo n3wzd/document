@@ -116,9 +116,9 @@ int main()
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/2252
-https://www.acmicpc.net/problem/3665
+https://www.acmicpc.net/problem/2252<br>
+https://www.acmicpc.net/problem/3665<br>
 
 ## 참고
-https://m.blog.naver.com/ndb796/221236874984
+https://m.blog.naver.com/ndb796/221236874984<br>
 {% endraw %}

@@ -467,11 +467,11 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/14216
+https://www.acmicpc.net/problem/14216<br>
 
 ## 참고
-https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/
-https://gazelle-and-cs.tistory.com/29
-http://www.secmem.org/blog/2021/04/18/hungarian-algorithm/
-https://kibbomi.tistory.com/141
+https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/<br>
+https://gazelle-and-cs.tistory.com/29<br>
+http://www.secmem.org/blog/2021/04/18/hungarian-algorithm/<br>
+https://kibbomi.tistory.com/141<br>
 {% endraw %}

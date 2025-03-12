@@ -283,14 +283,14 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/10531
-https://www.acmicpc.net/problem/1067
-https://www.acmicpc.net/problem/20176
+https://www.acmicpc.net/problem/10531<br>
+https://www.acmicpc.net/problem/1067<br>
+https://www.acmicpc.net/problem/20176<br>
 
 ## 참고
-https://aruz.tistory.com/1
-https://www.geeksforgeeks.org/fast-fourier-transformation-poynomial-multiplication/?ref=gcse
-https://ohgym.tistory.com/16
-https://seastar105.tistory.com/14
-https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%82%B0_%ED%91%B8%EB%A6%AC%EC%97%90_%EB%B3%80%ED%99%98
+https://aruz.tistory.com/1<br>
+https://www.geeksforgeeks.org/fast-fourier-transformation-poynomial-multiplication/?ref=gcse<br>
+https://ohgym.tistory.com/16<br>
+https://seastar105.tistory.com/14<br>
+https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%82%B0_%ED%91%B8%EB%A6%AC%EC%97%90_%EB%B3%80%ED%99%98<br>
 {% endraw %}

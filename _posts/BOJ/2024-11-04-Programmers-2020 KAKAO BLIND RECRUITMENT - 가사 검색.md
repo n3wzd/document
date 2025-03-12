@@ -87,5 +87,5 @@ vector<int> solution(vector<string> words, vector<string> queries) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/60060
+https://school.programmers.co.kr/learn/courses/30/lessons/60060<br>
 {% endraw %}

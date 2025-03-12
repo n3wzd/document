@@ -77,5 +77,5 @@ int solution(string str1, string str2) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17677
+https://school.programmers.co.kr/learn/courses/30/lessons/17677<br>
 {% endraw %}

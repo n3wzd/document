@@ -92,7 +92,7 @@ int main() {
 ```
 
 ### 참고
-https://velog.io/@gidskql6671/%EB%82%98%EB%A8%B8%EC%A7%80Modulo-%EC%97%B0%EC%82%B0-%EB%B6%84%EB%B0%B0%EB%B2%95%EC%B9%99
+https://velog.io/@gidskql6671/%EB%82%98%EB%A8%B8%EC%A7%80Modulo-%EC%97%B0%EC%82%B0-%EB%B6%84%EB%B0%B0%EB%B2%95%EC%B9%99<br>
 
 ## 확장 유클리드 호제법
 확장 유클리드 호제법을 사용하면 다음 수식에서 x, y, gcd(a, b)를 계산할 수 있다.
@@ -144,15 +144,15 @@ int main() {
 ```
 
 ### 참고
-https://www.crocus.co.kr/1232
+https://www.crocus.co.kr/1232<br>
 
 ## 연관 문제
 **주기 연산**
-https://www.acmicpc.net/problem/2477
+https://www.acmicpc.net/problem/2477<br>
 
 **나눗셈 분배법칙**
-https://www.acmicpc.net/problem/11401
+https://www.acmicpc.net/problem/11401<br>
 
 **DP 상태 응용**
-https://www.acmicpc.net/problem/1086
+https://www.acmicpc.net/problem/1086<br>
 {% endraw %}

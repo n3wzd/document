@@ -482,21 +482,21 @@ B' C
 
 ## 관련 문제
 ### 최대 유량
-https://www.acmicpc.net/problem/6086
-https://www.acmicpc.net/problem/2365
-https://www.acmicpc.net/problem/11495
+https://www.acmicpc.net/problem/6086<br>
+https://www.acmicpc.net/problem/2365<br>
+https://www.acmicpc.net/problem/11495<br>
 
 ### 최소 컷
-https://www.acmicpc.net/problem/13161
-https://www.acmicpc.net/problem/1420
+https://www.acmicpc.net/problem/13161<br>
+https://www.acmicpc.net/problem/1420<br>
 
 ### 정점 분할
-https://www.acmicpc.net/problem/2316
-https://www.acmicpc.net/problem/1420
+https://www.acmicpc.net/problem/2316<br>
+https://www.acmicpc.net/problem/1420<br>
 
 ## 참고
-https://anz1217.tistory.com/51
-https://everenew.tistory.com/177
-https://www.crocus.co.kr/1088
-https://www.crocus.co.kr/755
+https://anz1217.tistory.com/51<br>
+https://everenew.tistory.com/177<br>
+https://www.crocus.co.kr/1088<br>
+https://www.crocus.co.kr/755<br>
 {% endraw %}

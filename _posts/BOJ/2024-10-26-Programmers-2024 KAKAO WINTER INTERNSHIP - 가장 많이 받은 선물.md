@@ -72,5 +72,5 @@ int solution(vector<string> friends, vector<string> gifts) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/258712
+https://school.programmers.co.kr/learn/courses/30/lessons/258712<br>
 {% endraw %}

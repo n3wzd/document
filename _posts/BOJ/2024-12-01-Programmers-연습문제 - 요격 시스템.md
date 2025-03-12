@@ -62,5 +62,5 @@ int solution(vector<vector<int>> targets) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/181188
+https://school.programmers.co.kr/learn/courses/30/lessons/181188<br>
 {% endraw %}

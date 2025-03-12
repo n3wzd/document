@@ -65,9 +65,9 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/13974
+https://www.acmicpc.net/problem/13974<br>
 
 ## 참고
-https://justicehui.github.io/hard-algorithm/2019/01/02/knuthOpt/
-https://justicehui.github.io/icpc/2019/01/02/BOJ13974/
+https://justicehui.github.io/hard-algorithm/2019/01/02/knuthOpt/<br>
+https://justicehui.github.io/icpc/2019/01/02/BOJ13974/<br>
 {% endraw %}

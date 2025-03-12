@@ -177,10 +177,10 @@ int main()
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/5052
-https://www.acmicpc.net/problem/14725
-https://school.programmers.co.kr/learn/courses/30/lessons/60060
+https://www.acmicpc.net/problem/5052<br>
+https://www.acmicpc.net/problem/14725<br>
+https://school.programmers.co.kr/learn/courses/30/lessons/60060<br>
 
 ## 참고
-https://rebro.kr/86
+https://rebro.kr/86<br>
 {% endraw %}

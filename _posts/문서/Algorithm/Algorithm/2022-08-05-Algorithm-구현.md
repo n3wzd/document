@@ -299,7 +299,7 @@ bool Equal(double a, double b) { // a, b가 대략 같으면 true 반환
 ```
 드물지만 시간 초과 유무에 영향을 주기도 합니다. 따라서 2차원 배열을 생성할 때는 가급적 작은 변수를 1번째 인덱스로 하는 것이 좋습니다.
 
-예시 - https://www.acmicpc.net/problem/10067
+예시 - https://www.acmicpc.net/problem/10067<br>
 
 
 ### unsigned int vs 모듈러 연산

@@ -113,5 +113,5 @@ string solution(int n, int m, int y, int x, int goalY, int goalX, int k) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/150365
+https://school.programmers.co.kr/learn/courses/30/lessons/150365<br>
 {% endraw %}

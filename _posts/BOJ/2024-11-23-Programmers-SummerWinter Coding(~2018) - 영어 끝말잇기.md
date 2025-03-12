@@ -68,5 +68,5 @@ vector<int> solution(int n, vector<string> W) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12981
+https://school.programmers.co.kr/learn/courses/30/lessons/12981<br>
 {% endraw %}

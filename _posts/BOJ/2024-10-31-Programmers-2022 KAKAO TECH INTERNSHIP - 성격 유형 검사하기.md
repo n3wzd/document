@@ -77,5 +77,5 @@ string solution(vector<string> survey, vector<int> choices) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/118666
+https://school.programmers.co.kr/learn/courses/30/lessons/118666<br>
 {% endraw %}

@@ -100,5 +100,5 @@ vector<string> solution(vector<string> record) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42888
+https://school.programmers.co.kr/learn/courses/30/lessons/42888<br>
 {% endraw %}

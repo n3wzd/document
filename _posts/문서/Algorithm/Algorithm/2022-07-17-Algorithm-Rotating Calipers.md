@@ -149,9 +149,9 @@ int main() {
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/9240
-https://www.acmicpc.net/problem/10254
+https://www.acmicpc.net/problem/9240<br>
+https://www.acmicpc.net/problem/10254<br>
 
 ## 참고
-https://aruz.tistory.com/59
+https://aruz.tistory.com/59<br>
 {% endraw %}

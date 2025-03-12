@@ -114,10 +114,10 @@ int main()
 ```
 
 ### 연관 문제
-https://www.acmicpc.net/problem/1260
-https://www.acmicpc.net/problem/1012
-https://www.acmicpc.net/problem/1707
-https://www.acmicpc.net/problem/3197
+https://www.acmicpc.net/problem/1260<br>
+https://www.acmicpc.net/problem/1012<br>
+https://www.acmicpc.net/problem/1707<br>
+https://www.acmicpc.net/problem/3197<br>
 
 ## DFS vs BFS
 일반적인 상황에서 그래프의 모든 정점을 방문하는 목적 뿐이라면 아무거나 선택해도 상관없다. 그러나 상황에 따라 어떤 것이 적합한지는 다를 수 있으므로, 탐색 방향을 기준으로 필요에 따라 선택해서 사용하면 된다.
@@ -198,12 +198,12 @@ void BFS(start_x, start_y) // 최단거리 BFS
 ```
 
 ### 연관 문제
-https://www.acmicpc.net/problem/2178
-https://www.acmicpc.net/problem/7576
-https://www.acmicpc.net/problem/7562
-https://www.acmicpc.net/problem/2206
-https://www.acmicpc.net/problem/14226
-https://www.acmicpc.net/problem/5427
+https://www.acmicpc.net/problem/2178<br>
+https://www.acmicpc.net/problem/7576<br>
+https://www.acmicpc.net/problem/7562<br>
+https://www.acmicpc.net/problem/2206<br>
+https://www.acmicpc.net/problem/14226<br>
+https://www.acmicpc.net/problem/5427<br>
 
 ## BFS vs DP
 최단거리 BFS로 문제를 해결하는 과정은 마치 DP와 비슷한 면이 있다. 양측 모두 캐시를 통해 현재 상태를 기록하며, 부분 문제로 분할이 가능한 것처럼 보이기 때문. 그러나 몇몇 문제는 DP를 사용할 수 없고, BFS를 사용해야 한다. 그럼 이 두 방법의 차이는 무엇일까?
@@ -215,7 +215,7 @@ BFS와 DP의 차이는 **시작(점화식의 초항), 사이클의 유무** 이�
 정리하자면, 문제 분할을 그래프로 표현했을 때 **유한한 트리 구조** 가 아니면 DP를 사용할 수 없다.
 
 ## 참고
-https://namu.wiki/w/%EA%B9%8A%EC%9D%B4%20%EC%9A%B0%EC%84%A0%20%ED%83%90%EC%83%89
-https://namu.wiki/w/%EB%84%88%EB%B9%84%20%EC%9A%B0%EC%84%A0%20%ED%83%90%EC%83%89
-https://gmlwjd9405.github.io/2018/08/14/algorithm-dfs.html
+https://namu.wiki/w/%EA%B9%8A%EC%9D%B4%20%EC%9A%B0%EC%84%A0%20%ED%83%90%EC%83%89<br>
+https://namu.wiki/w/%EB%84%88%EB%B9%84%20%EC%9A%B0%EC%84%A0%20%ED%83%90%EC%83%89<br>
+https://gmlwjd9405.github.io/2018/08/14/algorithm-dfs.html<br>
 {% endraw %}

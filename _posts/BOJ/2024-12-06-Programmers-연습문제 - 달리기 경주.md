@@ -49,5 +49,5 @@ vector<string> solution(vector<string> players, vector<string> callings) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/178871
+https://school.programmers.co.kr/learn/courses/30/lessons/178871<br>
 {% endraw %}

@@ -44,9 +44,9 @@ int main()
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/11659
-https://www.acmicpc.net/problem/11660
+https://www.acmicpc.net/problem/11659<br>
+https://www.acmicpc.net/problem/11660<br>
 
 ## 참고
-https://jow1025.tistory.com/47
+https://jow1025.tistory.com/47<br>
 {% endraw %}

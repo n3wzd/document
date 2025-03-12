@@ -125,22 +125,22 @@ x에 대해 [0, max] 스위핑 탐색 => 현재 위치 = x<br>
 
 ## 관련 문제
 ### 1차원 탐색
-https://www.acmicpc.net/problem/2170
-https://www.acmicpc.net/problem/2836
-https://www.acmicpc.net/problem/16357
+https://www.acmicpc.net/problem/2170<br>
+https://www.acmicpc.net/problem/2836<br>
+https://www.acmicpc.net/problem/16357<br>
 
 ### 2차원 탐색
-https://www.acmicpc.net/problem/5419
-https://www.acmicpc.net/problem/17131
-https://www.acmicpc.net/problem/10534
-https://www.acmicpc.net/problem/10167
+https://www.acmicpc.net/problem/5419<br>
+https://www.acmicpc.net/problem/17131<br>
+https://www.acmicpc.net/problem/10534<br>
+https://www.acmicpc.net/problem/10167<br>
 
 ### 직사각형 합집합 (구간 합집합)
-https://www.acmicpc.net/problem/3392
-https://www.acmicpc.net/problem/11012
-https://www.acmicpc.net/problem/2809
+https://www.acmicpc.net/problem/3392<br>
+https://www.acmicpc.net/problem/11012<br>
+https://www.acmicpc.net/problem/2809<br>
 
 ## 참고
-https://byeo.tistory.com/entry/%EC%8A%A4%EC%9C%84%ED%95%91-Sweeping
-https://blogshine.tistory.com/120
+https://byeo.tistory.com/entry/%EC%8A%A4%EC%9C%84%ED%95%91-Sweeping<br>
+https://blogshine.tistory.com/120<br>
 {% endraw %}

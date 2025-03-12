@@ -48,5 +48,5 @@ int solution(vector<vector<string>> clothes) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42578
+https://school.programmers.co.kr/learn/courses/30/lessons/42578<br>
 {% endraw %}

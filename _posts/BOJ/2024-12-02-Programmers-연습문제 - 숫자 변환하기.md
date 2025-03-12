@@ -54,5 +54,5 @@ int solution(int x, int y, int n) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/154538
+https://school.programmers.co.kr/learn/courses/30/lessons/154538<br>
 {% endraw %}

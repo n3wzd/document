@@ -192,5 +192,5 @@ int main()
 ```
 
 ## 링크
-https://www.acmicpc.net/problem/2150
+https://www.acmicpc.net/problem/2150<br>
 {% endraw %}

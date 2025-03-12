@@ -81,5 +81,5 @@ int solution(int n, vector<vector<int>> edges) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/68937
+https://school.programmers.co.kr/learn/courses/30/lessons/68937<br>
 {% endraw %}

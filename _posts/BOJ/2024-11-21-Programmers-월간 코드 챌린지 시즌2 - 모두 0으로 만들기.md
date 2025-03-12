@@ -67,5 +67,5 @@ ll solution(vector<int> a, vector<vector<int>> edges) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/76503
+https://school.programmers.co.kr/learn/courses/30/lessons/76503<br>
 {% endraw %}

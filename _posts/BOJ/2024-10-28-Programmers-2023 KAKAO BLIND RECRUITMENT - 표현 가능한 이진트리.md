@@ -79,5 +79,5 @@ vector<int> solution(vector<ll> numbers) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/150367
+https://school.programmers.co.kr/learn/courses/30/lessons/150367<br>
 {% endraw %}

@@ -283,9 +283,9 @@ int main()
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/1786
+https://www.acmicpc.net/problem/1786<br>
 
 ## 참고
-https://injae-kim.github.io/dev/2020/07/23/all-about-kmp-algorithm.html
-https://bowbowbow.tistory.com/6
+https://injae-kim.github.io/dev/2020/07/23/all-about-kmp-algorithm.html<br>
+https://bowbowbow.tistory.com/6<br>
 {% endraw %}

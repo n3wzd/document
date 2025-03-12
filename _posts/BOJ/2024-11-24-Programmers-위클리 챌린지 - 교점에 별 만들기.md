@@ -63,5 +63,5 @@ vector<string> solution(vector<vector<int>> lines) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/87377
+https://school.programmers.co.kr/learn/courses/30/lessons/87377<br>
 {% endraw %}

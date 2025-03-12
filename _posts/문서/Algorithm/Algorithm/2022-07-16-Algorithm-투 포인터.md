@@ -39,15 +39,15 @@ title: '[Algorithm] 투 포인터'
 슬라이딩 윈도우에서 최대/소는 나이브하게 구하면 O(N<sup>2</sup>) 시간이 걸리지만, `덱`을 사용하면 O(N)으로 구할 수 있다.
 
 ## 연관 문제
-https://www.acmicpc.net/problem/1806
-https://www.acmicpc.net/problem/2470
-https://www.acmicpc.net/problem/11066
+https://www.acmicpc.net/problem/1806<br>
+https://www.acmicpc.net/problem/2470<br>
+https://www.acmicpc.net/problem/11066<br>
 
 ### 슬라이딩 윈도우 최대/소
-https://www.acmicpc.net/problem/11003
+https://www.acmicpc.net/problem/11003<br>
 
 ## 참고
-https://afteracademy.com/blog/what-is-the-two-pointer-technique
-https://github.com/WooVictory/Ready-For-Tech-Interview/blob/master/Algorithm/%ED%88%AC%ED%8F%AC%EC%9D%B8%ED%84%B0%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md
-https://velog.io/@zwon/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%94%A9-%EC%9C%88%EB%8F%84%EC%9A%B0Sliding-Window
+https://afteracademy.com/blog/what-is-the-two-pointer-technique<br>
+https://github.com/WooVictory/Ready-For-Tech-Interview/blob/master/Algorithm/%ED%88%AC%ED%8F%AC%EC%9D%B8%ED%84%B0%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md<br>
+https://velog.io/@zwon/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%94%A9-%EC%9C%88%EB%8F%84%EC%9A%B0Sliding-Window<br>
 {% endraw %}

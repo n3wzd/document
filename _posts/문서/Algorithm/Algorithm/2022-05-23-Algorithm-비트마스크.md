@@ -70,9 +70,9 @@ DP(Visited, Time, Money)
 그 외, 2진수 관련 연산, 2<sup>k</sup>가 필요한 연산에서 비트마스크를 사용하면 편리하다. (ex. 어떤 정수에서 2<sup>k</sup>를 확인, 2<sup>k</sup> 더하기 등)<br>
 
 ## 관련 문제
-https://www.acmicpc.net/problem/2098
-https://www.acmicpc.net/problem/1311
+https://www.acmicpc.net/problem/2098<br>
+https://www.acmicpc.net/problem/1311<br>
 
 ## 참고
-https://mygumi.tistory.com/361
+https://mygumi.tistory.com/361<br>
 {% endraw %}

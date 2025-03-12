@@ -60,5 +60,5 @@ int solution(vector<int> bandage, int health, vector<vector<int>> attacks) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/250137
+https://school.programmers.co.kr/learn/courses/30/lessons/250137<br>
 {% endraw %}

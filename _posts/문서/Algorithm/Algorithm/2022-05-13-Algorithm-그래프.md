@@ -59,9 +59,9 @@ ex. `BOJ - 2206 - 벽 부수고 이동하기`에서 벽이 막힌 곳은 이동�
 ## 연관 문제
 `DFS & BFS` 외전 참고.
 
-인접 행렬이 유리한 경우 - https://www.acmicpc.net/problem/3665
+인접 행렬이 유리한 경우 - https://www.acmicpc.net/problem/3665<br>
 
 ## 참고
-https://namu.wiki/w/%EA%B7%B8%EB%9E%98%ED%94%84(%EC%9D%B4%EC%82%B0%EC%88%98%ED%95%99)
-https://codermun-log.tistory.com/288
+https://namu.wiki/w/%EA%B7%B8%EB%9E%98%ED%94%84(%EC%9D%B4%EC%82%B0%EC%88%98%ED%95%99)<br>
+https://codermun-log.tistory.com/288<br>
 {% endraw %}

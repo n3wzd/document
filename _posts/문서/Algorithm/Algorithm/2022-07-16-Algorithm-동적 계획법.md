@@ -122,59 +122,59 @@ DP(i, w)
 
 #### DP - 기초
 부분 문제의 상태가 간단한 (주로 1차원) 연습 문제.
-https://www.acmicpc.net/problem/2579
-https://www.acmicpc.net/problem/10844
-https://www.acmicpc.net/problem/1149
-https://www.acmicpc.net/problem/2156
+https://www.acmicpc.net/problem/2579<br>
+https://www.acmicpc.net/problem/10844<br>
+https://www.acmicpc.net/problem/1149<br>
+https://www.acmicpc.net/problem/2156<br>
 
 #### DP - 중급
 부분 문제의 상태가 2차원 이상인 더 어려운 문제.
-https://www.acmicpc.net/problem/1520
-https://www.acmicpc.net/problem/13392
-https://www.acmicpc.net/problem/2169
+https://www.acmicpc.net/problem/1520<br>
+https://www.acmicpc.net/problem/13392<br>
+https://www.acmicpc.net/problem/2169<br>
 
 #### LIS
 대표적인 DP 문제.
-https://www.acmicpc.net/problem/11053
-https://www.acmicpc.net/problem/2565
-https://www.acmicpc.net/problem/15648
+https://www.acmicpc.net/problem/11053<br>
+https://www.acmicpc.net/problem/2565<br>
+https://www.acmicpc.net/problem/15648<br>
 
 #### LCS
 대표적인 DP 문제 2. 2개의 탐색 대상의 현재 위치를 현재 상태로 정의한다. (`투 포인터`를 현재 상태로 사용)
-https://www.acmicpc.net/problem/9251
-https://www.acmicpc.net/problem/2618
+https://www.acmicpc.net/problem/9251<br>
+https://www.acmicpc.net/problem/2618<br>
 
 #### 0-1 가방 문제 (Knapsack Problem)
 대표적인 DP 문제 3. 아이템 번호와 수치 값(ex. 가방 한도)를 현재 상태로 활용하며, 경우의 수 시나리오(ex. 현재 들고 있는 물건을 선택 vs 포기)로 문제를 분할한다. 또한 토글링을 적용할 수 있다.
-https://www.acmicpc.net/problem/12865
-https://www.acmicpc.net/problem/2629
+https://www.acmicpc.net/problem/12865<br>
+https://www.acmicpc.net/problem/2629<br>
 
 #### 투 포인터
 처음과 끝을 `투 포인터`로 하고, 탐색 범위를 분할하는 유형.
-https://www.acmicpc.net/problem/11066
-https://www.acmicpc.net/problem/11049
-https://www.acmicpc.net/problem/10942
+https://www.acmicpc.net/problem/11066<br>
+https://www.acmicpc.net/problem/11049<br>
+https://www.acmicpc.net/problem/10942<br>
 
 #### 메모리 제한
 공간 복잡도를 고려하는 문제. 토글링, 점화식 입력 대상 전환 등 기법이 필요하다. 이러한 상황에서는 Bottom-Up이 적합하다.
-https://www.acmicpc.net/problem/2293
-https://www.acmicpc.net/problem/7579
-https://www.acmicpc.net/problem/5977 - 필수는 아니지만 토글링을 적용할 수 있다
+https://www.acmicpc.net/problem/2293<br>
+https://www.acmicpc.net/problem/7579<br>
+https://www.acmicpc.net/problem/5977<br> - 필수는 아니지만 토글링을 적용할 수 있다<br>
 
 #### 비트마스크 적용
 `비트마스크`를 사용해 boolean 배열을 정수 하나로 바꿀 수 있다.
-https://www.acmicpc.net/problem/2098
-https://www.acmicpc.net/problem/1311
-https://www.acmicpc.net/problem/1648
-https://www.acmicpc.net/problem/1086
+https://www.acmicpc.net/problem/2098<br>
+https://www.acmicpc.net/problem/1311<br>
+https://www.acmicpc.net/problem/1648<br>
+https://www.acmicpc.net/problem/1086<br>
 
 #### 슬라이딩 윈도우 최적화
 `덱`을 사용해서 O(N) 시간으로 슬라이딩 윈도우 최대/소를 찾는 문제
-https://www.acmicpc.net/problem/5977
-https://www.acmicpc.net/problem/15678
+https://www.acmicpc.net/problem/5977<br>
+https://www.acmicpc.net/problem/15678<br>
 
 ## 참고
-https://semaph.tistory.com/16
-https://namu.wiki/w/%EB%A9%94%EB%AA%A8%EC%9D%B4%EC%A0%9C%EC%9D%B4%EC%85%98
-https://namu.wiki/w/%EB%8F%99%EC%A0%81%20%EA%B3%84%ED%9A%8D%EB%B2%95
+https://semaph.tistory.com/16<br>
+https://namu.wiki/w/%EB%A9%94%EB%AA%A8%EC%9D%B4%EC%A0%9C%EC%9D%B4%EC%85%98<br>
+https://namu.wiki/w/%EB%8F%99%EC%A0%81%20%EA%B3%84%ED%9A%8D%EB%B2%95<br>
 {% endraw %}

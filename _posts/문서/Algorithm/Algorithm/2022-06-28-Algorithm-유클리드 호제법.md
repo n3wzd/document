@@ -47,11 +47,11 @@ int main() {
 ```
 
 ### 연관 문제
-https://www.acmicpc.net/problem/2609
+https://www.acmicpc.net/problem/2609<br>
 
 ### 참고
-https://ko.wikipedia.org/wiki/%EC%B5%9C%EB%8C%80%EA%B3%B5%EC%95%BD%EC%88%98
-https://ko.wikipedia.org/wiki/%EC%9C%A0%ED%81%B4%EB%A6%AC%EB%93%9C_%ED%98%B8%EC%A0%9C%EB%B2%95
+https://ko.wikipedia.org/wiki/%EC%B5%9C%EB%8C%80%EA%B3%B5%EC%95%BD%EC%88%98<br>
+https://ko.wikipedia.org/wiki/%EC%9C%A0%ED%81%B4%EB%A6%AC%EB%93%9C_%ED%98%B8%EC%A0%9C%EB%B2%95<br>
 
 
 ## 확장 유클리드 호제법 (Extended Euclidean Algorithm)
@@ -116,9 +116,9 @@ int main() {
 ```
 
 ### 연관 문제
-https://www.acmicpc.net/problem/3955
+https://www.acmicpc.net/problem/3955<br>
 
 ### 참고
-https://www.geeksforgeeks.org/euclidean-algorithms-basic-and-extended/
-https://www.crocus.co.kr/1232
+https://www.geeksforgeeks.org/euclidean-algorithms-basic-and-extended/<br>
+https://www.crocus.co.kr/1232<br>
 {% endraw %}

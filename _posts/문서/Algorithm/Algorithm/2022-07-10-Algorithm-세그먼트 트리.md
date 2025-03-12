@@ -282,18 +282,18 @@ int main() {
 
 ## 관련 문제
 **기본 문제**
-https://www.acmicpc.net/problem/2042
+https://www.acmicpc.net/problem/2042<br>
 
 **Bottom-Up 업데이트 사용**
-https://www.acmicpc.net/problem/11505
-https://www.acmicpc.net/problem/2357
+https://www.acmicpc.net/problem/11505<br>
+https://www.acmicpc.net/problem/2357<br>
 
 **커스텀 노드**
-https://www.acmicpc.net/problem/16993
+https://www.acmicpc.net/problem/16993<br>
 
 ## 참고
-https://m.blog.naver.com/ndb796/221282210534
-https://www.acmicpc.net/blog/view/9
-https://book.acmicpc.net/ds/segment-tree
-https://www.crocus.co.kr/648
+https://m.blog.naver.com/ndb796/221282210534<br>
+https://www.acmicpc.net/blog/view/9<br>
+https://book.acmicpc.net/ds/segment-tree<br>
+https://www.crocus.co.kr/648<br>
 {% endraw %}

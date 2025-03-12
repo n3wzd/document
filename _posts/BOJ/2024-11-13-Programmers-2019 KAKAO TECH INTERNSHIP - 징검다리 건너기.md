@@ -111,8 +111,8 @@ int solution(vector<int> stonesI, int k) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/64062
+https://school.programmers.co.kr/learn/courses/30/lessons/64062<br>
 
 ### 비슷한 문제
-https://leetcode.com/problems/sliding-window-maximum/
+https://leetcode.com/problems/sliding-window-maximum/<br>
 {% endraw %}

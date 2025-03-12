@@ -32,7 +32,7 @@ void rotateAll() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/20058
-https://www.acmicpc.net/problem/21609
-https://school.programmers.co.kr/learn/courses/30/lessons/60059
+https://www.acmicpc.net/problem/20058<br>
+https://www.acmicpc.net/problem/21609<br>
+https://school.programmers.co.kr/learn/courses/30/lessons/60059<br>
 {% endraw %}

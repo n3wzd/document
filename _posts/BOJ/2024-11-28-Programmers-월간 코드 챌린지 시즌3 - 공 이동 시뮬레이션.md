@@ -117,5 +117,5 @@ ll solution(int N, int M, int Y, int X, vector<vector<int>> Q) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/87391
+https://school.programmers.co.kr/learn/courses/30/lessons/87391<br>
 {% endraw %}

@@ -69,5 +69,5 @@ int solution(vector<string> logs) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17676
+https://school.programmers.co.kr/learn/courses/30/lessons/17676<br>
 {% endraw %}

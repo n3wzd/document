@@ -57,5 +57,5 @@ int solution(int k, vector<vector<int>> dungeons) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/87946
+https://school.programmers.co.kr/learn/courses/30/lessons/87946<br>
 {% endraw %}

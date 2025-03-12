@@ -74,5 +74,5 @@ int solution(int n, ll l, ll r) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/148652
+https://school.programmers.co.kr/learn/courses/30/lessons/148652<br>
 {% endraw %}

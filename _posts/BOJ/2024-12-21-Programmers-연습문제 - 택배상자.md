@@ -50,5 +50,5 @@ int solution(vector<int> order) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/131704
+https://school.programmers.co.kr/learn/courses/30/lessons/131704<br>
 {% endraw %}

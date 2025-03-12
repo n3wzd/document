@@ -51,5 +51,5 @@ int solution(int k, int m, vector<int> score) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/135808
+https://school.programmers.co.kr/learn/courses/30/lessons/135808<br>
 {% endraw %}

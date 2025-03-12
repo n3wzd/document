@@ -101,5 +101,5 @@ vector<int> solution(vector<string> info, vector<string> query) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/72412
+https://school.programmers.co.kr/learn/courses/30/lessons/72412<br>
 {% endraw %}

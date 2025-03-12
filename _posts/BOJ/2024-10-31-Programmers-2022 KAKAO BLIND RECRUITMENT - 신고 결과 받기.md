@@ -74,5 +74,5 @@ vector<int> solution(vector<string> id_list, vector<string> report, int k) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/92334
+https://school.programmers.co.kr/learn/courses/30/lessons/92334<br>
 {% endraw %}

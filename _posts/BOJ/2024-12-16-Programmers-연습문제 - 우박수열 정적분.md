@@ -71,5 +71,5 @@ vector<double> solution(int k, vector<vector<int>> ranges) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/134239
+https://school.programmers.co.kr/learn/courses/30/lessons/134239<br>
 {% endraw %}

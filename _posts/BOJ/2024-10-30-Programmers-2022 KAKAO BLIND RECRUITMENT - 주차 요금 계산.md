@@ -66,5 +66,5 @@ vector<int> solution(vector<int> fees, vector<string> records) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/92341
+https://school.programmers.co.kr/learn/courses/30/lessons/92341<br>
 {% endraw %}

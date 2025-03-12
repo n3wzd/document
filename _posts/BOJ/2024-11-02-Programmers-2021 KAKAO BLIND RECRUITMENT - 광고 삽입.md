@@ -88,5 +88,5 @@ string solution(string play_time, string adv_time, vector<string> logs) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/72414
+https://school.programmers.co.kr/learn/courses/30/lessons/72414<br>
 {% endraw %}
