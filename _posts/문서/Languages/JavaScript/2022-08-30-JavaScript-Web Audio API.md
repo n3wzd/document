@@ -1,7 +1,7 @@
 ---
 categories:
 - JavaScript
-date: '2024-01-09'
+date: '2022-08-30'
 title: '[JavaScript] Web Audio API'
 ---
 
