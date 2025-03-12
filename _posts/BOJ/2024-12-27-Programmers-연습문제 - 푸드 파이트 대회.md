@@ -35,7 +35,7 @@ title: '[Programmers] 연습문제 - 푸드 파이트 대회'
 #include <algorithm>
 using namespace std;
 
-string solution(vector<int> food) {<br>
+string solution(vector<int> food) {
     string left = "", right;
     for(int i = 1; i < food.size(); i++)
         for(int j = 0; j < food[i] / 2; j++)
@@ -46,5 +46,5 @@ string solution(vector<int> food) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/134240<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/134240
 {% endraw %}

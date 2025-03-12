@@ -22,7 +22,7 @@ title: '[Programmers] PCCP - 아날로그 시계'
     -   시간이 23시 59분 59초를 초과해서 0시 0분 0초로 돌아가는 경우는 주어지지 않습니다.
 
 ## 해결
-초침-분침, 초침-시침이 같아지는 규칙을 찾아야 합니다. => `애드 혹`<br>
+초침-분침, 초침-시침이 같아지는 규칙을 찾아야 합니다. => `애드 혹`
 
 먼저 각 침의 속도를 찾아봅시다. 1시간을 기준으로 했을 때(시침이 0에서 5까지 이동), 분침은 60회, 초침은 3600회만큼 사이클을 완료합니다. 초침을 기준으로 시계의 선형 거리를 정의합니다.
 ```
@@ -58,7 +58,7 @@ H = h * 3600 + m * 60 + s
 ```
 using namespace std;
 int getTime(int h, int m, int s) { return h * 3600 + m * 60 + s; }
-bool isLeft(int a, int b) { int d = b - a; return (d > 0 && d <= 21600) || d < -21600; }<br>
+bool isLeft(int a, int b) { int d = b - a; return (d > 0 && d <= 21600) || d < -21600; }
 
 int solution(int h1, int m1, int s1, int h2, int m2, int s2) {
     int cnt = 0, lo = getTime(h1, m1, s1), hi = getTime(h2, m2, s2), diff = hi - lo;
@@ -82,5 +82,5 @@ int solution(int h1, int m1, int s1, int h2, int m2, int s2) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/250135<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/250135
 {% endraw %}

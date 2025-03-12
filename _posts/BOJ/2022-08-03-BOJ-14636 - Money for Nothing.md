@@ -26,7 +26,7 @@ Display the maximum total number of dollars you can earn. If there is no way to 
 ## 해결
 공급자는 특정 날짜부터 구매가 가능하고 소비자는 특정 날짜까지 판매가 가능하다. 공급자와 소비자는 각각 하나만 선택할 수 있으며, 얻을 수 있는 이익은 두 날짜의 차에서 팔고 남은 금액의 곱이다.
 
-최대 이익을 구하는 수식을 정리하면, (C[i].date > P[j].date)<br>
+최대 이익을 구하는 수식을 정리하면, (C[i].date > P[j].date)
 > F[i, j] = max((C[i].date - P[j].date) × (C[i].price - P[j].price))<br>
 
 모든 i, j 조합을 조사하면 최대 이익을 알 수 있다. 하지만 O(N<sup>2</sup>) 시간이 걸리니 다른 방법을 찾아보자.
@@ -61,12 +61,12 @@ struct Company { ll p, d; };
 const int SIZE = 5e5 + 2;
 int N, M; ll res = 0;
 Company P[SIZE], C[SIZE];
-vector<Company> PS, CS;<br>
+vector<Company> PS, CS;
 ll F(ll i, ll j) { return (CS[i].d - PS[j].d) * (CS[i].p - PS[j].p); }
 bool cmp(Company a, Company b) { return a.d < b.d; }
 
 void DC(ll lo, ll hi, ll lo2, ll hi2) {
-	if (lo > hi)<br>
+	if (lo > hi)
 		return;
 	ll i = (lo + hi) / 2;
 	ll v = -2e18, v_idx = lo2;
@@ -86,17 +86,17 @@ void DC(ll lo, ll hi, ll lo2, ll hi2) {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> M >> N;<br>
+	cin >> M >> N;
 	for (int i = 0; i < M; i++)
-		cin >> P[i].p >> P[i].d;<br>
+		cin >> P[i].p >> P[i].d;
 	for (int i = 0; i < N; i++)
-		cin >> C[i].p >> C[i].d;<br>
+		cin >> C[i].p >> C[i].d;
 	sort(P, P + M, cmp);
 	sort(C, C + N, cmp);
 
 	PS.push_back(P[0]); CS.push_back(C[0]);
 	for (int i = 1; i < M; i++)
-		if (PS.back().p > P[i].p)<br>
+		if (PS.back().p > P[i].p)
 			PS.push_back(P[i]);
 	for (int i = 1; i < N; i++) {
 		while (!CS.empty() && CS.back().p <= C[i].p)
@@ -111,5 +111,5 @@ int main() {
 ```
 
 ## 링크
-https://www.acmicpc.net/problem/14636<br>
+<br>https://www.acmicpc.net/problem/14636
 {% endraw %}

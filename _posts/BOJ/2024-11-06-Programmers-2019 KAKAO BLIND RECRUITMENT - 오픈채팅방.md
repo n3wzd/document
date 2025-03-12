@@ -77,19 +77,19 @@ Muzi가 나간후 다시 들어올 때, Prodo 라는 닉네임으로 들어올 �
 #include <map>
 #include <sstream>
 using namespace std;
-map<string, string> m;<br>
+map<string, string> m;
 
-vector<string> solution(vector<string> record) {<br>
-    vector<string> answer;<br>
+vector<string> solution(vector<string> record) {
+    vector<string> answer;
     for(auto r : record) {
         istringstream iss(r);
-        string a, b, c; iss >> a >> b >> c;<br>
+        string a, b, c; iss >> a >> b >> c;
         if(a == "Enter") m[b] = c;
         if(a == "Change") m[b] = c;
     }
     for(auto r : record) {
         istringstream iss(r);
-        string a, b; iss >> a >> b;<br>
+        string a, b; iss >> a >> b;
         if(a == "Enter")
             answer.push_back(m[b] + "님이 들어왔습니다.");
         if(a == "Leave")
@@ -100,5 +100,5 @@ vector<string> solution(vector<string> record) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42888<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/42888
 {% endraw %}

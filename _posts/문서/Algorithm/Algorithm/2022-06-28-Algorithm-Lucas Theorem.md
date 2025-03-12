@@ -37,8 +37,8 @@ void DP() {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> K >> M; DP();<br>
-	while (N > 0) {<br>
+	cin >> N >> K >> M; DP();
+	while (N > 0) {
 		C = ModMul(C, cache[N % M][K % M]);
 		N /= M, K /= M;
 	}
@@ -48,9 +48,9 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/11402<br>
-https://www.acmicpc.net/problem/15718<br>
+<br>https://www.acmicpc.net/problem/11402
+<br>https://www.acmicpc.net/problem/15718
 
 ## 참고
-https://bowbowbow.tistory.com/2<br>
+<br>https://bowbowbow.tistory.com/2
 {% endraw %}

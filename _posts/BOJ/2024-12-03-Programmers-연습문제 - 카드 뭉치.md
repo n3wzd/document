@@ -38,7 +38,7 @@ title: '[Programmers] 연습문제 - 카드 뭉치'
 #include <vector>
 using namespace std;
 
-string solution(vector<string> cards1, vector<string> cards2, vector<string> goal) {<br>
+string solution(vector<string> cards1, vector<string> cards2, vector<string> goal) {
     int p1 = 0, p2 = 0;
     for(auto w : goal) {
         if(p1 < cards1.size() && w == cards1[p1])
@@ -53,5 +53,5 @@ string solution(vector<string> cards1, vector<string> cards2, vector<string> goa
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/159994<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/159994
 {% endraw %}

@@ -88,7 +88,7 @@ ex. 구간 [3, 7] 입력?
    1-2     (3-4)      (5-6)    |7-8|
   1   2    3   4      5   6   (7)  8
 
-=> OP([3-4], OP([5-6], [7])) 반환<br>
+=> OP([3-4], OP([5-6], [7])) 반환
 ```
 
 ```
@@ -98,17 +98,17 @@ idx = 현재 노드 인덱스
 
 int Get(int start, int end, int idx, int left, int right) {
 	// 1. 현재 구간이 입력 구간을 완전히 벗어난 경우?
-	//  => 쿼리 연산 항등원을 반환한다.<br>
-	if(start > right || end < left)<br>
+	//  => 쿼리 연산 항등원을 반환한다.
+	if(start > right || end < left)
 		return 0;
 
 	// 2. 현재 구간이 입력 구간에 완전히 포함된 경우?
-	//	=> 현재 노드 값을 반환한다.<br>
+	//	=> 현재 노드 값을 반환한다.
 	if(start >= left && end <= right)
 		return tree[idx];
 
 	// 3. 위 조건에 해당되지 않으며, 현재 구간이 입력 구간에 일부 겹치는 경우?
-	//	=> 구간을 분할하여 탐색하며, 분할한 구간의 연산 결과를 입력으로 한 쿼리 연산 값을 반환한다.<br>
+	//	=> 구간을 분할하여 탐색하며, 분할한 구간의 연산 결과를 입력으로 한 쿼리 연산 값을 반환한다.
 	int mid = (start + end) / 2;
 	return Get(start, mid, idx * 2, left, right) + Get(mid + 1, end, idx * 2 + 1, left, right);
 }
@@ -132,7 +132,7 @@ diff = 값 변화량
 
 void Update(int start, int end, int idx, int pos, int diff) {
 	// 1. 현재 구간이 입력 위치를 벗어나면 종료
-	if(start > pos || end < pos)<br>
+	if(start > pos || end < pos)
 		return;
 	
 	// 2. 현재 노드 업데이트 - 값의 변화량 사용
@@ -156,11 +156,11 @@ value = 변경할 값
 
 int Update(int start, int end, int idx, int pos, int value) {
 	// 1. 현재 구간이 입력 구간을 완전히 벗어난 경우?
-	//  => 현재 노드 값을 반환한다.<br>
-	if (start > pos || end < pos)<br>
+	//  => 현재 노드 값을 반환한다.
+	if (start > pos || end < pos)
 		return tree[idx];
 	
-	// 2. 현재 구간의 길이가 1이면 목표 위치에 해당 => 값 업데이트<br>
+	// 2. 현재 구간의 길이가 1이면 목표 위치에 해당 => 값 업데이트
 	if (start == end)
 		return tree[idx] = value;
 
@@ -195,14 +195,14 @@ int Init(int start, int end, int idx) {
 }
 
 int Get(int start, int end, int idx, int left, int right) {
-	if(start > right || end < left) return 0;<br>
+	if(start > right || end < left) return 0;
 	if(start >= left && end <= right) return tree[idx];
 	int mid = (start + end) / 2;
 	return Get(start, mid, idx * 2, left, right) + Get(mid + 1, end, idx * 2 + 1, left, right);
 }
 
 void Update(int start, int end, int idx, int pos, int diff) {
-	if(start > pos || end < pos) return;<br>
+	if(start > pos || end < pos) return;
 	
 	tree[idx] += diff;
 	if(start == end) return;
@@ -214,15 +214,15 @@ void Update(int start, int end, int idx, int pos, int diff) {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M >> K;<br>
+	cin >> N >> M >> K;
 	for (int i = 1; i <= N; i++)
-		cin >> num[i];<br>
+		cin >> num[i];
 	Init(1, N, 1);
 
 	int Q = M + K;
 	while (Q--) {
 		int a, b, c;
-		cin >> a >> b >> c;<br>
+		cin >> a >> b >> c;
 		if (a == 1) {
 			Update(1, N, 1, b, c - num[b]);
 			num[b] = c;
@@ -249,14 +249,14 @@ int Init(int start, int end, int idx) {
 }
 
 int Get(int start, int end, int idx, int left, int right) {
-	if(start > right || end < left) return 0;<br>
+	if(start > right || end < left) return 0;
 	if(start >= left && end <= right) return tree[idx];
 	int mid = (start + end) / 2;
 	return Get(start, mid, idx * 2, left, right) + Get(mid + 1, end, idx * 2 + 1, left, right);
 }
 
 int Update(int start, int end, int idx, int pos, int value) {
-	if (start > pos || end < pos) return tree[idx];<br>
+	if (start > pos || end < pos) return tree[idx];
 	if (start == end) return tree[idx] = value;
 	int mid = (start + end) / 2;
 	return tree[idx] = Update(start, mid, idx * 2, pos, value) + Update(mid + 1, end, idx * 2 + 1, pos, value);
@@ -264,15 +264,15 @@ int Update(int start, int end, int idx, int pos, int value) {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M >> K;<br>
+	cin >> N >> M >> K;
 	for (int i = 1; i <= N; i++)
-		cin >> num[i];<br>
+		cin >> num[i];
 	Init(1, N, 1);
 
 	int Q = M + K;
 	while (Q--) {
 		int a, b, c;
-		cin >> a >> b >> c;<br>
+		cin >> a >> b >> c;
 		if (a == 1) Update(1, N, 1, b, c);
 		else cout << Get(1, N, 1, b, c) << "\n";
 	}
@@ -282,18 +282,18 @@ int main() {
 
 ## 관련 문제
 **기본 문제**
-https://www.acmicpc.net/problem/2042<br>
+<br>https://www.acmicpc.net/problem/2042
 
 **Bottom-Up 업데이트 사용**
-https://www.acmicpc.net/problem/11505<br>
-https://www.acmicpc.net/problem/2357<br>
+<br>https://www.acmicpc.net/problem/11505
+<br>https://www.acmicpc.net/problem/2357
 
 **커스텀 노드**
-https://www.acmicpc.net/problem/16993<br>
+<br>https://www.acmicpc.net/problem/16993
 
 ## 참고
-https://m.blog.naver.com/ndb796/221282210534<br>
-https://www.acmicpc.net/blog/view/9<br>
-https://book.acmicpc.net/ds/segment-tree<br>
-https://www.crocus.co.kr/648<br>
+<br>https://m.blog.naver.com/ndb796/221282210534
+<br>https://www.acmicpc.net/blog/view/9
+<br>https://book.acmicpc.net/ds/segment-tree
+<br>https://www.crocus.co.kr/648
 {% endraw %}

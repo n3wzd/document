@@ -54,7 +54,7 @@ string intToStr(int t) {
     return "" + m.str() + ":" + s.str();
 }
 
-string solution(string video_len, string pos, string op_start, string op_end, vector<string> commands) {<br>
+string solution(string video_len, string pos, string op_start, string op_end, vector<string> commands) {
     int len = strToInt(video_len), p = strToInt(pos);
     int start = strToInt(op_start), end = strToInt(op_end);
 
@@ -73,5 +73,5 @@ string solution(string video_len, string pos, string op_start, string op_end, ve
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/340213<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/340213
 {% endraw %}

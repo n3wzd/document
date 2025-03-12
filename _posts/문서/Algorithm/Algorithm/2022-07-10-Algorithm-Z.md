@@ -33,7 +33,7 @@ S의 인덱스( = i)를 순차 탐색해서 Z 배열을 채워보자. 우선 i =
 
 i = 1부터는 크게 2가지 케이스로 나눌 수 있다.
 
-**Case 1. i > R**<br>
+**Case 1. i > R**
 i가 [L, R] 오른쪽 바깥에 있는 경우로, 새로 검사를 시작해야 한다. L = R = i로 하고 공통 접두사를 순차적으로 검색해서 찾으면 된다.
 ```
 case 1. [  ]  i
@@ -56,7 +56,7 @@ ABABAE...  ABABABX
  k         Li  R
 Z[k] = 0
 R - i + 1 = 4
-=> Z[i] = Z[k] = 0<br>
+=> Z[i] = Z[k] = 0
 ```
 
 **Case 2-2. Z[k] ≥ R - i + 1**
@@ -71,7 +71,7 @@ R - i + 1 = 3
 
 ABABAE...  ABABABX
   k        L i  R
-=> Z[i] = 4<br>
+=> Z[i] = 4
 ```
 
 ## 코드
@@ -85,7 +85,7 @@ int z[SIZE];
 void Z(const char* s) {
 	int L = 0, R = 0, n = strlen(s);
 	for (int i = 1; i < n; i++) {
-		if (i > R) {<br>
+		if (i > R) {
 			L = R = i;
 			while (R < n && s[R - L] == s[R])
 				R++;
@@ -111,7 +111,7 @@ void Z(const char* s) {
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	string s;
-	cin >> s;<br>
+	cin >> s;
 	Z(s.c_str());
 
 	int size = s.size();
@@ -122,10 +122,10 @@ int main() {
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/13713<br>
-https://www.acmicpc.net/problem/16229<br>
+<br>https://www.acmicpc.net/problem/13713
+<br>https://www.acmicpc.net/problem/16229
 
 ## 참고
-https://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/<br>
-https://anz1217.tistory.com/66<br>
+<br>https://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/
+<br>https://anz1217.tistory.com/66
 {% endraw %}

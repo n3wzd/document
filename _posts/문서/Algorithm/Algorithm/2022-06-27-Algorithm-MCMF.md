@@ -52,12 +52,12 @@ ll dist[SIZE];
 bool inQ[SIZE];
 int trc_v[SIZE];
 int trc_idx[SIZE];
-vector<Edge> graph[SIZE];<br>
+vector<Edge> graph[SIZE];
 
 bool SPFA() {
 	memset(inQ, 0, sizeof(inQ));
 	for (int i = 0; i < SIZE; i++) dist[i] = INF;
-	queue <int> q;<br>
+	queue <int> q;
 	q.push(S), dist[S] = 0, inQ[S] = 1;
 
 	while (!q.empty()) {
@@ -67,7 +67,7 @@ bool SPFA() {
 			if (graph[v][i].cap == 0) continue;
 			int nv = graph[v][i].dest, w = graph[v][i].weight;
 
-			if (dist[nv] > dist[v] + w) {<br>
+			if (dist[nv] > dist[v] + w) {
 				dist[nv] = dist[v] + w;
 				trc_v[nv] = v, trc_idx[nv] = i;
 
@@ -106,13 +106,13 @@ void MakeEdge(int a, int b, int w, int c) {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M;<br>
+	cin >> N >> M;
 	S = N + M, T = N + M + 1;
 	for (int n = 0; n < N; n++) {
 		int len, work, cost;
-		cin >> len;<br>
+		cin >> len;
 		while (len--) {
-			cin >> work >> cost;<br>
+			cin >> work >> cost;
 			MakeEdge(n, N + work - 1, cost, 1);
 		}
 		MakeEdge(S, n, 0, 1);
@@ -131,12 +131,12 @@ int main() {
 그래프의 모든 가중치를 음수로 바꾸고 MCMF를 그대로 수행하면 된다. 이때 구한 최소 비용을 다시 양수로 바꾼 것이 최대 비용이다.
 
 ## 관련 문제
-https://www.acmicpc.net/problem/11408<br>
-https://www.acmicpc.net/problem/11409<br>
-https://www.acmicpc.net/problem/11111<br>
-https://www.acmicpc.net/problem/11493<br>
+<br>https://www.acmicpc.net/problem/11408
+<br>https://www.acmicpc.net/problem/11409
+<br>https://www.acmicpc.net/problem/11111
+<br>https://www.acmicpc.net/problem/11493
 
 ## 참고
-https://anz1217.tistory.com/54<br>
-https://www.crocus.co.kr/1090<br>
+<br>https://anz1217.tistory.com/54
+<br>https://www.crocus.co.kr/1090
 {% endraw %}

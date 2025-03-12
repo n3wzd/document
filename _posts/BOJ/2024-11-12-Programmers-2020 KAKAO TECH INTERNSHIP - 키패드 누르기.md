@@ -53,7 +53,7 @@ struct Point { int x, y; };
 int distance(Point a, Point b) { return abs(a.x - b.x) + abs(a.y - b.y); }
 Point P[10] = { {1, 3} };
 
-string solution(vector<int> numbers, string hand) {<br>
+string solution(vector<int> numbers, string hand) {
     string answer = "";
     Point left = { 0, 3 }, right = { 2, 3 };
     for(int i = 0; i < 10; i++)
@@ -83,5 +83,5 @@ string solution(vector<int> numbers, string hand) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/67256<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/67256
 {% endraw %}

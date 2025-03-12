@@ -213,7 +213,7 @@ C++에선 string 클래스를 사용하는 것을 추천합니다.
 ### STL 자료구조/알고리즘
 C++ STL에선 동적 배열, 스택, 큐, 덱, 우선순위 큐, 집합(set, map), 정렬, 이분 탐색 등을 기본적으로 제공합니다. 직접 구현하는 것보다 편리하고 성능도 좋습니다. (단, PS에선 필요에 따라 직접 구현해서 사용할 때도 있습니다)
 
-### 10<sup>k</sup> 표기<br>
+### 10<sup>k</sup> 표기
 e 표기로 정리할 수 있습니다. (Tip. k = 0의 개수)
 ```
 1000000 = 1e6
@@ -224,7 +224,7 @@ e 표기로 정리할 수 있습니다. (Tip. k = 0의 개수)
 ```
 typedef long long ll
 typedef double dd
-typedef pair<int, int> pi<br>
+typedef pair<int, int> pi
 ``` 
 
 ### include
@@ -247,7 +247,7 @@ auto str = "ThisIsString";
 반복문에서도 사용할 수 있습니다. 반복자를 다룰 때 편리합니다.
 ```
 struct Data { string name; int num; };
-vector<Data> list;<br>
+vector<Data> list;
 
 // list의 모든 값 탐색 1
 for (auto d : list) {
@@ -299,7 +299,7 @@ bool Equal(double a, double b) { // a, b가 대략 같으면 true 반환
 ```
 드물지만 시간 초과 유무에 영향을 주기도 합니다. 따라서 2차원 배열을 생성할 때는 가급적 작은 변수를 1번째 인덱스로 하는 것이 좋습니다.
 
-예시 - https://www.acmicpc.net/problem/10067<br>
+예시 - <br>https://www.acmicpc.net/problem/10067
 
 
 ### unsigned int vs 모듈러 연산

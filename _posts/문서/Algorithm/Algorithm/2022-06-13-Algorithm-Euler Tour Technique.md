@@ -68,11 +68,11 @@ ex. 서브트리에서 k를 더하는 쿼리?
 구간 합을 더하는 세그먼트 트리 사용
 
 > 트리 초기화<br>
-=> Init(1, N, 1)<br>
+=> Init(1, N, 1)
 > 정점 v의 서브트리 업데이트<br>
-=> Update(1, N, 1, subtree[v].start, subtree[v].end, k)<br>
+=> Update(1, N, 1, subtree[v].start, subtree[v].end, k)
 > 정점 v의 값 출력<br>
-=> Get(1, N, 1, subtree[b].start)<br>
+=> Get(1, N, 1, subtree[b].start)
 ```
 
 초기화 작업같이 트리에서 원래 정점 번호를 사용하고 싶다면, 위의 euler 배열을 통해 변환하면 된다.
@@ -95,7 +95,7 @@ public:
 };
 
 int N, M;
-vector<int> graph[500001];<br>
+vector<int> graph[500001];
 Range subtree[500001];
 int euler[500001];
 ll salary[500001];
@@ -127,14 +127,14 @@ void Init(int start, int end, int idx) {
 }
 
 ll Get(int start, int end, int idx, int pos) {
-	if (start > pos || end < pos) return 0;<br>
+	if (start > pos || end < pos) return 0;
 	if (start == end) return tree[idx];
 	int mid = (start + end) / 2;
 	return Get(start, mid, idx * 2, pos) + Get(mid + 1, end, idx * 2 + 1, pos) + tree[idx];
 }
 
 void Update(int start, int end, int idx, int left, int right, ll diff) {
-	if (start > right || end < left) return;<br>
+	if (start > right || end < left) return;
 	if (start >= left && end <= right) {
 		tree[idx] += diff;
 		return;
@@ -146,11 +146,11 @@ void Update(int start, int end, int idx, int left, int right, ll diff) {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M;<br>
-	cin >> salary[1];<br>
+	cin >> N >> M;
+	cin >> salary[1];
 	for (int i = 2; i <= N; i++) {
 		int a, b = i;
-		cin >> salary[i] >> a;<br>
+		cin >> salary[i] >> a;
 		graph[a].push_back(b);
 		graph[b].push_back(a);
 	}
@@ -160,13 +160,13 @@ int main() {
 	while (M--) {
 		char a;
 		int b, c;
-		cin >> a;<br>
+		cin >> a;
 		if (a == 'p') {
-			cin >> b >> c;<br>
+			cin >> b >> c;
 			Update(1, N, 1, subtree[b].start + 1, subtree[b].end, c);
 		}
 		else {
-			cin >> b;<br>
+			cin >> b;
 			cout << Get(1, N, 1, subtree[b].start) << "\n";
 		}
 	}
@@ -175,10 +175,10 @@ int main() {
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/14268<br>
-https://www.acmicpc.net/problem/14287<br>
-https://www.acmicpc.net/problem/2820<br>
+<br>https://www.acmicpc.net/problem/14268
+<br>https://www.acmicpc.net/problem/14287
+<br>https://www.acmicpc.net/problem/2820
 
 ## 참고
-https://anz1217.tistory.com/41<br>
+<br>https://anz1217.tistory.com/41
 {% endraw %}

@@ -95,7 +95,7 @@ root->Find("APPLE")
 Find(const char* str)
 	// 현재 입력 문자열의 위치가 끝인지 검사한다.
 	if (!*str)
-		if (isEnd) // 문자열 끝 and 현재 노드가 끝 => true 반환<br>
+		if (isEnd) // 문자열 끝 and 현재 노드가 끝 => true 반환
 			return true
 		return false
 
@@ -166,7 +166,7 @@ int main()
 	Node* root = new Node();
 	string str;
 
-	cin >> str;<br>
+	cin >> str;
 	root->Insert(str.c_str());
 
 	string temp = "abcd";
@@ -177,10 +177,10 @@ int main()
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/5052<br>
-https://www.acmicpc.net/problem/14725<br>
-https://school.programmers.co.kr/learn/courses/30/lessons/60060<br>
+<br>https://www.acmicpc.net/problem/5052
+<br>https://www.acmicpc.net/problem/14725
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/60060
 
 ## 참고
-https://rebro.kr/86<br>
+<br>https://rebro.kr/86
 {% endraw %}

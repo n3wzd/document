@@ -31,14 +31,14 @@ title: '[Programmers] 2023 KAKAO BLIND RECRUITMENT - 표현 가능한 이진트�
 
 ## 해결
 - 주어진 트리가 `트리` 구조를 유지하는지 판정합니다. 더미가 아닌 손자 노드를 보유한 더미 노드가 존재하면 트리가 아닙니다.
-- 트리를 구성하기 위해 이진수 길이는 2<sup>N</sup> - 1이어야 합니다. 부족한 길이는 0으로 채웁니다.<br>
+- 트리를 구성하기 위해 이진수 길이는 2<sup>N</sup> - 1이어야 합니다. 부족한 길이는 0으로 채웁니다.
 - 루트 노드의 번호는 (이진수 길이의 절반 + 1)입니다.
 
 ```
 1. 정수를 2진수 배열로 변환
 2. 루트 노드 찾기
 3. 트리 탐색(시작점 = 루트 노드):
-	- 현재 노드가 더미 and 더미가 아닌 손자 노드 존재 => 트리 아님<br>
+	- 현재 노드가 더미 and 더미가 아닌 손자 노드 존재 => 트리 아님
 ```
 
 ## 코드
@@ -63,15 +63,15 @@ bool DFS(int n, int level) {
 int isTree(long long n) {
     memset(tree, 0, sizeof(tree));
     int len = 0, root = 1; pass = 1;
-    while(n > 0) tree[len++] = n % 2, n /= 2;<br>
+    while(n > 0) tree[len++] = n % 2, n /= 2;
     while(root < len) root *= 2;
     root /= 2;
     DFS(root, root);
     return pass;
 }
 
-vector<int> solution(vector<ll> numbers) {<br>
-    vector<int> answer;<br>
+vector<int> solution(vector<ll> numbers) {
+    vector<int> answer;
     for(ll n : numbers)
         answer.push_back(isTree(n));
     return answer;
@@ -79,5 +79,5 @@ vector<int> solution(vector<ll> numbers) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/150367<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/150367
 {% endraw %}

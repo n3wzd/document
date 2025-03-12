@@ -45,7 +45,7 @@ title: '[Programmers] 2022 KAKAO BLIND RECRUITMENT - 양궁대회'
     -   라이언이 어떻게 화살을 쏘든  **라이언의 점수가 어피치의 점수보다 낮거나 같으면  `[-1]`을 return 해야 합니다.**
 
 ## 해결
-- 입력이 작으므로 모든 경우를 조사할 수 있습니다. 현재 과녁 점수가 주어졌을 때, 라이언의 선택지는 현재 점수 얻기, 무승부, 포기하기 3가지가 있습니다. => `백트래킹`<br>
+- 입력이 작으므로 모든 경우를 조사할 수 있습니다. 현재 과녁 점수가 주어졌을 때, 라이언의 선택지는 현재 점수 얻기, 무승부, 포기하기 3가지가 있습니다. => `백트래킹`
 	- 현재 점수를 얻으려면 어피치가 맞춘 개수 + 1개의 화살을 소모합니다.
 	- 무승부는 어피치가 맞춘 개수만큼 화살을 소모합니다.
 	- 포기하기는 화살을 소모하지 않습니다.
@@ -56,7 +56,7 @@ title: '[Programmers] 2022 KAKAO BLIND RECRUITMENT - 양궁대회'
 ```
 #include <vector>
 using namespace std;
-vector<int> peach, ryan(11, 0), answer, failAnswer = { -1 };<br>
+vector<int> peach, ryan(11, 0), answer, failAnswer = { -1 };
 int highscore = -1;
 
 void BT(int level, int life) {
@@ -66,11 +66,11 @@ void BT(int level, int life) {
         for (int i = 0; i <= 10; i++)
             if (peach[i] != 0 || ryan[i] != 0)
                 peach[i] >= ryan[i] ? enemyScore += 10 - i : myScore += 10 - i;
-        if (myScore > enemyScore) {<br>
-            bool ok = (myScore - enemyScore) > highscore;<br>
+        if (myScore > enemyScore) {
+            bool ok = (myScore - enemyScore) > highscore;
             if ((myScore - enemyScore) == highscore) {
                 for (int i = 10; i >= 0; i--) {
-                    if (ryan[i] > answer[i])<br>
+                    if (ryan[i] > answer[i])
                         ok = 1;
                     if (ryan[i] != answer[i])
                         break;
@@ -96,7 +96,7 @@ void BT(int level, int life) {
     BT(level + 1, life);
 }
 
-vector<int> solution(int n, vector<int> info) {<br>
+vector<int> solution(int n, vector<int> info) {
     peach = info;
     BT(0, n);
     return highscore == -1 ? failAnswer : answer;
@@ -104,5 +104,5 @@ vector<int> solution(int n, vector<int> info) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/92342<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/92342
 {% endraw %}

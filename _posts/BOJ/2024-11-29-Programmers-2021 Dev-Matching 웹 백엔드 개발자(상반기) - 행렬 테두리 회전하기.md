@@ -28,7 +28,7 @@ rows x columns 크기인 행렬이 있습니다. 행렬에는 1부터 rows x col
     -   예를 들어, 두 번째 회전에 대한 답은 첫 번째 회전을 실행한 다음, 그 상태에서 두 번째 회전을 실행했을 때 이동한 숫자 중 최솟값을 구하면 됩니다.
 
 ## 해결
-주어진 쿼리에 따라 행렬을 회전합니다. 이때 회전은 시계 방향으로 외곽을 1칸씩 옮기는 연산입니다. => `시뮬레이션`<br>
+주어진 쿼리에 따라 행렬을 회전합니다. 이때 회전은 시계 방향으로 외곽을 1칸씩 옮기는 연산입니다. => `시뮬레이션`
 
 ```
 (x1, y1, x2, y2) 회전
@@ -44,8 +44,8 @@ using namespace std;
 int dx[] = { 1, 0, -1, 0 }, dy[] = { 0, 1, 0, -1 };
 int A[101][101], T[101][101];
 
-vector<int> solution(int N, int M, vector<vector<int>> Q) {<br>
-    vector<int> answer;<br>
+vector<int> solution(int N, int M, vector<vector<int>> Q) {
+    vector<int> answer;
     for(int i = 0; i < N * M; i++)
         A[i / M][i % M] = i + 1;
     for(auto q : Q) {
@@ -65,5 +65,5 @@ vector<int> solution(int N, int M, vector<vector<int>> Q) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/77485<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/77485
 {% endraw %}

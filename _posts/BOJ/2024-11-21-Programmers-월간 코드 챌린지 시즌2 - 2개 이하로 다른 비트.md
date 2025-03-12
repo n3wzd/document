@@ -22,11 +22,11 @@ title: '[Programmers] 월간 코드 챌린지 시즌2 - 2개 이하로 다른 �
 ## 해결
 먼저 예시를 통해 규칙을 찾아봅시다.
 ```
-00000 => 00001<br>
-00001 => 00010<br>
-00011 => 00101<br>
-00111 => 01011<br>
-01111 => 10111<br>
+00000 => 00001
+00001 => 00010
+00011 => 00101
+00111 => 01011
+01111 => 10111
 ```
 
 가장 오른쪽의 0이 1이 되고, 그 왼쪽에 있는 1이 0이 됨을 발견할 수 있습니다. 따라서 f(x)는 다음과 같이 정리할 수 있습니다:
@@ -40,8 +40,8 @@ title: '[Programmers] 월간 코드 챌린지 시즌2 - 2개 이하로 다른 �
 using namespace std;
 typedef long long ll;
 
-vector<ll> solution(vector<ll> numbers) {<br>
-    vector<ll> answer; ll b = 1;<br>
+vector<ll> solution(vector<ll> numbers) {
+    vector<ll> answer; ll b = 1;
     for (auto n : numbers) {
         if (n == 0) {
             answer.push_back(1);
@@ -56,5 +56,5 @@ vector<ll> solution(vector<ll> numbers) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/77885<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/77885
 {% endraw %}

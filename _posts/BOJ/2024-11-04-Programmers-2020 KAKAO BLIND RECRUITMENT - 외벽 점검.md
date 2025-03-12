@@ -26,7 +26,7 @@ title: '[Programmers] 2020 KAKAO BLIND RECRUITMENT - 외벽 점검'
 -   친구들을 모두 투입해도 취약 지점을 전부 점검할 수 없는 경우에는 -1을 return 해주세요.
 
 ## 해결
-최소 인원을 배치해서 모든 취약점을 커버해야 합니다. 모든 경우를 탐색할 필요가 있으며, 탐색에는 중복이 존재합니다. => `원형 DP`<br>
+최소 인원을 배치해서 모든 취약점을 커버해야 합니다. 모든 경우를 탐색할 필요가 있으며, 탐색에는 중복이 존재합니다. => `원형 DP`
 
 현재 상태를 (취약점, 남은 친구 목록)으로 정의하며, 계산 값은 전체 취약점 커버가 가능할 때의 최소 인원입니다. (모든 인원을 투입해도 커버하지 못하면 무한대를 반환합니다.) 현재 취약점을 시작점으로 해서 인원을 투입했다면 해당 인원은 이동 거리만큼 연속한 취약점들을 커버합니다. (이동 방향은 시계 방향으로 고정합니다.) 다음 취약점 위치는 커버하지 못한 가장 가까운 취약점입니다. 커버할 취약점이 없다면 탐색을 종료합니다. 남은 친구 목록은 boolean 배열이므로 `비트마스킹`으로 구현합니다.
 
@@ -43,12 +43,12 @@ title: '[Programmers] 2020 KAKAO BLIND RECRUITMENT - 외벽 점검'
 using namespace std;
 const int MAXN = 99999;
 int N, cache[32][1 << 8][32];
-vector<int> weak, dist;<br>
+vector<int> weak, dist;
 
 int DP(int n, int team, int L) {
     if (n >= L)
         return 0;
-    if (cache[n][team][L] > 0)<br>
+    if (cache[n][team][L] > 0)
         return cache[n][team][L];
     cache[n][team][L] = MAXN;
     for (int i = 0; i < dist.size(); i++) {
@@ -61,7 +61,7 @@ int DP(int n, int team, int L) {
     return cache[n][team][L];
 }
 
-int solution(int n, vector<int> weakI, vector<int> distI) {<br>
+int solution(int n, vector<int> weakI, vector<int> distI) {
     N = weakI.size(); weak = weakI, dist = distI;
     for (int i = 0; i < N; i++)
         weak.push_back(n + weak[i]);
@@ -73,5 +73,5 @@ int solution(int n, vector<int> weakI, vector<int> distI) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/60062<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/60062
 {% endraw %}

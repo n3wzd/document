@@ -64,8 +64,8 @@ void Insert(Line v) {
 	stk[size] = v;
 	
 	// 교점 x 좌표 대소 비교 (A = size, B = size - 1, C = size - 2)
-	// A, B의 교점 x > B, C의 교점 x을 만족할 때까지 스택 삭제 반복<br>
-	while (1 < size && Cross(size - 2, size - 1) > Cross(size - 1, size)) {<br>
+	// A, B의 교점 x > B, C의 교점 x을 만족할 때까지 스택 삭제 반복
+	while (1 < size && Cross(size - 2, size - 1) > Cross(size - 1, size)) {
 		stk[size - 1] = stk[size];
 		size--;
 	}
@@ -140,7 +140,7 @@ struct CHT {
 
 	void Insert(Line v) {
 		stk[size] = v;
-		while (1 < size && Cross(size - 2, size - 1) > Cross(size - 1, size)) {<br>
+		while (1 < size && Cross(size - 2, size - 1) > Cross(size - 1, size)) {
 			stk[size - 1] = stk[size];
 			size--;
 		}
@@ -162,11 +162,11 @@ CHT cht;
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N;<br>
+	cin >> N;
 	for (int i = 0; i < N; i++)
-		cin >> A[i];<br>
+		cin >> A[i];
 	for (int i = 0; i < N; i++)
-		cin >> B[i];<br>
+		cin >> B[i];
 
 	cht.Insert({ B[0], 0 });
 	for (int i = 1; i < N; i++) {
@@ -179,11 +179,11 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/13263<br>
-https://www.acmicpc.net/problem/4008<br>
-https://www.acmicpc.net/problem/10067<br>
+<br>https://www.acmicpc.net/problem/13263
+<br>https://www.acmicpc.net/problem/4008
+<br>https://www.acmicpc.net/problem/10067
 
 ## 참고
-https://www.weeklyps.com/entry/%EC%BB%A8%EB%B2%A1%EC%8A%A4-%ED%97%90-%ED%8A%B8%EB%A6%AD-Convex-Hull-Trick<br>
-https://stonejjun.tistory.com/50<br>
+<br>https://www.weeklyps.com/entry/%EC%BB%A8%EB%B2%A1%EC%8A%A4-%ED%97%90-%ED%8A%B8%EB%A6%AD-Convex-Hull-Trick
+<br>https://stonejjun.tistory.com/50
 {% endraw %}

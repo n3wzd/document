@@ -49,5 +49,5 @@ int solution(int n) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12980<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/12980
 {% endraw %}

@@ -57,7 +57,7 @@ int DP(int n)
 int main()
 {
 	int n;
-	cin >> n;<br>
+	cin >> n;
 	cout << DP(n) << endl;
 	return 0;
 }
@@ -80,7 +80,7 @@ int cache[10000] = { 0, };
 int main()
 {
 	int n;
-	cin >> n;<br>
+	cin >> n;
 
 	cache[0] = 0;
 	cache[1] = 1;
@@ -103,14 +103,14 @@ DP(i, w)
 	...
 	DP(i - 1, w - item[i])
 
-=> i가 1씩 감소한다. 즉, i에 대해 현재 문제에서 이전 문제의 값만 참고하므로 토글링을 고려해볼 수 있다. <br>
+=> i가 1씩 감소한다. 즉, i에 대해 현재 문제에서 이전 문제의 값만 참고하므로 토글링을 고려해볼 수 있다. 
 ```
 
 토글링을 구현할 때는 이전 값만 참조해야 하므로 주로 Bottom-Up으로 구현된다.
 
 #### 활용 예시
-- 냅색 알고리즘(knapsack-problem): 들고 있는 물건의 번호 i를 생략할 수 있다. DP(i, w) => DP(w)<br>
-- 벨만-포드 알고리즘: 최단 경로에서 사용 가능한 최대 간선 개수 k를 생략할 수 있다. DP(v, k) => DP(v)<br>
+- 냅색 알고리즘(knapsack-problem): 들고 있는 물건의 번호 i를 생략할 수 있다. DP(i, w) => DP(w)
+- 벨만-포드 알고리즘: 최단 경로에서 사용 가능한 최대 간선 개수 k를 생략할 수 있다. DP(v, k) => DP(v)
 
 ## 연관 문제
 1. 분할 정복 함수(점화식) 설계
@@ -122,59 +122,59 @@ DP(i, w)
 
 #### DP - 기초
 부분 문제의 상태가 간단한 (주로 1차원) 연습 문제.
-https://www.acmicpc.net/problem/2579<br>
-https://www.acmicpc.net/problem/10844<br>
-https://www.acmicpc.net/problem/1149<br>
-https://www.acmicpc.net/problem/2156<br>
+<br>https://www.acmicpc.net/problem/2579
+<br>https://www.acmicpc.net/problem/10844
+<br>https://www.acmicpc.net/problem/1149
+<br>https://www.acmicpc.net/problem/2156
 
 #### DP - 중급
 부분 문제의 상태가 2차원 이상인 더 어려운 문제.
-https://www.acmicpc.net/problem/1520<br>
-https://www.acmicpc.net/problem/13392<br>
-https://www.acmicpc.net/problem/2169<br>
+<br>https://www.acmicpc.net/problem/1520
+<br>https://www.acmicpc.net/problem/13392
+<br>https://www.acmicpc.net/problem/2169
 
 #### LIS
 대표적인 DP 문제.
-https://www.acmicpc.net/problem/11053<br>
-https://www.acmicpc.net/problem/2565<br>
-https://www.acmicpc.net/problem/15648<br>
+<br>https://www.acmicpc.net/problem/11053
+<br>https://www.acmicpc.net/problem/2565
+<br>https://www.acmicpc.net/problem/15648
 
 #### LCS
 대표적인 DP 문제 2. 2개의 탐색 대상의 현재 위치를 현재 상태로 정의한다. (`투 포인터`를 현재 상태로 사용)
-https://www.acmicpc.net/problem/9251<br>
-https://www.acmicpc.net/problem/2618<br>
+<br>https://www.acmicpc.net/problem/9251
+<br>https://www.acmicpc.net/problem/2618
 
 #### 0-1 가방 문제 (Knapsack Problem)
 대표적인 DP 문제 3. 아이템 번호와 수치 값(ex. 가방 한도)를 현재 상태로 활용하며, 경우의 수 시나리오(ex. 현재 들고 있는 물건을 선택 vs 포기)로 문제를 분할한다. 또한 토글링을 적용할 수 있다.
-https://www.acmicpc.net/problem/12865<br>
-https://www.acmicpc.net/problem/2629<br>
+<br>https://www.acmicpc.net/problem/12865
+<br>https://www.acmicpc.net/problem/2629
 
 #### 투 포인터
 처음과 끝을 `투 포인터`로 하고, 탐색 범위를 분할하는 유형.
-https://www.acmicpc.net/problem/11066<br>
-https://www.acmicpc.net/problem/11049<br>
-https://www.acmicpc.net/problem/10942<br>
+<br>https://www.acmicpc.net/problem/11066
+<br>https://www.acmicpc.net/problem/11049
+<br>https://www.acmicpc.net/problem/10942
 
 #### 메모리 제한
 공간 복잡도를 고려하는 문제. 토글링, 점화식 입력 대상 전환 등 기법이 필요하다. 이러한 상황에서는 Bottom-Up이 적합하다.
-https://www.acmicpc.net/problem/2293<br>
-https://www.acmicpc.net/problem/7579<br>
-https://www.acmicpc.net/problem/5977<br> - 필수는 아니지만 토글링을 적용할 수 있다<br>
+<br>https://www.acmicpc.net/problem/2293
+<br>https://www.acmicpc.net/problem/7579
+<br>https://www.acmicpc.net/problem/5977 - 필수는 아니지만 토글링을 적용할 수 있다
 
 #### 비트마스크 적용
 `비트마스크`를 사용해 boolean 배열을 정수 하나로 바꿀 수 있다.
-https://www.acmicpc.net/problem/2098<br>
-https://www.acmicpc.net/problem/1311<br>
-https://www.acmicpc.net/problem/1648<br>
-https://www.acmicpc.net/problem/1086<br>
+<br>https://www.acmicpc.net/problem/2098
+<br>https://www.acmicpc.net/problem/1311
+<br>https://www.acmicpc.net/problem/1648
+<br>https://www.acmicpc.net/problem/1086
 
 #### 슬라이딩 윈도우 최적화
 `덱`을 사용해서 O(N) 시간으로 슬라이딩 윈도우 최대/소를 찾는 문제
-https://www.acmicpc.net/problem/5977<br>
-https://www.acmicpc.net/problem/15678<br>
+<br>https://www.acmicpc.net/problem/5977
+<br>https://www.acmicpc.net/problem/15678
 
 ## 참고
-https://semaph.tistory.com/16<br>
-https://namu.wiki/w/%EB%A9%94%EB%AA%A8%EC%9D%B4%EC%A0%9C%EC%9D%B4%EC%85%98<br>
-https://namu.wiki/w/%EB%8F%99%EC%A0%81%20%EA%B3%84%ED%9A%8D%EB%B2%95<br>
+<br>https://semaph.tistory.com/16
+<br>https://namu.wiki/w/%EB%A9%94%EB%AA%A8%EC%9D%B4%EC%A0%9C%EC%9D%B4%EC%85%98
+<br>https://namu.wiki/w/%EB%8F%99%EC%A0%81%20%EA%B3%84%ED%9A%8D%EB%B2%95
 {% endraw %}

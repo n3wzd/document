@@ -12,7 +12,7 @@ title: '[Programmers] PCCP - 퍼즐 게임 챌린지'
 당신은 순서대로  `n`개의 퍼즐을 제한 시간 내에 풀어야 하는 퍼즐 게임을 하고 있습니다. 각 퍼즐은 난이도와 소요 시간이 정해져 있습니다. 당신의 숙련도에 따라 퍼즐을 풀 때 틀리는 횟수가 바뀌게 됩니다. 현재 퍼즐의 난이도를  `diff`, 현재 퍼즐의 소요 시간을  `time_cur`, 이전 퍼즐의 소요 시간을  `time_prev`, 당신의 숙련도를  `level`이라 하면, 게임은 다음과 같이 진행됩니다.
 
 -   `diff`  ≤  `level`이면 퍼즐을 틀리지 않고  `time_cur`만큼의 시간을 사용하여 해결합니다.
--   `diff`  >  `level`이면, 퍼즐을 총  `diff`  -  `level`번 틀립니다. 퍼즐을 틀릴 때마다,  `time_cur`만큼의 시간을 사용하며, 추가로  `time_prev`만큼의 시간을 사용해 이전 퍼즐을 다시 풀고 와야 합니다.  **이전 퍼즐을 다시 풀 때는 이전 퍼즐의 난이도에 상관없이 틀리지 않습니다.**  `diff`  -  `level`번 틀린 이후에 다시 퍼즐을 풀면  `time_cur`만큼의 시간을 사용하여 퍼즐을 해결합니다.<br>
+-   `diff`  >  `level`이면, 퍼즐을 총  `diff`  -  `level`번 틀립니다. 퍼즐을 틀릴 때마다,  `time_cur`만큼의 시간을 사용하며, 추가로  `time_prev`만큼의 시간을 사용해 이전 퍼즐을 다시 풀고 와야 합니다.  **이전 퍼즐을 다시 풀 때는 이전 퍼즐의 난이도에 상관없이 틀리지 않습니다.**  `diff`  -  `level`번 틀린 이후에 다시 퍼즐을 풀면  `time_cur`만큼의 시간을 사용하여 퍼즐을 해결합니다.
 
 예를 들어  `diff`  = 3,  `time_cur`  = 2,  `time_prev`  = 4인 경우,  `level`에 따라 퍼즐을 푸는데 걸리는 시간은 다음과 같습니다.
 
@@ -48,7 +48,7 @@ level  < diffs[i]: (diffs[i] - level) * (times[i] + times[i - 1]) + times[i]
 #include <vector>
 using namespace std;
 
-bool Cond(int level, vector<int> diffs, vector<int> times, long long limit) {<br>
+bool Cond(int level, vector<int> diffs, vector<int> times, long long limit) {
     int size = diffs.size();
     long long gameTime = 0;
     for (int i = 0; i < size; i++)
@@ -56,7 +56,7 @@ bool Cond(int level, vector<int> diffs, vector<int> times, long long limit) {<br
     return gameTime <= limit;
 }
 
-int solution(vector<int> diffs, vector<int> times, long long limit) {<br>
+int solution(vector<int> diffs, vector<int> times, long long limit) {
     int lo = 1, hi = 100000, mid;
     while (lo < hi) {
         mid = (lo + hi) / 2;
@@ -68,5 +68,5 @@ int solution(vector<int> diffs, vector<int> times, long long limit) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/340212<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/340212
 {% endraw %}

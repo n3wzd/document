@@ -46,7 +46,7 @@ sum = a    sum = a+b     sum = a+b+c
 
 일반적으로 스위핑 탐색의 전체적인 구성은 다음과 같다.
 ```
-x에 대해 [0, max] 스위핑 탐색 => 현재 위치 = x<br>
+x에 대해 [0, max] 스위핑 탐색 => 현재 위치 = x
 	1. 현재 대상을 변화하는 연산 수행 (변화량, 구간 쿼리...)
 	2. 현재 위치 x의 결과 구하기
 		- 최종 답에 취합
@@ -64,11 +64,11 @@ x에 대해 [0, max] 스위핑 탐색 => 현재 위치 = x<br>
 - 스위핑 결과 = 현재 선의 길이
 ```
 - 현재 선 [lo, hi]
-- 스위핑 탐색 => 입력 선 [newLo, newHi]<br>
-	- newLo > hi<br>
+- 스위핑 탐색 => 입력 선 [newLo, newHi]
+	- newLo > hi
 		- 전체 합 += 현재 선 길이 // 결과 구하기
 		- lo = newLo, hi = newHi // 현재 선 업데이트
-	- newHi > hi<br>
+	- newHi > hi
 		- hi = newHi // 현재 선의 끝 업데이트
 ```
 
@@ -86,7 +86,7 @@ x에 대해 [0, max] 스위핑 탐색 => 현재 위치 = x<br>
 
 ```
 - 구간 배열 [0, N - 1] // N - 1 = 좌표 최댓값
-- 스위핑 탐색 => 현재 점 = (x, y)<br>
+- 스위핑 탐색 => 현재 점 = (x, y)
 	1. 전체 합 += [0, y]의 구간 합 // 결과 구하기
 	2. 구간 배열에서 y 위치에 1을 더한다.
 ```
@@ -111,10 +111,10 @@ x에 대해 [0, max] 스위핑 탐색 => 현재 위치 = x<br>
 
 ```
 - 구간 배열 [0, MAX]
-- 스위핑 탐색 => 현재 위치 = x<br>
-	1. rectLeft[x]의 모든 사각형을 반영한다. => 현재 사각형 [y1, y2]<br>
+- 스위핑 탐색 => 현재 위치 = x
+	1. rectLeft[x]의 모든 사각형을 반영한다. => 현재 사각형 [y1, y2]
 		- [y1, y2] 구간에 1을 더한다.
-	2. rectRight[x]의 모든 사각형을 반영한다. => 현재 사각형 [y1, y2]<br>
+	2. rectRight[x]의 모든 사각형을 반영한다. => 현재 사각형 [y1, y2]
 		- [y1, y2] 구간에 1을 뺀다.
 	3. 최종 답 += [0, MAX] 구간에서 양수의 개수
 ```
@@ -125,22 +125,22 @@ x에 대해 [0, max] 스위핑 탐색 => 현재 위치 = x<br>
 
 ## 관련 문제
 ### 1차원 탐색
-https://www.acmicpc.net/problem/2170<br>
-https://www.acmicpc.net/problem/2836<br>
-https://www.acmicpc.net/problem/16357<br>
+<br>https://www.acmicpc.net/problem/2170
+<br>https://www.acmicpc.net/problem/2836
+<br>https://www.acmicpc.net/problem/16357
 
 ### 2차원 탐색
-https://www.acmicpc.net/problem/5419<br>
-https://www.acmicpc.net/problem/17131<br>
-https://www.acmicpc.net/problem/10534<br>
-https://www.acmicpc.net/problem/10167<br>
+<br>https://www.acmicpc.net/problem/5419
+<br>https://www.acmicpc.net/problem/17131
+<br>https://www.acmicpc.net/problem/10534
+<br>https://www.acmicpc.net/problem/10167
 
 ### 직사각형 합집합 (구간 합집합)
-https://www.acmicpc.net/problem/3392<br>
-https://www.acmicpc.net/problem/11012<br>
-https://www.acmicpc.net/problem/2809<br>
+<br>https://www.acmicpc.net/problem/3392
+<br>https://www.acmicpc.net/problem/11012
+<br>https://www.acmicpc.net/problem/2809
 
 ## 참고
-https://byeo.tistory.com/entry/%EC%8A%A4%EC%9C%84%ED%95%91-Sweeping<br>
-https://blogshine.tistory.com/120<br>
+<br>https://byeo.tistory.com/entry/%EC%8A%A4%EC%9C%84%ED%95%91-Sweeping
+<br>https://blogshine.tistory.com/120
 {% endraw %}

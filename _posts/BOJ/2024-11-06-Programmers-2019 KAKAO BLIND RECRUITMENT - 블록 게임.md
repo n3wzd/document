@@ -35,7 +35,7 @@ title: '[Programmers] 2019 KAKAO BLIND RECRUITMENT - 블록 게임'
     -   모양에 관계 없이 서로 다른 블록은 서로 다른 숫자로 표현된다.
 
 ## 해결
-검은 블록으로 제거 가능한 블록을 찾아야 합니다. => `시뮬레이션`<br>
+검은 블록으로 제거 가능한 블록을 찾아야 합니다. => `시뮬레이션`
 
 블록 형태 판정은 `그래프 탐색`을 사용합니다.
 
@@ -63,7 +63,7 @@ title: '[Programmers] 2019 KAKAO BLIND RECRUITMENT - 블록 게임'
 #include <vector>
 using namespace std;
 int N, M, cnt = 1, gx, gy, rx1, rx2, ry1, ry2, dx[4] = {1, 0, -1, 0}, dy[4] = {0, 1, 0, -1};
-vector<vector<int>> board;<br>
+vector<vector<int>> board;
 int visited[51][51];
 
 void DFS(int x, int y, int id) {
@@ -98,16 +98,16 @@ void isRect(int x, int y) {
     }
 }
 
-int solution(vector<vector<int>> B) {<br>
+int solution(vector<vector<int>> B) {
     board = B, N = board.size();
     for (gy = 0; gy < N; gy++)
         for (gx = 0; gx < N; gx++)
-            if (visited[gy][gx] != cnt && board[gy][gx] > 0)<br>
+            if (visited[gy][gx] != cnt && board[gy][gx] > 0)
                 isRect(gx, gy);
     return cnt - 1;
 }
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42894<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/42894
 {% endraw %}

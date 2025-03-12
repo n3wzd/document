@@ -53,7 +53,7 @@ title: '[Programmers] 2019 KAKAO TECH INTERNSHIP - 징검다리 건너기'
 시간 복잡도는 `O(N)`입니다.
 
 ### 세그먼트 트리
-슬라이딩 윈도우를 최댓값을 찾는 구간 쿼리로 간주할 수 있습니다. 이는 최댓값을 저장하는 `세그먼트 트리`를 구현하면 바로 해결할 수 있습니다. => `BOJ - 2357 - 최솟값과 최댓값` 참고<br>
+슬라이딩 윈도우를 최댓값을 찾는 구간 쿼리로 간주할 수 있습니다. 이는 최댓값을 저장하는 `세그먼트 트리`를 구현하면 바로 해결할 수 있습니다. => `BOJ - 2357 - 최솟값과 최댓값` 참고
 
 시간 복잡도는 `O(N * logN)`입니다.
 
@@ -63,9 +63,9 @@ title: '[Programmers] 2019 KAKAO TECH INTERNSHIP - 징검다리 건너기'
 #include <vector>
 #include <queue>
 using namespace std;
-deque<int> q;<br>
+deque<int> q;
 
-int solution(vector<int> stones, int k) {<br>
+int solution(vector<int> stones, int k) {
     int answer = 1 << 30;
     for(int i = 0; i < stones.size(); i++) {
         while(!q.empty() && stones[q.front()] <= stones[i])
@@ -85,7 +85,7 @@ int solution(vector<int> stones, int k) {<br>
 #include <vector>
 using namespace std;
 const int MINV = -1;
-vector<int> stones;<br>
+vector<int> stones;
 int N, answer = 1 << 30, tree[800004];
 
 int init(int start, int end, int idx) {
@@ -95,13 +95,13 @@ int init(int start, int end, int idx) {
 }
 
 int get(int start, int end, int idx, int left, int right) {
-    if (start > right || end < left) return MINV;<br>
+    if (start > right || end < left) return MINV;
     if (start >= left && end <= right) return tree[idx];
     int mid = (start + end) / 2;
     return max(get(start, mid, idx * 2, left, right), get(mid + 1, end, idx * 2 + 1, left, right));
 }
 
-int solution(vector<int> stonesI, int k) {<br>
+int solution(vector<int> stonesI, int k) {
     stones = stonesI; N = stones.size();
     init(0, N - 1, 1);
     for(int i = 0; i <= N - k; i++)
@@ -111,8 +111,8 @@ int solution(vector<int> stonesI, int k) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/64062<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/64062
 
 ### 비슷한 문제
-https://leetcode.com/problems/sliding-window-maximum/<br>
+<br>https://leetcode.com/problems/sliding-window-maximum/
 {% endraw %}

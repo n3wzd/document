@@ -118,9 +118,9 @@ splay 연산은 스플레이 트리에서 균형을 맞추는데 사용되는 �
 
 splay(x) 연산을 정리하면 다음과 같다.
 ```
-1. pp가 없음 => rotate(x)<br>
-2. pp→p→x가 일직선 => rotate(p), rotate(x)<br>
-3. pp→p→x가 일직선이 아님 => rotate(x), rotate(x)<br>
+1. pp가 없음 => rotate(x)
+2. pp→p→x가 일직선 => rotate(p), rotate(x)
+3. pp→p→x가 일직선이 아님 => rotate(x), rotate(x)
 ```
 이 과정을 x가 루트가 될 때까지 반복하면 된다.
 ```
@@ -149,7 +149,7 @@ key는 중위 순회의 순서번호이므로 왼쪽 노드로 이동하면 k를
 void Find(int k) {
 	Node* x = root;
 	while (1) {
-		while (x->l && x->l->size > k)<br>
+		while (x->l && x->l->size > k)
 			x = x->l;
 		if (x->l) k -= x->l->size;
 		if (!k--) break;
@@ -166,7 +166,7 @@ x에서 루트까지 올라가면서 경로를 `스택`에 저장한 다음, 다
 ```
 int GetKey(Node* x) {
 	// x → 루트
-	stack<Node*> path;<br>
+	stack<Node*> path;
 	Node* v = x; path.push(v);
 	while (v->p) {
 		v = v->p;
@@ -321,7 +321,7 @@ struct SplayMethod {
 	void Find(int k) {
 		Node* x = root;
 		while (1) {
-			while (x->l && x->l->size > k)<br>
+			while (x->l && x->l->size > k)
 				x = x->l;
 			if (x->l) k -= x->l->size;
 			if (!k--) break;
@@ -346,7 +346,7 @@ struct SplayMethod {
 	void Create(int lo, int hi) {
 		Node* x = root = new Node(lo - 1, 0);
 		for (int i = lo; i <= hi; i++) {
-			ll num; cin >> num;<br>
+			ll num; cin >> num;
 			x->r = new Node(i, num);
 			x->r->p = x;
 			x = x->r;
@@ -372,13 +372,13 @@ ll Get(int lo, int hi) {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M >> K;<br>
+	cin >> N >> M >> K;
 	splay.Create(1, N);
 
 	ll Q = M + K;
 	while (Q--) {
 		ll a, b, c;
-		cin >> a >> b >> c;<br>
+		cin >> a >> b >> c;
 		if (a == 1) Update(b, c);
 		else cout << Get(b, c) << "\n";
 	}
@@ -509,7 +509,7 @@ struct SplayMethod {
 		Node* x = root;
 		x->propagate();
 		while (1) {
-			while (x->l && x->l->size > k)<br>
+			while (x->l && x->l->size > k)
 				x = x->l, x->propagate();
 			if (x->l) k -= x->l->size;
 			if (!k--) break;
@@ -535,7 +535,7 @@ struct SplayMethod {
 	void Create(int lo, int hi) {
 		Node* x = root = new Node(lo - 1, 0);
 		for (int i = lo; i <= hi; i++) {
-			ll num; cin >> num;<br>
+			ll num; cin >> num;
 			x->r = new Node(i, num);
 			x->r->p = x;
 			x = x->r;
@@ -562,15 +562,15 @@ ll Get(int lo, int hi) {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M >> K;<br>
+	cin >> N >> M >> K;
 	splay.Create(1, N);
 
 	ll Q = M + K;
 	while (Q--) {
 		ll a, b, c, d;
-		cin >> a >> b >> c;<br>
+		cin >> a >> b >> c;
 		if (a == 1) {
-			cin >> d;<br>
+			cin >> d;
 			Update(b, c, d);
 		}
 		else cout << Get(b, c) << "\n";
@@ -618,7 +618,7 @@ ex.
 
 1. (4 3 2 1)
 2. (3 4) (1 2)
-=> reverse(1, 4), reverse(1, 2), reverse(3, 4)<br>
+=> reverse(1, 4), reverse(1, 2), reverse(3, 4)
 ```
 이를 일반화하면, (0 < t < hi - lo + 1)
 > shift(lo, hi, t) = reverse(lo, hi), reverse(lo, lo + t - 1), reverse(lo + t, hi)<br>
@@ -736,7 +736,7 @@ struct SplayMethod {
 		Node* x = root;
 		x->propagate();
 		while (1) {
-			while (x->l && x->l->size > k)<br>
+			while (x->l && x->l->size > k)
 				x = x->l, x->propagate();
 			if (x->l) k -= x->l->size;
 			if (!k--) break;
@@ -747,7 +747,7 @@ struct SplayMethod {
 	}
 
 	int GetKey(Node* x) {
-		stack<Node*> path;<br>
+		stack<Node*> path;
 		Node* v = x; path.push(v);
 		while (v->p) {
 			v = v->p;
@@ -831,19 +831,19 @@ void DFS(Node* v) {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M;<br>
+	cin >> N >> M;
 	splay.Create();
 	for (int i = 0; i < M; i++) {
 		int a, b, c, d;
-		cin >> a >> b;<br>
+		cin >> a >> b;
 		if (a == 1) {
-			cin >> c;<br>
+			cin >> c;
 			Node* x = splay.Range(b, c);
 			cout << x->minV << " " << x->maxV << " " << x->sum << "\n";
 			Flip(b, c);
 		}
 		if (a == 2) {
-			cin >> c >> d;<br>
+			cin >> c >> d;
 			Node* x = splay.Range(b, c);
 			cout << x->minV << " " << x->maxV << " " << x->sum << "\n";
 			Shift(b, c, d);
@@ -860,10 +860,10 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/3444<br>
-https://www.acmicpc.net/problem/13159<br>
+<br>https://www.acmicpc.net/problem/3444
+<br>https://www.acmicpc.net/problem/13159
 
 ## 참고
-https://aruz.tistory.com/180<br>
-https://justicehui.github.io/tag/#/Splay-Tree<br>
+<br>https://aruz.tistory.com/180
+<br>https://justicehui.github.io/tag/#/Splay-Tree
 {% endraw %}

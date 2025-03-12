@@ -63,7 +63,7 @@ string solve(string p) {
     int lCnt = 0, rCnt = 0;
     for(int i = 0; i < p.size(); i++) {
         p[i] == '(' ? lCnt++ : rCnt++;    
-        if(lCnt == rCnt && lCnt > 0) {<br>
+        if(lCnt == rCnt && lCnt > 0) {
             string u = p.substr(0, i + 1);
             string v = p.substr(i + 1, p.size() - (i + 1));
             if(p[0] == '(')
@@ -80,5 +80,5 @@ string solution(string p) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/60058<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/60058
 {% endraw %}

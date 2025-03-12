@@ -21,7 +21,7 @@ title: '[Programmers] 월간 코드 챌린지 시즌1 - 짝수 행 세기'
     -   a의 각 행의 길이는 1 이상 300 이하로 모두 동일합니다.
 
 ## 해결
-모든 경우의 수를 계산해야 하며, 계산 과정에서 중복 상태가 존재합니다. => `DP`<br>
+모든 경우의 수를 계산해야 하며, 계산 과정에서 중복 상태가 존재합니다. => `DP`
 
 어떠한 열에 포함된 1의 개수가 2개라고 가정합시다. 이 열을 어떻게 배열하든, 다음 열에는 2개의 행만이 계산에 영향을 받습니다. 즉,  열의 1의 개수가 중요합니다. (이전 열의 배치 방법은 다음 열의 경우의 수 계산 방법이 달라지지 않습니다.)
 
@@ -93,7 +93,7 @@ void solve() {
     }
 }
 
-int solution(vector<vector<int>> a) {<br>
+int solution(vector<vector<int>> a) {
     N = a.size(), M = a[0].size();
     for (int x = 1; x <= M; x++)
         for (int y = 0; y < N; y++)
@@ -104,5 +104,5 @@ int solution(vector<vector<int>> a) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/68647<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/68647
 {% endraw %}

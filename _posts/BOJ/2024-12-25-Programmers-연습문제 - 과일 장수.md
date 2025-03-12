@@ -40,7 +40,7 @@ title: '[Programmers] 연습문제 - 과일 장수'
 #include <algorithm>
 using namespace std;
 
-int solution(int k, int m, vector<int> score) {<br>
+int solution(int k, int m, vector<int> score) {
     int answer = 0;
     sort(score.begin(), score.end(), greater<int>());
     for(int i = 0; i < score.size(); i += m)
@@ -51,5 +51,5 @@ int solution(int k, int m, vector<int> score) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/135808<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/135808
 {% endraw %}

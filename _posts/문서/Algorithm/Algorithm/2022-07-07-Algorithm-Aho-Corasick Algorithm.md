@@ -9,9 +9,9 @@ title: '[Algorithm] Aho-Corasick Algorithm'
 ## 다중 패턴?
 입력 문자열에서 1개의 문자열 패턴을 찾을 때는 `KMP Algorithm`이 사용된다. 하지만 패턴이 여러 개가 추가되면 어떨까?
 
-이때 KMP를 사용하면 시간 복잡도는 O(N × k + M<sub>1</sub> + M<sub>2</sub> + ... )이다. (N = 입력 문자열 길이, M<sub>i</sub> = i번 패턴 길이, k = 패턴 개수)<br>
+이때 KMP를 사용하면 시간 복잡도는 O(N × k + M<sub>1</sub> + M<sub>2</sub> + ... )이다. (N = 입력 문자열 길이, M<sub>i</sub> = i번 패턴 길이, k = 패턴 개수)
 
-여기서 `Aho-Corasick`을 사용하면 O(N + M<sub>1</sub> + M<sub>2</sub> + ... )으로 단축할 수 있다. 일반적으로 문자열 패턴 검색은 N이 상대적으로 큰 편이므로(웹페이지에서 Ctrl+F를 사용해보자) 유의미한 감소폭이다.<br>
+여기서 `Aho-Corasick`을 사용하면 O(N + M<sub>1</sub> + M<sub>2</sub> + ... )으로 단축할 수 있다. 일반적으로 문자열 패턴 검색은 N이 상대적으로 큰 편이므로(웹페이지에서 Ctrl+F를 사용해보자) 유의미한 감소폭이다.
 
 ## Aho-Corasick Algorithm
 `Aho-Corasick`은 입력 문자열에서 여러 개의 패턴을 찾는 것에 특화된 검색 알고리즘이다. 동작을 1줄로 요약하자면, `Trie`에서 `KMP Algorithm`를 수행한 것이라고 볼 수 있다.
@@ -62,19 +62,19 @@ kbcz
 kbcy
 
 현재 노드, 문자, 깊이, 패턴 끝, 실패 노드
-053CAC60, 0, 0 = 0 => 053CAC60 // 루트<br>
+053CAC60, 0, 0 = 0 => 053CAC60 // 루트
 
-053C6F68, c, 1 = 1 => 053CAC60<br>
-053C4A58, k, 2 = 0 => 053D1870<br>
-053CA920, b, 3 = 0 => 053D1558<br>
-053CECC0, c, 4 = 1 => 053D1710<br>
-053CED18, k, 5 = 1 => 053C4A58<br>
+053C6F68, c, 1 = 1 => 053CAC60
+053C4A58, k, 2 = 0 => 053D1870
+053CA920, b, 3 = 0 => 053D1558
+053CECC0, c, 4 = 1 => 053D1710
+053CED18, k, 5 = 1 => 053C4A58
 
-053D1870, k, 1 = 0 => 053CAC60<br>
-053D1558, b, 2 = 0 => 053CAC60<br>
-053D1710, c, 3 = 1 => 053C6F68<br>
-053D1768, z, 4 = 1 => 053CAC60<br>
-053D1818, y, 4 = 1 => 053CAC60<br>
+053D1870, k, 1 = 0 => 053CAC60
+053D1558, b, 2 = 0 => 053CAC60
+053D1710, c, 3 = 1 => 053C6F68
+053D1768, z, 4 = 1 => 053CAC60
+053D1818, y, 4 = 1 => 053CAC60
 ```
 
 - "ckbck"
@@ -92,7 +92,7 @@ kbcy
 실패 함수는 모든 노드에 대한 실패 노드를 설정하는 과정으로, KMP 알고리즘에서 pi 배열을 구하는 포지션에 대응된다. 위의 예시처럼 실패 노드에 의한 끝 정보를 결정하는 것이 필요하므로 인접 정점부터 탐색해야 한다. 따라서 실패 함수에선 `BFS`를 사용한다.
 ```
 void Failure() {
-	queue <Node*> q;<br>
+	queue <Node*> q;
 	q.push(root); // 루트부터 시작
 	root->fail = root; // 루트 노드의 실패 노드 = 루트 노드
 
@@ -107,7 +107,7 @@ void Failure() {
 				continue;
 
 			// 다음 노드의 깊이가 1인 경우 (루트 노드와 인접한 경우)
-			// => 다음 노드의 실패 노드 = 루트 노드<br>
+			// => 다음 노드의 실패 노드 = 루트 노드
 			if (v == root)
 				next->fail = root;
 			// 다음 노드의 깊이가 2 이상인 경우
@@ -205,7 +205,7 @@ public:
 Node* root = new Node();
 
 void Failure() {
-	queue <Node*> q;<br>
+	queue <Node*> q;
 	q.push(root);
 	root->fail = root;
 
@@ -257,18 +257,18 @@ bool KMP(const char* T) {
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	int N;
-	cin >> N;<br>
+	cin >> N;
 	while (N--) {
 		string s;
-		cin >> s;<br>
+		cin >> s;
 		root->Insert(s.c_str());
 	}
 	Failure();
 
-	cin >> N;<br>
+	cin >> N;
 	while (N--) {
 		string s;
-		cin >> s;<br>
+		cin >> s;
 		cout << (KMP(s.c_str()) ? "YES" : "NO") << "\n";
 	}
 	return 0;
@@ -276,12 +276,12 @@ int main() {
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/9250<br>
-https://www.acmicpc.net/problem/10256<br>
-https://www.acmicpc.net/problem/2809<br>
+<br>https://www.acmicpc.net/problem/9250
+<br>https://www.acmicpc.net/problem/10256
+<br>https://www.acmicpc.net/problem/2809
 
 ## 참고
-https://pangtrue.tistory.com/305<br>
-https://loosie.tistory.com/m/587<br>
-https://koosaga.com/157<br>
+<br>https://pangtrue.tistory.com/305
+<br>https://loosie.tistory.com/m/587
+<br>https://koosaga.com/157
 {% endraw %}

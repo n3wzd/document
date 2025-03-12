@@ -44,7 +44,7 @@ C D A B
 이 방법을 구현해보자.
 ```
 TopologySort()
-	queue<int> q<br>
+	queue<int> q
 	for (i = 1; i <= N; i++) // 진입 차수가 0인 정점을 큐에 추가
 		if(degree[i] == 0)
 			q.push(i)
@@ -74,11 +74,11 @@ using namespace std;
 const int _SIZE = 32001;
 int N, M;
 int degree[_SIZE];
-vector<int> graph[_SIZE];<br>
+vector<int> graph[_SIZE];
 
 void TopologySort()
 {
-	queue<int> q;<br>
+	queue<int> q;
 	for (int i = 1; i <= N; i++)
 		if(degree[i] == 0)
 			q.push(i);
@@ -102,11 +102,11 @@ void TopologySort()
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M;<br>
+	cin >> N >> M;
 	for (int i = 0; i < M; i++)
 	{
 		int a, b;
-		cin >> a >> b;<br>
+		cin >> a >> b;
 		graph[a].push_back(b);
 		degree[b]++;
 	}
@@ -116,9 +116,9 @@ int main()
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/2252<br>
-https://www.acmicpc.net/problem/3665<br>
+<br>https://www.acmicpc.net/problem/2252
+<br>https://www.acmicpc.net/problem/3665
 
 ## 참고
-https://m.blog.naver.com/ndb796/221236874984<br>
+<br>https://m.blog.naver.com/ndb796/221236874984
 {% endraw %}

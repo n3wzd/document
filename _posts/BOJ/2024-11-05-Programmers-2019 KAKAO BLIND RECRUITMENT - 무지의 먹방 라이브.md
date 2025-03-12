@@ -61,8 +61,8 @@ k는 큰 수 이므로 자료형 오버플로우에 유의합니다.
 using namespace std;
 typedef long long ll;
 
-int solution(vector<int> food_times, ll k) {<br>
-    map<int, int> cntMap; vector<vector<int>> cnt;<br>
+int solution(vector<int> food_times, ll k) {
+    map<int, int> cntMap; vector<vector<int>> cnt;
     for(int food : food_times)
         cntMap[food] ? cntMap[food]++ : cntMap[food] = 1;
     for (const auto& pair : cntMap)
@@ -76,7 +76,7 @@ int solution(vector<int> food_times, ll k) {<br>
         if(k < eat) {
             ll idx = k % foodLen, res = 1;
             for(int food : food_times) {
-                if(food > prevFood)<br>
+                if(food > prevFood)
                     if(idx-- == 0)
                         return res;
                 res++;
@@ -90,5 +90,5 @@ int solution(vector<int> food_times, ll k) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42891<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/42891
 {% endraw %}

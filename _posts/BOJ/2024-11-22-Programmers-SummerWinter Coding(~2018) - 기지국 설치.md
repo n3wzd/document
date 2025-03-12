@@ -40,7 +40,7 @@ void install(int lo, int hi, int W) {
     }
 }
 
-int solution(int N, vector<int> S, int W) {<br>
+int solution(int N, vector<int> S, int W) {
     int lo = 1;
     for(int i = 0; i < S.size(); i++) {
         install(lo, S[i] - W, W);
@@ -52,5 +52,5 @@ int solution(int N, vector<int> S, int W) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12979<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/12979
 {% endraw %}

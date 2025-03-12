@@ -25,7 +25,7 @@ N = 5
 1. 배열 A, B 입력
 2. B를 오름차순 정렬한다.
 3. B에서 중복 원소를 제거한다.
-4. 배열 A를 순서대로 탐색한다. => 현재 인덱스 = i<br>
+4. 배열 A를 순서대로 탐색한다. => 현재 인덱스 = i
 	- A[i]의 새 번호 = B.lower_bound(A[i])
 ```
 
@@ -39,14 +39,14 @@ C++에서는 STL 자료구조 `vector`를 사용하면 빠르게 구현할 수 �
 #include <algorithm>
 using namespace std;
 int N, num;
-vector<int> A, B;<br>
+vector<int> A, B;
 
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N;<br>
+	cin >> N;
 	for (int i = 0; i < N; i++) {
-		cin >> num;<br>
+		cin >> num;
 		A.push_back(num);
 		B.push_back(num);
 	}
@@ -60,9 +60,9 @@ int main()
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/18870<br>
-https://www.acmicpc.net/problem/5419<br>
+<br>https://www.acmicpc.net/problem/18870
+<br>https://www.acmicpc.net/problem/5419
 
 ## 참고
-https://mangu.tistory.com/90<br>
+<br>https://mangu.tistory.com/90
 {% endraw %}

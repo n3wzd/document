@@ -43,8 +43,8 @@ title: '[Programmers] 연습문제 - 연속된 부분 수열의 합'
 #include <queue>
 using namespace std;
 
-vector<int> solution(vector<int> S, int K) {<br>
-    deque<int> q;<br>
+vector<int> solution(vector<int> S, int K) {
+    deque<int> q;
     int sum = 0, N = S.size(), i = 0, lo = 0, hi = N - 1;
     for (int i = 0; i < N;) {
         while (sum < K && i < N) {
@@ -63,5 +63,5 @@ vector<int> solution(vector<int> S, int K) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/178870<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/178870
 {% endraw %}

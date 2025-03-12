@@ -37,7 +37,7 @@ int gcd(int a, int b) {
 
 int main() {
 	int n1, n2, res;
-	cin >> n1 >> n2;<br>
+	cin >> n1 >> n2;
 	res = gcd(n1, n2);
 
 	cout << res << "\n"; // gcd
@@ -47,11 +47,11 @@ int main() {
 ```
 
 ### 연관 문제
-https://www.acmicpc.net/problem/2609<br>
+<br>https://www.acmicpc.net/problem/2609
 
 ### 참고
-https://ko.wikipedia.org/wiki/%EC%B5%9C%EB%8C%80%EA%B3%B5%EC%95%BD%EC%88%98<br>
-https://ko.wikipedia.org/wiki/%EC%9C%A0%ED%81%B4%EB%A6%AC%EB%93%9C_%ED%98%B8%EC%A0%9C%EB%B2%95<br>
+<br>https://ko.wikipedia.org/wiki/%EC%B5%9C%EB%8C%80%EA%B3%B5%EC%95%BD%EC%88%98
+<br>https://ko.wikipedia.org/wiki/%EC%9C%A0%ED%81%B4%EB%A6%AC%EB%93%9C_%ED%98%B8%EC%A0%9C%EB%B2%95
 
 
 ## 확장 유클리드 호제법 (Extended Euclidean Algorithm)
@@ -100,10 +100,10 @@ ll GCD2(ll a, ll b, ll* x, ll* y) {
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	int Q;
-	cin >> Q;<br>
+	cin >> Q;
 	while (Q--) {
 		ll x, y, a, b;
-		cin >> a >> b;<br>
+		cin >> a >> b;
 		ll g = GCD2(a, b, &x, &y);
 		while (x >= 0) {
 			x -= b, y += a;
@@ -116,9 +116,9 @@ int main() {
 ```
 
 ### 연관 문제
-https://www.acmicpc.net/problem/3955<br>
+<br>https://www.acmicpc.net/problem/3955
 
 ### 참고
-https://www.geeksforgeeks.org/euclidean-algorithms-basic-and-extended/<br>
-https://www.crocus.co.kr/1232<br>
+<br>https://www.geeksforgeeks.org/euclidean-algorithms-basic-and-extended/
+<br>https://www.crocus.co.kr/1232
 {% endraw %}

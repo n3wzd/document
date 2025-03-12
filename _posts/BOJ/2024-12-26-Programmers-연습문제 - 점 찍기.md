@@ -50,5 +50,5 @@ ll solution(int k2, int d2) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/140107<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/140107
 {% endraw %}

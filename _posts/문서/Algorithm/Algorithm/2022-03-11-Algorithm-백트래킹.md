@@ -43,7 +43,7 @@ using namespace std;
 int arr[8]; // assume that arr is sorted array.
 int n, r;
 
-int state[8]; // current index in recursive function -> index sequence of arr<br>
+int state[8]; // current index in recursive function -> index sequence of arr
 bool visited[8] = { 0, }; // current used number(index of state[8]) list. 1 - used
 int start = 0;
 
@@ -93,9 +93,9 @@ void Combination(int index)
 int main()
 {
 	cout << "n, r: ";
-	cin >> n >> r;<br>
+	cin >> n >> r;
 	cout << "arr: ";
-	for (int i = 0; i < n; i++) cin >> arr[i];<br>
+	for (int i = 0; i < n; i++) cin >> arr[i];
 
 	cout << "nPr" << endl;
 	Permutation(0);
@@ -110,9 +110,9 @@ int main()
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/15649<br>
-https://www.acmicpc.net/problem/15650<br>
+<br>https://www.acmicpc.net/problem/15649
+<br>https://www.acmicpc.net/problem/15650
 
 ## 참고
-https://ko.wikipedia.org/wiki/%ED%87%B4%EA%B0%81%EA%B2%80%EC%83%89<br>
+<br>https://ko.wikipedia.org/wiki/%ED%87%B4%EA%B0%81%EA%B2%80%EC%83%89
 {% endraw %}

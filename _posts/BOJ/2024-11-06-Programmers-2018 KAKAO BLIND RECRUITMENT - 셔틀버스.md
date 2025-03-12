@@ -66,12 +66,12 @@ string itot(int t) {
     return h.str() + ":" + m.str();
 }
 
-string solution(int n, int p, int m, vector<string> timetables) {<br>
+string solution(int n, int p, int m, vector<string> timetables) {
     for(auto t : timetables)
         T[ttoi(t)]++;
     for(int t = 0; t < 1440; t++) {
         q += T[t];
-        if(t == busTime && n > 0) {<br>
+        if(t == busTime && n > 0) {
             busTime += p, n--, q -= m;
             if(q < 0)
                 resTime = t, q = 0;
@@ -84,5 +84,5 @@ string solution(int n, int p, int m, vector<string> timetables) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17678<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/17678
 {% endraw %}

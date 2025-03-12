@@ -23,7 +23,7 @@ title: '[Programmers] PCCP - 석유 시추'
     -   `land[i][j]`가 0이면 빈 땅을, 1이면 석유가 있는 땅을 의미합니다.
 
 ## 해결
-인접한 석유들을 조사합시다. => `그래프 탐색`<br>
+인접한 석유들을 조사합시다. => `그래프 탐색`
 
 ```
 1. 모든 칸 조사: 석유 덩어리 찾기
@@ -41,7 +41,7 @@ title: '[Programmers] PCCP - 석유 시추'
 #include <queue>
 using namespace std;
 int N, M, genBank = 1, dx[4] = { 1, 0, -1, 0 }, dy[4] = { 0, -1, 0, 1 };
-vector<vector<int>> landBoard; vector<int> oilBank = { 0 }; vector<bool> oilVisited;<br>
+vector<vector<int>> landBoard; vector<int> oilBank = { 0 }; vector<bool> oilVisited;
 int oilBoard[501][501];
 
 int DFS(int x, int y, int id) {
@@ -55,7 +55,7 @@ int DFS(int x, int y, int id) {
     return sum;
 }
 
-int solution(vector<vector<int>> land) {<br>
+int solution(vector<vector<int>> land) {
     landBoard = land; N = land.size(), M = land[0].size();
     for (int y = 0; y < N; y++)
         for (int x = 0; x < M; x++)
@@ -67,10 +67,10 @@ int solution(vector<vector<int>> land) {<br>
     int maxOil = 0;
     for (int x = 0; x < M; x++) {
         int oil = 0;
-        queue<int> q;<br>
+        queue<int> q;
         for (int y = 0; y < N; y++) {
             int id = oilBoard[y][x];
-            if (id > 0 && !oilVisited[id]) {<br>
+            if (id > 0 && !oilVisited[id]) {
                 oilVisited[id] = 1;
                 q.push(id);
             }
@@ -87,5 +87,5 @@ int solution(vector<vector<int>> land) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/250136<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/250136
 {% endraw %}

@@ -35,7 +35,7 @@ K번째 위치를 알려면 전체가 정렬되어 있어야 한다. 그러나 �
 정렬된 상태에서 K번째인 원소를 찾는 함수. `이분 탐색`을 사용해서 구현한다. 루트부터 시작해서, K가 왼쪽 노드보다 같거나 작으면 왼쪽 노드로 이동하고, 그렇지 않으면 오른쪽 노드로 이동한다. 만약 오른쪽 노드로 이동한다면, K에서 왼쪽 노드의 값을 빼준다. 단말 노드에 도착하면 해당 노드의 위치를 출력한다.
 ```
 int Find(int start, int end, int idx, int k) {
-	// 1. 구간 길이가 1이면 목표 위치를 찾은 상태 => 현재 구간 위치 반환<br>
+	// 1. 구간 길이가 1이면 목표 위치를 찾은 상태 => 현재 구간 위치 반환
 	if (start == end)
 		return start;
 	
@@ -52,9 +52,9 @@ ex. 3 5 1 6 8
  1     1     2     1
 1 0   1 0   1 1   0 1
 > 2번째로 작은 원소?<br>
-=> L-R-L으로 이동해서 3을 출력한다.<br>
+=> L-R-L으로 이동해서 3을 출력한다.
 > 4번째로 작은 원소?<br>
-=> R-L-R으로 이동해서 6을 출력한다.<br>
+=> R-L-R으로 이동해서 6을 출력한다.
 ```
 
 ### 코드
@@ -73,7 +73,7 @@ int Find(int start, int end, int idx, int k) {
 }
 
 int Update(int start, int end, int idx, int pos, int diff) {
-	if (start > pos || end < pos) return tree[idx];<br>
+	if (start > pos || end < pos) return tree[idx];
 	if (start == end) return tree[idx] += diff;
 	int mid = (start + end) / 2;
 	return tree[idx] = Update(start, mid, idx * 2, pos, diff) + Update(mid + 1, end, idx * 2 + 1, pos, diff);
@@ -81,10 +81,10 @@ int Update(int start, int end, int idx, int pos, int diff) {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N;<br>
+	cin >> N;
 	while (N--) {
 		int a, b;
-		cin >> a >> b;<br>
+		cin >> a >> b;
 		if (a == 1) {
 			Update(1, MAXV, 1, b, 1);
 		}
@@ -99,9 +99,9 @@ int main() {
 ```
 
 ### 관련 문제
-https://www.acmicpc.net/problem/12899<br>
-https://www.acmicpc.net/problem/2243<br>
-https://www.acmicpc.net/problem/1168<br>
+<br>https://www.acmicpc.net/problem/12899
+<br>https://www.acmicpc.net/problem/2243
+<br>https://www.acmicpc.net/problem/1168
 
 ## Lazy없는 구간 업데이트? (구간 업데이트 + 단일 반환)
 다음 쿼리를 구현해보자.
@@ -137,7 +137,7 @@ ex. 1 2 3 4
        0
   3         0
 1   2     6   4
-=> 5<br>
+=> 5
 ```
 
 ### 코드
@@ -161,14 +161,14 @@ void Init(int start, int end, int idx) {
 }
 
 ll Get(int start, int end, int idx, int pos) {
-	if (start > pos || end < pos) return 0;<br>
+	if (start > pos || end < pos) return 0;
 	if (start == end) return tree[idx];
 	int mid = (start + end) / 2;
 	return Get(start, mid, idx * 2, pos) + Get(mid + 1, end, idx * 2 + 1, pos) + tree[idx];
 }
 
 void Update(int start, int end, int idx, int left, int right, int diff) {
-	if (start > right || end < left) return;<br>
+	if (start > right || end < left) return;
 	if (start >= left && end <= right) {
 		tree[idx] += diff;
 		return;
@@ -180,17 +180,17 @@ void Update(int start, int end, int idx, int left, int right, int diff) {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N;<br>
+	cin >> N;
 	for (int i = 0; i < N; i++)
-		cin >> num[i];<br>
+		cin >> num[i];
 	Init(0, N - 1, 1);
 
-	cin >> M;<br>
+	cin >> M;
 	while (M--) {
 		int a, b, c, d;
-		cin >> a >> b;<br>
+		cin >> a >> b;
 		if (a == 1) {
-			cin >> c >> d;<br>
+			cin >> c >> d;
 			Update(0, N - 1, 1, b - 1, c - 1, d);
 		}
 		else
@@ -201,8 +201,8 @@ int main() {
 ```
 
 ### 관련 문제
-https://www.acmicpc.net/problem/16975<br>
-https://www.acmicpc.net/problem/14268<br>
-https://www.acmicpc.net/problem/3392<br>
-https://www.acmicpc.net/problem/17353<br>
+<br>https://www.acmicpc.net/problem/16975
+<br>https://www.acmicpc.net/problem/14268
+<br>https://www.acmicpc.net/problem/3392
+<br>https://www.acmicpc.net/problem/17353
 {% endraw %}

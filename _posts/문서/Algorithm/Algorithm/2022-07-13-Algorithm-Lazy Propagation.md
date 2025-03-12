@@ -64,10 +64,10 @@ void RangeUpdate(int start, int end, int idx, int left, int right, int diff) {
 	// 1. 현재 노드를 방문했으면 lazy를 우선 확인한다.
 	LazyUpdate(start, end, idx);
 
-	// 2. 현재 구간이 입력 구간을 완전히 벗어난 경우? => 탐색 종료<br>
-	if (start > right || end < left) return;<br>
+	// 2. 현재 구간이 입력 구간을 완전히 벗어난 경우? => 탐색 종료
+	if (start > right || end < left) return;
 
-	// 3. 현재 구간이 입력 구간에 완전히 포함된 경우? => 변화량 반영<br>
+	// 3. 현재 구간이 입력 구간에 완전히 포함된 경우? => 변화량 반영
 	if (start >= left && end <= right) {
 		// 3-1. 현재 변화량을 노드에 반영한다.
 		tree[idx] += (end - start + 1) * diff;
@@ -81,7 +81,7 @@ void RangeUpdate(int start, int end, int idx, int left, int right, int diff) {
 	}
 
 	// 4. 위 조건에 해당되지 않으며, 현재 구간이 입력 구간에 일부 겹치는 경우?
-	// => 탐색 범위를 분할한다.<br>
+	// => 탐색 범위를 분할한다.
 	int mid = (start + end) / 2;
 	RangeUpdate(start, mid, idx * 2, left, right, diff);
 	RangeUpdate(mid + 1, end, idx * 2 + 1, left, right, diff);
@@ -99,7 +99,7 @@ int Get(int start, int end, int idx, int left, int right) {
 	LazyUpdate(start, end, idx);
 
 	// 2. 이하는 일반 세그먼트 반환 연산과 동일
-	if (start > right || end < left) return 0;<br>
+	if (start > right || end < left) return 0;
 	if (start >= left && end <= right) return tree[idx];
 	int mid = (start + end) / 2;
 	return Get(start, mid, idx * 2, left, right) + Get(mid + 1, end, idx * 2 + 1, left, right);
@@ -136,7 +136,7 @@ void LazyUpdate(int start, int end, int idx) {
 
 int Get(int start, int end, int idx, int left, int right) {
 	LazyUpdate(start, end, idx);
-	if (start > right || end < left) return 0;<br>
+	if (start > right || end < left) return 0;
 	if (start >= left && end <= right) return tree[idx];
 	int mid = (start + end) / 2;
 	return Get(start, mid, idx * 2, left, right) + Get(mid + 1, end, idx * 2 + 1, left, right);
@@ -145,7 +145,7 @@ int Get(int start, int end, int idx, int left, int right) {
 void RangeUpdate(int start, int end, int idx, int left, int right, int diff) {
 	LazyUpdate(start, end, idx);
 
-	if (start > right || end < left) return;<br>
+	if (start > right || end < left) return;
 	if (start >= left && end <= right) {
 		tree[idx] += (end - start + 1) * diff;
 		if (start != end) {
@@ -163,17 +163,17 @@ void RangeUpdate(int start, int end, int idx, int left, int right, int diff) {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M >> K;<br>
+	cin >> N >> M >> K;
 	for (int i = 1; i <= N; i++)
-		cin >> num[i];<br>
+		cin >> num[i];
 	Init(1, N, 1);
 
 	int Q = M + K;
 	while (Q--) {
 		int a, b, c, d;
-		cin >> a >> b >> c;<br>
+		cin >> a >> b >> c;
 		if (a == 1) {
-			cin >> d;<br>
+			cin >> d;
 			RangeUpdate(1, N, 1, b, c, d);
 		}
 		else cout << Get(1, N, 1, b, c) << "\n";
@@ -183,12 +183,12 @@ int main() {
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/10999<br>
-https://www.acmicpc.net/problem/12844<br>
-https://www.acmicpc.net/problem/13925<br>
-https://www.acmicpc.net/problem/10070<br>
+<br>https://www.acmicpc.net/problem/10999
+<br>https://www.acmicpc.net/problem/12844
+<br>https://www.acmicpc.net/problem/13925
+<br>https://www.acmicpc.net/problem/10070
 
 ## 참고
-https://book.acmicpc.net/ds/segment-tree-lazy-propagation<br>
-https://overnap.com/bottom-up-segment-tree-and-commutative-property/<br>
+<br>https://book.acmicpc.net/ds/segment-tree-lazy-propagation
+<br>https://overnap.com/bottom-up-segment-tree-and-commutative-property/
 {% endraw %}

@@ -29,8 +29,8 @@ MST를 생성하는 알고리즘. 간선을 1개씩 추가해서 단계적으로
 ### 구현 예시
 ```
 int V, E, MST_cost = 0;
-vector<Edge> graph[10002];<br>
-priority_queue<Edge, vector<Edge>, cmp> pq;<br>
+vector<Edge> graph[10002];
+priority_queue<Edge, vector<Edge>, cmp> pq;
 bool visited[10002];
 
 void AddEdge(int v)
@@ -74,7 +74,7 @@ MST를 생성하는 알고리즘. 가장 최적인 간선을 선택해서 트리
 각 단계마다 트리를 연결하고 사이클 발생을 판별하는 자료구조로 `Disjoint Set`이 적합하다.  Disjoint Set은 집합을 트리 구조로 저장하므로 union을 통해 노드를 트리 구조로 연결할 수 있다. 그리고 트리 내부에 새로운 간선 1개가 추가되면 사이클이 발생하므로, 간선의 두 정점이 같은 트리에 속한다면 사이클이 발생한다고 판단할 수 있다.
 ```
 if (Find(A) == Find(B))
-	=> 사이클 발생<br>
+	=> 사이클 발생
 Union(A, B) // 트리 간선 연결
 ```
 
@@ -83,7 +83,7 @@ Union(A, B) // 트리 간선 연결
 ### 구현 예시
 ```
 int parent[20002];
-priority_queue<Edge, vector<Edge>, cmp> pq;<br>
+priority_queue<Edge, vector<Edge>, cmp> pq;
 
 int Find(int n)	// Find 연산
 void Union(int a, int b) // Union 연산
@@ -120,13 +120,13 @@ public:
 
 struct cmp {
 	bool operator()(Edge a, Edge b) {
-		return a.weight > b.weight;<br>
+		return a.weight > b.weight;
 	}
 };
 
 int V, E, MST_cost = 0;
-vector<Edge> graph[10002];<br>
-priority_queue<Edge, vector<Edge>, cmp> pq;<br>
+vector<Edge> graph[10002];
+priority_queue<Edge, vector<Edge>, cmp> pq;
 bool visited[10002];
 
 void AddEdge(int v)
@@ -157,7 +157,7 @@ void Prim()
 }
 
 int parent[20002];
-priority_queue<Edge, vector<Edge>, cmp> pq2;<br>
+priority_queue<Edge, vector<Edge>, cmp> pq2;
 
 int Find(int n)
 {
@@ -221,8 +221,8 @@ int main()
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/1197<br>
+<br>https://www.acmicpc.net/problem/1197
 
 ## 참고
-https://ongveloper.tistory.com/376<br>
+<br>https://ongveloper.tistory.com/376
 {% endraw %}

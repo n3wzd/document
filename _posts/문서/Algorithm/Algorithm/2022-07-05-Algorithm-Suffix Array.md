@@ -31,7 +31,7 @@ i     Suffix   SA[i]
 4         na     4
 5       nana     2
 ```
-이때 시간 복잡도는 O(N<sup>2</sup> × logN)이다. (각 접미사 비교 = N, 정렬 = N × logN)<br>
+이때 시간 복잡도는 O(N<sup>2</sup> × logN)이다. (각 접미사 비교 = N, 정렬 = N × logN)
 
 ## Manber-Myers Algorithm
 `Manber-Myers Algorithm`은 나이브 방법보다 Suffix Array를 빨리 구하는 방법이다.
@@ -193,12 +193,12 @@ void MakeLCP() {
 	int len = 0;
 	for (int i = 0; i < n; i++) {
 		int k = r[i];
-		if (k > 0) {<br>
+		if (k > 0) {
 			int j = SA[k - 1];
 			while (str[j + len] == str[i + len])
 				len++;
 			LCP[k] = len;
-			if (len > 0)<br>
+			if (len > 0)
 				len--;
 		}
 	}
@@ -256,12 +256,12 @@ void MakeLCP() {
 	int len = 0;
 	for (int i = 0; i < n; i++) {
 		int k = r[i];
-		if (k > 0) {<br>
+		if (k > 0) {
 			int j = SA[k - 1];
 			while (str[j + len] == str[i + len])
 				len++;
 			LCP[k] = len;
-			if (len > 0)<br>
+			if (len > 0)
 				len--;
 		}
 	}
@@ -280,7 +280,7 @@ void Print() {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> str;<br>
+	cin >> str;
 	MakeSA();
 	MakeLCP();
 	Print();
@@ -292,13 +292,13 @@ int main() {
 LCP는 인접 접미사간 공통 접두사의 길이를 저장한다. 이 점을 활용해 한 문자열에서 2번 이상 반복되는 모든 부분 문자열을 빠르게 스캔할 수 있다.
 
 ## 관련 문제
-https://www.acmicpc.net/problem/9248<br>
-https://www.acmicpc.net/problem/1605<br>
-https://www.acmicpc.net/problem/11479<br>
+<br>https://www.acmicpc.net/problem/9248
+<br>https://www.acmicpc.net/problem/1605
+<br>https://www.acmicpc.net/problem/11479
 
 ## 참고
-https://jason9319.tistory.com/141<br>
-https://plzrun.tistory.com/entry/Suffix-Array-ONlogNlgN%EA%B3%BC-ONlogN-%EA%B5%AC%ED%98%84-%EB%B0%8F-%EC%84%A4%EB%AA%85<br>
-https://www.geeksforgeeks.org/?p=137029<br>
-https://en.wikipedia.org/wiki/Suffix_array<br>
+<br>https://jason9319.tistory.com/141
+<br>https://plzrun.tistory.com/entry/Suffix-Array-ONlogNlgN%EA%B3%BC-ONlogN-%EA%B5%AC%ED%98%84-%EB%B0%8F-%EC%84%A4%EB%AA%85
+<br>https://www.geeksforgeeks.org/?p=137029
+<br>https://en.wikipedia.org/wiki/Suffix_array
 {% endraw %}

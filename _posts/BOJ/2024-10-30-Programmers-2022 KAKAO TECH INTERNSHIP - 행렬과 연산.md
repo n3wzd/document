@@ -60,11 +60,11 @@ title: '[Programmers] 2022 KAKAO TECH INTERNSHIP - 행렬과 연산'
 #include <vector>
 #include <queue>
 using namespace std;
-deque<int> row[50001], col[2];<br>
+deque<int> row[50001], col[2];
 int N, M, baseY;
 
-vector<vector<int>> solution(vector<vector<int>> rc, vector<string> operations) {<br>
-    vector<vector<int>> answer;<br>
+vector<vector<int>> solution(vector<vector<int>> rc, vector<string> operations) {
+    vector<vector<int>> answer;
     N = rc.size(), M = rc[0].size();
     for (int y = 0; y < N; y++)
         for (int x = 1; x < M - 1; x++)
@@ -74,7 +74,7 @@ vector<vector<int>> solution(vector<vector<int>> rc, vector<string> operations) 
             col[x].push_back(rc[y][x * (M - 1)]);
     for (auto cmd : operations) {
         if (cmd == "Rotate") {
-            if (M > 2) {<br>
+            if (M > 2) {
                 int prevY = (baseY - 1 + N) % N;
                 col[1].push_front(row[baseY].back()); row[baseY].pop_back();
                 row[prevY].push_back(col[1].back()); col[1].pop_back();
@@ -103,5 +103,5 @@ vector<vector<int>> solution(vector<vector<int>> rc, vector<string> operations) 
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/118670<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/118670
 {% endraw %}

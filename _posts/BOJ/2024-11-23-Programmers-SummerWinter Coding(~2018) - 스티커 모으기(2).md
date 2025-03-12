@@ -21,7 +21,7 @@ N개의 스티커가 원형으로 연결되어 있습니다.
 -   원형의 스티커 모양을 위해 sticker 배열의 첫 번째 원소와 마지막 원소가 서로 연결되어있다고 간주합니다.
 
 ## 해결
-스티커를 가져가면 이웃한 것을 사용할 수 없습니다. 입력이 작고 모든 경우를 조사해야 합니다. => `원형 DP`<br>
+스티커를 가져가면 이웃한 것을 사용할 수 없습니다. 입력이 작고 모든 경우를 조사해야 합니다. => `원형 DP`
 현재 상태를 (스티커 번호)로 정의하고, 결과 값은 최대 합입니다. 점화식은 현재 스티커를 가져갈지 넘어할지를 판단하며, 다음과 같습니다:
 > DP[n] = max(DP[n - 1], DP[n - 2] + A[N])<br>
 
@@ -33,7 +33,7 @@ N개의 스티커가 원형으로 연결되어 있습니다.
 using namespace std;
 int DP[100001][2];
 
-int solution(vector<int> sticker) {<br>
+int solution(vector<int> sticker) {
     int N = sticker.size();
     for(int i = 0; i < 2; i++) {
         DP[0][i] = i == 0 ? sticker[0] : 0;
@@ -47,5 +47,5 @@ int solution(vector<int> sticker) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12971<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/12971
 {% endraw %}

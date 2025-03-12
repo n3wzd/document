@@ -44,8 +44,8 @@ title: '[Programmers] 월간 코드 챌린지 시즌2 - 모두 0으로 만들기
 using namespace std;
 typedef long long ll;
 ll answer;
-vector<int> graph[300001];<br>
-vector<ll> w;<br>
+vector<int> graph[300001];
+vector<ll> w;
 
 ll DFS(int n, int prev) {
     for(int c : graph[n])
@@ -55,7 +55,7 @@ ll DFS(int n, int prev) {
     return w[n];
 }
 
-ll solution(vector<int> a, vector<vector<int>> edges) {<br>
+ll solution(vector<int> a, vector<vector<int>> edges) {
     for(auto b : a)
         w.push_back(b);
     for(auto edge : edges) {
@@ -67,5 +67,5 @@ ll solution(vector<int> a, vector<vector<int>> edges) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/76503<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/76503
 {% endraw %}

@@ -22,7 +22,7 @@ title: '[Programmers] 연습문제 - 2차원 동전 뒤집기'
     -   0은 동전의 앞면을, 1은 동전의 뒷면을 의미합니다.
 
 ## 해결
-같은 행 또는 열을 2번 뒤집으면 원래 상태로 돌아가므로, 서로 다른 행 또는 열을 선택하여 1회 뒤집는 경우를 찾습니다. 최대 경우의 수는 2<sup>20</sup>이므로 완전 탐색이 가능합니다. => `백트래킹`<br>
+같은 행 또는 열을 2번 뒤집으면 원래 상태로 돌아가므로, 서로 다른 행 또는 열을 선택하여 1회 뒤집는 경우를 찾습니다. 최대 경우의 수는 2<sup>20</sup>이므로 완전 탐색이 가능합니다. => `백트래킹`
 
 행 개수가 `N`, 열 개수가 `M`일 때, 뒤집을 `N + M`개의 행과 열을 선택합니다. 그리고 행렬 뒤집기 연산을 수행한 후, 목표 상태와 일치하는지 판정합니다.
 
@@ -32,7 +32,7 @@ title: '[Programmers] 연습문제 - 2차원 동전 뒤집기'
 using namespace std;
 int N, M, answer = -1;
 bool selected[21];
-vector<vector<int>> S, T;<br>
+vector<vector<int>> S, T;
 
 void BT(int level, int cnt) {
     if(level == N + M) {
@@ -50,7 +50,7 @@ void BT(int level, int cnt) {
     BT(level + 1, cnt);
 }
 
-int solution(vector<vector<int>> beginning, vector<vector<int>> target) {<br>
+int solution(vector<vector<int>> beginning, vector<vector<int>> target) {
     S = beginning, T = target; N = S.size(), M = S[0].size();
     BT(0, 0);
     return answer;
@@ -58,5 +58,5 @@ int solution(vector<vector<int>> beginning, vector<vector<int>> target) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/131703<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/131703
 {% endraw %}

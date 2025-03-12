@@ -22,7 +22,7 @@ title: '[Programmers] 연습문제 - 롤케이크 자르기'
 ## 해결
 전체를 2개의 구간으로 분할했을 때, 토핑의 종류 개수가 같은지 확인합니다. 모든 분할 경우를 조사할 수 있습니다.
 
-시작부터 임의의 위치, 임의의 위치에서 끝 구간에서 토핑 종류 개수를 카운팅합니다. 토핑 종류는 최대 10000까지 이므로 토핑 유무는 배열로 기록할 수 있습니다. 구간을 확장하는 방식으로 순차 탐색을 각각 수행하면 구간별 토핑 종류 개수를 구할 수 있습니다. => `누적 합`<br>
+시작부터 임의의 위치, 임의의 위치에서 끝 구간에서 토핑 종류 개수를 카운팅합니다. 토핑 종류는 최대 10000까지 이므로 토핑 유무는 배열로 기록할 수 있습니다. 구간을 확장하는 방식으로 순차 탐색을 각각 수행하면 구간별 토핑 종류 개수를 구할 수 있습니다. => `누적 합`
 
 마지막에는 모든 분할점을 순회해서 토핑 종류 개수가 같아지는 순간을 카운팅하면 됩니다.
 
@@ -33,10 +33,10 @@ using namespace std;
 int roll[2][1000001];
 bool top[2][10001];
 
-int solution(vector<int> T) {<br>
+int solution(vector<int> T) {
     int answer = 0, N = T.size();
     for(int i = 0; i < N; i++) {
-        if(i > 0) roll[0][i] = roll[0][i - 1];<br>
+        if(i > 0) roll[0][i] = roll[0][i - 1];
         if(!top[0][T[i]]) roll[0][i]++;
         top[0][T[i]] = 1;
     }
@@ -53,5 +53,5 @@ int solution(vector<int> T) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/132265<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/132265
 {% endraw %}

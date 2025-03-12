@@ -42,10 +42,10 @@ title: '[Programmers] 연습문제 - 최고의 집합'
 #include <vector>
 using namespace std;
 
-vector<int> solution(int n, int s) {<br>
+vector<int> solution(int n, int s) {
     if(s < n)
         return { -1 };
-    vector<int> answer;<br>
+    vector<int> answer;
     int a = s / n, d = s - (n * a);
     for(int i = 0; i < n; i++)
         answer.push_back(a);
@@ -56,5 +56,5 @@ vector<int> solution(int n, int s) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12938<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/12938
 {% endraw %}

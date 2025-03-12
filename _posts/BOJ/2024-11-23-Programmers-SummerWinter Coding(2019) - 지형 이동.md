@@ -36,15 +36,15 @@ N x N 크기인 정사각 격자 형태의 지형이 있습니다. 각 격자 �
 #include <cmath>
 using namespace std;
 struct Edge { int x, y, w; };
-vector<vector<int>> L;<br>
+vector<vector<int>> L;
 int N, M, H, genID = 1, area[301][301], dx[] = { 1, 0, -1, 0 }, dy[] = { 0, 1, 0, -1 };
-vector<Edge> graph[90001];<br>
+vector<Edge> graph[90001];
 bool visited[90001];
-struct cmp { bool operator()(Edge a, Edge b) { return a.w > b.w; } };<br>
-priority_queue<Edge, vector<Edge>, cmp> pq;<br>
+struct cmp { bool operator()(Edge a, Edge b) { return a.w > b.w; } };
+priority_queue<Edge, vector<Edge>, cmp> pq;
 
 void DFS(int x, int y) {
-    if(area[y][x] > 0) return;<br>
+    if(area[y][x] > 0) return;
     area[y][x] = genID;
     for(int d = 0; d < 4; d++) {
         int nx = x + dx[d], ny = y + dy[d];
@@ -79,7 +79,7 @@ int mst() {
     return cost;
 }
 
-int solution(vector<vector<int>> land, int height) {<br>
+int solution(vector<vector<int>> land, int height) {
     L = land, N = land.size(), M = land[0].size(), H = height;
     for(int y = 0; y < N; y++)
         for(int x = 0; x < M; x++)
@@ -90,5 +90,5 @@ int solution(vector<vector<int>> land, int height) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/62050<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/62050
 {% endraw %}

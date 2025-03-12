@@ -42,7 +42,7 @@ title: '[Programmers] SummerWinter Coding(~2018) - 스킬트리'
 using namespace std;
 bool tech[26];
 
-int solution(string user_skill, vector<string> skill_trees) {<br>
+int solution(string user_skill, vector<string> skill_trees) {
     int answer = 0;
     for(auto skill : user_skill)
         tech[skill - 'A'] = 1;
@@ -61,5 +61,5 @@ int solution(string user_skill, vector<string> skill_trees) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/49993<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/49993
 {% endraw %}

@@ -64,12 +64,12 @@ title: '[Programmers] 월간 코드 챌린지 시즌1 - 스타 수열'
 #include <vector>
 #include <set>
 using namespace std;
-set<int> S[500001];<br>
+set<int> S[500001];
 
-int solution(vector<int> A) {<br>
+int solution(vector<int> A) {
     int N = A.size(), answer = 0;
     for(int i = 0; i < N; i++) {
-        if(i > 0 && A[i - 1] != A[i] && S[A[i]].find(i - 1) == S[A[i]].end())<br>
+        if(i > 0 && A[i - 1] != A[i] && S[A[i]].find(i - 1) == S[A[i]].end())
             S[A[i]].insert(i - 1);
         else if(i < N - 1 && A[i + 1] != A[i])
             S[A[i]].insert(i + 1);
@@ -81,5 +81,5 @@ int solution(vector<int> A) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/70130<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/70130
 {% endraw %}

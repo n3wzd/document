@@ -26,7 +26,7 @@ title: '[Programmers] 연습문제 - 미로 탈출'
     -   출구는 레버가 당겨지지 않아도 지나갈 수 있으며, 모든 통로, 출구, 레버, 시작점은 여러 번 지나갈 수 있습니다.
 
 ## 해결
-벽이 존재하는 격자에서 특정 위치까지 최단 거리로 이동해야 합니다. => `최단거리 BFS`<br>
+벽이 존재하는 격자에서 특정 위치까지 최단 거리로 이동해야 합니다. => `최단거리 BFS`
 
 독립적인 BFS를 2번(출발점에서 레버, 레버에서 도착점) 돌리면 됩니다. 둘 중 하나라도 도달하지 못하면 -1을 반환합니다.
 
@@ -38,12 +38,12 @@ title: '[Programmers] 연습문제 - 미로 탈출'
 #include <cstring>
 using namespace std;
 struct Point { int x, y; };
-vector<string> maps;<br>
+vector<string> maps;
 int N, M, dist[101][101], dx[] = { 1, 0, -1, 0 }, dy[] = { 0, 1, 0, -1 };
 
 int BFS(Point S, Point E) {
     memset(dist, 0, sizeof(dist));
-    queue<Point> q; q.push(S);<br>
+    queue<Point> q; q.push(S);
     dist[S.y][S.x] = 1;
     while(!q.empty()) {
         Point c = q.front(); q.pop();
@@ -52,7 +52,7 @@ int BFS(Point S, Point E) {
             return dist[y][x] - 1;
         for(int d = 0; d < 4; d++) {
             int nx = x + dx[d], ny = y + dy[d];
-            if(nx < 0 || nx >= M || ny < 0 || ny >= N || dist[ny][nx] > 0 || maps[ny][nx] == 'X')<br>
+            if(nx < 0 || nx >= M || ny < 0 || ny >= N || dist[ny][nx] > 0 || maps[ny][nx] == 'X')
                 continue;
             q.push({ nx, ny });
             dist[ny][nx] = dist[y][x] + 1;
@@ -61,7 +61,7 @@ int BFS(Point S, Point E) {
     return -1e9;
 }
 
-int solution(vector<string> MI) {<br>
+int solution(vector<string> MI) {
     maps = MI; Point S, L, E; N = maps.size(), M = maps[0].size();
     for(int y = 0; y < N; y++) {
         for(int x = 0; x < M; x++) {
@@ -79,5 +79,5 @@ int solution(vector<string> MI) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/159993<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/159993
 {% endraw %}

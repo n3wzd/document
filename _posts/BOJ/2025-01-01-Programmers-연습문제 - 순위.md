@@ -28,7 +28,7 @@ n명의 권투선수가 권투 대회에 참여했고 각각 1번부터 n번까�
 순위가 결정되는 조건은 다음과 같습니다.
 > 이긴 상대 수 + 진 상대 수 = `n` - 1<br>
 
-승리 그래프(간선: 승리 -> 패배), 패배 그래프(간선: 패배 -> 승리)를 각각 생성합니다. 어떤 정점의 승리 / 패배 횟수는 해당 정점의 시작점으로 했을 때, `그래프 탐색`해서 방문한 정점 수 - 1입니다.<br>
+승리 그래프(간선: 승리 -> 패배), 패배 그래프(간선: 패배 -> 승리)를 각각 생성합니다. 어떤 정점의 승리 / 패배 횟수는 해당 정점의 시작점으로 했을 때, `그래프 탐색`해서 방문한 정점 수 - 1입니다.
 
 ```
 1. 승리, 패배 그래프 생성
@@ -43,9 +43,9 @@ n명의 권투선수가 권투 대회에 참여했고 각각 1번부터 n번까�
 using namespace std;
 const int SIZE = 101;
 int answer; bool visited[SIZE];
-vector<int> graphW[SIZE], graphL[SIZE];<br>
+vector<int> graphW[SIZE], graphL[SIZE];
 
-int DFS(int n, vector<int> graph[]) {<br>
+int DFS(int n, vector<int> graph[]) {
     if(visited[n])
         return 0;
     int cnt = 1; visited[n] = 1;
@@ -54,7 +54,7 @@ int DFS(int n, vector<int> graph[]) {<br>
     return cnt;
 }
 
-int solution(int n, vector<vector<int>> results) {<br>
+int solution(int n, vector<vector<int>> results) {
     for(auto edge : results) {
         graphW[edge[0]].push_back(edge[1]);
         graphL[edge[1]].push_back(edge[0]);
@@ -71,5 +71,5 @@ int solution(int n, vector<vector<int>> results) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/49191<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/49191
 {% endraw %}

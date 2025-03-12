@@ -44,8 +44,8 @@ title: '[Programmers] 2021 Dev-Matching 웹 백엔드 개발자(상반기) - 다
 #include <vector>
 #include <map>
 using namespace std;
-map<string, int> table;<br>
-vector<int> parent(10001, -1);<br>
+map<string, int> table;
+vector<int> parent(10001, -1);
 int money[10001];
 
 void propagate(int n, int m) {
@@ -60,8 +60,8 @@ void propagate(int n, int m) {
         money[n] += m;
 }
 
-vector<int> solution(vector<string> E, vector<string> R, vector<string> S, vector<int> A) {<br>
-    vector<int> answer;<br>
+vector<int> solution(vector<string> E, vector<string> R, vector<string> S, vector<int> A) {
+    vector<int> answer;
     int N = E.size(); table["-"] = N;
     for (int i = 0; i < N; i++)
         table[E[i]] = i;
@@ -76,5 +76,5 @@ vector<int> solution(vector<string> E, vector<string> R, vector<string> S, vecto
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/77486<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/77486
 {% endraw %}

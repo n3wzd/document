@@ -59,14 +59,14 @@ title: '[Programmers] 2018 KAKAO BLIND RECRUITMENT - 파일명 정렬'
 #include <algorithm>
 using namespace std;
 struct Node { string head; int number, id; };
-vector<Node> list; int genID = 0;<br>
+vector<Node> list; int genID = 0;
 string toLower(string s) {
     transform(s.begin(), s.end(), s.begin(), ::tolower);
     return s;
 }
 
-vector<string> solution(vector<string> files) {<br>
-    vector<string> answer;<br>
+vector<string> solution(vector<string> files) {
+    vector<string> answer;
     for (auto file : files) {
         int i = 0;
         while (!(file[i] >= '0' && file[i] <= '9')) i++;
@@ -84,5 +84,5 @@ vector<string> solution(vector<string> files) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17686<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/17686
 {% endraw %}

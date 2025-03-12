@@ -38,7 +38,7 @@ title: '[Programmers] 2022 KAKAO BLIND RECRUITMENT - 사라지는 발판'
 -   상대 플레이어의 캐릭터가 있는 칸으로 이동할 수 있습니다.
 
 ## 해결
-- 플레이어는 최적의 플레이를 한다는 것은 자신의 턴에서 자신이 지는 경우를 선택하지 않는 것과 같습니다. 무승부가 존재하지 않고 현재 턴에서 패배하는 경우는 선택에서 제외되므로, 어떤 상황이든 승패는 반드시 결정됩니다. (즉, 시작부터 승리, 패배를 알 수 있습니다.) => `Minimax Tree`<br>
+- 플레이어는 최적의 플레이를 한다는 것은 자신의 턴에서 자신이 지는 경우를 선택하지 않는 것과 같습니다. 무승부가 존재하지 않고 현재 턴에서 패배하는 경우는 선택에서 제외되므로, 어떤 상황이든 승패는 반드시 결정됩니다. (즉, 시작부터 승리, 패배를 알 수 있습니다.) => `Minimax Tree`
 	- 현재 턴에서 승리 선택지가 하나라도 존재한다면 이길 수 있는 상황입니다. 최대한 빨리 승리해야 하므로, 승리 선택지 중 최대 턴이 최소가 되는 선택지를 고릅니다.
 	- 현재 턴에서 승리 선택지가 없다면 질 수밖에 없는 상황입니다. 최대한 오래 버텨야 하므로, 최대 턴이 최대가 되는 선택지를 고릅니다.
 - `백트래킹`으로 모든 경우를 탐색합니다. 현재 상태는 (자신의 위치, 상대의 위치, 현재 플레이어, 현재 턴 수)이며, 결과 값은 (승리자, 최대 종료 턴수)입니다. 결과 값은 단일 정수로 표현할 수 있으며, 현재 플레이어와 승리자는 부호로 표현됩니다.
@@ -63,10 +63,10 @@ title: '[Programmers] 2022 KAKAO BLIND RECRUITMENT - 사라지는 발판'
 #include <vector>
 #include <cmath>
 using namespace std;
-vector<vector<int>> board;<br>
+vector<vector<int>> board;
 int N, M, resTurn, dx[4] = { 1, 0, -1, 0 }, dy[4] = { 0, 1, 0, -1 };
 bool isOut(int x, int y) { return x < 0 || x >= M || y < 0 || y >= N || board[y][x] == 0; }
-bool isWin(int player, int target) { return player * target > 0; }<br>
+bool isWin(int player, int target) { return player * target > 0; }
 
 bool willLose(int x, int y) {
     bool flag = 1;
@@ -78,7 +78,7 @@ bool willLose(int x, int y) {
 int game(int x1, int y1, int x2, int y2, int player, int turn) {
     if (willLose(x1, y1))
         return -turn * player;
-    vector<int> winCase, loseCase;<br>
+    vector<int> winCase, loseCase;
     board[y1][x1] = 0;
     for (int d = 0; d < 4; d++) {
         int nx = x1 + dx[d], ny = y1 + dy[d];
@@ -89,7 +89,7 @@ int game(int x1, int y1, int x2, int y2, int player, int turn) {
     }
     board[y1][x1] = 1;
 
-    if (winCase.size() > 0) {<br>
+    if (winCase.size() > 0) {
         int res = 99;
         for (int r : winCase)
             res = min(res, abs(r));
@@ -103,12 +103,12 @@ int game(int x1, int y1, int x2, int y2, int player, int turn) {
     }
 }
 
-int solution(vector<vector<int>> b, vector<int> aloc, vector<int> bloc) {<br>
+int solution(vector<vector<int>> b, vector<int> aloc, vector<int> bloc) {
     N = b.size(), M = b[0].size(), board = b;
     return abs(game(aloc[1], aloc[0], bloc[1], bloc[0], 1, 0));
 }
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/92345<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/92345
 {% endraw %}

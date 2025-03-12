@@ -22,7 +22,7 @@ title: '[Programmers] 월간 코드 챌린지 시즌2 - 음양 더하기'
 #include <vector>
 using namespace std;
 
-int solution(vector<int> num, vector<bool> signs) {<br>
+int solution(vector<int> num, vector<bool> signs) {
     int answer = 0;
     for(int i = 0; i < num.size(); i++)
         answer += signs[i] ? num[i] : -num[i];
@@ -31,5 +31,5 @@ int solution(vector<int> num, vector<bool> signs) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/76501<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/76501
 {% endraw %}

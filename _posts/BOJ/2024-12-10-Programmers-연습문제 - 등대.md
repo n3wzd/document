@@ -25,7 +25,7 @@ title: '[Programmers] 연습문제 - 등대'
 ## 해결
 제공되는 그래프는 연결 그래프이고 간선 개수가 정점 개수 - 1이므로 `트리`입니다. 즉, 사이클이 존재하지 않습니다.
 
-모든 간선을 커버하는 최소 정점 개수를 찾아야 합니다. 간선은 정점 2개의 연결이므로, 어떠한 간선이 있을 때 반드시 두 정점 중 하나는 활성 상태여야 합니다. 모든 경우를 확인해서 최소 개수를 찾습니다. => `트리 DP`<br>
+모든 간선을 커버하는 최소 정점 개수를 찾아야 합니다. 간선은 정점 2개의 연결이므로, 어떠한 간선이 있을 때 반드시 두 정점 중 하나는 활성 상태여야 합니다. 모든 경우를 확인해서 최소 개수를 찾습니다. => `트리 DP`
 - 현재 상태: (`n` = 정점, `flag` = 활성 유무)
 - 계산 값: 최소 활성 개수
 - 최종 답: min((루트 정점, 0), (루트 정점, 1))
@@ -40,11 +40,11 @@ title: '[Programmers] 연습문제 - 등대'
 #include <vector>
 using namespace std;
 const int SIZE = 100001;
-vector<int> graph[SIZE];<br>
+vector<int> graph[SIZE];
 int cache[SIZE][2];
 
 int DFS(int v, int flag, int p = -1) {
-    if(cache[v][flag] > 0)<br>
+    if(cache[v][flag] > 0)
         return cache[v][flag];
     cache[v][flag] = flag ? 1 : 0;
     for(int n : graph[v])
@@ -53,7 +53,7 @@ int DFS(int v, int flag, int p = -1) {
     return cache[v][flag];
 }
 
-int solution(int n, vector<vector<int>> edges) {<br>
+int solution(int n, vector<vector<int>> edges) {
     for(auto edge : edges) {
         graph[edge[0]].push_back(edge[1]);
         graph[edge[1]].push_back(edge[0]);
@@ -63,5 +63,5 @@ int solution(int n, vector<vector<int>> edges) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/133500<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/133500
 {% endraw %}

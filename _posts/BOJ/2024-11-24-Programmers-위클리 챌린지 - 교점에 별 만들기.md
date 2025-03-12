@@ -36,9 +36,9 @@ title: '[Programmers] 위클리 챌린지 - 교점에 별 만들기'
 using namespace std;
 typedef long long ll;
 
-vector<string> solution(vector<vector<int>> lines) {<br>
-    vector<string> answer;<br>
-    vector<vector<ll>> cross;<br>
+vector<string> solution(vector<vector<int>> lines) {
+    vector<string> answer;
+    vector<vector<ll>> cross;
     ll N = lines.size(), x1 = 1e12, x2 = -1e12, y1 = 1e12, y2 = -1e12;
     for(ll i = 0; i < N; i++) {
         for(ll j = i + 1; j < N; j++) {
@@ -63,5 +63,5 @@ vector<string> solution(vector<vector<int>> lines) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/87377<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/87377
 {% endraw %}

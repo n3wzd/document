@@ -24,7 +24,7 @@ title: '[Programmers] 월간 코드 챌린지 시즌3 - 없는 숫자 더하기'
 #include <vector>
 using namespace std;
 
-int solution(vector<int> numbers) {<br>
+int solution(vector<int> numbers) {
     int answer = 45;
     for(int n : numbers)
         answer -= n;
@@ -33,5 +33,5 @@ int solution(vector<int> numbers) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/86051<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/86051
 {% endraw %}

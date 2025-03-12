@@ -37,7 +37,7 @@ title: '[Programmers] 2019 KAKAO BLIND RECRUITMENT - 후보키'
 
 ## 해결
 - 키는 집합입니다. `조합`을 사용해서 모든 집합을 판별합니다.
-- 어떠한 키에 대해 유일성을 만족하라면, 키가 포함한 속성들만 봤을 때 모든 튜플에서 중복이 없어야 합니다. 각 튜플에서 속성에 해당되는 데이터들을 일렬로 연결한 문자열들에 대해 중복을 판정합니다. => `set` 사용<br>
+- 어떠한 키에 대해 유일성을 만족하라면, 키가 포함한 속성들만 봤을 때 모든 튜플에서 중복이 없어야 합니다. 각 튜플에서 속성에 해당되는 데이터들을 일렬로 연결한 문자열들에 대해 중복을 판정합니다. => `set` 사용
 	- 속성별로 데이터는 구분됩니다. (예 "A", "BC" vs "AB", "C") 일렬로 연결할 때는 구분 문자를 사이에 넣어줍시다.
 - 최소성은 어떠한 후보키에 다른 후보키가 포함되면 안되는 것을 의미합니다. 따라서 새로운 키를 판정하기 전에 포함 검사를 해야 합니다. 후보키는 boolean 배열이므로 `비트마스킹`으로 저장할 수 있으며, 부분 집합 판정은 존재하는 후보키 비트 값이 판정할 키에 모두 포함되는지를 확인하면 됩니다.
 
@@ -48,7 +48,7 @@ title: '[Programmers] 2019 KAKAO BLIND RECRUITMENT - 후보키'
 #include <queue>
 #include <set>
 using namespace std;
-vector<vector<string>> R; vector<int> candidate;<br>
+vector<vector<string>> R; vector<int> candidate;
 bool selected[9];
 int N, M, cnt;
 
@@ -65,7 +65,7 @@ void combination(int len, int start) {
                     ok &= !((key & 1 << x) ^ (ck & 1 << x));
             if(ok) return;
         }      
-        set<string> S;<br>
+        set<string> S;
         for (int y = 0; y < N; y++) {
             string tmp = "";
             for (int x = 0; x < M; x++)
@@ -85,7 +85,7 @@ void combination(int len, int start) {
     }
 }
 
-int solution(vector<vector<string>> relation) {<br>
+int solution(vector<vector<string>> relation) {
     R = relation; N = R.size(), M = R[0].size();
     for (int d = 1; d <= M; d++)
         combination(d, 0);
@@ -94,5 +94,5 @@ int solution(vector<vector<string>> relation) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42890<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/42890
 {% endraw %}

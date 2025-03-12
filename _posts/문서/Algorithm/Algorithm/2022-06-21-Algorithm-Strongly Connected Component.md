@@ -49,10 +49,10 @@ SCC를 구하는 방법으로 `코사라주 알고리즘`, `타잔 알고리즘`
 using namespace std;
 int N, M;
 bool visited[SIZE];
-vector<int> graph[SIZE];<br>
-vector<int> graphR[SIZE];<br>
-stack<int> stk;<br>
-vector<vector<int>> scc;<br>
+vector<int> graph[SIZE];
+vector<int> graphR[SIZE];
+stack<int> stk;
+vector<vector<int>> scc;
 int scc_idx;
 
 void DFS1(int v) {
@@ -77,7 +77,7 @@ void DFS2(int v) {
 	}
 }
 
-bool cmp(vector<int> a, vector<int> b) {<br>
+bool cmp(vector<int> a, vector<int> b) {
 	return a[0] < b[0];
 }
 
@@ -95,10 +95,10 @@ void Print() {
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M;<br>
+	cin >> N >> M;
 	for (int i = 0; i < M; i++) {
 		int a, b;
-		cin >> a >> b;<br>
+		cin >> a >> b;
 		graph[a].push_back(b);
 		graphR[b].push_back(a);
 	}
@@ -138,8 +138,8 @@ DFS의 현재 정점에서, 현재 정점과 다음 정점들이 현재 정점�
 
 ```
 1. 그래프 생성
-2. DFS 수행 => 현재 정점 = v<br>
-	1. 방문 순서대로 고유 번호 부여 => Did(v)<br>
+2. DFS 수행 => 현재 정점 = v
+	1. 방문 순서대로 고유 번호 부여 => Did(v)
 	2. 방문 순서대로 스택에 추가
 	3. 다음 정점 확인
 		- 현재 정점과 다음 정점들에 대한 최소 고유 번호를 구한다.
@@ -159,9 +159,9 @@ using namespace std;
 int N, M;
 int Did[SIZE];
 bool scc_ok[SIZE];
-vector<int> graph[SIZE];<br>
-stack<int> stk;<br>
-vector<vector<int>> scc;<br>
+vector<int> graph[SIZE];
+stack<int> stk;
+vector<vector<int>> scc;
 int Did_idx = 0, scc_idx;
 
 int DFS(int v) {
@@ -192,7 +192,7 @@ int DFS(int v) {
 	return minGoal;
 }
 
-bool cmp(vector<int> a, vector<int> b) {<br>
+bool cmp(vector<int> a, vector<int> b) {
 	return a[0] < b[0];
 }
 
@@ -210,10 +210,10 @@ void Print() {
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M;<br>
+	cin >> N >> M;
 	for (int i = 0; i < M; i++) {
 		int a, b;
-		cin >> a >> b;<br>
+		cin >> a >> b;
 		graph[a].push_back(b);
 	}
 
@@ -228,11 +228,11 @@ int main()
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/2150<br>
-https://www.acmicpc.net/problem/4196<br>
-https://www.acmicpc.net/problem/4013<br>
+<br>https://www.acmicpc.net/problem/2150
+<br>https://www.acmicpc.net/problem/4196
+<br>https://www.acmicpc.net/problem/4013
 
 ## 참고
-https://jason9319.tistory.com/98<br>
-https://yjg-lab.tistory.com/188<br>
+<br>https://jason9319.tistory.com/98
+<br>https://yjg-lab.tistory.com/188
 {% endraw %}

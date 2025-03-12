@@ -13,7 +13,7 @@ title: '[Algorithm] Centroid Decomposition'
 
 모든 트리는 최소한 1개의 센트로이드를 가지고 있음이 보장된다.
 
-`센트로이드 분할`은 현재 트리의 센트로이드를 기점으로 서브트리를 나누는 재귀적인 과정이다. 센트로이드 분할을 통해 트리에서 `분할정복`을 수행할 수 있다. => 빠른 계산 가능<br>
+`센트로이드 분할`은 현재 트리의 센트로이드를 기점으로 서브트리를 나누는 재귀적인 과정이다. 센트로이드 분할을 통해 트리에서 `분할정복`을 수행할 수 있다. => 빠른 계산 가능
 
 ## 설계
 ### 센트로이드 분할
@@ -21,7 +21,7 @@ title: '[Algorithm] Centroid Decomposition'
 ```
 v = 현재 정점 번호
 sz[v] = v를 루트로 하는 서브트리의 크기
-vector<int> con[v] = v와 연결된 정점 목록<br>
+vector<int> con[v] = v와 연결된 정점 목록
 visited[v] = v가 센트로이드였던 적이 있다면 true
 ```
 
@@ -40,7 +40,7 @@ sz를 사용해서 정의에 따라 센트로이드를 구할 수 있다. 임의
 ```
 int Centroid(int v, int prev, int size) {
 	for (auto i : con[v])
-		if (i != prev && !visited[i] && sz[i] * 2 > size)<br>
+		if (i != prev && !visited[i] && sz[i] * 2 > size)
 			return Centroid(i, v, size);
 	return v;
 }
@@ -79,9 +79,9 @@ const int SIZE = 200002, INF = 200002;
 struct Edge { int v, w; };
 struct Path { int dist, depth; };
 int N, K, race = INF, sz[SIZE], course[1000002];
-vector<Edge> con[SIZE];<br>
-vector<int> used_dist;<br>
-vector<Path> path;<br>
+vector<Edge> con[SIZE];
+vector<int> used_dist;
+vector<Path> path;
 bool visited[SIZE];
 
 int SetSize(int v, int prev, int d) {
@@ -97,14 +97,14 @@ int SetSize(int v, int prev, int d) {
 int Centroid(int v, int prev, int size) {
 	for (auto next : con[v]) {
 		int i = next.v;
-		if (i != prev && !visited[i] && sz[i] * 2 > size)<br>
+		if (i != prev && !visited[i] && sz[i] * 2 > size)
 			return Centroid(i, v, size);
 	}	
 	return v;
 }
 
 void Race(int v, int prev, int depth, int dist) {
-	if (dist > K)<br>
+	if (dist > K)
 		return;
 
 	race = min(race, depth + course[K - dist]);
@@ -145,10 +145,10 @@ void DC(int root) {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> K;<br>
+	cin >> N >> K;
 	for (int i = 0; i < N - 1; i++) {
 		int a, b, w;
-		cin >> a >> b >> w;<br>
+		cin >> a >> b >> w;
 		con[a].push_back({b, w});
 		con[b].push_back({a, w});
 	}
@@ -187,13 +187,13 @@ int CTR_Tree(int root) {
 
 ## 연관 문제
 ### 일반
-https://www.acmicpc.net/problem/5820<br>
-https://www.acmicpc.net/problem/13854<br>
+<br>https://www.acmicpc.net/problem/5820
+<br>https://www.acmicpc.net/problem/13854
 
 ### 센트로이드 트리
-https://www.acmicpc.net/problem/13514<br>
+<br>https://www.acmicpc.net/problem/13514
 
 ## 참고
-https://justicehui.github.io/hard-algorithm/2020/08/25/centroid/<br>
-https://www.secmem.org/blog/2021/04/14/centroid-of-a-tree/<br>
+<br>https://justicehui.github.io/hard-algorithm/2020/08/25/centroid/
+<br>https://www.secmem.org/blog/2021/04/14/centroid-of-a-tree/
 {% endraw %}

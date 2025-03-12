@@ -20,7 +20,7 @@ title: '[Programmers] 연습문제 - 귤 고르기'
 -   1 ≤  `tangerine`의 원소 ≤ 10,000,000
 
 ## 해결
-선택한 아이템의 종류가 최소여야 하며, 가장 개수가 많은 종류를 선택하는 것이 항상 이득입니다 => `그리디`<br>
+선택한 아이템의 종류가 최소여야 하며, 가장 개수가 많은 종류를 선택하는 것이 항상 이득입니다 => `그리디`
 1. 각 아이템의 출현 횟수 구하기: 종류 범위가 넓으므로 `map`을 사용합니다.
 2. 출현 횟수 내림차순 `정렬`
 3. `k`가 0이 될 때까지 출현 횟수를 순서대로 차감합니다.
@@ -32,10 +32,10 @@ title: '[Programmers] 연습문제 - 귤 고르기'
 #include <unordered_map>
 #include <algorithm>
 using namespace std;
-unordered_map<int, int> cnt;<br>
-vector<int> C; int idx, answer;<br>
+unordered_map<int, int> cnt;
+vector<int> C; int idx, answer;
 
-int solution(int k, vector<int> T) {<br>
+int solution(int k, vector<int> T) {
     for(auto t : T)
         cnt[t]++;
     sort(T.begin(), T.end());
@@ -43,12 +43,12 @@ int solution(int k, vector<int> T) {<br>
     for(auto t : T)
         C.push_back(cnt[t]);
     sort(C.begin(), C.end(), greater<int>());
-    while(k > 0)<br>
+    while(k > 0)
         k -= C[idx++], answer++;
     return answer;
 }
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/138476<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/138476
 {% endraw %}

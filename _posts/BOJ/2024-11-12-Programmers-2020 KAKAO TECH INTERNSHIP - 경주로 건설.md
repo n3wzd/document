@@ -44,13 +44,13 @@ title: '[Programmers] 2020 KAKAO TECH INTERNSHIP - 경주로 건설'
 #include <queue>
 using namespace std;
 struct Node { int x, y, axis, cost; };
-struct cmp { bool operator()(const Node& a, const Node& b) { return a.cost > b.cost; } };<br>
+struct cmp { bool operator()(const Node& a, const Node& b) { return a.cost > b.cost; } };
 int N, cost[26][26][2], dx[4] = { 1, 0, -1, 0 }, dy[4] = { 0, 1, 0, -1 };
 bool visited[26][26][2];
 const int INF = 1 << 29;
 
-int solution(vector<vector<int>> board) {<br>
-    priority_queue<Node, vector<Node>, cmp> pq;<br>
+int solution(vector<vector<int>> board) {
+    priority_queue<Node, vector<Node>, cmp> pq;
     N = board.size();
     for (int y = 0; y < N; y++)
         for (int x = 0; x < N; x++)
@@ -78,5 +78,5 @@ int solution(vector<vector<int>> board) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/67259<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/67259
 {% endraw %}

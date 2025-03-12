@@ -43,7 +43,7 @@ title: '[Programmers] 2019 KAKAO BLIND RECRUITMENT - 길 찾기 게임'
     -   모든 노드의 좌표는 문제에 주어진 규칙을 따르며, 잘못된 노드 위치가 주어지는 경우는 없다.
 
 ## 해결
-좌표 데이터를 트리로 변환하는 문제입니다. x 구간에 따라 서브 트리가 나뉘는 점을 활용합니다. => `분할정복`<br>
+좌표 데이터를 트리로 변환하는 문제입니다. x 구간에 따라 서브 트리가 나뉘는 점을 활용합니다. => `분할정복`
 
 먼저 주어진 정점을 y에 대해 저장합니다. (각 y에서 정점들은 x 오름차순으로`정렬`되어 있어야 합니다.) 그리고 y의 최댓값부터 탐색하여 정점을 추가합니다. 탐색의 현재 상태를 (자식으로 추가 가능한 x의 범위(lo, hi), 현재 정점(위치, 번호))으로 정의합니다.
 
@@ -65,15 +65,15 @@ title: '[Programmers] 2019 KAKAO BLIND RECRUITMENT - 길 찾기 게임'
 #include <algorithm>
 using namespace std;
 struct Node { int x, id; };
-vector<int> graph[10002];<br>
-vector<Node> nodeY[100001];<br>
-vector<vector<int>> answer = { {}, {} };<br>
+vector<int> graph[10002];
+vector<Node> nodeY[100001];
+vector<vector<int>> answer = { {}, {} };
 
 void makeTree(int lo, int hi, int x, int y, int parent) {
     while (y >= 0 && nodeY[y].size() == 0) y--;
     if (y < 0) return;
     for (auto node : nodeY[y]) {
-        if (node.x > lo && node.x < hi) {<br>
+        if (node.x > lo && node.x < hi) {
             graph[parent].push_back(node.id);
             if (node.x < x)
                 makeTree(lo, x, node.x, y - 1, node.id);
@@ -95,7 +95,7 @@ void postorder(int n) {
     if (n != 0) answer[1].push_back(n);
 }
 
-vector<vector<int>> solution(vector<vector<int>> nodeinfo) {<br>
+vector<vector<int>> solution(vector<vector<int>> nodeinfo) {
     int genID = 1;
     for (auto p : nodeinfo)
         nodeY[p[1]].push_back({ p[0], genID++ });
@@ -108,5 +108,5 @@ vector<vector<int>> solution(vector<vector<int>> nodeinfo) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42892<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/42892
 {% endraw %}

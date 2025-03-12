@@ -63,16 +63,16 @@ ex. 1010의 2번째 비트를 0으로 변경
 ex.
 DP([0, 1, 0 ... ], Time, Money)
 
-=> bitmask 적용<br>
+=> bitmask 적용
 DP(Visited, Time, Money)
 ```
 
-그 외, 2진수 관련 연산, 2<sup>k</sup>가 필요한 연산에서 비트마스크를 사용하면 편리하다. (ex. 어떤 정수에서 2<sup>k</sup>를 확인, 2<sup>k</sup> 더하기 등)<br>
+그 외, 2진수 관련 연산, 2<sup>k</sup>가 필요한 연산에서 비트마스크를 사용하면 편리하다. (ex. 어떤 정수에서 2<sup>k</sup>를 확인, 2<sup>k</sup> 더하기 등)
 
 ## 관련 문제
-https://www.acmicpc.net/problem/2098<br>
-https://www.acmicpc.net/problem/1311<br>
+<br>https://www.acmicpc.net/problem/2098
+<br>https://www.acmicpc.net/problem/1311
 
 ## 참고
-https://mygumi.tistory.com/361<br>
+<br>https://mygumi.tistory.com/361
 {% endraw %}

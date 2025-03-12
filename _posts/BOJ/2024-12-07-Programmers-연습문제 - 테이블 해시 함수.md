@@ -37,17 +37,17 @@ title: '[Programmers] 연습문제 - 테이블 해시 함수'
 #include <algorithm>
 using namespace std;
 
-int S(vector<int> d, int n) {<br>
+int S(vector<int> d, int n) {
     int sum = 0;
     for(int i = 0; i < d.size(); i++)
         sum += d[i] % n;
     return sum;
 }
 
-int solution(vector<vector<int>> data, int col, int lo, int hi) {<br>
+int solution(vector<vector<int>> data, int col, int lo, int hi) {
     col--; lo--; hi--;
     sort(data.begin(), data.end(), [col](auto a, auto b) {
-        return a[col] != b[col] ? a[col] < b[col] : a[0] > b[0];<br>
+        return a[col] != b[col] ? a[col] < b[col] : a[0] > b[0];
     });
     int answer = S(data[lo], lo + 1);
     for(int i = lo + 1; i <= hi; i++)
@@ -57,5 +57,5 @@ int solution(vector<vector<int>> data, int col, int lo, int hi) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/147354<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/147354
 {% endraw %}

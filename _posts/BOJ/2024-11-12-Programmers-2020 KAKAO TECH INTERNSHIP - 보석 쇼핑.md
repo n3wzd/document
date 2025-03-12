@@ -24,7 +24,7 @@ title: '[Programmers] 2020 KAKAO TECH INTERNSHIP - 보석 쇼핑'
     -   gems 배열의 각 원소는 길이가 1 이상 10 이하인 알파벳 대문자로만 구성된 문자열입니다.
 
 ## 해결
-먼저 모든 원소의 종류를 모두 포함하는 구간을 찾아봅시다. 일단 전체 구간은 모든 원소를 포함하므로 조건을 만족합니다. 여기서 구간의 범위를 천천히 축소해봅시다. 범위가 축소되면서 나오는 원소가 유일한 원소면 해당 구간은 조건을 만족하지 않게 됩니다. 즉, 전체 구간을 시작으로 하고, 유일한 원소를 만나기 전까지 구간을 축소하는 방법으로 목표한 구간을 찾을 수 있습니다. => `투 포인터`<br>
+먼저 모든 원소의 종류를 모두 포함하는 구간을 찾아봅시다. 일단 전체 구간은 모든 원소를 포함하므로 조건을 만족합니다. 여기서 구간의 범위를 천천히 축소해봅시다. 범위가 축소되면서 나오는 원소가 유일한 원소면 해당 구간은 조건을 만족하지 않게 됩니다. 즉, 전체 구간을 시작으로 하고, 유일한 원소를 만나기 전까지 구간을 축소하는 방법으로 목표한 구간을 찾을 수 있습니다. => `투 포인터`
 
 정답의 우선순위는 구간의 시작점이 최소인 것이므로 구간의 끝부터 범위를 좁힙니다. 그 다음에 구간의 시작점을 좁히면 됩니다.
 
@@ -49,17 +49,17 @@ title: '[Programmers] 2020 KAKAO TECH INTERNSHIP - 보석 쇼핑'
 #include <vector>
 #include <map>
 using namespace std;
-map<string, int> cnt;<br>
+map<string, int> cnt;
 
-vector<int> solution(vector<string> gems) {<br>
-    vector<int> answer;<br>
+vector<int> solution(vector<string> gems) {
+    vector<int> answer;
     for (auto gem : gems)
         cnt[gem] == 0 ? cnt[gem] = 1 : cnt[gem]++;
 
     int lo = 0, hi = gems.size() - 1;
-    while (cnt[gems[hi]] > 1)<br>
+    while (cnt[gems[hi]] > 1)
         cnt[gems[hi--]]--;
-    while (cnt[gems[lo]] > 1)<br>
+    while (cnt[gems[lo]] > 1)
         cnt[gems[lo++]]--;
     int minLen = hi - lo;
     answer = { lo + 1, hi + 1 };
@@ -69,7 +69,7 @@ vector<int> solution(vector<string> gems) {<br>
             cnt[gems[++hi]]++;
         if (gems[hi] != gems[lo])
             break;
-        while (cnt[gems[lo]] > 1)<br>
+        while (cnt[gems[lo]] > 1)
             cnt[gems[lo++]]--;
         if (hi - lo < minLen) {
             minLen = hi - lo;
@@ -81,5 +81,5 @@ vector<int> solution(vector<string> gems) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/67258<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/67258
 {% endraw %}

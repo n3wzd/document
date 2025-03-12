@@ -25,7 +25,7 @@ title: '[Programmers] 연습문제 - 억억단을 외우자'
 정수 `e`의 억억단에서 등장 개수를 세어 봅시다. `e`단에서 1개, `e`보다 큰 단에는 없고, `e`보다 작은 단에선 `a`의 약수단마다 1개씩 존재합니다. 즉, `e`의 등장 횟수는 약수 개수와 같으며, 주어진 문제는 다음과 같습니다.
 > A[s, e] = [s, e] 구간 내 약수 개수가 가장 많은 정수<br>
 
-구간 쿼리지만 `e`는 고정이며 `s`만 변수입니다. `s`의 최솟값, `m`을 찾고, `e`부터 `m`까지 구간을 확장하면서 `A[s, e]`의 값을 채웁니다. => `DP`<br>
+구간 쿼리지만 `e`는 고정이며 `s`만 변수입니다. `s`의 최솟값, `m`을 찾고, `e`부터 `m`까지 구간을 확장하면서 `A[s, e]`의 값을 채웁니다. => `DP`
 
 약수 개수를 구해 봅시다. 약수 개수를 저장하는 배열을 `D`로 정의합니다. 1부터 `e`까지 모든 정수를 순회하고, 각 정수의 배수를 `x`라고 했을 때, `D[x]`의 값을 1씩 카운팅합니다. (`에라토스테네스의 체`와 비슷한 방법입니다.)
 
@@ -42,8 +42,8 @@ void divisor(int e) {
             D[a * i]++;
 }
 
-vector<int> solution(int e, vector<int> starts) {<br>
-    vector<int> answer; divisor(e); int m = MAXN;<br>
+vector<int> solution(int e, vector<int> starts) {
+    vector<int> answer; divisor(e); int m = MAXN;
     for(int s : starts)
         m = min(s, m);
     M[e] = D[e]; X[e] = e;
@@ -58,5 +58,5 @@ vector<int> solution(int e, vector<int> starts) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/138475<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/138475
 {% endraw %}

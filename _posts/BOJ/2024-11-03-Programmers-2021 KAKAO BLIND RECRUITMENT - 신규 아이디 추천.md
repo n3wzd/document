@@ -80,7 +80,7 @@ string solution(string id) {
     id = regex_replace(id, regex("\\.+"), ".");
     id = regex_replace(id, regex("^\\.|\\.$"), "");
     if (id.empty()) id = "a";
-    if (id.size() > 15) id = id.substr(0, 15);<br>
+    if (id.size() > 15) id = id.substr(0, 15);
     if (id.back() == '.') id.pop_back();
     while (id.size() < 3) id += id[id.size() - 1];
     return id;
@@ -88,5 +88,5 @@ string solution(string id) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/72410<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/72410
 {% endraw %}

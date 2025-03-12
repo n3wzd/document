@@ -50,7 +50,7 @@ bool prime[10002] = { 0, };
 int main()
 {
 	int n;
-	cin >> n;<br>
+	cin >> n;
 
 	int sq = sqrt(n);
 	for (int i = 2; i <= sq; i++)
@@ -64,18 +64,18 @@ int main()
 	}
 
 	for (int i = 2; i <= n; i++) // 2부터 N까지 소수 판단 출력 (0이면 소수)
-		cout << i << " -> " << prime[i] << endl;<br>
+		cout << i << " -> " << prime[i] << endl;
 
 	return 0;
 }
 ```
 
 ### 연관 문제
-https://www.acmicpc.net/problem/1978<br>
-https://www.acmicpc.net/problem/1929<br>
+<br>https://www.acmicpc.net/problem/1978
+<br>https://www.acmicpc.net/problem/1929
 
 ### 참고
-https://continuous-development.tistory.com/204<br>
+<br>https://continuous-development.tistory.com/204
 
 ## 밀러-라빈 소수 판정법 (Miller-Rabin Primality Test)
 `밀러-라빈 소수 판정법`은 페르마 소수 판정법을 개선한 소수 판정법이다. 특정 큰 수 1개를 빠르게 판정할 때는 이 방법이 적합하다.
@@ -99,7 +99,7 @@ x를 알고 있다면 s와 d는 어렵지 않게 구할 수 있다.
 > a<sup>x-1</sup> ≡ 1 (mod x)<br>
 > a<sup>x-1</sup> - 1 ≡ 0 (mod x)<br>
 
-(x<sup>2</sup> - 1) = (x + 1)(x - 1)을 활용해서 인수분해를 하면 다음과 같다.<br>
+(x<sup>2</sup> - 1) = (x + 1)(x - 1)을 활용해서 인수분해를 하면 다음과 같다.
 > (a<sup>P1</sup> + 1)(a<sup>P2</sup> + 1) ... (a<sup>Ps</sup> + 1)(a<sup>Ps</sup> - 1) ≡ 0 (mod x) <br>
 > P<sub>i</sub> = 2<sup>s-i</sup> × d<br>
 
@@ -113,7 +113,7 @@ x를 알고 있다면 s와 d는 어렵지 않게 구할 수 있다.
 - x < 3,474,749,660,383 → a=2,3,5,7,11,13
 - x < 341,550,071,728,321 → a=2,3,5,7,11,13,17
 
-(출처 -  https://ko.wikipedia.org/wiki/%EB%B0%80%EB%9F%AC-%EB%9D%BC%EB%B9%88_%EC%86%8C%EC%88%98%ED%8C%90%EB%B3%84%EB%B2%95)<br>
+(출처 -  <br>https://ko.wikipedia.org/wiki/%EB%B0%80%EB%9F%AC-%EB%9D%BC%EB%B9%88_%EC%86%8C%EC%88%98%ED%8C%90%EB%B3%84%EB%B2%95)
 
 ```
 > isPrime(x) // x가 소수이면 true<br>
@@ -148,7 +148,7 @@ ll ModMul(ll a, ll b, ll mod) {	return ((a % mod) * (b % mod)) % mod; }
 
 ll FastPow(ll a, ll pw, ll mod) {
 	ll buf = 1;
-	while (pw > 1) {<br>
+	while (pw > 1) {
 		if (pw % 2 != 0) buf = ModMul(buf, a, mod);
 		a = ModMul(a, a, mod); pw /= 2;
 	}
@@ -182,10 +182,10 @@ bool isPrime(ll x) {
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	int N, cnt = 0;
-	cin >> N;<br>
+	cin >> N;
 	while(N--) {
 		ll x;
-		cin >> x;<br>
+		cin >> x;
 		if (isPrime(2 * x + 1)) cnt++;
 	}
 	cout << cnt;
@@ -194,10 +194,10 @@ int main() {
 ```
 
 ### 연관 문제
-https://www.acmicpc.net/problem/5615<br>
+<br>https://www.acmicpc.net/problem/5615
 
 ### 참고
-https://aruz.tistory.com/142<br>
-https://rebro.kr/46<br>
-https://ko.wikipedia.org/wiki/%EB%B0%80%EB%9F%AC-%EB%9D%BC%EB%B9%88_%EC%86%8C%EC%88%98%ED%8C%90%EB%B3%84%EB%B2%95<br>
+<br>https://aruz.tistory.com/142
+<br>https://rebro.kr/46
+<br>https://ko.wikipedia.org/wiki/%EB%B0%80%EB%9F%AC-%EB%9D%BC%EB%B9%88_%EC%86%8C%EC%88%98%ED%8C%90%EB%B3%84%EB%B2%95
 {% endraw %}

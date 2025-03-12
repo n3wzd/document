@@ -26,7 +26,7 @@ title: '[BOJ] 12781 - PIZZA ALVOLOC'
 주어진 4개의 점으로 도윤이가 친구들과 사이좋게 피자를 나눠 먹을 수 있으면 1, 그렇지 않으면 0을 출력한다.
 
 ## 해결
-두 선분이 교차하면 4등분이 됩니다. `선분 교차`를 활용합니다. => `17386 - 선분 교차 1`<br>
+두 선분이 교차하면 4등분이 됩니다. `선분 교차`를 활용합니다. => `17386 - 선분 교차 1`
 
 단, 한 점이 다른 선분에 포함되는 경우는 4등분이 되지 않습니다. 우선, 4개의 `CCW`를 구해봅시다.
 ```
@@ -55,13 +55,13 @@ struct Point { ll x, y; };
 
 int CCW(Point a, Point b, Point c) {
 	ll D = (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y);
-	return (D == 0) ? 0 : ((D > 0) ? 1 : -1);<br>
+	return (D == 0) ? 0 : ((D > 0) ? 1 : -1);
 }
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	Point p1, p2, p3, p4;
-	cin >> p1.x >> p1.y >> p2.x >> p2.y >> p3.x >> p3.y >> p4.x >> p4.y;<br>
+	cin >> p1.x >> p1.y >> p2.x >> p2.y >> p3.x >> p3.y >> p4.x >> p4.y;
 	int r1 = CCW(p1, p2, p3), r2 = CCW(p1, p2, p4);
 	int r3 = CCW(p3, p4, p1), r4 = CCW(p3, p4, p2);
 	if (r1 == r2 || r3 == r4 || r1 == 0 || r2 == 0 || r3 == 0 || r4 == 0)
@@ -73,5 +73,5 @@ int main() {
 ```
 
 ## 링크
-https://www.acmicpc.net/problem/12781<br>
+<br>https://www.acmicpc.net/problem/12781
 {% endraw %}

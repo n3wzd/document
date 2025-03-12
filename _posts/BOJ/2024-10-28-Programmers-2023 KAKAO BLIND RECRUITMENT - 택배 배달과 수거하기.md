@@ -26,7 +26,7 @@ title: '[Programmers] 2023 KAKAO BLIND RECRUITMENT - 택배 배달과 수거하�
 -   트럭의 초기 위치는 물류창고입니다.
 
 ## 해결
-집마다 이동 거리는 모두 동일하므로 한번 이동했을 때 이동 동선만 최대한 줄이면 됩니다. 항상 멀리 있는 집부터 처리하는 것이 최적입니다. => `그리디`<br>
+집마다 이동 거리는 모두 동일하므로 한번 이동했을 때 이동 동선만 최대한 줄이면 됩니다. 항상 멀리 있는 집부터 처리하는 것이 최적입니다. => `그리디`
 
 ```
 운전 사이클: 완료 횟수가 2 * n이면 종료
@@ -46,7 +46,7 @@ using namespace std;
 int success, last;
 long long cnt = 0;
 
-long long solution(int cap, int n, vector<int> deliveries, vector<int> pickups) {<br>
+long long solution(int cap, int n, vector<int> deliveries, vector<int> pickups) {
     for (int i = 0; i < n; i++)
         deliveries[i] == 0 ? success++ : last = max(last, i);
     for (int i = 0; i < n; i++)
@@ -54,7 +54,7 @@ long long solution(int cap, int n, vector<int> deliveries, vector<int> pickups) 
     while (success != n * 2) {
         int c = cap, d = cap, i = last, j = last;
         while (i >= 0) {
-            if (deliveries[i] > 0) {<br>
+            if (deliveries[i] > 0) {
                 if (c >= deliveries[i]) {
                     c -= deliveries[i];
                     deliveries[i] = 0;
@@ -69,7 +69,7 @@ long long solution(int cap, int n, vector<int> deliveries, vector<int> pickups) 
             i--;
         }
         while (j >= 0) {
-            if (pickups[j] > 0) {<br>
+            if (pickups[j] > 0) {
                 if (d >= pickups[j]) {
                     d -= pickups[j];
                     pickups[j] = 0;
@@ -91,5 +91,5 @@ long long solution(int cap, int n, vector<int> deliveries, vector<int> pickups) 
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/150369<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/150369
 {% endraw %}

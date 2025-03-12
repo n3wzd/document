@@ -22,7 +22,7 @@ title: '[Programmers] 월간 코드 챌린지 시즌1 - 내적'
 #include <vector>
 using namespace std;
 
-int solution(vector<int> a, vector<int> b) {<br>
+int solution(vector<int> a, vector<int> b) {
     int answer = 0;
     for(int i = 0; i < a.size(); i++)
         answer += a[i] * b[i];
@@ -31,5 +31,5 @@ int solution(vector<int> a, vector<int> b) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/70128<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/70128
 {% endraw %}

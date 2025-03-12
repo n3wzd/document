@@ -23,7 +23,7 @@ title: '[Programmers] 2024 KAKAO WINTER INTERNSHIP - 산 모양 타일링'
     -   `tops[i]`는 사다리꼴의 윗변과 변을 공유하는  `i+1`번째 정삼각형의 위쪽에 정삼각형을 붙이는 경우 1, 붙이지 않는 경우 0입니다.
 
 ## 해결
-모든 경우의 찾아야 하며, 삼각 타일은 부분 문제로 분할 가능합니다. 부분 문제는 중복 탐색이 존재합니다. => `DP`<br>
+모든 경우의 찾아야 하며, 삼각 타일은 부분 문제로 분할 가능합니다. 부분 문제는 중복 탐색이 존재합니다. => `DP`
 
 1층 삼각형의 번호(n)를 현재 상태로 정의합니다. n이 짝수, 홀수에 따라 구하는 답이 달라집니다. 초기 값은 1이며, 점화식은 다음과 같습니다. (T[n] = n번 삼각형 위에 있는 삼각형의 개수)
 > if n is even<br>
@@ -39,13 +39,13 @@ title: '[Programmers] 2024 KAKAO WINTER INTERNSHIP - 산 모양 타일링'
 ```
 #include <vector>
 using namespace std;
-vector<int> tops;<br>
+vector<int> tops;
 int N, DP[200003];
 const int p = 10007;
 int ModAdd(int a, int b) { return ((a % p) + (b % p)) % p; }
 int ModMul(int a, int b) { return ((a % p) * (b % p)) % p; }
 
-int solution(int n, vector<int> tops1) {<br>
+int solution(int n, vector<int> tops1) {
     tops = tops1; N = 2 * n + 1; DP[0] = DP[1] = 1;
     for (int i = 2; i <= N; i++)
         DP[i] = (i % 2 == 0)
@@ -56,5 +56,5 @@ int solution(int n, vector<int> tops1) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/258705<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/258705
 {% endraw %}

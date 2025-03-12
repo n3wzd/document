@@ -31,7 +31,7 @@ title: '[Programmers] 2018 KAKAO BLIND RECRUITMENT - 프렌즈4블록'
 입력으로 주어진 판 정보를 가지고 몇 개의 블록이 지워질지 출력하라.
 
 ## 해결
-주어진 게임 규칙을 구현하면 됩니다. => `시뮬레이션`<br>
+주어진 게임 규칙을 구현하면 됩니다. => `시뮬레이션`
 ```
 게임 사이클
 1. 모든 위치 순회: 2x2 사각형 영역이 모두 같은 블록이면 위치 기록
@@ -47,7 +47,7 @@ title: '[Programmers] 2018 KAKAO BLIND RECRUITMENT - 프렌즈4블록'
 using namespace std;
 bool flag[31][31];
 
-int solution(int m, int n, vector<string> board) {<br>
+int solution(int m, int n, vector<string> board) {
     int answer = 0;
     while (1) {
         for (int y = 0; y < m - 1; y++)
@@ -77,5 +77,5 @@ int solution(int m, int n, vector<string> board) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17679<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/17679
 {% endraw %}

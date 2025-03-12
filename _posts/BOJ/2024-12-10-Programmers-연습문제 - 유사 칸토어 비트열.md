@@ -37,7 +37,7 @@ title: '[Programmers] 연습문제 - 유사 칸토어 비트열'
 > O[2] = 16<br>
 > O[n] = 4<sup>n</sup><br>
 
-비트열 구간이 주어졌을 때, 이 구간의 1의 개수를 찾아봅시다. 전체 범위를 나눠서 탐색해서 `O(logN)` 시간으로 답을 구할 수 있습니다. => `분할 정복`<br>
+비트열 구간이 주어졌을 때, 이 구간의 1의 개수를 찾아봅시다. 전체 범위를 나눠서 탐색해서 `O(logN)` 시간으로 답을 구할 수 있습니다. => `분할 정복`
 - 처음에는 전체 길이를 범위로 합니다. 그리고 이 범위를 5등분하고, 분할된 범위 중 가운데를 제외하고 재귀적으로 탐색합니다.
 - 현재 범위가 주어진 구간에 완전히 벗어난다면 탐색하지 않습니다.
 - 현재 범위가 주어진 구간에 완전히 포함된다면 현재 범위에서 1의 개수를 반환합니다.
@@ -54,7 +54,7 @@ ll M4[21] = { 1, }, M5[21] = { 1, };
 
 void R(ll lo, ll n, ll l, ll r) {
     ll hi = lo + M5[n] - 1, t = M5[n] / 5;
-    if(lo > r || hi < l)<br>
+    if(lo > r || hi < l)
 		return;
     if(lo >= l && hi <= r) {
         answer += M4[n];
@@ -74,5 +74,5 @@ int solution(int n, ll l, ll r) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/148652<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/148652
 {% endraw %}

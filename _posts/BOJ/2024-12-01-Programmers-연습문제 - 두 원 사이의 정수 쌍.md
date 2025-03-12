@@ -47,7 +47,7 @@ typedef long long ll;
 ll C(ll r, bool outline) {
     ll a = 0, da = 0;
     for(ll x = 1, y = r; x <= r; x++) {
-        while((outline ? r * r < x * x + y * y : r * r <= x * x + y * y) && y > 0)<br>
+        while((outline ? r * r < x * x + y * y : r * r <= x * x + y * y) && y > 0)
             da++, y--;
         a += da;
     }
@@ -60,5 +60,5 @@ ll solution(int r1, int r2) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/181187<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/181187
 {% endraw %}

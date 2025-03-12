@@ -51,7 +51,7 @@ title: '[Programmers] 2021 KAKAO BLIND RECRUITMENT - 메뉴 리뉴얼'
 #include <algorithm>
 #include <iostream>
 using namespace std;
-map<string, int> cnt;<br>
+map<string, int> cnt;
 int maxCntByItem[11];
 bool selected[11];
 
@@ -76,8 +76,8 @@ void combination(string str, int k, int d, int start) {
     }
 }
 
-vector<string> solution(vector<string> orders, vector<int> course) {<br>
-    vector<string> answer;<br>
+vector<string> solution(vector<string> orders, vector<int> course) {
+    vector<string> answer;
     for(auto& order : orders)
         sort(order.begin(), order.end());
     for(auto order : orders)
@@ -93,5 +93,5 @@ vector<string> solution(vector<string> orders, vector<int> course) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/72411<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/72411
 {% endraw %}

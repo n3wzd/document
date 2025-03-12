@@ -14,7 +14,7 @@ title: '[Algorithm] Offline Dynamic Connectivity'
 
 이와 같이 그래프에서 실시간으로 간선이 추가/삭제될 때 관련 쿼리를 빠르게 다루는 문제를 Dynamic Connectivity Problem이라고 한다.
 
-일반적인 Dynamic Connectivity는 상당히 어렵다고 알려져 있다. 그러나 쿼리를 순서대로 처리하지 않아도 된다면( = `오프라인 쿼리`), `분할정복`으로 해결할 수 있다. => `Offline Dynamic Connectivity`<br>
+일반적인 Dynamic Connectivity는 상당히 어렵다고 알려져 있다. 그러나 쿼리를 순서대로 처리하지 않아도 된다면( = `오프라인 쿼리`), `분할정복`으로 해결할 수 있다. => `Offline Dynamic Connectivity`
 
 ## Offline Dynamic Connectivity
 간선에 'lifetime' 개념을 추가한다. 간선의 lifetime은 해당 간선이 유효한 시간이다. (여기서 시간의 단위는 쿼리 1개당 1로 정의한다.) 만약 간선 A가 3번 쿼리에서 생성되고 6번 쿼리에서 소멸되었다면 A의 lifetime은 [3, 6]이다. 만약 간선 A가 소멸되지 않았다면 lifetime은 [3, M]이다. (M = 쿼리의 개수)
@@ -49,7 +49,7 @@ ex.
      -7
  5
 [3]  [5]
-=> 5번 노드의 값에 -3을 빼고, 3번 노드에 -3을 대입하면 롤백이 된다.<br>
+=> 5번 노드의 값에 -3을 빼고, 3번 노드에 -3을 대입하면 롤백이 된다.
 ```
 이를 일반화하면 (weight가 작은 노드의 위치, 해당 노드의 이전 데이터)를 통해서 롤백을 수행할 수 있다.
 ```
@@ -79,7 +79,7 @@ const int SIZE = 100002;
 struct Edge { int src, dest; };
 struct RB { int pos, data; };
 int N, M;
-map<int, int> con[SIZE];<br>
+map<int, int> con[SIZE];
 Edge query[SIZE];
 
 struct Disjoint {
@@ -122,10 +122,10 @@ struct Disjoint {
 } dj;
 
 struct SegTree {
-	vector<Edge> tree[SIZE * 4];<br>
+	vector<Edge> tree[SIZE * 4];
 
 	void Add(int start, int end, int idx, int left, int right, Edge edge) {
-		if (start > right || end < left) return;<br>
+		if (start > right || end < left) return;
 		if (start >= left && end <= right) {
 			tree[idx].push_back(edge);
 			return;
@@ -136,7 +136,7 @@ struct SegTree {
 	}
 
 	void DC(int start, int end, int idx, int left, int right) {
-		stack<RB> stk;<br>
+		stack<RB> stk;
 		for (auto& i : tree[idx])
 			stk.push(dj.Union(i.src, i.dest));
 
@@ -164,12 +164,12 @@ struct SegTree {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M;<br>
+	cin >> N >> M;
 	dj.Init();
 	for (int t = 0; t < M; t++) {
 		int a, b, c;
-		cin >> a >> b >> c;<br>
-		if (b > c) swap(b, c);<br>
+		cin >> a >> b >> c;
+		if (b > c) swap(b, c);
 
 		if (a == 1)
 			con[b].emplace(c, t);
@@ -191,8 +191,8 @@ int main() {
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/16911<br>
+<br>https://www.acmicpc.net/problem/16911
 
 ## 참고
-https://koosaga.com/121<br>
+<br>https://koosaga.com/121
 {% endraw %}

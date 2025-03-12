@@ -41,9 +41,9 @@ title: '[Programmers] 2021 Dev-Matching 웹 백엔드 개발자(상반기) - 로
 #include <vector>
 #include <set>
 using namespace std;
-set<int> L;<br>
+set<int> L;
 
-vector<int> solution(vector<int> lottos, vector<int> win_nums) {<br>
+vector<int> solution(vector<int> lottos, vector<int> win_nums) {
     int win = 0, zero = 0;
     for(int n : win_nums)
         L.insert(n);
@@ -58,5 +58,5 @@ vector<int> solution(vector<int> lottos, vector<int> win_nums) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/77484<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/77484
 {% endraw %}

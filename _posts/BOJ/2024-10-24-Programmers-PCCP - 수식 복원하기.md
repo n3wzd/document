@@ -51,7 +51,7 @@ title: '[Programmers] PCCP - 수식 복원하기'
     -   결괏값이 음수가 되거나 서로 모순되는 수식은 주어지지 않습니다.
 
 ## 해결
-성립하는 진법을 모두 찾아야 합니다. => `브루트포스`<br>
+성립하는 진법을 모두 찾아야 합니다. => `브루트포스`
 - 수식 문자열 파싱은 `정규 표현식`을 사용하면 간편하게 파싱할 수 있습니다.
 - 진법 변환은 자릿수를 기준으로 변환하면 됩니다.
 - 수식의 정답을 비교할 때는 주어진 진법으로 변환하고 비교합니다.
@@ -73,8 +73,8 @@ title: '[Programmers] PCCP - 수식 복원하기'
 #include <regex>
 using namespace std;
 struct Expr { int a, b, c; bool add; };
-vector<Expr> X, N;<br>
-vector<string> finalX;<br>
+vector<Expr> X, N;
+vector<string> finalX;
 bool base[10];
 
 void parshing(string str) {
@@ -94,7 +94,7 @@ void parshing(string str) {
     str[str.size() - 1] == 'X' ? (X.push_back(expr), finalX.push_back(str)) : N.push_back(expr);
 }
 
-vector<string> solution(vector<string> expressions) {<br>
+vector<string> solution(vector<string> expressions) {
     int lo = 1, hi = 9;
     for (string str : expressions)
         parshing(str);
@@ -117,7 +117,7 @@ vector<string> solution(vector<string> expressions) {<br>
 
     for (int i = 0; i < X.size(); i++) {
         Expr expr = X[i];
-        vector<int> answers; bool isSame = 0; int answerBase = 0;<br>
+        vector<int> answers; bool isSame = 0; int answerBase = 0;
         for (int bs = lo; bs <= hi; bs++) {
             if (base[bs]) {
                 int A = ((expr.a / 10) * bs) + expr.a % 10;
@@ -127,7 +127,7 @@ vector<string> solution(vector<string> expressions) {<br>
                 answers.push_back(subC[0] * 100 + subC[1] * 10 + subC[2]);
             }
         }
-        if (answers.size() > 0) {<br>
+        if (answers.size() > 0) {
             answerBase = answers[0]; isSame = 1;
             for (int answer : answers)
                 isSame &= answerBase == answer;
@@ -142,5 +142,5 @@ vector<string> solution(vector<string> expressions) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/340210<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/340210
 {% endraw %}

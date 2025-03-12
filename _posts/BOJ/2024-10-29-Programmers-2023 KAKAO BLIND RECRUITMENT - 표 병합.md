@@ -55,7 +55,7 @@ title: '[Programmers] 2023 KAKAO BLIND RECRUITMENT - 표 병합'
 -   `commands`는 1개 이상의  `"PRINT r c"`  명령어를 포함하고 있습니다.
 
 ## 해결
-병합된 셀은 하나의 집합을 가지며, 기준 셀이 존재합니다. => `Disjoint Set`<br>
+병합된 셀은 하나의 집합을 가지며, 기준 셀이 존재합니다. => `Disjoint Set`
 - 트리를 저장하는 배열, 값을 저장하는 배열을 정의합니다. (크기 2500)
 - UPDATE A: find 연산으로 루트 노드의 값을 바꿉니다.
 - UPDATE value1: 값 배열을 순회해서 업데이트합니다.
@@ -101,7 +101,7 @@ void merge(int a, int b) {
 void unmerge(int n) {
     int p = find(n);
     string v = value[p];
-    vector<int> q;<br>
+    vector<int> q;
     for (int i = 0; i <= 2500; i++)
         if (find(i) == p)
             q.push_back(i);
@@ -110,15 +110,15 @@ void unmerge(int n) {
     value[n] = v;
 }
 
-vector<string> solution(vector<string> commands) {<br>
-    vector<string> answer;<br>
+vector<string> solution(vector<string> commands) {
+    vector<string> answer;
     for (int i = 0; i <= 2500; i++)
         parent[i] = -1, value[i] = "";
     for (string cmd : commands) {
         istringstream iss(cmd);
         string word;
-        vector<string> words;<br>
-        while (iss >> word)<br>
+        vector<string> words;
+        while (iss >> word)
             words.push_back(word);
 
         if (words[0] == "UPDATE" && words.size() == 4)
@@ -141,5 +141,5 @@ vector<string> solution(vector<string> commands) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/150366<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/150366
 {% endraw %}

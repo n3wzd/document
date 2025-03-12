@@ -49,7 +49,7 @@ title: '[Programmers] 2018 KAKAO BLIND RECRUITMENT - 다트 게임'
 #include <vector>
 using namespace std;
 bool digit(char c) { return c >= '0' && c <= '9'; }
-vector<int> list;<br>
+vector<int> list;
 
 int solution(string s) {
     int answer = 0;
@@ -61,7 +61,7 @@ int solution(string s) {
         if (s[i+1] == 'T')
             n *= n * n;
         if (i+2 < s.size() && s[i+2] == '*') {
-            if(list.size() > 0)<br>
+            if(list.size() > 0)
                 list[list.size() - 1] *= 2;
             n *= 2, i++;
         }
@@ -76,5 +76,5 @@ int solution(string s) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17682<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/17682
 {% endraw %}

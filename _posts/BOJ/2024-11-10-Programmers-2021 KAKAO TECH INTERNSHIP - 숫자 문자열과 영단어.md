@@ -26,7 +26,7 @@ title: '[Programmers] 2021 KAKAO TECH INTERNSHIP - 숫자 문자열과 영단어
 
 ## 해결
 - 주어진 문자열에서 20가지 단어를 비교하며 탐색합니다.
-- 접두사, 접미사가 겹쳐지는 단어가 없으므로 단어 대체를 사용할 수도 있습니다. => `정규 표현식`<br>
+- 접두사, 접미사가 겹쳐지는 단어가 없으므로 단어 대체를 사용할 수도 있습니다. => `정규 표현식`
 
 ## 코드
 ```
@@ -51,5 +51,5 @@ int solution(string s) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/81301<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/81301
 {% endraw %}

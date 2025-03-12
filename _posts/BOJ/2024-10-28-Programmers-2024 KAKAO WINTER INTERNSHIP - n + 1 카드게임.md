@@ -40,7 +40,7 @@ title: '[Programmers] 2024 KAKAO WINTER INTERNSHIP - n + 1 카드게임'
 - 카드 덱에 있는 수는 유일하며, 임의의 수가 주어지면 반드시 짝이 결정됩니다.
 - 덱에 있는 카드 쌍은 턴을 버틸 수 있는 생명과 같습니다.
 - 카드 쌍에서 하나만 있으면 아무런 의미가 없으며, 항상 쌍을 맞춰야 이득입니다. 앞쪽의 카드 구매, 뒤쪽의 카드를 각각 구매하는 것은 뒤쪽에 있는 카드를 가격 2로 구매하는 것과 동일합니다.
-- 초기 덱에 없는 서로 매칭되는 카드 2개를 구매하는 것보다, 초기 덱에 쌍이 존재하는 카드 1개를 구매하는 것이 항상 이득입니다. => `그리디`<br>
+- 초기 덱에 없는 서로 매칭되는 카드 2개를 구매하는 것보다, 초기 덱에 쌍이 존재하는 카드 1개를 구매하는 것이 항상 이득입니다. => `그리디`
 - 만약 서로 매칭되는 카드 2개를 만났다면, 보류합니다. 추후 생명이 부족하다면 보류한 카드 쌍을 코인으로 구매하여 보충합니다. 이때 코인이 부족하다면 게임이 종료됩니다.
 
 예제를 정리하면 다음과 같습니다:
@@ -68,16 +68,16 @@ N = 12
 using namespace std;
 int N, turn, coin, life, items, price[1001];
 bool hasFirstCard[1001], hasCard[1001];
-vector<int> cards;<br>
+vector<int> cards;
 
 void shop(int card) {
-    if (price[card] == 1 && coin > 0)<br>
+    if (price[card] == 1 && coin > 0)
         coin--, life++;
     if (price[card] == 2)
         items++;
 }
 
-int solution(int coinInput, vector<int> cardsInput) {<br>
+int solution(int coinInput, vector<int> cardsInput) {
     coin = coinInput; cards = cardsInput; N = cards.size();
     for (int i = 0; i < N / 3; i++) {
         if (hasFirstCard[N + 1 - cards[i]])
@@ -95,7 +95,7 @@ int solution(int coinInput, vector<int> cardsInput) {<br>
         int idx = N / 3 + turn * 2;
         shop(cards[idx]), shop(cards[idx + 1]);
         if (life < turn + 1) {
-            if (items > 0 && coin > 1)<br>
+            if (items > 0 && coin > 1)
                 items--, coin -= 2, life++;
             else
                 break;
@@ -106,5 +106,5 @@ int solution(int coinInput, vector<int> cardsInput) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/258707<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/258707
 {% endraw %}

@@ -23,7 +23,7 @@ XX게임에는 피로도 시스템(0 이상의 정수로 표현합니다)이 있
     -   서로 다른 던전의 ["최소 필요 피로도", "소모 피로도"]가 서로 같을 수 있습니다.
 
 ## 해결
-최소 필요 피로도가 존재하므로 소모 피로도 순서대로 방문하는 것이 최적이 아닐 수 있습니다. => `완전 탐색`<br>
+최소 필요 피로도가 존재하므로 소모 피로도 순서대로 방문하는 것이 최적이 아닐 수 있습니다. => `완전 탐색`
 
 던전의 모든 `순열`을 확인하며, 순열의 최대 길이가 정답입니다.
 
@@ -31,7 +31,7 @@ XX게임에는 피로도 시스템(0 이상의 정수로 표현합니다)이 있
 ```
 #include <vector>
 using namespace std;
-vector<vector<int>> D;<br>
+vector<vector<int>> D;
 int N; bool selected[9];
 
 int BT(int depth, int coffee) {
@@ -49,7 +49,7 @@ int BT(int depth, int coffee) {
     return cnt;
 }
 
-int solution(int k, vector<vector<int>> dungeons) {<br>
+int solution(int k, vector<vector<int>> dungeons) {
     D = dungeons; N = D.size();
     return BT(N, k);
 }
@@ -57,5 +57,5 @@ int solution(int k, vector<vector<int>> dungeons) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/87946<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/87946
 {% endraw %}

@@ -57,7 +57,7 @@ using namespace std;
 struct Point { int x, y; };
 struct PointSet { Point r = { 0, 0 }, b = { 0, 0 }; };
 int N, M, minTurn = 999, dx[4] = { 1, 0, -1, 0 }, dy[4] = { 0, 1, 0, -1 };
-vector<vector<int>> board;<br>
+vector<vector<int>> board;
 bool visitedR[4][4], visitedB[4][4];
 Point RG, BG;
 
@@ -91,7 +91,7 @@ void DFS(Point r, Point b, int turn) {
     visitedR[r.y][r.x] = visitedB[b.y][b.x] = 0;
 }
 
-int solution(vector<vector<int>> maze) {<br>
+int solution(vector<vector<int>> maze) {
     Point r, b;
     board = maze, N = maze.size(), M = maze[0].size();
     for (int y = 0; y < N; y++) {
@@ -108,5 +108,5 @@ int solution(vector<vector<int>> maze) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/250134<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/250134
 {% endraw %}

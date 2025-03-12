@@ -31,15 +31,15 @@ title: '[Programmers] 연습문제 - 기능개발'
 #include <queue>
 using namespace std;
 
-vector<int> solution(vector<int> P, vector<int> S) {<br>
-    vector<int> answer, C;<br>
+vector<int> solution(vector<int> P, vector<int> S) {
+    vector<int> answer, C;
     for(int i = 0; i < P.size(); i++) {
         int d = (100 - P[i]) / S[i];
         C.push_back(d * S[i] == 100 - P[i] ? d : d + 1);
     }
     int mx = C[0], p = 0;
     for(int i = 1; i < P.size(); i++) {
-        if(C[i] > mx) {<br>
+        if(C[i] > mx) {
             mx = C[i];
             answer.push_back(i - p);
             p = i;
@@ -51,5 +51,5 @@ vector<int> solution(vector<int> P, vector<int> S) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42586<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/42586
 {% endraw %}

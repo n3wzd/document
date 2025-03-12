@@ -21,7 +21,7 @@ S사에서는 각 부서에 필요한 물품을 지원해 주기 위해 부서�
 -   budget은 예산을 나타내며, 1 이상 10,000,000 이하의 자연수입니다.
 
 ## 해결
-항상 신청한 금액이 적은 부서부터 주는 것이 이득입니다. => `그리디`<br>
+항상 신청한 금액이 적은 부서부터 주는 것이 이득입니다. => `그리디`
 
 부서 오름차순 정렬하고 순차적으로 예산을 분배하면 됩니다.
 
@@ -31,7 +31,7 @@ S사에서는 각 부서에 필요한 물품을 지원해 주기 위해 부서�
 #include <algorithm>
 using namespace std;
 
-int solution(vector<int> D, int budget) {<br>
+int solution(vector<int> D, int budget) {
     int answer = 0;
     sort(D.begin(), D.end());
     for(auto d : D)
@@ -42,5 +42,5 @@ int solution(vector<int> D, int budget) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12982<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/12982
 {% endraw %}

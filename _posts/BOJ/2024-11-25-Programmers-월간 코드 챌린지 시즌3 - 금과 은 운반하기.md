@@ -46,7 +46,7 @@ title: '[Programmers] 월간 코드 챌린지 시즌3 - 금과 은 운반하기'
 using namespace std;
 typedef long long ll;
 
-ll solution(int a, int b, vector<int> G, vector<int> S, vector<int> W, vector<int> T) {<br>
+ll solution(int a, int b, vector<int> G, vector<int> S, vector<int> W, vector<int> T) {
     ll lo = 0, hi = 4e14, N = G.size();
     while(lo < hi) {
         ll t = (lo + hi) / 2;
@@ -66,5 +66,5 @@ ll solution(int a, int b, vector<int> G, vector<int> S, vector<int> W, vector<in
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/86053<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/86053
 {% endraw %}

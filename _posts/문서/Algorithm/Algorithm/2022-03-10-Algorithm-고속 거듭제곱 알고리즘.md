@@ -21,8 +21,8 @@ title: '[Algorithm] 고속 거듭제곱 알고리즘'
 
 여기서 홀수를 대처하기 위해 나머지를 저장하는 변수를 추가하자.
 ```
-(2, 7) 2 2 2 2 2 2 2 -> buf *= 2<br>
-(4, 3) 4 4 4 -> buf *= 4<br>
+(2, 7) 2 2 2 2 2 2 2 -> buf *= 2
+(4, 3) 4 4 4 -> buf *= 4
 (16, 1) 16
 = 16 * buf = 16 * 8 = 128
 ```
@@ -36,9 +36,9 @@ int a, b, buf = 1;
 
 int main()
 {
-	cin >> a >> b;<br>
+	cin >> a >> b;
 
-	while (b > 1)<br>
+	while (b > 1)
 	{
 		if (b % 2 != 0) buf *= a;
 		a *= a;
@@ -51,6 +51,6 @@ int main()
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/1629<br>
-https://www.acmicpc.net/problem/10830<br>
+<br>https://www.acmicpc.net/problem/1629
+<br>https://www.acmicpc.net/problem/10830
 {% endraw %}

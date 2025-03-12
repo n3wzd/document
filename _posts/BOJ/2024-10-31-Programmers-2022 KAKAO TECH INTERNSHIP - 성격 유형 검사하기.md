@@ -56,7 +56,7 @@ title: '[Programmers] 2022 KAKAO TECH INTERNSHIP - 성격 유형 검사하기'
 using namespace std;
 int score[26];
 
-string solution(vector<string> survey, vector<int> choices) {<br>
+string solution(vector<string> survey, vector<int> choices) {
     string answer = "";
     for(int i = 0; i < survey.size(); i++) {
         switch(choices[i]) {
@@ -77,5 +77,5 @@ string solution(vector<string> survey, vector<int> choices) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/118666<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/118666
 {% endraw %}

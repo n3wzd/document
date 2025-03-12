@@ -22,10 +22,10 @@ title: '[Programmers] 월간 코드 챌린지 시즌1 - 3진법 뒤집기'
 ```
 #include <vector>
 using namespace std;
-vector<int> T;<br>
+vector<int> T;
 
 int solution(int n) {
-    while(n > 0) {<br>
+    while(n > 0) {
         T.push_back(n % 3);
         n /= 3;
     }
@@ -37,5 +37,5 @@ int solution(int n) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/68935<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/68935
 {% endraw %}

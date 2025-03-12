@@ -31,10 +31,10 @@ title: '[Programmers] 연습문제 - K번째수'
 #include <algorithm>
 using namespace std;
 
-vector<int> solution(vector<int> array, vector<vector<int>> commands) {<br>
-    vector<int> answer;<br>
+vector<int> solution(vector<int> array, vector<vector<int>> commands) {
+    vector<int> answer;
     for(auto c : commands) {
-        vector<int> sub;<br>
+        vector<int> sub;
         for (int i = c[0] - 1; i <= c[1] - 1; i++)
             sub.push_back(array[i]);
         sort(sub.begin(), sub.end());
@@ -45,5 +45,5 @@ vector<int> solution(vector<int> array, vector<vector<int>> commands) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42748<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/42748
 {% endraw %}

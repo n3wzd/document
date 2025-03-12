@@ -31,7 +31,7 @@ arr이 매개변수로 주어집니다. 위와 같은 방식으로 arr을 압축
 ```
 #include <vector>
 using namespace std;
-vector<vector<int>> arr;<br>
+vector<vector<int>> arr;
 int cnt[2];
 
 void quad(int x, int y, int d) {
@@ -50,12 +50,12 @@ void quad(int x, int y, int d) {
     quad(x + nd, y + nd, nd);
 }
 
-vector<int> solution(vector<vector<int>> arrI) {<br>
+vector<int> solution(vector<vector<int>> arrI) {
     arr = arrI; quad(0, 0, arr.size());
     return { cnt[0], cnt[1] };
 }
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/68936<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/68936
 {% endraw %}

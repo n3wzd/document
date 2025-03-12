@@ -29,22 +29,22 @@ title: '[Algorithm] 완전 탐색'
 
 ## 연관 문제
 #### 일반
-https://www.acmicpc.net/problem/7568<br>
-https://www.acmicpc.net/problem/1025<br>
-https://www.acmicpc.net/problem/14500<br>
-https://www.acmicpc.net/problem/2615<br>
+<br>https://www.acmicpc.net/problem/7568
+<br>https://www.acmicpc.net/problem/1025
+<br>https://www.acmicpc.net/problem/14500
+<br>https://www.acmicpc.net/problem/2615
 
 #### 테크닉 - 확실한 오답은 피하기
-https://www.acmicpc.net/problem/9663<br>
-https://www.acmicpc.net/problem/14939<br>
-https://www.acmicpc.net/problem/1020<br>
+<br>https://www.acmicpc.net/problem/9663
+<br>https://www.acmicpc.net/problem/14939
+<br>https://www.acmicpc.net/problem/1020
 
 #### Meet In The Middle
 `Meet In The Middle` 문서 참고
 
 #### 답의 단서의 일부
-https://www.acmicpc.net/problem/17472<br>
+<br>https://www.acmicpc.net/problem/17472
 
 ## 참고
-https://namu.wiki/w/%EB%B8%8C%EB%A3%A8%ED%8A%B8%20%ED%8F%AC%EC%8A%A4<br>
+<br>https://namu.wiki/w/%EB%B8%8C%EB%A3%A8%ED%8A%B8%20%ED%8F%AC%EC%8A%A4
 {% endraw %}

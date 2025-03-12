@@ -51,7 +51,7 @@ title: '[Programmers] 2018 KAKAO BLIND RECRUITMENT - 뉴스 클러스터링'
 #include <algorithm>
 #include <cctype>
 using namespace std;
-multiset<string> MS;<br>
+multiset<string> MS;
 string toLower(string s) {
     transform(s.begin(), s.end(), s.begin(), ::tolower);
     return s;
@@ -77,5 +77,5 @@ int solution(string str1, string str2) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17677<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/17677
 {% endraw %}

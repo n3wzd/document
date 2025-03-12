@@ -53,11 +53,11 @@ LZW 압축은 다음 과정을 거친다.
 #include <vector>
 #include <map>
 using namespace std;
-map<string, int> dict;<br>
+map<string, int> dict;
 string tmp = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-vector<int> answer;<br>
+vector<int> answer;
 
-vector<int> solution(string msg) {<br>
+vector<int> solution(string msg) {
     int N = msg.size(), genID = 1;
     for (; genID <= 26; genID++)
         dict[tmp.substr(genID - 1, 1)] = genID;
@@ -65,7 +65,7 @@ vector<int> solution(string msg) {<br>
         int len = N - i;
         while (len) {
             string tk = msg.substr(i, len);
-            if (dict[tk] > 0) {<br>
+            if (dict[tk] > 0) {
                 answer.push_back(dict[tk]);
                 break;
             }
@@ -80,5 +80,5 @@ vector<int> solution(string msg) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17684<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/17684
 {% endraw %}

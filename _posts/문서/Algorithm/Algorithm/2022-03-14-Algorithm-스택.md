@@ -25,9 +25,9 @@ C++ stack.h에서 스택을 제공한다.
 스택이 비어 있을 때 조회/삭제 연산을 하면 오류가 발생한다. 조회/삭제 전에는 스택이 비어 있는지 검사하는 것이 좋다.
 
 ## 연관 문제
-https://www.acmicpc.net/problem/10828<br>
-https://www.acmicpc.net/problem/17298<br>
+<br>https://www.acmicpc.net/problem/10828
+<br>https://www.acmicpc.net/problem/17298
 
 ## 참고
-https://namu.wiki/w/%EC%8A%A4%ED%83%9D(%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0)<br>
+<br>https://namu.wiki/w/%EC%8A%A4%ED%83%9D(%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0)
 {% endraw %}

@@ -50,7 +50,7 @@ title: '[Programmers] 2018 KAKAO BLIND RECRUITMENT - 캐시'
 #include <algorithm>
 using namespace std;
 int N, T;
-queue<string> cache;<br>
+queue<string> cache;
 bool compare(string a, string b) {
     transform(a.begin(), a.end(), a.begin(), ::tolower);
     transform(b.begin(), b.end(), b.begin(), ::tolower);
@@ -69,12 +69,12 @@ int find(string s) {
     cache.push(s);
     if(hit) 
         return 1;
-    else if(cache.size() > N)<br>
+    else if(cache.size() > N)
         cache.pop();
     return 5;
 }
 
-int solution(int cacheSize, vector<string> cities) {<br>
+int solution(int cacheSize, vector<string> cities) {
     N = cacheSize;
     for(auto d : cities)
         T += find(d);
@@ -83,5 +83,5 @@ int solution(int cacheSize, vector<string> cities) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17680<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/17680
 {% endraw %}

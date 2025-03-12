@@ -41,10 +41,10 @@ title: '[Programmers] 2024 KAKAO WINTER INTERNSHIP - 가장 많이 받은 선물
 #include <vector>
 #include <map>
 using namespace std;
-map<string, int> name;<br>
+map<string, int> name;
 int N, gift[51][51], score[51];
 
-int solution(vector<string> friends, vector<string> gifts) {<br>
+int solution(vector<string> friends, vector<string> gifts) {
     N = friends.size();
     for (int i = 0; i < N; i++)
         name.insert({ friends[i], i });
@@ -63,7 +63,7 @@ int solution(vector<string> friends, vector<string> gifts) {<br>
     for (int i = 0; i < N; i++) {
         int myGift = 0;
         for (int j = 0; j < N; j++)
-            if (i != j && (gift[i][j] > gift[j][i] || (gift[i][j] == gift[j][i] && score[i] > score[j])))<br>
+            if (i != j && (gift[i][j] > gift[j][i] || (gift[i][j] == gift[j][i] && score[i] > score[j])))
                 myGift++;
         maxGift = max(maxGift, myGift);
     }
@@ -72,5 +72,5 @@ int solution(vector<string> friends, vector<string> gifts) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/258712<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/258712
 {% endraw %}

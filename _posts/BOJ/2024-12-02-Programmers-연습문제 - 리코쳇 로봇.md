@@ -37,7 +37,7 @@ D....D.
     -   "R"과 "G"는 한 번씩 등장합니다.
 
 ## 해결
-격자에서 최단 거리를 찾아야 합니다. => `최단거리 BFS`<br>
+격자에서 최단 거리를 찾아야 합니다. => `최단거리 BFS`
 
 전체 과정은 일반적인 격자 맵에서 최단거리 BFS와 같습니다. (`BOJ - 2178 - 미로 탐색` 참고) 다음 정점을 현재 정점(`x`, `y`)에서 4방향으로 벽에 닿을 때까지 이동한 위치로 하면 됩니다.
 
@@ -50,9 +50,9 @@ using namespace std;
 struct Point { int x, y; };
 int dist[101][101], dx[] = { 1, 0, -1, 0 }, dy[] = { 0, 1, 0, -1 };
 
-int solution(vector<string> board) {<br>
+int solution(vector<string> board) {
     int N = board.size(), M = board[0].size();
-    queue<Point> q; Point G;<br>
+    queue<Point> q; Point G;
     for(int y = 0; y < N; y++) {
         for(int x = 0; x < M; x++) {
             if(board[y][x] == 'R')
@@ -71,7 +71,7 @@ int solution(vector<string> board) {<br>
             while(nx >= 0 && nx < M && ny >= 0 && ny < N && board[ny][nx] != 'D')
                 nx += dx[d], ny += dy[d];
             nx -= dx[d], ny -= dy[d];
-            if(dist[ny][nx] > 0)<br>
+            if(dist[ny][nx] > 0)
                 continue;
             q.push({ nx, ny });
             dist[ny][nx] = dist[y][x] + 1;
@@ -82,5 +82,5 @@ int solution(vector<string> board) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/169199<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/169199
 {% endraw %}

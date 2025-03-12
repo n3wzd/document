@@ -43,7 +43,7 @@ title: '[Programmers] 2020 KAKAO BLIND RECRUITMENT - 기둥과 보 설치'
     -   x, y좌표가 모두 같은 경우 기둥이 보보다 앞에 오면 됩니다.
 
 ## 해결
-- 주어진 건설 쿼리를 그대로 구현하면 됩니다. => `시뮬레이션`<br>
+- 주어진 건설 쿼리를 그대로 구현하면 됩니다. => `시뮬레이션`
 - 기둥 원점은 아래 점이며, 보 원점은 왼쪽 점입니다. 한 위치에 기둥과 보는 중첩될 수 있습니다.
 
 설치 조건은 다음과 같습니다:
@@ -65,7 +65,7 @@ bool board[104][104][2];
 
 bool isSafe(int x, int y, int a) {
     return (a == 0) ?
-        (y == 1 || (y > 1 && board[y - 1][x][0]) || board[y][x - 1][1] || board[y][x][1]) :<br>
+        (y == 1 || (y > 1 && board[y - 1][x][0]) || board[y][x - 1][1] || board[y][x][1]) :
         ((board[y - 1][x][0] || board[y - 1][x + 1][0]) || (board[y][x - 1][1]) && (board[y][x + 1][1]));
 }
 
@@ -87,8 +87,8 @@ void uninstall(int x, int y, int a) {
     if (!ok) board[y][x][a] = 1;
 }
 
-vector<vector<int>> solution(int n, vector<vector<int>> build_frame) {<br>
-    N = n + 1; vector<vector<int>> answer;<br>
+vector<vector<int>> solution(int n, vector<vector<int>> build_frame) {
+    N = n + 1; vector<vector<int>> answer;
     for (auto frame : build_frame) {
         frame[3] == 1 ?
             install(frame[0] + 1, frame[1] + 1, frame[2]) :
@@ -104,5 +104,5 @@ vector<vector<int>> solution(int n, vector<vector<int>> build_frame) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/60061<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/60061
 {% endraw %}

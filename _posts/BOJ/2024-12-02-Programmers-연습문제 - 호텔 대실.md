@@ -23,8 +23,8 @@ title: '[Programmers] 연습문제 - 호텔 대실'
 ## 해결
 모든 구간을 배치했을 때, 구간이 가장 많이 존재하는 위치를 찾아야 합니다.
 - 시간은 정수로 변환해서 사용합니다.
-- 전체 길이가 작으므로, 모든 위치를 탐색할 수 있습니다. => `스위핑`<br>
-- 현재 위치에서 구간의 개수를 정의합니다. 구간의 시작과 끝을 수직선에 기록하여, 구간 시작을 만나면 구간의 개수에 1을 더하고 끝을 만나면 구간의 개수에 1을 뺍니다. => `누적 합`<br>
+- 전체 길이가 작으므로, 모든 위치를 탐색할 수 있습니다. => `스위핑`
+- 현재 위치에서 구간의 개수를 정의합니다. 구간의 시작과 끝을 수직선에 기록하여, 구간 시작을 만나면 구간의 개수에 1을 더하고 끝을 만나면 구간의 개수에 1을 뺍니다. => `누적 합`
 
 ```
 1. 모든 구간의 시작과 끝을 수직선에 기록
@@ -42,7 +42,7 @@ using namespace std;
 int ttoi(string t) { return stoi(t.substr(0, 2)) * 60 + stoi(t.substr(3, 2)); }
 int T[1451];
 
-int solution(vector<vector<string>> book_time) {<br>
+int solution(vector<vector<string>> book_time) {
     int answer = 0, sum = 0;
     for(auto book : book_time) {
         T[ttoi(book[0])]++;
@@ -57,5 +57,5 @@ int solution(vector<vector<string>> book_time) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/155651<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/155651
 {% endraw %}

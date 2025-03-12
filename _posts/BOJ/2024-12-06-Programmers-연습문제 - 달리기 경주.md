@@ -24,7 +24,7 @@ title: '[Programmers] 연습문제 - 달리기 경주'
     -   경주 진행중 1등인 선수의 이름은 불리지 않습니다.
 
 ## 해결
-문자열 리스트에서 문자열 쿼리가 주어졌을 때 해당 문자열을 이전 위치의 것과 swap해야 합니다. 문자열에서 위치, 위치에서 문자열을 찾는 자료구조를 정의하면 됩니다. => 배열, `map`<br>
+문자열 리스트에서 문자열 쿼리가 주어졌을 때 해당 문자열을 이전 위치의 것과 swap해야 합니다. 문자열에서 위치, 위치에서 문자열을 찾는 자료구조를 정의하면 됩니다. => 배열, `map`
 
 ## 코드
 ```
@@ -32,9 +32,9 @@ title: '[Programmers] 연습문제 - 달리기 경주'
 #include <vector>
 #include <unordered_map>
 using namespace std;
-unordered_map<string, int> ranks;<br>
+unordered_map<string, int> ranks;
 
-vector<string> solution(vector<string> players, vector<string> callings) {<br>
+vector<string> solution(vector<string> players, vector<string> callings) {
     for(int i = 0; i < players.size(); i++)
         ranks[players[i]] = i;
     for(auto cur : callings) {
@@ -49,5 +49,5 @@ vector<string> solution(vector<string> players, vector<string> callings) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/178871<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/178871
 {% endraw %}

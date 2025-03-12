@@ -26,7 +26,7 @@ FJ has noticed that cows near each other in line often know each other well; he 
 연속합의 길이가 K를 초과하지 않아야 하는 조건 속에서 최대 합을 구해야 한다. `DP`를 사용하자.
 
 **< 부분 문제 정의 >**
-- 현재 상태 = 현재 수열의 끝 => (n)<br>
+- 현재 상태 = 현재 수열의 끝 => (n)
 	- 목표 상태 = N
 - 계산 결과 = 수열 S의 구간 [1, n]에서 문제의 조건에 맞는 최대 합
 
@@ -47,7 +47,7 @@ S의 구간 합은 `누적 합`으로 구할 수 있다. (값의 변동은 없�
 for (int i = n; i >= n - K; i--)
 	cache[n] = max(cache[n], ps[n] - ps[i] + cache[i - 1]);
 ```
-시간 복잡도는 O(N<sup>2</sup>)이다. 그러나 N은 최대 10<sup>5</sup>이므로 시간 초과가 발생할 수 있어 최적화 작업이 필요하다. => 구간 최대를 빠르게 구해야 함<br>
+시간 복잡도는 O(N<sup>2</sup>)이다. 그러나 N은 최대 10<sup>5</sup>이므로 시간 초과가 발생할 수 있어 최적화 작업이 필요하다. => 구간 최대를 빠르게 구해야 함
 
 위의 점화식은 슬라이딩 윈도우에서 최대를 구하는 문제라고 볼 수 있으며, 이 문제는 `덱`을 사용해서 O(N) 시간으로 단축할 수 있다. 점화식에서 (-ps[i] + cache[i - 1])를 덱의 값으로 저장하면 된다.
 
@@ -62,13 +62,13 @@ using namespace std;
 int N, K, cow;
 ll ps, cache;
 struct Node { ll val; int id; };
-deque<Node> dq;<br>
+deque<Node> dq;
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> K;<br>
+	cin >> N >> K;
 	for (int n = 1; n <= N; n++) {
-		cin >> cow;<br>
+		cin >> cow;
 		ps += cow;
 		if(!dq.empty())
 			if (n - (K + 1) >= dq.front().id)
@@ -76,12 +76,12 @@ int main() {
 
 		ll val = -ps + cache;
 		while (!dq.empty()) {
-			if (dq.back().val > val)<br>
+			if (dq.back().val > val)
 				break;
 			dq.pop_back();
 		}
 		dq.push_back({ val, n });
-		cache = (n - K > 0) ? ps + dq.front().val : ps;<br>
+		cache = (n - K > 0) ? ps + dq.front().val : ps;
 	}
 	cout << cache;
 	return 0;
@@ -89,5 +89,5 @@ int main() {
 ```
 
 ## 링크
-https://www.acmicpc.net/problem/5977<br>
+<br>https://www.acmicpc.net/problem/5977
 {% endraw %}

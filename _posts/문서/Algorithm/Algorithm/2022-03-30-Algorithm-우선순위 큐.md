@@ -39,7 +39,7 @@ return max_heap[1]
 #### 삽입
 1. 새로운 원소를 배열 맨 끝에 추가하고, 총 크기에 +1 더한다.
 ```
-=> insert 8<br>
+=> insert 8
            7
      6            3
   4    5       8   
@@ -51,13 +51,13 @@ heap_size = 6
 	- 만약 부모가 자식보다 작다면 교체를 수행한다.
 	- 루트 노드에 도달했으면 더 이상 비교를 할 수 없다. [과정 종료]
 ```
-=> child 8 > parent 3 -> replace!<br>
+=> child 8 > parent 3 -> replace!
            7
      6            8
   4    5       3   
 ```
 ```
-=> child 8 > parent 7 -> replace!<br>
+=> child 8 > parent 7 -> replace!
            8
      6            7
   4    5       3   
@@ -70,12 +70,12 @@ heap_size = 6
 힙은 루트 노드만 조회가 가능하므로, 삭제 역시 루트 노드만 가능하다.
 1. 루트 노드를 삭제하고, 배열 상에서 마지막 원소를 루트 노드에 옮긴다. 그리고 총 크기에서 1을 뺀다.
 ```
-=> delete 8<br>
+=> delete 8
            
      6            7
   4    5       3   
 
-=> move 3 to root<br>
+=> move 3 to root
            3
      6            7
   4    5         
@@ -85,7 +85,7 @@ heap_size = 6
 	- 최대 자식과 루트 노드를 비교하고, 자식이 더 크면 교체를 수행.
 	- 그렇지 않으면 [과정 종료]
 ```
-=> child 7 > parent 3 -> replace!<br>
+=> child 7 > parent 3 -> replace!
            7
      6            3
   4    5          
@@ -118,7 +118,7 @@ void Push(int n)
 	max_heap[++heap_size] = n;
 	int i = heap_size;
 
-	for (; i > 1; i /= 2)<br>
+	for (; i > 1; i /= 2)
 	{
 		if (n <= max_heap[i / 2]) break;
 		max_heap[i] = max_heap[i / 2];
@@ -137,7 +137,7 @@ int Pop()
 	int i = 1;
 	while (i <= heap_size / 2)
 	{
-		int m = (max_heap[i * 2] > max_heap[i * 2 + 1]) ? i * 2 : i * 2 + 1;<br>
+		int m = (max_heap[i * 2] > max_heap[i * 2 + 1]) ? i * 2 : i * 2 + 1;
 		if (last >= max_heap[m]) break;
 		max_heap[i] = max_heap[m];
 		i = m;
@@ -159,7 +159,7 @@ int main()
 	int t;
 	scanf("%d", &t);
 
-	for (; t > 0; t--)<br>
+	for (; t > 0; t--)
 	{
 		int cmd;
 		scanf("%d", &cmd);
@@ -183,18 +183,18 @@ sort함수와 비슷하게 비교 함수를 사용해서 커스터마이징이 �
 ```
 struct compare{
     bool operator()(int a, int b){
-        return a > b;<br>
+        return a > b;
     }
 };
 ```
 위의 예시를 사용하면 오름차순이 된다. 만약 a < b이라면, 내림차순이 된다. (sort 비교 함수와 달리, 부등호 방향이 반대라는 점을 유의하자)
 
 ## 연관 문제
-https://www.acmicpc.net/problem/11279<br>
-https://www.acmicpc.net/problem/11286<br>
-https://www.acmicpc.net/problem/1655<br>
+<br>https://www.acmicpc.net/problem/11279
+<br>https://www.acmicpc.net/problem/11286
+<br>https://www.acmicpc.net/problem/1655
 
 ## 참고
-https://chanhuiseok.github.io/posts/ds-4/<br>
-https://doorrock.tistory.com/13<br>
+<br>https://chanhuiseok.github.io/posts/ds-4/
+<br>https://doorrock.tistory.com/13
 {% endraw %}

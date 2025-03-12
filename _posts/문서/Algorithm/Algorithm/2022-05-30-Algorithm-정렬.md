@@ -33,7 +33,7 @@ bool cmp(int a, int b)		// 함수, 인자 이름은 아무거나 해도 상관�
 	return a < b;
 }
 ```
-위의 예시를 적용하면 오름차순 정렬이 수행된다. 만약 a > b이라면, 내림차순 정렬이 된다.<br>
+위의 예시를 적용하면 오름차순 정렬이 수행된다. 만약 a > b이라면, 내림차순 정렬이 된다.
 
 Tip. greater<자료형>(), less<자료형>()
 cmp 위치에 greater, less 객체를 줄 수 있다. 전자는 내림차순, 후자는 오름차순이다.
@@ -49,16 +49,16 @@ cmp 위치에 greater, less 객체를 줄 수 있다. 전자는 내림차순, �
 using namespace std;
 
 int n;
-pair<int, int> arr[100002];<br>
+pair<int, int> arr[100002];
 
-bool cmp(pair<int, int> a, pair<int, int> b) {<br>
+bool cmp(pair<int, int> a, pair<int, int> b) {
 	if (a.first != b.first) return a.first < b.first;
 	else return a.second < b.second;
 }
 
 int main()
 {
-	cin >> n;<br>
+	cin >> n;
 	for (int i = 0; i < n; i++)
 		scanf("%d%d", &arr[i].first, &arr[i].second);
 	sort(arr, arr + n, cmp);
@@ -69,9 +69,9 @@ int main()
 ```
 
 ### 연관 문제
-https://www.acmicpc.net/problem/2751<br>
-https://www.acmicpc.net/problem/11650<br>
-https://www.acmicpc.net/problem/1517<br>
+<br>https://www.acmicpc.net/problem/2751
+<br>https://www.acmicpc.net/problem/11650
+<br>https://www.acmicpc.net/problem/1517
 
 ## 카운팅 정렬
 카운팅 정렬은 원소의 값을 인덱스로 하고, 해당 원소의 출현 횟수를 값으로 하는 배열을 사용해서 정렬하는 방법이다.
@@ -108,7 +108,7 @@ int cnt[10002] = { 0, };
 
 int main()
 {
-	cin >> n;<br>
+	cin >> n;
 	for (int i = 0; i < n; i++)
 	{
 		int num;
@@ -125,9 +125,9 @@ int main()
 ```
 
 ### 연관 문제
-https://www.acmicpc.net/problem/10989<br>
-https://www.acmicpc.net/problem/12899<br>
+<br>https://www.acmicpc.net/problem/10989
+<br>https://www.acmicpc.net/problem/12899
 
 ## 참고
-https://namu.wiki/w/%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98<br>
+<br>https://namu.wiki/w/%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98
 {% endraw %}

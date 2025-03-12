@@ -29,7 +29,7 @@ title: '[Programmers] 2019 KAKAO TECH INTERNSHIP - 크레인 인형뽑기 게임
 -   moves 배열 각 원소들의 값은 1 이상이며 board 배열의 가로 크기 이하인 자연수입니다.
 
 ## 해결
-인형을 뽑는 과정을 구현합니다. => `시뮬레이션`<br>
+인형을 뽑는 과정을 구현합니다. => `시뮬레이션`
 
 바구니는 선입후출 구조이므로 `스택`으로 구현합니다. 스택의 위쪽과 현재 인형이 같으면 인형을 터뜨립니다.
 
@@ -38,9 +38,9 @@ title: '[Programmers] 2019 KAKAO TECH INTERNSHIP - 크레인 인형뽑기 게임
 #include <vector>
 #include <stack>
 using namespace std;
-stack<int> stk;<br>
+stack<int> stk;
 
-int solution(vector<vector<int>> board, vector<int> moves) {<br>
+int solution(vector<vector<int>> board, vector<int> moves) {
     int N = board.size(), answer = 0;
     for(auto x : moves) {
         int y = 0; x--;
@@ -60,5 +60,5 @@ int solution(vector<vector<int>> board, vector<int> moves) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/64061<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/64061
 {% endraw %}

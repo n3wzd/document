@@ -21,7 +21,7 @@ A 나라와 B 나라가 싸우고 있는 이 세계는 2 차원 공간으로 이
     -   0 ≤ s < e ≤ 100,000,000
 
 ## 해결
-최소 개수로 모든 개구간을 커버해야 합니다. 어떤 구간을 커버할 때, 최대한 다른 구간도 많이 커버하는 것이 이득입니다. 부분 최적이 전체 최적을 보장합니다. => `그리디`<br>
+최소 개수로 모든 개구간을 커버해야 합니다. 어떤 구간을 커버할 때, 최대한 다른 구간도 많이 커버하는 것이 이득입니다. 부분 최적이 전체 최적을 보장합니다. => `그리디`
 
 현재 구간을 현재 범위로 설정합니다. 그리고 시작점과 가까운 다음 구간을 가져옵니다. 이 구간이 현재 범위와 걸쳐진다면 같이 커버가 가능합니다. 이때 현재 범위가 다음 구간의 교집합으로 축소됩니다. 현재 범위가 커버하지 못하는 다음 구간을 만나면, 정답 개수에 1을 더하고 현재 범위를 다음 구간으로 리셋합니다.
 ```
@@ -40,10 +40,10 @@ A 나라와 B 나라가 싸우고 있는 이 세계는 2 차원 공간으로 이
 #include <algorithm>
 using namespace std;
 
-int solution(vector<vector<int>> targets) {<br>
+int solution(vector<vector<int>> targets) {
     int N = targets.size(), answer = 0;
     sort(targets.begin(), targets.end(), [](const vector<int>& a, const vector<int>& b) {
-        return a[0] != b[0] ?  a[0] < b[0] : a[1] > b[1];<br>
+        return a[0] != b[0] ?  a[0] < b[0] : a[1] > b[1];
     });
     for(int i = 0; i < N;) {
         int lo = targets[i][0], hi = targets[i][1];
@@ -62,5 +62,5 @@ int solution(vector<vector<int>> targets) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/181188<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/181188
 {% endraw %}

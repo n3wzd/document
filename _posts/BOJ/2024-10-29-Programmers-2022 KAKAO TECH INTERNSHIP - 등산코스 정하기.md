@@ -86,7 +86,7 @@ int merge(int a, int b) {
     return MAXN;
 }
 
-vector<int> solution(int n, vector<vector<int>> paths, vector<int> gates, vector<int> summits) {<br>
+vector<int> solution(int n, vector<vector<int>> paths, vector<int> gates, vector<int> summits) {
     for (int i = 0; i <= n; i++)
         parent[i] = -1;
     for (int gate : gates)
@@ -108,5 +108,5 @@ vector<int> solution(int n, vector<vector<int>> paths, vector<int> gates, vector
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/118669<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/118669
 {% endraw %}

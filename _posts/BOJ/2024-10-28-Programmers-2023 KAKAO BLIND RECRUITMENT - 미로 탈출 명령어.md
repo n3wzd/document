@@ -65,7 +65,7 @@ E...
 
 ## 해결
 - 먼저 도달 가능성을 판정해야 합니다. 시작 지점-도착 지점 거리를 D라고 했을 때, k는 D보다 같거나 크고, k와 D를 각각 2로 나눈 나머지가 동일하면 도착 지점에 갈 수 있습니다.
-- 사전순은 앞의 문자가 우선됩니다. 다음 위치에 가도 충분히 골에 도달할 수 있다는 것이 보장된다는 전제 하에, 현재 위치에서 밑으로 갈 수 있다면 항상 밑으로 가는 것이 이득입니다. 만약 밑으로 최대한 이동했다면, 그 뒤는 항상 왼쪽으로 가는 것이 이득입니다. => `그리디`<br>
+- 사전순은 앞의 문자가 우선됩니다. 다음 위치에 가도 충분히 골에 도달할 수 있다는 것이 보장된다는 전제 하에, 현재 위치에서 밑으로 갈 수 있다면 항상 밑으로 가는 것이 이득입니다. 만약 밑으로 최대한 이동했다면, 그 뒤는 항상 왼쪽으로 가는 것이 이득입니다. => `그리디`
 
 ```
 1. 도착 가능성 판정
@@ -92,7 +92,7 @@ string solution(int n, int m, int y, int x, int goalY, int goalX, int k) {
     while (k != dist) {
         if (y < n - 1)
             y++, answer += 'd';
-        else if (x > 0)<br>
+        else if (x > 0)
             x--, answer += 'l';
         else
             x++, answer += 'r';
@@ -101,7 +101,7 @@ string solution(int n, int m, int y, int x, int goalY, int goalX, int k) {
     while (k--) {
         if (y < goalY)
             y++, answer += 'd';
-        else if (x > goalX)<br>
+        else if (x > goalX)
             x--, answer += 'l';
         else if (x < goalX)
             x++, answer += 'r';
@@ -113,5 +113,5 @@ string solution(int n, int m, int y, int x, int goalY, int goalX, int k) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/150365<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/150365
 {% endraw %}

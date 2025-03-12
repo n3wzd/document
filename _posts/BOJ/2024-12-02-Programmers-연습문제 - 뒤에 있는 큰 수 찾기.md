@@ -46,10 +46,10 @@ A: - 7 7 7 -
 #include <vector>
 using namespace std;
 struct Node { int n, i; };
-stack<Node> stk;<br>
+stack<Node> stk;
 
-vector<int> solution(vector<int> L) {<br>
-    int N = L.size(); vector<int> answer(N, 0);<br>
+vector<int> solution(vector<int> L) {
+    int N = L.size(); vector<int> answer(N, 0);
     for(int i = 0; i < N; i++) {
         while(!stk.empty() && stk.top().n < L[i])
             answer[stk.top().i] = L[i], stk.pop();
@@ -62,8 +62,8 @@ vector<int> solution(vector<int> L) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/154539<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/154539
 
 ### 같은 문제
-https://www.acmicpc.net/problem/17298<br>
+<br>https://www.acmicpc.net/problem/17298
 {% endraw %}

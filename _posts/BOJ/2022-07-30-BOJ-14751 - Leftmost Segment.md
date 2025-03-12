@@ -57,7 +57,7 @@ const double EPS = 1e-6;
 int N, M;
 ll minX, maxX;
 Line line[SIZE];
-bool cmp(Line a, Line b) { return a.a > b.a; }<br>
+bool cmp(Line a, Line b) { return a.a > b.a; }
 bool Equal(double a, double b) { return abs(a - b) < EPS; }
 
 struct CHT {
@@ -81,7 +81,7 @@ struct CHT {
 		}
 		
 		stk[size] = v;
-		while (1 < size && Cross(size - 2, size - 1) > Cross(size - 1, size)) {<br>
+		while (1 < size && Cross(size - 2, size - 1) > Cross(size - 1, size)) {
 			stk[size - 1] = stk[size];
 			size--;
 		}
@@ -90,7 +90,7 @@ struct CHT {
 
 	bool Scan(int mid, double x) {
 		double c = Cross(mid, mid + 1);
-		return (!Equal(c, x)) ? c < x : stk[mid].a > stk[mid + 1].a;<br>
+		return (!Equal(c, x)) ? c < x : stk[mid].a > stk[mid + 1].a;
 	}
 
 	int Search(double x) {
@@ -108,10 +108,10 @@ CHT cht;
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> maxX >> minX >> N;<br>
+	cin >> maxX >> minX >> N;
 	for (int i = 0; i < N; i++) {
 		double y1, y2, d;
-		cin >> y2 >> y1;<br>
+		cin >> y2 >> y1;
 		d = (y2 - y1) / (maxX - minX);
 		line[i] = { d, -d * minX + y1, i + 1 };
 	}
@@ -120,10 +120,10 @@ int main() {
 	for (int i = 0; i < N; i++)
 		cht.Insert(line[i]);
 
-	cin >> M;<br>
+	cin >> M;
 	for (int i = 0; i < M; i++) {
 		double x;
-		cin >> x;<br>
+		cin >> x;
 		cout << cht.Search(x) << "\n";
 	}
 	return 0;
@@ -131,5 +131,5 @@ int main() {
 ```
 
 ## 링크
-https://www.acmicpc.net/problem/14751<br>
+<br>https://www.acmicpc.net/problem/14751
 {% endraw %}

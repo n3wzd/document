@@ -35,7 +35,7 @@ A[3]은 "an**a**na", A[6]은 "ana**c**ana"이 최대 팰린드롬이다. 정리�
 이제 A[i]를 구하는 Manacher 알고리즘을 구현해보자.
 ```
 S = 입력 문자열
-maxR = 현재 팰린드롬 중에서 오른쪽 끝의 최대 => i + A[i]의 최대<br>
+maxR = 현재 팰린드롬 중에서 오른쪽 끝의 최대 => i + A[i]의 최대
 cen = maxR에 해당되는 팰린드롬의 중심
 N = S의 길이
 
@@ -97,7 +97,7 @@ void Manachers(string S) {
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	string input, s;
-	cin >> input;<br>
+	cin >> input;
 	s = MakePalin(input);
 	Manachers(s);
 
@@ -110,10 +110,10 @@ int main() {
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/13275<br>
-https://www.acmicpc.net/problem/11046<br>
+<br>https://www.acmicpc.net/problem/13275
+<br>https://www.acmicpc.net/problem/11046
 
 ## 참고
-https://www.crocus.co.kr/1075<br>
-https://www.scaler.com/topics/data-structures/manachers-algorithm/<br>
+<br>https://www.crocus.co.kr/1075
+<br>https://www.scaler.com/topics/data-structures/manachers-algorithm/
 {% endraw %}

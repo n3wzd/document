@@ -40,7 +40,7 @@ char match(char c) {
 int solution(string s) {
     int answer = 0, N = s.size();
     for(int b = 0; b < N; b++) {
-        stack<char> stk;<br>
+        stack<char> stk;
         for(int i = 0; i < N; i++) {
             char cur = s[(b + i) % N];
             if(!stk.empty() && stk.top() == match(cur))
@@ -56,5 +56,5 @@ int solution(string s) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/76502<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/76502
 {% endraw %}

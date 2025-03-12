@@ -48,12 +48,12 @@ S -         - E
 대표적인 예시는 가방 문제(Knapsack Problem). 분할 가능한 가방 문제는 그리디가 가능하지만, 0-1 가방 문제는 그리디를 사용할 수 없다. 이 경우에는 DP를 사용한다.
 
 ## 연관 문제
-https://www.acmicpc.net/problem/11047<br>
-https://www.acmicpc.net/problem/13975<br>
-https://www.acmicpc.net/problem/1781<br>
-https://www.acmicpc.net/problem/1202<br>
+<br>https://www.acmicpc.net/problem/11047
+<br>https://www.acmicpc.net/problem/13975
+<br>https://www.acmicpc.net/problem/1781
+<br>https://www.acmicpc.net/problem/1202
 
 ## 참고
-https://namu.wiki/w/%EA%B7%B8%EB%A6%AC%EB%94%94%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98<br>
-https://gamedevlog.tistory.com/60<br>
+<br>https://namu.wiki/w/%EA%B7%B8%EB%A6%AC%EB%94%94%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98
+<br>https://gamedevlog.tistory.com/60
 {% endraw %}

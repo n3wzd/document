@@ -26,12 +26,12 @@ title: '[Programmers] 2019 KAKAO BLIND RECRUITMENT - 매칭 점수'
 -   한 웹페이지 문자열의 길이는  `1`  이상  `1,500`  이하이다.
 -   웹페이지의 index는 pages 배열의 index와 같으며 0부터 시작한다.
 -   한 웹페이지의 url은 HTML의 태그 내에  태그의 값으로 주어진다.
-    -   예를들어, 아래와 같은 meta tag가 있으면 이 웹페이지의 url은  `https://careers.kakao.com/index`<br>  이다.<br>
-    -   `<meta property="og:url" content="https://careers.kakao.com/index"<br> />`<br>
--   한 웹페이지에서 모든 외부 링크는  `<a href="https://careers.kakao.com/index">`의<br> 형태를 가진다.<br>
+    -   예를들어, 아래와 같은 meta tag가 있으면 이 웹페이지의 url은  `<br>https://careers.kakao.com/index`  이다.
+    -   `<meta property="og:url" content="<br>https://careers.kakao.com/index" />`
+-   한 웹페이지에서 모든 외부 링크는  `<a href="<br>https://careers.kakao.com/index">`의 형태를 가진다.
     -   `<a>`  내에 다른 attribute가 주어지는 경우는 없으며 항상 href로 연결할 사이트의 url만 포함된다.
-    -   위의 경우에서 해당 웹페이지는  `https://careers.kakao.com/index`<br>  로 외부링크를 가지고 있다고 볼 수 있다.<br>
--   모든 url은  `https://`<br>  로만 시작한다.<br>
+    -   위의 경우에서 해당 웹페이지는  `<br>https://careers.kakao.com/index`  로 외부링크를 가지고 있다고 볼 수 있다.
+-   모든 url은  `<br>https://`  로만 시작한다.
 -   검색어 word는 하나의 영어 단어로만 주어지며 알파벳 소문자와 대문자로만 이루어져 있다.
 -   word의 길이는  `1`  이상  `12`  이하이다.
 -   검색어를 찾을 때, 대소문자 구분은 무시하고 찾는다.
@@ -66,8 +66,8 @@ title: '[Programmers] 2019 KAKAO BLIND RECRUITMENT - 매칭 점수'
 using namespace std;
 int N; double wordScore[20], linkScore[20];
 string myLink[20];
-vector<string> hyperlink[20];<br>
-map<string, int> linkToIdx;<br>
+vector<string> hyperlink[20];
+map<string, int> linkToIdx;
 
 int getMaxScore() {
     double maxScore = -1; int res = 0;
@@ -77,7 +77,7 @@ int getMaxScore() {
                 linkScore[linkToIdx[s]] += wordScore[i] / hyperlink[i].size();
     for (int i = 0; i < N; i++) {
         double score = wordScore[i] + linkScore[i];
-        if (score > maxScore) {<br>
+        if (score > maxScore) {
             maxScore = score;
             res = i;
         }
@@ -85,7 +85,7 @@ int getMaxScore() {
     return res;
 }
 
-int solution(string word, vector<string> pages) {<br>
+int solution(string word, vector<string> pages) {
     N = pages.size();
     for (int i = 0; i < N; i++) {
         auto page = pages[i];
@@ -116,5 +116,5 @@ int solution(string word, vector<string> pages) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42893<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/42893
 {% endraw %}

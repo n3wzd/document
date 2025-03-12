@@ -54,12 +54,12 @@ title: '[Programmers] 2020 KAKAO TECH INTERNSHIP - 동굴 탐험'
 #include <vector>
 #include <queue>
 using namespace std;
-queue<int> q;<br>
+queue<int> q;
 bool visited[200001], waited[200001];
-vector<int> graph[200001];<br>
+vector<int> graph[200001];
 int key[200001], door[200001], waitCnt;
 
-bool solution(int N, vector<vector<int>> paths, vector<vector<int>> orders) {<br>
+bool solution(int N, vector<vector<int>> paths, vector<vector<int>> orders) {
     for(auto path : paths) {
         graph[path[0]].push_back(path[1]);
         graph[path[1]].push_back(path[0]);
@@ -95,5 +95,5 @@ bool solution(int N, vector<vector<int>> paths, vector<vector<int>> orders) {<br
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/67260<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/67260
 {% endraw %}

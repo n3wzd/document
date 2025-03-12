@@ -52,8 +52,8 @@ int timeToInt(string s) {
     return (stoi(s.substr(0, 4)) * 12 + stoi(s.substr(5, 2))) * 28 + stoi(s.substr(8, 2));
 }
 
-vector<int> solution(string todayS, vector<string> terms, vector<string> privacies) {<br>
-    vector<int> answer;<br>
+vector<int> solution(string todayS, vector<string> terms, vector<string> privacies) {
+    vector<int> answer;
     int today = timeToInt(todayS);
     for (string s : terms)
         priv[s[0] - 65] = stoi(s.substr(2, s.size() - 2)) * 28;
@@ -69,5 +69,5 @@ vector<int> solution(string todayS, vector<string> terms, vector<string> privaci
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/150370<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/150370
 {% endraw %}

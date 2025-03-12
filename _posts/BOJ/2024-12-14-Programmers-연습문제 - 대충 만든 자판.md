@@ -44,10 +44,10 @@ title: '[Programmers] 연습문제 - 대충 만든 자판'
 #include <vector>
 using namespace std;
 const int INF = 100001;
-vector<int> key(26, INF);<br>
+vector<int> key(26, INF);
 
-vector<int> solution(vector<string> keymap, vector<string> targets) {<br>
-    vector<int> answer;<br>
+vector<int> solution(vector<string> keymap, vector<string> targets) {
+    vector<int> answer;
     for(auto k : keymap)
         for(int i = 0; i < k.size(); i++)
             key[k[i] - 'A'] = min(i + 1, key[k[i] - 'A']);
@@ -62,5 +62,5 @@ vector<int> solution(vector<string> keymap, vector<string> targets) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/160586<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/160586
 {% endraw %}

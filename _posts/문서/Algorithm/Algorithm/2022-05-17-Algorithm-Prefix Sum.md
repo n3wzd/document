@@ -11,7 +11,7 @@ title: '[Algorithm] Prefix Sum'
 
 ## 방법
 ```
-1. 1번부터 n번까지 누적 합을 미리 구한다. => sum[n]<br>
+1. 1번부터 n번까지 누적 합을 미리 구한다. => sum[n]
 2. [a, b] 구간 합 = sum[b] - sum[a - 1]
 ```
 
@@ -29,14 +29,14 @@ int sum[100002];
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M;<br>
+	cin >> N >> M;
 	for (int i = 1; i <= N; i++) {
-		cin >> num;<br>
+		cin >> num;
 		sum[i] = num + sum[i - 1];
 	}
 	for (int i = 0; i < M; i++) {
 		int a, b;
-		cin >> a >> b;<br>
+		cin >> a >> b;
 		cout << sum[b] - sum[a-1] << "\n";
 	}
 	return 0;
@@ -44,9 +44,9 @@ int main()
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/11659<br>
-https://www.acmicpc.net/problem/11660<br>
+<br>https://www.acmicpc.net/problem/11659
+<br>https://www.acmicpc.net/problem/11660
 
 ## 참고
-https://jow1025.tistory.com/47<br>
+<br>https://jow1025.tistory.com/47
 {% endraw %}

@@ -37,11 +37,11 @@ title: '[Programmers] 연습문제 - 부대복귀'
 #include <queue>
 #define SIZE 100001
 using namespace std;
-vector<int> graph[SIZE];<br>
+vector<int> graph[SIZE];
 int dist[SIZE];
 
 void BFS(int S) {
-    queue<int> q;<br>
+    queue<int> q;
     q.push(S); dist[S] = 1;
     while(!q.empty()) {
         int v = q.front(); q.pop();
@@ -54,8 +54,8 @@ void BFS(int S) {
     }
 }
 
-vector<int> solution(int n, vector<vector<int>> R, vector<int> S, int D) {<br>
-    vector<int> answer;<br>
+vector<int> solution(int n, vector<vector<int>> R, vector<int> S, int D) {
+    vector<int> answer;
     for(auto r : R) {
         graph[r[0]].push_back(r[1]);
         graph[r[1]].push_back(r[0]);
@@ -68,5 +68,5 @@ vector<int> solution(int n, vector<vector<int>> R, vector<int> S, int D) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/132266<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/132266
 {% endraw %}

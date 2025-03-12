@@ -41,7 +41,7 @@ soruce    3       c    sink
 1. 이분 그래프를 생성한다.
 	- 이때 두 집합의 정점 번호는 서로 별개이다.
 	- ex. X의 1번 정점과 Y의 1번 정점은 서로 다르다.
-2. X의 모든 정점 탐색 => 현재 정점 = x<br>
+2. X의 모든 정점 탐색 => 현재 정점 = x
 	- Y에 대한 방문 기록을 초기화한다.
 	- 시작점이 x인 DFS 수행
 		- DFS의 출력이 1이면 전체 매칭 수에 1을 더한다.
@@ -54,7 +54,7 @@ matching[MAX] = X, Y 매칭 정보 배열
 	- 매칭이 없다면 X의 정점 번호가 아닌 다른 값 배정 (주로 0 or -1로 한다)
 
 > DFS(x)<br>
-1. x의 방문 안된 Y의 인접 정점들을 조사한다. => 인접 정점 = y<br>
+1. x의 방문 안된 Y의 인접 정점들을 조사한다. => 인접 정점 = y
 	1. y의 방문 표시 활성
 	2. y가 매칭되지 않았다면 x-y 매칭 기록
 		- 1을 반환하고 종료
@@ -75,7 +75,7 @@ matching[MAX] = X, Y 매칭 정보 배열
 #define SIZE 1002
 using namespace std;
 int N, M;
-vector<int> graph[SIZE];<br>
+vector<int> graph[SIZE];
 int matching[SIZE];
 bool visited[SIZE];
 
@@ -104,12 +104,12 @@ int Bipartite() {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M;<br>
+	cin >> N >> M;
 	for (int i = 1; i <= N; i++) {
 		int len, work;
-		cin >> len;<br>
+		cin >> len;
 		while (len--) {
-			cin >> work;<br>
+			cin >> work;
 			graph[i].push_back(work);
 		}
 	}
@@ -143,20 +143,20 @@ int main() {
 
 ## 관련 문제
 ### 이분 매칭
-https://www.acmicpc.net/problem/11375<br>
-https://www.acmicpc.net/problem/11376<br>
-https://www.acmicpc.net/problem/2188<br>
-https://www.acmicpc.net/problem/1017<br>
-https://www.acmicpc.net/problem/1671<br>
+<br>https://www.acmicpc.net/problem/11375
+<br>https://www.acmicpc.net/problem/11376
+<br>https://www.acmicpc.net/problem/2188
+<br>https://www.acmicpc.net/problem/1017
+<br>https://www.acmicpc.net/problem/1671
 
 ### 최소 정점 커버
-https://www.acmicpc.net/problem/1867<br>
+<br>https://www.acmicpc.net/problem/1867
 
 ### 최대 독립 집합
-https://www.acmicpc.net/problem/11014<br>
+<br>https://www.acmicpc.net/problem/11014
 
 ## 참고
-https://yjg-lab.tistory.com/209<br>
-https://www.crocus.co.kr/756<br>
-https://khj94811.tistory.com/2<br>
+<br>https://yjg-lab.tistory.com/209
+<br>https://www.crocus.co.kr/756
+<br>https://khj94811.tistory.com/2
 {% endraw %}

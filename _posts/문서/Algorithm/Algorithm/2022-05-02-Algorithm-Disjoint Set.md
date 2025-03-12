@@ -131,6 +131,6 @@ int main()
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/1717<br>
-https://www.acmicpc.net/problem/20040<br>
+<br>https://www.acmicpc.net/problem/1717
+<br>https://www.acmicpc.net/problem/20040
 {% endraw %}

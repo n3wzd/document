@@ -34,12 +34,12 @@ N개의 마을로 이루어진 나라가 있습니다. 이 나라의 각 마을�
 #include <queue>
 using namespace std;
 struct Edge { int v, w; };
-struct cmp { bool operator()(Edge& a, Edge& b) { return a.w > b.w; }};<br>
+struct cmp { bool operator()(Edge& a, Edge& b) { return a.w > b.w; }};
 const int INF = 99999999;
 int N, answer, dist[51];
 bool visited[51];
-vector<Edge> graph[51];<br>
-priority_queue<Edge, vector<Edge>, cmp> pq;<br>
+vector<Edge> graph[51];
+priority_queue<Edge, vector<Edge>, cmp> pq;
 
 void Dijkstra() {
 	for (int i = 1; i <= N; i++)
@@ -59,7 +59,7 @@ void Dijkstra() {
 	}
 }
 
-int solution(int n, vector<vector<int>> roads, int K) {<br>
+int solution(int n, vector<vector<int>> roads, int K) {
     N = n;
     for(auto road : roads) {
         graph[road[0]].push_back({road[1], road[2]});
@@ -74,5 +74,5 @@ int solution(int n, vector<vector<int>> roads, int K) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12978<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/12978
 {% endraw %}

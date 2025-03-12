@@ -24,7 +24,7 @@ title: '[Programmers] 연습문제 - 카운트 다운'
 -   1 ≤  `target`  ≤ 100,000
 
 ## 해결
-주어진 문제는 가중치가 2차원인 그래프에서 최단 거리를 찾는 것과 같습니다. => `데이크스트라`<br>
+주어진 문제는 가중치가 2차원인 그래프에서 최단 거리를 찾는 것과 같습니다. => `데이크스트라`
 - 정점: 0부터 `target`까지 수
 	- 합을 통해 이동하므로 `target`보다 큰 수는 고려하지 않습니다.
 - 간선: 현재 정점의 값 + (1부터 20까지 수의 각 1, 2, 3배수 또는 50)
@@ -42,21 +42,21 @@ title: '[Programmers] 연습문제 - 카운트 다운'
 #include <queue>
 using namespace std;
 struct Node { int v, w, s; };
-struct cmp { bool operator()(Node& a, Node& b) { return (a.w != b.w) ? a.w > b.w : a.s < b.s; } };<br>
-priority_queue<Node, vector<Node>, cmp> pq;<br>
-vector<int> dist[100001];<br>
+struct cmp { bool operator()(Node& a, Node& b) { return (a.w != b.w) ? a.w > b.w : a.s < b.s; } };
+priority_queue<Node, vector<Node>, cmp> pq;
+vector<int> dist[100001];
 const int INF = 1e9;
 
 void update(int nv, int nw, int ns, int target) {
-    if(nv > target)<br>
+    if(nv > target)
         return;
-    if(dist[nv][0] > nw || (dist[nv][0] == nw && dist[nv][1] < ns)) {<br>
+    if(dist[nv][0] > nw || (dist[nv][0] == nw && dist[nv][1] < ns)) {
         dist[nv] = { nw, ns };
         pq.push({ nv, nw, ns });
     }
 }
 
-vector<int> solution(int target) {<br>
+vector<int> solution(int target) {
     for (int i = 1; i <= target; i++)
         dist[i] = { INF, 0 };
     pq.push({ 0, 0, 0 });
@@ -75,5 +75,5 @@ vector<int> solution(int target) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/131129<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/131129
 {% endraw %}

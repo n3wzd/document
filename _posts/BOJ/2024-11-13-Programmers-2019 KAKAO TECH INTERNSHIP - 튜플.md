@@ -65,11 +65,11 @@ title: '[Programmers] 2019 KAKAO TECH INTERNSHIP - 튜플'
 #include <set>
 using namespace std;
 int lo = 2, genID;
-vector<vector<int>> arr;<br>
-vector<int> answer;<br>
-set<int> items;<br>
+vector<vector<int>> arr;
+vector<int> answer;
+set<int> items;
 
-vector<int> solution(string s) {<br>
+vector<int> solution(string s) {
     arr.push_back({ });
     for (int i = 2; i < s.size() - 1; i++) {
         if (s[i] == '}') {
@@ -98,5 +98,5 @@ vector<int> solution(string s) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/64065<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/64065
 {% endraw %}

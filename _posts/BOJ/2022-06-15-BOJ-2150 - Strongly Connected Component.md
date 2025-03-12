@@ -36,10 +36,10 @@ title: '[BOJ] 2150 - Strongly Connected Component'
 using namespace std;
 int N, M;
 bool visited[SIZE];
-vector<int> graph[SIZE];<br>
-vector<int> graphR[SIZE];<br>
-stack<int> stk;<br>
-vector<vector<int>> scc;<br>
+vector<int> graph[SIZE];
+vector<int> graphR[SIZE];
+stack<int> stk;
+vector<vector<int>> scc;
 int scc_idx;
 
 void DFS1(int v) {
@@ -64,7 +64,7 @@ void DFS2(int v) {
 	}
 }
 
-bool cmp(vector<int> a, vector<int> b) {<br>
+bool cmp(vector<int> a, vector<int> b) {
 	return a[0] < b[0];
 }
 
@@ -82,10 +82,10 @@ void Print() {
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M;<br>
+	cin >> N >> M;
 	for (int i = 0; i < M; i++) {
 		int a, b;
-		cin >> a >> b;<br>
+		cin >> a >> b;
 		graph[a].push_back(b);
 		graphR[b].push_back(a);
 	}
@@ -123,9 +123,9 @@ using namespace std;
 int N, M;
 int Did[SIZE];
 bool scc_ok[SIZE];
-vector<int> graph[SIZE];<br>
-stack<int> stk;<br>
-vector<vector<int>> scc;<br>
+vector<int> graph[SIZE];
+stack<int> stk;
+vector<vector<int>> scc;
 int Did_idx = 0, scc_idx;
 
 int DFS(int v) {
@@ -156,7 +156,7 @@ int DFS(int v) {
 	return minGoal;
 }
 
-bool cmp(vector<int> a, vector<int> b) {<br>
+bool cmp(vector<int> a, vector<int> b) {
 	return a[0] < b[0];
 }
 
@@ -174,10 +174,10 @@ void Print() {
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M;<br>
+	cin >> N >> M;
 	for (int i = 0; i < M; i++) {
 		int a, b;
-		cin >> a >> b;<br>
+		cin >> a >> b;
 		graph[a].push_back(b);
 	}
 
@@ -192,5 +192,5 @@ int main()
 ```
 
 ## 링크
-https://www.acmicpc.net/problem/2150<br>
+<br>https://www.acmicpc.net/problem/2150
 {% endraw %}

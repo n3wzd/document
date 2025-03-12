@@ -49,7 +49,7 @@ double Calipers() {
 		maxDist = max(maxDist, Distance(P[cvx[p1]], P[cvx[p2]]));
 
 		// 2. 캘리퍼스 각도 비교
-		if (CCW({ P[cvx[(p1 + 1) % cvx_N]] - P[cvx[p1]] }, { 0, 0 }, P[cvx[p2]] - P[cvx[(p2 + 1) % cvx_N]]) > 0)<br>
+		if (CCW({ P[cvx[(p1 + 1) % cvx_N]] - P[cvx[p1]] }, { 0, 0 }, P[cvx[p2]] - P[cvx[(p2 + 1) % cvx_N]]) > 0)
 			p2 = (p2 + 1) % cvx_N;
 		else
 			p1 = (p1 + 1) % cvx_N;
@@ -75,7 +75,7 @@ double Distance(Point a, Point b) { return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.
 
 int CCW(Point a, Point b, Point c) {
 	int D = (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y);
-	return (D == 0) ? 0 : ((D > 0) ? 1 : -1);<br>
+	return (D == 0) ? 0 : ((D > 0) ? 1 : -1);
 }
 
 bool cmp1(Point a, Point b) {
@@ -93,7 +93,7 @@ void Convex() {
 	sort(P, P + N, cmp1);
 	sort(P + 1, P + N, cmp2);
 
-	stack<int> stk;<br>
+	stack<int> stk;
 	stk.push(0);
 	stk.push(1);
 	for (int i = 2; i < N; i++) {
@@ -112,7 +112,7 @@ void Convex() {
 	int minX = 1000, maxX = -1000;
 	for (int i = cvx_N - 1; i >= 0; i--) {
 		cvx[i] = stk.top(); stk.pop();
-		if (minX > P[cvx[i]].x) {<br>
+		if (minX > P[cvx[i]].x) {
 			minX = P[cvx[i]].x;
 			minpx = i;
 		}
@@ -128,7 +128,7 @@ double Calipers() {
 	int p1 = minpx, p2 = maxpx;
 	for (int i = 0; i < cvx_N; i++) {
 		maxDist = max(maxDist, Distance(P[cvx[p1]], P[cvx[p2]]));
-		if (CCW({ P[cvx[(p1 + 1) % cvx_N]] - P[cvx[p1]] }, { 0, 0 }, P[cvx[p2]] - P[cvx[(p2 + 1) % cvx_N]]) > 0)<br>
+		if (CCW({ P[cvx[(p1 + 1) % cvx_N]] - P[cvx[p1]] }, { 0, 0 }, P[cvx[p2]] - P[cvx[(p2 + 1) % cvx_N]]) > 0)
 			p2 = (p2 + 1) % cvx_N;
 		else
 			p1 = (p1 + 1) % cvx_N;
@@ -139,9 +139,9 @@ double Calipers() {
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	cout << fixed; cout.precision(8);
-	cin >> N;<br>
+	cin >> N;
 	for (int i = 0; i < N; i++)
-		cin >> P[i].x >> P[i].y;<br>
+		cin >> P[i].x >> P[i].y;
 	Convex();
 	cout << Calipers();
 	return 0;
@@ -149,9 +149,9 @@ int main() {
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/9240<br>
-https://www.acmicpc.net/problem/10254<br>
+<br>https://www.acmicpc.net/problem/9240
+<br>https://www.acmicpc.net/problem/10254
 
 ## 참고
-https://aruz.tistory.com/59<br>
+<br>https://aruz.tistory.com/59
 {% endraw %}

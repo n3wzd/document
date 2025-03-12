@@ -27,7 +27,7 @@ title: '[Programmers] 2019 KAKAO TECH INTERNSHIP - 불량 사용자'
 -   제재 아이디 목록들을 구했을 때 아이디들이 나열된 순서와 관계없이 아이디 목록의 내용이 동일하다면 같은 것으로 처리하여 하나로 세면 됩니다.
 
 ## 해결
-집합(제재 아이디 목록)을 원소로 하는 집합의 크기(제재 아이디 목록의 경우의 수)를 찾아야 합니다. => `set` 자료구조 사용<br>
+집합(제재 아이디 목록)을 원소로 하는 집합의 크기(제재 아이디 목록의 경우의 수)를 찾아야 합니다. => `set` 자료구조 사용
 
 각 불량 사용자에 해당되는 응모자 아이디를 모두 찾은 뒤, 하나씩 제재 아이디 목록을 만들어보면 됩니다. 여기서 사용되는 집합 내부에는 순서가 구분되지 않고 중복된 원소가 없어야 합니다.
 
@@ -47,8 +47,8 @@ title: '[Programmers] 2019 KAKAO TECH INTERNSHIP - 불량 사용자'
 #include <set>
 #include <algorithm>
 using namespace std;
-set<string> S;<br>
-vector<int> caught[8];<br>
+set<string> S;
+vector<int> caught[8];
 int selected[8], N, M;
 
 bool cmp(string user, string ban) {
@@ -84,7 +84,7 @@ void BT(int depth) {
     }
 }
 
-int solution(vector<string> user_id, vector<string> banned_id) {<br>
+int solution(vector<string> user_id, vector<string> banned_id) {
     N = banned_id.size(), M = user_id.size();
     for(int i = 0; i < N; i++)
         for(int j = 0; j < M; j++)
@@ -96,5 +96,5 @@ int solution(vector<string> user_id, vector<string> banned_id) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/64064<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/64064
 {% endraw %}

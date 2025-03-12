@@ -31,10 +31,10 @@ typedef long long ll;
 
 ll solution(int price, int money, int count) {
     ll answer = ((ll)count * (count + 1)) / 2 * price - money;
-    return answer > 0 ? answer : 0;<br>
+    return answer > 0 ? answer : 0;
 }
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/82612<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/82612
 {% endraw %}

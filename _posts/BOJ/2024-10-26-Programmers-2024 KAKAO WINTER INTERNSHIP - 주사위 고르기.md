@@ -29,7 +29,7 @@ A가 주사위를 선택하는 경우는 `조합`입니다. 최대 경우의 수
 
 주사위 분배가 결정되었을 때, 승리 횟수를 조사해야 합니다. N개의 주사위가 나오는 경우의 수는 6<sup>N</sup>이라 시간 초과 리스크가 있습니다. 따라서 탐색 횟수를 줄여야 합니다.
 
-만약 A의 주사위 총합이 S로 결정되었을 때, A가 승리하려면 B의 총합이 S 미만이어야 합니다. 즉, A의 총합과 B의 총합이 같아지는 순간을 찾는다면 승리 횟수를 바로 알 수 있습니다. 어떠한 리스트에서 특정 값을 찾는 것은 `lowerbound`로 빠르게 구할 수 있습니다. 이 방법의 시간 복잡도는 O(6<sup>N/2</sup> × log6<sup>N/2</sup>)입니다. => `Meet In The Middle`<br>
+만약 A의 주사위 총합이 S로 결정되었을 때, A가 승리하려면 B의 총합이 S 미만이어야 합니다. 즉, A의 총합과 B의 총합이 같아지는 순간을 찾는다면 승리 횟수를 바로 알 수 있습니다. 어떠한 리스트에서 특정 값을 찾는 것은 `lowerbound`로 빠르게 구할 수 있습니다. 이 방법의 시간 복잡도는 O(6<sup>N/2</sup> × log6<sup>N/2</sup>)입니다. => `Meet In The Middle`
 
 ```
 승리 횟수 찾기
@@ -49,8 +49,8 @@ A가 주사위를 선택하는 경우는 `조합`입니다. 최대 경우의 수
 using namespace std;
 int N, maxWin = -1;
 bool selectedDice[10];
-vector<int> winDeck, finalWinDeck;<br>
-vector<vector<int>> dice;<br>
+vector<int> winDeck, finalWinDeck;
+vector<vector<int>> dice;
 
 void sumDFS(vector<int>& diceIdx, vector<int>& sumList, int depth = 0, int sum = 0) {
     if (depth == N / 2) {
@@ -62,7 +62,7 @@ void sumDFS(vector<int>& diceIdx, vector<int>& sumList, int depth = 0, int sum =
 }
 
 void game() {
-    vector<int> sumA, sumB, diceIdxA, diceIdxB;<br>
+    vector<int> sumA, sumB, diceIdxA, diceIdxB;
     for (int s = 0; s < N; s++)
         selectedDice[s] ? diceIdxA.push_back(s) : diceIdxB.push_back(s);
     sumDFS(diceIdxA, sumA);
@@ -72,7 +72,7 @@ void game() {
     int win = 0;
     for (int s : sumA)
         win += distance(sumB.begin(), lower_bound(sumB.begin(), sumB.end(), s));
-    if (win > maxWin) {<br>
+    if (win > maxWin) {
         maxWin = win;
         winDeck = diceIdxA;
     }
@@ -90,7 +90,7 @@ void combination(int start = 0, int depth = 0) {
     }
 }
 
-vector<int> solution(vector<vector<int>> diceInput) {<br>
+vector<int> solution(vector<vector<int>> diceInput) {
     dice = diceInput; N = dice.size();
     combination();
     for(int w : winDeck)
@@ -100,5 +100,5 @@ vector<int> solution(vector<vector<int>> diceInput) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/258709<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/258709
 {% endraw %}

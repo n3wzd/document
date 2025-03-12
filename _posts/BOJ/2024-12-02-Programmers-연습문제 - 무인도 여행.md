@@ -28,7 +28,7 @@ title: '[Programmers] 연습문제 - 무인도 여행'
 #include <vector>
 #include <algorithm>
 using namespace std;
-vector<string> maps;<br>
+vector<string> maps;
 bool visited[101][101];
 int N, M, dx[] = { 1, 0 , -1, 0 }, dy[] = { 0, 1, 0, -1 };
 
@@ -43,9 +43,9 @@ int DFS(int x, int y) {
     return sum;
 }
 
-vector<int> solution(vector<string> mapI) {<br>
+vector<int> solution(vector<string> mapI) {
     maps = mapI; N = maps.size(), M = maps[0].size();
-    vector<int> answer;<br>
+    vector<int> answer;
     for(int y = 0; y < N; y++)
         for(int x = 0; x < M; x++)
             if(!visited[y][x] && maps[y][x] != 'X')
@@ -58,5 +58,5 @@ vector<int> solution(vector<string> mapI) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/154540<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/154540
 {% endraw %}

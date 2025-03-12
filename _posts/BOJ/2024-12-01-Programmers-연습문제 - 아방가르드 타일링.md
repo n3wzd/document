@@ -41,7 +41,7 @@ title: '[Programmers] 연습문제 - 아방가르드 타일링'
 
 > DP(n) = DP(n - 1) × 1 + DP(n - 2) × 2 + DP(n - 3) × 5 + DP(n - 4) × 2 + DP(n - 5) × 2 + DP(n - 6) × 4 + ...<br>
 
-나이브한 수행 시간은 O(N<sup>2</sup>)으로, 시간 초과가 날 수 있으므로 최적화를 해야 합니다. 뒷부분은 반복되는 구간의 합이므로 저장이 가능합니다. => `누적 합`<br>
+나이브한 수행 시간은 O(N<sup>2</sup>)으로, 시간 초과가 날 수 있으므로 최적화를 해야 합니다. 뒷부분은 반복되는 구간의 합이므로 저장이 가능합니다. => `누적 합`
 
 { 2, 2, 4 } 구간만 새로 계산하고 나머지는 이전에 계산한 누적 합을 가져오면 됩니다. 최종 점화식은 다음과 같습니다.
 
@@ -73,5 +73,5 @@ int solution(int n) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/181186<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/181186
 {% endraw %}

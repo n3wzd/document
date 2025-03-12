@@ -35,9 +35,9 @@ title: '[Programmers] 연습문제 - 의상'
 #include <vector>
 #include <map>
 using namespace std;
-map<string, int> types;<br>
+map<string, int> types;
 
-int solution(vector<vector<string>> clothes) {<br>
+int solution(vector<vector<string>> clothes) {
     int answer = 1;
     for(auto clothe : clothes) 
         types[clothe[1]]++;
@@ -48,5 +48,5 @@ int solution(vector<vector<string>> clothes) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42578<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/42578
 {% endraw %}

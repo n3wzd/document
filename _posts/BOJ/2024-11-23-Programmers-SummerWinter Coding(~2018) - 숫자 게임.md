@@ -25,7 +25,7 @@ A 팀원들이 부여받은 수가 출전 순서대로 나열되어있는 배열
 -   `A`와  `B`의 각 원소는  `1`  이상  `1,000,000,000`  이하의 자연수입니다.
 
 ## 해결
-상대보다 큰 값이 있다면 큰 값 중에서 최솟값, 그렇지 않다면 가장 작은 값을 반환하는 것이 항상 이득입니다. 최종 목표는 B의 승점이므로 무승부 상황일 때는 패배하는 것이 이득입니다. => `그리디`<br>
+상대보다 큰 값이 있다면 큰 값 중에서 최솟값, 그렇지 않다면 가장 작은 값을 반환하는 것이 항상 이득입니다. 최종 목표는 B의 승점이므로 무승부 상황일 때는 패배하는 것이 이득입니다. => `그리디`
 
 미리 A의 순서에 맞게 카드 세팅을 한다고 가정할 수 있으므로 주어진 순서는 의미가 없습니다. 따라서 A를 내림차순으로 탐색하면 됩니다. A의 현재 값에 대해 B의 경우는 다음과 같습니다:
 1. 큰 값이 없음: 항상 패배, 무승부이므로 넘어갑니다.
@@ -45,7 +45,7 @@ A 팀원들이 부여받은 수가 출전 순서대로 나열되어있는 배열
 #include <vector>
 using namespace std;
     
-int solution(vector<int> A, vector<int> B) {<br>
+int solution(vector<int> A, vector<int> B) {
     int answer = 0;
     sort(A.begin(), A.end(), greater<int>());
     sort(B.begin(), B.end());
@@ -57,5 +57,5 @@ int solution(vector<int> A, vector<int> B) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12987<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/12987
 {% endraw %}

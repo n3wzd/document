@@ -24,7 +24,7 @@ title: '[Programmers] 2020 KAKAO BLIND RECRUITMENT - 블록 이동하기'
 -   로봇이 항상 목적지에 도착할 수 있는 경우만 입력으로 주어집니다.
 
 ## 해결
-- 로봇이 이동하는 최단거리를 찾아야 합니다. => `최단거리 BFS`<br>
+- 로봇이 이동하는 최단거리를 찾아야 합니다. => `최단거리 BFS`
 - 로봇의 회전 상태도 탐색에 영향을 주므로 위치 정점(x, y)에 회전 파라미터를 추가합니다.
 - 로봇의 회전 기준점과 방향은 자유입니다. 어떠한 상황에서 로봇의 회전은 4가지가 가능합니다.
 - 로봇 원점을 로봇의 좌측 상단으로 정의합니다. 회전시 원점 좌표가 바뀔 수 있습니다.
@@ -63,8 +63,8 @@ struct Node { int x, y, a; };
 using namespace std;
 int N, M, dx[4] = { 1, 0, -1, 0 }, dy[4] = { 0, 1, 0, -1 };
 int dist[102][102][2]; // 0: hor, 1: ver
-vector<vector<int>> board;<br>
-queue<Node> q;<br>
+vector<vector<int>> board;
+queue<Node> q;
 bool isSafe(int x, int y) { return !(x < 0 || x >= M || y < 0 || y >= N || board[y][x]); }
 void add(int x, int y, int a, int d) {
     if (isSafe(x, y) && isSafe(x + dx[a], y + dy[a]) && dist[y][x][a] == 0) {
@@ -73,7 +73,7 @@ void add(int x, int y, int a, int d) {
     }
 }
 
-int solution(vector<vector<int>> boardI) {<br>
+int solution(vector<vector<int>> boardI) {
     board = boardI; N = board.size(), M = board[0].size();
     q.push({ 0, 0, 0 }); dist[0][0][0] = 1;
     while (1) {
@@ -110,5 +110,5 @@ int solution(vector<vector<int>> boardI) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/60063<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/60063
 {% endraw %}

@@ -43,19 +43,19 @@ title: '[Programmers] 2020 KAKAO BLIND RECRUITMENT - 가사 검색'
 #include <vector>
 using namespace std;
 struct Node {
-    vector<Node*> c = vector<Node*>(26, nullptr);<br>
+    vector<Node*> c = vector<Node*>(26, nullptr);
     int cnt = 0;
 };
-vector<Node*> prefix = vector<Node*>(10001, nullptr);<br>
-vector<Node*> suffix = vector<Node*>(10001, nullptr);<br>
+vector<Node*> prefix = vector<Node*>(10001, nullptr);
+vector<Node*> suffix = vector<Node*>(10001, nullptr);
 Node* getChild(Node* a, int b) {
     if (a->c[b] == nullptr)
         a->c[b] = new Node();
     return a->c[b];
 }
 
-vector<int> solution(vector<string> words, vector<string> queries) {<br>
-    vector<int> answer;<br>
+vector<int> solution(vector<string> words, vector<string> queries) {
+    vector<int> answer;
     for(int i = 1; i <= 10000; i++) 
         prefix[i] = new Node(), suffix[i] = new Node();
     for (auto word : words) {
@@ -87,5 +87,5 @@ vector<int> solution(vector<string> words, vector<string> queries) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/60060<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/60060
 {% endraw %}

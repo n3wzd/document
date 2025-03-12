@@ -38,11 +38,11 @@ int V, E, S = 1;
 ll dist[SIZE];
 bool inQ[SIZE];
 int cycle[SIZE];
-vector<Edge> graph[SIZE];<br>
+vector<Edge> graph[SIZE];
 
 bool SPFA() {
     for (int i = 1; i <= V; i++) dist[i] = INF;
-    queue <int> q;<br>
+    queue <int> q;
     q.push(S), dist[S] = 0, inQ[S] = 1;
 
     while (!q.empty()) {
@@ -53,7 +53,7 @@ bool SPFA() {
             int nv = graph[v][i].dest;
             int w = graph[v][i].weight;
 
-            if (dist[nv] > dist[v] + w) {<br>
+            if (dist[nv] > dist[v] + w) {
                 dist[nv] = dist[v] + w;
                 if (!inQ[nv]) {
                     cycle[nv]++;
@@ -70,10 +70,10 @@ bool SPFA() {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> V >> E;<br>
+	cin >> V >> E;
 	for (int i = 0; i < E; i++) {
 		int a, b, w;
-		cin >> a >> b >> w;<br>
+		cin >> a >> b >> w;
 		graph[a].push_back({ b, w });
 	}
 
@@ -90,5 +90,5 @@ int main() {
 ```
 
 ## 참고
-https://www.crocus.co.kr/1089<br>
+<br>https://www.crocus.co.kr/1089
 {% endraw %}

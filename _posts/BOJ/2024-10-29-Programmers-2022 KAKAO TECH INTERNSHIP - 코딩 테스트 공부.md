@@ -55,7 +55,7 @@ title: '[Programmers] 2022 KAKAO TECH INTERNSHIP - 코딩 테스트 공부'
 
 > DP(a, c) = min(DP(a + 1, c) + 1, DP(a, c + 1) + 1)<br>
 > 현재 풀 수 있는 모든 문제: <br>
-	> DP(a, c) = min(DP(a + (획득 알고력), c + (획득 코딩력)) + (소요 시간));<br>
+	> DP(a, c) = min(DP(a + (획득 알고력), c + (획득 코딩력)) + (소요 시간));
 
 - 탐색이 종료되는 순간은 알고력과 코딩력이 각 모든 문제의 요구 알고력 최댓값, 코딩력 최댓값과 같거나 클 때입니다. 정확히 목표치와 같지 않아도 되며, 목표치보다 알고력 또는 코딩력이 커도 상관이 없습니다. 초기 알고력 또는 코딩력이 목표치보다 큰 경우도 존재합니다.
 ```
@@ -69,13 +69,13 @@ title: '[Programmers] 2022 KAKAO TECH INTERNSHIP - 코딩 테스트 공부'
 #include <vector>
 using namespace std;
 int alp, cop, alpGoal, copGoal, cache[151][151];
-vector<vector<int>> problems;<br>
+vector<vector<int>> problems;
 
 int DP(int a, int c) {
     if (a >= alpGoal && c >= copGoal)
         return 0;
     a = min(a, alpGoal); c = min(c, copGoal);
-    if (cache[a][c] > 0)<br>
+    if (cache[a][c] > 0)
         return cache[a][c];
     cache[a][c] = 999;
     cache[a][c] = min(cache[a][c], min(DP(a + 1, c) + 1, DP(a, c + 1) + 1));
@@ -85,7 +85,7 @@ int DP(int a, int c) {
     return cache[a][c];
 }
 
-int solution(int a, int c, vector<vector<int>> pro) {<br>
+int solution(int a, int c, vector<vector<int>> pro) {
     problems = pro; alp = a, cop = c;
     for (auto p : problems)
         alpGoal = max(alpGoal, p[0]), copGoal = max(copGoal, p[1]);
@@ -95,5 +95,5 @@ int solution(int a, int c, vector<vector<int>> pro) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/118668<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/118668
 {% endraw %}

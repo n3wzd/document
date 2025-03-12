@@ -20,9 +20,9 @@ title: '[Algorithm] Hungarian Algorithm'
 ```
 매칭 대상: 크기가 N인 서로 분리된 집합 A, B
 매칭 비용: 2차원 정방행렬 (N × N)
-1. 모든 행에서 다음을 수행한다. => A[y]<br>
+1. 모든 행에서 다음을 수행한다. => A[y]
 	- A[y] -= min(A[y])
-2. 모든 열에서 다음을 수행한다. => B[x]<br>
+2. 모든 열에서 다음을 수행한다. => B[x]
 	- B[x] -= min(B[x])
 3. A, B를 연결하는 이분 그래프를 생성한다. 간선은 값이 0인 비용이다.
 4. 해당 그래프에서 이분 매칭을 수행한다.
@@ -71,9 +71,9 @@ O O X X
 
 > 최대 매칭 = 4 (→ 매칭 완료)<br>
 가능한 매칭 조합은 2가지이며, 최소 비용은 12다.
-(4, 1) (3, 2) (2, 3) (4, 1) => 3 + 3 + 2 + 4 = 12<br>
+(4, 1) (3, 2) (2, 3) (4, 1) => 3 + 3 + 2 + 4 = 12
 or
-(1, 1) (2, 3) (3, 2) (4, 4) => 2 + 3 + 2 + 5 = 12<br>
+(1, 1) (2, 3) (3, 2) (4, 4) => 2 + 3 + 2 + 5 = 12
 ```
 
 ## 설계
@@ -157,7 +157,7 @@ void Augment() {
 
 	// 탐색 변수 초기화
 	int x, y, root = 0;
-	queue<int> q;<br>
+	queue<int> q;
 
 	// alternating tree 초기화
 	memset(S, 0, sizeof(S));
@@ -368,7 +368,7 @@ void AddTree(int x, int lastX) {
 void Augment() {
 	if (max_match == N) return;
 	int x, y, root = 0;
-	queue<int> q;<br>
+	queue<int> q;
 
 	memset(S, 0, sizeof(S));
 	memset(T, 0, sizeof(T));
@@ -454,10 +454,10 @@ int Hungarian() {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N;<br>
+	cin >> N;
 	for (int y = 0; y < N; y++) {
 		for (int x = 0; x < N; x++) {
-			cin >> cost[y][x];<br>
+			cin >> cost[y][x];
 			cost[y][x] = -cost[y][x];
 		}
 	}
@@ -467,11 +467,11 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/14216<br>
+<br>https://www.acmicpc.net/problem/14216
 
 ## 참고
-https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/<br>
-https://gazelle-and-cs.tistory.com/29<br>
-http://www.secmem.org/blog/2021/04/18/hungarian-algorithm/<br>
-https://kibbomi.tistory.com/141<br>
+<br>https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/
+<br>https://gazelle-and-cs.tistory.com/29
+<br>http://www.secmem.org/blog/2021/04/18/hungarian-algorithm/
+<br>https://kibbomi.tistory.com/141
 {% endraw %}

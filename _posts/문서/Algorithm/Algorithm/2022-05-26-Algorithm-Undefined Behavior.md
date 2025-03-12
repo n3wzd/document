@@ -43,7 +43,7 @@ int Func(int n)
 }
 ```
 다음 구문은 VS에서 컴파일이 되며, 동작도 정상적으로 된다! 그러나 gcc에선 런타임 에러(WithoutReturning)로 잡힌다.
-참고 - https://developercommunity.visualstudio.com/t/compiler-does-not-report-error-when-no-return-valu/792888<br>
+참고 - <br>https://developercommunity.visualstudio.com/t/compiler-does-not-report-error-when-no-return-valu/792888
 
 ## Sequence Point
 - sequence point는 모든 식의 평가(계산)이 완료되는 지점이다.
@@ -59,8 +59,8 @@ int Func(int n)
 > 확실한 연산의 순서가 필요하면, 순서를 명시적으로 표현한다<br>
 
 ### 참고
-https://dojang.io/mod/page/view.php?id=757<br>
-https://knowledgeforengineers.tistory.com/114?category=916186<br>
+<br>https://dojang.io/mod/page/view.php?id=757
+<br>https://knowledgeforengineers.tistory.com/114?category=916186
 
 ## 그럼 제출해야만 에러를 알 수 있나요?
 > 아닙니다. 채점 도움말을 보시면 채점 환경과 컴파일 옵션을 확인할 수 있습니다. 이와 비슷한 환경에서 실행하시면 채점할 때 어떤 오류가 나올 지 미리 확인할 수 있습니다.<br>
@@ -70,12 +70,12 @@ https://knowledgeforengineers.tistory.com/114?category=916186<br>
 가장 정확한 방법은 직접 gcc를 사용하고 환경을 비슷하게 셋팅하는 것이지만 불편하다는 치명적인(?) 문제점이 있다.
 
 따라서 온라인 컴파일러를 활용하자. 구글신에 검색하면 여러 컴파일러 사이트를 확인할 수 있다.
-- [OnlineGDB](https://www.onlinegdb.com/online_c++_compiler)<br>
-- [ideone.com](http://ideone.com/)<br>
+- [OnlineGDB](<br>https://www.onlinegdb.com/online_c++_compiler)
+- [ideone.com](<br>http://ideone.com/)
 
 제출하기 전에 온라인 컴파일러로 확인해서 사소한 이유로 받는 '틀렸습니다', '컴파일 에러', '런타임 에러'를 피해보자!
 
 ## 참고
-Undefined behavior란? - https://www.secmem.org/blog/2020/01/17/c-c++-and-ub/<br>
-컴파일 에러가 나시나요? - https://www.acmicpc.net/blog/view/52<br>
+Undefined behavior란? - <br>https://www.secmem.org/blog/2020/01/17/c-c++-and-ub/
+컴파일 에러가 나시나요? - <br>https://www.acmicpc.net/blog/view/52
 {% endraw %}

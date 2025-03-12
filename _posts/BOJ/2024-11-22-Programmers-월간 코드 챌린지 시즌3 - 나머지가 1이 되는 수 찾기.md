@@ -27,5 +27,5 @@ int solution(int n) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/87389<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/87389
 {% endraw %}

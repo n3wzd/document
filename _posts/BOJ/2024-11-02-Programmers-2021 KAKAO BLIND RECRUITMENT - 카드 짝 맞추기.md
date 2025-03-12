@@ -43,7 +43,7 @@ title: '[Programmers] 2021 KAKAO BLIND RECRUITMENT - 카드 짝 맞추기'
 -   게임 화면의 좌측 상단이 (0, 0), 우측 하단이 (3, 3) 입니다.
 
 ## 해결
-- 항상 현재 위치에 가까운 카드를 선택하는 것이 최적이 아닐 수 있습니다. 또한 어떤 카드 쌍을 먼저 제거하는 것이 이득인지 알 수 없으며, 각 카드 쌍을 제거하는 과정은 서로 종속적이므로 모든 경우를 탐색해야 합니다. => `백트래킹`<br>
+- 항상 현재 위치에 가까운 카드를 선택하는 것이 최적이 아닐 수 있습니다. 또한 어떤 카드 쌍을 먼저 제거하는 것이 이득인지 알 수 없으며, 각 카드 쌍을 제거하는 과정은 서로 종속적이므로 모든 경우를 탐색해야 합니다. => `백트래킹`
 - 카드 쌍 제거 순서는 `순열`로 모든 경우를 찾을 수 있습니다. 제거할 카드 쌍이 정해졌을 때, 카드 1개를 뒤집으면 항상 쌍에 맞는 다른 카드를 뒤집는 것이 이득입니다. 하지만 2개의 카드 중에서 어떤 것을 먼저 뒤집는 것이 전체 횟수에서 최적인지는 알 수 없으므로 2가지 모두 확인해야 합니다. 카드 쌍 개수가 N일 때, 전체 순서의 경우의 수는 N! × 2<sup>N</sup>입니다.
 - 보드 크기가 작으므로, 전체 보드를 탐색하는 방법으로 카드 쌍 순서를 정할 수도 있습니다. 이 방법을 사용하면 카드 쌍 순서와 쌍 내부 순서를 한꺼번에 정할 수 있어 구현할 때 편리합니다.
 - 시작점과 목적지가 정해졌을 때, 최적의 이동 거리는 `최단거리 BFS`로 찾을 수 있습니다. 현재 위치(x, y)가 주어졌을 때, 인접 이동, 컨트롤 이동으로 가능한 다음 위치는 최대 8가지 입니다.
@@ -70,7 +70,7 @@ using namespace std;
 struct Point { int x, y; };
 int minDist = 999999, dx[4] = { 1, 0, -1, 0 }, dy[4] = { 0, 1, 0, -1 };
 bool visited[4][4];
-vector<vector<int>> board;<br>
+vector<vector<int>> board;
 bool isOut(int x, int y) { return x < 0 || x >= 4 || y < 0 || y >= 4; }
 Point findOther(int tx, int ty) {
     for (int y = 0; y < 4; y++)
@@ -81,7 +81,7 @@ Point findOther(int tx, int ty) {
 
 int BFS(int x, int y, int gx, int gy) {
     memset(visited, 0, sizeof(visited));
-    queue<Point> q; q.push({ x, y });<br>
+    queue<Point> q; q.push({ x, y });
     visited[y][x] = 1;
     int dist = 0;
     while (1) {
@@ -100,7 +100,7 @@ int BFS(int x, int y, int gx, int gy) {
             for (int d = 0; d < 4; d++) {
                 int nx = c.x, ny = c.y;
                 for (; !isOut(nx + dx[d], ny + dy[d]); nx += dx[d], ny += dy[d])
-                    if (board[ny][nx] > 0 && !(nx == c.x && ny == c.y))<br>
+                    if (board[ny][nx] > 0 && !(nx == c.x && ny == c.y))
                         break;
                 if (!visited[ny][nx]) {
                     visited[ny][nx] = 1;
@@ -116,7 +116,7 @@ void BT(int x, int y, int distSum) {
     bool isEmpty = 1;
     for (int cy1 = 0; cy1 < 4; cy1++) {
         for (int cx1 = 0; cx1 < 4; cx1++) {
-            if (board[cy1][cx1] > 0) {<br>
+            if (board[cy1][cx1] > 0) {
                 int card = board[cy1][cx1];
                 Point p = findOther(cx1, cy1); int cx2 = p.x, cy2 = p.y;
                 int dist1 = BFS(x, y, cx1, cy1), dist2 = BFS(cx1, cy1, cx2, cy2);
@@ -131,12 +131,12 @@ void BT(int x, int y, int distSum) {
         minDist = min(minDist, distSum); 
 }
 
-int solution(vector<vector<int>> boardI, int r, int c) {<br>
+int solution(vector<vector<int>> boardI, int r, int c) {
     board = boardI; BT(c, r, 0);
     return minDist;
 }
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/72415<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/72415
 {% endraw %}

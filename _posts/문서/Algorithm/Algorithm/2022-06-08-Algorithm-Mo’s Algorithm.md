@@ -85,10 +85,10 @@ for (int i = 0; i < M; i++) {
 	newHi = query[i].right;
 
 	// 구간 포인터 이동 (+ 답 변화량 반영)
-	while (lo > newLo) Scan(--lo, 1);<br>
+	while (lo > newLo) Scan(--lo, 1);
 	while (lo < newLo) Scan(lo++, -1);
 	while (hi < newHi) Scan(++hi, 1);
-	while (hi > newHi) Scan(hi--, -1);<br>
+	while (hi > newHi) Scan(hi--, -1);
 
 	// 현재 답 구하기
 	resList[query[i].order] = res;
@@ -137,21 +137,21 @@ bool cmp(Query a, Query b) {
 }
 
 void Scan(int p, int d) {
-	if (cnt[arr[p]] == 0 && d > 0) res++;<br>
+	if (cnt[arr[p]] == 0 && d > 0) res++;
 	if (cnt[arr[p]] == 1 && d < 0) res--;
 	cnt[arr[p]] += d;
 }
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N;<br>
+	cin >> N;
 	sqN = sqrt(N);
 	for (int i = 0; i < N; i++)
-		cin >> arr[i];<br>
+		cin >> arr[i];
 
-	cin >> M;<br>
+	cin >> M;
 	for (int i = 0; i < M; i++) {
-		cin >> query[i].left >> query[i].right;<br>
+		cin >> query[i].left >> query[i].right;
 		query[i].left--, query[i].right--, query[i].order = i;
 	}
 	sort(query, query + M, cmp);
@@ -161,10 +161,10 @@ int main() {
 	cnt[arr[lo]] = 1;
 	for (int i = 0; i < M; i++) {
 		int newLo = query[i].left, newHi = query[i].right;
-		while (lo > newLo) Scan(--lo, 1);<br>
+		while (lo > newLo) Scan(--lo, 1);
 		while (lo < newLo) Scan(lo++, -1);
 		while (hi < newHi) Scan(++hi, 1);
-		while (hi > newHi) Scan(hi--, -1);<br>
+		while (hi > newHi) Scan(hi--, -1);
 		resList[query[i].order] = res;
 	}
 	for (int i = 0; i < M; i++)
@@ -175,8 +175,8 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/13547<br>
+<br>https://www.acmicpc.net/problem/13547
 
 ## 참고
-http://www.secmem.org/blog/2019/02/09/mo's-algorithm/<br>
+<br>http://www.secmem.org/blog/2019/02/09/mo's-algorithm/
 {% endraw %}

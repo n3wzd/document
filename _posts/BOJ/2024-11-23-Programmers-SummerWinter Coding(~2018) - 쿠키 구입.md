@@ -36,10 +36,10 @@ title: '[Programmers] SummerWinter Coding(~2018) - 쿠키 구입'
 #include <queue>
 using namespace std;
 
-int solution(vector<int> cookie) {<br>
+int solution(vector<int> cookie) {
     int answer = 0, N = cookie.size();
     for(int s = 0; s < N; s++) {
-        deque<int> L, R;<br>
+        deque<int> L, R;
         int sumL = 0, sumR = 0, i = s;
         while(i < N) {
             while(i < N && sumL >= sumR) {
@@ -61,5 +61,5 @@ int solution(vector<int> cookie) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/49995<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/49995
 {% endraw %}

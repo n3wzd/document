@@ -43,15 +43,15 @@ using namespace std;
 
 struct cmp {
 	bool operator()(pair<int, int>& a, pair<int, int>& b) {
-		return a.second > b.second;<br>
+		return a.second > b.second;
 	}
 };
 
 int N, E, S; // N = 정점 개수, E = 간선 개수, S = 시작 정점 번호
 int dist[802]; // 최단 거리를 저장하는 배열
 bool visited[802] = { 0, }; // 각 정점의 방문 여부를 저장하는 배열
-vector<pair<int, int>> graph[802]; // 그래프 저장: 인접 리스트 사용<br>
-priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> pq;<br>
+vector<pair<int, int>> graph[802]; // 그래프 저장: 인접 리스트 사용
+priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> pq;
 // 우선순위 큐 (first: 정점 번호, second: 최단 거리 dist (우선순위 큐 정렬 기준으로 사용, dist가 가장 작은 것이 root에 위치한다))
 
 void Dijkstra(int S)
@@ -110,7 +110,7 @@ int main()
 
 음의 가중치는 간선의 방향이 반대인 것이 아니라, 이동하면 오히려 이득을 보는 경우다. 예를 들어 어떤 톨게이트를 통과하면 오히려 돈을 받는 경우가 음의 가중치에 해당된다.
 
-현재 정점 v과 최단 경로에서 사용 가능한 최대 간선 개수 k를 현재 상태 dist(v, k)로 정의한다. 그리고 벨만-포드 알고리즘에서 사용되는 점화식은 다음과 같다. (v<sub>i</sub> = v에서 인접한 정점, (v<sub>i</sub>→v))<br>
+현재 정점 v과 최단 경로에서 사용 가능한 최대 간선 개수 k를 현재 상태 dist(v, k)로 정의한다. 그리고 벨만-포드 알고리즘에서 사용되는 점화식은 다음과 같다. (v<sub>i</sub> = v에서 인접한 정점, (v<sub>i</sub>→v))
 > d(v, k) = min{d(v, k-1), min{d(v<sub>1</sub>, k-1) + weight(v<sub>1</sub>, v), d(v<sub>2</sub>, k-1) + weight(v<sub>2</sub>, v), ... }}<br>
 
 여기서 계산할 때 k-1번 직전 캐시를 한번씩만 재참조하기 때문에 캐시 크기를 압축할 수 있다. 즉, 실제로 구현할 때는 dist에서 k인덱스를 생략할 수 있다.
@@ -189,7 +189,7 @@ bool BellmanFord()
 		int src = graph[e].src;
 		int dest = graph[e].dest;
 		int weight = graph[e].weight;
-		if (dist[src] != INF && dist[dest] > dist[src] + weight)<br>
+		if (dist[src] != INF && dist[dest] > dist[src] + weight)
 			return false; // N-1번 이후에도 최단 거리가 갱신되면 음의 사이클이 존재함
 	}
 
@@ -302,19 +302,19 @@ int main()
 일반적으로 다익스트라 알고리즘이 가장 빠르다.
 
 #### 최단 거리 선택?
-- 가중치가 없는 그래프의 최단 거리 => BFS<br>
-- 가중치가 있는 그래프의 최단 거리 => 다익스트라<br>
-- 가중치가 있는 음의 가중치를 포함한 그래프의 최단 거리 => 벨만-포드<br>
-- 가중치가 있는 그래프의 최단 거리, 모든 정점을 시작점으로 하는 경우 => 플로이드-와샬<br>
+- 가중치가 없는 그래프의 최단 거리 => BFS
+- 가중치가 있는 그래프의 최단 거리 => 다익스트라
+- 가중치가 있는 음의 가중치를 포함한 그래프의 최단 거리 => 벨만-포드
+- 가중치가 있는 그래프의 최단 거리, 모든 정점을 시작점으로 하는 경우 => 플로이드-와샬
 
 ## 연관 문제
-다익스트라 - https://www.acmicpc.net/problem/1753<br>
-벨만-포드 - https://www.acmicpc.net/problem/11657<br>
-플로이드-와샬 - https://www.acmicpc.net/problem/11404<br>
+다익스트라 - <br>https://www.acmicpc.net/problem/1753
+벨만-포드 - <br>https://www.acmicpc.net/problem/11657
+플로이드-와샬 - <br>https://www.acmicpc.net/problem/11404
 
 ## 참고
-https://m.blog.naver.com/ndb796/221234424646<br>
-https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/<br>
-https://4legs-study.tistory.com/26<br>
-https://reakwon.tistory.com/55<br>
+<br>https://m.blog.naver.com/ndb796/221234424646
+<br>https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/
+<br>https://4legs-study.tistory.com/26
+<br>https://reakwon.tistory.com/55
 {% endraw %}

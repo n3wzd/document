@@ -36,7 +36,7 @@ title: '[Programmers] 2022 KAKAO BLIND RECRUITMENT - k진수에서 소수 개수
 #include <cmath>
 using namespace std;
 typedef long long ll;
-queue<int> q;<br>
+queue<int> q;
 int cnt = 0;
 
 bool isPrime(ll n) {
@@ -59,7 +59,7 @@ void scan() {
 }
 
 int solution(int n, int k) {
-    while (n > 0) {<br>
+    while (n > 0) {
         n % k != 0 ? q.push(n % k) : scan();
         n /= k;
     }
@@ -69,5 +69,5 @@ int solution(int n, int k) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/92335<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/92335
 {% endraw %}

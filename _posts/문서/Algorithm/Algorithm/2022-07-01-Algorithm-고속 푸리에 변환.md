@@ -28,7 +28,7 @@ $$
 ## 설계
 FFT에서 가장 자주 활용되는 `Cooley-Tukey 알고리즘`을 사용하자.
 
-사용하기 전에, 수열의 길이는 2의 거듭제곱이어야 한다. 만약 2의 거듭제곱이 아니면 길이가 2의 거듭제곱이 될 때까지 뒤쪽 수열에 0을 채워주자. (ex. 현재 길이가 12면 뒤쪽에 0을 4개 추가) 처음부터 수열의 크기를 2<sup>d</sup> 단위로 설정하는 방법도 있다.<br>
+사용하기 전에, 수열의 길이는 2의 거듭제곱이어야 한다. 만약 2의 거듭제곱이 아니면 길이가 2의 거듭제곱이 될 때까지 뒤쪽 수열에 0을 채워주자. (ex. 현재 길이가 12면 뒤쪽에 0을 4개 추가) 처음부터 수열의 크기를 2<sup>d</sup> 단위로 설정하는 방법도 있다.
 
 이제 A[n]를 푸리에 변환해보자.  `분할 정복 알고리즘`을 적용해서 수열을 홀수 인덱스, 짝수 인덱스 기준으로 2개의 부분 문제로 분할한다.
 ```
@@ -68,13 +68,13 @@ A[n + N / 2] = A0[n] - (w[n] * A1[n])
 ### 재귀 함수 구현
 C++에서 복소수 표현은 복소수를 관리하는 템플릿인 `complex<double>`을 사용한다. 또한 삼각함수(sin, cos)가 필요한데, 이들은 `cmath` 라이브러리에서 가져오면 된다.
 ```
-typedef complex<double> cd<br>
+typedef complex<double> cd
 void FFT(vector<cd>& A, bool inv) {
 	int n = A.size();
 	if (n == 1)
 		return;
 
-	vector<cd> A0(n / 2), A1(n / 2);<br>
+	vector<cd> A0(n / 2), A1(n / 2);
 	for (int i = 0; i < n / 2; i++) {
 		A0[i] = A[i * 2];
 		A1[i] = A[i * 2 + 1];
@@ -82,7 +82,7 @@ void FFT(vector<cd>& A, bool inv) {
 	FFT(A0, inv);
 	FFT(A1, inv);
 
-	vector<cd> w(n);<br>
+	vector<cd> w(n);
 	for (int i = 0; i < n; i++) {
 		double p = 2 * PI * i / n * (inv ? -1 : 1);
 		w[i] = cd(cos(p), sin(p));
@@ -132,7 +132,7 @@ void FFT(vector<cd>& A, bool inv) {
 	// 문제 정렬
 	int n = A.size();
 	for (int k = 0; k < n; k++) {
-		int i = 0, lo = 1, hi = n >> 1;<br>
+		int i = 0, lo = 1, hi = n >> 1;
 		for (; lo < hi; lo <<= 1, hi >>= 1) {
 			if (k & hi) i += lo;
 			if (k & lo) i += hi;
@@ -166,7 +166,7 @@ void FFT(vector<cd>& A, bool inv) {
 ## 다항식 곱하기
 다항식은 차수를 인덱스, 계수를 값으로 하는 벡터로 표현된다.
 
-2x<sup>0</sup> + 5x<sup>1</sup> + 2x<sup>3</sup> + 6x<sup>5</sup><br>
+2x<sup>0</sup> + 5x<sup>1</sup> + 2x<sup>3</sup> + 6x<sup>5</sup>
 → [2, 5, 0, 2, 0 6]
 
 두 다항식 A, B를 곱해보자. 나이브하게 벡터끼리 곱하는 방법은 O(N<sup>2</sup>) 시간이 걸린다. 하지만 `고속 푸리에 변환`을 적용하면 O(N log N)으로 시간을 단축할 수 있다.
@@ -213,13 +213,13 @@ A, B를 다항식으로 표현하면 다음과 같다. (원소를 차수로 하�
 #include <complex>
 #define PI 3.14159265358979323846
 using namespace std;
-typedef complex<double> cd;<br>
+typedef complex<double> cd;
 const int SIZE = 1 << 19;
 
 void FFT(vector<cd>& A, bool inv) {
 	int n = A.size();
 	for (int k = 0; k < n; k++) {
-		int i = 0, lo = 1, hi = n >> 1;<br>
+		int i = 0, lo = 1, hi = n >> 1;
 		for (; lo < hi; lo <<= 1, hi >>= 1) {
 			if (k & hi) i += lo;
 			if (k & lo) i += hi;
@@ -259,17 +259,17 @@ void MUL(vector<cd>& A, vector<cd>& B, vector<cd>& C) {
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	int N, M, d, cnt = 0;
-	vector<cd> A(SIZE), B(SIZE), C(SIZE);<br>
-	vector<int> goal;<br>
-	cin >> N;<br>
+	vector<cd> A(SIZE), B(SIZE), C(SIZE);
+	vector<int> goal;
+	cin >> N;
 	A[0] = B[0] = cd(1, 0);
 	for (int i = 0; i < N; i++) {
-		cin >> d;<br>
+		cin >> d;
 		A[d] = B[d] = cd(1, 0);
 	}
-	cin >> M;<br>
+	cin >> M;
 	for (int i = 0; i < M; i++) {
-		cin >> d;<br>
+		cin >> d;
 		goal.push_back(d);
 	}
 
@@ -283,14 +283,14 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/10531<br>
-https://www.acmicpc.net/problem/1067<br>
-https://www.acmicpc.net/problem/20176<br>
+<br>https://www.acmicpc.net/problem/10531
+<br>https://www.acmicpc.net/problem/1067
+<br>https://www.acmicpc.net/problem/20176
 
 ## 참고
-https://aruz.tistory.com/1<br>
-https://www.geeksforgeeks.org/fast-fourier-transformation-poynomial-multiplication/?ref=gcse<br>
-https://ohgym.tistory.com/16<br>
-https://seastar105.tistory.com/14<br>
-https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%82%B0_%ED%91%B8%EB%A6%AC%EC%97%90_%EB%B3%80%ED%99%98<br>
+<br>https://aruz.tistory.com/1
+<br>https://www.geeksforgeeks.org/fast-fourier-transformation-poynomial-multiplication/?ref=gcse
+<br>https://ohgym.tistory.com/16
+<br>https://seastar105.tistory.com/14
+<br>https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%82%B0_%ED%91%B8%EB%A6%AC%EC%97%90_%EB%B3%80%ED%99%98
 {% endraw %}

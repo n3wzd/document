@@ -24,7 +24,7 @@ XYZ 마트는 일정한 금액을 지불하면 10일 동안 회원 자격을 부
     -   1 ≤  `want`의 원소의 길이,  `discount`의 원소의 길이 ≤ 12
 
 ## 해결
-고정 길이 구간 내부의 원소 개수와 주어진 집합의 원소 개수가 일치하는지 판별하면 됩니다. => `슬라이딩 윈도우` + `누적 합`<br>
+고정 길이 구간 내부의 원소 개수와 주어진 집합의 원소 개수가 일치하는지 판별하면 됩니다. => `슬라이딩 윈도우` + `누적 합`
 
 ```
 할인 목록 순회:
@@ -40,9 +40,9 @@ XYZ 마트는 일정한 금액을 지불하면 10일 동안 회원 자격을 부
 #include <vector>
 #include <map>
 using namespace std;
-map<string, int> target, cnt;<br>
+map<string, int> target, cnt;
 
-int solution(vector<string> want, vector<int> number, vector<string> discount) {<br>
+int solution(vector<string> want, vector<int> number, vector<string> discount) {
     int answer = 0, N = want.size();
     for(int i = 0; i < N; i++)
         target[want[i]] = number[i];
@@ -61,5 +61,5 @@ int solution(vector<string> want, vector<int> number, vector<string> discount) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/131127<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/131127
 {% endraw %}

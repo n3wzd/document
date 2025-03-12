@@ -25,7 +25,7 @@ title: '[Programmers] 연습문제 - 삼총사'
 ```
 #include <vector>
 using namespace std;
-int answer; vector<int> number;<br>
+int answer; vector<int> number;
 bool selected[13];
 
 void BT(int start, int depth) {
@@ -44,12 +44,12 @@ void BT(int start, int depth) {
     }
 }
 
-int solution(vector<int> numberI) {<br>
+int solution(vector<int> numberI) {
     number = numberI; BT(0, 3);
     return answer;
 }
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/131705<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/131705
 {% endraw %}

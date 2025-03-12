@@ -43,12 +43,12 @@ int solution(int N, int L, int P) {
     int answer = 0;
     for(int i = 1; i <= N; i++) {
         int d = D(i);
-        answer += d > L ? P : d;<br>
+        answer += d > L ? P : d;
     }
     return answer;
 }
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/136798<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/136798
 {% endraw %}

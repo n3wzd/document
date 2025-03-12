@@ -29,7 +29,7 @@ n의 약수 p가 있다고 했을 때(아직 p의 값은 알 수 없다), 위의
 위의 수열을 그래프로 표현하면 다음과 비슷하다. 실제로 ρ하고 비슷하게 생겼다.
 ![](images/Pollard_rho_cycle.png)
 
-(그림 출처 - https://en.wikipedia.org/wiki/Pollard%27s_rho_algorithm)<br>
+(그림 출처 - <br>https://en.wikipedia.org/wiki/Pollard%27s_rho_algorithm)
 
 모듈러 적용 이전 원래 수열에서 수 a, b가 있다고 하자. 만약 a, b가 ρ모양 그래프에서 같은 위치에 있다면 다음이 성립할 것이다.
 > a ≡ b (mod p)<br>
@@ -39,7 +39,7 @@ n은 p의 약수이므로 abs(a - b)와 n는 모두 p를 공통 약수로 갖는
 
 만약 g가 1이면 a와 b는 ρ모양 그래프에서 같은 위치에 있지 않은 것이므로 그냥 넘어가면 된다. g가 n이면 원래 수열을 모두 탐색했으나 약수를 찾지 못한 경우로, 다항함수를 다시 랜덤으로 생성해야 한다. (c와 함수 초항의 값을 바꿔주면 된다)
 
-g가 1과 n이 아니라고 했을 때, g는 n의 약수이지만 아직 소수임은 확실하지 않다. g가 소수인지 를 판정하자. 만약 소수가 맞다면 소인수분해 목록에 추가한다. 그렇지 않다면 g, n /g으로 분할해서 위의 탐색을 반복한다. => `분할 정복 알고리즘`<br>
+g가 1과 n이 아니라고 했을 때, g는 n의 약수이지만 아직 소수임은 확실하지 않다. g가 소수인지 를 판정하자. 만약 소수가 맞다면 소인수분해 목록에 추가한다. 그렇지 않다면 g, n /g으로 분할해서 위의 탐색을 반복한다. => `분할 정복 알고리즘`
 
 마지막으로 a, b가 합동하는 순간(=나머지가 같은 순간)은 어떤 방법으로 찾을 수 있을까? 이는 `플로이드 사이클 판정 알고리즘`을 활용해서 탐색하면 해결할 수 있다. a를 1배속, b를 2배속으로 원래 수열을 탐색하게 하면 합동하는 순간을 판정할 수 있다.
 
@@ -108,7 +108,7 @@ ll GCD(ll a, ll b) { return (a % b == 0) ? b : GCD(b, a % b); }
 
 ll FastPow(ll a, ll pw, ll mod) {
 	ll buf = 1;
-	while (pw > 1) {<br>
+	while (pw > 1) {
 		if (pw % 2 != 0) buf = ModMul(buf, a, mod);
 		a = ModMul(a, a, mod); pw /= 2;
 	}
@@ -139,7 +139,7 @@ bool isPrime(ll x) {
 	return 1;
 }
 
-vector<ll> factors;<br>
+vector<ll> factors;
 void Pollard(ll n) {
 	if (n == 1) return;
 	if (n % 2 == 0) {
@@ -169,7 +169,7 @@ void Pollard(ll n) {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	ll N; cin >> N;<br>
+	ll N; cin >> N;
 	Pollard(N);
 	sort(factors.begin(), factors.end());
 	for (int i = 0; i < factors.size(); i++)
@@ -180,9 +180,9 @@ int main() {
 ※ Visual Studio에선 __int128를 지원하지 않는다. 대신 시간이 약간 더 오래걸리지만 unsigned long long으로 대체할 수 있다.
 
 ## 연관 문제
-https://www.acmicpc.net/problem/4149<br>
+<br>https://www.acmicpc.net/problem/4149
 
 ## 참고
-https://blog.naver.com/PostView.nhn?blogId=jinhan814&logNo=222141831551&categoryNo=6&parentCategoryNo=6&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView<br>
-https://aruz.tistory.com/140<br>
+<br>https://blog.naver.com/PostView.nhn?blogId=jinhan814&logNo=222141831551&categoryNo=6&parentCategoryNo=6&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView
+<br>https://aruz.tistory.com/140
 {% endraw %}

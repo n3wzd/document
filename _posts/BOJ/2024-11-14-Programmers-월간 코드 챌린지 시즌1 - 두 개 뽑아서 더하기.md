@@ -25,8 +25,8 @@ title: '[Programmers] 월간 코드 챌린지 시즌1 - 두 개 뽑아서 더하
 #include <algorithm>
 using namespace std;
 
-vector<int> solution(vector<int> numbers) {<br>
-    vector<int> answer; int N = numbers.size();<br>
+vector<int> solution(vector<int> numbers) {
+    vector<int> answer; int N = numbers.size();
     for(int i = 0; i < N; i++)
         for(int j = 0; j < N; j++)
             if(i != j)
@@ -38,5 +38,5 @@ vector<int> solution(vector<int> numbers) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/68644<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/68644
 {% endraw %}

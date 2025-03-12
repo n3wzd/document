@@ -25,9 +25,9 @@ title: '[Programmers] 2020 KAKAO BLIND RECRUITMENT - 자물쇠와 열쇠'
     -   0은 홈 부분, 1은 돌기 부분을 나타냅니다.
 
 ## 해결
-- 열쇠를 회전하거나 이동하여 자물쇠가 맞는지 확인해야 합니다. => `브루트포스`<br>
+- 열쇠를 회전하거나 이동하여 자물쇠가 맞는지 확인해야 합니다. => `브루트포스`
 - 열쇠 회전은 0도, 90도, 180도, 270도 4가지 방법이 존재하며, `배열 회전`으로 4가지 열쇠를 만들어줍시다.
-- 4가지 열쇠를 자물쇠의 모든 위치에 대입해봅니다. 자물쇠의 원점을 (0, 0)으로 가정했을 때, 열쇠의 원점은 (-(N - 1), -(N - 1))부터 (M - 1, M - 1)까지 가능합니다. => `슬라이딩 윈도우`<br>
+- 4가지 열쇠를 자물쇠의 모든 위치에 대입해봅니다. 자물쇠의 원점을 (0, 0)으로 가정했을 때, 열쇠의 원점은 (-(N - 1), -(N - 1))부터 (M - 1, M - 1)까지 가능합니다. => `슬라이딩 윈도우`
 - 열쇠 칸이 자물쇠 바깥에 있다면 자물쇠 홈만 고려합니다. 그렇지 않으면 열쇠 칸과 대응되는 자물쇠 칸을 `XOR` 연산합니다.
 - 자물쇠 홈이 모두 1인 경우가 있습니다. 이 때는 열쇠 모양 관계없이 최종 값이 `true`입니다.
 
@@ -39,7 +39,7 @@ title: '[Programmers] 2020 KAKAO BLIND RECRUITMENT - 자물쇠와 열쇠'
 using namespace std;
 int N, M;
 bool key[4][21][21];
-vector<vector<int>> lock;<br>
+vector<vector<int>> lock;
 bool isOut(int x, int y) { return x < 0 || x >= M || y < 0 || y >= M; }
 
 void rotate(int x, int y, int d) {
@@ -64,7 +64,7 @@ bool isPass(int d, int by, int bx) {
     return ok;
 }
 
-bool solution(vector<vector<int>> keyI, vector<vector<int>> lockI) {<br>
+bool solution(vector<vector<int>> keyI, vector<vector<int>> lockI) {
     M = keyI.size(), N = lockI.size(); lock = lockI;
     bool ok = 1;
     for (int y = 0; y < N; y++)
@@ -85,5 +85,5 @@ bool solution(vector<vector<int>> keyI, vector<vector<int>> lockI) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/60059<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/60059
 {% endraw %}

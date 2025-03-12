@@ -41,8 +41,8 @@ title: '[Programmers] 월간 코드 챌린지 시즌3 - n^2 배열 자르기'
 using namespace std;
 typedef long long ll;
 
-vector<int> solution(int n, ll left, ll right) {<br>
-    vector<int> answer;<br>
+vector<int> solution(int n, ll left, ll right) {
+    vector<int> answer;
     for(ll i = left; i <= right; i++)
         answer.push_back(max(i % n, i / n) + 1);
     return answer;
@@ -50,5 +50,5 @@ vector<int> solution(int n, ll left, ll right) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/87390<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/87390
 {% endraw %}

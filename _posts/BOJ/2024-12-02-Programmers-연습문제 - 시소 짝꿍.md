@@ -42,12 +42,12 @@ using namespace std;
 typedef long long ll;
 ll w[4001];
 
-ll solution(vector<int> weights) {<br>
+ll solution(vector<int> weights) {
     ll answer = 0;
     for(int i : weights)
         w[i]++;
     for(int i = 100; i <= 1000; i++) {
-        if(w[i] > 1)<br>
+        if(w[i] > 1)
             answer += w[i] * (w[i] - 1) / 2;
         answer += w[i] * w[i * 2];
         if(i % 2 == 0)
@@ -60,5 +60,5 @@ ll solution(vector<int> weights) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/152996<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/152996
 {% endraw %}

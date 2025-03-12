@@ -29,13 +29,13 @@ title: '[Programmers] 월간 코드 챌린지 시즌1 - 풍선 터트리기'
 ## 해결
 다음과 같은 예시를 가정해봅니다:
 ```
-[1, 2, 3, 4, 5] => 1, 2, 3, 4, 5<br>
+[1, 2, 3, 4, 5] => 1, 2, 3, 4, 5
 
-[5, 4, 3, 2, 1] => 5, 4, 3, 2, 1<br>
+[5, 4, 3, 2, 1] => 5, 4, 3, 2, 1
 
-[1, 3, 5, 4, 2] => 1, X, X, X, 2<br>
+[1, 3, 5, 4, 2] => 1, X, X, X, 2
 
-[5, 3, 1, 2, 4] => 5, 3, 1, 2, 4<br>
+[5, 3, 1, 2, 4] => 5, 3, 1, 2, 4
 
 ※ X: 최후까지 생존 불가능
 ```
@@ -56,7 +56,7 @@ title: '[Programmers] 월간 코드 챌린지 시즌1 - 풍선 터트리기'
 #include <vector>
 using namespace std;
 
-int solution(vector<int> a) {<br>
+int solution(vector<int> a) {
     int minV = 1e9 + 1, answer = 1, N = a.size();
     for(auto n : a)
         minV = min(minV, n);
@@ -72,5 +72,5 @@ int solution(vector<int> a) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/68646<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/68646
 {% endraw %}

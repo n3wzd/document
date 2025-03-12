@@ -66,7 +66,7 @@ ll ModMul(ll a, ll b) {
 
 ll FastPow(ll a, ll power) {
 	ll buf = 1;
-	while (power > 1) {<br>
+	while (power > 1) {
 		if (power % 2 != 0) buf = ModMul(buf, a);
 		a = ModMul(a, a);
 		power /= 2;
@@ -92,7 +92,7 @@ int main() {
 ```
 
 ### 참고
-https://velog.io/@gidskql6671/%EB%82%98%EB%A8%B8%EC%A7%80Modulo-%EC%97%B0%EC%82%B0-%EB%B6%84%EB%B0%B0%EB%B2%95%EC%B9%99<br>
+<br>https://velog.io/@gidskql6671/%EB%82%98%EB%A8%B8%EC%A7%80Modulo-%EC%97%B0%EC%82%B0-%EB%B6%84%EB%B0%B0%EB%B2%95%EC%B9%99
 
 ## 확장 유클리드 호제법
 확장 유클리드 호제법을 사용하면 다음 수식에서 x, y, gcd(a, b)를 계산할 수 있다.
@@ -137,22 +137,22 @@ ll ModInv(ll a, ll p) {
 
 int main() {
 	ll a, p = 97;
-	cin >> a;<br>
+	cin >> a;
 	cout << ModInv(a, p);
 	return 0;
 }
 ```
 
 ### 참고
-https://www.crocus.co.kr/1232<br>
+<br>https://www.crocus.co.kr/1232
 
 ## 연관 문제
 **주기 연산**
-https://www.acmicpc.net/problem/2477<br>
+<br>https://www.acmicpc.net/problem/2477
 
 **나눗셈 분배법칙**
-https://www.acmicpc.net/problem/11401<br>
+<br>https://www.acmicpc.net/problem/11401
 
 **DP 상태 응용**
-https://www.acmicpc.net/problem/1086<br>
+<br>https://www.acmicpc.net/problem/1086
 {% endraw %}

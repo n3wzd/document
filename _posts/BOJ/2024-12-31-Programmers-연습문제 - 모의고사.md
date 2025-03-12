@@ -31,11 +31,11 @@ title: '[Programmers] 연습문제 - 모의고사'
 ```
 #include <vector>
 using namespace std;
-vector<int> D[3] = {{1, 2, 3, 4, 5}, {2, 1, 2, 3, 2, 4, 2, 5}, {3, 3, 1, 1, 2, 2, 4, 4, 5, 5}};<br>
+vector<int> D[3] = {{1, 2, 3, 4, 5}, {2, 1, 2, 3, 2, 4, 2, 5}, {3, 3, 1, 1, 2, 2, 4, 4, 5, 5}};
 int cnt[3], maxScore = 0;
 
-vector<int> solution(vector<int> answers) {<br>
-    vector<int> solution;<br>
+vector<int> solution(vector<int> answers) {
+    vector<int> solution;
     for(int i = 0; i < answers.size(); i++)
         for(int d = 0; d < 3; d++)
             cnt[d] += answers[i] == D[d][i % D[d].size()] ? 1 : 0;
@@ -49,5 +49,5 @@ vector<int> solution(vector<int> answers) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/42840<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/42840
 {% endraw %}

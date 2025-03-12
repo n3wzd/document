@@ -68,7 +68,7 @@ string itot(ll t) {
     return h.str() + ":" + m.str() + ":" + s.str();
 }
 
-string solution(string play_time, string adv_time, vector<string> logs) {<br>
+string solution(string play_time, string adv_time, vector<string> logs) {
     N = ttoi(play_time), width = ttoi(adv_time) - 1;
     for (auto log : logs) {
         dtx[ttoi(log.substr(0, 8))]++;
@@ -79,7 +79,7 @@ string solution(string play_time, string adv_time, vector<string> logs) {<br>
     for (ll lo = 0; lo <= N - width; lo++) {
         dt += dtx[lo + width];
         sum += dt;
-        if (sum > resSum)<br>
+        if (sum > resSum)
             resSum = sum, resLo = lo;
         dt -= dtx[lo];
     }
@@ -88,5 +88,5 @@ string solution(string play_time, string adv_time, vector<string> logs) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/72414<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/72414
 {% endraw %}

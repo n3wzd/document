@@ -44,9 +44,9 @@ title: '[Programmers] PCCP - 붕대 감기'
 #include <vector>
 using namespace std;
 
-int solution(vector<int> bandage, int health, vector<vector<int>> attacks) {<br>
+int solution(vector<int> bandage, int health, vector<vector<int>> attacks) {
     int hp = health, mhp = health, t = 0;
-    for(vector<int> attack : attacks) {<br>
+    for(vector<int> attack : attacks) {
         int dt = attack[0] - t - 1;
         int heal = bandage[1] * dt + (bandage[2] * (dt / bandage[0]));
         hp = min(mhp, hp + heal);
@@ -60,5 +60,5 @@ int solution(vector<int> bandage, int health, vector<vector<int>> attacks) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/250137<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/250137
 {% endraw %}

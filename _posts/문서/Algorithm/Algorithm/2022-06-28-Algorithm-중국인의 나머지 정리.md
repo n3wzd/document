@@ -60,7 +60,7 @@ void DP() {
 
 ll GetC(ll n, ll r, ll p) {
 	ll C = 1;
-	while (n > 0) {<br>
+	while (n > 0) {
 		if(p == p1)	C = ModMul(C, cache1[n % p][r % p], p);
 		else C = ModMul(C, cache2[n % p][r % p], p);
 		n /= p, r /= p;
@@ -92,10 +92,10 @@ int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	ll Q, inv1, inv2;
 	DP(); inv1 = ModInv(p1, p2), inv2 = ModInv(p2, p1);
-	cin >> Q;<br>
+	cin >> Q;
 	while (Q--) {
 		ll N, K, C1, C2;
-		cin >> N >> K;<br>
+		cin >> N >> K;
 		if (N == 0 && K == 1) { cout << "1\n"; continue; }
 		if (N + 1 < K || K == 1) { cout << "0\n"; continue; }
 		N--, K -= 2;
@@ -107,8 +107,8 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/15718<br>
+<br>https://www.acmicpc.net/problem/15718
 
 ## 참고
-https://blog.joonas.io/23<br>
+<br>https://blog.joonas.io/23
 {% endraw %}

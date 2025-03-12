@@ -31,9 +31,9 @@ title: '[Programmers] 2019 KAKAO TECH INTERNSHIP - 호텔 방 배정'
 [ 4, 7, 8, 11 ]
 ```
 아래과 같은 방이 요청되었을 때, 각각의 답은 아래와 같습니다:
-- 4 => 5<br>
-- 7, 8 => 9<br>
-- 11 => 12<br>
+- 4 => 5
+- 7, 8 => 9
+- 11 => 12
 
 여기서 연속한 방들은 답이 공통이라는 것을 발견할 수 있습니다. 방문한 연속된 방들을 집합으로 묶습니다. 방 요청이 들어오면 집합의 최댓값을 반환하면 정답을 구할 수 있습니다. 이는 `분리 집합`으로 구현할 수 있습니다.
 
@@ -60,7 +60,7 @@ title: '[Programmers] 2019 KAKAO TECH INTERNSHIP - 호텔 방 배정'
 #include <unordered_map>
 using namespace std;
 typedef long long ll;
-unordered_map<ll, ll> parent;<br>
+unordered_map<ll, ll> parent;
 bool isExist(ll n) { return parent[n] != 0; }
 
 ll Find(ll n) {
@@ -77,11 +77,11 @@ ll Find(ll n) {
 void Union(ll a, ll b) {
     ll p1 = Find(a);
     ll p2 = Find(b);
-    p1 > p2 ? parent[p2] = p1 : parent[p1] = p2;<br>
+    p1 > p2 ? parent[p2] = p1 : parent[p1] = p2;
 }
 
-vector<ll> solution(ll k, vector<ll> room_number) {<br>
-    vector<ll> answer;<br>
+vector<ll> solution(ll k, vector<ll> room_number) {
+    vector<ll> answer;
     for (auto num : room_number) {
         ll next = isExist(num) ? Find(num) + 1 : num;
         parent[next] = -1;
@@ -96,5 +96,5 @@ vector<ll> solution(ll k, vector<ll> room_number) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/64063<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/64063
 {% endraw %}

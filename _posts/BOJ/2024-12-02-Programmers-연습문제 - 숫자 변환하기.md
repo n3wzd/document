@@ -21,7 +21,7 @@ title: '[Programmers] 연습문제 - 숫자 변환하기'
 -   1 ≤  `n`  <  `y`
 
 ## 해결
-적절히 위치를 옮겨서 최단 횟수로 이동해야 합니다. => `최단거리 BFS`<br>
+적절히 위치를 옮겨서 최단 횟수로 이동해야 합니다. => `최단거리 BFS`
 
 수직선에서 현재 위치(`c`)를 정점으로 정의합니다. 다음 정점은 `c + n`, `c * 2`, `c * 3`입니다.
 
@@ -35,7 +35,7 @@ using namespace std;
 int V[1000001];
 
 int solution(int x, int y, int n) {
-    queue<int> q;<br>
+    queue<int> q;
     q.push(x); V[x] = 1;
     while(!q.empty()) {
         int c = q.front(); q.pop();
@@ -54,5 +54,5 @@ int solution(int x, int y, int n) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/154538<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/154538
 {% endraw %}

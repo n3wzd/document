@@ -55,9 +55,9 @@ XX 게임에서는 지형 편집 기능을 이용하여 플레이어가 직접 �
 using namespace std;
 typedef long long ll;
 
-ll solution(vector<vector<int>> land2D, int P, int Q) {<br>
+ll solution(vector<vector<int>> land2D, int P, int Q) {
     ll answer = ((ll)1 << 62), p = 0, q = 0, k = 1;
-    vector<int> land;<br>
+    vector<int> land;
     for(auto row : land2D)
         for(auto c : row)
             land.push_back(c);
@@ -77,5 +77,5 @@ ll solution(vector<vector<int>> land2D, int P, int Q) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12984<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/12984
 {% endraw %}

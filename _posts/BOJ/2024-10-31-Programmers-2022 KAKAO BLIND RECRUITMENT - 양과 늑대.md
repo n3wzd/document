@@ -27,7 +27,7 @@ title: '[Programmers] 2022 KAKAO BLIND RECRUITMENT - 양과 늑대'
     -   0번 노드는 항상 루트 노드입니다.
 
 ## 해결
-- 늑대 정점을 방문하는 것은 이득일 수도 아닐 수도 있습니다. 따라서 모든 경우를 탐색해야 합니다. => `백트래킹`<br>
+- 늑대 정점을 방문하는 것은 이득일 수도 아닐 수도 있습니다. 따라서 모든 경우를 탐색해야 합니다. => `백트래킹`
 - `그래프 탐색`으로 현재 방문 가능한 정점들에서 양의 수를 구할 수 있습니다. 탐색 대상이 트리이므로 노드마다 level을 부여해서 방문 처리를 할 수 있습니다. 탐색에 제약이 되는 것은 늑대 정점 뿐이며, 이 정점을 다음 백트래킹 탐색 대상으로 합니다.
 - 백트래킹 탐색 상태를 (현재 양 수, 현재 늑대 수, 트리 탐색 시작 정점, 다음 방문할 정점 목록)으로 정의합니다. 다음 정점 목록은 boolean 배열이며, `비트마스크`로 구현할 수 있습니다.
 
@@ -44,7 +44,7 @@ title: '[Programmers] 2022 KAKAO BLIND RECRUITMENT - 양과 늑대'
 ```
 #include <vector>
 using namespace std;
-vector<int> graph[18], info;<br>
+vector<int> graph[18], info;
 int N, level[18], tmpSheep, tmpNext, res = 1;
 
 void setLevel(int n, int d) {
@@ -72,12 +72,12 @@ void BT(int sheep, int wolf, int start, int next) {
     next = tmpNext, sheep += tmpSheep;
     res = max(res, sheep);
     for (int i = 0; i <= N; i++) {
-        if (next & (1 << i) && sheep > wolf + 1)<br>
+        if (next & (1 << i) && sheep > wolf + 1)
             BT(sheep, wolf + 1, i, next & ~(1 << i));
     }
 }
 
-int solution(vector<int> infoI, vector<vector<int>> edges) {<br>
+int solution(vector<int> infoI, vector<vector<int>> edges) {
     info = infoI;
     for (auto edge : edges) {
         graph[edge[0]].push_back(edge[1]);
@@ -91,5 +91,5 @@ int solution(vector<int> infoI, vector<vector<int>> edges) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/92343<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/92343
 {% endraw %}

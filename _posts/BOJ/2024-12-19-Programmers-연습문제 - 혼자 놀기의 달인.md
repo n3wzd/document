@@ -41,7 +41,7 @@ title: '[Programmers] 연습문제 - 혼자 놀기의 달인'
 3. 방문한 횟수 반환
 ```
 
-모든 경우를 조사하면 되며, 시간 복잡도는 O(N<sup>2</sup>)입니다. => `브루트 포스`<br>
+모든 경우를 조사하면 되며, 시간 복잡도는 O(N<sup>2</sup>)입니다. => `브루트 포스`
 
 ## 코드
 ```
@@ -50,7 +50,7 @@ title: '[Programmers] 연습문제 - 혼자 놀기의 달인'
 using namespace std;
 bool selected[101];
 
-int solution(vector<int> cards) {<br>
+int solution(vector<int> cards) {
     int N = cards.size(), answer = 0;
     for(int i = 0; i < N; i++)
         cards[i]--;
@@ -77,5 +77,5 @@ int solution(vector<int> cards) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/131130<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/131130
 {% endraw %}

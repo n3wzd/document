@@ -23,7 +23,7 @@ while (start <= end)
 	mid = (start + end) / 2;					// 탐색 범위가 절반씩 감소한다
 	if(v[mid] == target) return true			// 목표 값 발견
 	if(v[mid] < target) start = mid + 1			// mid에 1을 더해서 탐색에 배제
-	if(v[mid] > target) end = mid - 1			// mid에 1을 빼서 탐색에 배제<br>
+	if(v[mid] > target) end = mid - 1			// mid에 1을 빼서 탐색에 배제
 }
 return false;
 ```
@@ -90,22 +90,22 @@ return end;
 ```
 199 200, mid = 199
 if Checker(mid) = TRUE
-start = mid => 199 200 (loop ???)<br>
-end = mid => 199 199<br>
+start = mid => 199 200 (loop ???)
+end = mid => 199 199
 
 if Checker(mid) = FALSE
-end = mid - 1 => 199 198 ???<br>
-start = mid + 1=> 200 200<br>
+end = mid - 1 => 199 198 ???
+start = mid + 1=> 200 200
 
 
 199 200, mid = 200
 if Checker(mid) = TRUE
-start = mid => 200 200<br>
-end = mid => 199 200 (loop ???)<br>
+start = mid => 200 200
+end = mid => 199 200 (loop ???)
 
 if Checker(mid) = FALSE
-end = mid - 1 => 199 199<br>
-start = mid + 1=> 201 200 ???<br>
+end = mid - 1 => 199 199
+start = mid + 1=> 201 200 ???
 ```
 
 end = mid일 때는 왼쪽, start = mid일 때는 오른쪽을 선택하면 된다.
@@ -118,7 +118,7 @@ LowerBound와 UpperBound는 매개변수 탐색으로 구현할 수 있다.
 
 **LowerBound**
 ```
-while(end - start > 0)<br>
+while(end - start > 0)
 	mid = (start + end) / 2
 	if(v[mid] < target) start = mid + 1
 	if(v[mid] >= target) end = mid
@@ -128,10 +128,10 @@ return end
 
 **UpperBound**
 ```
-while(end - start > 0)<br>
+while(end - start > 0)
 	mid = (start + end) / 2
 	if(v[mid] <= target) start = mid + 1
-	if(v[mid] > target) end = mid<br>
+	if(v[mid] > target) end = mid
 return end
 ```
  LowerBound와 비슷하지만 조건이 >=에서 >으로 되었다. 초과인 값만 탐색 경계에 포함하므로, 반복할수록 키 값 초과가 배열에서 처음 나오는 위치로 수렴한다.
@@ -143,7 +143,7 @@ return end
 #include <algorithm>
 using namespace std;
 
-vector<int> v;<br>
+vector<int> v;
 int target;
 
 bool BinarySearch()
@@ -157,7 +157,7 @@ bool BinarySearch()
 		mid = (start + end) / 2;
 		if (v[mid] == target) return true;
 		else if (v[mid] < target) start = mid + 1;
-		else if (v[mid] > target) end = mid - 1;<br>
+		else if (v[mid] > target) end = mid - 1;
 	}
 
 	return false;
@@ -198,16 +198,16 @@ int UpperBound()
 int main()
 {
 	int n;
-	cin >> n;<br>
+	cin >> n;
 	for (int i = 0; i < n; i++)
 	{
 		int num;
-		cin >> num;<br>
+		cin >> num;
 		v.push_back(num);
 	}
 	sort(v.begin(), v.end());
 
-	cin >> target;<br>
+	cin >> target;
 	cout << BinarySearch() << endl;
 	cout << LowerBound() << endl;
 	cout << UpperBound() << endl;
@@ -224,16 +224,16 @@ C++의 algorithm.h에선 이분 탐색과 관련된 함수를 제공한다.
 또한 `set`, `map`, `multimap`에서도 전용 lower_bound, upper_bound 메소드를 제공한다.
 
 ## 연관 문제
-https://www.acmicpc.net/problem/1920<br>
-https://www.acmicpc.net/problem/10816<br>
-https://www.acmicpc.net/problem/1654<br>
-https://www.acmicpc.net/problem/1300<br>
-https://www.acmicpc.net/problem/17951<br>
-https://www.acmicpc.net/problem/1202<br>
+<br>https://www.acmicpc.net/problem/1920
+<br>https://www.acmicpc.net/problem/10816
+<br>https://www.acmicpc.net/problem/1654
+<br>https://www.acmicpc.net/problem/1300
+<br>https://www.acmicpc.net/problem/17951
+<br>https://www.acmicpc.net/problem/1202
 
 ## 참고
-https://satisfactoryplace.tistory.com/39<br>
-https://namu.wiki/w/%EC%9D%B4%EC%A7%84%20%ED%83%90%EC%83%89<br>
-https://blog.naver.com/bestmaker0290/220820005454<br>
-https://chanhuiseok.github.io/posts/algo-55/<br>
+<br>https://satisfactoryplace.tistory.com/39
+<br>https://namu.wiki/w/%EC%9D%B4%EC%A7%84%20%ED%83%90%EC%83%89
+<br>https://blog.naver.com/bestmaker0290/220820005454
+<br>https://chanhuiseok.github.io/posts/algo-55/
 {% endraw %}

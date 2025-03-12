@@ -25,7 +25,7 @@ title: '[Algorithm] Convex Hull'
 > 1. y가 가장 작은 점<br>
 > 2. y가 동일하면 x가 가장 작은 점<br>
 
-기준점 B를 중심으로 모든 점을 반시계 방향으로 정렬한다. => `CCW` 사용 <br>
+기준점 B를 중심으로 모든 점을 반시계 방향으로 정렬한다. => `CCW` 사용 
 > 점 A<sub>1</sub>, B, A<sub>2</sub> 순서대로 CCW를 이었을 때,<br>
 > 1. 시계 방향이면(CCW < 0) A<sub>1</sub>, A<sub>2</sub> 순서대로 정렬<br>
 > 2. 반시계 방향이면(CCW > 0) A<sub>2</sub>, A<sub>1</sub> 순서대로 정렬<br>
@@ -49,7 +49,7 @@ title: '[Algorithm] Convex Hull'
 그리고 `스택`을 사용해서 기준점부터 점들을 순차 탐색한다. 스택 상단 2개의 점과 현재 점을 이었을 때 CCW가 반시계 방향을 이뤄야 하며, 만약 시계 방향을 이루면 스택 상단의 점 1개를 제외한다. 최종적으로 스택에 들어있는 점들이 순서대로 컨벡스 헐을 구성한다.
 ```
 Point P[N];
-stack<int> stk;<br>
+stack<int> stk;
 
 // 기준점과 1번 점을 스택에 추가한다.
 stk.push(0);
@@ -62,7 +62,7 @@ for (int i = 2; i < N; i++) {
 		int a = stk.top(); stk.pop();
 		int b = stk.top();
 
-		// 반시계 방향(CCW > 0)을 구성하면 통과<br>
+		// 반시계 방향(CCW > 0)을 구성하면 통과
 		// 그렇지 않으면 반시계 방향이 될 때까지 반복
 		if (CCW(P[b], P[a], P[i]) == 1) {
 			stk.push(a);
@@ -88,7 +88,7 @@ Point P[100002];
 
 int CCW(Point a, Point b, Point c) {
 	ll D = (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y);
-	return (D == 0) ? 0 : ((D > 0) ? 1 : -1);<br>
+	return (D == 0) ? 0 : ((D > 0) ? 1 : -1);
 }
 
 bool cmp1(Point a, Point b) {
@@ -106,7 +106,7 @@ void Convex() {
 	sort(P, P + N, cmp1);
 	sort(P + 1, P + N, cmp2);
 
-	stack<int> stk;<br>
+	stack<int> stk;
 	stk.push(0);
 	stk.push(1);
 	for (int i = 2; i < N; i++) {
@@ -125,19 +125,19 @@ void Convex() {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N;<br>
+	cin >> N;
 	for (int i = 0; i < N; i++)
-		cin >> P[i].x >> P[i].y;<br>
+		cin >> P[i].x >> P[i].y;
 	Convex();
 	return 0;
 }
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/1708<br>
-https://www.acmicpc.net/problem/7420<br>
-https://www.acmicpc.net/problem/3878<br>
+<br>https://www.acmicpc.net/problem/1708
+<br>https://www.acmicpc.net/problem/7420
+<br>https://www.acmicpc.net/problem/3878
 
 ## 참고
-https://www.crocus.co.kr/1288<br>
+<br>https://www.crocus.co.kr/1288
 {% endraw %}

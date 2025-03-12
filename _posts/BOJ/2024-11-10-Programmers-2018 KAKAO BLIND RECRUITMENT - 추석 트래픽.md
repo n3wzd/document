@@ -23,7 +23,7 @@ title: '[Programmers] 2018 KAKAO BLIND RECRUITMENT - 추석 트래픽'
 -   `solution`  함수에서는 로그 데이터  `lines`  배열에 대해  **초당 최대 처리량**을 리턴한다.
 
 ## 해결
-- 구간이 주어졌을 때, 특정 범위 내 걸쳐지거나 포함되는 구간의 최대 개수를 찾아야 합니다. => `슬라이딩 윈도우`<br>
+- 구간이 주어졌을 때, 특정 범위 내 걸쳐지거나 포함되는 구간의 최대 개수를 찾아야 합니다. => `슬라이딩 윈도우`
 - N의 최대가 충분히 작기 때문에 모든 구간을 나이브로 비교하는 O(N<sup>2</sup>) 방법이 가능합니다.
 - 구간을 최대한 많이 포함하려면 항상 윈도우의 시작을 어떠한 구간의 시작점 또는 끝점으로 하는 것이 이득입니다.
 
@@ -46,8 +46,8 @@ int ttoi(string t) {
         stoi(t.substr(17, 2)) * 1000 + stoi(t.substr(20, 3));
 }
 
-int solution(vector<string> logs) {<br>
-    vector<Range> R;<br>
+int solution(vector<string> logs) {
+    vector<Range> R;
     for (auto log : logs) {
         int hi = ttoi(log);
         int lo = hi - stod(log.substr(24, log.size() - 25)) * 1000;
@@ -57,9 +57,9 @@ int solution(vector<string> logs) {<br>
     for(int i = 0; i < N; i++) {
         int cnt1 = 0, cnt2 = 0;
         for(int j = 0; j < N; j++) {
-            if(!(R[j].lo > R[i].lo + 999 || R[j].hi < R[i].lo))<br>
+            if(!(R[j].lo > R[i].lo + 999 || R[j].hi < R[i].lo))
                 cnt1++;
-            if(!(R[j].lo > R[i].hi + 999 || R[j].hi < R[i].hi))<br>
+            if(!(R[j].lo > R[i].hi + 999 || R[j].hi < R[i].hi))
                 cnt2++;
         }  
         maxCnt = max(maxCnt, max(cnt1, cnt2));
@@ -69,5 +69,5 @@ int solution(vector<string> logs) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17676<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/17676
 {% endraw %}

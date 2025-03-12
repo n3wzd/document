@@ -99,11 +99,11 @@ int DFS(int v, int flow) {
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> M;<br>
+	cin >> M;
 	for (int i = 0; i < M; i++) {
 		char ca, cb;
 		int a, b, w;
-		cin >> ca >> cb >> w;<br>
+		cin >> ca >> cb >> w;
 		a = (ca < 'a') ? ca - 'A' : ca - 'a' + 26;
 		b = (cb < 'a') ? cb - 'A' : cb - 'a' + 26;
 		graph[a][b] += w;
@@ -158,7 +158,7 @@ const int S = 0, T = 25, INF = 1 << 29;
 
 bool BFS() {
 	memset(visited, 0, sizeof(visited));
-	queue <int> q;<br>
+	queue <int> q;
 	q.push(S);
 	visited[S] = 1;
 
@@ -195,11 +195,11 @@ int NetFlow() {
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> M;<br>
+	cin >> M;
 	for (int i = 0; i < M; i++) {
 		char ca, cb;
 		int a, b, w;
-		cin >> ca >> cb >> w;<br>
+		cin >> ca >> cb >> w;
 		a = (ca < 'a') ? ca - 'A' : ca - 'a' + 26;
 		b = (cb < 'a') ? cb - 'A' : cb - 'a' + 26;
 		graph[a][b] += w;
@@ -242,7 +242,7 @@ int main()
 
 이전에 선택한 경로는 이미 최대 유량을 보냈으므로 다시 탐색하지 않아도 된다. 따라서 시간 절약을 위해 DFS에선 이미 탐색한 경로를 방문하지 않는다. 현재 정점이 탐색한 인접 간선 개수를 저장하는 배열(work)를 사용해서 이를 구현할 수 있다.
 
-시간 복잡도는 O(V<sup>2</sup> × E)이다. 평균적으로 3가지 알고리즘 중에서 가장 빠르다.<br>
+시간 복잡도는 O(V<sup>2</sup> × E)이다. 평균적으로 3가지 알고리즘 중에서 가장 빠르다.
 
 ### 코드
 #### 인접 행렬
@@ -260,7 +260,7 @@ const int S = 0, T = 25, INF = 1 << 29;
 
 bool BFS() {
 	memset(level, -1, sizeof(level));
-	queue <int> q;<br>
+	queue <int> q;
 	q.push(S);
 	level[S] = 0;
 
@@ -310,11 +310,11 @@ int NetFlow() {
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> M;<br>
+	cin >> M;
 	for (int i = 0; i < M; i++) {
 		char ca, cb;
 		int a, b, w;
-		cin >> ca >> cb >> w;<br>
+		cin >> ca >> cb >> w;
 		a = (ca < 'a') ? ca - 'A' : ca - 'a' + 26;
 		b = (cb < 'a') ? cb - 'A' : cb - 'a' + 26;
 		graph[a][b] += w;
@@ -336,13 +336,13 @@ int main()
 using namespace std;
 struct Edge { int next, cap, prevIdx; };
 int N, M;
-vector<Edge> graph[SIZE];<br>
+vector<Edge> graph[SIZE];
 int level[SIZE], work[SIZE];
 int S, T, INF = 1 << 29;
 
 bool BFS() {
 	memset(level, -1, sizeof(level));
-	queue <int> q;<br>
+	queue <int> q;
 	q.push(S);
 	level[S] = 0;
 
@@ -412,12 +412,12 @@ void Connect(int id) {
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N >> M;<br>
+	cin >> N >> M;
 	for (int y = 0; y < N; y++) {
 		for (int x = 0; x < M; x++) {
 			int id = y * M + x;
 			char c;
-			cin >> c;<br>
+			cin >> c;
 			if (c == 'K') S = id;
 			if (c == 'H') T = id;
 			if (c != '#') MakeEdge(In(id), Out(id), 1);
@@ -482,21 +482,21 @@ B' C
 
 ## 관련 문제
 ### 최대 유량
-https://www.acmicpc.net/problem/6086<br>
-https://www.acmicpc.net/problem/2365<br>
-https://www.acmicpc.net/problem/11495<br>
+<br>https://www.acmicpc.net/problem/6086
+<br>https://www.acmicpc.net/problem/2365
+<br>https://www.acmicpc.net/problem/11495
 
 ### 최소 컷
-https://www.acmicpc.net/problem/13161<br>
-https://www.acmicpc.net/problem/1420<br>
+<br>https://www.acmicpc.net/problem/13161
+<br>https://www.acmicpc.net/problem/1420
 
 ### 정점 분할
-https://www.acmicpc.net/problem/2316<br>
-https://www.acmicpc.net/problem/1420<br>
+<br>https://www.acmicpc.net/problem/2316
+<br>https://www.acmicpc.net/problem/1420
 
 ## 참고
-https://anz1217.tistory.com/51<br>
-https://everenew.tistory.com/177<br>
-https://www.crocus.co.kr/1088<br>
-https://www.crocus.co.kr/755<br>
+<br>https://anz1217.tistory.com/51
+<br>https://everenew.tistory.com/177
+<br>https://www.crocus.co.kr/1088
+<br>https://www.crocus.co.kr/755
 {% endraw %}

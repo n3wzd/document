@@ -59,7 +59,7 @@ guild
 #include <vector>
 using namespace std;
 struct Node {
-    vector<Node*> c = vector<Node*>(26, nullptr);<br>
+    vector<Node*> c = vector<Node*>(26, nullptr);
     int cnt = 0;
     bool end = 0;
 };
@@ -84,7 +84,7 @@ void DFS(Node* n, int depth) {
             DFS(child, depth + 1);
 }
 
-int solution(vector<string> words) {<br>
+int solution(vector<string> words) {
     for (auto word : words) {
         Node* node = root;
         for (int i = 0; i < word.size(); i++) {
@@ -99,5 +99,5 @@ int solution(vector<string> words) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17685<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/17685
 {% endraw %}

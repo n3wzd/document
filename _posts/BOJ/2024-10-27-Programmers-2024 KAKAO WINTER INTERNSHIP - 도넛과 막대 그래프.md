@@ -55,14 +55,14 @@ title: '[Programmers] 2024 KAKAO WINTER INTERNSHIP - 도넛과 막대 그래프'
 #include <vector>
 using namespace std;
 int S, A, B, C, N;
-vector<int> edges[1000001];<br>
+vector<int> edges[1000001];
 int inCnt[1000001];
 int in(int n) { return inCnt[n]; }
 int out(int n) { return edges[n].size(); }
 
-vector<int> solution(vector<vector<int>> edgesInput) {<br>
-    vector<int> answer;<br>
-    for(vector<int> edge : edgesInput) {<br>
+vector<int> solution(vector<vector<int>> edgesInput) {
+    vector<int> answer;
+    for(vector<int> edge : edgesInput) {
         edges[edge[0]].push_back(edge[1]);
         N = max(N, max(edge[0], edge[1]));
         inCnt[edge[1]]++;
@@ -94,5 +94,5 @@ vector<int> solution(vector<vector<int>> edgesInput) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/258711<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/258711
 {% endraw %}

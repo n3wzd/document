@@ -34,9 +34,9 @@ title: '[Programmers] 2021 KAKAO BLIND RECRUITMENT - 매출 하락 최소화'
 ## 해결
 - 전체 직원 구조는 트리입니다. 팀은 부모-자식을 의미하며, 한 팀에서 팀장은 무조건 1명입니다.
 	- 직원 = 정점, 팀장 = 부모 정점, 팀원 = 자식 정점, CEO = 루트 정점
-- 어떤 직원이 2개의 소속을 가졌다면 두 팀에서 모두 참석한 것으로 인정되므로, 그리디를 사용할 수 없으며 모든 경우를 조사해야 합니다. => `트리 DP`<br>
+- 어떤 직원이 2개의 소속을 가졌다면 두 팀에서 모두 참석한 것으로 인정되므로, 그리디를 사용할 수 없으며 모든 경우를 조사해야 합니다. => `트리 DP`
 
-현재 상태를 (현재 직원)으로 정의합시다. 최소 팀에서 1명은 참석해야 하므로, 점화식은 다음과 같습니다: (N = 팀장, C<sub>i</sub> = 팀원, M = 매출)<br>
+현재 상태를 (현재 직원)으로 정의합시다. 최소 팀에서 1명은 참석해야 하므로, 점화식은 다음과 같습니다: (N = 팀장, C<sub>i</sub> = 팀원, M = 매출)
 > DP(N) = min(팀장 참석, 팀원1 참석, 팀원2 참석, ...)<br>
 > 팀장 참석 = M(N) + DP(C<sub>1</sub>) + DP(C<sub>2</sub>) + ...<br>
 > 팀원1 참석 = (M(C<sub>1</sub>) + DP(C<sub>1-1</sub>) + DP(C<sub>1-2</sub>) + ...) + DP(C<sub>2</sub>) + DP(C<sub>3</sub>) + ...<br>
@@ -57,7 +57,7 @@ title: '[Programmers] 2021 KAKAO BLIND RECRUITMENT - 매출 하락 최소화'
 #include <iostream>
 #include <vector>
 using namespace std;
-vector<int> childs[300001], sales;<br>
+vector<int> childs[300001], sales;
 int cache[300001][2];
 
 int DP(int n, int must) {
@@ -80,7 +80,7 @@ int DP(int n, int must) {
     return cache[n][must];
 }
 
-int solution(vector<int> sales1, vector<vector<int>> links) {<br>
+int solution(vector<int> sales1, vector<vector<int>> links) {
     sales = sales1;
     for(int i = 0; i < sales.size(); i++)
         cache[i][0] = cache[i][1] = -1;
@@ -91,5 +91,5 @@ int solution(vector<int> sales1, vector<vector<int>> links) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/72416<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/72416
 {% endraw %}

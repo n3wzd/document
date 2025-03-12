@@ -23,7 +23,7 @@ title: '[Programmers] SummerWinter Coding(~2018) - 소수 만들기'
 #include <vector>
 #include <cmath>
 using namespace std;
-vector<int> nums;<br>
+vector<int> nums;
 int N, answer;
 bool selected[51];
 
@@ -36,7 +36,7 @@ int isPrime(int n) {
 }
 
 void combination(int start, int depth) {
-    if(depth > 2) {<br>
+    if(depth > 2) {
         int n = 0;
         for(int i = 0; i < N; i++)
             if(selected[i])
@@ -51,7 +51,7 @@ void combination(int start, int depth) {
     }
 }
 
-int solution(vector<int> numsI) {<br>
+int solution(vector<int> numsI) {
     nums = numsI; N = nums.size();
     combination(0, 0);
     return answer;
@@ -59,5 +59,5 @@ int solution(vector<int> numsI) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/12977<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/12977
 {% endraw %}

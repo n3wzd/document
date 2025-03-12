@@ -29,8 +29,8 @@ title: '[Programmers] 연습문제 - 명예의 전당 (1)'
 #include <vector>
 using namespace std;
 
-vector<int> solution(int k, vector<int> score) {<br>
-    vector<int> answer, list;<br>
+vector<int> solution(int k, vector<int> score) {
+    vector<int> answer, list;
     for(int s : score) {
         list.push_back(s);
         sort(list.begin(), list.end(), greater<int>());
@@ -41,5 +41,5 @@ vector<int> solution(int k, vector<int> score) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/138477<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/138477
 {% endraw %}

@@ -31,9 +31,9 @@ int Q, N, file, S[SIZE];
 int cache[SIZE][SIZE], K[SIZE][SIZE];
 
 void Solve() {
-	cin >> N;<br>
+	cin >> N;
 	for (int i = 1; i <= N; i++) {
-		cin >> file;<br>
+		cin >> file;
 		S[i] = S[i - 1] + file;
 		cache[i - 1][i] = 0;
 		K[i - 1][i] = i;
@@ -57,7 +57,7 @@ void Solve() {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> Q;<br>
+	cin >> Q;
 	while (Q--)
 		Solve();
 	return 0;
@@ -65,9 +65,9 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/13974<br>
+<br>https://www.acmicpc.net/problem/13974
 
 ## 참고
-https://justicehui.github.io/hard-algorithm/2019/01/02/knuthOpt/<br>
-https://justicehui.github.io/icpc/2019/01/02/BOJ13974/<br>
+<br>https://justicehui.github.io/hard-algorithm/2019/01/02/knuthOpt/
+<br>https://justicehui.github.io/icpc/2019/01/02/BOJ13974/
 {% endraw %}

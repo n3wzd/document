@@ -28,7 +28,7 @@ title: '[Programmers] 연습문제 - 숫자 타자 대회'
     -   `numbers`는 아라비아 숫자로만 이루어진 문자열입니다.
 
 ## 해결
-어떤 손가락을 움직이는 것이 최적인지 알 수 없으므로 모든 경우를 탐색합니다. => `DP`<br>
+어떤 손가락을 움직이는 것이 최적인지 알 수 없으므로 모든 경우를 탐색합니다. => `DP`
 
 양손 위치가 탐색에 영향을 주므로, 현재 상태를 (입력 배열 인덱스 = `n`, 왼손 위치 = `l`, 오른손 위치 = `r`)로 정의합니다. 계산 결과는 최소 이동 가중치 합입니다. 초기 상태는 (0, 4, 6)이며, `n`이 입력 배열 끝을 넘을 때 탐색이 종료됩니다.
 
@@ -44,7 +44,7 @@ title: '[Programmers] 연습문제 - 숫자 타자 대회'
 #include <string>
 #include <vector>
 using namespace std;
-vector<int> N;<br>
+vector<int> N;
 int cache[100001][10][10], C[10][10] = {
     { 1, 7, 6, 7, 5, 4, 5, 3, 2, 3 },
     { 7, 1, 2, 4, 2, 3, 5, 4, 5, 6 },
@@ -61,7 +61,7 @@ int cache[100001][10][10], C[10][10] = {
 int DP(int n, int l, int r) {
     if(n >= N.size())
         return 0;
-    if(cache[n][l][r] > 0)<br>
+    if(cache[n][l][r] > 0)
         return cache[n][l][r];
     cache[n][l][r] = 1e9;
     if(r != N[n])
@@ -79,5 +79,5 @@ int solution(string numbers) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/136797<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/136797
 {% endraw %}

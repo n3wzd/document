@@ -46,7 +46,7 @@ LCA를 탐색해보자.
 ```
 LCA(n1, n2) // 2개의 입력 노드
 	// 깊이 통일
-	while (depth[n1] > depth[n2]) n1 = parent[n1]<br>
+	while (depth[n1] > depth[n2]) n1 = parent[n1]
 	while (depth[n1] < depth[n2]) n2 = parent[n2]
 
 	// 같아질 때까지 부모 노드따라 역추적
@@ -66,7 +66,7 @@ LCA(n1, n2) // 2개의 입력 노드
 using namespace std;
 
 int N, M;
-vector<int> graph[50001];<br>
+vector<int> graph[50001];
 int parent[50001];
 int depth[50001];
 
@@ -86,7 +86,7 @@ void DFS(int v, int d)
 
 int LCA(int n1, int n2)
 {
-	while (depth[n1] > depth[n2]) n1 = parent[n1];<br>
+	while (depth[n1] > depth[n2]) n1 = parent[n1];
 	while (depth[n1] < depth[n2]) n2 = parent[n2];
 
 	while (n1 != n2)
@@ -100,21 +100,21 @@ int LCA(int n1, int n2)
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N;<br>
+	cin >> N;
 	for (int i = 0; i < N - 1; i++)
 	{
 		int a, b;
-		cin >> a >> b;<br>
+		cin >> a >> b;
 		graph[a].push_back(b);
 		graph[b].push_back(a);
 	}
 	DFS(1, 1);
 
-	cin >> M;<br>
+	cin >> M;
 	for (int i = 0; i < M; i++)
 	{
 		int n1, n2;
-		cin >> n1 >> n2;<br>
+		cin >> n1 >> n2;
 		cout << LCA(n1, n2) << "\n";
 	}
 	return 0;
@@ -169,7 +169,7 @@ return parent[n1][0]
 using namespace std;
 
 int N, M;
-vector<int> graph[100001];<br>
+vector<int> graph[100001];
 int parent[100001][18];
 int depth[100001];
 int max_depth;
@@ -193,7 +193,7 @@ void DFS(int v, int d)
 
 int LCA(int n1, int n2)
 {
-	if (depth[n1] > depth[n2]) {<br>
+	if (depth[n1] > depth[n2]) {
 		int temp = n1;
 		n1 = n2;
 		n2 = temp;
@@ -219,22 +219,22 @@ int LCA(int n1, int n2)
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N;<br>
+	cin >> N;
 	for (int i = 0; i < N - 1; i++)
 	{
 		int a, b;
-		cin >> a >> b;<br>
+		cin >> a >> b;
 		graph[a].push_back(b);
 		graph[b].push_back(a);
 	}
 	max_depth = (int)floor(log2(100001));
 	DFS(1, 1);
 
-	cin >> M;<br>
+	cin >> M;
 	for (int i = 0; i < M; i++)
 	{
 		int n1, n2;
-		cin >> n1 >> n2;<br>
+		cin >> n1 >> n2;
 		cout << LCA(n1, n2) << "\n";
 	}
 	return 0;
@@ -243,12 +243,12 @@ int main()
 
 ## 연관 문제
 **O(N)**
-https://www.acmicpc.net/problem/11437<br>
+<br>https://www.acmicpc.net/problem/11437
 
 **O(logN)**
-https://www.acmicpc.net/problem/11438<br>
-https://www.acmicpc.net/problem/3176<br>
+<br>https://www.acmicpc.net/problem/11438
+<br>https://www.acmicpc.net/problem/3176
 
 ## 참고
-https://4legs-study.tistory.com/121<br>
+<br>https://4legs-study.tistory.com/121
 {% endraw %}

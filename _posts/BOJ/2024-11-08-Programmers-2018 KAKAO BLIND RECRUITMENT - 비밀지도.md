@@ -37,8 +37,8 @@ title: '[Programmers] 2018 KAKAO BLIND RECRUITMENT - 비밀지도'
 #include <vector>
 using namespace std;
 
-vector<string> solution(int n, vector<int> arr1, vector<int> arr2) {<br>
-    vector<string> answer;<br>
+vector<string> solution(int n, vector<int> arr1, vector<int> arr2) {
+    vector<string> answer;
     for(int i = 0; i < arr1.size(); i++) {
         int y = arr1[i] | arr2[i]; string s = "";
         for(int x = n - 1; x >= 0; x--)
@@ -50,5 +50,5 @@ vector<string> solution(int n, vector<int> arr1, vector<int> arr2) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17681<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/17681
 {% endraw %}

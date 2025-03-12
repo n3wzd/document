@@ -39,5 +39,5 @@ int solution(int left, int right) {
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/77884<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/77884
 {% endraw %}

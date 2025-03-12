@@ -29,7 +29,7 @@ begin = 3
 ABDABCDC
    |||
    ABC
-=> Find!<br>
+=> Find!
 ```
 위의 일반적인 선형 탐색은 간단하고 구현이 편리하지만, O(NM) 시간으로 대체로 느리다!
 
@@ -41,7 +41,7 @@ ABDABCDC
 ABCDEQWERTY
 ||||||
 ABCDEF
-=> ABCDE까지 일치<br>
+=> ABCDE까지 일치
 ```
 KMP 알고리즘의 포인트는 **부분 일치 정보**를 활용하여 불필요한 비교 횟수를 줄이는 것이다.
 
@@ -61,22 +61,22 @@ ABCDE
     |
     A
 ```
-만약 패턴 비교를 하고 길이 L만큼 부분 문자열이 일치했다면, L만큼 평행이동을 해서 비교를 패스할 수 있고, 시간을 단축할 수 있다! => L만큼 이동  <br>
+만약 패턴 비교를 하고 길이 L만큼 부분 문자열이 일치했다면, L만큼 평행이동을 해서 비교를 패스할 수 있고, 시간을 단축할 수 있다! => L만큼 이동  
 
 하지만 항상 L만큼 넘길 수 없다. 다음과 같이 부분 일치 문자열에서 처음과 끝이 동일한 경우를 고려해야 한다.
 ```
 ABACCABACCABAEEABA
 |||||||||
 ABACCABAE
-=> ABACCABA까지 일치<br>
-=> 양끝이 ABA (길이 C)<br>
+=> ABACCABA까지 일치
+=> 양끝이 ABA (길이 C)
 ```
-패턴을 1칸씩 이동한다면, 입력 문자열의 [5, 7] 위치와 패턴 문자열의 [0, 2] 부분에서 처음으로 일치가 발생하는 점을 확인할 수 있다. 따라서 이 경우는 처음과 끝이 일치하는 부분까지, 즉 L - C만큼 평행이동을 하면 된다. 여기서 문자 비교일 경우, 처음과 끝은 일치한다는 점을 이미 알고 있으므로 추가로 C만큼 비교를 건너뛸 수 있다. => 패턴 문자열 위치는 (L - C), 문자 비교는 L만큼 이동<br>
+패턴을 1칸씩 이동한다면, 입력 문자열의 [5, 7] 위치와 패턴 문자열의 [0, 2] 부분에서 처음으로 일치가 발생하는 점을 확인할 수 있다. 따라서 이 경우는 처음과 끝이 일치하는 부분까지, 즉 L - C만큼 평행이동을 하면 된다. 여기서 문자 비교일 경우, 처음과 끝은 일치한다는 점을 이미 알고 있으므로 추가로 C만큼 비교를 건너뛸 수 있다. => 패턴 문자열 위치는 (L - C), 문자 비교는 L만큼 이동
 ```
 ABACCABA(C)CABAEEABA
      |||||||||
      ABA(C)CABAE
-=> Find!<br>
+=> Find!
 ```
 만약 이 효율적인 아이디어를 적용하기 위해서는 패턴의 부분 문자열에 대한 접두사, 접미사의 최대 길이를 먼저 알고 있어야 한다.
 
@@ -130,11 +130,11 @@ P // 패턴 문자열
 begin = 0 // 현재 탐색 위치 (= 부분 문자열[0] 위치)
 window = 0 // 일치하는 부분 문자열의 길이
 
-1. 문자에 대해 비교 탐색 수행 => T[begin + window] == P[window]<br>
+1. 문자에 대해 비교 탐색 수행 => T[begin + window] == P[window]
 	- 중간에 문자가 일치하지 않거나, 패턴이 완전 일치할 때까지 진행
 	- 만약 완전 일치한다면, 현재 위치를 검색 결과에 기록한다.
 2. 비교 시작점을 옮긴다.
-	- window > 0이면,<br>
+	- window > 0이면,
 		- begin += L - pi[window - 1]
 		- window = pi[window - 1]
 	- 그렇지 않으면, 
@@ -156,7 +156,7 @@ KMP()
 				search.add(begin)
 		else
 			// 비교 시작점 옮기기
-			if (window > 0)<br>
+			if (window > 0)
 				begin += window - pi[window - 1]
 				window = pi[window - 1]
 				// 이 과정을 거쳐도 begin + window는 보존된다.
@@ -188,7 +188,7 @@ PI_Setting()
 			window++
 			pi[begin + window - 1] = window // pi 배열 기록
 		else
-			if (window > 0)<br>
+			if (window > 0)
 				// 이전 탐색에서 구했던 pi 데이터 활용
 				begin += window - pi[window - 1]
 				window = pi[window - 1]
@@ -223,7 +223,7 @@ using namespace std;
 
 string T, P;
 int pi[1000001];
-vector<int> search;<br>
+vector<int> search;
 
 void PI_Setting()
 {
@@ -236,7 +236,7 @@ void PI_Setting()
 			pi[begin + window - 1] = window;
 		}
 		else {
-			if (window > 0) {<br>
+			if (window > 0) {
 				begin += window - pi[window - 1];
 				window = pi[window - 1];
 			}
@@ -258,7 +258,7 @@ void KMP()
 				search.push_back(begin);
 		}
 		else {
-			if (window > 0) {<br>
+			if (window > 0) {
 				begin += window - pi[window - 1];
 				window = pi[window - 1];
 			}
@@ -283,9 +283,9 @@ int main()
 ```
 
 ## 관련 문제
-https://www.acmicpc.net/problem/1786<br>
+<br>https://www.acmicpc.net/problem/1786
 
 ## 참고
-https://injae-kim.github.io/dev/2020/07/23/all-about-kmp-algorithm.html<br>
-https://bowbowbow.tistory.com/6<br>
+<br>https://injae-kim.github.io/dev/2020/07/23/all-about-kmp-algorithm.html
+<br>https://bowbowbow.tistory.com/6
 {% endraw %}

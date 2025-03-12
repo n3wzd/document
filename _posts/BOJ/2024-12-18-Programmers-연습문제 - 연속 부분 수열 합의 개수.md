@@ -30,8 +30,8 @@ title: '[Programmers] 연습문제 - 연속 부분 수열 합의 개수'
 using namespace std;
 int ps[2001];
 
-int solution(vector<int> A) {<br>
-    int N = A.size(); set<int> S;<br>
+int solution(vector<int> A) {
+    int N = A.size(); set<int> S;
     ps[0] = A[0];
     for(int i = 1; i < N * 2; i++)
         ps[i] = ps[i - 1] + A[i % N];
@@ -43,5 +43,5 @@ int solution(vector<int> A) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/131701<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/131701
 {% endraw %}

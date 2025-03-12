@@ -146,7 +146,7 @@ struct SplayMethod {
 		Node* x = root;
 		x->propagate();
 		while (1) {
-			while (x->l && x->l->size > k)<br>
+			while (x->l && x->l->size > k)
 				x = x->l, x->propagate();
 			if (x->l) k -= x->l->size;
 			if (!k--) break;
@@ -157,7 +157,7 @@ struct SplayMethod {
 	}
 
 	int PathUpdate(Node* x) {
-		stack<Node*> path;<br>
+		stack<Node*> path;
 		Node* v = x; path.push(v);
 		while (v->p) {
 			v = v->p;
@@ -197,7 +197,7 @@ struct SplayMethod {
 	void Create() {
 		Node* x = root = new Node();
 		for (int i = 0; i < N; i++) {
-			int num; cin >> num;<br>
+			int num; cin >> num;
 			x->r = new Node();
 			x->r->p = x;
 			x = x->r;
@@ -223,7 +223,7 @@ void Flip(int lo, int hi) {
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	while (1) {
-		cin >> N;<br>
+		cin >> N;
 		if (N == 0) return 0;
 
 		splay.Create();
@@ -240,5 +240,5 @@ int main() {
 ```
 
 ## 링크
-https://www.acmicpc.net/problem/3444<br>
+<br>https://www.acmicpc.net/problem/3444
 {% endraw %}

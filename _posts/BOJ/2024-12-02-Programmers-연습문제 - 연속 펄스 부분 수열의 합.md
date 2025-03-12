@@ -23,7 +23,7 @@ title: '[Programmers] 연습문제 - 연속 펄스 부분 수열의 합'
 
 하지만 구간마다 펄스 수열 곱하지 않아도 됩니다. 임의의 구간에서 펄스 수열은 곱한 것은, 펄스 수열을 곱한 전체 수열에서 임의의 구간을 선택한 것과 같기 때문입니다. 따라서 전체 수열에서 펄스 수열을 곱한 것을 A, B라고 했을 때, 정답은 max(A에서 최대 구간 합, B에서 최대 구간 합)입니다.
 
-다음으로 음수가 존재하는 구간 최대 합을 구해 봅시다. 수열을 순차 탐색했을 때, 현재 구간의 합이 새로운 값으로 인해 합이 음수가 된다면 손해이며, 이 때는 구간 합을 초기화해야 합니다. => `그리디`<br>
+다음으로 음수가 존재하는 구간 최대 합을 구해 봅시다. 수열을 순차 탐색했을 때, 현재 구간의 합이 새로운 값으로 인해 합이 음수가 된다면 손해이며, 이 때는 구간 합을 초기화해야 합니다. => `그리디`
 
 이 방법을 이용해서 최대 합을 찾을 수 있습니다:
 ```
@@ -40,7 +40,7 @@ title: '[Programmers] 연습문제 - 연속 펄스 부분 수열의 합'
 using namespace std;
 typedef long long ll;
 
-ll solve(vector<int> S) {<br>
+ll solve(vector<int> S) {
     ll sum = 0, res = 0;
     for(auto n : S) {
         sum = -n < sum ? sum + n : 0;
@@ -49,8 +49,8 @@ ll solve(vector<int> S) {<br>
     return res;
 }
 
-ll solution(vector<int> S) {<br>
-    vector<int> A, B;<br>
+ll solution(vector<int> S) {
+    vector<int> A, B;
     for(int i = 0; i < S.size(); i++) {
         A.push_back(S[i] * (i % 2 == 0 ? -1 : 1));
         B.push_back(S[i] * (i % 2 == 1 ? -1 : 1));
@@ -60,5 +60,5 @@ ll solution(vector<int> S) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/161988<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/161988
 {% endraw %}

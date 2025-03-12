@@ -24,7 +24,7 @@ title: '[Algorithm] 역추적 배열'
 	- 경로를 출력할 때는 일반적으로 마지막에서 처음 방향으로 탐색하기 때문에 역방향으로 출력될 수 있다. 이때는 `스택` 등을 활용해서 정방향으로 출력하면 된다.
 
 ```
-stack<int> stk;<br>
+stack<int> stk;
 int pos = start;
 while (pos != -1)		// 역추적 배열 탐색
 {
@@ -39,7 +39,7 @@ while (!stk.empty())	// 정방향 출력
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/12852<br>
-https://www.acmicpc.net/problem/9019<br>
-https://www.acmicpc.net/problem/9252<br>
+<br>https://www.acmicpc.net/problem/12852
+<br>https://www.acmicpc.net/problem/9019
+<br>https://www.acmicpc.net/problem/9252
 {% endraw %}

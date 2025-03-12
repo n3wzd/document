@@ -45,17 +45,17 @@ title: '[Programmers] 2022 KAKAO BLIND RECRUITMENT - 신고 결과 받기'
 #include <vector>
 #include <map>
 using namespace std;
-map<string, int> m;<br>
+map<string, int> m;
 int cnt[1001], genID;
 bool cert[1001][1001];
 
-vector<int> solution(vector<string> id_list, vector<string> report, int k) {<br>
-    vector<int> answer;<br>
+vector<int> solution(vector<string> id_list, vector<string> report, int k) {
+    vector<int> answer;
     for(auto s : id_list)
         m.insert({s, genID++});
     for(auto r : report) {
         istringstream iss(r);
-        string a, b; iss >> a >> b;<br>
+        string a, b; iss >> a >> b;
         int user1 = m.find(a)->second, user2 = m.find(b)->second;
         if(!cert[user1][user2]) {
             cert[user1][user2] = 1;
@@ -74,5 +74,5 @@ vector<int> solution(vector<string> id_list, vector<string> report, int k) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/92334<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/92334
 {% endraw %}

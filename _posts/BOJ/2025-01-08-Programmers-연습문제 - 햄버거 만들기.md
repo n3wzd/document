@@ -20,7 +20,7 @@ title: '[Programmers] 연습문제 - 햄버거 만들기'
 -   `ingredient`의 원소는 1, 2, 3 중 하나의 값이며, 순서대로 빵, 야채, 고기를 의미합니다.
 
 ## 해결
-리스트 중간에 아이템이 제거되면 분리된 두 리스트는 연결됩니다. => `스택`<br>
+리스트 중간에 아이템이 제거되면 분리된 두 리스트는 연결됩니다. => `스택`
 
 재료를 하나씩 스택에 넣고, 스택의 위쪽 4개의 아이템이 햄버거가 되는지 확인합니다. 햄버거가 되면 정답을 업데이트하고 위쪽 4개의 재료를 스택에서 제거하면 됩니다.
 
@@ -29,13 +29,13 @@ title: '[Programmers] 연습문제 - 햄버거 만들기'
 #include <vector>
 using namespace std;
 
-int solution(vector<int> A) {<br>
-    vector<int> S;<br>
+int solution(vector<int> A) {
+    vector<int> S;
     int answer = 0;
     for(int a : A) {
         S.push_back(a);
         int s = S.size();
-        if(s > 3 && S[s - 1] == 1 && S[s - 2] == 3 && S[s - 3] == 2 && S[s - 4] == 1) {<br>
+        if(s > 3 && S[s - 1] == 1 && S[s - 2] == 3 && S[s - 3] == 2 && S[s - 4] == 1) {
             answer++;
             for(int r = 0; r < 4; r++)
                 S.pop_back();
@@ -46,5 +46,5 @@ int solution(vector<int> A) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/133502<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/133502
 {% endraw %}

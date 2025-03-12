@@ -46,7 +46,7 @@ title: '[Programmers] 연습문제 - 혼자서 하는 틱택토'
 #include <vector>
 using namespace std;
 
-bool hasBingo(vector<string> B, int ex, int ey) {<br>
+bool hasBingo(vector<string> B, int ex, int ey) {
     bool ok = 0; B[ey][ex] = '.';
     for(int y = 0; y < 3; y++)
         ok |= (B[y][0] == B[y][1] && B[y][0] == B[y][2] && B[y][0] != '.');
@@ -57,7 +57,7 @@ bool hasBingo(vector<string> B, int ex, int ey) {<br>
     return ok;
 }
 
-int solution(vector<string> B) {<br>
+int solution(vector<string> B) {
     int a = 0, b = 0;
     for(int y = 0; y < 3; y++)
         for(int x = 0; x < 3; x++)
@@ -72,5 +72,5 @@ int solution(vector<string> B) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/160585<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/160585
 {% endraw %}

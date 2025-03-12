@@ -37,7 +37,7 @@ title: '[Programmers] 연습문제 - 과제 진행하기'
 -   진행중이던 과제가 끝나는 시각과 새로운 과제를 시작해야하는 시각이 같은 경우 진행중이던 과제는 끝난 것으로 판단합니다.
 
 ## 해결
-- 나중에 추가된 원소가 먼저 나가는 후입선출 자료 구조가 필요합니다. => `스택`<br>
+- 나중에 추가된 원소가 먼저 나가는 후입선출 자료 구조가 필요합니다. => `스택`
 - 입력을 시작 시간순으로 `정렬`합니다. (시간 문자열은 정수로 변환해서 사용합니다.)
 - 새로운 과제가 주어지면, 스택에 있는 진행 중인 과제가 끝나는 시간과 새로운 과제의 시작 시간을 비교합니다. 과제가 모두 끝났거나, 진행 중인 과제가 끝나는 시간이 새로운 과제 시작 시간보다 클 때 새로운 과제를 스택에 추가합니다. (그렇지 않다면 진행 중인 과제를 차례대로 완료합니다.)
 - 진행 중인 과제의 진행 시간은 진행 중인 과제 앞에 새로운 과제가 추가될 때, 시작 시간은 앞에 하던 과제가 완료될 때 업데이트됩니다.
@@ -62,11 +62,11 @@ title: '[Programmers] 연습문제 - 과제 진행하기'
 using namespace std;
 struct Node { string id; int s, d; };
 int ttoi(string s) { return stoi(s.substr(0, 2)) * 60 + stoi(s.substr(3, 2)); }
-stack<Node> stk;<br>
-vector<Node> P;<br>
+stack<Node> stk;
+vector<Node> P;
 
-vector<string> solution(vector<vector<string>> plans) {<br>
-    vector<string> answer;<br>
+vector<string> solution(vector<vector<string>> plans) {
+    vector<string> answer;
     for(auto p : plans)
         P.push_back({p[0], ttoi(p[1]), stoi(p[2])});
     sort(P.begin(), P.end(), [](Node &a, Node &b) { return a.s < b.s; });
@@ -88,5 +88,5 @@ vector<string> solution(vector<vector<string>> plans) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/176962<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/176962
 {% endraw %}

@@ -51,7 +51,7 @@ void floyd() {
                 adj[i][j] = min(adj[i][j], adj[i][k] + adj[k][j]);
 }
 
-int solution(int n, int s, int a, int b, vector<vector<int>> fares) {<br>
+int solution(int n, int s, int a, int b, vector<vector<int>> fares) {
     N = n;
     for (int i = 1; i <= N; i++)
         for (int j = 1; j <= N; j++)
@@ -69,5 +69,5 @@ int solution(int n, int s, int a, int b, vector<vector<int>> fares) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/72413<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/72413
 {% endraw %}

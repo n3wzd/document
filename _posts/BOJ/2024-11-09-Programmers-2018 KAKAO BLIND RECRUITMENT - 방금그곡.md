@@ -34,7 +34,7 @@ title: '[Programmers] 2018 KAKAO BLIND RECRUITMENT - 방금그곡'
 
 ## 해결
 주어진 검색어를 입력 문자열에서 찾는 문제입니다.
-- #으로 인해 문자열 길이는 음악 길이와 다릅니다. 구현상 편의를 위해 길이가 2인 음표를 길이 1로 바꿔줍니다. (예: "C#" => "2")<br>
+- #으로 인해 문자열 길이는 음악 길이와 다릅니다. 구현상 편의를 위해 길이가 2인 음표를 길이 1로 바꿔줍니다. (예: "C#" => "2")
 - 탐색할 음악은 재생 시간에 맞게 조정되어야 합니다. 원본 음악 길이가 재생 시간보다 작으면 음악 길이를 재생 시간에 맞게 잘라야 하며, 그렇지 않다면 재생 시간만큼 연장되어야 합니다.
 - 음악 문자열 처리를 완료했다면 제공된 단어를 검색합니다. 입력 데이터가 작으므로 KMP 없이 나이브한 판정이 가능합니다.
 
@@ -57,7 +57,7 @@ title: '[Programmers] 2018 KAKAO BLIND RECRUITMENT - 방금그곡'
 #include <map>
 #include <sstream>
 using namespace std;
-map<string, string> note = { {"C", "1"}, {"C#", "2"}, {"D", "3"}, {"D#", "4"}, {"E", "5"}, {"F", "6"}, {"F#", "7"}, {"G", "8"}, {"G#", "9"}, {"A", "A"}, {"A#", "B"}, {"B", "C"}, {"B#", "D"} };<br>
+map<string, string> note = { {"C", "1"}, {"C#", "2"}, {"D", "3"}, {"D#", "4"}, {"E", "5"}, {"F", "6"}, {"F#", "7"}, {"G", "8"}, {"G#", "9"}, {"A", "A"}, {"A#", "B"}, {"B", "C"}, {"B#", "D"} };
 int ttoi(string t) { return stoi(t.substr(0, 2)) * 60 + stoi(t.substr(3, 2)); }
 
 string init(string m) {
@@ -79,7 +79,7 @@ string init(string m) {
 
 bool match(string m1, string m2) {
     int N = m1.size(), M = m2.size();
-    if (N > M)<br>
+    if (N > M)
         return 0;
     for (int s = 0; s <= M - N; s++) {
         bool ok = 1;
@@ -90,7 +90,7 @@ bool match(string m1, string m2) {
     return 0;
 }
 
-string solution(string m, vector<string> musicinfos) {<br>
+string solution(string m, vector<string> musicinfos) {
     int maxSize = -1;
     string myMusic = init(m), answer = "";
     for (int i = 0; i < musicinfos.size(); i++) {
@@ -111,5 +111,5 @@ string solution(string m, vector<string> musicinfos) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/17683<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/17683
 {% endraw %}

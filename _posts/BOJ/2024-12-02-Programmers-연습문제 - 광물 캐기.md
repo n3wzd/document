@@ -37,7 +37,7 @@ title: '[Programmers] 연습문제 - 광물 캐기'
     -   stone : 돌
 
 ## 해결
-입력이 작으므로 전체 탐색이 가능하며, 부분 문제로 분할 가능하며 중복 상태가 존재합니다. => `DP`<br>
+입력이 작으므로 전체 탐색이 가능하며, 부분 문제로 분할 가능하며 중복 상태가 존재합니다. => `DP`
 
 현재 상태를 (각 남은 곡괭이 수) = (`d`, `i`, `s`)로 정의하며, 계산 결과는 최소 피로도입니다. 현재 광물 위치는 남은 곡괭이 수로 구할 수 있습니다. (초기 곡괭이 총합 - 남은 곡괭이 수) 초기 상태는 초기 곡괭이 개수이며, 곡괭이를 모두 소진하거나 캘 수 있는 광물이 없으면 탐색이 종료됩니다. 각 종류의 곡괭이를 사용하는 것으로 점화식을 설계합니다:
 
@@ -52,9 +52,9 @@ title: '[Programmers] 연습문제 - 광물 캐기'
 #include <map>
 using namespace std;
 const int INF = 1e9;
-vector<string> M;<br>
+vector<string> M;
 int cache[6][6][6], N, STA[3][3] = { { 1, 1, 1 }, { 5, 1, 1 }, { 25, 5, 1 } };
-map<string, int> dict;<br>
+map<string, int> dict;
 
 int MANA(int m, int p) {
     int c = 0;
@@ -65,7 +65,7 @@ int MANA(int m, int p) {
 
 int DP(int d, int i, int s) {
     int m = (N - (d + i + s)) * 5;
-    if(cache[d][i][s] > 0)<br>
+    if(cache[d][i][s] > 0)
         return cache[d][i][s];
     if(d < 0 || i < 0 || s < 0)
         return INF;
@@ -77,7 +77,7 @@ int DP(int d, int i, int s) {
     return cache[d][i][s];
 }
 
-int solution(vector<int> P, vector<string> minerals) {<br>
+int solution(vector<int> P, vector<string> minerals) {
     M = minerals; N = P[0] + P[1] + P[2];
     dict["diamond"] = 0, dict["iron"] = 1, dict["stone"] = 2;
     return DP(P[0], P[1], P[2]);
@@ -85,5 +85,5 @@ int solution(vector<int> P, vector<string> minerals) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/172927<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/172927
 {% endraw %}

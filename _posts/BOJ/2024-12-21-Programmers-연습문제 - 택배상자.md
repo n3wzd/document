@@ -37,9 +37,9 @@ title: '[Programmers] 연습문제 - 택배상자'
 #include <vector>
 using namespace std;
 
-int solution(vector<int> order) {<br>
+int solution(vector<int> order) {
     int answer = 0, N = order.size();
-    stack<int> stk;<br>
+    stack<int> stk;
     for(int i = 0; i < N; i++) {
         stk.push(i + 1);
         while(!stk.empty() && stk.top() == order[answer])
@@ -50,5 +50,5 @@ int solution(vector<int> order) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/131704<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/131704
 {% endraw %}

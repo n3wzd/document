@@ -22,7 +22,7 @@ title: '[Programmers] 2022 KAKAO TECH INTERNSHIP - 두 큐 합 같게 만들기'
 -   주의: 언어에 따라 합 계산 과정 중 산술 오버플로우 발생 가능성이 있으므로 long type 고려가 필요합니다.
 
 ## 해결
-- 두 큐의 합을 같게 하려면 항상 합이 더 큰 큐에 있는 값을 합이 작은 큐에 보내야 합니다. 이러한 과정을 반복하면 합이 같아지는 방향으로 수렴합니다. => `그리디`<br>
+- 두 큐의 합을 같게 하려면 항상 합이 더 큰 큐에 있는 값을 합이 작은 큐에 보내야 합니다. 이러한 과정을 반복하면 합이 같아지는 방향으로 수렴합니다. => `그리디`
 - 큐는 구별되지 않으므로, 두 큐가 큐 길이만큼 큐 연산을 수행하면 처음 상태와 동일하게 됩니다. 따라서 각 큐가 큐 길이만큼 연산할 때마다 사이클이 발생합니다. 주어진 큐에 따라 합 비교 탐색이 끝나지 않을 수 있으므로, 사이클이 판정되면 탐색을 종료해야 합니다.
 
 ## 코드
@@ -31,10 +31,10 @@ title: '[Programmers] 2022 KAKAO TECH INTERNSHIP - 두 큐 합 같게 만들기'
 #include <queue>
 using namespace std;
 typedef long long ll;
-queue<int> q1, q2;<br>
+queue<int> q1, q2;
 int N, mv1, mv2; ll sum1, sum2 = 0;
 
-int solution(vector<int> queue1, vector<int> queue2) {<br>
+int solution(vector<int> queue1, vector<int> queue2) {
     N = queue1.size();
     for (int n : queue1) sum1 += n, q1.push(n);
     for (int n : queue2) sum2 += n, q2.push(n);
@@ -57,5 +57,5 @@ int solution(vector<int> queue1, vector<int> queue2) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/118667<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/118667
 {% endraw %}

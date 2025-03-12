@@ -31,7 +31,7 @@ n개의 점으로 이루어진 트리가 있습니다. 이때, 트리 상에서 
 2. 정점 A에서 가장 먼 정점 B 찾기
 3. A, B가 트리의 지름
 ```
-`그래프 탐색`으로 구현할 수 있습니다. 임의의 정점은 루트 정점으로 하는 것이 편리합니다. => `BOJ - 1167 - 트리의 지름` 참고<br>
+`그래프 탐색`으로 구현할 수 있습니다. 임의의 정점은 루트 정점으로 하는 것이 편리합니다. => `BOJ - 1167 - 트리의 지름` 참고
 
 다음으로 문제의 답을 찾아봅시다. 어떠한 트리를 A와 B를 기준으로 펼치면 다음과 같습니다:
 ```
@@ -54,7 +54,7 @@ A와 B의 거리는 이미 최대이므로 다른 정점 조합으로 최대 거
 ```
 #include <vector>
 using namespace std;
-vector<int> graph[250001];<br>
+vector<int> graph[250001];
 int maxV, maxDist;
 
 void DFS(int n, int prev, int dist, int banned) {
@@ -67,7 +67,7 @@ void DFS(int n, int prev, int dist, int banned) {
             DFS(c, n, dist + 1, banned);
 }
 
-int solution(int n, vector<vector<int>> edges) {<br>
+int solution(int n, vector<vector<int>> edges) {
     for(auto edge : edges) {
         graph[edge[0]].push_back(edge[1]);
         graph[edge[1]].push_back(edge[0]);
@@ -81,5 +81,5 @@ int solution(int n, vector<vector<int>> edges) {<br>
 ```
 
 ## 링크
-https://school.programmers.co.kr/learn/courses/30/lessons/68937<br>
+<br>https://school.programmers.co.kr/learn/courses/30/lessons/68937
 {% endraw %}

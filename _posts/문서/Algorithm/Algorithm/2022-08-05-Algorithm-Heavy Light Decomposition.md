@@ -54,7 +54,7 @@ parent[v] = v의 부모 정점 번호
 top[v] = v를 포함하는 체인에서 깊이가 가장 작은 정점의 번호
 in[v] = v → 구간 id
 in_inv[v] = 구간 id → v
-vector<int> child[v] = v의 자식 정점 목록<br>
+vector<int> child[v] = v의 자식 정점 목록
 ```
 
 현재 child[v]만 값이 저장되어 있다고 하자. 나머지 변수를 설정하기 위해 총 2번의 `DFS`를 수행해야 한다.
@@ -71,7 +71,7 @@ void DFS1(int v = 1) {
 
 		sz[v] += sz[i];
 		// Heavy Edge와 연결된 자식을 child에서 가장 앞에 배치한다.
-		if (sz[i] > sz[child[v][0]])<br>
+		if (sz[i] > sz[child[v][0]])
 			swap(i, child[v][0]);
 	}
 }
@@ -133,7 +133,7 @@ int Query(int a, int b) {
 		a = parent[top[a]];
 	}
 	// 구간의 시작, 끝을 정렬하는 과정 (ex. [5, 3] → [3, 5])
-	if (depth[a] > depth[b])<br>
+	if (depth[a] > depth[b])
 		swap(a, b);
 	
 	// 같은 체인을 대상으로 구간 연산 수행
@@ -154,8 +154,8 @@ const int SIZE = 100002;
 struct Edge { int dest, w, id; };
 int N, M, id = 0, sz[SIZE], depth[SIZE], parent[SIZE];
 int top[SIZE], in[SIZE], in_inv[SIZE], weight[SIZE], etov[SIZE];
-vector<int> child[SIZE];<br>
-vector<Edge> con[SIZE];<br>
+vector<int> child[SIZE];
+vector<Edge> con[SIZE];
 bool visited[SIZE];
 
 struct SegmentTree {
@@ -167,14 +167,14 @@ struct SegmentTree {
 	}
 
 	int Get(int start, int end, int idx, int left, int right) {
-		if (start > right || end < left) return 0;<br>
+		if (start > right || end < left) return 0;
 		if (start >= left && end <= right) return tree[idx];
 		int mid = (start + end) / 2;
 		return max(Get(start, mid, idx * 2, left, right), Get(mid + 1, end, idx * 2 + 1, left, right));
 	}
 
 	int Update(int start, int end, int idx, int pos, int value) {
-		if (start > pos || end < pos) return tree[idx];<br>
+		if (start > pos || end < pos) return tree[idx];
 		if (start == end) return tree[idx] = value;
 		int mid = (start + end) / 2;
 		return tree[idx] = max(Update(start, mid, idx * 2, pos, value), Update(mid + 1, end, idx * 2 + 1, pos, value));
@@ -203,7 +203,7 @@ void DFS1(int v = 1) {
 		DFS1(i);
 
 		sz[v] += sz[i];
-		if (sz[i] > sz[child[v][0]])<br>
+		if (sz[i] > sz[child[v][0]])
 			swap(i, child[v][0]);
 	}
 }
@@ -229,7 +229,7 @@ int Query(int a, int b) {
 		res = max(res, seg.Get(1, N, 1, in[top[a]], in[a]));
 		a = parent[top[a]];
 	}
-	if (depth[a] > depth[b])<br>
+	if (depth[a] > depth[b])
 		swap(a, b);
 	res = max(res, seg.Get(1, N, 1, in[a] + 1, in[b]));
 	return res;
@@ -237,20 +237,20 @@ int Query(int a, int b) {
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	cin >> N;<br>
+	cin >> N;
 	for (int i = 1; i <= N - 1; i++) {
 		int a, b, w;
-		cin >> a >> b >> w;<br>
+		cin >> a >> b >> w;
 		con[a].push_back({ b, w, i });
 		con[b].push_back({ a, w, i });
 	}
 	DFS0(); DFS1(); DFS2();
 	seg.Init(1, N, 1);
 
-	cin >> M;<br>
+	cin >> M;
 	while (M--) {
 		int q, a, b;
-		cin >> q >> a >> b;<br>
+		cin >> q >> a >> b;
 		if (q == 1)	Update(a, b);
 		else cout << Query(a, b) << "\n";
 	}
@@ -259,11 +259,11 @@ int main() {
 ```
 
 ## 연관 문제
-https://www.acmicpc.net/problem/13512<br>
-https://www.acmicpc.net/problem/13510<br>
-https://www.acmicpc.net/problem/2927<br>
-https://www.acmicpc.net/problem/17429<br>
+<br>https://www.acmicpc.net/problem/13512
+<br>https://www.acmicpc.net/problem/13510
+<br>https://www.acmicpc.net/problem/2927
+<br>https://www.acmicpc.net/problem/17429
 
 ## 참고
-https://justicehui.github.io/hard-algorithm/2020/01/24/hld/<br>
+<br>https://justicehui.github.io/hard-algorithm/2020/01/24/hld/
 {% endraw %}
