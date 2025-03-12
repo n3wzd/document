@@ -16,7 +16,7 @@ AI:AI, TensorFlow;
 API:GooglePlacesAPI, OpenStreetMap;
 OS:OS;
 Blog:Jekyll, MkDocs;
-Other:Cert, Book;
+Other:Book;
 {% endcapture %}
 
 <nav class="nav__list">
